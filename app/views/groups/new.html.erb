@@ -15,7 +15,44 @@
         Make Threads
       </div>
     </div>
+
     <div class="panel panel-warning make_thread_category">
+      <div class="make_content">
+        <div class="title_text">
+          <div class="jp">
+            ハッシュタグの追加
+          </div>
+          Add Hashtags
+        </div>
+        <div class="hash_form">
+          <textarea id="content"class="content_input_form form-control form_lang en_data_content" rows="3" cols="65"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="select_category_title">
+          <div class="jp">
+            スレッドの種類
+          </div>
+          Type of Thread
+        </div>
+        <select class="selectpicker big_select" style="font-size:15px;">
+          <option style="font-size:15px;">
+            メインカテゴリー|Main Category
+          </option>
+          <% @category.each do |cate| %>
+            <div style="margin-top:10px"></div>
+            <option
+            <% if cate.id == flash["search_big_id"] %>
+              selected
+            <% end %>
+            class="big_select"id="<%= cate.id %>"value="<%= cate.id %>">
+              <%= cate.name_jp %>|<%= cate.name_en %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <!--<div class="panel panel-warning make_thread_category">
       <div class='make_content panel-body'>
         <div class="row">
           <div class="select_category_title">
@@ -35,7 +72,7 @@
         <div class="now_category">
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="panel panel-warning make_thread_category">
       <div class="flag_show">
         <div class="flag_image">
