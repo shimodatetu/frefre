@@ -7,12 +7,17 @@ Rails.application.routes.draw do
   get 'search/show'
   get 'category/new'
   get 'category/new2'
+  get 'category/new3'
   get 'category/smallcategory/:id/:page' => 'category#smallcategory'
   get 'category/smallcategory/:id' => 'category#smallcategory'
+  get 'category/typecategory/:id/:page' => 'category#typecategory'
+  get 'category/typecategory/:id' => 'category#typecategory'
   match '/small_new' => 'category#small_new', via: [ :post ]
   match '/big_new' => 'category#big_new', via: [ :post ]
   match '/all_new' => 'category#all_new', via: [ :post ]
+  match '/type_new' => 'category#type_new', via: [ :post ]
   get 'category/show'
+  get 'category/show2'
   post 'tasks/en',to:'tasks#lang_change_en'
   post 'tasks/jp',to:'tasks#lang_change_jp'
   post 'delete',to:'tasks#delete'

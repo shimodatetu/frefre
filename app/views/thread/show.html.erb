@@ -30,8 +30,25 @@
       <div class="float_jp">
         <%= thread.title_jp %>
       </div>
-      <%= thread.title_en %>
+      <div class="float_en">
+        <%= thread.title_en %>
+      </div>
     </div>
+    <% thread.hashtags.each do |hashtag| %>
+      <div class="hash_tag">
+        <div class="hash_icon">
+          #
+        </div>
+        <div class="hash_text">
+          <div class="hash_jp">
+            <%= hashtag.hash_jp %>
+          </div>
+          <div class="hash_en">
+            <%= hashtag.hash_en %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 
   <div class="pvpage_head">

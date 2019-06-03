@@ -1,0 +1,31 @@
+<% lang = session["lang"] %>
+<div class="category_list_all_cover">
+  <div class="category_head">
+    <div class="panel-title">
+      <div class="panel-title-text">
+        <div class="float_jp">
+          カテゴリ一覧
+        </div>
+        Categoru List
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-warning big_category_list all_category_list">
+    <div class="panel-body category_content">
+      <% @threadtypes.each do |type| %>
+        <%= link_to "/category/typecategory/#{type.id}" do %>
+          <div class="bigcategory_only">
+            <div id="<%= type.id %>"class="category_title">
+              <div class="cate_name">
+                <div class="float_jp">
+                  <%= type.type_jp %>
+                </div>
+                <%= type.type_en %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,10 @@
 class ThreadBroadcastJob < ApplicationJob
   queue_as :default
   def perform(message)
-    ActionCable.server.broadcast 'thread_channel', user_id:message.user_id,message: render_message(message),id: message.id
+    p "----------------------------"
+    p message
+    p "----------------------------"
+    ActionCable.server.broadcast 'thread_channel', user_id:message.user_id,id: message.id
   end
   private
   def render_message(message)

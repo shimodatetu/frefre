@@ -76,10 +76,31 @@
     .float_jp{
       font-size:12px;
     }
+    .hash_tag{
+      margin-top:10px;
+      display: inline-block;
+      .hash_icon{
+        display: inline-block;
+        font-size:18px;
+      }
+      .hash_text{
+        display: inline-block;
+        margin-left:-2px;
+        margin-right:3px;
+        .hash_en{
+          margin-top:-5px;
+        }
+        .hash_jp{
+          font-size:10px;
+        }
+      }
+    }
     .panel-title-text{
-      display:inline-block;
       vertical-align: bottom;
       margin-top:10px;
+      .float_en{
+        margin-top:-4px;
+      }
     }
     .thread_post_button{
       display:inline-block;
@@ -201,7 +222,7 @@
     }
     .thread_cover{
       background-color: #ffffff;
-      padding:20px;
+      padding:10px;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       border-radius: 0px;
@@ -326,7 +347,7 @@
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            margin:7px;
+            margin-top:2px;
             .post_content_text{
               margin:auto;
             }

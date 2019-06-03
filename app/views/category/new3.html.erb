@@ -1,0 +1,21 @@
+<div>
+  <table class="category"border="1"style="font-size:20px;">
+    <% @type_all.each do |type| %>
+      <tr>
+        <th >
+          <div>　<%= type.type_jp %>／<%= type.type_en %></div>
+        </th>
+        <th></th>
+      </tr>
+    <% end %>
+    <tr>
+      <th>
+        <%= form_for @type_new, url: type_new_path do |b_new| %>
+          <%= b_new.text_field :type_jp ,placeholder:"　大カテゴリー(日)"%>
+          <%= b_new.text_field :type_en ,placeholder:"　大カテゴリー(英)"%>
+          <%= b_new.submit '投稿' %>
+        <% end %>
+      </th>
+    </tr>
+  </table>
+</div>

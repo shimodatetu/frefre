@@ -1,14 +1,9 @@
+<% type_id = params[:id].to_i %>
+<% threadtype =  @threadtypes.find(type_id)%>
 <% lang = session["lang"] %>
-<style>
-  .ui-tooltip{background: #F2FBEF}
-  .tooltip-title{
-    background:#000;
-  }
-</style>
-<div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>">
-</div>
-<div class=" pvpage_all">
-  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+
+<div class="smallcategory_search">
+  <div class="lang_bar_cover">
     <div class="lang_bar">
       <div class="country_flag en_country">
         <%= image_tag "/english.png", class: "image" %>
@@ -16,16 +11,16 @@
       <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
           data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
       <div class="country_flag jp_country">
-        <%= image_tag "/21hb-GV4ZtL.jpg", class: "image" %>
+        <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
       </div>
     </div>
   </div>
-  <div class="panel-title"style="display:inline-block">
+  <div class="category_show">
     <div class="panel-title-text">
       <div class="float_jp">
-        人気スレッド
+        <%= threadtype.type_jp %>カテゴリー
       </div>
-      Popular Threads
+      <%= threadtype.type_en %>Category
     </div>
     <!--<%= link_to '/groups', data: {"turbolinks"=>false},class:"thread_post_button btn btn-default" do %>
       <div class="jp">
@@ -38,7 +33,7 @@
   </div>
   <div class="thread_all"style="padding-top:10px;">
     <% there_be = false %>
-    <% @groups.order(seen_num: "DESC").offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |group| %>
+    <% threadtype.groups.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |group| %>
       <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover">
@@ -78,13 +73,8 @@
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <% group.hashtags.each do |hash|%>
-                      #<%= hash.hash_en %>　
-                    <% end %>
+                    <%= simple_format(h(group.posts.first.content_eng)) %>
                   </div>
-                </div>
-                <div class="see_more">
-                  See more
                 </div>
               </div>
               <div class="post_content_position_space">
@@ -93,19 +83,13 @@
               <div class="post_content_position jp_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <% require 'uri' %>
-                    <%= URI.decode(group.title_jp) %>
+                    <%= group.title_jp %>
                   </div>
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <% group.hashtags.each do |hash|%>
-                      #<%= hash.hash_jp %>　
-                    <% end %>
+                    <%= simple_format(h(group.posts.first.content_jap)) %>
                   </div>
-                </div>
-                <div class="see_more">
-                  もっと見る
                 </div>
               </div>
             </div>
@@ -116,10 +100,10 @@
     <% if there_be == false %>
       <div class="not_found">
         <div class="en">
-          There is no thread created.
+          There is no thread in this category.
         </div>
         <div class="jp">
-          まだスレッドが作成されていません。
+          このカテゴリーではまだスレッドが作成されていません。
         </div>
       </div>
     <% else %>
@@ -129,7 +113,7 @@
             <span class="glyphicon glyphicon-chevron-left"></span>
           </div>
         <% else %>
-          <%= link_to("/home/#{@page_id - 1}",class:"page_button ok_push") do %>
+          <%= link_to("/category/typeategory/#{type_id}/#{@page_id - 1}",class:"page_button ok_push") do %>
             <span class="glyphicon glyphicon-chevron-left"></span>
           <% end %>
         <% end %>
@@ -139,12 +123,12 @@
           </div>
         <% end %>
         <% for num in @start_num.round..@end_num.round do %>
-          <% if num == @page_id %>
+          <% if num == @page_id.round %>
             <div class="page_button now_page">
               <%= num %>
             </div>
           <% else %>
-            <%= link_to("/home/#{num}",class:"page_button page_move") do %>
+            <%= link_to("/category/typecategory/#{type_id}/#{num}",class:"page_button page_move") do %>
               <%= num %>
             <% end %>
           <% end %>
@@ -154,12 +138,12 @@
             ...
           </div>
         <% end %>
-        <% if @page_num.round <= @page_id.round || @page_num.round == 1 %>
+        <% if @page_num.round <= @page_id.round %>
           <div class="page_button no_push">
             <span class="glyphicon glyphicon-chevron-right"></span>
           </div>
         <% else %>
-          <%= link_to("/home/#{@page_id.round + 1}",class:"page_button ok_push") do %>
+          <%= link_to("/category/typecategory/#{type_id}/#{@page_id.round+ 1}",class:"page_button ok_push") do %>
             <span class="glyphicon glyphicon-chevron-right"></span>
           <% end %>
         <% end %>

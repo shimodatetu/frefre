@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_30_001020) do
+ActiveRecord::Schema.define(version: 2019_05_30_081937) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,13 +41,19 @@ ActiveRecord::Schema.define(version: 2019_04_30_001020) do
   end
 
   create_table "groups", force: :cascade do |t|
-    t.string "lang"
     t.string "title_en"
     t.string "title_jp"
     t.integer "user_id"
-    t.integer "smallcategory_id"
-    t.integer "bigcategory_id"
+    t.integer "threadtype_id"
     t.integer "seen_num", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hash_en"
+    t.string "hash_jp"
+    t.string "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -78,7 +84,13 @@ ActiveRecord::Schema.define(version: 2019_04_30_001020) do
   create_table "smallcategories", force: :cascade do |t|
     t.string "name_en"
     t.string "name_jp"
-    t.integer "bigcategory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "threadtypes", force: :cascade do |t|
+    t.string "type_en"
+    t.string "type_jp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
