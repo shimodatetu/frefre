@@ -68,7 +68,9 @@
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <%= group.title_en %>
+                    <% group.hashtags.each do |hash|%>
+                      #<%= hash.hash_en %>　
+                    <% end %>
                   </div>
                 </div>
                 <div class="post_content">
@@ -83,7 +85,9 @@
               <div class="post_content_position jp_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <%= group.title_jp %>
+                    <% group.hashtags.each do |hash|%>
+                      #<%= hash.hash_jp %>　
+                    <% end %>
                   </div>
                 </div>
                 <div class="post_content">
