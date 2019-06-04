@@ -4,18 +4,6 @@
     color:#ffffff;
   }
 </style>
-<!--
-<link rel="stylesheet" href="https://rawgit.com/ainterpreting/jquery-multilineSelectmenu/master/jquery.multilineSelectmenu.css">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="https://rawgit.com/ainterpreting/jquery-multilineSelectmenu/master/jquery.multilineSelectmenu.js"></script>
--->
-<script type="text/javascript">
-  $(function(){
-    //$(".type_select").multilineSelectmenu()
-  });
-</script>
 <% if logged_in? %>
   <div class="make_thread_cover">
     <div class="get_user_id"id="<%= current_user.id %>"></div>
@@ -36,15 +24,17 @@
           Type of Thread
         </div>
         <div class="hash_form">
-          <select class="selectpicker type_select" style="font-size:15px;">
-            <% @thread_types.each do |type| %>
-              <div style="margin-top:10px"></div>
-              <option
-              class="big_select"id="<%= type.id %>"value="<%= type.id %>">
-                <%= type.type_jp %>|<%= type.type_en %>
-              </option>
-            <% end %>
-          </select>
+          <% @thread_types.each do |type| %>
+            <input class="radio_button"type="radio" name="type_select" value="<%= type.id %>">
+              <div class="radio_text">
+                <div class="radio_jp">
+                  <%= type.type_jp %>
+                </div>
+                <div class="radio_en">
+                  <%= type.type_en %>
+                </div>
+              </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -238,6 +228,60 @@
         </div>
       </div>
     </div>
+    <div class="thread_post_cover">
+      <div class="modal fade" id="groupModal" tabindex="-1">
+      	<div class="modal-dialog"style="width:90vw">
+      		<div class="modal-content">
+      			<div class="modal-body">
+              <div class="thread_post">
+                <div class="post_form_cover post_form_cover_enjp connect_btn">
+                  <%= image_tag "/english.png", class: "image" %>
+                  <textarea name="content"class="en_form_hash connect_btn content_post form-control"></textarea>
+                </div>
+                <div class="space_form"></div>
+                <div class="post_form_cover post_form_cover_enjp">
+                  <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
+                  <textarea name="content"class="jp_form_hash content_post form-control" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="thread_post">
+                <div class="post_form_cover post_form_cover_enjp connect_btn">
+                  <input name="content"class="en_form_title content_post form-control">
+                </div>
+                <div class="space_form"></div>
+                <div class="post_form_cover post_form_cover_enjp">
+                  <input name="content"class="jp_form_title content_post form-control">
+                </div>
+              </div>
+              <div class="thread_post">
+                <div class="post_form_cover post_form_cover_enjp connect_btn">
+                  <textarea name="content"class="en_form_content connect_btn content_post form-control" rows="4"></textarea>
+                </div>
+                <div class="space_form"></div>
+                <div class="post_form_cover post_form_cover_enjp">
+                  <textarea name="content"class="jp_form_content content_post form-control" rows="4"></textarea>
+                </div>
+              </div>
+              <div class="explain_text">
+                You have to write both English and Japanese.<br>
+                ここでは英語と日本語を入力して投稿します。
+              </div>
+      			</div>
+      			<div class="modal-footer">
+              <button type="button" class="btn btn-default btn_send"id="enjp">
+                <div class="float_jp">投稿</div>
+                <div class="base_en">Post</div>
+              </button>
+              <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+                <div class="float_jp">戻る</div>
+                <div class="base_en">Back</div>
+              </button>
+      			</div>
+      		</div>
+      	</div>
+      </div>
+    </div>
+
   </div>
 <% else %>
   <div class="panel panel-warning not_logined_cover">
@@ -259,3 +303,13 @@
     </div>
   </div>
 <% end %>
+<!--
+<link rel="stylesheet" href="https://rawgit.com/ainterpreting/jquery-multilineSelectmenu/master/jquery.multilineSelectmenu.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://rawgit.com/ainterpreting/jquery-multilineSelectmenu/master/jquery.multilineSelectmenu.js"></script>
+-->
+<script type="text/javascript">
+  //$(".type_select").multilineSelectmenu()
+</script>

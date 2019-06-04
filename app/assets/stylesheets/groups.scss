@@ -78,6 +78,19 @@
           margin-right:2%;
           width:45%;
         }
+        .radio_button{
+          display:inline-block;
+        }
+        .radio_text{
+          display:inline-block;
+          .radio_jp{
+            font-size: 12px;
+          }
+          .radio_en{
+            font-size: 16px;
+            margin-top: -3px;
+          }
+        }
       }
       .now_category{
         .add_category{
@@ -160,6 +173,7 @@
         margin-left: 190px;
       }
     }
+
     .sub_jp{
       font-size:12px;
     }

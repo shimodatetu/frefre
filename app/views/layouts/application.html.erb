@@ -6,7 +6,6 @@
     <title>FreFre</title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -16,5 +15,34 @@
     <div class="main_content_cover">
       <%= yield %>
     </div>
+    <% if !flash["alert_en"].nil? && !flash["alert_jp"].nil?%>
+      <script>
+        $(function(){
+          $("#successModal .en").append("<%= flash["alert_en"] %>")
+          $("#successModal .jp").append("<%= flash["alert_jp"] %>")
+          $("#successModal").modal("show")
+          $(".modal-backdrop").attr("style","display:none;")
+          setTimeout(function(){
+            $("#successModal").modal("hide")
+          },2000);
+        })
+      </script>
+      flash["alert_en"] = nil
+      flash["alert_jp"] = nil
+    <% end %>
   </body>
+  <div class="modal fade" id="successModal" tabindex="-1">
+    <div class="modal-dialog"style="width:90vw">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="explain_text">
+            <div class="jp"></div>
+            <div class="en"></div>
+          </div>
+          <div class="delete_html">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </html>
