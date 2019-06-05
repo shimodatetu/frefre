@@ -9,8 +9,8 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
     location.reload();
 
   change: (username,gender,year,month,date,country,profile_en,profile_jp,able_see) ->
-    console.log(username,gender,year,month,date,country,profile_en,profile_jp,able_see)
-    @perform 'change',username:username,gender:gender,year:year,month:month,date:date,
+    console.log(username,gender,country,profile_en,profile_jp,able_see)
+    @perform 'change',username:username,gender:gender,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
 
 

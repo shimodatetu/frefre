@@ -4,7 +4,8 @@ class User < ApplicationRecord
   has_many :posts
   has_many :groups
   has_secure_password
-  validates :password, length: (6..32),format: { with: /\A[a-z0-9]+\z/i }
+  validates :password, length: (6..32),on: :create, format: { with: /\A[a-z0-9]+\z/i }
+  validates :password, length: {minimum: 6}, on: :update, allow_blank: true
   #mount_uploader :image, ImageUploader
   after_update { ProfileBroadcastJob.perform_later self  }
 
