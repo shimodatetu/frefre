@@ -1,6 +1,4 @@
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css">
+
 <form>
   <div class="profile_title">
     <div class="title">
@@ -142,7 +140,7 @@
               Country
             </div>
           </div>
-          <div class="cprofile_ontent_cover">
+          <div class="profile_content_cover">
             <select value="<%= current_user.country %>"class="content_select"id="country"name="country"style="padding:1vw;">
               <option value="">No selected</option>
               <%= render partial: "country" %>

@@ -9,11 +9,13 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
     location.reload();
 
   change: (username,gender,year,month,date,country,profile_en,profile_jp,able_see) ->
+    console.log(username,gender,year,month,date,country,profile_en,profile_jp,able_see)
     @perform 'change',username:username,gender:gender,year:year,month:month,date:date,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
 
 
 $(document).on 'click', '.save_button', (event) ->
+  alert("asd")
   #year = $(".profile_page #year").val();
   #month = $(".profile_page #month").val();
   #date = $(".profile_page #date").val();
@@ -26,10 +28,8 @@ $(document).on 'click', '.save_button', (event) ->
   country = $(".profile_page #country").val();
   profile_en = $(".profile_page #profile_en").val();
   profile_jp = $(".profile_page #profile_jp").val();
-
   if profile_en != "" && profile_jp != ""
     App.profile.change(username,gender,year,month,date,country,profile_en,profile_jp,able_see)
-
   else if profile_en == "" && profile_jp != ""
     $("#toen_change").dialog
       modal: true

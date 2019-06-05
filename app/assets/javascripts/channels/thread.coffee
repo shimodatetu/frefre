@@ -46,10 +46,11 @@ send_check=()->
       App.thread.make("enjp",title_jp,content_jp,title_en,content_en,$('input[name=type_select]:checked').val(),hash_ary_jp,hash_ary_en);
 
 $(document).on 'click', '.make_thread_cover .post_button', (event) ->
-  type_check($(@).attr("id"))
+  #alert($('input[name=type_select]:checked').val())
+  type_check($(@).attr("id"),$('input[name=type_select]:checked').val())
   event.preventDefault()
 
-type_check=(id)->
+type_check=(id,type)->
   if id == "enjp"
     title_en = $(".en_data_title").val();
     title_jp = $(".jp_data_title").val();
@@ -57,7 +58,9 @@ type_check=(id)->
     content_jp = $(".jp_data_content").val();
     hash_en = $(".hash_en").val()
     hash_jp = $(".hash_jp").val()
-    if title_en == ""
+    if type == undefined
+      alert("Type of thread is not selected.\nスレッドの種類が選択されていません");
+    else if title_en == ""
       alert("Title in English is empty.\n英語のタイトルの欄に何も書かれていません");
     else if title_jp == ""
       alert("Tille in Japanese is empty.\n日本語のタイトルの欄に何も書かれていません");
@@ -72,7 +75,9 @@ type_check=(id)->
     else
       hash_ary_en = cut_hash(hash_en)
       hash_ary_jp = cut_hash(hash_jp)
-      if hash_ary_en.length != hash_ary_jp.length
+      if type == undefined
+        alert("Type of thread is not selected.\nスレッドの種類が選択されていません");
+      else if hash_ary_en.length != hash_ary_jp.length
         alert("ハッシュタグが間違っています\nHashtag is wrong.");
       else
         #App.thread.make("enjp",title_jp,content_jp,title_en,content_en,category,hash_ary_jp,hash_ary_en);
@@ -87,7 +92,9 @@ type_check=(id)->
     title_en = $(".en_data_title").val();
     content_en = $(".en_data_content").val();
     hash_en = $(".hash_en").val();
-    if title_en == ""
+    if type == undefined
+      alert("Type of thread is not selected.\nスレッドの種類が選択されていません");
+    else if title_en == ""
       alert("Title in English is empty.\n英語のタイトルの欄に何も書かれていません");
     else if content_en == ""
       alert("Content in English is empty.\n英語の内容入力欄に何も書かれていません");
@@ -111,14 +118,14 @@ type_check=(id)->
       translate_google(title_jp,content_jp,"en",hash_ary_jp)
 
 cut_hash=(hash_data)->
-  hash_ary= []
-  first = true
-  hash_data.split('#').forEach (value) ->
-    if first == true
-      first = false
-    else
-      hash_ary.push(value)
-  return hash_ary
+  hash_ary_main = []
+  hash_ary = hash_data.split('#')
+  for h in [0...hash_ary.length]
+    hash_ary2 = hash_ary[h].split('＃')
+    for i in [0...hash_ary2.length]
+      hash_ary_main.push(hash_ary2[i])
+  hash_ary_main.shift()
+  return hash_ary_main
 
 
 translate_google=(title,coment,lang,hash_ary) ->
@@ -150,8 +157,8 @@ translate_google=(title,coment,lang,hash_ary) ->
       hash_ary.push(ary[i]);
     if lang == "ja"
       #App.thread.make(lang,ary[7],ary[15],title,coment,category,hash_base,hash_ary)
-      $("#groupModal .en_form_hash").html(hash_base.join(""))
-      $("#groupModal .jp_form_hash").html(hash_ary.join("");)
+      $("#groupModal .en_form_hash").html(hash_base.join("#"))
+      $("#groupModal .jp_form_hash").html(hash_ary.join("#");)
       $("#groupModal .en_form_content").html(coment)
       $("#groupModal .jp_form_content").html(ary[15])
       $("#groupModal .en_form_title").val(title)
@@ -159,18 +166,10 @@ translate_google=(title,coment,lang,hash_ary) ->
       $("#groupModal").modal("show")
     else
       #App.thread.make(lang,title,coment,ary[7],ary[15],category,hash_ary,hash_base)
-      $("#groupModal .en_form_hash").html(hash_ary.join())
-      $("#groupModal .jp_form_hash").html(hash_base.join())
+      $("#groupModal .en_form_hash").html(hash_ary.join("#"))
+      $("#groupModal .jp_form_hash").html(hash_base.join("#"))
       $("#groupModal .en_form_content").html(ary[15])
       $("#groupModal .jp_form_content").html(coment)
       $("#groupModal .en_form_title").val(ary[7])
       $("#groupModal .jp_form_title").val(title)
       $("#groupModal").modal("show")
-
-
-bytes=(str) ->
-  return(encodeURIComponent(str).replace(/%../g,"x").length);
-isHalf=(str)->
-  str_length = str.length
-  str_byte = bytes(str)
-  return str_length == str_byte

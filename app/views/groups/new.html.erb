@@ -26,14 +26,14 @@
         <div class="hash_form">
           <% @thread_types.each do |type| %>
             <input class="radio_button"type="radio" name="type_select" value="<%= type.id %>">
-              <div class="radio_text">
-                <div class="radio_jp">
-                  <%= type.type_jp %>
-                </div>
-                <div class="radio_en">
-                  <%= type.type_en %>
-                </div>
+            <div class="radio_text">
+              <div class="radio_jp">
+                <%= type.type_jp %>
               </div>
+              <div class="radio_en">
+                <%= type.type_en %>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>
