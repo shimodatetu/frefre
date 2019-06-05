@@ -23,8 +23,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   speak: (lang,mes_jp,mes_en, group)->
     mes_jp = mes_jp.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "\r");
     mes_en = mes_en.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "&lt;br&gt;");
-    console.log(@perform 'speak')
-    console.log(@perform('speak',lang: "en",content_jap: mes_jp,content_eng: mes_en, group_id: group));
+    @perform('speak',lang: "en",content_jap: mes_jp,content_eng: mes_en, group_id: group)
+    $('#sampleModal-enjp').modal("hide")
 
 
 $(document).on 'click', '.post_footer .btn_send', (event) ->
@@ -47,8 +47,8 @@ add_post=(data)->
     jp_height = plus_post.find(".jp_content_row .post_content_text").height();
     en_height = plus_post.find(".en_content_row .post_content_text").height();
     row = (Math.max(jp_height,en_height) - 10) / 22;
-    plus_post.find(".jp_content_row").attr("style","margin:7px;-webkit-line-clamp:"+Math.ceil(row));
-    plus_post.find(".en_content_row").attr("style","margin:7px;-webkit-line-clamp:"+Math.ceil(row));
+    plus_post.find(".jp_content_row").attr("style","-webkit-line-clamp:"+Math.ceil(row));
+    plus_post.find(".en_content_row").attr("style","-webkit-line-clamp:"+Math.ceil(row));
     slider = $(".slider-handle").attr("aria-valuenow");
     en_per = slider / 10;
     jp_per = (1000 - slider) / 10;
@@ -68,29 +68,18 @@ add_post=(data)->
 
 
 type_check=(id)->
-  if id == "enjp"
-    text_en = $(".base_en_form").val();
-    text_jp = $(".base_jp_form").val();
-    if text_en == ""
-      alert("English form is empty.\n英語の欄に何も書かれていません");
-    else if text_jp == ""
-      alert("Japanese form is empty.\n日本語入力欄に何も書かれていません");
-    else
-      $("#sampleModal-enjp .en_form").val(text_en)
-      $("#sampleModal-enjp .jp_form").val(text_jp)
-      $('#sampleModal-enjp').modal("show")
-  else if id == "en"
-      text = $(".base_en_form").val();
-      if text == ""
-        alert("English form is empty.\n英語の欄に何も書かれていません");
-      else
-        translate_google("ja",text)
-  else if id == "jp"
-      text = $(".base_jp_form").val();
-      if text == ""
-        alert("Japanese form is empty.\n日本語の欄に何も書かれていません");
-      else
-        translate_google("en",text);
+  text_en = $(".base_en_form").val();
+  text_jp = $(".base_jp_form").val();
+  if text_en == "" && text_jp == ""
+    alert("This form is empty.\n入力欄に何も書かれていません");
+  else　if text_en != "" && text_jp != ""
+    $("#sampleModal-enjp .en_form").val(text_en)
+    $("#sampleModal-enjp .jp_form").val(text_jp)
+    $('#sampleModal-enjp').modal("show")
+  else if text_jp == ""
+    translate_google("ja",text_en)
+  else if text_en == ""
+    translate_google("en",text_jp);
     # body...
 
 translate_google=(lang,words) ->
@@ -98,7 +87,7 @@ translate_google=(lang,words) ->
   url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
   data = new FormData
   data.append 'q', words
-  data.append 'target', 'ja'
+  data.append 'target', lang
   data.append 'format', "text"
   settings =
     method: 'POST'
@@ -107,11 +96,9 @@ translate_google=(lang,words) ->
     res.text()
   ).then (text) ->
     ary = text.split('"');
-    alert(text)
     translation = ary[7]#7番はテキスト
     if lang == "ja"
       $(".only_en_form").val("");
-      $('#sampleModal-en').modal('hide');
       #App.room.speak(lang,translation,words, group)
       $("#sampleModal-enjp .en_form").val(words)
       $("#sampleModal-enjp .jp_form").val(translation)
@@ -119,7 +106,6 @@ translate_google=(lang,words) ->
       $('#sampleModal-enjp').modal("show")
     else
       $(".only_jp_form").val("");
-      $('#sampleModal-jp').modal('hide');
       #App.room.speak(lang,words,translation, group)
       $("#sampleModal-enjp .jp_form").val(words)
       $("#sampleModal-enjp .en_form").val(translation)
