@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+
 <html class="top-page">
   <head>
     <%= favicon_link_tag 'icon3.png',style:"border-radius:50%"%>
@@ -15,24 +16,9 @@
     <div class="main_content_cover">
       <%= yield %>
     </div>
-    <% if !flash["alert_en"].nil? && !flash["alert_jp"].nil?%>
-      <script>
-        $(function(){
-          $("#successModal .en").append("<%= flash["alert_en"] %>")
-          $("#successModal .jp").append("<%= flash["alert_jp"] %>")
-          $("#successModal").modal("show")
-          $(".modal-backdrop").attr("style","display:none;")
-          setTimeout(function(){
-            $("#successModal").modal("hide")
-          },2000);
-        })
-      </script>
-      flash["alert_en"] = nil
-      flash["alert_jp"] = nil
-    <% end %>
   </body>
   <div class="modal fade" id="successModal" tabindex="-1">
-    <div class="modal-dialog"style="width:90vw">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
           <div class="explain_text">
@@ -46,3 +32,8 @@
     </div>
   </div>
 </html>
+<script>
+  $(function(){
+    alert_get()
+  })
+</script>

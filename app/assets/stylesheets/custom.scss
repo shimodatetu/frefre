@@ -10,6 +10,25 @@
     font-family: 'object-fit: cover; object-position: 0 100%;'
   }
 }
+#successModal{
+  .modal-dialog{
+    border-radius: 5px;
+    width:40vw;
+    .modal-body{
+      width:auto;
+    }
+    .success{
+      background: #def5dd;
+      border-radius: 5px;
+      color:#155724;
+    }
+    .fail{
+      background: #f8d7da;
+      border-radius: 5px;
+      color:#721c24;
+    }
+  }
+}
 body{
   background:#fff0a017;
 }

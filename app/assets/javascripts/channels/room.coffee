@@ -24,14 +24,17 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     mes_jp = mes_jp.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "\r");
     mes_en = mes_en.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "&lt;br&gt;");
     @perform('speak',lang: "en",content_jap: mes_jp,content_eng: mes_en, group_id: group)
+    $(".base_en_form").val("")
+    $(".base_jp_form").val("")
     $('#sampleModal-enjp').modal("hide")
+    alert_modal("You successed to post.","投稿に成功しました。","success")
 
 
 $(document).on 'click', '.post_footer .btn_send', (event) ->
   if($(this).attr("name") == "logined")
     type_check(this.id);
   else
-    alert("You can't post a comment because you haven't logined.\nログインしていないので書き込めません。")
+    alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
 
 $(document).on 'click', '#sampleModal-enjp .btn_send', (event) ->
@@ -71,7 +74,7 @@ type_check=(id)->
   text_en = $(".base_en_form").val();
   text_jp = $(".base_jp_form").val();
   if text_en == "" && text_jp == ""
-    alert("This form is empty.\n入力欄に何も書かれていません");
+    alert_modal("This form is empty.","入力欄に何も書かれていません","fail");
   else　if text_en != "" && text_jp != ""
     $("#sampleModal-enjp .en_form").val(text_en)
     $("#sampleModal-enjp .jp_form").val(text_jp)

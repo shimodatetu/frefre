@@ -68,15 +68,18 @@
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding">
+                    <%= simple_format(h(group.title_en)) %>
+                  </div>
+                </div>
+                <div class="post_content en">
+                  <div class="post_content_text">
                     <% group.hashtags.each do |hash|%>
                       #<%= hash.hash_en %>　
                     <% end %>
                   </div>
                 </div>
-                <div class="post_content">
-                  <div class="post_content_text">
-                    <%= simple_format(h(group.posts.first.content_eng)) %>
-                  </div>
+                <div class="see_more">
+                  See more
                 </div>
               </div>
               <div class="post_content_position_space">
@@ -85,15 +88,18 @@
               <div class="post_content_position jp_position">
                 <div class="thread_title">
                   <div class="title_padding">
+                    <%= simple_format(h(group.title_jp)) %>
+                  </div>
+                </div>
+                <div class="post_content jp">
+                  <div class="post_content_text">
                     <% group.hashtags.each do |hash|%>
                       #<%= hash.hash_jp %>　
                     <% end %>
                   </div>
                 </div>
-                <div class="post_content">
-                  <div class="post_content_text">
-                    <%= simple_format(h(group.posts.first.content_jap)) %>
-                  </div>
+                <div class="see_more">
+                  もっと見る
                 </div>
               </div>
             </div>

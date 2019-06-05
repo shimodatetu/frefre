@@ -6,16 +6,23 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    location.reload();
 
-  change: (username,gender,year,month,date,country,profile_en,profile_jp,able_see) ->
-    console.log(username,gender,country,profile_en,profile_jp,able_see)
+  change: (username,gender,country,profile_en,profile_jp,able_see) ->
     @perform 'change',username:username,gender:gender,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
+    alert_set("You successed to save your profile.","プロフィールの保存に成功しました。","success")
+    location.reload()
 
+$(document).on 'click', '.profile_check_modal .btn_send', (event) ->
+  able_see = $("#cmn-toggle-1").prop("checked")
+  username = $(".profile_page #username").val();
+  gender = $(".profile_page #gender").val();
+  country = $(".profile_page #country").val();
+  profile_en = $(".profile_check_modal .en_form").val();
+  profile_jp = $(".profile_check_modal .jp_form").val();
+  App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
 
-$(document).on 'click', '.save_button', (event) ->
-  alert("asd")
+$(document).on 'click', '.profile_save_button', (event) ->
   #year = $(".profile_page #year").val();
   #month = $(".profile_page #month").val();
   #date = $(".profile_page #date").val();
@@ -29,43 +36,15 @@ $(document).on 'click', '.save_button', (event) ->
   profile_en = $(".profile_page #profile_en").val();
   profile_jp = $(".profile_page #profile_jp").val();
   if profile_en != "" && profile_jp != ""
-    App.profile.change(username,gender,year,month,date,country,profile_en,profile_jp,able_see)
+    App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
   else if profile_en == "" && profile_jp != ""
-    $("#toen_change").dialog
-      modal: true
-      title: 'Confirmation / 確認画面'
-      buttons:
-        'to English / 英語に翻訳': ->
-          $(this).dialog 'close'
-          translate_google(username,gender,year,month,date,country,profile_en,profile_jp,"en",able_see)
-          return
-        'No Translation / 翻訳しない': ->
-          $(this).dialog 'close'
-          App.profile.change(username,gender,year,month,date,country,profile_en,profile_jp,able_see)
-          return
-        'Cancel / キャンセル': ->
-          $(this).dialog 'close'
-          return
+    translate_google(username,gender,country,profile_en,profile_jp,"en",able_see)
   else if profile_en != "" && profile_jp == ""
-    $("#tojp_change").dialog
-      modal: true
-      title: 'Confirmation / 確認画面'
-      buttons:
-        'to Japanese / 日本語に翻訳': ->
-          $(this).dialog 'close'
-          translate_google(username,gender,year,month,date,country,profile_en,profile_jp,"ja",able_see)
-          return
-        'No Translation / 翻訳しない': ->
-          $(this).dialog 'close'
-          App.profile.change(username,gender,year,month,date,country,profile_en,profile_jp,able_see)
-          return
-        'Cancel / キャンセル': ->
-          $(this).dialog 'close'
-          return
+    translate_google(username,gender,country,profile_en,profile_jp,"ja",able_see)
   else
-    App.profile.change(username,gender,year,month,date,country,profile_en,profile_jp,able_see)
+    App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
 
-translate_google=(username,gender,year,month,date,country,profile_en,profile_jp,lang,able_see) ->
+translate_google=(username,gender,country,profile_en,profile_jp,lang,able_see) ->
   words = profile_jp
   if lang == "ja"
     words = profile_en
@@ -83,6 +62,12 @@ translate_google=(username,gender,year,month,date,country,profile_en,profile_jp,
     ary = text.split('"');
     trans_text = ary[7]#7番はテキスト
     if lang == "ja"
-      App.profile.change(username,gender,year,month,date,country,profile_en,trans_text,able_see)
+      #App.profile.change(username,gender,year,month,date,country,profile_en,trans_text,able_see)
+      $(".profile_check_modal .en_form").val(words)
+      $(".profile_check_modal .jp_form").val(trans_text)
+      $("#profile_modal").modal("show")
     else
-      App.profile.change(username,gender,year,month,date,country,trans_text,profile_jp,able_see)
+      #App.profile.change(username,gender,year,month,date,country,trans_text,profile_jp,able_see)
+      $(".profile_check_modal .en_form").val(trans_text)
+      $(".profile_check_modal .jp_form").val(words)
+      $("#profile_modal").modal("show")

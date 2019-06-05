@@ -143,7 +143,7 @@
       }
     }
   }
-  .save_button{
+  .profile_save_button{
     margin-left: 5px;
     margin-top:-10px;
     border:0px;
@@ -179,6 +179,10 @@
   }
 
 }
+.profile_check_modal{
+
+}
+
 .ui-dialog{
   width:500px !important;
   margin:auto !important;
@@ -221,4 +225,106 @@ input.cmn-toggle-round:checked + label:before {
 }
 input.cmn-toggle-round:checked + label:after {
   margin-left: 90px;
+}
+.profile_check_modal{
+  .btn_back{
+    display: inline-block;
+    margin-right:30px;
+    font-size:16px;
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:15px;
+    padding-right:15px;
+    color:#777;
+  }
+  .btn_send{
+    display: inline-block;
+    font-size:16px;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:16px;
+    padding-right:16px;
+    background: #fff0a0;
+    border:solid thin #ddd;
+    color: #cd853f;
+  }
+  .btn_delete{
+    display: inline-block;
+    font-size:16px;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:16px;
+    padding-right:16px;
+    background: #fff0a0;
+    border:solid thin #ddd;
+    color: #f00;
+  }
+  .float_jp{
+    font-size:12px;
+  }
+  .base_en{
+    margin-top:-3px;
+  }
+  .thread_post{
+    padding-left:10px;
+    margin-top:30px;
+    width:100%;
+    label > input {
+      display:none;	/* アップロードボタンのスタイルを無効にする */
+    }
+    .post_form_cover{
+      display: inline-block;
+      vertical-align: bottom;
+      width:calc(50% - 10px);
+      text-align: center;
+      ::placeholder{
+        color:#bbb;
+        text-align: center;
+        font-size:16px;
+      }
+      .image{
+        width:40px;
+        height:28px;
+        margin-bottom:3px;
+      }
+    }
+    .post_form_cover_en{
+      width:60%;
+      margin-left:20%;
+    }
+    .post_form_cover_jp{
+      width:60%;
+      margin-left:20%;
+    }
+    .connect_btn{
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+    .space_form{
+      display: inline-block;
+      //padding-left: 50px;
+    }
+    .post_data_cover{
+      display: inline-block;
+      vertical-align: bottom;
+      width:calc(50% - 100px);
+      text-align: center;
+      .image{
+        width:40px;
+        height:28px;
+        margin-bottom:3px;
+        margin-left: calc(50% - 20px);
+        display:block;
+      }
+      .data_show{
+        font-size:16px;
+        border-radius:5px;
+        border:solid thin #ccc;
+        height:160px;
+        padding:10px;
+        width:100%;
+        word-wrap: break-word;
+      }
+    }
+  }
 }

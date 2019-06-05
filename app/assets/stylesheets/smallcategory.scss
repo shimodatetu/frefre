@@ -1,4 +1,7 @@
 .smallcategory_search{
+  p{
+    margin:0px;
+  }
   .thread_link:hover{
     .thread_cover{
       background-color: rgba(252,248,210,1);
@@ -189,10 +192,9 @@
     }
 
     .thread_cover{
-      filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.2));
       cursor: pointer;
       background-color: #ffffff;
-      padding:20px;
+      padding:10px;
       border-radius: 5px;
       margin-bottom:10px;
       border:solid thin #dddddd;
@@ -262,18 +264,37 @@
               height:20px;
             }
           }
+          .post_content.en{
+            margin-right:70px;
+          }
+          .post_content.jp{
+            margin-right:80px;
+          }
           .post_content{
             overflow : hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
-            padding-left:10px;
-            padding-right:10px;
+            height:25px;
             .post_content_text{
               margin:auto;
               margin-top:5px;
+              overflow : hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
             }
+          }
+          .see_more{
+            float:right;
+            margin-top:-20px;
+            color:#327ab7;
+          }
+          .see_more:hover{
+            border-bottom:solid 1px #135288;
+            color:#135288;
           }
         }
         .lang_type{

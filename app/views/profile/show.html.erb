@@ -77,3 +77,40 @@
   </div>
 </div>
 <% end %>
+<div class="profile_check_modal">
+  <div class="modal fade" id="profile_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="thread_post">
+            <div class="post_form_cover post_form_cover_enjp connect_btn">
+              <%= image_tag "/english.png", class: "image" %>
+              <textarea name="content"class="en_form connect_btn content_post form-control" rows="6"
+              placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
+            </div>
+            <div class="space_form"></div>
+            <div class="post_form_cover post_form_cover_enjp">
+              <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
+              <textarea name="content"class="jp_form content_post form-control" rows="6"
+              placeholder="&#13;&#10;This side is Japanese form.&#13;&#10;こちらは日本語投稿欄です"></textarea>
+            </div>
+          </div>
+          <div class="explain_text">
+            You have to write both English and Japanese.<br>
+            ここでは英語と日本語を入力して投稿します。
+          </div>
+  			</div>
+  			<div class="modal-footer">
+          <button type="button" class="btn btn-default btn_send"id="enjp">
+            <div class="float_jp">投稿</div>
+            <div class="base_en">Post</div>
+          </button>
+          <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+            <div class="float_jp">戻る</div>
+            <div class="base_en">Back</div>
+          </button>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</div>

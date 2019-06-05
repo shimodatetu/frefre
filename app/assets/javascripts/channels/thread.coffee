@@ -13,6 +13,8 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
   make: (lang, title_jp,mes_jp,title_en,mes_en,category,hash_jp,hash_en) ->
     category = Number(category)
     @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,category:category,title_en:title_en,message_en:mes_en,category:category,hash_en:hash_en,hash_jp:hash_jp)
+    alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
+    location.reload()
 
 $(document).on 'click', '#groupModal .btn_send',(event) ->
   send_check()
@@ -25,22 +27,22 @@ send_check=()->
   hash_en = $("#groupModal .en_form_hash").val()
   hash_jp = $("#groupModal .jp_form_hash").val()
   if title_en == ""
-    alert("Title in English is empty.\n英語のタイトルの欄に何も書かれていません");
+    alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
   else if title_jp == ""
-    alert("Tille in Japanese is empty.\n日本語のタイトルの欄に何も書かれていません");
+    alert_modal("Tille in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
   else if content_en == ""
-    alert("Content in English is empty.\n英語の内容入力欄に何も書かれていません");
+    alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
   else if content_jp == ""
-    alert("Content in Japanese is empty.\n日本語の内容入力欄に何も書かれていません");
+    alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
   else if hash_en == ""
-    alert("Hashtag in English is empty.\n英語のハッシュタグの欄に何も書かれていません");
+    alert_modal("Hashtag in English is empty.","英語のハッシュタグの欄に何も書かれていません","fail");
   else if hash_jp == ""
-    alert("Hashtag in Japanese is empty.\n日本語のハッシュタグの欄に何も書かれていません");
+    alert_mofal("Hashtag in Japanese is empty.","日本語のハッシュタグの欄に何も書かれていません","fail");
   else
     hash_ary_en = cut_hash(hash_en)
     hash_ary_jp = cut_hash(hash_jp)
     if hash_ary_en.length != hash_ary_jp.length
-      alert("ハッシュタグが間違っています\nHashtag is wrong.");
+      alert_modal("ハッシュタグが間違っています","Hashtag is wrong.","fail");
     else
       $("#groupModal").modal("hide")
       App.thread.make("enjp",title_jp,content_jp,title_en,content_en,$('input[name=type_select]:checked').val(),hash_ary_jp,hash_ary_en);
@@ -51,71 +53,70 @@ $(document).on 'click', '.make_thread_cover .post_button', (event) ->
   event.preventDefault()
 
 type_check=(id,type)->
-  if id == "enjp"
+  if type == undefined
+    alert_modal("Type of thread is not selected.","スレッドの種類が選択されていません","fail");
+  else
     title_en = $(".en_data_title").val();
     title_jp = $(".jp_data_title").val();
     content_en = $(".en_data_content").val();
     content_jp = $(".jp_data_content").val();
     hash_en = $(".hash_en").val()
     hash_jp = $(".hash_jp").val()
-    if type == undefined
-      alert("Type of thread is not selected.\nスレッドの種類が選択されていません");
-    else if title_en == ""
-      alert("Title in English is empty.\n英語のタイトルの欄に何も書かれていません");
-    else if title_jp == ""
-      alert("Tille in Japanese is empty.\n日本語のタイトルの欄に何も書かれていません");
-    else if content_en == ""
-      alert("Content in English is empty.\n英語の内容入力欄に何も書かれていません");
-    else if content_jp == ""
-      alert("Content in Japanese is empty.\n日本語の内容入力欄に何も書かれていません");
-    else if hash_en == ""
-      alert("Hashtag in English is empty.\n英語のハッシュタグの欄に何も書かれていません");
-    else if hash_jp == ""
-      alert("Hashtag in Japanese is empty.\n日本語のハッシュタグの欄に何も書かれていません");
-    else
-      hash_ary_en = cut_hash(hash_en)
-      hash_ary_jp = cut_hash(hash_jp)
-      if type == undefined
-        alert("Type of thread is not selected.\nスレッドの種類が選択されていません");
-      else if hash_ary_en.length != hash_ary_jp.length
-        alert("ハッシュタグが間違っています\nHashtag is wrong.");
+    if title_en == "" && title_jp == "" && content_jp == "" && content_en == "" && hash_en == "" && hash_jp == ""
+      alert_modal("Nothing is inputed.","何も入力されていません","fail")
+    else if title_en == "" && content_en == "" && hash_en == ""
+      title_jp = $(".jp_data_title").val();
+      content_jp = $(".jp_data_content").val();
+      hash_jp = $(".hash_jp").val();
+      if title_jp == ""
+        alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
+      else if content_jp == ""
+        alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+      else if hash_jp == ""
+        alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
       else
-        #App.thread.make("enjp",title_jp,content_jp,title_en,content_en,category,hash_ary_jp,hash_ary_en);
-        $("#groupModal .en_form_hash").html(hash_en)
-        $("#groupModal .jp_form_hash").html(hash_jp)
-        $("#groupModal .en_form_content").html(content_en)
-        $("#groupModal .jp_form_content").html(content_jp)
-        $("#groupModal .en_form_title").val(title_en)
-        $("#groupModal .jp_form_title").val(title_jp)
-        $("#groupModal").modal("show")
-  else if id == "en"
-    title_en = $(".en_data_title").val();
-    content_en = $(".en_data_content").val();
-    hash_en = $(".hash_en").val();
-    if type == undefined
-      alert("Type of thread is not selected.\nスレッドの種類が選択されていません");
-    else if title_en == ""
-      alert("Title in English is empty.\n英語のタイトルの欄に何も書かれていません");
-    else if content_en == ""
-      alert("Content in English is empty.\n英語の内容入力欄に何も書かれていません");
-    else if hash_en == ""
-      alert("Hashtag in English is empty.\n英語のハッシュタグ入力欄に何も書かれていません");
+        hash_ary_jp = cut_hash(hash_jp)
+        translate_google(title_jp,content_jp,"en",hash_ary_jp)
+    else if title_jp == "" && content_jp == "" && hash_jp == ""
+      title_en = $(".en_data_title").val();
+      content_en = $(".en_data_content").val();
+      hash_en = $(".hash_en").val();
+      if title_en == ""
+        alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
+      else if content_en == ""
+        alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+      else if hash_en == ""
+        alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
+      else
+        hash_ary_en = cut_hash(hash_en)
+        translate_google(title_en,content_en,"ja",hash_ary_en)
     else
-      hash_ary_en = cut_hash(hash_en)
-      translate_google(title_en,content_en,"ja",hash_ary_en)
-  else if id == "jp"
-    title_jp = $(".jp_data_title").val();
-    content_jp = $(".jp_data_content").val();
-    hash_jp = $(".hash_jp").val();
-    if title_jp == ""
-      alert("Title in Japanese is empty.\n日本語のタイトルの欄に何も書かれていません");
-    else if content_jp == ""
-      alert("Content in Japanese is empty.\n日本語の内容入力欄に何も書かれていません");
-    else if hash_jp == ""
-      alert("Hashtag in Japanese is empty.\n日本語のハッシュタグ入力欄に何も書かれていません");
-    else
-      hash_ary_jp = cut_hash(hash_jp)
-      translate_google(title_jp,content_jp,"en",hash_ary_jp)
+      if title_en == ""
+        alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
+      else if title_jp == ""
+        alert_modal("Tille in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
+      else if content_en == ""
+        alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+      else if content_jp == ""
+        alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+      else if hash_en == ""
+        alert_modal("Hashtag in English is empty.","英語のハッシュタグの欄に何も書かれていません","fail");
+      else if hash_jp == ""
+        alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグの欄に何も書かれていません","fail");
+      else
+        hash_ary_en = cut_hash(hash_en)
+        hash_ary_jp = cut_hash(hash_jp)
+        if hash_ary_en.length != hash_ary_jp.length
+          alert_modal("ハッシュタグが間違っています","Hashtag is wrong.","fail");
+        else
+          #App.thread.make("enjp",title_jp,content_jp,title_en,content_en,category,hash_ary_jp,hash_ary_en);
+          $("#groupModal .en_form_hash").html(hash_en)
+          $("#groupModal .jp_form_hash").html(hash_jp)
+          $("#groupModal .en_form_content").html(content_en)
+          $("#groupModal .jp_form_content").html(content_jp)
+          $("#groupModal .en_form_title").val(title_en)
+          $("#groupModal .jp_form_title").val(title_jp)
+          $("#groupModal").modal("show")
 
 cut_hash=(hash_data)->
   hash_ary_main = []
@@ -157,8 +158,8 @@ translate_google=(title,coment,lang,hash_ary) ->
       hash_ary.push(ary[i]);
     if lang == "ja"
       #App.thread.make(lang,ary[7],ary[15],title,coment,category,hash_base,hash_ary)
-      $("#groupModal .en_form_hash").html(hash_base.join("#"))
-      $("#groupModal .jp_form_hash").html(hash_ary.join("#");)
+      $("#groupModal .en_form_hash").html("#"+hash_base.join("#"))
+      $("#groupModal .jp_form_hash").html("#"+hash_ary.join("#");)
       $("#groupModal .en_form_content").html(coment)
       $("#groupModal .jp_form_content").html(ary[15])
       $("#groupModal .en_form_title").val(title)
@@ -166,8 +167,8 @@ translate_google=(title,coment,lang,hash_ary) ->
       $("#groupModal").modal("show")
     else
       #App.thread.make(lang,title,coment,ary[7],ary[15],category,hash_ary,hash_base)
-      $("#groupModal .en_form_hash").html(hash_ary.join("#"))
-      $("#groupModal .jp_form_hash").html(hash_base.join("#"))
+      $("#groupModal .en_form_hash").html("#"+hash_ary.join("#"))
+      $("#groupModal .jp_form_hash").html("#"+hash_base.join("#"))
       $("#groupModal .en_form_content").html(ary[15])
       $("#groupModal .jp_form_content").html(coment)
       $("#groupModal .en_form_title").val(ary[7])
