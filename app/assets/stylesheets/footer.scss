@@ -1,0 +1,28 @@
+.page_footer{
+  bottom:0px;
+  min-height:80px;
+  background:#fff0b0;
+  text-align: center;
+  width:100vw;
+  .link_button{
+    display: inline-block;
+    margin:10px;
+    margin-top:20px;
+    margin-left:20px;
+    font-size:16px;
+    a{
+      color:#cd853f;
+    }
+    .en{
+      font-size:16px;
+    }
+    .jp{
+      font-size:12px;
+    }
+  }
+  .footer_bar{
+    margin-left:10px;
+    display: inline-block;
+    color:#cd853f;
+  }
+}

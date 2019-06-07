@@ -1,5 +1,6 @@
 $(function(){
-  $(".post_form .post_file").on("change",function(){
-    $('.post_form .img_post').trigger('click');
+  $(".post_button_form .post_file").on("change",function(){
+    alert("asd");
+    $('.post_button_form .img_post').trigger('click');
   });
 });

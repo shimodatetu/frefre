@@ -16,12 +16,13 @@
     <div class="main_content_cover">
       <%= yield %>
     </div>
+    <%= render partial:'layouts/footer' %>
   </body>
   <div class="modal fade" id="successModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
-          <div class="explain_text">
+          <div class="how_that">
             <div class="jp"></div>
             <div class="en"></div>
           </div>
@@ -32,8 +33,11 @@
     </div>
   </div>
 </html>
-<script>
-  $(function(){
-    alert_get()
-  })
-</script>
+<% if !flash["alert_en"].nil? && !flash["alert_jp"].nil? %>
+  <script>
+    alert_modal('<%= flash["alert_en"] %>','<%= flash["alert_jp"] %>','<%= flash["alert_type"] %>')
+  </script>
+  <% flash["alert_en"] = nil %>
+  <% flash["alert_jp"] = nil %>
+  <% flash["alert_type"] = nil %>
+<% end %>

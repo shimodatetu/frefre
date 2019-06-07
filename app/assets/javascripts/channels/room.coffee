@@ -14,10 +14,13 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       page_id_max = Number($(".thread_page_num").attr("id"))
       page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
       if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+        alert_set("You successed to post.","投稿に成功しました","success")
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
       else if Number(now_page) == page
+        alert_modal("You successed to post.","投稿に成功しました","success")
         add_post(data)
       else if user_id == data['user_id']
+        alert_set("You successed to post.","投稿に成功しました","success")
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
 
   speak: (lang,mes_jp,mes_en, group)->
@@ -27,10 +30,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     $(".base_en_form").val("")
     $(".base_jp_form").val("")
     $('#sampleModal-enjp').modal("hide")
-    alert_modal("You successed to post.","投稿に成功しました。","success")
 
 
-$(document).on 'click', '.post_footer .btn_send', (event) ->
+$(document).on 'click', '.post_footer_simple .btn_send', (event) ->
   if($(this).attr("name") == "logined")
     type_check(this.id);
   else
@@ -78,6 +80,8 @@ type_check=(id)->
   else　if text_en != "" && text_jp != ""
     $("#sampleModal-enjp .en_form").val(text_en)
     $("#sampleModal-enjp .jp_form").val(text_jp)
+    $(".explain_text .en").attr("style","")
+    $(".explain_text .jp").attr("style","display:none")
     $('#sampleModal-enjp').modal("show")
   else if text_jp == ""
     translate_google("ja",text_en)
@@ -105,14 +109,20 @@ translate_google=(lang,words) ->
       #App.room.speak(lang,translation,words, group)
       $("#sampleModal-enjp .en_form").val(words)
       $("#sampleModal-enjp .jp_form").val(translation)
-      $(".base_jp_form").val(translation)
+      #$(".base_en_form").val("")
+      #$(".base_jp_form").val("")
+      $(".explain_text .en").attr("style","")
+      $(".explain_text .jp").attr("style","display:none")
       $('#sampleModal-enjp').modal("show")
     else
       $(".only_jp_form").val("");
       #App.room.speak(lang,words,translation, group)
       $("#sampleModal-enjp .jp_form").val(words)
       $("#sampleModal-enjp .en_form").val(translation)
-      $(".base_en_form").val(translation)
+      #$(".base_en_form").val("")
+      #$(".base_jp_form").val("")
+      $(".explain_text .jp").attr("style","")
+      $(".explain_text .en").attr("style","display:none")
       $('#sampleModal-enjp').modal("show")
 
 bytes=(str) ->

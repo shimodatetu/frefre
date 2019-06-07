@@ -71,6 +71,25 @@
               <%= f.password_field :password_confirmation, class: "form-control input_form" %>
             </div>
           </div>
+          <div class="input-groups">
+            <%= f.check_box :agreement, class: "checkbox_input" %>
+            <div class="input_title term_check">
+              <div class="float_jp">
+                利用規約に同意する
+              </div>
+              <div class="base_en">
+                Agree our Terms of service
+              </div>
+            </div>
+          </div>
+          <%= link_to "/users/term",class:"term_link" do %>
+            <div class="en">
+              Open the term of service
+            </div>
+            <div class="jp">
+              利用規約を開く
+            </div>
+          <% end %>
           <div class="submit_button_cover">
             <button type="submit"class="submit_button btn btn-default">
               <div class="float_jp">

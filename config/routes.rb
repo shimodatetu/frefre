@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get '/groups',to:'groups#new'
   post 'profile/send_img'
   get 'users/index'
+  get 'users/term'
   get 'other_profile/show'
   get 'other_profile/:id' => 'other_profile#show'
   get 'other_profile', to:'other_profile#show'

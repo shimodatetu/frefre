@@ -14,173 +14,175 @@
   <div class="profile_page row">
     <div class="profile_page_en">
       <div class="col-sm-12">
-      <div class="col-sm-12 profile_content">
-        <div class="row profile_content_data">
-          <div class="content_name">
-            <div class="jp">
-              プロフィールを公開する
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                プロフィールを公開する
+              </div>
+              <div class="en">
+                Disclose Profile
+              </div>
             </div>
-            <div class="en">
-              Disclose Profile
-            </div>
-          </div>
-          <div class=""style="">
-            <div class="no_text">
-              NO
-            </div>
-            <div class="switch">
-              <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox"
-              <% if current_user.able_see == true %>
-                checked
-              <% end %>>
-              <label for="cmn-toggle-1"></label>
-            </div>
-            <div class="yes_text">
-              YES
+            <div class=""style="">
+              <div class="no_text">
+                NO
+              </div>
+              <div class="switch">
+                <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox"
+                <% if current_user.able_see == true %>
+                  checked
+                <% end %>>
+                <label for="cmn-toggle-1"></label>
+              </div>
+              <div class="yes_text">
+                YES
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-12 profile_content">
-        <div class="row profile_content_data">
-          <div class="content_name">
-            <div class="jp">
-              ユーザーネーム
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                ユーザーネーム
+              </div>
+              <div class="en">
+                Username
+              </div>
             </div>
-            <div class="en">
-              Username
+            <div class="profile_content_cover">
+              <input id="username"class="form_control content_input form-control" placeholder="Blank"value="<%= current_user.name %>">
             </div>
-          </div>
-          <div class="profile_content_cover">
-            <input id="username"class="form_control content_input form-control" placeholder="Blank"value="<%= current_user.name %>">
           </div>
         </div>
-      </div>
-      <div class="col-sm-12 profile_content">
-        <div class="row profile_content_data">
-          <div class="content_name">
-            <div class="jp">
-              性別
+
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                性別
+              </div>
+              <div class="en">
+                Gender
+              </div>
             </div>
-            <div class="en">
-              Gender
-            </div>
-          </div>
-          <div class="profile_content_cover">
-            <select id="gender"class="content_select">
-              <option value="">No Selected</option>
-              <% if current_user.gender == "Male" %>
-                <option value="Male" selected>Male / 男性</option>
-              <% else %>
-                <option value="Male">Male / 男性</option>
-              <% end %>
-              <% if current_user.gender == "Female" %>
-                <option value="Female" selected>Female / 女性</option>
-              <% else %>
-                <option value="Female">Female / 女性</option>
-              <% end %>
-              <% if current_user.gender == "Neuter" %>
-                <option value="Neuter" selected>Neuter / 中性</option>
-              <% else %>
-                <option value="Neuter">Neuter / 中性</option>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>
-      <!--<div class="col-sm-12 profile_content">
-        <div class="profile_content_data row">
-          <div class="content_name col-sm-2">
-            <div class="jp">
-              生年月日
-            </div>
-            Date Of Birth
-          </div>
-          <div class="col-sm-10">
-            <select id="year"class="content_select">
-              <option>Year</option>
-              <% 2019.downto(1900) do |num| %>
-                <% if current_user.birth_year == num %>
-                  <option value="<%= num %>"selected><%= num %></option>
+            <div class="profile_content_cover">
+              <select id="gender"class="content_select">
+                <option value="">No Selected</option>
+                <% if current_user.gender == "Male" %>
+                  <option value="Male" selected>Male / 男性</option>
                 <% else %>
-                  <option value="<%= num %>"><%= num %></option>
+                  <option value="Male">Male / 男性</option>
                 <% end %>
-              <% end %>
-            </select>
-            <select id="month"class="content_select">
-              <option>Month</option>
-              <% 1.upto(12) do |num| %>
-                <% if current_user.birth_month == num %>
-                  <option value="<%= num %>"selected><%= num %></option>
+                <% if current_user.gender == "Female" %>
+                  <option value="Female" selected>Female / 女性</option>
                 <% else %>
-                  <option value="<%= num %>"><%= num %></option>
+                  <option value="Female">Female / 女性</option>
                 <% end %>
-              <% end %>
-            </select>
-            <select id="date"class="content_select">
-              <option>Date</option>
-              <% 1.upto(31) do |num| %>
-                <% if current_user.birth_day == num %>
-                  <option value="<%= num %>"selected><%= num %></option>
+                <% if current_user.gender == "Neuter" %>
+                  <option value="Neuter" selected>Neuter / 中性</option>
                 <% else %>
-                  <option value="<%= num %>"><%= num %></option>
+                  <option value="Neuter">Neuter / 中性</option>
                 <% end %>
-              <% end %>
-            </select>
+              </select>
+            </div>
           </div>
         </div>
-      </div>-->
-      <div class="profile_content">
-        <div class="row profile_content_data">
-          <div class="content_name">
-            <div class="jp">
-              出身国
+        <!--<div class="col-sm-12 profile_content">
+          <div class="profile_content_data row">
+            <div class="content_name col-sm-2">
+              <div class="jp">
+                生年月日
+              </div>
+              Date Of Birth
             </div>
-            <div class="en">
-              Country
+            <div class="col-sm-10">
+              <select id="year"class="content_select">
+                <option>Year</option>
+                <% 2019.downto(1900) do |num| %>
+                  <% if current_user.birth_year == num %>
+                    <option value="<%= num %>"selected><%= num %></option>
+                  <% else %>
+                    <option value="<%= num %>"><%= num %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              <select id="month"class="content_select">
+                <option>Month</option>
+                <% 1.upto(12) do |num| %>
+                  <% if current_user.birth_month == num %>
+                    <option value="<%= num %>"selected><%= num %></option>
+                  <% else %>
+                    <option value="<%= num %>"><%= num %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              <select id="date"class="content_select">
+                <option>Date</option>
+                <% 1.upto(31) do |num| %>
+                  <% if current_user.birth_day == num %>
+                    <option value="<%= num %>"selected><%= num %></option>
+                  <% else %>
+                    <option value="<%= num %>"><%= num %></option>
+                  <% end %>
+                <% end %>
+              </select>
             </div>
           </div>
-          <div class="profile_content_cover">
-            <select value="<%= current_user.country %>"class="content_select"id="country"name="country"style="padding:1vw;">
-              <option value="">No selected</option>
-              <%= render partial: "country" %>
-            </select>
-            <script type="text/javascript">
-              $("#country option[value='<%= current_user.country %>']").prop("selected","selected");
-            </script>
+        </div>-->
+        <div class="profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                出身国
+              </div>
+              <div class="en">
+                Country
+              </div>
+            </div>
+            <div class="profile_content_cover">
+              <select value="<%= current_user.country %>"class="content_select"id="country"name="country"style="padding:1vw;">
+                <option value="">No selected</option>
+                <%= render partial: "country" %>
+              </select>
+              <script type="text/javascript">
+                $("#country option[value='<%= current_user.country %>']").prop("selected","selected");
+              </script>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="profile_words">
-    <div class="profile_content">
-      <div class="col-sm-6">
-        <div class="row profile_content_data self_introduction">
-          <div class="content_name">
-            <div class="jp">
-              自己紹介(英語)
+    <div class="profile_words">
+      <div class="profile_content">
+        <div class="col-sm-6">
+          <div class="row profile_content_data self_introduction">
+            <div class="content_name">
+              <div class="jp">
+                自己紹介(英語)
+              </div>
+              <div class="en">
+                Introduction
+                (English)
+              </div>
             </div>
-            <div class="en">
-              Introduction
-              (English)
-            </div>
+            <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"><%=current_user.profile_en%></textarea>
           </div>
-          <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"><%=current_user.profile_en%></textarea>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="row profile_content_data self_introduction">
-          <div class=" content_name">
-            <div class="jp">
-              自己紹介(日本語)
+        <div class="col-sm-6">
+          <div class="row profile_content_data self_introduction">
+            <div class=" content_name">
+              <div class="jp">
+                自己紹介(日本語)
+              </div>
+              <div class="en">
+                Introduction
+                (Japanese)
+              </div>
             </div>
-            <div class="en">
-              Introduction
-              (Japanese)
-            </div>
+            <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"><%=current_user.profile_jp%></textarea>
           </div>
-          <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"><%=current_user.profile_jp%></textarea>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :activation_digest
       # t.string :activation_token
       t.boolean :able_see, default: true
+      t.string :agreement, default: false
       t.boolean :activated, default: false
       t.datetime :activated_at
       t.string :reset_digest

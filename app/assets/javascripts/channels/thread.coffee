@@ -116,6 +116,8 @@ type_check=(id,type)->
           $("#groupModal .jp_form_content").html(content_jp)
           $("#groupModal .en_form_title").val(title_en)
           $("#groupModal .jp_form_title").val(title_jp)
+          $(".explain_text .en").attr("style","")
+          $(".explain_text .jp").attr("style","display:none")
           $("#groupModal").modal("show")
 
 cut_hash=(hash_data)->
@@ -164,6 +166,8 @@ translate_google=(title,coment,lang,hash_ary) ->
       $("#groupModal .jp_form_content").html(ary[15])
       $("#groupModal .en_form_title").val(title)
       $("#groupModal .jp_form_title").val(ary[7])
+      $(".explain_text .en").attr("style","")
+      $(".explain_text .jp").attr("style","display:none")
       $("#groupModal").modal("show")
     else
       #App.thread.make(lang,title,coment,ary[7],ary[15],category,hash_ary,hash_base)
@@ -173,4 +177,6 @@ translate_google=(title,coment,lang,hash_ary) ->
       $("#groupModal .jp_form_content").html(coment)
       $("#groupModal .en_form_title").val(ary[7])
       $("#groupModal .jp_form_title").val(title)
+      $(".explain_text .jp").attr("style","")
+      $(".explain_text .en").attr("style","display:none")
       $("#groupModal").modal("show")

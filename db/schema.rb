@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_081937) do
+ActiveRecord::Schema.define(version: 2019_06_07_075337) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 2019_05_30_081937) do
     t.string "hash_en"
     t.string "hash_jp"
     t.string "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notices", force: :cascade do |t|
+    t.string "notice_from"
+    t.string "notice_main"
+    t.string "user_id"
+    t.string "notice_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -110,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_081937) do
     t.string "password_digest"
     t.string "activation_digest"
     t.boolean "able_see", default: true
+    t.string "agreement", default: "f"
     t.boolean "activated", default: false
     t.datetime "activated_at"
     t.string "reset_digest"

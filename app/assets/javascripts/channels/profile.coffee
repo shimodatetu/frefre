@@ -10,7 +10,7 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
   change: (username,gender,country,profile_en,profile_jp,able_see) ->
     @perform 'change',username:username,gender:gender,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
-    alert_set("You successed to save your profile.","プロフィールの保存に成功しました。","success")
+    alert_set("You successed to save your profile.","プロフィールの保存に成功しました","success")
     location.reload()
 
 $(document).on 'click', '.profile_check_modal .btn_send', (event) ->
@@ -65,9 +65,13 @@ translate_google=(username,gender,country,profile_en,profile_jp,lang,able_see) -
       #App.profile.change(username,gender,year,month,date,country,profile_en,trans_text,able_see)
       $(".profile_check_modal .en_form").val(words)
       $(".profile_check_modal .jp_form").val(trans_text)
+      $(".explain_text .en").attr("style","")
+      $(".explain_text .jp").attr("style","display:none")
       $("#profile_modal").modal("show")
     else
       #App.profile.change(username,gender,year,month,date,country,trans_text,profile_jp,able_see)
       $(".profile_check_modal .en_form").val(trans_text)
       $(".profile_check_modal .jp_form").val(words)
+      $(".explain_text .jp").attr("style","")
+      $(".explain_text .en").attr("style","display:none")
       $("#profile_modal").modal("show")

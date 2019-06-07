@@ -1,5 +1,5 @@
 .sign_page_cover{
-  position:absolute;
+  //position:absolute;
   vertical-align: center;
   padding-left:calc(50% - 300px);
   .login_page{
@@ -27,10 +27,20 @@
         text-align: center;
       }
     }
+    .term_link{
+      float:right;
+    }
     .input-groups{
       margin-top:16px;
       margin-left: 50px;
       margin-right: 50px;
+      .checkbox_input{
+        display: inline-block;
+      }
+      .term_check{
+        display: inline-block;
+        margin-left: 5px;
+      }
       .input_title{
         font-size: 18px;
         .float_jp{

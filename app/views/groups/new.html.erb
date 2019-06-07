@@ -109,8 +109,16 @@
           <textarea id="content"class="content_input_form form-control form_lang jp_data_content" rows="3" cols="65"></textarea>
         </div>
       </div>
-      <div class="post_footer">
-        
+      <button type="button" class="post_button_place post_button btn btn-primary words_post_button"id="en">
+        <div class="glyphicon glyphicon-comment picture_send"></div>
+        <div class="button_text">
+          <div class="float_jp">
+             投稿
+          </div>
+          Post
+        </div>
+      </button>
+      <!--<div class="post_footer">
         <button type="button" class="post_button btn btn-primary words_post_button"id="en">
           <div class="button_text">
             <div class="float_jp">
@@ -120,7 +128,7 @@
           </div>
           <div class="glyphicon glyphicon-comment picture_send"></div>
         </button>
-        <!--<button type="button" class="post_button btn btn-primary words_post_button"id="enjp">
+        <button type="button" class="post_button btn btn-primary words_post_button"id="enjp">
           <div class="button_text">
             <div class="float_jp">
               書き込み
@@ -138,8 +146,8 @@
             Write
           </div>
           <%= image_tag "21hb-GV4ZtL.jpg", class: "image picture_send" %>
-        </button>-->
-      </div>
+        </button>
+      </div>-->
     </div>
     <div class="modal fade category_modal" id="category_modal" tabindex="-1">
     	<div class="modal-dialog"style="width:90vw">
@@ -257,10 +265,20 @@
                 </div>
               </div>
               <div class="explain_text">
-                You have to write both English and Japanese.<br>
-                ここでは英語と日本語を入力して投稿します。
+                <div class="en">
+                  ●Post it as it is→”POST”<br>
+                  ●When you rewrite mistranslation or miswriting (not to use translation)<br>
+                    →Please rewrite the contents above & “POST“.<br>
+                  ●When you rewrite En miswriting & translate it into Jp →“BACK”<br>
+                </div>
+                <div class="jp">
+                  ●このまま投稿→「投稿」<br>
+                  ●誤記・誤訳を修正して投稿（翻訳を使わない）→上記を直接書き直す＆「投稿」<br>
+                  ●日本語の誤記を直して、もう一度英訳→「戻る」<br>
+                </div>
               </div>
       			</div>
+
       			<div class="modal-footer">
               <button type="button" class="btn btn-default btn_send"id="enjp">
                 <div class="float_jp">投稿</div>
