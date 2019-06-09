@@ -2,6 +2,9 @@
   ::-webkit-input-placeholder {
     color: #bbbbbb;
   }
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #fff7cd;
+  }
   .profile_sub{
       position:fixed;
   }

@@ -25,7 +25,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
   speak: (lang,mes_jp,mes_en, group)->
     mes_jp = mes_jp.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "\r");
-    mes_en = mes_en.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "&lt;br&gt;");
+    mes_en = mes_en.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "\r");
     @perform('speak',lang: "en",content_jap: mes_jp,content_eng: mes_en, group_id: group)
     $(".base_en_form").val("")
     $(".base_jp_form").val("")
@@ -75,19 +75,29 @@ add_post=(data)->
 type_check=(id)->
   text_en = $(".base_en_form").val();
   text_jp = $(".base_jp_form").val();
-  if text_en == "" && text_jp == ""
-    alert_modal("This form is empty.","入力欄に何も書かれていません","fail");
-  else　if text_en != "" && text_jp != ""
-    $("#sampleModal-enjp .en_form").val(text_en)
-    $("#sampleModal-enjp .jp_form").val(text_jp)
-    $(".explain_text .en").attr("style","")
-    $(".explain_text .jp").attr("style","display:none")
-    $('#sampleModal-enjp').modal("show")
-  else if text_jp == ""
-    translate_google("ja",text_en)
-  else if text_en == ""
-    translate_google("en",text_jp);
-    # body...
+  if id == "post"
+    if text_en != "" && text_jp != ""
+      $("#sampleModal-enjp .en_form").val(text_en)
+      $("#sampleModal-enjp .jp_form").val(text_jp)
+      $(".explain_text .en").attr("style","")
+      $(".explain_text .jp").attr("style","display:none")
+      $('#sampleModal-enjp').modal("show")
+    else if text_jp != ""
+      alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
+    else if text_en != ""
+      alert_modal("The Japanese form is empty.","日本語入力欄に何も書かれていません","fail");
+    else
+      alert_modal("This form is empty.","入力欄に何も書かれていません","fail");
+  else if id == "trans"
+    if text_en != "" && text_jp != ""
+      alert_modal("Both Englsh and Japanese form is filled.","両方の入力欄に入力されています","fail");
+    else if text_jp != ""
+      translate_google("en",text_jp)
+    else if text_en != ""
+      translate_google("ja",text_en)
+    else
+      alert_modal("This form is empty.","入力欄に何も書かれていません","fail")
+
 
 translate_google=(lang,words) ->
   key = window.ENV.RailsEnv

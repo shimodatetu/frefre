@@ -39,7 +39,6 @@
         <div class="thread_cover">
           <div class="group_user_cover">
             <div class="group_img_cover">
-              <object>
               <%= link_to "/other_profile/#{group.user.id}" do %>
                 <% if group.user.photo.nil? %>
                   <%= image_tag("/user.png", :class => "group_img") %>
@@ -47,24 +46,21 @@
                   <%= image_tag show_image_profile_path(group.user), :class => "group_img" %>
                 <% end %>
               <% end %>
-              </object>
             </div>
           </div>
           <div class="thread_content">
             <div class="post_content_cover">
-              <object>
-                <div class="user_name">
-                  <% if !logged_in? || current_user.id != group.user.id %>
-                    <%= link_to "/other_profile/#{group.user.id}" do %>
-                      <%= group.user.name %>
-                    <% end %>
-                  <% else %>
-                    <%= link_to "/profile" do %>
-                      <%= group.user.name %>
-                    <% end %>
+              <div class="user_name">
+                <% if !logged_in? || current_user.id != group.user.id %>
+                  <%= link_to "/other_profile/#{group.user.id}" do %>
+                    <%= group.user.name %>
                   <% end %>
-                </div>
-              </object>
+                <% else %>
+                  <%= link_to "/profile" do %>
+                    <%= group.user.name %>
+                  <% end %>
+                <% end %>
+              </div>
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding">

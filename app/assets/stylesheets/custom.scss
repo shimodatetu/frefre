@@ -4,10 +4,43 @@
   padding-left:calc(5%);
   width:calc(70%);
   display: inline-block;
+  object{
+    height:0px;
+  }
   .obj-fit-img {
     object-fit: cover;
     object-position: 0 100%;
     font-family: 'object-fit: cover; object-position: 0 100%;'
+  }
+  .normal_button{
+    display: inline-block;
+    background: #fff6c6bd;
+    border: solid 1px #cd853f4d;
+    color:#cd853f;
+    word-wrap: break-word;
+    padding-left: 2px;
+    margin-left:5px;
+    .picture_send{
+      display: inline-block;
+      margin-right:10px;
+    }
+    .image{
+      width:28px;
+      height:20px;
+      margin-top:-15px;
+    }
+    .picture_send{
+      display: inline-block;
+      margin-right:0px;
+      width:20px;
+      margin-left:5px!important;
+    }
+    .button_text{
+      display: inline-block;
+      .float_jp{
+        font-size:11px;
+      }
+    }
   }
 }
 #successModal{
@@ -31,7 +64,7 @@
   }
 }
 body{
-  background:#fff0a017;
+  //background:#fff0a017;
 }
 @media screen and (max-width: 600px){
   .profile{
@@ -76,7 +109,6 @@ body{
     width: 95%!important;
   }
   .thread_cover{
-    padding-left: 5px!important;
     padding-right: 5px!important;
   }
   .thread_all{

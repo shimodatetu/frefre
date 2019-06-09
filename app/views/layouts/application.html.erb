@@ -33,11 +33,12 @@
     </div>
   </div>
 </html>
-<% if !flash["alert_en"].nil? && !flash["alert_jp"].nil? %>
-  <script>
+<script>
+  alert_get()
+  <% if !flash["alert_en"].nil? && !flash["alert_jp"].nil? %>
     alert_modal('<%= flash["alert_en"] %>','<%= flash["alert_jp"] %>','<%= flash["alert_type"] %>')
-  </script>
-  <% flash["alert_en"] = nil %>
-  <% flash["alert_jp"] = nil %>
-  <% flash["alert_type"] = nil %>
-<% end %>
+    <% flash["alert_en"] = nil %>
+    <% flash["alert_jp"] = nil %>
+    <% flash["alert_type"] = nil %>
+  <% end %>
+</script>

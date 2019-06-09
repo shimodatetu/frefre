@@ -6,6 +6,9 @@ function alert_modal(alert_en,alert_jp,alert_type){
   if(alert_type != null) {
     $(".modal-content").addClass(alert_type)
   }
+  else {
+    $(".modal-content").attr("class","modal-content")
+  }
   setTimeout(function(){
     $("#successModal").modal("hide")
   },1500);
