@@ -60,7 +60,8 @@ ActiveRecord::Schema.define(version: 2019_06_07_075337) do
 
   create_table "notices", force: :cascade do |t|
     t.string "notice_from"
-    t.string "notice_main"
+    t.string "notice_main_en"
+    t.string "notice_main_jp"
     t.string "user_id"
     t.string "notice_type"
     t.datetime "created_at", null: false

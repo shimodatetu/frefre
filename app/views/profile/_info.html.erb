@@ -1,0 +1,41 @@
+<div class="profile_notice">
+  
+  <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |notice| %>
+    <%= link_to("/thread/show/#{notice.id}" , class:"thread_link") do %>
+      <% there_be = true %>
+      <div class="thread_cover">
+        <div class="thread_content">
+          <div class="post_content_cover">
+            <div class="post_content_position en_position">
+              <div class="thread_title">
+                <div class="title_padding">
+                  <%= notice.notice_from %>
+                </div>
+              </div>
+              <div class="post_content">
+                <div class="post_content_text">
+                  <%= notice.notice_main_jp %>
+                </div>
+              </div>
+            </div>
+            <div class="post_content_position_space">
+              <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+            </div>
+            <div class="post_content_position jp_position">
+              <div class="thread_title">
+                <div class="title_padding">
+                  <%= notice.notice_from %>
+                </div>
+              </div>
+              <div class="post_content">
+                <div class="post_content_text">
+                  <%= notice.notice_main_en %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

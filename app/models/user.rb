@@ -3,6 +3,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :posts
   has_many :groups
+  has_many :notices
   has_secure_password
   validates :password, length: (6..32),on: :create, format: { with: /\A[a-z0-9]+\z/i }
   validates :password, length: {minimum: 6}, on: :update, allow_blank: true
