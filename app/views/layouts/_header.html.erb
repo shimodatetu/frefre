@@ -4,7 +4,7 @@
     <div class="nav-fall border border-primary">
       <%= link_to '/',class:"link_text" do %>
         <div class="text_fill
-        <% if url == '/'%>
+        <% if url == '/' || url.include?('thread_list')%>
           <%= "now_page" %>
         <% end %>">
           <div class="height_control"></div>
