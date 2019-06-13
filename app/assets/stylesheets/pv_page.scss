@@ -267,8 +267,16 @@
       margin-left:-5px;
     }
   }
+  .more_thread_dot{
+    text-align: center;
+    .dot{
+      margin-top:-12px;
+    }
+  }
   .see_more_thread{
-    float:right;
+    float: right;
+    //margin-top: -25px;
+    font-size: 15px;
   }
 }
 .page_button_cover{
