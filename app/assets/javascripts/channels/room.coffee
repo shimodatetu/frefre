@@ -26,6 +26,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   speak: (lang,mes_jp,mes_en, group)->
     mes_jp = mes_jp.replace("// n", '').replace("//n", '');
     mes_en = mes_en.replace("//n", '').replace("// n", '');
+    @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
     $(".base_en_form").val("")
     $(".base_jp_form").val("")
     $('#sampleModal-enjp').modal("hide")
