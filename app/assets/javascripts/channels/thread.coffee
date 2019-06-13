@@ -64,6 +64,7 @@ type_check=(id,type)->
     hash_jp = $(".hash_jp").val()
     if id == "post"
       if title_en != "" && title_jp != "" && content_jp != "" && content_en != "" && hash_en != "" && hash_jp != ""
+        #両方投稿するとき
         hash_ary_en = cut_hash(hash_en)
         hash_ary_jp = cut_hash(hash_jp)
         if hash_ary_en.length != hash_ary_jp.length
@@ -76,8 +77,9 @@ type_check=(id,type)->
           $("#groupModal .jp_form_content").html(content_jp)
           $("#groupModal .en_form_title").val(title_en)
           $("#groupModal .jp_form_title").val(title_jp)
-          $(".explain_text .en").attr("style","")
+          $(".explain_text .en").attr("style","display:none")
           $(".explain_text .jp").attr("style","display:none")
+          $(".explain_text .enjp").attr("style","")
           $("#groupModal").modal("show")
       else if hash_en == ""
         alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
@@ -169,6 +171,7 @@ translate_google=(title,content,lang,hash_ary) ->
       $("#groupModal .jp_form_title").val(trans_title)
       $(".explain_text .en").attr("style","")
       $(".explain_text .jp").attr("style","display:none")
+      $(".explain_text .enjp").attr("style","display:none")
       $("#groupModal").modal("show")
     else
       $("#groupModal .en_form_hash").html("#"+hash_ary.join("#"))
@@ -179,4 +182,5 @@ translate_google=(title,content,lang,hash_ary) ->
       $("#groupModal .jp_form_title").val(title)
       $(".explain_text .jp").attr("style","")
       $(".explain_text .en").attr("style","display:none")
+      $(".explain_text .enjp").attr("style","display:none")
       $("#groupModal").modal("show")

@@ -78,8 +78,9 @@ type_check=(id)->
     if text_en != "" && text_jp != ""
       $("#sampleModal-enjp .en_form").val(text_en)
       $("#sampleModal-enjp .jp_form").val(text_jp)
-      $(".explain_text .en").attr("style","")
+      $(".explain_text .en").attr("style","display:none")
       $(".explain_text .jp").attr("style","display:none")
+      $(".explain_text .enjp").attr("style","")
       $('#sampleModal-enjp').modal("show")
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
@@ -122,6 +123,7 @@ translate_google=(lang,words) ->
       #$(".base_jp_form").val("")
       $(".explain_text .en").attr("style","")
       $(".explain_text .jp").attr("style","display:none")
+      $(".explain_text .enjp").attr("style","display:none")
       $('#sampleModal-enjp').modal("show")
     else
       $(".only_jp_form").val("");
@@ -132,6 +134,7 @@ translate_google=(lang,words) ->
       #$(".base_jp_form").val("")
       $(".explain_text .jp").attr("style","")
       $(".explain_text .en").attr("style","display:none")
+      $(".explain_text .enjp").attr("style","display:none")
       $('#sampleModal-enjp').modal("show")
 
 bytes=(str) ->

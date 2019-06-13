@@ -2,7 +2,7 @@
 <br>
 <p>Notice from the FreFre administrative office -------------------</p>
 <p>We have accepted your temporary registration as a FreFre member.
-  ▼▼ Please access the following URL to complete the registration ▼▼ </p>
+  ▼▼ Please access the following link to complete the registration ▼▼ </p>
 
 <%= link_to "Completing the member registration", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email)%>
@@ -10,7 +10,7 @@
 <p> ※ If the above URL can not be opened, please copy and paste the URL into the address field of the web browser. </P>
 <br><br><br>
 <p>FreFre フレフレ運営事務局からのお知らせ ―――――――――――――――――― </p>
-<p>FreFre フレフレの会員の仮登録を受け付けました。  ▼▼ 下記URLにアクセスし、登録を完了させてください ▼▼</p>
+<p>FreFre フレフレの会員の仮登録を受け付けました。  ▼▼ 下記リンクにアクセスし、登録を完了させてください ▼▼</p>
 
 <%= link_to "会員登録を完了する", edit_account_activation_url( @user.activation_token,
                                                     email: @user.email) %>

@@ -67,6 +67,7 @@ translate_google=(username,gender,country,profile_en,profile_jp,lang,able_see) -
       $(".profile_check_modal .jp_form").val(trans_text)
       $(".explain_text .en").attr("style","")
       $(".explain_text .jp").attr("style","display:none")
+      $(".explain_text .enjp").attr("style","display:none")
       $("#profile_modal").modal("show")
     else
       #App.profile.change(username,gender,year,month,date,country,trans_text,profile_jp,able_see)
@@ -74,4 +75,5 @@ translate_google=(username,gender,country,profile_en,profile_jp,lang,able_see) -
       $(".profile_check_modal .jp_form").val(words)
       $(".explain_text .jp").attr("style","")
       $(".explain_text .en").attr("style","display:none")
+      $(".explain_text .enjp").attr("style","display:none")
       $("#profile_modal").modal("show")
