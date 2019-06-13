@@ -24,9 +24,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
 
   speak: (lang,mes_jp,mes_en, group)->
-    mes_jp = mes_jp.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "\r");
-    mes_en = mes_en.replace(/\r\n/g, "<br />").replace(/(\n|\r)/g, "\r");
-    @perform('speak',lang: "en",content_jap: mes_jp,content_eng: mes_en, group_id: group)
+    mes_jp = mes_jp.replace("// n", '').replace("//n", '');
+    mes_en = mes_en.replace("//n", '').replace("// n", '');
     $(".base_en_form").val("")
     $(".base_jp_form").val("")
     $('#sampleModal-enjp').modal("hide")
@@ -112,8 +111,8 @@ translate_google=(lang,words) ->
   fetch(url, settings).then((res) ->
     res.text()
   ).then (text) ->
-    ary = text.split('"');
-    translation = ary[7]#7番はテキスト
+    get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
+    translation = get_text
     if lang == "ja"
       $(".only_en_form").val("");
       #App.room.speak(lang,translation,words, group)

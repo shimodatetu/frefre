@@ -81,9 +81,14 @@
                   <option value="Female">Female / 女性</option>
                 <% end %>
                 <% if current_user.gender == "Neuter" %>
-                  <option value="Neuter" selected>Neuter / 中性</option>
+                  <option value="Neuter" selected>Other / その他</option>
                 <% else %>
-                  <option value="Neuter">Neuter / 中性</option>
+                  <option value="Neuter">Other / その他</option>
+                <% end %>
+                <% if current_user.gender == "not_answer" %>
+                  <option value="not_answer" selected>No answer / 答えない</option>
+                <% else %>
+                  <option value="not_answer">No answer / 答えない</option>
                 <% end %>
               </select>
             </div>

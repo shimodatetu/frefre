@@ -134,51 +134,48 @@ cut_hash=(hash_data)->
   return hash_ary_main
 
 
-translate_google=(title,coment,lang,hash_ary) ->
+translate_google=(title,content,lang,hash_ary) ->
   key = window.ENV.RailsEnv
   url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
   data = new FormData
   data.append 'q', title
-  data.append 'q', coment
+  data.append 'q', content
   hash_base = []
-  console.log(hash_ary)
   hash_ary.forEach (value) ->
-    console.log(value)
     data.append 'q', value
     hash_base.push(value)
   data.append 'target', lang
+  data.append 'format', "text"
   settings =
     method: 'POST'
     body: data
   fetch(url, settings).then((res) ->
     res.text()
   ).then (text) ->
-    ary = text.split('"');
-    trans_title = ary[7]#7番はテキスト
-    trans_content = ary[15]
-    i = 15
-    hash_ary = [];
-    while(ary[i+8] != undefined)
-      i += 8
-      hash_ary.push(ary[i]);
+    translate = JSON.parse(text)["data"]["translations"]
+    trans_title = translate[0]["translatedText"]
+    trans_content = translate[1]["translatedText"]
+    i = 1
+    hash_ary = []
+    while(translate[i+1] != undefined)
+      i += 1
+      hash_ary.push(translate[i]["translatedText"]);
     if lang == "ja"
-      #App.thread.make(lang,ary[7],ary[15],title,coment,category,hash_base,hash_ary)
       $("#groupModal .en_form_hash").html("#"+hash_base.join("#"))
       $("#groupModal .jp_form_hash").html("#"+hash_ary.join("#");)
-      $("#groupModal .en_form_content").html(coment)
-      $("#groupModal .jp_form_content").html(ary[15])
+      $("#groupModal .en_form_content").html(content)
+      $("#groupModal .jp_form_content").html(trans_content)
       $("#groupModal .en_form_title").val(title)
-      $("#groupModal .jp_form_title").val(ary[7])
+      $("#groupModal .jp_form_title").val(trans_title)
       $(".explain_text .en").attr("style","")
       $(".explain_text .jp").attr("style","display:none")
       $("#groupModal").modal("show")
     else
-      #App.thread.make(lang,title,coment,ary[7],ary[15],category,hash_ary,hash_base)
       $("#groupModal .en_form_hash").html("#"+hash_ary.join("#"))
       $("#groupModal .jp_form_hash").html("#"+hash_base.join("#"))
-      $("#groupModal .en_form_content").html(ary[15])
-      $("#groupModal .jp_form_content").html(coment)
-      $("#groupModal .en_form_title").val(ary[7])
+      $("#groupModal .en_form_content").html(trans_content)
+      $("#groupModal .jp_form_content").html(content)
+      $("#groupModal .en_form_title").val(trans_title)
       $("#groupModal .jp_form_title").val(title)
       $(".explain_text .jp").attr("style","")
       $(".explain_text .en").attr("style","display:none")

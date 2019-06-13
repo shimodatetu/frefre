@@ -1,12 +1,8 @@
-class PvPageController < ApplicationController
-  def show
-    @groups = Group.all
-    #set_group_data
-  end
-  def new
+class ThreadListController < ApplicationController
+  def popular
     set_group_data
   end
-  def popular
+  def new
     set_group_data
   end
 

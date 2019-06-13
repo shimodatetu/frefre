@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notice/show/:id' => 'notice#show'
   get 'other_profile/show'
   get 'account_activations/check'
   get 'password_resets/new'
@@ -42,6 +43,10 @@ Rails.application.routes.draw do
   get 'other_profile/show'
   get 'other_profile/:id' => 'other_profile#show'
   get 'other_profile', to:'other_profile#show'
+  get 'thread_list/popular'
+  get 'thread_list/new'
+  get 'thread_list/popular/:id' => 'thread_list#popular'
+  get 'thread_list/new/:id' => 'thread_list#new'
   resources :users
   resources :profile
   resources :profile do

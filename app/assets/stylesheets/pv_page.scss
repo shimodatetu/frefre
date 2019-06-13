@@ -1,5 +1,6 @@
 .pvpage_all{
-  
+
+  margin-top:40px;
   .thread_link:hover{
     .thread_cover{
       background-color: rgba(252,248,210,1);
@@ -13,7 +14,7 @@
     padding-top:8px;
     margin-left:-5%;
     padding-left:5%;
-    margin-top:-20px;
+    margin-top:-60px;
     border-bottom: solid thin #BF8454;
     .lang_bar{
       padding-left:calc(10% + 80px);
@@ -66,7 +67,6 @@
   .panel-title{
     width:100%;
     display: inline-block;
-    margin-top:50px;
     margin-bottom:10px;
     padding-left:20px;
     font-size:18px;
@@ -266,6 +266,9 @@
       margin-top:20px;
       margin-left:-5px;
     }
+  }
+  .see_more_thread{
+    float:right;
   }
 }
 .page_button_cover{

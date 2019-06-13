@@ -1,41 +1,77 @@
 <div class="profile_notice">
-  
-  <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |notice| %>
-    <%= link_to("/thread/show/#{notice.id}" , class:"thread_link") do %>
-      <% there_be = true %>
-      <div class="thread_cover">
-        <div class="thread_content">
-          <div class="post_content_cover">
-            <div class="post_content_position en_position">
-              <div class="thread_title">
-                <div class="title_padding">
-                  <%= notice.notice_from %>
-                </div>
-              </div>
-              <div class="post_content">
-                <div class="post_content_text">
-                  <%= notice.notice_main_jp %>
-                </div>
-              </div>
+  <div class="panel-title"style="display:inline-block">
+    <div class="panel-title-text">
+      <div class="float_jp">
+        お知らせ
+      </div>
+      <div class="float_en">
+        Notice
+      </div>
+    </div>
+  </div>
+  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+    <div class="lang_bar">
+      <div class="country_flag en_country">
+        <%= image_tag "/english.png", class: "image" %>
+      </div>
+      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+          data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
+      <div class="country_flag jp_country">
+        <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
+      </div>
+    </div>
+  </div>
+  <div class="notice_cover">
+    <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |notice| %>
+      <%= link_to("/notice/show/#{notice.id}" , class:"thread_link") do %>
+        <% there_be = true %>
+        <div class="thread_cover">
+          <div class="group_user_cover">
+            <div class="group_img_cover">
+              <%= image_tag "info.png", :class => "group_img" %>
             </div>
-            <div class="post_content_position_space">
-              <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-            </div>
-            <div class="post_content_position jp_position">
-              <div class="thread_title">
-                <div class="title_padding">
-                  <%= notice.notice_from %>
+          </div>
+          <div class="thread_content">
+            <div class="post_content_cover">
+              <div class="post_content_position en_position">
+                <div class="thread_title">
+                  <div class="title_padding">
+                    <% if notice.notice_from < 1 %>
+                      From FreFre Administrative Office
+                    <% else %>
+                      From <%= User.find_by(id: notice.notice_from).name %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="post_content">
+                  <div class="post_content_text">
+                    <%= notice.notice_main_jp %>
+                  </div>
                 </div>
               </div>
-              <div class="post_content">
-                <div class="post_content_text">
-                  <%= notice.notice_main_en %>
+              <div class="post_content_position_space">
+                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+              </div>
+              <div class="post_content_position jp_position">
+                <div class="thread_title">
+                  <div class="title_padding">
+                    <% if notice.notice_from < 1 %>
+                      フレフレ事務局
+                    <% else %>
+                      <%= User.find_by(id: notice.notice_from).name %>より
+                    <% end %>
+                  </div>
+                </div>
+                <div class="post_content">
+                  <div class="post_content_text">
+                    <%= notice.notice_main_en %>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
