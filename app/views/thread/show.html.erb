@@ -4,8 +4,7 @@
 <% thread.seen_num+=1 %>
 <% thread.save %>
 
-<div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>">
-</div>
+<div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
 <% if logged_in? %>
   <div class="user_login"id="<%= current_user.id %>"></div>
 <% else %>
@@ -20,11 +19,10 @@
       <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
           data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
       <div class="country_flag jp_country">
-        <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
+        <%= image_tag "/21hb-GV4ZtL.jpg", class: "image" %>
       </div>
     </div>
   </div>
-
   <div class="panel-title"style="display:inline-block">
     <div class="panel-title-text">
       <div class="float_jp">

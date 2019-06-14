@@ -23,21 +23,21 @@
     padding: 0px 0px;
   }
   .nav-fall{
-    background: #fff;
+    background: #3d67b4;
     z-index:20;
     padding-left:20px;
     height:52px;
     font-size: 14px;
-    color:#cd853f;
-    border-bottom-width: thin;
-    border-bottom-color: #BF8454;
-    border-bottom-style: solid;
+    color:#fff;
+    //border-bottom-width: thin;
+    //border-bottom-color: #fff;
+    //border-bottom-style: solid;
     .icon{
       height:25px;
       width:25px;
     }
     .login_button:hover{
-      color:#C8A580;
+      color:#ffffff;
     }
     .login_button{
       height:100%;
@@ -47,7 +47,7 @@
       font-size: 18px;
       font-weight: bold;
       text-decoration: none;
-      color:#BF8454;
+      color:#fff;
       .url_menu{
         margin-top: -10px;
         min-width:120px;
@@ -66,12 +66,12 @@
           background:#f4f4f4;
         }
         .url_tab{
-          color:#BF8454;
+          color:#3d67b4;
           font-size:18px;
           text-align: center;
           .logout_button{
             margin-left:-15px;
-            color:#BF8454;
+            color:#3d67b4;
             font-weight:normal;
             background-color: transparent;
             border: none;
@@ -102,7 +102,7 @@
       .now_page{
         height:100%;
         margin-bottom:10px;
-        border-bottom:solid 2px #BF8454;
+        border-bottom:solid 3px #BF8454;
       }
       .text_fill{
         height:100%;
@@ -110,7 +110,7 @@
           padding-left:5px;
           padding-right:5px;
           height:100%;
-          color:#BF8454;
+          color:#fff;
           margin-left:-3px;
           display: inline-block;
           font-weight:lighter;
@@ -125,21 +125,21 @@
       }
     }
     .text_fill:hover{
-      color:#D8B590;
-      border-bottom:solid 2px #D8B590;
+      color:#fff;
+      border-bottom:solid 2px #fff;
     }
     .link_text{
       margin-left:-4px;
       height:100%;
       display: inline-block;
       text-align:center;
-      color:#BF8454;
+      color:#fff;
       font-size: 18px;
       font-weight: bold;
       text-decoration: none;
       .now_page{
         margin-bottom:10px;
-        border-bottom:solid 2px #BF8454;
+        border-bottom:solid 3px #fff;
       }
       .text_fill{
         display: inline-block;

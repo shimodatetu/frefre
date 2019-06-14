@@ -1,68 +1,12 @@
 .pvpage_all{
-
   margin-top:40px;
   .thread_link:hover{
     .thread_cover{
-      background-color: rgba(252,248,210,1);
+      background-color: #dcf2fe;
     }
   }
   .lang_bar_cover{
-    z-index: 20;
-    background: #fff7cd;
-    position:fixed;
-    width:100%;
-    padding-top:8px;
-    margin-left:-5%;
-    padding-left:5%;
-    margin-top:-60px;
-    border-bottom: solid thin #BF8454;
-    .lang_bar{
-      padding-left:calc(10% + 80px);
-      padding-top:8px;
-      padding-bottom:8px;
-      .slider{
-        width:calc(10% + 250px);
-        display: inline-block;
-        .tooltip{
-          display: none !important;
-        }
-        .slider-handle{
-          top: -5px !important;
-          width: 30px !important;
-          height: 30px !important;
-          background: rgb(80, 120, 220);
-          z-index:50;
-          .slider_icon{
-            color:#fff;
-            margin-left:2px;
-            margin-top:2.5px;
-            font-size:25px;
-          }
-        }
-        .slider-selection{
-          //height: 20px !important;
-          //top: -5px !important;
-          background: rgb(46, 82, 189);
-        }
-        .slider-track-high{
-          //top: -5px;
-          //height:20px;
-          background: #fff;
-          -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2)
-        }
-      }
-      .country_flag{
-        display: inline-block;
-        margin-right: 10px;
-        .image{
-          height:28px;
-          width:40px;
-        }
-      }
-      .jp_country{
-        margin-left:18px;
-      }
-    }
+
   }
   .panel-title{
     width:100%;
@@ -70,7 +14,6 @@
     margin-bottom:10px;
     padding-left:20px;
     font-size:18px;
-    color:#BF8454;
     .float_jp{
       font-size:12px;
     }
@@ -85,14 +28,14 @@
       float:right;
       font-size:18px;
       color:#fff;
-      background:#2e52bd;
+      background:#dcf2fe;
       .jp{
         font-size:12px;
       }
     }
   }
   .pvpage_head{
-    border-top:3px solid #fff2a0;
+    border-top:3px solid rgb(239,166,3);
     .pvpage_lang{
       display:inline-block;
       vertical-align: bottom;
@@ -176,7 +119,7 @@
           padding-left:10px;
           padding-right:10px;
           font-size:18px;
-          background:#fff7cf;
+          background:#dcf2fe;
           .title_padding{
             text-align: center;
             font-size:18px;
@@ -237,7 +180,7 @@
           .see_more{
             float:right;
             margin-top:-20px;
-            color:#327ab7;
+            color:#3d67b4;
           }
           .see_more:hover{
             border-bottom:solid 1px #135288;
@@ -253,7 +196,7 @@
             padding:4px;
             padding-left:7px;
             padding-right:7px;
-            background-color: #fff0b0;
+            background-color: #dcf2fe;
           }
         }
       }

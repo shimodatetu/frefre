@@ -2,77 +2,13 @@
 
 .thread_page{
   margin-bottom:40px;
-  .thread_link:hover{
-    .thread_cover{
-      background-color: rgba(252,248,210,1);
-    }
-  }
-  .lang_bar_cover{
-    z-index: 20;
-    background: #ffffff;
-    background:#fff7cd;
-    position:fixed;
-    width:100%;
-    margin-left:-5%;
-    padding-left:5%;
-    margin-top:-20px;
-    border-bottom: solid thin #BF8454;
-    .lang_bar{
-      padding-left:calc(10% + 80px);
-      padding-top:10px;
-      padding-bottom:10px;
-      .slider{
-        width:calc(10% + 250px);
-        display: inline-block;
-        .tooltip{
-          display: none !important;
-        }
-        .slider-handle{
-          top: -5px !important;
-          width: 30px !important;
-          height: 30px !important;
-          background: rgb(80, 120, 220);
-          z-index:50;
-          .slider_icon{
-            color:#fff;
-            margin-left:2px;
-            margin-top:2.5px;
-            font-size:25px;
-          }
-        }
-        .slider-selection{
-          //height: 20px !important;
-          //top: -5px !important;
-          background: rgb(46, 82, 189);
-        }
-        .slider-track-high{
-          //top: -5px;
-          //height:20px;
-          background: #fff;
-          -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2)
-        }
-      }
-      .country_flag{
-        display: inline-block;
-        margin-right: 10px;
-        .image{
-          height:28px;
-          width:40px;
-        }
-      }
-      .jp_country{
-        margin-left:18px;
-      }
-    }
-  }
+  margin-top: 40px;
   .panel-title{
-    margin-top:50px;
     display: inline-block;
     width:100%;
     margin-bottom:10px;
     padding-left:20px;
     font-size:18px;
-    color:#BF8454;
     .float_jp{
       font-size:12px;
     }
@@ -115,7 +51,7 @@
     }
   }
   .pvpage_head{
-    border-top:3px solid #fff2a0;
+    border-top:3px solid #3d67b4;
     .pvpage_lang{
       display:inline-block;
       vertical-align: bottom;
@@ -140,52 +76,7 @@
       }
     }
   }
-  .lang_bar{
-    padding-left:calc(28% - 30px);
-    margin-top: 5px;
-    .slider{
-      width:calc(65% - 75px);
-      display: inline-block;
-      .tooltip{
-        display: none !important;
-      }
-      .slider-handle{
-        top: -5px !important;
-        width: 30px !important;
-        height: 30px !important;
-        background: rgb(80, 120, 220);
-        z-index:50;
-        .slider_icon{
-          color:#fff;
-          margin-left:2px;
-          margin-top:2.5px;
-          font-size:25px;
-        }
-      }
-      .slider-selection{
-        //height: 20px !important;
-        //top: -5px !important;
-        background: rgb(46, 82, 189);
-      }
-      .slider-track-high{
-        //top: -5px;
-        //height:20px;
-        background: #fff;
-        -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2)
-      }
-    }
-    .country_flag{
-      display: inline-block;
-      margin-right: 8px;
-      .image{
-        height:28px;
-        width:40px;
-      }
-    }
-    .jp_country{
-      margin-left: 20px;
-    }
-  }
+
   .col-sm-6{
     padding-left:5px;
     float:left;
@@ -259,7 +150,7 @@
           padding-left:10px;
           padding-right:10px;
           font-size:18px;
-          background:#fff7cf;
+          background:#dcf2fe;
           .title_padding{
             text-align: center;
             font-size:18px;
@@ -305,9 +196,9 @@
                 }
               }
               .one_topic:hover{
-                background: #fff7cd;
-                color: #bf8454;
-                a{color:#bf8454}
+                background: #dcf2fe;
+                //color: #000;
+                //a{color:#bf8454}
               }
               .one_topic:nth-of-type(n+2){
                 border-top: solid thin #bbb;
@@ -394,9 +285,8 @@
     width:100%;
     bottom:5px;
     .post_button{
-      background: #fff0a08f!important;
-      border: solid thin #cd853f75;
-      color:#cd853f;
+      background:#3d67b4!important;
+      color:#fff;
       padding-left:20px;
       padding-right:20px;
       vertical-align:top;
@@ -514,7 +404,7 @@
     padding: 0;
     appearance: none;
     .btn{
-      background: #f74d3c;
+      background: #3d67b4;
       color:#fff;
     }
   }
@@ -654,9 +544,9 @@
       padding-bottom:3px;
       padding-left:16px;
       padding-right:16px;
-      background: #fff0a0;
+      background: #3d67b4;
       border:solid thin #ddd;
-      color: #cd853f;
+      color: #fff;
     }
     .btn_delete{
       display: inline-block;

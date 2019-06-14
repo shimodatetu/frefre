@@ -1,0 +1,58 @@
+.lang_bar_cover{
+  z-index: 20;
+  background: #dcf2fe;
+  position:fixed;
+  width:100%;
+  padding-top:8px;
+  margin-left:-5%;
+  padding-left:5%;
+  margin-top:-60px;
+  border-bottom: none;
+  .lang_bar{
+    padding-left:calc(10% + 80px);
+    padding-top:8px;
+    padding-bottom:8px;
+    .slider{
+      width:calc(10% + 250px);
+      display: inline-block;
+      .tooltip{
+        display: none !important;
+      }
+      .slider-handle{
+        top: -5px !important;
+        width: 30px !important;
+        height: 30px !important;
+        background: rgb(80, 120, 220);
+        z-index:50;
+        .slider_icon{
+          color:#fff;
+          margin-left:2px;
+          margin-top:2.5px;
+          font-size:25px;
+        }
+      }
+      .slider-selection{
+        //height: 20px !important;
+        //top: -5px !important;
+        background: rgb(46, 82, 189);
+      }
+      .slider-track-high{
+        //top: -5px;
+        //height:20px;
+        background: #fff;
+        -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2)
+      }
+    }
+    .country_flag{
+      display: inline-block;
+      margin-right: 10px;
+      .image{
+        height:28px;
+        width:40px;
+      }
+    }
+    .jp_country{
+      margin-left:18px;
+    }
+  }
+}

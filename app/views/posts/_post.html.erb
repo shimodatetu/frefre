@@ -27,11 +27,11 @@
           <div class="user_name">
             <% if params[:id].nil? || !logged_in? || current_user.id != post.user.id %>
               <%= link_to "/other_profile/#{post.user.id}" do %>
-                <%= post.user.name %>
+                <%= post.user.name %>/<%= post.id %>
               <% end %>
             <% else %>
               <%= link_to "/profile" do %>
-                <%= post.user.name %>
+                <%= post.user.name %>/<%= post.id %>
               <% end %>
             <% end %>
           </div>

@@ -1,9 +1,14 @@
+a{
+  color:#3d67b4;
+}
+
 .main_content_cover{
   padding-top:70px;
   padding-bottom:40px;
   padding-left:calc(5%);
   width:calc(70%);
   display: inline-block;
+  color:#3d67b4;
   object{
     height:0px;
   }
@@ -14,9 +19,9 @@
   }
   .normal_button{
     display: inline-block;
-    background: #fff6c6bd;
+    background: #3d67b4;
     border: solid 1px #cd853f4d;
-    color:#cd853f;
+    color:#fff;
     word-wrap: break-word;
     padding-left: 2px;
     margin-left:5px;

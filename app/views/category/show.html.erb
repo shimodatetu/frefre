@@ -1,5 +1,17 @@
 <% lang = session["lang"] %>
-<div class="category_list_all_cover">
+<div class="category_list_all_cover pvpage_all">
+  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+    <div class="lang_bar">
+      <div class="country_flag en_country">
+        <%= image_tag "/english.png", class: "image" %>
+      </div>
+      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+          data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
+      <div class="country_flag jp_country">
+        <%= image_tag "/21hb-GV4ZtL.jpg", class: "image" %>
+      </div>
+    </div>
+  </div>
   <div class="category_head">
     <div class="panel-title">
       <div class="panel-title-text">
@@ -10,58 +22,115 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-warning big_category_list all_category_list">
+  <div class="panel panel-default big_category_list all_category_list thread_all">
     <div class="panel-body category_content">
-      <% @category.each do |cate| %>
-        <div class="bigcategory_only">
-          <div id="<%= cate.id %>"class="category_title">
-            <div class="cate_icon">
-              <div class="change_icon glyphicon glyphicon-chevron-down"></div>
-            </div>
-            <div class="cate_name">
-              <div class="float_jp">
-                <%= cate.name_jp %>
+      <% @threadtypes.each do |type| %>
+        <%= link_to "/category/typecategory/#{type.id}" do %>
+          <div class="bigcategory_only">
+            <div id="<%= type.id %>"class="category_title">
+              <div class="cate_name">
+                <div class="float_jp">
+                  <%= type.type_jp %>
+                </div>
+                <%= type.type_en %>
               </div>
-              <%= cate.name_en %>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="panel-body category_all_content row">
-      <% @category.each do |cate| %>
-        <div class="panel panel-warning category_panel<%= cate.id %>">
-          <div class="bigcategory_add panel-heading">
-            <div class="category_title panel-title">
-              <div class="float_jp">
-                <%= cate.name_jp %>
+        <% end %>
+        <% there_be = false %>
+        <% type.groups.order(seen_num: "DESC").limit(3).each do |group| %>
+          <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
+            <% there_be = true %>
+            <div class="thread_cover">
+              <div class="group_user_cover">
+                <div class="group_img_cover">
+                  <object>
+                  <%= link_to "/other_profile/#{group.user.id}" do %>
+                    <% if group.user.photo.nil? %>
+                      <%= image_tag("/user.png", :class => "group_img") %>
+                    <% else %>
+                      <%= image_tag show_image_profile_path(group.user), :class => "group_img" %>
+                    <% end %>
+                  <% end %>
+
+                  </object>
+                </div>
               </div>
-              <%= cate.name_en %>
-            </div>
-          </div>
-          <ul class="smallcategory panel-body">
-            <% cate.smallcategories.each do |s_cate| %>
-              <li class="text col-sm-4">
-                <%= link_to "/category/smallcategory/#{s_cate.id}" do %>
-                  <div class="float_jp">
-                    <%= s_cate.name_jp %>
+              <div class="thread_content">
+                <div class="post_content_cover">
+                  <div class="user_name">
+                  <object>
+                    <% if !logged_in? || current_user.id != group.user.id %>
+                      <%= link_to "/other_profile/#{group.user.id}" do %>
+                        <%= group.user.name %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to "/profile" do %>
+                        <%= group.user.name %>
+                      <% end %>
+                    <% end %>
+                    </object>
                   </div>
-                  <%= s_cate.name_en %>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+                  <div class="post_content_position en_position">
+                    <div class="thread_title">
+                      <div class="title_padding">
+                        <%= group.title_en %>
+                      </div>
+                    </div>
+                    <div class="post_content en">
+                      <div class="post_content_text">
+                        <% group.hashtags.each do |hash|%>
+                          #<%= hash.hash_en %>　
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="see_more">
+                      See more
+                    </div>
+                  </div>
+                  <div class="post_content_position_space">
+                    <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+                  </div>
+                  <div class="post_content_position jp_position">
+                    <div class="thread_title">
+                      <div class="title_padding">
+                        <% require 'uri' %>
+                        <%= URI.decode(group.title_jp) %>
+                      </div>
+                    </div>
+                    <div class="post_content jp">
+                      <div class="post_content_text">
+                        <% group.hashtags.each do |hash|%>
+                          #<%= hash.hash_jp %>　
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="see_more">
+                      もっと見る
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% if there_be == false %>
+          <div class="not_found">
+            <div class="en">
+              There is no thread created.
+            </div>
+            <div class="jp">
+              まだスレッドが作成されていません。
+            </div>
+          </div>
+        <% else %>
+          <%= link_to "/category/typecategory/#{type.id}" do %>
+            <div class="see_more_thread">
+              See More / もっと見る
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>
-
 </div>
-
-<script type="text/javascript">
-  $(".category_title").on("click",function(){
-    var scroll_place = $(".category_panel"+$(this).attr("id")).offset().top;
-    scroll_place -= 60;
-    $("html").animate({scrollTop:scroll_place},"normal");
-  });
-</script>

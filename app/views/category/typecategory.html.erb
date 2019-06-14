@@ -1,8 +1,7 @@
 <% type_id = params[:id].to_i %>
 <% threadtype =  @threadtypes.find(type_id)%>
 <% lang = session["lang"] %>
-
-<div class="smallcategory_search">
+<div class="pvpage_all">
   <div class="lang_bar_cover">
     <div class="lang_bar">
       <div class="country_flag en_country">
@@ -15,7 +14,7 @@
       </div>
     </div>
   </div>
-  <div class="category_show">
+  <div class="panel-title">
     <div class="panel-title-text">
       <div class="float_jp">
         <%= threadtype.type_jp %>

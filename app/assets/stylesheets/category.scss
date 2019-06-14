@@ -1,11 +1,7 @@
 .category_list_all_cover{
-  margin-top:10px;
+  margin-top:40px;
   a {
     text-decoration: none;
-    color:rgba(99,176,189,1);
-  }
-  a:hover{
-    color:rgba(99,176,189,0.5);
   }
   .search_result{
     width:55vw;
@@ -45,13 +41,11 @@
     }
   }
   .category_head{
-    padding-left:20px;
-    padding-bottom:10px;
     margin-bottom:20px;
-    border-bottom:3px solid #fff2a0;
+    border-bottom:3px solid #3d67b4;
     .panel-title{
       font-size:18px;
-      color:#BF8454;
+      color:#3d67b4;
       .float_jp{
         font-size:12px;
       }
@@ -76,7 +70,7 @@
   .big_category_list{
     margin-bottom:5px;
     .category_head{
-      background-color: rgba(255,235,110,1);
+      background-color: #fff;
       .panel-title{
         font-size:20px;
         .float_jp{
@@ -89,17 +83,16 @@
       margin-top:2px;
     }
     .category_content{
-      padding-left:30px;
+      padding:10px;
+      margin-left:10px;
       border-top-left-radius:10px;
       border-top-right-radius:10px;
-      border-bottom:2px solid #faebcc;
       background:#ffffff;
       .bigcategory_only:hover{
         color:#999;
       }
       .bigcategory_only{
         display: inline-block;
-        min-width: 42%;
         padding-left:10px;
         margin-top:5px;
         cursor : pointer;
@@ -107,10 +100,13 @@
         font-size:20px;
         .category_title{
           .cate_name{
-            margin-left:30px;
+            color:#3d67b4;
             .float_jp{
               font-size:12px;
             }
+          }
+          .cate_name:hover{
+            color:#3d67b4bf;
           }
           .cate_icon{
             font-size:20px;

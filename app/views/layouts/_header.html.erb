@@ -19,7 +19,7 @@
           </div>
         </div>
       <% end %>
-      <%= link_to '/category/show2',class:"link_text" do %>
+      <%= link_to '/category/show',class:"link_text" do %>
         <div class="text_fill
         <% if url.include?('category') %>
           <%= "now_page" %>
@@ -59,7 +59,7 @@
           <% if url.include?('/profile') %>
             <%= "now_page" %>
           <% end %>"data-toggle="dropdown">
-            <%= link_to '/category/show2',class:"link_text",onclick:"window.location.href = '/profile';" do %>
+            <%= link_to '/category/show',class:"link_text",onclick:"window.location.href = '/profile';" do %>
               <div class="height_control"></div>
               <span class="icon glyphicon glyphicon-user"></span>
               <div class="text">

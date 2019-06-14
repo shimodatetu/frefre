@@ -62,6 +62,7 @@ class CategoryController < ApplicationController
 
   def show
     @category = Bigcategory.all
+    @threadtypes = Threadtype.all
   end
   def show2
     @category = Bigcategory.all
