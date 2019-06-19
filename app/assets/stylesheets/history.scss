@@ -1,8 +1,12 @@
 .profile_history{
   margin-left:20px;
   width:70vw;
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #dcf2fe;
+  }
   .nav-tabs{
     position: fixed;
+    background-color: #fff;
     z-index:5;
     width:70%;
     margin-top:-20px;
@@ -15,8 +19,7 @@
     }
   }
   .nav-link:hover{
-    color: #555555;
-    background-color: #fffbe6;
+    background-color: #dcf2fe;
     border: 1px solid #ddd;
     border-bottom-color: transparent;
     cursor: default;
@@ -28,16 +31,16 @@
     }
   }
   .nav-link:hover{
-    color:#BF8454!important;
+    color:#3d67b4!important;
   }
   .active{
     .nav-link{
-      color:#BF8454!important;
+      color:#3d67b4!important;
     }
   }
   .thread_link:hover{
     .thread_cover{
-      background-color: rgba(252,248,210,1);
+      background-color: #dcf2fe
     }
   }
   .panel-title{
@@ -46,7 +49,7 @@
     margin-bottom:10px;
     padding-left:20px;
     font-size:20px;
-    color:#BF8454;
+    color:#3d67b4;
     .float_jp{
       font-size:12px;
     }
@@ -67,10 +70,10 @@
     }
   }
   .panel-title:hover{
-    color:#bf84546b;
+    color:#3d67b4b5;
   }
   .pvpage_head{
-    border-top:3px solid #fff2a0;
+    border-top:3px solid #ffb432;
   }
   .tab-pane.active{
     display:block!important;
@@ -79,6 +82,9 @@
   .tab-pane:not(.active){
     display:none!important;
     font-size:10px;
+  }
+  .thread_cover:hover{
+    background: #dcf2fe;
   }
   .thread_cover{
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.2));
@@ -125,7 +131,7 @@
         padding-left:10px;
         padding-right:10px;
         font-size:18px;
-        background:#fff7cf;
+        background:#dcf2fe;
         .title_padding{
           text-align: center;
           font-size:18px;
@@ -192,10 +198,10 @@
   }
   .lang_bar_cover{
     z-index: 20;
-    background: #ffffff;
-     background: #fff7cd;
+    background: #dcf2fe;
     width:70%;
     margin-top:54px;
+    margin-left: 0px;
     position:fixed;
     border: solid thin #ddd;
     border-top:none;
@@ -251,6 +257,7 @@
     margin-top:30px;
     font-size:18px;
     margin-left:20px;
+    height: 200px;
     .jp{
       margin-top:20px;
       margin-left:-5px;

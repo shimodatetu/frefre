@@ -1,5 +1,78 @@
 <% url = request.fullpath %>
 <div class="header">
+  <div class="header_logo">
+
+    <%= image_tag "icon3.png", :class => "icon_img" %>
+    <%= image_tag "logo.png", :class => "logo_img" %>
+    <% if logged_in?  %>
+      <div class="login_button dropdown">
+        <div class="text_fill dropdown-toggle
+        <% if url.include?('/profile') %>
+          <%= "now_page" %>
+        <% end %>"data-toggle="dropdown">
+          <%= link_to '/category/show',class:"link_text",onclick:"window.location.href = '/profile';" do %>
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-user"></span>
+            <div class="text">
+              <div class="float_jap"style="margin-left:8px">マイページ</div>
+              <div class="base_en">My Page</div>
+            </div>
+          <% end %>
+        </div>
+        <ul class="dropdown-menu url_menu">
+          <li class="url_tab_li"><%= link_to("/profile" , class:"url_tab") do%>
+            <div class="jp">
+              プロフィール
+            </div>
+            Profile
+          <% end %></li>
+          <li><%= link_to("/profile/2" , class:"url_tab") do%>
+            <div class="jp">
+              ヒストリー
+            </div>
+            History
+          <% end %></li>
+          <li>
+            <%= form_tag('/logout/inner',method: :post,class:"url_tab url_tab_form") do %>
+              <button type="submit"class="logout_button">
+                <div class="jp">
+                  ログアウト
+                </div>
+                Logout
+              </button>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    <% else %>
+      <%= link_to("/login" , class:"login_button") do %>
+        <div class="text_fill
+        <% if url.include?('/login') %>
+          <%= "now_page" %>
+        <% end %>">
+          <div class="height_control"></div>
+          <span class="icon glyphicon glyphicon-log-in"></span>
+          <div class="text">
+            <div class="float_jap"style="padding-left:10px">ログイン</div>
+            <div class="base_en">Log In</div>
+          </div>
+        </div>
+      <% end %>
+      <%= link_to("/users" , class:"login_button",style:"padding-right:2px") do %>
+        <div class="text_fill
+        <% if url.include?('/users') %>
+          <%= "now_page" %>
+        <% end %>">
+          <div class="height_control"></div>
+          <span class="icon glyphicon glyphicon-user"></span>
+          <div class="text">
+            <div class="float_jap"style="padding-left:15px">会員登録</div>
+            <div class="base_en">Sign Up</div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
   <div class="width_set"style="width:100vw;">
     <div class="nav-fall border border-primary">
       <%= link_to '/',class:"link_text" do %>
@@ -52,74 +125,6 @@
             </div>
           </div>
         </div>
-      <% end %>
-      <% if logged_in?  %>
-        <div class="login_button dropdown">
-          <div class="text_fill dropdown-toggle
-          <% if url.include?('/profile') %>
-            <%= "now_page" %>
-          <% end %>"data-toggle="dropdown">
-            <%= link_to '/category/show',class:"link_text",onclick:"window.location.href = '/profile';" do %>
-              <div class="height_control"></div>
-              <span class="icon glyphicon glyphicon-user"></span>
-              <div class="text">
-                <div class="float_jap"style="margin-left:8px">マイページ</div>
-                <div class="base_en">My Page</div>
-              </div>
-            <% end %>
-          </div>
-          <ul class="dropdown-menu url_menu">
-            <li class="url_tab_li"><%= link_to("/profile" , class:"url_tab") do%>
-              <div class="jp">
-                プロフィール
-              </div>
-              Profile
-            <% end %></li>
-            <li><%= link_to("/profile/2" , class:"url_tab") do%>
-              <div class="jp">
-                ヒストリー
-              </div>
-              History
-            <% end %></li>
-            <li>
-              <%= form_tag('/logout/inner',method: :post,class:"url_tab url_tab_form") do %>
-                <button type="submit"class="logout_button">
-                  <div class="jp">
-                    ログアウト
-                  </div>
-                  Logout
-                </button>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      <% else %>
-        <%= link_to("/login" , class:"login_button") do %>
-          <div class="text_fill
-          <% if url.include?('/login') %>
-            <%= "now_page" %>
-          <% end %>">
-            <div class="height_control"></div>
-            <span class="icon glyphicon glyphicon-log-in"></span>
-            <div class="text">
-              <div class="float_jap"style="padding-left:10px">ログイン</div>
-              <div class="base_en">Log In</div>
-            </div>
-          </div>
-        <% end %>
-        <%= link_to("/users" , class:"login_button",style:"padding-right:2px") do %>
-          <div class="text_fill
-          <% if url.include?('/users') %>
-            <%= "now_page" %>
-          <% end %>">
-            <div class="height_control"></div>
-            <span class="icon glyphicon glyphicon-user"></span>
-            <div class="text">
-              <div class="float_jap"style="padding-left:15px">会員登録</div>
-              <div class="base_en">Sign Up</div>
-            </div>
-          </div>
-        <% end %>
       <% end %>
       <span class="search_all"style="display:none">
         <%= form_tag('/search/header',method: :post) do %>

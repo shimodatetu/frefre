@@ -1,3 +1,15 @@
-// Place all the styles related to the Notice controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.profile_notice{
+  margin-left:5px;
+  .lang_bar_cover{
+    margin-top:-60px;
+    margin-left:0px;
+    width:70%;
+    .lang_bar{
+      padding-left: calc(20% - 10px);
+    }
+  }
+  .notice_cover{
+    margin-top:50px;
+    width:70%;
+  }
+}

@@ -144,6 +144,7 @@
       <% show_group_id = -1 %>
       <% there_be = false %>
       <% current_user.posts.offset(@thread_page_num2*(@page_id2 - 1)).limit(@thread_page_num2).each do |post| %>
+
         <% if show_group_id != post.group_id %>
           <% show_group_id = post.group_id %>
           <%= link_to("/thread/show/#{post.group_id}" , class:"thread_link") do %>
@@ -158,41 +159,47 @@
           <div class="pvpage_head">
           </div>
         <% end %>
-        <div class="thread_cover">
-          <div class="thread_content">
-            <div class="post_content_cover">
-              <% if post.photo.nil? %>
-                <div class="user_name">
-                  <%= post.user.name %>
-                </div>
-                <div class="post_content_position en_position">
-                  <div class="post_content">
-                    <div class="post_content_text text_down">
-                      <%= post.content_eng %>
+        <% link_id = (post.id_ingroup - 1) / 10 + 1 %>
+        <% if link_id < 1 %>
+          <% link_id = 1 %>
+        <% end %>
+        <%= link_to("/thread/show/#{link_id}",class:"thread_cover_link") do %>
+          <div class="thread_cover">
+            <div class="thread_content">
+              <div class="post_content_cover">
+                <% if post.photo.nil? %>
+                  <div class="user_name">
+                    <%= post.user.name %>
+                  </div>
+                  <div class="post_content_position en_position">
+                    <div class="post_content">
+                      <div class="post_content_text text_down">
+                        <%= post.content_eng %>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="post_content_position_space"style="margin-top:0px;">
-                  <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-                </div>
-                <div class="post_content_position jp_position">
-                  <div class="post_content">
-                    <div class="post_content_text text_down">
-                      <%= post.content_jap %>
+                  <div class="post_content_position_space"style="margin-top:0px;">
+                    <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+                  </div>
+                  <div class="post_content_position jp_position">
+                    <div class="post_content">
+                      <div class="post_content_text text_down">
+                        <%= post.content_jap %>
+                      </div>
                     </div>
                   </div>
-                </div>
-              <% else %>
-                <div class="user_name">
-                  <%= post.user.name %>
-                </div>
-                <div class="post_image_cover">
-                  <%= image_tag show_post_image_thread_path(post), :class => "post_image" %>
-                </div>
-              <% end %>
+                <% else %>
+                  <div class="user_name">
+                    <%= post.user.name %>
+                  </div>
+                  <div class="post_image_cover">
+                    <%= image_tag show_post_image_thread_path(post), :class => "post_image" %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
       <% if there_be == false %>
         <div class="not_found">
