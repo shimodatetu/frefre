@@ -14,9 +14,9 @@
       <div class="group_img_cover">
         <%= link_to "/other_profile/#{post.user.id}" do %>
           <% if post.user.photo.nil? %>
-            <%= image_tag("/user.png", :class => "group_img") %>
+            <%= image_tag("/user2.png", :class => "group_img") %>
           <% else %>
-            <%= image_tag show_image_profile_path(post.user), :class => "group_img" %>
+            <%= image_tag show_image_user_path(post.user), :class => "group_img" %>
           <% end %>
         <% end %>
       </div>
@@ -78,7 +78,7 @@
             </div>
           <% end %>
         </div>
-        <% if post.photo.nil? %>
+        <% if post.image.nil? %>
           <div class="post_content_position en_position">
             <% if post.id == first_id %>
               <div class="thread_title">
@@ -115,8 +115,11 @@
             </div>
           </div>
         <% else %>
+          <script>
+          </script>
           <div class="post_image_cover">
-            <%= image_tag show_post_image_thread_path(post), :class => "post_image" %>
+            <img src="<%= post.image %>">
+            <%#= image_tag show_post_image_thread_path(post), :class => "post_image" %>
           </div>
         <% end %>
       </div>

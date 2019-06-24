@@ -1,6 +1,6 @@
 class ThreadController < ApplicationController
   def show
-    @post =Post.new
+    @post = Post.new
     gon.login = logged_in?
     thread = Group.find_by(id: params[:id])
     thread_page_num = 10.to_f
@@ -35,8 +35,11 @@ class ThreadController < ApplicationController
     @end_num = end_num
   end
   def show_post_image
-    p params[:id]
     @photo = Post.find(params[:id])
+    send_data @photo.photo, :type => 'image/jpeg'
+  end
+  def show_image
+    @photo = User.first
     send_data @photo.photo, :type => 'image/jpeg'
   end
 end

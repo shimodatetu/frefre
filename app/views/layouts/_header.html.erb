@@ -1,9 +1,10 @@
 <% url = request.fullpath %>
 <div class="header">
   <div class="header_logo">
-
-    <%= image_tag "icon3.png", :class => "icon_img" %>
-    <%= image_tag "logo.png", :class => "logo_img" %>
+    <%= link_to "/" do%>
+      <%= image_tag "icon3.png", :class => "icon_img" %>
+      <%= image_tag "logo.png", :class => "logo_img" %>
+    <% end %>
     <% if logged_in?  %>
       <div class="login_button dropdown">
         <div class="text_fill dropdown-toggle

@@ -15,39 +15,65 @@
     <div class="panel-title"style="display:inline-block">
       <div class="panel-title-text">
         <div class="float_jp">
-          お知らせ
+          チャット一覧
         </div>
         <div class="float_en">
-          Notice
+          Chat List
         </div>
       </div>
     </div>
     <% there_be = false %>
     <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |notice| %>
-      <%= link_to("/notice/show/#{notice.id}" , class:"thread_link") do %>
+      <% send_user = notice.users.last %>
+      <% to_user = notice.users.last %>
+      <%= link_to("/profile/5/#{notice.id}/0" , class:"thread_link") do %>
         <% there_be = true %>
-        <div class="thread_cover">
+        <div class="thread_cover link_cover">
           <div class="group_user_cover">
             <div class="group_img_cover">
-              <%= image_tag "info.png", :class => "group_img" %>
+              <% if notice.users.last.id < 1 %>
+                <%= image_tag "info.png", :class => "group_img" %>
+              <% elsif send_user.id == current_user.id %>
+                <% if to_user.photo.nil? %>
+                  <%= image_tag("/user2.png", :class => "group_img") %>
+                <% else %>
+                  <%= image_tag show_image_user_path(to_user), :class => "group_img" %>
+                <% end %>
+              <% else %>
+                <% if send_user.photo.nil? %>
+                  <%= image_tag("/user2.png", :class => "group_img") %>
+                <% else %>
+                  <%= image_tag show_image_user_path(send_user), :class => "group_img" %>
+                <% end %>
+              <% end %>
             </div>
           </div>
           <div class="thread_content">
             <div class="post_content_cover">
+              <div class="user_name">
+                <% if notice.users.last.id < 1 %>
+                  <%= FreFre Office %>
+                <% else %>
+                  <%= User.find_by(id: notice.users.last.id).name %>
+                <% end %>
+              </div>
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <% if notice.notice_from < 1 %>
-                      From FreFre Administrative Office
+                    <% if send_user.id == current_user.id %>
+                      Chat with <%= to_user.name %>
                     <% else %>
-                      From <%= User.find_by(id: notice.notice_from).name %>
+                      Chat with <%= send_user.name %>
                     <% end %>
                   </div>
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <%= notice.notice_main_jp %>
+                    <%= notice.chats.last.main_jp %>
                   </div>
+                </div>
+                <div class="see_more">
+                  See more
                 </div>
               </div>
               <div class="post_content_position_space">
@@ -56,17 +82,20 @@
               <div class="post_content_position jp_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <% if notice.notice_from < 1 %>
-                      フレフレ事務局
+                    <% if send_user.id == current_user.id %>
+                      <%= to_user.name %>とのチャット
                     <% else %>
-                      <%= User.find_by(id: notice.notice_from).name %>より
+                      <%= send_user.name %>とのチャット
                     <% end %>
                   </div>
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <%= notice.notice_main_en %>
+                    <%= notice.chats.last.main_jp %>
                   </div>
+                </div>
+                <div class="see_more">
+                  See more
                 </div>
               </div>
             </div>
@@ -77,10 +106,10 @@
     <% if there_be == false %>
       <div class="not_found">
         <div class="en">
-          You haven't made any thread.
+          There is no chat.
         </div>
         <div class="jp">
-          あなたはまだスレッドを作成していません。
+          チャットはありません
         </div>
       </div>
     <% else %>

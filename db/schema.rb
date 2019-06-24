@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_07_075337) do
+ActiveRecord::Schema.define(version: 2019_06_20_084659) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 2019_06_07_075337) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.integer "notice_id"
+    t.string "main_en"
+    t.string "main_jp"
+    t.string "image"
+    t.integer "user_id"
+    t.string "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "title_en"
     t.string "title_jp"
@@ -60,12 +71,18 @@ ActiveRecord::Schema.define(version: 2019_06_07_075337) do
 
   create_table "notices", force: :cascade do |t|
     t.integer "notice_from"
-    t.string "notice_main_en"
-    t.string "notice_main_jp"
+    t.string "title_en"
+    t.string "title_jp"
     t.string "user_id"
-    t.string "notice_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notices_users", force: :cascade do |t|
+    t.integer "notice_id", null: false
+    t.integer "user_id", null: false
+    t.index ["notice_id"], name: "index_notices_users_on_notice_id"
+    t.index ["user_id"], name: "index_notices_users_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -125,6 +142,7 @@ ActiveRecord::Schema.define(version: 2019_06_07_075337) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer "notice"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

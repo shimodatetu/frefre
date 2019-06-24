@@ -107,7 +107,7 @@
           padding-top:1px;
           font-size:15px;
           text-align: center;
-          color:#000000;
+          color:#fff;
         }
       }
       .thread_content{
@@ -224,6 +224,7 @@
 }
 .page_button_cover{
   margin-top: 40px;
+  margin-bottom: 40px;
   margin-left:20px;
   a{
     text-decoration: none;
@@ -265,4 +266,13 @@
     margin:0px;
     padding:0px;
   }
+}
+.see_more{
+  float:right;
+  margin-top:-20px;
+  color:#3d67b4;
+}
+.see_more:hover{
+  border-bottom:solid 1px #135288;
+  color:#135288;
 }

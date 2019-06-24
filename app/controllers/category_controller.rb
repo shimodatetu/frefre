@@ -54,7 +54,6 @@ class CategoryController < ApplicationController
         small_id += 1
         if smallcategory.save
         else
-          p small_id.to_s + "/" + big_real_id.to_s + "/" + smallcategory.name_en + "/" + smallcategory.name_jp
         end
       end
     end

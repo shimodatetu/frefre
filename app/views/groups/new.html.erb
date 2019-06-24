@@ -208,34 +208,34 @@
                   </div>
                 <% end %>
               </div>
-              <div class="panel-body category_all_content row">
-                <% @category.each do |cate| %>
-                  <div class="panel panel-warning category_panel<%= cate.id %>">
+              <!--<div class="panel-body category_all_content row">
+                <%# @category.each do |cate| %>
+                  <div class="panel panel-warning category_panel<%#= cate.id %>">
                     <div class="bigcategory_add panel-heading">
                       <div class="category_title panel-title">
                         <div class="float_jp">
-                          <%= cate.name_jp %>
+                          <%#= cate.name_jp %>
                         </div>
-                        <%= cate.name_en %>
+                        <%#= cate.name_en %>
                       </div>
                     </div>
                     <ul class="smallcategory panel-body">
-                      <% cate.smallcategories.each do |s_cate| %>
+                      <%# cate.smallcategories.each do |s_cate| %>
                         <li class="text col-sm-4">
-                          <div class="select_category_url"id="<%= s_cate.id %>"
-                            data-s_name_jp="<%=s_cate.name_jp%>"data-s_name_en="<%=s_cate.name_en%>"
-                            data-b_name_jp="<%=cate.name_jp%>"data-b_name_en="<%=cate.name_en%>">
+                          <div class="select_category_url"id="<%#= s_cate.id %>"
+                            data-s_name_jp="<%#=s_cate.name_jp%>"data-s_name_en="<%#=s_cate.name_en%>"
+                            data-b_name_jp="<%#=cate.name_jp%>"data-b_name_en="<%#=cate.name_en%>">
                             <div class="float_jp">
-                              <%= s_cate.name_jp %>
+                              <%#= s_cate.name_jp %>
                             </div>
-                            <%= s_cate.name_en %>
+                            <%#= s_cate.name_en %>
                           </div>
                         </li>
-                      <% end %>
+                      <%# end %>
                     </ul>
                   </div>
-                <% end %>
-              </div>
+                <%# end %>
+              </div>-->
             </div>
           </div>
         </div>

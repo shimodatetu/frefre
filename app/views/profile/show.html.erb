@@ -4,9 +4,9 @@
     <div class="profile_sub"style="display:inline-block">
       <div class="profile_picture">
         <% if current_user.photo.nil? %>
-          <%= image_tag("/user.png", :class => "group_img") %>
+          <%= image_tag("/user2.png", :class => "group_img") %>
         <% else %>
-          <%= image_tag show_image_profile_path(current_user), :class => "group_img" %>
+          <%= image_tag show_image_user_path(current_user), :class => "group_img" %>
         <% end %>
         <%= form_for current_user,url: "/profile" do |f| %>
           <%= button_tag type: 'button',class:"profile_picture_change" do %>
@@ -48,10 +48,10 @@
           <li class="nav-item profile_contents_button">
             <%= link_to '/profile/4',class:"nav-link" do %>
               <div class="jp">
-                お知らせ
+                チャット
               </div>
               <div class="en">
-                Notice
+                Chat
               </div>
             <% end %>
           </li>
@@ -65,6 +65,8 @@
         <%= render partial:"history" %>
       <% elsif params[:id] == "4" %>
         <%= render partial:"info" %>
+      <% elsif params[:id] == "5" %>
+        <%= render partial:"detail_info" %>
       <% end %>
     </div>
   </div>

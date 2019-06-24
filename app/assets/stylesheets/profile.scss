@@ -2,13 +2,13 @@
   ::-webkit-input-placeholder {
     color: #bbbbbb;
   }
-  
+
   .profile_sub{
       position:fixed;
   }
   .profile_main{
     display:inline-block;
-    width:70%;
+    width:100%;
     margin-left:160px;
   }
   .profile_picture{
@@ -27,6 +27,7 @@
       width:100%;
       text-align:center;
       padding:2px;
+      font-size: 18px;
       box-shadow: none;
       .jp{
         font-size:12px;
@@ -200,7 +201,7 @@ input.cmn-toggle-round + label:before,
 input.cmn-toggle-round + label:after {
   display: block;
   position: absolute;
-  top: 8px;
+  top: 68px;
   left: 1px;
   bottom: 1px;
   content: "";

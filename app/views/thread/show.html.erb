@@ -76,8 +76,8 @@
         </div>
 			</div>
       <div class="post_footer_simple">
-        <div class="post_button_cover">
-          <button type="button" class="post_button btn btn-primary btn_send words_post_button"id="post"
+        <div class="post_button_cover thread_send">
+          <button type="button" class="normal_button post_button btn btn-primary btn_send words_post_button"id="post"
           name="<% if logged_in? %>logined<% end %>">
             <div class="glyphicon glyphicon-comment picture_send"></div>
             <div class="button_text">
@@ -87,7 +87,7 @@
               Post
             </div>
           </button>
-          <button type="button" class="post_button btn btn-primary btn_send words_post_button"id="trans"
+          <button type="button" class="normal_button post_button btn btn-primary btn_send words_post_button"id="trans"
           name="<% if logged_in? %>logined<% end %>">
             <div class="glyphicon glyphicon-comment picture_send"></div>
             <div class="button_text">
@@ -97,8 +97,9 @@
               Translate
             </div>
           </button>
-          <%= form_for @post, :html => {:class => "post_button_form"},remote: true do |f| %>
-            <label for="file_send"class="post_button image_send_button btn btn-prmary image_post_button">
+          <%#= form_for @post,remote: true, :html => {:class => "image_post post_button_form"} do |f| %>
+          <form class="thread_image_post post_button_form">
+            <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
               <div class="button_text">
                 <div class="float_jp">
@@ -107,64 +108,15 @@
                 Image
               </div>
             </label>
-            <%= f.file_field :photo,:id => "file_send", :class => "post_file", :style => "display:none"%>
+            <%#= f.file_field :photo,:id => "file_send", :class => "post_file", :style => "display:none"%>
+            <input type="file"id="file_send"class="post_file"style="display:none">
             <input type="hidden"id="group" name="group" value="<%= params[:id] %>">
-            <%= f.hidden_field :group_id,value: params[:id] %>
-            <button type="submit"class="img_post"style="display:none"></button>
-          <% end %>
+            <%#= f.hidden_field :group_id,value: params[:id] %>
+          </form>
+          <%# end %>
         </div>
       </div>
-      <!--<div>
-        <%= form_for @post, :html => {:class => "post_form"},remote: true do |f| %>
-          <label for="file_send"class="image_send_button btn btn-prmary image_post_button">
-            <div class="glyphicon glyphicon-picture picture_send"></div>
-          </label>
-          <%= f.file_field :photo,:id => "file_send", :class => "post_file", :style => "display:none"%>
-          <input type="hidden"id="group" name="group" value="<%= params[:id] %>">
-          <%= f.hidden_field :group_id,value: params[:id] %>
-          <button type="submit"class="img_post"style="display:none"></button>
-        <% end %>
-        <div class="post_footer">
-          <!--<div class="post_button_cover">
-            <button type="button" class="post_button btn btn-primary btn_send words_post_button"id="en"
-            name="<% if logged_in? %>logined<% end %>">
-              <div class="button_text">
-                <div class="float_jp">
-                  日本語に翻訳
-                </div>
-                Translate to Japanese
-              </div>
-              <%#= image_tag "/english.png", class: "image picture_send" %>
-            </button>
-          </div>
-          <div class="post_button_cover">
-            <button type="button" class="post_button btn btn-primary btn_send words_post_button"id="enjp"
-            name="<% if logged_in? %>logined<% end %>">
-              <div class="button_text">
-                <div class="float_jp">
-                  投稿
-                </div>
-                Post
-              </div>
-              <%#= image_tag "/english.png", class: "image picture_send" %>
-              <%#= image_tag "21hb-GV4ZtL.jpg", class: "image picture_send" %>
-            </button>
-          </div>
-          <div class="post_button_cover">
-            <button type="button" class="post_button btn btn-primary btn_send words_post_button"id="jp"
-            name="<% if logged_in? %>logined<% end %>">
-              <div class="button_text">
-                <div class="float_jp">
-                  英語に翻訳
-                </div>
-                Translate to English
-              </div>
-              <%#= image_tag "21hb-GV4ZtL.jpg", class: "image picture_send" %>
-            </button>
-          </div>
-        </div>
-			</div>
-    </div>-->
+    </div>
     <div class="page_button_cover">
       <% if 1 >= @page_id %>
         <div class="page_button no_push">

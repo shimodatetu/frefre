@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
  end
 
  def user_image_default
-   return "/user.png"
+   return "/user2.png"
  end
  #
  # require "google/cloud/translate"

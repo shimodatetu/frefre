@@ -49,9 +49,9 @@
               <object>
               <%= link_to "/other_profile/#{group.user.id}" do %>
                 <% if group.user.photo.nil? %>
-                  <%= image_tag("/user.png", :class => "group_img") %>
+                  <%= image_tag("/user2.png", :class => "group_img") %>
                 <% else %>
-                  <%= image_tag show_image_profile_path(group.user), :class => "group_img" %>
+                  <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
                 <% end %>
               <% end %>
               </object>

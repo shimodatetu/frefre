@@ -31,8 +31,34 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     $(".base_jp_form").val("")
     $('#sampleModal-enjp').modal("hide")
 
+  image: (file,group)->
+    @perform('image',group_id:group,image:file,lang:"none")
 
-$(document).on 'click', '.post_footer_simple .btn_send', (event) ->
+
+reader = new FileReader
+reader2 = new FileReader
+String::bytes = ->
+  encodeURIComponent(this).replace(/%../g, 'x').length
+
+reader.addEventListener 'load', ->
+
+  text = "<img src='" + String(reader.result) + "'>"
+  App.room.image(reader.result,parseInt($("#group").val()))
+
+  #blob = new Blob([result], {type: "application/octet-binary"})
+  #App.room.image(result,parseInt($("#group").val()))
+  #reader2.readAsDataURL(blob);
+  return
+
+reader2.addEventListener 'load', ->
+  text = "<img src='" + String(reader2.result) + "'>"
+  $(".thread_all").append(text)
+
+$(document).on 'change', '.thread_image_post .post_file', (event) ->
+  if (this.files[0].type != 'text/plain')
+    reader.readAsDataURL(this.files[0], 'UTF-8');
+
+$(document).on 'click', '.thread_send .btn_send', (event) ->
   if($(this).attr("name") == "logined")
     type_check(this.id);
   else

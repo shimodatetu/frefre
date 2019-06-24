@@ -2,13 +2,13 @@
 <% if User.find_by(id: params[:id].to_i) %>
   <% other_user = User.find_by(id: params[:id].to_i) %>
 <% end %>
-<div class="profile_other">
+<div class="profile">
   <div class="profile_sub"style="display:inline-block">
     <div class="profile_picture">
       <% if other_user.photo.nil? %>
-        <%= image_tag("/user.png", :class => "group_img") %>
+        <%= image_tag("/user2.png", :class => "group_img") %>
       <% else %>
-        <%= image_tag show_image_profile_path(other_user), :class => "group_img" %>
+        <%= image_tag show_image_user_path(other_user), :class => "group_img" %>
       <% end %>
       <div class="profile_picture_change">
         <label type="button" for="image">
@@ -16,72 +16,56 @@
         </label>
       </div>
     </div>
+    <div class="direct_mes_button">
+      <%= link_to "/notice/new/#{params[:id]}" do %>
+        <button class="btn mes_button normal_button">
+          <div class="jp">
+            ダイレクトメッセージ
+          </div>
+          <div class="en">
+            Direct Message
+          </div>
+        </button>
+      <% end %>
+    </div>
   </div>
   <div class="profile_main">
     <div class="profile_title">
       <div class="title">
         <div class="jp">
-          他の人のプロフィール
+          <%= other_user.name %>のプロフィール
         </div>
-        Other's profile
+        <%= other_user.name %>'s profile
       </div>
     </div>
     <div class="profile_page row">
       <div class="profile_page_en">
         <div class="col-sm-12">
-        <!--<div class="col-sm-12 profile_content">
-          <div class="row profile_content_data">
-            <div class="content_name">
-              <div class="jp">
-                プロフィールを公開する
+          <div class="col-sm-12 profile_content">
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  ユーザーネーム
+                </div>
+                <div class="en">
+                  Username
+                </div>
               </div>
-              <div class="en">
-                Disclose Profile
-              </div>
-            </div>
-            <div class=""style="width:70%;">
-              <div class="no_text">
-                NO
-              </div>
-              <div class="switch">
-                <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox"
-                <% if other_user.able_see == true %>
-                  checked
-                <% end %> disabled>
-                <label for="cmn-toggle-1"></label>
-              </div>
-              <div class="yes_text">
-                YES
+              <div class=""style="width:70%;">
+                <input id="username"class="form_control content_input form-control" placeholder="Blank"disabled value="<%= other_user.name %>">
               </div>
             </div>
           </div>
-        </div>-->
-        <div class="col-sm-12 profile_content">
-          <div class="row profile_content_data">
-            <div class="content_name">
-              <div class="jp">
-                ユーザーネーム
+          <div class="col-sm-12 profile_content">
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  性別
+                </div>
+                <div class="en">
+                  Gender
+                </div>
               </div>
-              <div class="en">
-                Username
-              </div>
-            </div>
-            <div class=""style="width:70%;">
-              <input id="username"class="form_control content_input form-control" placeholder="Blank"disabled value="<%= other_user.name %>">
-
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 profile_content">
-          <div class="row profile_content_data">
-            <div class="content_name">
-              <div class="jp">
-                性別
-              </div>
-              <div class="en">
-                Gender
-              </div>
-            </div>
               <% if other_user.able_see %>
                 <select id="gender"class="content_select"style="width:70%"disabled>
                   <option value="">No Selected</option>
@@ -104,116 +88,74 @@
               <% else %>
                 <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country"style="width:70%;">
               <% end %>
+            </div>
           </div>
-        </div>
-
-        <div class="col-sm-12 profile_content">
-          <div class="row profile_content_data">
-            <div class="content_name">
-              <div class="jp">
-                出身国
+          <div class="col-sm-12 profile_content">
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  出身国
+                </div>
+                <div class="en">
+                  Country
+                </div>
               </div>
-              <div class="en">
-                Country
+              <div class="">
+                <% if other_user.able_see %>
+                  <select value="<%= other_user.country %>"class="content_select"disabled id="country"name="country"style="width:70%;">
+                    <option value="">No selected</option>
+                  </select>
+                  <script type="text/javascript">
+                    $("#country option[value='<%= other_user.country %>']").prop("selected","selected");
+                  </script>
+                <% else %>
+                  <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country"style="width:70%;">
+                <% end %>
               </div>
             </div>
-            <div class="">
+          </div>
+        </div>
+      </div>
+      <div class="profile_page">
+        <div class="profile_content">
+          <div class="col-sm-6">
+            <div class="row profile_content_data self_introduction">
+              <div class="content_name">
+                <div class="jp">
+                  自己紹介(英語)
+                </div>
+                <div class="en">
+                  Self Introduction
+                  (English)
+                </div>
+              </div>
               <% if other_user.able_see %>
-                <select value="<%= other_user.country %>"class="content_select"disabled id="country"name="country"style="width:70%;">
-                  <option value="">No selected</option>
-                </select>
-                <script type="text/javascript">
-                  $("#country option[value='<%= other_user.country %>']").prop("selected","selected");
-                </script>
+                <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_en%></textarea>
               <% else %>
-                <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country"style="width:70%;">
+                <textarea id="profile_en"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row profile_content_data self_introduction">
+              <div class=" content_name">
+                <div class="jp">
+                  自己紹介(日本語)
+                </div>
+                <div class="en">
+                  Self Introduction
+                  (Japanese)
+                </div>
+              </div>
+              <% if other_user.able_see %>
+                <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_jp%></textarea>
+              <% else %>
+                <textarea id="profile_jp"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
               <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="profile_page">
-      <div class="profile_content">
-        <div class="col-sm-6">
-          <div class="row profile_content_data self_introduction">
-            <div class="content_name">
-              <div class="jp">
-                自己紹介(英語)
-              </div>
-              <div class="en">
-                Self Introduction
-                (English)
-              </div>
-            </div>
-            <% if other_user.able_see %>
-              <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_en%></textarea>
-            <% else %>
-              <textarea id="profile_en"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="row profile_content_data self_introduction">
-            <div class=" content_name">
-              <div class="jp">
-                自己紹介(日本語)
-              </div>
-              <div class="en">
-                Self Introduction
-                (Japanese)
-              </div>
-            </div>
-            <% if other_user.able_see %>
-              <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_jp%></textarea>
-            <% else %>
-              <textarea id="profile_jp"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--<div class="col-sm-12 profile_content">
-      <div class="profile_content_data row">
-        <div class="content_name col-sm-2">
-          <div class="jp">
-            生年月日
-          </div>
-          Date Of Birth
-        </div>
-        <div class="col-sm-10">
-          <select id="year"class="content_select">
-            <option>Year</option>
-            <% 2019.downto(1900) do |num| %>
-              <% if other_user.birth_year == num %>
-                <option value="<%= num %>"selected><%= num %></option>
-              <% else %>
-                <option value="<%= num %>"><%= num %></option>
-              <% end %>
-            <% end %>
-          </select>
-          <select id="month"class="content_select">
-            <option>Month</option>
-            <% 1.upto(12) do |num| %>
-              <% if other_user.birth_month == num %>
-                <option value="<%= num %>"selected><%= num %></option>
-              <% else %>
-                <option value="<%= num %>"><%= num %></option>
-              <% end %>
-            <% end %>
-          </select>
-          <select id="date"class="content_select">
-            <option>Date</option>
-            <% 1.upto(31) do |num| %>
-              <% if other_user.birth_day == num %>
-                <option value="<%= num %>"selected><%= num %></option>
-              <% else %>
-                <option value="<%= num %>"><%= num %></option>
-              <% end %>
-            <% end %>
-          </select>
-        </div>
-      </div>
-    </div>-->
   </div>
 </div>

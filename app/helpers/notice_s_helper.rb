@@ -1,0 +1,2 @@
+module NoticeSHelper
+end

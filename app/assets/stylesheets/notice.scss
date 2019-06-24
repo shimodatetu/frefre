@@ -1,7 +1,7 @@
 .profile_notice{
   margin-left:5px;
   .lang_bar_cover{
-    margin-top:-60px;
+    margin-top:-65px;
     margin-left:0px;
     width:70%;
     .lang_bar{
@@ -10,6 +10,196 @@
   }
   .notice_cover{
     margin-top:50px;
-    width:70%;
+  }
+  .panel-title{
+    display: inline-block;
+    margin-top:18px;
+    margin-bottom:10px;
+    padding-left:20px;
+    font-size:20px;
+    color:#3d67b4;
+    .float_jp{
+      font-size:12px;
+    }
+    .panel-title-text{
+      display:inline-block;
+      vertical-align: bottom;
+    }
+    .thread_post_button{
+      display:inline-block;
+      vertical-align: bottom;
+      margin-left:calc(100% - 300px);
+      font-size:18px;
+      color:#fff;
+      background:rgb(181, 206, 255);;
+      .jp{
+        font-size:12px;
+      }
+    }
+  }
+  .link_cover:hover{
+    background-color: #dcf2fe;
+  }
+  .thread_cover{
+    background-color: #ffffff;
+    padding:10px;
+    border-radius: 5px;
+    margin-top:10px;
+    border:solid thin #dddddd;
+    .group_user_cover{
+      display: inline-block;
+      vertical-align: middle;
+      height:100%;
+      margin-right: 10px;
+      margin-top:10px;
+      .group_img_cover{
+        text-align: center;
+        .group_img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius:50%;
+        }
+      }
+      .group_name{
+        padding-top:1px;
+        font-size:15px;
+        text-align: center;
+        color:#000000;
+      }
+    }
+    .post_image{
+      margin-top:10px;
+      //margin-left:calc(50% - 75px);
+      margin-left:40px;
+      max-width:180px;
+      max-height:200px;
+    }
+    .thread_content{
+      display: inline-block;
+      vertical-align: top;
+      color:#000000;
+      width:calc(100% - 100px);
+      .thread_title{
+        padding-left:10px;
+        padding-right:10px;
+        font-size:18px;
+        background:#dcf2fe;
+        .title_padding{
+          text-align: center;
+          font-size:18px;
+
+          overflow : hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+        }
+      }
+      .post_content_cover{
+        display: inline-block;
+        font-size:16px;
+        width:calc(100%);
+        .user_name{
+          color:#365899;
+          font-weight: bold;
+        }
+        .post_content_position{
+          display:inline-block;
+          vertical-align:top;
+          width:calc(50% - 15px);
+        }
+        .post_content_position_space{
+          display: inline-block;
+          width:15px;
+          font-size:15px;
+          vertical-align: -webkit-baseline-middle;
+          .img{
+            width:20px;
+            height:20px;
+          }
+        }
+        .post_content{
+          overflow : hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          padding-left:10px;
+          padding-right:10px;
+          .post_content_text{
+            margin:auto;
+            margin-top:5px;
+          }
+          .text_down{
+          }
+        }
+      }
+      .lang_type{
+        float:right;
+        margin-top:4px;
+        .lang-show{
+          border-radius: 5px;
+          font-size:15px;
+          padding:4px;
+          padding-left:7px;
+          padding-right:7px;
+          background-color: #fff0b0;
+        }
+      }
+    }
+  }
+  .post_footer_simple{
+    margin-left:calc(50% - 165px);
+    .post_button_cover{
+      display: inline-block;
+      .post_button{
+        padding-left: 0px;
+        margin-left: 10px;
+      }
+    }
+    .post_button_form{
+      display: inline-block;
+      .post_button{
+        padding-left:0px;
+      }
+      .picture_send{
+        font-size:17px;
+      }
+    }
+  }
+  .post_button{
+    background:#ffb432!important;
+    color:#fff;
+    padding-left:20px;
+    padding-right:20px;
+    vertical-align:top;
+    .image{
+      width:28px;
+      height:20px;
+      margin-top:-15px;
+    }
+    .picture_send{
+      display: inline-block;
+      margin-right:0px;
+      width:28px;
+      margin-left:5px!important;
+    }
+    .button_text{
+      display: inline-block;
+      .float_jp{
+        font-size:11px;
+      }
+    }
+  }
+  .not_found{
+    margin-top:30px;
+    font-size:18px;
+    margin-left:20px;
+    height: 200px;
+    .jp{
+      margin-top:20px;
+      margin-left:-5px;
+    }
   }
 }

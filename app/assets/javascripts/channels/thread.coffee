@@ -14,7 +14,7 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
     category = Number(category)
     @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,category:category,title_en:title_en,message_en:mes_en,category:category,hash_en:hash_en,hash_jp:hash_jp)
     alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
-    location.reload()
+    #location.reload()
 
 $(document).on 'click', '#groupModal .btn_send',(event) ->
   send_check()
@@ -47,7 +47,7 @@ send_check=()->
       $("#groupModal").modal("hide")
       App.thread.make("enjp",title_jp,content_jp,title_en,content_en,$('input[name=type_select]:checked').val(),hash_ary_jp,hash_ary_en);
 
-$(document).on 'click', '.make_thread_cover .post_button', (event) ->
+$(document).on 'click', '.make_thread_cover .words_post_button', (event) ->
   #alert($('input[name=type_select]:checked').val())
   type_check($(@).attr("id"),$('input[name=type_select]:checked').val())
   event.preventDefault()

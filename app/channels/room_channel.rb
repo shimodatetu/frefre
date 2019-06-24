@@ -21,4 +21,17 @@ class RoomChannel < ApplicationCable::Channel
       post.save
     end
   end
+
+  def image(data)
+    group = Group.find_by(id: data['group_id'])
+    if group
+      post = Post.new()
+      post.lang = data['lang']
+      post.id_ingroup = group.posts.count
+      post.image = data['image']
+      post.group_id = group.id
+      post.user_id = current_user.id
+      post.save
+    end
+  end
 end

@@ -1,16 +1,303 @@
-<% Notice.find(id: params[:id].to_i) do |notice| %>
-  <div class="profile_notice">
-    <div class="panel-title"style="display:inline-block">
-      <div class="panel-title-text">
-        <div class="float_jp">
-          お知らせ
-        </div>
-        <div class="float_en">
-          Notice
-        </div>
+<% if a = Notice.find_by(id: params[:page].to_i) %>
+  <% notice = a %>
+<% else %>
+  <% notice = current_user.notices.first %>
+<% end %>
+<div class="thread_page">
+  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+    <div class="lang_bar">
+      <div class="country_flag en_country">
+        <%= image_tag "/english.png", class: "image" %>
+      </div>
+      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+          data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
+      <div class="country_flag jp_country">
+        <%= image_tag "/21hb-GV4ZtL.jpg", class: "image" %>
       </div>
     </div>
   </div>
-  <div class="">
+  <div class="panel-title"style="display:inline-block">
+    <div class="panel-title-text">
+      <div class="float_jp">
+        <%= notice.notice_sub_jp %>
+      </div>
+      <div class="float_en">
+        <%= notice.notice_sub_en %>
+      </div>
+    </div>
   </div>
-<% end %>
+  <div class="pvpage_head">
+  </div>
+  <div class="thread_all"style="padding-top:10px;">
+    <div class="thread_cover_cover">
+      <%#= render notice.posts.first %>
+      <%#= render notice.posts.offset(@thread_page_num*(@page_id - 1)+1).limit(@thread_page_num) %>
+      <% notice.chats.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |chat| %>
+      <div class="thread_cover"id="<%= chat.id %>">
+        <div class="group_user_cover">
+          <div class="group_img_cover">
+            <%= link_to "/other_profile/#{chat.user.id}" do %>
+              <% if chat.user.photo.nil? %>
+                <%= image_tag("/user2.png", :class => "group_img") %>
+              <% else %>
+                <%= image_tag show_image_user_path(chat.user), :class => "group_img" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="thread_content">
+          <div class="post_content_cover">
+            <div>
+              <div class="user_name">
+                <% if params[:id].nil? || !logged_in? || current_user.id != chat.user.id %>
+                  <%= link_to "/other_profile/#{chat.user.id}" do %>
+                    <%= chat.user.name %>
+                  <% end %>
+                <% else %>
+                  <%= link_to "/profile" do %>
+                    <%= chat.user.name %>
+                  <% end %>
+                <% end %>
+              </div>
+              <% if params[:id].nil? || current_user != chat.user || (chat.id != first_id && logged_in? && current_user.id == chat.user.id)%>
+                <div class="dropdown">
+                  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="caret"></span>
+                  </div>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <% if params[:id].nil? %>
+                      <div class="one_topic delete_button_set">
+                        <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
+                            data-whatever="<%= chat.id %>">
+                          <div class="jp">投稿を削除する</div>
+                          Delete this comment
+                        </button>
+                      </div>
+                      <div class="one_topic">
+                        <%= link_to "/other_profile/#{chat.user.id}" do %>
+                          <div class="jp">プロフィールへ飛ぶ</div>
+                          Jump to the profile.
+                        <% end %>
+                      </div>
+                    <% else %>
+                      <% if current_user != chat.user %>
+                        <div class="one_topic">
+                          <%= link_to "/other_profile/#{chat.user.id}" do %>
+                            <div class="jp">プロフィールへ飛ぶ</div>
+                            Jump to the profile.
+                          <% end %>
+                        </div>
+                      <% end %>
+                      <% if chat.id != first_id && logged_in? && current_user.id == chat.user.id %>
+                        <div class="one_topic">
+                          <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
+                              data-whatever="<%= chat.id %>">
+                            <div class="jp">投稿を削除する</div>
+                            Delete this comment
+                          </button>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+            <% if chat.photo.nil? %>
+              <div class="post_content_position en_position">
+                <% if chat.id == first_id %>
+                  <div class="thread_title">
+                    <div class="title_padding">
+                      <%= chat.group.title_en %>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="title_space"></div>
+                <% end %>
+                <div class="post_content en_content_row">
+                  <div class="post_content_text">
+                    <%= simple_format(h(chat.content_eng)) %>
+                  </div>
+                </div>
+              </div>
+              <div class="post_content_position_space">
+                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+              </div>
+              <div class="post_content_position jp_position">
+                <% if chat.id == first_id %>
+                  <div class="thread_title">
+                    <div class="title_padding">
+                      <%= chat.group.title_jp %>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="title_space"></div>
+                <% end %>
+                <div class="post_content jp_content_row">
+                  <div class="post_content_text">
+                    <%= simple_format(h(chat.content_jap)) %>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="post_image_cover">
+                <%= image_tag show_post_image_thread_path(post), :class => "post_image" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="footer thread_footer">
+    <div class="thread_post_cover">
+			<div class="modal-body">
+        <div class="thread_post">
+          <div class="post_form_cover post_form_cover_enjp connect_btn">
+            <%= image_tag "/english.png", class: "image" %>
+            <textarea name="content"class="base_en_form connect_btn content_post form-control" rows="6"
+            placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
+          </div>
+          <div class="space_form"></div>
+          <div class="post_form_cover post_form_cover_enjp">
+            <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
+            <textarea name="content"class="base_jp_form content_post form-control" rows="6"
+            placeholder="&#13;&#10;This side is Japanese form.&#13;&#10;こちらは日本語投稿欄です"></textarea>
+          </div>
+        </div>
+			</div>
+      <div class="post_footer_simple">
+        <div class="post_button_cover">
+          <button type="button" class="post_button btn btn-primary btn_send words_post_button"id="post"
+          name="<% if logged_in? %>logined<% end %>">
+            <div class="glyphicon glyphicon-comment picture_send"></div>
+            <div class="button_text">
+              <div class="float_jp">
+                投稿
+              </div>
+              Post
+            </div>
+          </button>
+          <button type="button" class="post_button btn btn-primary btn_send words_post_button"id="trans"
+          name="<% if logged_in? %>logined<% end %>">
+            <div class="glyphicon glyphicon-comment picture_send"></div>
+            <div class="button_text">
+              <div class="float_jp">
+                翻訳
+              </div>
+              Translate
+            </div>
+          </button>
+          <%= form_for @chat, :html => {:class => "post_button_form"},remote: true do |f| %>
+            <label for="file_send"class="post_button image_send_button btn btn-prmary image_post_button">
+              <div class="glyphicon glyphicon-picture picture_send"></div>
+              <div class="button_text">
+                <div class="float_jp">
+                  画像
+                </div>
+                Image
+              </div>
+            </label>
+            <%= f.file_field :photo,:id => "file_send", :class => "post_file", :style => "display:none"%>
+            <input type="hidden"id="group" name="group" value="<%= params[:id] %>">
+            <%= f.hidden_field :group_id,value: params[:id] %>
+            <button type="submit"class="img_post"style="display:none"></button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="page_button_cover">
+      <% if 1 >= @page_id %>
+        <div class="page_button no_push">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </div>
+      <% else %>
+        <%= link_to("/thread/show/#{params[:id]}/#{@page_id - 1}",class:"page_button ok_push") do %>
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        <% end %>
+      <% end %>
+      <% if @start_num != 1 %>
+        <div class="page_button dot_show">
+          ...
+        </div>
+      <% end %>
+      <% for num in @start_num.round..@end_num.round do %>
+        <% if num == @page_id.round %>
+          <div class="page_button now_page">
+            <%= num %>
+          </div>
+        <% else %>
+          <%= link_to("/thread/show/#{params[:id]}/#{num}",class:"page_button") do %>
+            <%= num %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% if @end_num.round != @page_num.round %>
+        <div class="page_button dot_show">
+          ...
+        </div>
+      <% end %>
+      <% if @page_num.round <= @page_id.round %>
+        <div class="page_button no_push">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+      <% else %>
+        <%= link_to("/thread/show/#{params[:id]}/#{@page_id.round + 1}",class:"page_button ok_push") do %>
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div class="thread_post_cover">
+  <div class="modal fade" id="sampleModal-enjp" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="thread_post">
+            <div class="post_form_cover post_form_cover_enjp connect_btn">
+              <%= image_tag "/english.png", class: "image" %>
+              <textarea name="content"class="en_form connect_btn content_post form-control" rows="6"
+              placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
+            </div>
+            <div class="space_form"></div>
+            <div class="post_form_cover post_form_cover_enjp">
+              <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
+              <textarea name="content"class="jp_form content_post form-control" rows="6"
+              placeholder="&#13;&#10;This side is Japanese form.&#13;&#10;こちらは日本語投稿欄です"></textarea>
+            </div>
+          </div>
+          <div class="explain_text">
+            <div class="en">
+              ●Post it as it is →“POST”<br>
+              ●Rewriting words and mistranslations  (not using translation)<br>
+                →Rewrite the contents above & “POST”<br>
+              ●Rewriting English words & translating it into Jp again →“BACK”<br>
+            </div>
+            <div class="jp">
+              ●このまま投稿→「投稿」<br>
+              ●誤記・誤訳を修正して投稿（翻訳を使わない）→上記を書き直す＆「投稿」<br>
+              ●日本語の誤記を直して、もう一度英訳→「戻る」<br>
+            </div>
+            <div class="enjp">
+              ●Rewriting words and mistranslations  (not using translation)<br>
+                →Rewrite the contents above & “POST”
+            </div>
+          </div>
+  			</div>
+  			<div class="modal-footer">
+          <button type="button" class="btn btn-default btn_send"id="enjp">
+            <div class="float_jp">投稿</div>
+            <div class="base_en">Post</div>
+          </button>
+          <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+            <div class="float_jp">戻る</div>
+            <div class="base_en">Back</div>
+          </button>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</div>

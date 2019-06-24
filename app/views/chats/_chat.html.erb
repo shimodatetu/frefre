@@ -1,0 +1,51 @@
+<% notice = chat.notice %>
+<div class="thread_cover">
+  <div class="group_user_cover">
+    <div class="group_img_cover">
+      <% if notice.users.first.id < 1 %>
+        <%= image_tag "info.png", :class => "group_img" %>
+      <% else %>
+        <% if chat.user.photo.nil? %>
+          <%= image_tag("/user2.png", :class => "group_img") %>
+        <% else %>
+          <%= image_tag show_image_user_path(chat.user), :class => "group_img" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="thread_content">
+    <div class="post_content_cover">
+      <div class="user_name">
+        <% if notice.users.first.id < 1 %>
+          <%= FreFre Office %>
+        <% else %>
+          <%= chat.user.name %>
+        <% end %>
+      </div>
+
+      <% if chat.image.nil? %>
+        <div class="post_content_position en_position">
+          <div class="post_content">
+            <div class="post_content_text">
+              <%= chat.main_en %>
+            </div>
+          </div>
+        </div>
+        <div class="post_content_position_space">
+          <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+        </div>
+        <div class="post_content_position jp_position">
+          <div class="post_content">
+            <div class="post_content_text">
+              <%= chat.main_jp %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="post_image_cover">
+          <img src="<%= chat.image %>">
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

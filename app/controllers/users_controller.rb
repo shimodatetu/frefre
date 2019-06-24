@@ -20,7 +20,6 @@ class UsersController < ApplicationController
           @user.errors.full_messages.each do |message|
             flash.now[:failed_en] = message
             error_jp(message)
-            p message
           end
         end
         render :index
@@ -54,7 +53,10 @@ class UsersController < ApplicationController
 
   def update
   end
-
+  def show_image
+    @image = User.find(params[:id])
+    send_data @image.photo, :type => 'image/jpeg'
+  end
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

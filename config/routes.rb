@@ -32,10 +32,13 @@ Rails.application.routes.draw do
   get 'sessions/index'
   get 'posts/index'
   post "posts",to: "posts#create",as: "posts"
+  post "chats",to: "chats#create",as: "chats"
   get '/profile',to: 'profile#show'
   get '/profile/:id' => 'profile#show'
+  get '/profile/:id/:page1' => 'profile#show'
   get '/profile/:id/:page1/:page2' => 'profile#show'
   patch '/profile', to: 'profile#update'
+  get '/notice/new/:id' => 'notice#new'
   get '/groups',to:'groups#new'
   post 'profile/send_img'
   get 'users/index'
@@ -48,7 +51,12 @@ Rails.application.routes.draw do
   get 'thread_list/popular/:id' => 'thread_list#popular'
   get 'thread_list/new/:id' => 'thread_list#new'
   resources :users
-  resources :profile
+  resources :users do
+    member do
+      get "show_image"
+    end
+  end
+  resources :notice
   resources :profile do
     member do
       get "show_image"
