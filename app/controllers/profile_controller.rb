@@ -134,11 +134,18 @@ class ProfileController < ApplicationController
     end
   end
   def update
-    if current_user.update(file_name: params[:user]["photo"].original_filename,
-                          photo:params[:user]["photo"].read)
-      redirect_to profile_path
+    if params[:user]["photo"].nil?
+      if current_user.update!(image:params[:user]["image"].to_i)
+        redirect_to profile_path
+      else
+        render :show
+      end
     else
-      render :show
+      if current_user.update!(image:0, photo:params[:user]["photo"].read)
+        redirect_to profile_path
+      else
+        render :show
+      end
     end
   end
   private

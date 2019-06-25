@@ -3,25 +3,30 @@
   <div class="profile">
     <div class="profile_sub"style="display:inline-block">
       <div class="profile_picture">
-        <% if current_user.photo.nil? %>
-          <%= image_tag("/user2.png", :class => "group_img") %>
+        <% if current_user.image == 0 %>
+          <% if current_user.photo.nil? %>
+            <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+          <% else %>
+            <%= image_tag show_image_user_path(current_user), :class => "group_img" %>
+          <% end %>
         <% else %>
-          <%= image_tag show_image_user_path(current_user), :class => "group_img" %>
+          <%= image_tag("/userimage/user#{current_user.image}.png", :class => "group_img") %>
         <% end %>
-        <%= form_for current_user,url: "/profile" do |f| %>
-          <%= button_tag type: 'button',class:"profile_picture_change" do %>
-            <label type="button" for="image">
+        <div class="edit_user">
+          <button type="button" class="profile_picture_change " data-toggle="modal" data-target="#image_modal" data-whatever="@mdo">
+            <label>
               <div class="jp">
                 写真を変更する
               </div>
               <div class="en">
                 Change Photo
               </div>
-              <%= f.file_field :photo,id:"image",class:"profile_image_input",style:"display:none" %>
             </label>
-          <% end %>
-          <%= f.submit "send",id:"image_submit",style:"display:none" %>
-        <% end %>
+          </button>
+        </div>
+        <div class="name_show">
+          <%= current_user.name %>
+        </div>
       </div>
       <div class="profile_contents_change">
         <ul class="nav flex-column">
@@ -132,6 +137,91 @@
             <div class="base_en">Post</div>
           </button>
           <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+            <div class="float_jp">戻る</div>
+            <div class="base_en">Back</div>
+          </button>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</div>
+<div class="profile_modal">
+  <div class="modal fade" id="image_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="image_change image_change_type">
+            <%= image_tag("/user.png", :class=> "image") %>
+            <%= form_for current_user,url: "/profile" do |f| %>
+              <%= button_tag type: 'button',class:"profile_picture_change normal_button" do %>
+                <label type="button" for="image">
+                  <div class="jp">
+                    自分で画像を用意する
+                  </div>
+                  <div class="en">
+                    Prepare photo by yourself.
+                  </div>
+                  <%= f.file_field :photo,id:"image",class:"profile_image_input",style:"display:none" %>
+                </label>
+              <% end %>
+              <%= f.submit "send",id:"image_submit",style:"display:none" %>
+            <% end %>
+          </div>
+          <div class="image_change image_change_type">
+            <%= image_tag("/userimage/user1.png", :class=> "image") %>
+            <div class="edit_user">
+              <button type="button" class="profile_picture_change normal_button" data-toggle="modal" data-target="#user_image_modal" data-whatever="@mdo">
+                <label>
+                  <div class="jp">
+                    用意された画像を使用する
+                  </div>
+                  <div class="en">
+                    User prepared photo
+                  </div>
+                </label>
+              </button>
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn_back" data-dismiss="modal">
+            <div class="float_jp">戻る</div>
+            <div class="base_en">Back</div>
+          </button>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="user_image_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <% 1.upto(8) do |i| %>
+            <div class="image_change image_change_select">
+              <%= form_for current_user,url: "/profile" do |f| %>
+                <%= image_tag("/userimage/user#{i.to_s}.png", :class=> "image") %>
+                <div class="edit_user">
+                  <%= button_tag type: 'submit',class:"profile_picture_change normal_button" do %>
+                    <label>
+                      <div class="jp">
+                        この画像を選択する
+                      </div>
+                      <div class="en">
+                        Choose this Image
+                      </div>
+                    </label>
+                  <% end %>
+                </div>
+                <%= f.number_field :image,id:"image_submit",style:"display:none",value:i %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn_back" data-dismiss="modal">
             <div class="float_jp">戻る</div>
             <div class="base_en">Back</div>
           </button>

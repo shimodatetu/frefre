@@ -2,7 +2,6 @@
   ::-webkit-input-placeholder {
     color: #bbbbbb;
   }
-
   .profile_sub{
       position:fixed;
   }
@@ -10,19 +9,27 @@
     display:inline-block;
     width:100%;
     margin-left:160px;
+    margin-bottom:10px;
+    min-height:400px;
   }
   .profile_picture{
     width:160px;
+    margin-bottom:15px;
+    .name_show{
+      background: #3d67b4;
+      color:#fff;
+      padding:5px;
+      margin-top:10px;
+      font-size:20px;
+    }
     .group_img{
       width: 160px; /* 任意の幅を指定 */
-      height: 100px; /* 任意の高さを指定 */
+      height: 160px; /* 任意の高さを指定 */
       object-fit:cover;
     }
     .profile_picture_change{
       background-color: #dddddd;
       color: #555;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
       border:none;
       width:100%;
       text-align:center;
@@ -40,7 +47,10 @@
     .profile_picture_change:hover{
       background-color: #cccccc;
     }
-    margin-bottom:20px;
+    .edit_user{
+      margin-top: -48px;
+      opacity: 0.7;
+    }
   }
   .profile_contents_change{
     width:160px;
@@ -182,9 +192,6 @@
   }
 
 }
-.profile_check_modal{
-
-}
 
 .ui-dialog{
   width:500px !important;
@@ -229,7 +236,7 @@ input.cmn-toggle-round:checked + label:before {
 input.cmn-toggle-round:checked + label:after {
   margin-left: 90px;
 }
-.profile_check_modal{
+.profile_modal{
   .btn_back{
     display: inline-block;
     margin-right:30px;
@@ -327,6 +334,37 @@ input.cmn-toggle-round:checked + label:after {
         padding:10px;
         width:100%;
         word-wrap: break-word;
+      }
+    }
+  }
+  .image_change_type{
+    margin-left: calc(33% - 133px);
+  }
+  .image_change_select{
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .image_change{
+    display: inline-block;
+    button{
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      margin-top:-50px;
+      width:200px;
+    }
+    .image{
+      width:200px;
+      height:200px;
+    }
+  }
+  .btn_back{
+    margin-right: calc(50% - 33px);
+  }
+  .set_prepared_image{
+    button{
+      .image{
+        height:100px;
+        width:100px;
       }
     }
   }

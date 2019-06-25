@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_084659) do
     t.string "email"
     t.string "country"
     t.string "gender"
+    t.integer "image", default: 1
     t.binary "photo", limit: 1048576
     t.string "file_name"
     t.string "profile_en"
