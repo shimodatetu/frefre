@@ -14,7 +14,7 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
   make: (lang, mes_jp,mes_en,address) ->
     address = Number(address)
     @perform('make',lang:lang,mes_jp:mes_jp,address:address,mes_en:mes_en)
-    alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
+    alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
 
 $(document).on 'click', '#noticeModal .btn_send',(event) ->
   send_check()
