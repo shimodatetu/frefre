@@ -11,7 +11,7 @@ function alert_modal(alert_en,alert_jp,alert_type){
   }
   setTimeout(function(){
     $("#successModal").modal("hide")
-  },1500);
+  },3000);
 }
 
 function alert_get(){
