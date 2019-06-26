@@ -6,7 +6,11 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password]) && user.activated?
       log_in user
+      flash["alert_en"] = "You successed to login"
+      flash["alert_jp"] = "ログインに成功しました。"
+      flash["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
+
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
       flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"

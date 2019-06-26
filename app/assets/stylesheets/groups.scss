@@ -219,7 +219,7 @@
       margin-top:10px;
       .flag_image{
         display:inline-block;
-        margin-left: 30%;
+        margin-left: calc(33% - 30px);
         .image{
           height:27px;
           width:40px;
@@ -459,7 +459,7 @@
 
 .not_logined_cover{
   vertical-align: center;
-  margin-left:calc(50vw - 250px);
+  margin-left:calc(50vw - 300px);
   width:450px;
   .not_logined{
     font-size:16px;
