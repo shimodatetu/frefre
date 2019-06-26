@@ -10,7 +10,7 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
   change: (username,gender,country,profile_en,profile_jp,able_see) ->
     @perform 'change',username:username,gender:gender,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
-    alert_set("You successed to save your profile.","プロフィールの保存に成功しました","success")
+    alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
     location.reload()
 
 $(document).on 'click', '.profile_check_modal .btn_send', (event) ->
