@@ -8,6 +8,11 @@ a{
   padding-left:calc(5%);
   width:calc(70%);
   display: inline-block;
+  .modal{
+    .btn_send{
+      background:#ffb432!important;
+    }
+  }
   .panel-title{
     color:#3d67b4;
   }
