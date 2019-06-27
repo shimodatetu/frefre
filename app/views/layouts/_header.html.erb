@@ -5,8 +5,18 @@
       <%= image_tag "icon3.png", :class => "icon_img" %>
       <%= image_tag "logo.png", :class => "logo_img" %>
     <% end %>
+
     <% if logged_in?  %>
       <div class="login_button dropdown">
+
+        <span class="search_all">
+          <%= form_tag('/search/header',method: :post) do %>
+            <%= text_field_tag :search_text ,"", class:"form-control search_form",placeholder:"Search / 検索" %>
+            <button type="submit"class="search" style="border: none;">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          <% end %>
+        </span>
         <div class="text_fill dropdown-toggle
         <% if url.include?('/profile') %>
           <%= "now_page" %>
@@ -74,6 +84,7 @@
       <% end %>
     <% end %>
   </div>
+
   <div class="width_set"style="width:100vw;">
     <div class="nav-fall border border-primary">
       <%= link_to '/',class:"link_text" do %>
@@ -127,14 +138,6 @@
           </div>
         </div>
       <% end %>
-      <span class="search_all"style="display:none">
-        <%= form_tag('/search/header',method: :post) do %>
-          <%= text_field_tag :search_text ,"", class:"form-control search_form",placeholder:"Search / 検索" %>
-          <button type="submit"class="search" style="border: none;">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        <% end %>
-      </span>
     </div>
   </div>
 </div>
