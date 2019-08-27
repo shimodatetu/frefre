@@ -18,9 +18,9 @@
   <div class="panel-title">
     <div class="panel-title-text">
       <div class="float_jp">
-        <%= smallcategory.name_jp %>カテゴリー
+        <%= simple_format(text_url_to_link(h(smallcategory.name_jp))) %>カテゴリー
       </div>
-      <%= smallcategory.name_en %>Category
+      <%= simple_format(text_url_to_link(h(smallcategory.name_en))) %>Category
     </div>
     <!--<%= link_to '/groups', data: {"turbolinks"=>false},class:"thread_post_button btn btn-default" do %>
       <div class="jp">
@@ -57,23 +57,23 @@
               <div class="user_name">
                 <% if !logged_in? || current_user.id != group.user.id %>
                   <%= link_to "/other_profile/#{group.user.id}" do %>
-                    <%= group.user.name %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
                   <% end %>
                 <% else %>
                   <%= link_to "/profile" do %>
-                    <%= group.user.name %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
                   <% end %>
                 <% end %>
               </div>
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <%= group.title_en %>
+                    <%= simple_format(text_url_to_link(h(group.title_en))) %>
                   </div>
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <%= simple_format(h(group.posts.first.content_eng)) %>
+                    <%= simple_format(text_url_to_link(h(group.posts.first.content_eng))) %>
                   </div>
                 </div>
               </div>
@@ -83,12 +83,12 @@
               <div class="post_content_position jp_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <%= group.title_jp %>
+                    <%= simple_format(text_url_to_link(h(group.title_jp))) %>
                   </div>
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <%= simple_format(h(group.posts.first.content_jap)) %>
+                    <%= simple_format(text_url_to_link(h(group.posts.first.content_jap))) %>
                   </div>
                 </div>
               </div>

@@ -7,9 +7,9 @@
         <div class="thread_content">
           <div class="thread_title">
             <% if lang != "jap" %>
-              <%= group.title_en %>
+              <%= simple_format(text_url_to_link(h(group.title_en))) %>
             <% else %>
-              <%= group.title_jp %>
+              <%= simple_format(text_url_to_link(h(group.title_jp))) %>
             <% end %>
           </div>
           <div class="group_user_cover">
@@ -19,16 +19,16 @@
               <%= image_tag(group.user.image.url, :class => "group_img") %>
             <% end %>
             <p class="group_name">
-              <%= group.user.name %>
+              <%= simple_format(text_url_to_link(h(group.user.name))) %>
             </p>
           </div>
           <div class="post_content_cover">
             <div class="post_content">
               <div class="post_content_l">
                 <% if lang != "jap" %>
-                  <%= group.posts.first.content_eng %>
+                  <%= simple_format(text_url_to_link(h(group.posts.first.content_eng))) %>
                 <% else %>
-                  <%= group.posts.first.content_jap %>
+                  <%= simple_format(text_url_to_link(h(group.posts.first.content_jap))) %>
                 <% end %>
               </div>
             </div>

@@ -23,10 +23,13 @@
     <div class="panel-title"style="display:inline-block">
       <div class="panel-title-text">
         <div class="float_jp">
-          "<%= from_user.name %>"と"<%= to_user.name %>"のチャット
+          "<%= simple_format(text_url_to_link(h(from_user.name))) %>
+          "と"
+          <%= simple_format(text_url_to_link(h(to_user.name))) %>"のチャット
         </div>
         <div class="float_en">
-          Chat "<%= from_user.name %>" with "<%= to_user.name %>"
+          Chat "<%= simple_format(text_url_to_link(h(from_user.name))) %>"
+          with "<%= simple_format(text_url_to_link(h(to_user.name))) %>"
         </div>
       </div>
     </div>

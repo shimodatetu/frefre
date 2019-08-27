@@ -16,7 +16,7 @@
       <% end %>
 
       <div class="name_show">
-        <%= other_user.name %>
+        <%= simple_format(text_url_to_link(h(other_user.name))) %>
       </div>
     </div>
     <div class="direct_mes_button">
@@ -36,9 +36,9 @@
     <div class="profile_title">
       <div class="title">
         <div class="jp">
-          <%= other_user.name %>のプロフィール
+          <%= simple_format(text_url_to_link(h(other_user.name))) %>のプロフィール
         </div>
-        <%= other_user.name %>'s profile
+        <%= simple_format(text_url_to_link(h(other_user.name))) %>'s profile
       </div>
     </div>
     <div class="profile_page row">

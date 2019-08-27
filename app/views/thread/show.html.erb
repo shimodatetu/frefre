@@ -26,10 +26,10 @@
   <div class="panel-title"style="display:inline-block">
     <div class="panel-title-text">
       <div class="float_jp">
-        <%= thread.title_jp %>
+        <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
       </div>
       <div class="float_en">
-        <%= thread.title_en %>
+        <%= simple_format(text_url_to_link(h(thread.title_en))) %>
       </div>
     </div>
     <% thread.hashtags.each do |hashtag| %>
@@ -39,10 +39,10 @@
         </div>
         <div class="hash_text">
           <div class="hash_jp">
-            <%= hashtag.hash_jp %>
+            <%= simple_format(text_url_to_link(h(hashtag.hash_jp))) %>
           </div>
           <div class="hash_en">
-            <%= hashtag.hash_en %>
+            <%= simple_format(text_url_to_link(h(hashtag.hash_en))) %>
           </div>
         </div>
       </div>

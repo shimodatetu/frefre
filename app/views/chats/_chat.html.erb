@@ -23,7 +23,7 @@
         <% if notice.users.first.id < 1 %>
           <%= FreFre Office %>
         <% else %>
-          <%= chat.user.name %>
+          <%= simple_format(text_url_to_link(h(chat.user.name))) %>
         <% end %>
       </div>
 
@@ -31,7 +31,7 @@
         <div class="post_content_position en_position">
           <div class="post_content">
             <div class="post_content_text">
-              <%= chat.main_en %>
+              <%= simple_format(text_url_to_link(h(chat.main_en))) %>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="post_content_position jp_position">
           <div class="post_content">
             <div class="post_content_text">
-              <%= chat.main_jp %>
+              <%= simple_format(text_url_to_link(h(chat.main_jp))) %>
             </div>
           </div>
         </div>

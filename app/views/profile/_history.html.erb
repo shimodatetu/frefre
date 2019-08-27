@@ -55,7 +55,7 @@
                 <div class="post_content_position en_position">
                   <div class="thread_title">
                     <div class="title_padding">
-                      <%= group.title_en %>
+                      <%= simple_format(text_url_to_link(h(group.title_en))) %>
                     </div>
                   </div>
                   <div class="post_content">

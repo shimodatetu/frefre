@@ -5,24 +5,29 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    user_id = Number($(".user_login").attr("id"))
+    alert("get")
     urls = location.pathname.split("/")
     now_id = urls[3]
     if Number(now_id) == data['group_id']
+      user_id = Number($(".user_login").attr("id"))
       now_page = 1
       if urls.length >= 5
         now_page = urls[4]
       page_id_max = Number($(".thread_page_num").attr("id"))
       page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
       if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-        alert_set("You successed to post.","投稿に成功しました","success")
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+        if user_id == data['user_id']
+          alert_set("You successed to post.","投稿に成功しました","success")
       else if Number(now_page) == page
-        alert_modal("You successed to post.","投稿に成功しました","success")
         add_post(data)
-      else if user_id == data['user_id']
-        alert_set("You successed to post.","投稿に成功しました","success")
+        if user_id == data['user_id']
+          alert_modal("You successed to post.","投稿に成功しました","success")
+      else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+        if user_id == data['user_id']
+          alert_set("You successed to post.","投稿に成功しました","success")
+
 
   speak: (lang,mes_jp,mes_en, group)->
     mes_jp = mes_jp.replace("// n", '').replace("//n", '');

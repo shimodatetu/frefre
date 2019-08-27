@@ -19,10 +19,10 @@
   <div class="panel-title"style="display:inline-block">
     <div class="panel-title-text">
       <div class="float_jp">
-        <%= notice.notice_sub_jp %>
+        <%= simple_format(text_url_to_link(h(notice.notice_sub_jp))) %>
       </div>
       <div class="float_en">
-        <%= notice.notice_sub_en %>
+        <%= simple_format(text_url_to_link(h(notice.notice_sub_en))) %>
       </div>
     </div>
   </div>
@@ -51,11 +51,11 @@
               <div class="user_name">
                 <% if params[:id].nil? || !logged_in? || current_user.id != chat.user.id %>
                   <%= link_to "/other_profile/#{chat.user.id}" do %>
-                    <%= chat.user.name %>
+                    <%= simple_format(text_url_to_link(h(chat.user.name))) %>
                   <% end %>
                 <% else %>
                   <%= link_to "/profile" do %>
-                    <%= chat.user.name %>
+                    <%= simple_format(text_url_to_link(h(chat.user.name))) %>
                   <% end %>
                 <% end %>
               </div>
@@ -126,7 +126,7 @@
                 <% if chat.id == first_id %>
                   <div class="thread_title">
                     <div class="title_padding">
-                      <%= chat.group.title_jp %>
+                      <%= simple_format(text_url_to_link(h(chat.group.title_jp))) %>
                     </div>
                   </div>
                 <% else %>
@@ -134,7 +134,7 @@
                 <% end %>
                 <div class="post_content jp_content_row">
                   <div class="post_content_text">
-                    <%= simple_format(h(chat.content_jap)) %>
+                    <%= simple_format(text_url_to_link(h(chat.content_jap))) %>
                   </div>
                 </div>
               </div>
