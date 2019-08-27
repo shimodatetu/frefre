@@ -2,6 +2,9 @@ a{
   color:#07689f;
 }
 
+p{
+  margin:0px;
+}
 .main_content_cover{
   padding-top:90px;
   padding-bottom:40px;
@@ -10,7 +13,7 @@ a{
   display: inline-block;
   .modal{
     .btn_send{
-      background:#f76b8a!important;
+      background:#eb6ea4!important;
     }
   }
   .panel-title{
@@ -26,7 +29,7 @@ a{
   }
   .normal_button{
     display: inline-block;
-    background: #f76b8a;
+    background: #eb6ea4;
     border: solid 1px #cd853f4d;
     color:#fff;
     word-wrap: break-word;
