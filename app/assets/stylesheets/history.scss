@@ -2,7 +2,7 @@
   margin-left:20px;
   width:70vw;
   .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    background-color: #a2d5f2;
+    background-color: #eaf6f6 ;
   }
   .nav-tabs{
     position: fixed;
@@ -19,7 +19,7 @@
     }
   }
   .nav-link:hover{
-    background-color: #a2d5f2;
+    background-color: #eaf6f6 ;
     border: 1px solid #ddd;
     border-bottom-color: transparent;
     cursor: default;
@@ -31,16 +31,16 @@
     }
   }
   .nav-link:hover{
-    color:#07689f!important;
+    color:#66bfbf!important;
   }
   .active{
     .nav-link{
-      color:#07689f!important;
+      color:#66bfbf!important;
     }
   }
   .thread_link:hover{
     .thread_cover{
-      background-color: #a2d5f2
+      background-color: #eaf6f6 
     }
   }
   .panel-title{
@@ -49,7 +49,7 @@
     margin-bottom:10px;
     padding-left:20px;
     font-size:20px;
-    color:#07689f;
+    color:#66bfbf;
     .float_jp{
       font-size:12px;
     }
@@ -70,10 +70,10 @@
     }
   }
   .panel-title:hover{
-    color:#07689fb5;
+    color:#66bfbfb5;
   }
   .pvpage_head{
-    border-top:3px solid #e198b4;
+    border-top:3px solid #f76b8a;
   }
   .tab-pane.active{
     display:block!important;
@@ -84,7 +84,7 @@
     font-size:10px;
   }
   .thread_cover:hover{
-    background: #a2d5f2;
+    background: #eaf6f6 ;
   }
   .thread_cover{
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.2));
@@ -131,7 +131,7 @@
         padding-left:10px;
         padding-right:10px;
         font-size:18px;
-        background:#a2d5f2;
+        background:#eaf6f6 ;
         .title_padding{
           text-align: center;
           font-size:18px;
@@ -198,7 +198,7 @@
   }
   .lang_bar_cover{
     z-index: 20;
-    background: #a2d5f2;
+    background: #eaf6f6 ;
     width:70%;
     margin-top:54px;
     margin-left: 0px;
