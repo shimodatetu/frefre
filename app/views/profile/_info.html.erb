@@ -69,15 +69,15 @@
                 <div class="thread_title">
                   <div class="title_padding">
                     <% if send_user.id == current_user.id %>
-                      Chat with <%= to_user.name %>
+                      Chat with <%= simple_format(text_url_to_link(h(to_user.name))) %>
                     <% else %>
-                      Chat with <%= send_user.name %>
+                      Chat with <%= simple_format(text_url_to_link(h(send_user.name))) %>
                     <% end %>
                   </div>
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <%= notice.chats.last.main_jp %>
+                    <%= simple_format(text_url_to_link(h(notice.chats.last.main_en))) %>
                   </div>
                 </div>
                 <div class="see_more">
@@ -91,15 +91,15 @@
                 <div class="thread_title">
                   <div class="title_padding">
                     <% if send_user.id == current_user.id %>
-                      <%= to_user.name %>とのチャット
+                      <%= simple_format(text_url_to_link(h(to_user.name))) %>とのチャット
                     <% else %>
-                      <%= send_user.name %>とのチャット
+                      <%= simple_format(text_url_to_link(h(send_user.name))) %>とのチャット
                     <% end %>
                   </div>
                 </div>
                 <div class="post_content">
                   <div class="post_content_text">
-                    <%= notice.chats.last.main_jp %>
+                    <%= simple_format(text_url_to_link(h(notice.chats.last.main_jp))) %>
                   </div>
                 </div>
                 <div class="see_more">

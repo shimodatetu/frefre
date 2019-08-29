@@ -1,7 +1,7 @@
 .profile_notice{
   margin-left:5px;
   .lang_bar_cover{
-    margin-top:-65px;
+    margin-top:-45px;
     margin-left:0px;
     width:70%;
     .lang_bar{
@@ -9,7 +9,10 @@
     }
   }
   .notice_cover{
-    margin-top:50px;
+    margin-top:-5px;
+    p{
+      display: inline-block;
+    }
   }
   .panel-title{
     display: inline-block;
@@ -150,7 +153,7 @@
     }
   }
   .post_footer_simple{
-    margin-left:calc(50% - 165px);
+    margin-left:calc(50% - 105px);
     .post_button_cover{
       display: inline-block;
       .post_button{

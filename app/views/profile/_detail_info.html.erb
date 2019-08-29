@@ -23,13 +23,12 @@
     <div class="panel-title"style="display:inline-block">
       <div class="panel-title-text">
         <div class="float_jp">
-          "<%= simple_format(text_url_to_link(h(from_user.name))) %>
-          "と"
-          <%= simple_format(text_url_to_link(h(to_user.name))) %>"のチャット
+          <%= simple_format(text_url_to_link(h(from_user.name))) %>と
+          <%= simple_format(text_url_to_link(h(to_user.name))) %>のチャット
         </div>
         <div class="float_en">
-          Chat "<%= simple_format(text_url_to_link(h(from_user.name))) %>"
-          with "<%= simple_format(text_url_to_link(h(to_user.name))) %>"
+          Chat <%= simple_format(text_url_to_link(h(from_user.name))) %>
+          with <%= simple_format(text_url_to_link(h(to_user.name))) %>
         </div>
       </div>
     </div>
@@ -87,7 +86,19 @@
               <textarea name="content"class="base_en_form connect_btn content_post form-control" rows="6"
               placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
             </div>
-            <div class="space_form"></div>
+            <div class="space_form chat_send">
+              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
+                <div class="button_text">
+                  <div class="float_jp">
+                    翻訳
+                  </div>
+                  <div class="right_en">
+                  Translate
+                </div>
+              </button>
+            </div>
             <div class="post_form_cover post_form_cover_enjp">
               <%= image_tag "21hb-GV4ZtL.jpg", class: "image" %>
               <textarea name="content"class="base_jp_form content_post form-control" rows="6"
@@ -107,7 +118,7 @@
                 Post
               </div>
             </button>
-            <button type="button" class="post_button btn btn_send words_post_button"id="trans"
+            <!---<button type="button" class="post_button btn btn_send words_post_button"id="trans"
             name="<% if logged_in? %>logined<% end %>">
               <div class="glyphicon glyphicon-comment picture_send"></div>
               <div class="button_text">
@@ -116,7 +127,7 @@
                 </div>
                 Translate
               </div>
-            </button>
+            </button>-->
             <%#= form_for @chat, :html => {:class => "post_button_form"},remote: true do |f| %>
             <form class="chat_image_post post_button_form">
               <label for="file_send"class="post_button image_send_button btn btn-prmary image_post_button">

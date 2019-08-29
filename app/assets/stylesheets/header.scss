@@ -14,94 +14,94 @@
       height: 40px;
       margin-top: 5px;
     }
-    .login_button:hover{
-      color:#07689fbd;
-    }
-    .login_button{
-      height:100%;
-      padding-right:40px;
-      padding-top:7px;
-      float:right;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      color:#07689f;
-      .url_menu{
-        margin-top: -10px;
-        min-width:120px;
-        float:right;
-        .url_tab_li{
-          margin-bottom:5px;
-        }
-        .url_tab_form{
-          padding-left:15px!important;
-          margin-right:5px;
-          padding-bottom:5px;
-          border-radius: 5px;
-        }
-        .url_tab_form:hover{
-          background:#f4f4f4;
-        }
-        .url_tab{
-          color:#07689f;
-          font-size:15px;
-          text-align: center;
-          .logout_button{
-            margin-left:-15px;
-            color:#07689f;
-            font-weight:normal;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            padding: 0;
-            appearance: none;
-          }
-          .login_button:hover{
-            background-color: #fff;
-          }
-          .jp{
-            font-size:10px;
-          }
-        }
-      }
-      .height_control{
-        display: inline-block;
-        vertical-align: middle;
-        height:49px;
-        //background:#000000;
-      }
-      .icon{
-        display: inline-block;
-        font-size:25px;
-        margin-top:7px;
-      }
-      .now_page{
-        height:100%;
-        margin-bottom:10px;
-        border-bottom:solid 3px #fff;
-      }
-      .text_fill{
-        height:100%;
-        .text{
-          padding-left:5px;
-          padding-right:5px;
-          height:100%;
-          color:#07689f;
-          margin-left:-3px;
-          display: inline-block;
-          font-weight:lighter;
-          .float_jap{
-            font-size:10px;
-          }
-          .base_en{
-            margin-top:-3px;
-            margin-left:5px;
-          }
-        }
-      }
-    }
 
+  }
+  .login_button:hover{
+    color:#07689fbd;
+  }
+  .login_button{
+    height:100%;
+    padding-right:40px;
+    padding-top:5px;
+    float:right;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color:#fff;
+    .url_menu{
+      margin-top: -10px;
+      min-width:120px;
+      float:right;
+      .url_tab_li{
+        margin-bottom:5px;
+      }
+      .url_tab_form{
+        padding-left:15px!important;
+        margin-right:5px;
+        padding-bottom:5px;
+        border-radius: 5px;
+      }
+      .url_tab_form:hover{
+        background:#f4f4f4;
+      }
+      .url_tab{
+        color:#07689f;
+        font-size:15px;
+        text-align: center;
+        .logout_button{
+          margin-left:-15px;
+          color:#07689f;
+          font-weight:normal;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          outline: none;
+          padding: 0;
+          appearance: none;
+        }
+        .login_button:hover{
+          background-color: #fff;
+        }
+        .jp{
+          font-size:10px;
+        }
+      }
+    }
+    .height_control{
+      display: inline-block;
+      vertical-align: middle;
+      height:49px;
+      //background:#000000;
+    }
+    .icon{
+      display: inline-block;
+      font-size:20px;
+      margin-top:6px;
+    }
+    .now_page{
+      height:100%;
+      margin-bottom:10px;
+      border-bottom:solid 3px #fff;
+    }
+    .text_fill{
+      height:100%;
+      .text{
+        padding-left:5px;
+        padding-right:5px;
+        height:100%;
+        color:#fff;
+        margin-left:-3px;
+        display: inline-block;
+        font-weight:lighter;
+        .float_jap{
+          font-size:10px;
+        }
+        .base_en{
+          margin-top:-3px;
+          margin-left:5px;
+        }
+      }
+    }
   }
   .navbar {
     z-index:20;

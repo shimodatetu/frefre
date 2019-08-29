@@ -8,7 +8,7 @@
     position: fixed;
     background-color: #fff;
     z-index:5;
-    width:70%;
+    width:calc(70% + 10px);
     margin-top:-20px;
     padding-top:10px;
   }
@@ -40,7 +40,7 @@
   }
   .thread_link:hover{
     .thread_cover{
-      background-color: #dff5eaff 
+      background-color: #dff5eaff
     }
   }
   .panel-title{
@@ -199,14 +199,14 @@
   .lang_bar_cover{
     z-index: 20;
     background: #dff5eaff ;
-    width:70%;
+    width:calc(70% + 10px);
     margin-top:54px;
     margin-left: 0px;
     position:fixed;
     border: solid thin #ddd;
     border-top:none;
     .lang_bar{
-      padding-left:calc(20% - 10px);
+      padding-left:calc(14% - 10px);
       padding-top:8px;
       padding-bottom:8px;
       .slider{
