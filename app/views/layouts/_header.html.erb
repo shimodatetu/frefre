@@ -138,6 +138,11 @@
           </div>
         </div>
       <% end %>
+      <%= link_to '/', data: {"turbolinks"=>false},class:"link_text title_logo_link" do %>
+        <div class="title_logo">
+          <%= image_tag "/frefre.png", class: "image" %>
+        </div>
+      <% end %>
       <% if logged_in?  %>
         <div class="login_button dropdown">
           <span class="search_all"style="display:none">

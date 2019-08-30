@@ -173,6 +173,18 @@
           }
         }
       }
+      .title_logo{
+        margin-left: 5%;
+        max-height: 50px;
+        margin-top: -20px;
+        img{
+          padding-top: 25px;
+          height: 80px;
+        }
+      }
+    }
+    .title_logo_link{
+      margin-left: 5%;
     }
     .search_all{
       float:right;
@@ -266,7 +278,7 @@
     }
   }
 }
-@media screen and (max-width: 660px){
+@media screen and (max-width: 750px){
   .header{
     .link_text .text_fill .float_text{
       display: none !important;

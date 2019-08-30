@@ -5,6 +5,16 @@ a{
 p{
   margin:0px;
 }
+.sub_content_cover{
+  display: inline-block;
+  width:25%;
+  vertical-align: top;
+  margin-top: 150px;
+  margin-left: 2%;
+  img{
+    width:100%;
+  }
+}
 .main_content_cover{
   padding-top:90px;
   padding-bottom:40px;
@@ -96,7 +106,7 @@ body{
     width:600px!important;
   }
 }
-@media screen and (max-width: 800px){
+@media screen and (max-width: 750px){
   .login_page{
     .input-groups{
       margin-left: 20px!important;
