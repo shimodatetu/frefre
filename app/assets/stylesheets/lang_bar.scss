@@ -22,7 +22,7 @@
         top: -5px !important;
         width: 30px !important;
         height: 30px !important;
-        background: #07689F;
+        background: #0097a7;
         z-index:50;
         .slider_icon{
           color:#fff;
@@ -34,13 +34,13 @@
       .slider-selection{
         //height: 20px !important;
         //top: -5px !important;
-        background:#07689F;
+        background:#0097a7;
       }
       .slider-track-high{
         //top: -5px;
         //height:20px;
-        background: #fff;
-        -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2)
+        background: #408bc9;
+        -webkit-box-shadow:none !important;
       }
     }
     .country_flag{
@@ -48,11 +48,11 @@
       margin-right: 10px;
       .image{
         height:28px;
-        width:40px;
+        width:50px;
       }
     }
     .jp_country{
-      margin-left:18px;
+      margin-left:15px;
     }
   }
 }
