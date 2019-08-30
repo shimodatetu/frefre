@@ -112,6 +112,16 @@
     height: 50px;
     padding: 0px 0px;
   }
+  .header_logo{
+    position:absolute;
+    margin-left: calc(50% - 50px);
+    .title_logo{
+      margin-top:10px;
+      img{
+        width: 100px;
+      }
+    }
+  }
   .nav-fall{
     background: #66bfbfff;
     z-index:20;
@@ -129,6 +139,9 @@
     .text_fill:hover{
       color:#fff;
       border-bottom:solid 2px #fff;
+    }
+    .header_logo{
+      position:absolute;
     }
     .link_text{
       margin-left:-4px;
@@ -278,7 +291,7 @@
     }
   }
 }
-@media screen and (max-width: 750px){
+@media screen and (max-width: 900px){
   .header{
     .link_text .text_fill .float_text{
       display: none !important;
