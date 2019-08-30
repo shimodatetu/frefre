@@ -311,26 +311,30 @@ input.cmn-toggle-round:checked + label:after {
       border-bottom-left-radius: 0px;
     }
     .space_form{
-      .space_form{
-        display: inline-block;
-        .post_button{
-          width:40px;
-          height:80px;
-          margin-bottom:23px;
-          padding: 0px 2px 5px 2px;
+      display: inline-block;
+      width: 46px;
+      height: 86px;
+      margin-bottom: 23px;
+      padding: 2px;
+      border-radius: 5px;
+      border: solid thin #ff9d3b;
+      .post_button{
+        width:40px;
+        height:80px;
+        margin-bottom:23px;
+        padding: 0px 2px 5px 2px;
+        display:block;
+        white-space: normal;
+        .picture_send{
+          margin:0px!important;
+          font-size: 20px;
+          width:100%;
+          text-align:center;
           display:block;
-          white-space: normal;
-          .picture_send{
-            margin:0px!important;
-            font-size: 20px;
-            width:100%;
-            text-align:center;
-            display:block;
-          }
-          .button_text{
-            display:block;
-            word-wrap: break-word;
-          }
+        }
+        .button_text{
+          display:block;
+          word-wrap: break-word;
         }
       }
     }
