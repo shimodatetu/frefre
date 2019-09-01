@@ -58,9 +58,10 @@
       font-family:'alba';
     }
     .post_button_place{
-      margin-left: calc(50% - 85px);
+      margin-left: calc(50% - 45px);
       .post_button{
         display:inline-block;
+        padding-left: 0px;
       }
     }
     .make_content{
@@ -212,7 +213,7 @@
         display: inline-block;
         margin-left:5px;
         margin-right:5px;
-        width:calc(50% - 20px);
+        width:calc(50% - 40px);
       }
     }
     .flag_show{
@@ -230,6 +231,35 @@
       margin-right: 20px;
       padding-top:5px;
       font-size:20px;
+    }
+    .space_form{
+      display: inline-block;
+      vertical-align: bottom;
+      width: 46px;
+      height: 86px;
+      margin-bottom: 23px;
+      padding: 2px;
+      border-radius: 5px;
+      border: solid thin #ff9d3b;
+      .post_button{
+        width:40px;
+        height:80px;
+        margin-bottom:23px;
+        padding: 0px 2px 5px 2px;
+        display:block;
+        white-space: normal;
+        .picture_send{
+          margin:0px!important;
+          font-size: 20px;
+          width:100%;
+          text-align:center;
+          display:block;
+        }
+        .button_text{
+          display:block;
+          word-wrap: break-word;
+        }
+      }
     }
     .title_input_name{
       margin-top:5px;
