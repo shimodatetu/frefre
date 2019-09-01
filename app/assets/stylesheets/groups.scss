@@ -78,12 +78,11 @@
       }
       .hash_form{
         margin-left:20px;
-        margin-right:10px;
+        margin-right:20px;
         margin-top:10px;
         .hash_input{
           display:inline-block;
-          margin-right:2%;
-          width:45%;
+          width:calc(50% - 40px);
         }
         .radio_button{
           display:inline-block;
@@ -198,7 +197,7 @@
         display: inline-block;
         margin-left:5px;
         margin-right:5px;
-        width:calc(50% - 20px);
+        width:calc(50% - 40px);
       }
     }
     .content_input{
@@ -231,6 +230,10 @@
       margin-right: 20px;
       padding-top:5px;
       font-size:20px;
+    }
+    .sub_space{
+      width:46px;
+      display: inline-block;
     }
     .space_form{
       display: inline-block;

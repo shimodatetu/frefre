@@ -252,8 +252,11 @@ body{
   }
   .make_thread_category{
     width:93%!important;
-    .hash_input{
-      width:47%!important;
+    .hash_form{
+      margin-right: 0px!important;
+      .hash_input{
+        width:calc(50% - 33px)!important;
+      }
     }
   }
 }
