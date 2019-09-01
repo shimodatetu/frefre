@@ -51,6 +51,17 @@
         </div>
         <div class="content_input">
           <textarea id="content"class="content_input_form form-control form_lang en_data_content" rows="5" cols="65"></textarea>
+          <div class="space_form">
+            <button type="button" class="normal_button post_button btn btn_send mes_post_button"id="trans">
+              <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
+              <div class="button_text">
+                <div class="float_jp">
+                   翻訳
+                </div>
+                Translate
+              </div>
+            </button>
+          </div>
           <textarea id="content"class="content_input_form form-control form_lang jp_data_content" rows="5" cols="65"></textarea>
         </div>
       </div>
@@ -64,15 +75,6 @@
             Post
           </div>
         </button>
-        <button type="button" class="normal_button post_button btn  mes_post_button"id="trans">
-          <div class="glyphicon glyphicon-comment picture_send"></div>
-          <div class="button_text">
-            <div class="float_jp">
-               翻訳
-            </div>
-            Translate
-          </div>
-        </button>
       </div>
     </div>
     <div class="thread_post_cover">
@@ -84,7 +86,6 @@
                 <div class="post_form_cover post_form_cover_enjp connect_btn">
                   <%= image_tag "/eng.png", class: "image" %>
                 </div>
-                <div class="space_form"></div>
                 <div class="post_form_cover post_form_cover_enjp">
                   <%= image_tag "jap.png", class: "image" %>
                 </div>
@@ -93,7 +94,6 @@
                 <div class="post_form_cover post_form_cover_enjp connect_btn">
                   <textarea name="content"class="en_form_content connect_btn content_post form-control" rows="4"></textarea>
                 </div>
-                <div class="space_form"></div>
                 <div class="post_form_cover post_form_cover_enjp">
                   <textarea name="content"class="jp_form_content content_post form-control" rows="4"></textarea>
                 </div>
