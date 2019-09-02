@@ -107,6 +107,9 @@ body{
   }
 }
 @media screen and (max-width: 750px){
+  .sub_content_cover{
+    display:none;
+  }
   .login_page{
     .input-groups{
       margin-left: 20px!important;
