@@ -11,14 +11,15 @@ p{
   vertical-align: top;
   margin-top: 150px;
   margin-left: 2%;
-  img{
-    width:100%;
+  iframe{
+    width: 25vw;
+    height: 14vw;
   }
 }
 .main_content_cover{
   padding-top:90px;
   padding-bottom:40px;
-  padding-left:calc(5%);
+  padding-left:2%;
   width:calc(70%);
   display: inline-block;
   .modal{
@@ -68,9 +69,6 @@ p{
         font-size:11px;
       }
     }
-  }
-  .normal_button:hover{
-
   }
 }
 #successModal{
