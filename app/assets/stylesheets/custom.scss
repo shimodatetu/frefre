@@ -302,6 +302,9 @@ body{
   }
   .profile_sub{
     width:25%!important;
+    .edit_user{
+      margin-top: calc(-7vw - 13px)!important;
+    }
     .profile_picture{
       width:100%!important;
       .group_img{
@@ -315,6 +318,7 @@ body{
   .profile_other, .profile{
     .profile_main{
       margin-left:calc(30% - 20px)!important;
+      width:70%!important;
     }
     .profile_picture .group_img{
       height:18vw!important;
