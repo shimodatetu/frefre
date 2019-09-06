@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
 
   private
   def log_in(user)
+    reset_session
     session[:user_id] = user.id
   end
 

@@ -5,7 +5,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    alert("get")
     urls = location.pathname.split("/")
     now_id = urls[3]
     if Number(now_id) == data['group_id']
