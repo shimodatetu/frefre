@@ -1,6 +1,6 @@
 <% lang = session["lang"] %>
 <% session["now_group"] = params[:id] %>
-<% thread = Group.find_by(id: params[:id]) %>
+<% thread = Group.find(params[:id]) %>
 <% thread.seen_num+=1 %>
 <% thread.save %>
 
@@ -171,46 +171,48 @@
       <% end %>
     </div>
   </div>
-
-  <div class="thread_post_cover check_delete">
-    <div class="modal fade" id="deleteModal" tabindex="-1">
-      <div class="modal-dialog"style="width:90vw">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="explain_text">
-              この投稿は削除されます。
-              復元できません。
-              削除しますか？
-              <div class="en">
-                Your comment will be deleted.
-                It is not able to be reconstructed.
-                Do you want to delete this comment?
+  <% if logged_in? %>
+    <div class="thread_post_cover check_delete">
+      <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog"style="width:90vw">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="explain_text">
+                この投稿は削除されます。
+                復元できません。
+                削除しますか？
+                <div class="en">
+                  Your comment will be deleted.
+                  It is not able to be reconstructed.
+                  Do you want to delete this comment?
+                </div>
+              </div>
+              <div class="delete_html thread_all">
               </div>
             </div>
-            <div class="delete_html thread_all">
+            <div class="modal-footer">
+              <%= form_tag('/delete',method: :post) do %>
+                <%= hidden_field_tag :delete_id ,-1,class:"delete_id" %>
+                <%= hidden_field_tag :url, request.path %>
+                <button type="submit" class="btn btn-default btn_delete"id="jp">
+                  <div class="float_jp">削除</div>
+                  <div class="base_en">Delete</div>
+                </button>
+                <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+                  <div class="float_jp">戻る</div>
+                  <div class="base_en">Back</div>
+                </button>
+              <% end %>
             </div>
-          </div>
-          <div class="modal-footer">
-            <%= form_tag('/delete',method: :post) do %>
-              <%= hidden_field_tag :delete_id ,-1,class:"delete_id" %>
-              <%= hidden_field_tag :url, request.path %>
-              <button type="submit" class="btn btn-default btn_delete"id="jp">
-                <div class="float_jp">削除</div>
-                <div class="base_en">Delete</div>
-              </button>
-              <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
-                <div class="float_jp">戻る</div>
-                <div class="base_en">Back</div>
-              </button>
-            <% end %>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 
+<% if logged_in? %>
 <div class="thread_post_cover">
   <div class="modal fade" id="sampleModal-enjp" tabindex="-1">
   	<div class="modal-dialog"style="width:90vw">
@@ -261,6 +263,7 @@
   </div>
 </div>
 </div>
+<% end %>
 <button class="delete_button_destroy"style="display:none">
 </button>
 <% if logged_in? == true %>

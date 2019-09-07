@@ -5,8 +5,8 @@
   }
 </style>
 <% other_user = current_user %>
-<% if User.find_by(id: params[:id].to_i) %>
-  <% other_user = User.find_by(id: params[:id].to_i) %>
+<% if User.find(params[:id].to_i) %>
+  <% other_user = User.find(params[:id].to_i) %>
 <% end %>
 <% if logged_in? %>
   <div class="make_thread_cover">

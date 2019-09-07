@@ -1,5 +1,5 @@
 <% lang = session["lang"] %>
-<% subcategory = Smallcategory.find_by(id: params[:id]) %>
+<% subcategory = Smallcategory.find(params[:id]) %>
 <% category = subcategory.bigcategory %>
 <div class="thread_all">
   <div class="thread_all_title">

@@ -9,7 +9,7 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    group = Group.find_by(id: data['group_id'])
+    group = Group.find(data['group_id'])
     if group
       post = Post.new()
       post.lang = data['lang']
@@ -23,7 +23,7 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def image(data)
-    group = Group.find_by(id: data['group_id'])
+    group = Group.find(data['group_id'])
     if group
       post = Post.new()
       post.lang = data['lang']

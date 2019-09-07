@@ -9,7 +9,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def make(data)
-    notice = Notice.find_by(id: data['group_id'].to_i)
+    notice = Notice.find(data['group_id'].to_i)
     chat = Chat.new()
     chat.main_jp = data['content_jap']
     chat.main_en = data['content_eng']

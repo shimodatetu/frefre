@@ -95,7 +95,7 @@ class ProfileController < ApplicationController
       if !params[:page1].nil?
         notice_page = params[:page1]
       end
-      @notice = Notice.find_by(id:notice_page.to_i)
+      @notice = Notice.find(notice_page.to_i)
       thread_page_num = 10.to_f
       page_show_max = 5.to_f
       page_max_half = (page_show_max / 2).ceil

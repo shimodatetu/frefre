@@ -62,7 +62,7 @@
                 <% if notice.users.last.id < 1 %>
                   <%= FreFre Office %>
                 <% else %>
-                  <%= User.find_by(id: notice.users.last.id).name %>
+                  <%= User.find(notice.users.last.id).name %>
                 <% end %>
               </div>
               <div class="post_content_position en_position">

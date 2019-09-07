@@ -1,7 +1,7 @@
 class NoticeController < ApplicationController
   def show
     if Chat.present?
-      @notice = Notice.find_by(id: params[:id])
+      @notice = Notice.find(params[:id])
       @chat = Chat.new
       thread_page_num = 10.to_f
       page_show_max = 5.to_f
