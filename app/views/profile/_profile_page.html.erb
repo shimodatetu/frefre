@@ -160,8 +160,8 @@
       </div>
     </div>
     <div class="profile_words">
-      <div class="profile_content">
-        <div class="col-sm-6">
+      <div class="profile_content intro_content">
+        <div class="intro">
           <div class="row profile_content_data self_introduction">
             <div class="content_name">
               <div class="jp">
@@ -175,7 +175,20 @@
             <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"><%=current_user.profile_en%></textarea>
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="space_form prof_trans">
+          <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans"
+          name="<% if logged_in? %>logined<% end %>">
+            <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
+            <div class="button_text">
+              <div class="float_jp">
+                翻訳
+              </div>
+              <div class="right_en">
+              Translate
+            </div>
+          </button>
+        </div>
+        <div class="intro">
           <div class="row profile_content_data self_introduction">
             <div class=" content_name">
               <div class="jp">

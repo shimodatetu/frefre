@@ -96,6 +96,39 @@
       padding-left:15px;
       padding-right:15px;
       padding-top:5px;
+      .intro{
+        display: inline-block;
+        width:calc(50% - 30px);
+      }
+      .space_form{
+        display: inline-block;
+        vertical-align: bottom;
+        width: 46px;
+        height: 86px;
+        margin-bottom: 23px;
+        padding: 2px;
+        border-radius: 5px;
+        border: solid thin #ff9d3b;
+        .post_button{
+          width:40px;
+          height:80px;
+          margin-bottom:23px;
+          padding: 0px 2px 5px 2px;
+          display:block;
+          white-space: normal;
+          .picture_send{
+            margin:0px!important;
+            font-size: 20px;
+            width:100%;
+            text-align:center;
+            display:block;
+          }
+          .button_text{
+            display:block;
+            word-wrap: break-word;
+          }
+        }
+      }
       .profile_content_data{
         padding:5px;
         .content_cover{
@@ -154,9 +187,12 @@
       .self_introduction{
         margin-top:10px;
         margin-bottom:10px;
-        margin-right:10px;
-        margin-left: -30px;
+        margin-right:0px;
+        margin-left: 0px;
       }
+    }
+    .intro_content{
+      padding-left:0px;
     }
   }
   .profile_save_button{
@@ -259,7 +295,7 @@ input.cmn-toggle-round:checked + label:after {
     padding-right:16px;
     background: #fff0a0;
     border:solid thin #ddd;
-    color: #cd853f;
+    color: #fff;
   }
   .btn_delete{
     display: inline-block;
