@@ -1,4 +1,8 @@
 # Puma can serve each request in a thread from an internal thread pool.
+
+cert = "/Users/user/example.com.pem"
+key = "/Users/user/example.com-key.pem"
+ssl_bind "0.0.0.0", 9292, cert: cert, key: key
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
