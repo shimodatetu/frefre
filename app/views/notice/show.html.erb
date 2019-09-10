@@ -58,6 +58,10 @@
                     <%= simple_format(text_url_to_link(h(chat.user.name))) %>
                   <% end %>
                 <% end %>
+
+                <div class="create_time"style="float:right">
+                  <%= chat.created_at.strftime('%Y/%m/%d') %>
+                </div>
               </div>
               <% if params[:id].nil? || current_user != chat.user || (chat.id != first_id && logged_in? && current_user.id == chat.user.id)%>
                 <div class="dropdown">

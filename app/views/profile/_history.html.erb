@@ -172,6 +172,9 @@
                 <% if post.photo.nil? %>
                   <div class="user_name">
                     <%= post.user.name %>
+                    <div class="create_time"style="float:right">
+                      <%= post.created_at.strftime('%Y/%m/%d') %>
+                    </div>
                   </div>
                   <div class="post_content_position en_position">
                     <div class="post_content">
@@ -193,6 +196,9 @@
                 <% else %>
                   <div class="user_name">
                     <%= post.user.name %>
+                    <div class="create_time"style="float:right">
+                      <%= post.created_at.strftime('%Y/%m/%d') %>
+                    </div>
                   </div>
                   <div class="post_image_cover">
                     <%= image_tag show_post_image_thread_path(post), :class => "post_image" %>

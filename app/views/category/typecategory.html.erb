@@ -66,6 +66,9 @@
                       <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% end %>
+                  <div class="create_time"style="float:right">
+                    <%= group.created_at.strftime('%Y/%m/%d') %>
+                  </div>
                 </div>
               </object>
               <div class="post_content_position en_position">
