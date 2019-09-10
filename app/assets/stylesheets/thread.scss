@@ -225,6 +225,9 @@
           }
           .post_image_cover{
             padding:auto;
+            img{
+              height:200px;
+            }
             .post_image{
               margin-top:10px;
               //margin-left:calc(50% - 75px);
