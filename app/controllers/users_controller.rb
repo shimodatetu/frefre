@@ -4,9 +4,13 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(user_params)
-    if params[:user][:agreement] == "0"
+    if params[:user][:agreement_term] == "0"
       flash.now[:failed_en] = "Please agree the terms of service"
       flash.now[:failed_jp] = "利用規約に同意してください"
+      render :index
+    elif params[:user][:agreement_policy] == "0"
+      flash.now[:failed_en] = "Please agree the privacy policy"
+      flash.now[:failed_jp] = "プライバシーポリシーに同意してください"
       render :index
     else
       if @user.save
