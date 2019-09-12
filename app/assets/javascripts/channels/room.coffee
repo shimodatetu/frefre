@@ -90,15 +90,15 @@ add_post=(data)->
     jp_per = (1000 - slider) / 10;
     if slider < 100
       plus_post.find(".en_position").attr("style","display:none;");
-      plus_post.find(".jp_position").attr("style","width:calc(100% - 25px)");
+      plus_post.find(".jp_position").attr("style","width:calc(100%)");
       plus_post.find(".post_content_position_space").attr("style","display:none;");
     else if slider > 900
-      plus_post.find(".en_position").attr("style","width:calc(100% - 25px)");
+      plus_post.find(".en_position").attr("style","width:calc(100%)");
       plus_post.find(".jp_position").attr("style","display:none");
       plus_post.find(".post_content_position_space").attr("style","display:none;");
     else
-      plus_post.find(".en_position").attr("style","width:calc("+en_per+"% - 25px)");
-      plus_post.find(".jp_position").attr("style","width:calc("+jp_per+"% - 25px)");
+      plus_post.find(".en_position").attr("style","width:calc("+en_per+"% - 15px)");
+      plus_post.find(".jp_position").attr("style","width:calc("+jp_per+"% - 15px)");
       plus_post.find(".post_content_position_space").removeAttr("style");
 
 

@@ -168,12 +168,19 @@
           width:100%;
           .user_name{
             color:#365899;
+            display: inline-block;
             font-weight: bold;
           }
 
           .dropdown{
             display: inline-block;
             float:right;
+            .create_time{
+              float:left;
+              margin-right:2px;
+              font-weight: bold;
+              color:#07689f
+            }
             .caret {
               border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #000000;
             }
