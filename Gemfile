@@ -22,6 +22,8 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass'
 gem 'carrierwave'
+gem 'sqlite3', group: [:development, :test]
+gem 'pg', group: :production
 gem 'gon'
 gem 'dropzonejs-rails'
 gem 'google-cloud-translate'
