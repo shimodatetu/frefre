@@ -16,17 +16,17 @@ $(function(){
         //console.log(70/cover_width*500)
         if(value < 200){
           $(".en_position").attr("style","display:none;");
-          $(".jp_position").attr("style","width:calc(100%)");
+          $(".jp_position").attr("style","width:calc(100% - 25px)");
           $(".post_content_position_space").attr("style","display:none;");
         }
         else if(value > 800){
-          $(".en_position").attr("style","width:calc(100%)");
+          $(".en_position").attr("style","width:calc(100% - 25px)");
           $(".jp_position").attr("style","display:none");
           $(".post_content_position_space").attr("style","display:none;");
         }
         else{
-          $(".en_position").attr("style","width:calc("+en_per+"% - 15px)");
-          $(".jp_position").attr("style","width:calc("+jp_per+"% - 15px)");
+          $(".en_position").attr("style","width:calc("+en_per+"% - 25px)");
+          $(".jp_position").attr("style","width:calc("+jp_per+"% - 25px)");
           $(".post_content_position_space").removeAttr("style");
         }
       }
