@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'policy',to:'policy#show_policy'
   get 'term',to:'policy#show_term'
   get 'contact',to:'policy#contact'
+  post 'contact/mail',to:'policy#mail'
 
   get 'notice/show/:id' => 'notice#show'
   get 'other_profile/show'
