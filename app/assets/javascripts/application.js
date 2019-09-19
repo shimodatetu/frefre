@@ -17,5 +17,6 @@
 //= require jquery.turbolinks
 // require turbolinks
 //= require autosize
+// require execjs
 //= require env
 //= require_tree .

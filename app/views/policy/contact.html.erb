@@ -1,22 +1,77 @@
 
-<%= form_tag('/contact/mail',method: :post) do %>
+<%= form_tag("/contact/mail",method: :post) do %>
   <div class="make_thread_cover">
     <div class="panel panel-warning make_thread_category">
       <div class="panel-body content_cover">
         <div class="content_input_name"style="margin-top:20px">
           <div class="sub_jp">
-            お問い合わせ
+            本名
           </div>
           <div class="main_en">
-            Contact Us
+            Real Name
+          </div>
+          <div class="content_input">
+            <%= text_field :contact_data ,"", id:"content_name",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
+          </div>
+        </div>
+        <div class="content_input_name"style="margin-top:20px">
+          <div class="sub_jp">
+            ユーザーネーム
+          </div>
+          <div class="main_en">
+            Username
           </div>
         </div>
         <div class="content_input">
-          <%= text_area :contact_mes ,"", id:"content",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
+          <%= text_field :contact_data ,"", id:"content_username",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
+        </div>
+        <div class="content_input_name"style="margin-top:20px">
+          <div class="sub_jp">
+            メールアドレス
+          </div>
+          <div class="main_en">
+            Mail Address
+          </div>
+        </div>
+        <div class="content_input">
+          <%= text_field :contact_data ,"", id:"content_mail",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
+        </div>
+        <div class="content_input_name"style="margin-top:20px">
+          <div class="sub_jp">
+            電話番号
+          </div>
+          <div class="main_en">
+            Phone Number
+          </div>
+        </div>
+        <div class="content_input">
+          <%= text_field :contact_data ,"", id:"content_phone",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
+        </div>
+        <div class="content_input_name"style="margin-top:20px">
+          <div class="sub_jp">
+            出身国
+          </div>
+          <div class="main_en">
+            Country
+          </div>
+        </div>
+        <div class="content_input">
+          <%= text_field :contact_data ,"", id:"content_country",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
+        </div>
+        <div class="content_input_name"style="margin-top:20px">
+          <div class="sub_jp">
+            お問い合わせ内容
+          </div>
+          <div class="main_en">
+            Inquiry Details
+          </div>
+        </div>
+        <div class="content_input">
+          <%= text_area :contact_data ,"", id:"content_message",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
         </div>
       </div>
       <div class="post_button_place">
-        <button type="submit" class="normal_button btn send_contact"id="post"onClick='alert_modal("You succeed to send","投稿に成功しました","success")'>
+        <button type="submit" class="normal_button btn send_contact"id="post">
           <div class="button_text">
             <div class="float_jp">
                投稿

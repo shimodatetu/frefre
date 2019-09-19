@@ -1,5 +1,7 @@
 function alert_modal(alert_en,alert_jp,alert_type){
+  alert("1")
   $("#successModal .en").html(alert_en)
+  alert("2")
   $("#successModal .jp").html(alert_jp)
   $("#successModal").modal("show")
   $(".modal-backdrop").attr("style","display:none;")
@@ -11,6 +13,22 @@ function alert_modal(alert_en,alert_jp,alert_type){
   }
   setTimeout(function(){
     $("#successModal").modal("hide")
+  },3000);
+}
+
+function alert_modal_js(alert_en,alert_jp,alert_type){
+  document.querySelector("#successModal .en").innerHTML = alert_en
+  document.querySelector("#successModal .jp").innerHTML = alert_jp
+  document.querySelector("#successModal").modal("show")
+  document.querySelector(".modal-backdrop").attr("style","display:none;")
+  if(alert_type != null) {
+    document.querySelector(".modal-content").addClass(alert_type)
+  }
+  else {
+    document.querySelector(".modal-content").attr("class","modal-content")
+  }
+  setTimeout(function(){
+    document.querySelector("#successModal").modal("hide")
   },3000);
 }
 

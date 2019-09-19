@@ -8,12 +8,12 @@
   .profile_main{
     display:inline-block;
     width:100%;
-    margin-left:160px;
+    margin-left:120px;
     margin-bottom:10px;
     min-height:400px;
   }
   .profile_picture{
-    width:160px;
+    width:120px;
     margin-bottom:15px;
     .name_show{
       background: #07689f;
@@ -23,8 +23,8 @@
       font-size:20px;
     }
     .group_img{
-      width: 160px; /* 任意の幅を指定 */
-      height: 160px; /* 任意の高さを指定 */
+      width: 120px; /* 任意の幅を指定 */
+      height: 120px; /* 任意の高さを指定 */
       object-fit:cover;
     }
     .profile_picture_change{
@@ -37,10 +37,10 @@
       font-size: 18px;
       box-shadow: none;
       .jp{
-        font-size:12px;
+        font-size:13px;
       }
       .en{
-        font-size:18px;
+        font-size:17px;
         margin-top:-3px;
       }
     }
@@ -53,7 +53,7 @@
     }
   }
   .profile_contents_change{
-    width:160px;
+    width:120px;
     border-radius:5px;
     .nav{
       border-radius: 5px;

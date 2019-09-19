@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_save { self.email = email.downcase }
   before_create :create_activation_digest
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :posts
@@ -12,8 +13,9 @@ class User < ApplicationRecord
   after_update { ProfileBroadcastJob.perform_later self  }
 
   validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }
-  validates :email, uniqueness:true,presence: true
 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true,  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   def User.new_token
     SecureRandom.urlsafe_base64
   end

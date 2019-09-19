@@ -54,7 +54,7 @@ $(document).on 'click', '.make_thread_cover .words_post_button', (event) ->
 
 type_check=(id,type)->
   if type == undefined
-    alert_modal("Type of thread is not selected.","スレッドの種類が選択されていません","fail");
+    alert_modal_js("Type of thread is not selected.","スレッドの種類が選択されていません","fail");
   else
     title_en = $(".en_data_title").val();
     title_jp = $(".jp_data_title").val();
