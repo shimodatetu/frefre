@@ -213,6 +213,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rinku (2.0.6)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -310,6 +311,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.2)
   rest-client
+  rinku
   rspec (>= 3.0.0)
   sass-rails (~> 5.0)
   selenium-webdriver

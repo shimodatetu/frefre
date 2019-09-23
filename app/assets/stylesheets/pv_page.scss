@@ -1,6 +1,9 @@
 .pvpage_all{
   margin-top:40px;
   .thread_link:hover{
+    .thread_cover#1{
+    	border: solid 3px #bee;
+    }
     .thread_cover{
       background-color: #dff5eaff ;
     }
@@ -75,7 +78,10 @@
       }
     }
 
-    .thread_cover{
+    .thread_cover#1{
+	border: solid 3px #bee;
+}
+.thread_cover{
       //filter: drop-shadow(2px 5px 5px rgba(0,0,0,0.2));
       cursor: pointer;
       background-color: #ffffff;

@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :groups
   has_many :chats
+  has_many :userinfos
   has_and_belongs_to_many :notices
   has_secure_password
   validates :password, length: (6..32),on: :create, format: { with: /\A[a-z0-9]+\z/i }

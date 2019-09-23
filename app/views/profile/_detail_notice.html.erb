@@ -1,0 +1,66 @@
+
+<% if a = Userinfo.find(params[:page1].to_i) %>
+  <% userinfo = a %>
+<% else %>
+  <% userinfo = current_user.userinfos.first %>
+<% end %>
+<div class="profile_notice">
+  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+    <div class="lang_bar">
+      <div class="country_flag en_country">
+        <%= image_tag "/eng.png", class: "image" %>
+      </div>
+      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+          data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
+      <div class="country_flag jp_country">
+        <%= image_tag "jap.png", class: "image" %>
+      </div>
+    </div>
+  </div>
+  <div class="notice_cover">
+    <div class="panel-title"style="display:inline-block">
+      <div class="panel-title-text">
+        <div class="float_jp">
+          <%= userinfo.title_jp %>
+        </div>
+        <div class="float_en">
+          <%= userinfo.title_en %>
+        </div>
+      </div>
+    </div>
+    <div class="thread_cover">
+      <div class="group_user_cover">
+        <div class="group_img_cover">
+          <%= image_tag "info.png", :class => "group_img" %>
+        </div>
+      </div>
+      <div class="thread_content">
+        <div class="post_content_cover">
+          <div class="user_name">
+            FreFre office
+            <div class="create_time"style="float:right">
+              <%= userinfo.created_at.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
+          <div class="post_content_position en_position">
+            <div class="post_content">
+              <div class="post_content_text">
+                <%= simple_format(Rinku.auto_link(h(userinfo.message_en))) %>
+              </div>
+            </div>
+          </div>
+          <div class="post_content_position_space">
+            <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+          </div>
+          <div class="post_content_position jp_position">
+            <div class="post_content">
+              <div class="post_content_text">
+                <%= simple_format(Rinku.auto_link(h(userinfo.message_jp))) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

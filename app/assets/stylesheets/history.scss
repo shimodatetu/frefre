@@ -14,6 +14,9 @@
   }
   .tab-content{
     padding-top:100px;
+    .thread_cover#1{
+    	border: solid 3px #bee;
+    }
     .thread_cover{
       filter:none;
     }
@@ -39,6 +42,9 @@
     }
   }
   .thread_link:hover{
+    .thread_cover#1{
+    	border: solid 3px #bee;
+    }
     .thread_cover{
       background-color: #dff5eaff
     }
@@ -83,10 +89,16 @@
     display:none!important;
     font-size:10px;
   }
-  .thread_cover:hover{
+  .thread_cover#1{
+	border: solid 3px #bee;
+}
+.thread_cover:hover{
     background: #dff5eaff ;
   }
-  .thread_cover{
+  .thread_cover#1{
+	border: solid 3px #bee;
+}
+.thread_cover{
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.2));
     background-color: #ffffff;
     padding:20px;

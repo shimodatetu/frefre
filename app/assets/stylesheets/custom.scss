@@ -4,7 +4,11 @@ a{
 
 p{
   margin:0px;
-  display:inline-block;
+}
+.no_inline{
+  p{
+    display:block!important;
+  }
 }
 .sub_content_cover{
   display: inline-block;

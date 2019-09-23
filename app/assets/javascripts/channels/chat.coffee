@@ -39,7 +39,7 @@ $(document).on 'click', '#chatModal-enjp .btn_send', (event) ->
 
 add_post=(data)->
   plus_post = $(data["message"])
-  $(".thread_cover_cover").append plus_post
+  $(".thread_cover").append plus_post
   plus_post.ready ->
     $(".delete_button_destroy").click();
     jp_height = plus_post.find(".jp_content_row .post_content_text").height();

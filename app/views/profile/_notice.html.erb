@@ -15,72 +15,40 @@
     <div class="panel-title"style="display:inline-block">
       <div class="panel-title-text">
         <div class="float_jp">
-          チャット一覧
+          お知らせ一覧
         </div>
         <div class="float_en">
-          Chat List
+          Notice List
         </div>
       </div>
     </div>
     <% there_be = false %>
-    <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |notice| %>
-      <% send_user = notice.users.last %>
-      <% to_user = notice.users.last %>
-      <%= link_to("/profile/5/#{notice.id}/0" , class:"thread_link") do %>
+    <% current_user.userinfos.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |userinfo| %>
+      <%= link_to("/profile/7/#{userinfo.id}" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover link_cover">
           <div class="group_user_cover">
             <div class="group_img_cover">
-              <% if notice.users.last.id < 1 %>
-                <%= image_tag "info.png", :class => "group_img" %>
-              <% elsif send_user.id == current_user.id %>
-                <% if to_user.image == 0 %>
-                  <% if to_user.photo.nil? %>
-                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-                  <% else %>
-                    <%= image_tag show_image_user_path(to_user), :class => "group_img" %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag("/userimage/user#{to_user.image}.png", :class => "group_img") %>
-                <% end %>
-              <% else %>
-                <% if send_user.image == 0 %>
-                  <% if send_user.photo.nil? %>
-                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-                  <% else %>
-                    <%= image_tag show_image_user_path(send_user), :class => "group_img" %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag("/userimage/user#{send_user.image}.png", :class => "group_img") %>
-                <% end %>
-              <% end %>
+              <%= image_tag "info.png", :class => "group_img" %>
             </div>
           </div>
           <div class="thread_content">
             <div class="post_content_cover">
               <div class="user_name">
-                <% if notice.users.last.id < 1 %>
-                  <%= FreFre Office %>
-                <% else %>
-                  <%= User.find(notice.users.last.id).name %>
-                <% end %>
+                frefre office
                 <div class="create_time"style="float:right">
-                  <%= notice.created_at.strftime('%Y/%m/%d') %>
+                  <%= userinfo.created_at.strftime('%Y/%m/%d') %>
                 </div>
               </div>
               <div class="post_content_position en_position">
                 <div class="thread_title">
-                  <div class="title_padding">
-                    <% if send_user.id == current_user.id %>
-                      Chat with <%= simple_format(text_url_to_link(h(to_user.name))) %>
-                    <% else %>
-                      Chat with <%= simple_format(text_url_to_link(h(send_user.name))) %>
-                    <% end %>
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(userinfo.title_en))) %>
                   </div>
                 </div>
                 <div class="post_content">
-                  <div class="post_content_text">
-                    <%= simple_format(text_url_to_link(h(notice.chats.last.main_en))) %>
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(userinfo.message_en))) %>
                   </div>
                 </div>
                 <div class="see_more">
@@ -92,17 +60,13 @@
               </div>
               <div class="post_content_position jp_position">
                 <div class="thread_title">
-                  <div class="title_padding">
-                    <% if send_user.id == current_user.id %>
-                      <%= simple_format(text_url_to_link(h(to_user.name))) %>とのチャット
-                    <% else %>
-                      <%= simple_format(text_url_to_link(h(send_user.name))) %>とのチャット
-                    <% end %>
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(userinfo.title_jp))) %>
                   </div>
                 </div>
                 <div class="post_content">
-                  <div class="post_content_text">
-                    <%= simple_format(text_url_to_link(h(notice.chats.last.main_jp))) %>
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(userinfo.message_jp))) %>
                   </div>
                 </div>
                 <div class="see_more">

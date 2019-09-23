@@ -19,14 +19,22 @@ class NoticeChannel < ApplicationCable::Channel
         chat.user_id = current_user.id
         chat.notice_id = notice.id
         chat.save!
+        info = Userinfo.new()
+        info.title_en = 'You get a direct message from ' + notice.users[1].name + '!'
+
+        info.title_jp = notice.users[1].name + 'からダイレクトメッセージがありました！'
+
+        info.message_en = 'You get a direct message from ' + notice.users[1].name + '.
+        Please click on the url below and check the message.
+        https://www.frefreforum.com/profile/5/'+notice.id.to_s
+
+        info.message_jp = notice.users[1].name + 'からダイレクトメッセージがありました！
+        下記のURLをクリックしてメッセージを確認してください。
+        https://www.frefreforum.com/profile/5/' + notice.id.to_s
+        info.user_id = notice.users[0].id
+        info.save
       end
     else
-
-      p "------------------------"
-      p (notice = current_user.notices.includes(:users).where('users.id' => data['address'])).blank?
-      p "----------------------------"
-      p notice[0].id
-      p "----------------------------"
       chat = Chat.new()
       chat.main_en = data['mes_en']
       chat.main_jp = data['mes_jp']

@@ -70,7 +70,7 @@
               </div>
               <div class="post_content_position en_position">
                 <div class="thread_title">
-                  <div class="title_padding">
+                  <div class="title_padding no_inline">
                     <% if send_user.id == current_user.id %>
                       Chat with <%= simple_format(text_url_to_link(h(to_user.name))) %>
                     <% else %>
@@ -92,7 +92,7 @@
               </div>
               <div class="post_content_position jp_position">
                 <div class="thread_title">
-                  <div class="title_padding">
+                  <div class="title_padding no_inline">
                     <% if send_user.id == current_user.id %>
                       <%= simple_format(text_url_to_link(h(to_user.name))) %>とのチャット
                     <% else %>

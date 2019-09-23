@@ -3,7 +3,10 @@
     margin:0px;
   }
   .thread_link:hover{
-    .thread_cover{
+    .thread_cover#1{
+	border: solid 3px #bee;
+}
+.thread_cover{
       background-color: rgba(252,248,210,1);
     }
   }
@@ -191,7 +194,10 @@
       }
     }
 
-    .thread_cover{
+    .thread_cover#1{
+	border: solid 3px #bee;
+}
+.thread_cover{
       cursor: pointer;
       background-color: #ffffff;
       padding:10px;

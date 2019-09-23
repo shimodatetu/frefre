@@ -1,7 +1,5 @@
 function alert_modal(alert_en,alert_jp,alert_type){
-  alert("1")
   $("#successModal .en").html(alert_en)
-  alert("2")
   $("#successModal .jp").html(alert_jp)
   $("#successModal").modal("show")
   $(".modal-backdrop").attr("style","display:none;")

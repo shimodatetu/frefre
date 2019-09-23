@@ -43,7 +43,10 @@
   .link_cover:hover{
     background-color: #dff5eaff ;
   }
-  .thread_cover{
+  .thread_cover#1{
+	border: solid 3px #bee;
+}
+.thread_cover{
     background-color: #ffffff;
     padding:10px;
     border-radius: 5px;
@@ -129,7 +132,7 @@
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 1;
           padding-left:10px;
-          padding-right:10px;
+          padding-right:70px;
           .post_content_text{
             margin:auto;
             margin-top:5px;

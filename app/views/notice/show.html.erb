@@ -110,7 +110,7 @@
               <div class="post_content_position en_position">
                 <% if chat.id == first_id %>
                   <div class="thread_title">
-                    <div class="title_padding">
+                    <div class="title_padding no_inline">
                       <%= chat.group.title_en %>
                     </div>
                   </div>
@@ -129,7 +129,7 @@
               <div class="post_content_position jp_position">
                 <% if chat.id == first_id %>
                   <div class="thread_title">
-                    <div class="title_padding">
+                    <div class="title_padding no_inline">
                       <%= simple_format(text_url_to_link(h(chat.group.title_jp))) %>
                     </div>
                   </div>

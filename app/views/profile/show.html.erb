@@ -60,6 +60,16 @@
               </div>
             <% end %>
           </li>
+          <li class="nav-item profile_contents_button">
+            <%= link_to '/profile/6',class:"nav-link" do %>
+              <div class="jp">
+                お知らせ
+              </div>
+              <div class="en">
+                Notice
+              </div>
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>
@@ -74,6 +84,8 @@
         <%= render partial:"detail_info" %>
       <% elsif params[:id] == "6" %>
         <%= render partial:"notice" %>
+      <% elsif params[:id] == "7" %>
+        <%= render partial:"detail_notice" %>
       <% end %>
     </div>
   </div>
