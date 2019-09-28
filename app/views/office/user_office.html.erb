@@ -1,0 +1,49 @@
+<style>
+  .col-sm-9{
+    margin-bottom:30px;
+  }
+  .col-sm-12{
+    margin-bottom:30px;
+  }
+</style>
+<%= form_tag('/user_info', method: :post) do %>
+  <div class="row">
+    <div class="col-sm-3">
+      ユーザーID
+    </div>
+    <div class="col-sm-9">
+      <%= text_field_tag :user_id, "",class:"form-control"  %>
+    </div>
+
+    <div class="col-sm-12">
+      ※全員の場合、0
+    </div>
+    <div class="col-sm-3">
+      英語タイトル
+    </div>
+    <div class="col-sm-9">
+      <%= text_field_tag :title_en, "",class:"form-control"  %>
+    </div>
+    <div class="col-sm-3">
+      日本語タイトル
+    </div>
+    <div class="col-sm-9">
+      <%= text_field_tag :title_jp, "" ,class:"form-control" %>
+    </div>
+    <div class="col-sm-3">
+      英語内容
+    </div>
+    <div class="col-sm-9">
+      <%= text_area_tag :message_en, "",class:"form-control" %>
+    </div>
+    <div class="col-sm-3">
+      日本語内容
+    </div>
+    <div class="col-sm-9">
+      <%= text_area_tag :message_jp, "" ,class:"form-control" %>
+    </div>
+    <button type="submit"class="btn btn-primary">
+      送信
+    </button>
+  </div>
+<% end %>

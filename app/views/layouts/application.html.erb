@@ -13,14 +13,14 @@
   </head>
   <body>
     <%= render partial:'layouts/header' %>
-    <div class="main_content_cover">
+    <div class="main_content_cover"id="main_content_cover">
       <%= yield %>
     </div>
     <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
     !url.include?('term') && !url.include?('contact') %>
       <div class="sub_content_cover">
         <%#= image_tag "/samune3.png", class: "image" %>
-        <iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!--iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
       </div>
     <% end %>
     <%= render partial:'layouts/footer' %>

@@ -10,9 +10,8 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
     if String(data['user_id']) == $(".get_user_id").attr("id")
       location.href=local
     # Called when there's incoming data on the websocket for this channel
-  make: (lang, title_jp,mes_jp,title_en,mes_en,category,hash_jp,hash_en) ->
-    category = Number(category)
-    @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,category:category,title_en:title_en,message_en:mes_en,category:category,hash_en:hash_en,hash_jp:hash_jp)
+  make: (lang, title_jp,mes_jp,title_en,mes_en,hash_jp,hash_en) ->
+    @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,title_en:title_en,message_en:mes_en,hash_en:hash_en,hash_jp:hash_jp)
     alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
     #location.reload()
 
@@ -45,85 +44,80 @@ send_check=()->
       alert_modal("ハッシュタグが間違っています","Hashtag is wrong.","fail");
     else
       $("#groupModal").modal("hide")
-      App.thread.make("enjp",title_jp,content_jp,title_en,content_en,$('input[name=type_select]:checked').val(),hash_ary_jp,hash_ary_en);
+      App.thread.make("enjp",title_jp,content_jp,title_en,content_en,hash_ary_jp,hash_ary_en);
 
 $(document).on 'click', '.make_thread_cover .words_post_button', (event) ->
-  #alert($('input[name=type_select]:checked').val())
-  type_check($(@).attr("id"),$('input[name=type_select]:checked').val())
+  type_check($(@).attr("id"))
   event.preventDefault()
 
-type_check=(id,type)->
-  if type == undefined
-    alert_modal_js("Type of thread is not selected.","スレッドの種類が選択されていません","fail");
+type_check=(id)->
+  title_en = $(".en_data_title").val();
+  title_jp = $(".jp_data_title").val();
+  content_en = $(".en_data_content").val();
+  content_jp = $(".jp_data_content").val();
+  hash_en = $(".hash_en").val()
+  hash_jp = $(".hash_jp").val()
+  if id == "post"
+    if title_en != "" && title_jp != "" && content_jp != "" && content_en != "" && hash_en != "" && hash_jp != ""
+      #両方投稿するとき
+      hash_ary_en = cut_hash(hash_en)
+      hash_ary_jp = cut_hash(hash_jp)
+      if hash_ary_en.length != hash_ary_jp.length
+        alert_modal("ハッシュタグが間違っています","Hashtag is wrong.","fail");
+      else
+        $("#groupModal .en_form_hash").html(hash_en)
+        $("#groupModal .jp_form_hash").html(hash_jp)
+        $("#groupModal .en_form_content").html(content_en)
+        $("#groupModal .jp_form_content").html(content_jp)
+        $("#groupModal .en_form_title").val(title_en)
+        $("#groupModal .jp_form_title").val(title_jp)
+        $(".explain_text .en").attr("style","display:none")
+        $(".explain_text .jp").attr("style","display:none")
+        $(".explain_text .enjp").attr("style","")
+        $("#groupModal").modal("show")
+    else if hash_en == ""
+      alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
+    else if hash_jp == ""
+      alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
+    else if title_en == ""
+      alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
+    else if title_jp == ""
+      alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
+    else if content_en == ""
+      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+    else if content_jp == ""
+      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
   else
-    title_en = $(".en_data_title").val();
-    title_jp = $(".jp_data_title").val();
-    content_en = $(".en_data_content").val();
-    content_jp = $(".jp_data_content").val();
-    hash_en = $(".hash_en").val()
-    hash_jp = $(".hash_jp").val()
-    if id == "post"
-      if title_en != "" && title_jp != "" && content_jp != "" && content_en != "" && hash_en != "" && hash_jp != ""
-        #両方投稿するとき
-        hash_ary_en = cut_hash(hash_en)
-        hash_ary_jp = cut_hash(hash_jp)
-        if hash_ary_en.length != hash_ary_jp.length
-          alert_modal("ハッシュタグが間違っています","Hashtag is wrong.","fail");
-        else
-          #App.thread.make("enjp",title_jp,content_jp,title_en,content_en,category,hash_ary_jp,hash_ary_en);
-          $("#groupModal .en_form_hash").html(hash_en)
-          $("#groupModal .jp_form_hash").html(hash_jp)
-          $("#groupModal .en_form_content").html(content_en)
-          $("#groupModal .jp_form_content").html(content_jp)
-          $("#groupModal .en_form_title").val(title_en)
-          $("#groupModal .jp_form_title").val(title_jp)
-          $(".explain_text .en").attr("style","display:none")
-          $(".explain_text .jp").attr("style","display:none")
-          $(".explain_text .enjp").attr("style","")
-          $("#groupModal").modal("show")
-      else if hash_en == ""
-        alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
-      else if hash_jp == ""
-        alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
-      else if title_en == ""
-        alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
-      else if title_jp == ""
+    if title_en == "" && title_jp == "" && content_jp == "" && content_en == "" && hash_en == "" && hash_jp == ""
+      alert_modal("Nothing is inputed.","何も入力されていません","fail")
+    else if title_en == "" && content_en == "" && hash_en == ""
+      title_jp = $(".jp_data_title").val();
+      content_jp = $(".jp_data_content").val();
+      hash_jp = $(".hash_jp").val();
+      if title_jp == ""
         alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
-      else if content_en == ""
-        alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
       else if content_jp == ""
         alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
-    else
-      if title_en == "" && title_jp == "" && content_jp == "" && content_en == "" && hash_en == "" && hash_jp == ""
-        alert_modal("Nothing is inputed.","何も入力されていません","fail")
-      else if title_en == "" && content_en == "" && hash_en == ""
-        title_jp = $(".jp_data_title").val();
-        content_jp = $(".jp_data_content").val();
-        hash_jp = $(".hash_jp").val();
-        if title_jp == ""
-          alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
-        else if content_jp == ""
-          alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
-        else if hash_jp == ""
-          alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
-        else
-          hash_ary_jp = cut_hash(hash_jp)
-          translate_google(title_jp,content_jp,"en",hash_ary_jp)
-      else if title_jp == "" && content_jp == "" && hash_jp == ""
-        title_en = $(".en_data_title").val();
-        content_en = $(".en_data_content").val();
-        hash_en = $(".hash_en").val();
-        if title_en == ""
-          alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
-        else if content_en == ""
-          alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
-        else if hash_en == ""
-          alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
-        else
-          hash_ary_en = cut_hash(hash_en)
-          translate_google(title_en,content_en,"ja",hash_ary_en)
+      else if hash_jp == ""
+        alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
       else
-        alert_modal("Both Englsh and Japanese form is filled.","両方の入力欄に入力されています","fail");
+        hash_ary_jp = cut_hash(hash_jp)
+        translate_google(title_jp,content_jp,"en",hash_ary_jp)
+    else if title_jp == "" && content_jp == "" && hash_jp == ""
+      title_en = $(".en_data_title").val();
+      content_en = $(".en_data_content").val();
+      hash_en = $(".hash_en").val();
+      if title_en == ""
+        alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
+      else if content_en == ""
+        alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+      else if hash_en == ""
+        alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
+      else
+        hash_ary_en = cut_hash(hash_en)
+        translate_google(title_en,content_en,"ja",hash_ary_en)
+    else
+      alert_modal("Both Englsh and Japanese form is filled.","両方の入力欄に入力されています","fail");
 
 cut_hash=(hash_data)->
   hash_ary_main = []

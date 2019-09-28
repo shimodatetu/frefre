@@ -1,13 +1,27 @@
+
+.down_slider{
+  position:absolute;
+  margin-left:5px;
+  font-size:25px;
+  margin-top:45px;
+  //color: #408bc9;
+  //display:none;
+}
 .lang_bar_cover{
   z-index: 20;
   background: #dff5eaff ;
   position:fixed;
   width:100%;
   padding-top:38px;
-  margin-left:-2%;
   padding-left:5%;
-  margin-top:-90px;
+  margin-top:5px;
   border-bottom: none;
+  .up_slider{
+    float: left;
+    margin-left: -50px;
+    font-size: 25px;
+    //color: #408bc9;
+  }
   .lang_bar{
     padding-left:calc(10% + 80px);
     padding-top:8px;

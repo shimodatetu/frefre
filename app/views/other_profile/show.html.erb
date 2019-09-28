@@ -119,43 +119,41 @@
           </div>
         </div>
       </div>
-      <div class="profile_page">
-        <div class="profile_content">
-          <div class="col-sm-6">
-            <div class="row profile_content_data self_introduction">
-              <div class="content_name">
-                <div class="jp">
-                  自己紹介(英語)
-                </div>
-                <div class="en">
-                  Self Introduction
-                  (English)
-                </div>
+      <div class="profile_content">
+        <div class="col-sm-6"style="padding-left:0px">
+          <div class="row profile_content_data self_introduction">
+            <div class="content_name">
+              <div class="jp">
+                自己紹介(英語)
               </div>
-              <% if other_user.able_see %>
-                <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_en%></textarea>
-              <% else %>
-                <textarea id="profile_en"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
-              <% end %>
+              <div class="en">
+                Self Introduction
+                (English)
+              </div>
             </div>
+            <% if other_user.able_see %>
+              <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_en%></textarea>
+            <% else %>
+              <textarea id="profile_en"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
+            <% end %>
           </div>
-          <div class="col-sm-6">
-            <div class="row profile_content_data self_introduction">
-              <div class=" content_name">
-                <div class="jp">
-                  自己紹介(日本語)
-                </div>
-                <div class="en">
-                  Self Introduction
-                  (Japanese)
-                </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row profile_content_data self_introduction">
+            <div class=" content_name">
+              <div class="jp">
+                自己紹介(日本語)
               </div>
-              <% if other_user.able_see %>
-                <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_jp%></textarea>
-              <% else %>
-                <textarea id="profile_jp"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
-              <% end %>
+              <div class="en">
+                Self Introduction
+                (Japanese)
+              </div>
             </div>
+            <% if other_user.able_see %>
+              <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_jp%></textarea>
+            <% else %>
+              <textarea id="profile_jp"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
+            <% end %>
           </div>
         </div>
       </div>

@@ -1,10 +1,42 @@
 
 
 $(function(){
+  if(localStorage.getItem("slider_position") == "close"){
+    target_slider = document.getElementById("lang_bar_cover")
+    if(target_slider != null){
+      target_slider.style.marginTop = '-37px'
+      document.getElementById("main_content_cover").style.paddingTop = "15px"
+      //$('.lang_bar_cover').attr("style","margin-top:-37px");
+      //$('.main_content_cover').attr("style","padding-top:15px");
+    }
+  }
   var first_value = 500;
   if(localStorage.getItem("frefre_slider") != null){
     first_value = localStorage.getItem("frefre_slider")
   }
+  moving = false;
+  $(".up_slider").on("click",function(){
+    if(moving == false){
+      //$(".up_slider").attr("style","display:none")
+      //$(".down_slider").attr("style","display:inline-block")
+      $('.lang_bar_cover').animate( {marginTop: '-37px'} , {duration: 200,queue: false});
+      $(".main_content_cover").animate( {paddingTop: '15px'} , {duration: 200,queue: false});
+      localStorage.setItem("slider_position","close")
+      moving = true;
+    }
+    moving = false;
+  });
+  $(".down_slider").on("click",function(){
+    if(moving == false){
+      //$(".up_slider").attr("style","display:inline-block")
+      //$(".down_slider").attr("style","display:none")
+      $('.lang_bar_cover').animate( {marginTop: '5px'} , {duration: 200,queue: false});
+      $(".main_content_cover").animate( {paddingTop: '60px'} , {duration: 200,queue: false});
+      localStorage.setItem("slider_position","open")
+      moving = true;
+    }
+    moving = false;
+  });
   $('.lang_bar_cover #slider').slider({
     value:first_value,
     formatter: function(value) {

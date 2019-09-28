@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  post 'user_info',to:'office#user_info'
+  get 'user_office',to:'office#user_office'
+
   get 'policy',to:'policy#show_policy'
   get 'term',to:'policy#show_term'
   get 'contact',to:'policy#contact'

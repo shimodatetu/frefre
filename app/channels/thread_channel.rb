@@ -9,7 +9,8 @@ class ThreadChannel < ApplicationCable::Channel
 
   def make(data)
     group = Group.new()
-    group.threadtype_id = data['category'].to_i
+    #group.threadtype_id = data['category'].to_i
+    group.threadtype_id = 1
     group.title_jp = data['title_jp']
     group.title_en = data['title_en']
     group.user_id = current_user.id

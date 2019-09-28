@@ -2,6 +2,15 @@
   ::-webkit-input-placeholder {
     color: #bbbbbb;
   }
+  [disabled]{
+    background: #fff;
+    -webkit-appearance: none;
+    padding-left: 10px!important;
+  }
+  .help_show{
+    margin-left: 6px;
+    margin-top:10px;
+  }
   .profile_sub{
       position:fixed;
   }
@@ -120,7 +129,6 @@
         .post_button{
           width:40px;
           height:80px;
-          margin-bottom:23px;
           padding: 0px 2px 5px 2px;
           display:block;
           white-space: normal;
@@ -193,7 +201,7 @@
         }
       }
       .self_introduction{
-        margin-top:10px;
+        padding-top: 0px;
         margin-bottom:10px;
         margin-right:0px;
         margin-left: 0px;
@@ -368,7 +376,6 @@ input.cmn-toggle-round:checked + label:after {
       .post_button{
         width:40px;
         height:80px;
-        margin-bottom:23px;
         padding: 0px 2px 5px 2px;
         display:block;
         white-space: normal;
