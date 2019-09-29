@@ -1,7 +1,7 @@
 
 .down_slider{
-  position:absolute;
-  margin-left:5px;
+  position:fixed;
+  margin-left:10px;
   font-size:25px;
   margin-top:45px;
   //color: #408bc9;
@@ -18,7 +18,7 @@
   border-bottom: none;
   .up_slider{
     float: left;
-    margin-left: -50px;
+    margin-left: -42px;
     font-size: 25px;
     //color: #408bc9;
   }
