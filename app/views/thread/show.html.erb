@@ -5,11 +5,6 @@
 <% thread.save %>
 
 <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
-<% if logged_in? %>
-  <div class="user_login"id="<%= current_user.id %>"></div>
-<% else %>
-  <div class="user_login"id="false"></div>
-<% end %>
 <div class="thread_page">
   <div class="panel-title"style="display:inline-block">
     <div class="panel-title-text">
@@ -64,8 +59,26 @@
             <textarea name="content"class="base_en_form connect_btn content_post form-control" rows="6"
             placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
           </div>
-          <div class="space_form thread_send">
-            <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans"
+          <div class="space_form">
+            <div class="trans_cover">
+              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                <div class="button_text">
+                  翻訳
+                </div>
+              </button>
+            </div>
+            <div class="trans_cover">
+              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                <div class="button_text">
+                  Trans
+                </div>
+              </button>
+            </div>
+            <!--<button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans"
             name="<% if logged_in? %>logined<% end %>">
               <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
               <div class="button_text">
@@ -75,7 +88,7 @@
                 <div class="right_en">
                 Translate
               </div>
-            </button>
+            </button>-->
           </div>
           <div class="post_form_cover post_form_cover_enjp">
             <%= image_tag "jap.png", class: "image" %>

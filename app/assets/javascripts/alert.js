@@ -1,17 +1,22 @@
+now_alert = false
 function alert_modal(alert_en,alert_jp,alert_type){
-  $("#successModal .en").html(alert_en)
-  $("#successModal .jp").html(alert_jp)
-  $("#successModal").modal("show")
-  $(".modal-backdrop").attr("style","display:none;")
-  if(alert_type != null) {
-    $(".modal-content").addClass(alert_type)
+  if(now_alert == false){
+    $("#successModal .en").html(alert_en)
+    $("#successModal .jp").html(alert_jp)
+    $("#successModal").modal("show")
+    $(".modal-backdrop").attr("style","display:none;")
+    if(alert_type != null) {
+      $(".modal-content").addClass(alert_type)
+    }
+    else {
+      $(".modal-content").attr("class","modal-content")
+    }
+    now_alert = true
+    setTimeout(function(){
+      $("#successModal").modal("hide")
+      now_alert = false;
+    },3000);
   }
-  else {
-    $(".modal-content").attr("class","modal-content")
-  }
-  setTimeout(function(){
-    $("#successModal").modal("hide")
-  },3000);
 }
 
 function alert_modal_js(alert_en,alert_jp,alert_type){

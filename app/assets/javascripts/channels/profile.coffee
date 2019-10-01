@@ -1,3 +1,5 @@
+
+window.translated = false
 App.profile = App.cable.subscriptions.create "ProfileChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
@@ -33,10 +35,14 @@ $(document).on 'click', '#profile_modal .btn_send', (event) ->
 $(document).on 'click', '.prof_trans .words_post_button', (event) ->
   profile_en = $(".profile_page #profile_en").val();
   profile_jp = $(".profile_page #profile_jp").val();
-  if profile_en == "" && profile_jp != ""
+  if window.translated == true
+    alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
+  else if this.id == "trans_to_en"
     translate_google(profile_en,profile_jp,"en")
-  else if profile_en != "" && profile_jp == ""
+  else if this.id == "trans_to_jp"
     translate_google(profile_en,profile_jp,"ja")
+  else
+    alert("asd");
 
 $(document).on 'click', '.profile_save_button', (event) ->
   #year = $(".profile_page #year").val();
@@ -54,7 +60,6 @@ $(document).on 'click', '.profile_save_button', (event) ->
   App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
 
 translate_google=(profile_en,profile_jp,lang) ->
-
   words = profile_jp
   if lang == "ja"
     words = profile_en
@@ -71,19 +76,26 @@ translate_google=(profile_en,profile_jp,lang) ->
   ).then (text) ->
     ary = text.split('"');
     trans_text = ary[7]#7番はテキスト
+    window.translated = true
     if lang == "ja"
       #App.profile.change(username,gender,year,month,date,country,profile_en,trans_text,able_see)
+      ###
       $("#profile_modal .en_form").val(words)
       $("#profile_modal .jp_form").val(trans_text)
       $(".explain_text .en").attr("style","")
       $(".explain_text .jp").attr("style","display:none")
       $(".explain_text .enjp").attr("style","display:none")
       $("#profile_modal").modal("show")
+      ###
+      $("#profile_jp").val(trans_text)
     else
       #App.profile.change(username,gender,year,month,date,country,trans_text,profile_jp,able_see)
+      ###
       $("#profile_modal .en_form").val(trans_text)
       $("#profile_modal .jp_form").val(words)
       $(".explain_text .jp").attr("style","")
       $(".explain_text .en").attr("style","display:none")
       $(".explain_text .enjp").attr("style","display:none")
       $("#profile_modal").modal("show")
+      ###
+      $("#profile_en").val(trans_text)

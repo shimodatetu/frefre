@@ -1,4 +1,5 @@
 
+window.translated = false
 App.room = App.cable.subscriptions.create "RoomChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
@@ -7,6 +8,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   received: (data) ->
     urls = location.pathname.split("/")
     now_id = urls[3]
+    window.translated = false
     if Number(now_id) == data['group_id']
       user_id = Number($(".user_login").attr("id"))
       now_page = 1
@@ -35,29 +37,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     $(".base_en_form").val("")
     $(".base_jp_form").val("")
     $('#sampleModal-enjp').modal("hide")
-
   image: (file,group)->
     @perform('image',group_id:group,image:file,lang:"none")
-
-
-reader = new FileReader
-reader2 = new FileReader
-String::bytes = ->
-  encodeURIComponent(this).replace(/%../g, 'x').length
-
-reader.addEventListener 'load', ->
-
-  text = "<img src='" + String(reader.result) + "'>"
-  App.room.image(reader.result,parseInt($("#group").val()))
-
-  #blob = new Blob([result], {type: "application/octet-binary"})
-  #App.room.image(result,parseInt($("#group").val()))
-  #reader2.readAsDataURL(blob);
-  return
-
-reader2.addEventListener 'load', ->
-  text = "<img src='" + String(reader2.result) + "'>"
-  $(".thread_all").append(text)
 
 $(document).on 'change', '.thread_image_post .post_file', (event) ->
   if (this.files[0].type != 'text/plain')
@@ -69,11 +50,12 @@ $(document).on 'click', '.thread_send .btn_send', (event) ->
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
-
+###
 $(document).on 'click', '#sampleModal-enjp .btn_send', (event) ->
   text_en = $("#sampleModal-enjp .en_form").val();
   text_jp = $("#sampleModal-enjp .jp_form").val();
   App.room.speak("none",text_jp,text_en,parseInt($("#group").val()))
+###
 
 add_post=(data)->
   plus_post = $(data["message"])
@@ -103,32 +85,39 @@ add_post=(data)->
 
 
 
-type_check=(id)->
+type_check=(type)->
   text_en = $(".base_en_form").val();
   text_jp = $(".base_jp_form").val();
-  if id == "post"
+  if type == "post"
     if text_en != "" && text_jp != ""
+      ###
       $("#sampleModal-enjp .en_form").val(text_en)
       $("#sampleModal-enjp .jp_form").val(text_jp)
       $(".explain_text .en").attr("style","display:none")
       $(".explain_text .jp").attr("style","display:none")
       $(".explain_text .enjp").attr("style","")
       $('#sampleModal-enjp').modal("show")
+      ###
+      App.room.speak("none",text_jp,text_en,parseInt($("#group").val()))
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""
       alert_modal("The Japanese form is empty.","日本語入力欄に何も書かれていません","fail");
     else
       alert_modal("This form is empty.","入力欄に何も書かれていません","fail");
-  else if id == "trans"
-    if text_en != "" && text_jp != ""
-      alert_modal("Both Englsh and Japanese form is filled.","両方の入力欄に入力されています","fail");
-    else if text_jp != ""
-      translate_google("en",text_jp)
-    else if text_en != ""
-      translate_google("ja",text_en)
-    else
-      alert_modal("This form is empty.","入力欄に何も書かれていません","fail")
+  else
+    if window.translated == true
+      alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
+    else if type == "trans_to_en"
+      if text_jp == ""
+        alert_modal("Japanese form is empty.","日本語入力欄に何も書かれていません","fail")
+      else
+        translate_google("en",text_jp)
+    else if type == "trans_to_jp"
+      if text_en == ""
+        alert_modal("English form is empty.","英語入力欄に何も書かれていません","fail")
+      else
+        translate_google("ja",text_en)
 
 
 translate_google=(lang,words) ->
@@ -144,30 +133,34 @@ translate_google=(lang,words) ->
   fetch(url, settings).then((res) ->
     res.text()
   ).then (text) ->
+    console.log(text)
+    window.translated = true
     get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
     translation = get_text
     if lang == "ja"
-      $(".only_en_form").val("");
+      #$(".only_en_form").val("");
       #App.room.speak(lang,translation,words, group)
-      $("#sampleModal-enjp .en_form").val(words)
-      $("#sampleModal-enjp .jp_form").val(translation)
+      #$("#sampleModal-enjp .en_form").val(words)
+      #$("#sampleModal-enjp .jp_form").val(translation)
       #$(".base_en_form").val("")
       #$(".base_jp_form").val("")
-      $(".explain_text .en").attr("style","")
-      $(".explain_text .jp").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $('#sampleModal-enjp').modal("show")
+      #$(".explain_text .en").attr("style","")
+      #$(".explain_text .jp").attr("style","display:none")
+      #$(".explain_text .enjp").attr("style","display:none")
+      #$('#sampleModal-enjp').modal("show")
+      $(".base_jp_form").val(translation)
     else
-      $(".only_jp_form").val("");
+      #$(".only_jp_form").val("");
       #App.room.speak(lang,words,translation, group)
-      $("#sampleModal-enjp .jp_form").val(words)
-      $("#sampleModal-enjp .en_form").val(translation)
+      #$("#sampleModal-enjp .jp_form").val(words)
+      #$("#sampleModal-enjp .en_form").val(translation)
       #$(".base_en_form").val("")
       #$(".base_jp_form").val("")
-      $(".explain_text .jp").attr("style","")
-      $(".explain_text .en").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $('#sampleModal-enjp').modal("show")
+      #$(".explain_text .jp").attr("style","")
+      #$(".explain_text .en").attr("style","display:none")
+      #$(".explain_text .enjp").attr("style","display:none")
+      #$('#sampleModal-enjp').modal("show")
+      $(".base_en_form").val(translation)
 
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);

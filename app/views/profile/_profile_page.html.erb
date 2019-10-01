@@ -185,17 +185,24 @@
           </div>
         </div>
         <div class="space_form prof_trans">
-          <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans"
-          name="<% if logged_in? %>logined<% end %>">
-            <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
-            <div class="button_text">
-              <div class="float_jp">
+          <div class="trans_cover">
+            <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
+            name="<% if logged_in? %>logined<% end %>">
+              <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+              <div class="button_text">
                 翻訳
               </div>
-              <div class="right_en">
-              Translate
-            </div>
-          </button>
+            </button>
+          </div>
+          <div class="trans_cover">
+            <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
+            name="<% if logged_in? %>logined<% end %>">
+              <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+              <div class="button_text">
+                Trans
+              </div>
+            </button>
+          </div>
         </div>
         <div class="intro">
           <div class="row profile_content_data self_introduction">
