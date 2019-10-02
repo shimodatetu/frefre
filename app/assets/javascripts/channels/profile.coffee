@@ -38,9 +38,15 @@ $(document).on 'click', '.prof_trans .words_post_button', (event) ->
   if window.translated == true
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if this.id == "trans_to_en"
-    translate_google(profile_en,profile_jp,"en")
+    if profile_jp == ""
+      alert_modal("Japanese introduction is empty.","日本語プロフィール欄に何も書かれていません","fail")
+    else
+      translate_google(profile_en,profile_jp,"en")
   else if this.id == "trans_to_jp"
-    translate_google(profile_en,profile_jp,"ja")
+    if profile_en == ""
+      alert_modal("English introduction is empty.","英語プロフィール欄に何も書かれていません","fail")
+    else
+      translate_google(profile_en,profile_jp,"ja")
   else
     alert("asd");
 
