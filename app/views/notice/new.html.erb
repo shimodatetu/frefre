@@ -61,15 +61,24 @@
         <div class="content_input">
           <textarea id="content"class="content_input_form form-control form_lang en_data_content" rows="5" cols="65"></textarea>
           <div class="space_form">
-            <button type="button" class="normal_button post_button btn btn_send mes_post_button"id="trans">
-              <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
-              <div class="button_text">
-                <div class="float_jp">
-                   翻訳
+            <div class="trans_cover">
+              <button type="button" class="normal_button post_button btn  btn_send mes_post_button"id="trans_to_en"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                <div class="button_text">
+                  翻訳
                 </div>
-                Translate
-              </div>
-            </button>
+              </button>
+            </div>
+            <div class="trans_cover">
+              <button type="button" class="normal_button post_button btn  btn_send mes_post_button"id="trans_to_jp"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                <div class="button_text">
+                  Trans
+                </div>
+              </button>
+            </div>
           </div>
           <textarea id="content"class="content_input_form form-control form_lang jp_data_content" rows="5" cols="65"></textarea>
         </div>

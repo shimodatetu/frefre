@@ -133,7 +133,6 @@ translate_google=(lang,words) ->
   fetch(url, settings).then((res) ->
     res.text()
   ).then (text) ->
-    console.log(text)
     window.translated = true
     get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
     translation = get_text

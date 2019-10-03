@@ -1,3 +1,5 @@
+
+window.translated = false
 App.thread = App.cable.subscriptions.create "ThreadChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
@@ -5,6 +7,7 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
+    window.translated = false
     local = '/thread/show/'+data['id']
     $('#groups').append data['message']
     if String(data['user_id']) == $(".get_user_id").attr("id")
@@ -87,37 +90,28 @@ type_check=(id)->
       alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
     else if content_jp == ""
       alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
-  else
-    if title_en == "" && title_jp == "" && content_jp == "" && content_en == "" && hash_en == "" && hash_jp == ""
-      alert_modal("Nothing is inputed.","何も入力されていません","fail")
-    else if title_en == "" && content_en == "" && hash_en == ""
-      title_jp = $(".jp_data_title").val();
-      content_jp = $(".jp_data_content").val();
-      hash_jp = $(".hash_jp").val();
-      if title_jp == ""
-        alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
-      else if content_jp == ""
-        alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
-      else if hash_jp == ""
-        alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
-      else
-        hash_ary_jp = cut_hash(hash_jp)
-        translate_google(title_jp,content_jp,"en",hash_ary_jp)
-    else if title_jp == "" && content_jp == "" && hash_jp == ""
-      title_en = $(".en_data_title").val();
-      content_en = $(".en_data_content").val();
-      hash_en = $(".hash_en").val();
-      if title_en == ""
-        alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
-      else if content_en == ""
-        alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
-      else if hash_en == ""
-        alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
-      else
-        hash_ary_en = cut_hash(hash_en)
-        translate_google(title_en,content_en,"ja",hash_ary_en)
+  else if window.translated == true
+    alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
+  else if id == "trans_to_en"
+    if title_jp == ""
+      alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
+    else if content_jp == ""
+      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+    else if hash_jp == ""
+      alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
     else
-      alert_modal("Both Englsh and Japanese form is filled.","両方の入力欄に入力されています","fail");
+      hash_ary_jp = cut_hash(hash_jp)
+      translate_google(title_jp,content_jp,"en",hash_ary_jp)
+  else if id == "trans_to_jp"
+    if title_en == ""
+      alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
+    else if content_en == ""
+      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+    else if hash_en == ""
+      alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
+    else
+      hash_ary_en = cut_hash(hash_en)
+      translate_google(title_en,content_en,"ja",hash_ary_en)
 
 cut_hash=(hash_data)->
   hash_ary_main = []
@@ -148,6 +142,7 @@ translate_google=(title,content,lang,hash_ary) ->
   fetch(url, settings).then((res) ->
     res.text()
   ).then (text) ->
+    window.translated = true
     translate = JSON.parse(text)["data"]["translations"]
     trans_title = translate[0]["translatedText"]
     trans_content = translate[1]["translatedText"]
@@ -157,24 +152,32 @@ translate_google=(title,content,lang,hash_ary) ->
       i += 1
       hash_ary.push(translate[i]["translatedText"]);
     if lang == "ja"
-      $("#groupModal .en_form_hash").html("#"+hash_base.join("#"))
-      $("#groupModal .jp_form_hash").html("#"+hash_ary.join("#");)
-      $("#groupModal .en_form_content").html(content)
-      $("#groupModal .jp_form_content").html(trans_content)
-      $("#groupModal .en_form_title").val(title)
-      $("#groupModal .jp_form_title").val(trans_title)
-      $(".explain_text .en").attr("style","")
-      $(".explain_text .jp").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $("#groupModal").modal("show")
+      #$("#groupModal .en_form_hash").html("#"+hash_base.join("#"))
+      #$("#groupModal .jp_form_hash").html("#"+hash_ary.join("#");)
+      #$("#groupModal .en_form_content").html(content)
+      #$("#groupModal .jp_form_content").html(trans_content)
+      #$("#groupModal .en_form_title").val(title)
+      #$("#groupModal .jp_form_title").val(trans_title)
+      #$(".explain_text .en").attr("style","")
+      #$(".explain_text .jp").attr("style","display:none")
+      #$(".explain_text .enjp").attr("style","display:none")
+      #$("#groupModal").modal("show")
+
+      $(".jp_data_title").val(trans_title);
+      $(".jp_data_content").html(trans_content);
+      $(".hash_jp").html("#"+hash_ary.join("#"))
     else
-      $("#groupModal .en_form_hash").html("#"+hash_ary.join("#"))
-      $("#groupModal .jp_form_hash").html("#"+hash_base.join("#"))
-      $("#groupModal .en_form_content").html(trans_content)
-      $("#groupModal .jp_form_content").html(content)
-      $("#groupModal .en_form_title").val(trans_title)
-      $("#groupModal .jp_form_title").val(title)
-      $(".explain_text .jp").attr("style","")
-      $(".explain_text .en").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $("#groupModal").modal("show")
+      #$("#groupModal .en_form_hash").html("#"+hash_ary.join("#"))
+      #$("#groupModal .jp_form_hash").html("#"+hash_base.join("#"))
+      #$("#groupModal .en_form_content").html(trans_content)
+      #$("#groupModal .jp_form_content").html(content)
+      #$("#groupModal .en_form_title").val(trans_title)
+      #$("#groupModal .jp_form_title").val(title)
+      #$(".explain_text .jp").attr("style","")
+      #$(".explain_text .en").attr("style","display:none")
+      #$(".explain_text .enjp").attr("style","display:none")
+      #$("#groupModal").modal("show")
+
+      $(".en_data_title").val(trans_title);
+      $(".en_data_content").html(trans_content);
+      $(".hash_en").html("#"+hash_ary.join("#"))
