@@ -87,17 +87,24 @@
               placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
             </div>
             <div class="space_form chat_send">
-              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans"
-              name="<% if logged_in? %>logined<% end %>">
-                <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
-                <div class="button_text">
-                  <div class="float_jp">
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                  <div class="button_text">
                     翻訳
                   </div>
-                  <div class="right_en">
-                  Translate
-                </div>
-              </button>
+                </button>
+              </div>
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                  <div class="button_text">
+                    Trans
+                  </div>
+                </button>
+              </div>
             </div>
             <div class="post_form_cover post_form_cover_enjp">
               <%= image_tag "jap.png", class: "image" %>

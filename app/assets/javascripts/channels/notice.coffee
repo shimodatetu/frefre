@@ -44,17 +44,19 @@ type_check=(id,type)->
     content_en = $(".en_data_content").val();
     content_jp = $(".jp_data_content").val();
     if id == "post"
-      if content_jp != "" && content_en != ""
-        $("#noticeModal .en_form_content").html(content_en)
-        $("#noticeModal .jp_form_content").html(content_jp)
-        $(".explain_text .en").attr("style","display:none")
-        $(".explain_text .jp").attr("style","display:none")
-        $(".explain_text .enjp").attr("style","")
-        $("#noticeModal").modal("show")
-      else if content_en == ""
+      if content_en == ""
         alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
       else if content_jp == ""
         alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+      else
+        $("#noticeModal").modal("hide")
+        App.notice.make("enjp",content_jp,content_en,$(".get_other_id").attr("id"));
+        #$("#noticeModal .en_form_content").html(content_en)
+        #$("#noticeModal .jp_form_content").html(content_jp)
+        #$(".explain_text .en").attr("style","display:none")
+        #$(".explain_text .jp").attr("style","display:none")
+        #$(".explain_text .enjp").attr("style","")
+        #$("#noticeModal").modal("show")
     else if window.translated == true
       alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
     else if id == "trans_to_jp"

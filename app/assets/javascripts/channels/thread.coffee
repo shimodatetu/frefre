@@ -39,7 +39,7 @@ send_check=()->
   else if hash_en == ""
     alert_modal("Hashtag in English is empty.","英語のハッシュタグの欄に何も書かれていません","fail");
   else if hash_jp == ""
-    alert_mofal("Hashtag in Japanese is empty.","日本語のハッシュタグの欄に何も書かれていません","fail");
+    alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグの欄に何も書かれていません","fail");
   else
     hash_ary_en = cut_hash(hash_en)
     hash_ary_jp = cut_hash(hash_jp)
@@ -61,35 +61,36 @@ type_check=(id)->
   hash_en = $(".hash_en").val()
   hash_jp = $(".hash_jp").val()
   if id == "post"
-    if title_en != "" && title_jp != "" && content_jp != "" && content_en != "" && hash_en != "" && hash_jp != ""
-      #両方投稿するとき
+    if title_en == ""
+      alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
+    else if title_jp == ""
+      alert_modal("Tille in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
+    else if content_en == ""
+      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+    else if content_jp == ""
+      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+    else if hash_en == ""
+      alert_modal("Hashtag in English is empty.","英語のハッシュタグの欄に何も書かれていません","fail");
+    else if hash_jp == ""
+      alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグの欄に何も書かれていません","fail");
+    else
       hash_ary_en = cut_hash(hash_en)
       hash_ary_jp = cut_hash(hash_jp)
       if hash_ary_en.length != hash_ary_jp.length
         alert_modal("ハッシュタグが間違っています","Hashtag is wrong.","fail");
       else
-        $("#groupModal .en_form_hash").html(hash_en)
-        $("#groupModal .jp_form_hash").html(hash_jp)
-        $("#groupModal .en_form_content").html(content_en)
-        $("#groupModal .jp_form_content").html(content_jp)
-        $("#groupModal .en_form_title").val(title_en)
-        $("#groupModal .jp_form_title").val(title_jp)
-        $(".explain_text .en").attr("style","display:none")
-        $(".explain_text .jp").attr("style","display:none")
-        $(".explain_text .enjp").attr("style","")
-        $("#groupModal").modal("show")
-    else if hash_en == ""
-      alert_modal("Hashtag in English is empty.","英語のハッシュタグ入力欄に何も書かれていません","fail");
-    else if hash_jp == ""
-      alert_modal("Hashtag in Japanese is empty.","日本語のハッシュタグ入力欄に何も書かれていません","fail");
-    else if title_en == ""
-      alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
-    else if title_jp == ""
-      alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
-    else if content_en == ""
-      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
-    else if content_jp == ""
-      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+        $("#groupModal").modal("hide")
+        App.thread.make("enjp",title_jp,content_jp,title_en,content_en,hash_ary_jp,hash_ary_en);
+        #$("#groupModal .en_form_hash").html(hash_en)
+        #$("#groupModal .jp_form_hash").html(hash_jp)
+        #$("#groupModal .en_form_content").html(content_en)
+        #$("#groupModal .jp_form_content").html(content_jp)
+        #$("#groupModal .en_form_title").val(title_en)
+        #$("#groupModal .jp_form_title").val(title_jp)
+        #$(".explain_text .en").attr("style","display:none")
+        #$(".explain_text .jp").attr("style","display:none")
+        #$(".explain_text .enjp").attr("style","")
+        #$("#groupModal").modal("show")
   else if window.translated == true
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if id == "trans_to_en"

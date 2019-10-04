@@ -1,3 +1,5 @@
+
+window.translated = false
 App.chat = App.cable.subscriptions.create "ChatChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
@@ -6,14 +8,17 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
   received: (data) ->
 
   make: (lang,mes_jp,mes_en, group)->
+    window.translated = false
     mes_jp = mes_jp.replace("// n", '').replace("//n", '');
     mes_en = mes_en.replace("//n", '').replace("// n", '');
+    alert_modal("You successed to post.","投稿に成功しました","success")
     @perform('make',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
     $(".base_en_form").val("")
     $(".base_jp_form").val("")
     $('#chatModal-enjp').modal("hide")
 
   image: (file,group)->
+    window.translated = false
     @perform('image',group_id:group,image:file,lang:"none")
 
 reader = new FileReader
@@ -70,27 +75,31 @@ type_check=(id)->
   text_jp = $(".base_jp_form").val();
   if id == "post"
     if text_en != "" && text_jp != ""
-      $("#chatModal-enjp .en_form").val(text_en)
-      $("#chatModal-enjp .jp_form").val(text_jp)
-      $(".explain_text .en").attr("style","display:none")
-      $(".explain_text .jp").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","")
-      $('#chatModal-enjp').modal("show")
+      #$("#chatModal-enjp .en_form").val(text_en)
+      #$("#chatModal-enjp .jp_form").val(text_jp)
+      #$(".explain_text .en").attr("style","display:none")
+      #$(".explain_text .jp").attr("style","display:none")
+      #$(".explain_text .enjp").attr("style","")
+      #$('#chatModal-enjp').modal("show")
+      App.chat.make("none",text_jp,text_en,parseInt($("#group").val()))
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""
       alert_modal("The Japanese form is empty.","日本語入力欄に何も書かれていません","fail");
     else
       alert_modal("This form is empty.","入力欄に何も書かれていません","fail");
-  else if id == "trans"
-    if text_en != "" && text_jp != ""
-      alert_modal("Both Englsh and Japanese form is filled.","両方の入力欄に入力されています","fail");
-    else if text_jp != ""
-      translate_google("en",text_jp)
-    else if text_en != ""
-      translate_google("ja",text_en)
+  else if window.translated == true
+    alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
+  else if id == "trans_to_en"
+    if text_jp == ""
+      alert_modal("The Japanese form is empty.","日本語入力欄に何も書かれていません","fail");
     else
-      alert_modal("This form is empty.","入力欄に何も書かれていません","fail")
+      translate_google("en",text_jp)
+  else if id == "trans_to_jp"
+    if text_en == ""
+      alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
+    else
+      translate_google("ja",text_en)
 
 
 translate_google=(lang,words) ->
@@ -106,30 +115,27 @@ translate_google=(lang,words) ->
   fetch(url, settings).then((res) ->
     res.text()
   ).then (text) ->
+    window.translated = true
     get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
     translation = get_text
     if lang == "ja"
-      $(".only_en_form").val("");
-      #App.chat.make(lang,translation,words, group)
-      $("#chatModal-enjp .en_form").val(words)
-      $("#chatModal-enjp .jp_form").val(translation)
-      #$(".base_en_form").val("")
-      #$(".base_jp_form").val("")
-      $(".explain_text .en").attr("style","")
-      $(".explain_text .jp").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $('#chatModal-enjp').modal("show")
+      #$(".only_en_form").val("");
+      #$("#chatModal-enjp .en_form").val(words)
+      #$("#chatModal-enjp .jp_form").val(translation)
+      #$(".explain_text .en").attr("style","")
+      #$(".explain_text .jp").attr("style","display:none")
+      #$(".explain_text .enjp").attr("style","display:none")
+      #$('#chatModal-enjp').modal("show")
+      $(".base_jp_form").val(translation);
     else
-      $(".only_jp_form").val("");
-      #App.chat.make(lang,words,translation, group)
-      $("#chatModal-enjp .jp_form").val(words)
-      $("#chatModal-enjp .en_form").val(translation)
-      #$(".base_en_form").val("")
-      #$(".base_jp_form").val("")
-      $(".explain_text .jp").attr("style","")
-      $(".explain_text .en").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $('#chatModal-enjp').modal("show")
+      #$(".only_jp_form").val("");
+      #$("#chatModal-enjp .jp_form").val(words)
+      #$("#chatModal-enjp .en_form").val(translation)
+      #$(".explain_text .jp").attr("style","")
+      #$(".explain_text .en").attr("style","display:none")
+      #$(".explain_text .enjp").attr("style","display:none")
+      #$('#chatModal-enjp').modal("show")
+      $(".base_en_form").val(translation);
 
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);
