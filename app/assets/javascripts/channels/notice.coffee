@@ -72,11 +72,15 @@ type_check=(id,type)->
 
 
 translate_google=(content,lang) ->
+  source = "en"
+  if lang == 'en'
+    source = "ja"
   key = window.ENV.RailsEnv
   url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
   data = new FormData
   data.append 'q', content
   data.append 'target', lang
+  data.append 'source', source
   data.append 'format', "text"
   settings =
     method: 'POST'

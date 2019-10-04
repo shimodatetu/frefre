@@ -66,6 +66,9 @@ $(document).on 'click', '.profile_save_button', (event) ->
   App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
 
 translate_google=(profile_en,profile_jp,lang) ->
+  source = "en"
+  if lang == 'en'
+    source = "ja"
   words = profile_jp
   if lang == "ja"
     words = profile_en
@@ -73,6 +76,7 @@ translate_google=(profile_en,profile_jp,lang) ->
   url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
   data = new FormData
   data.append 'q', words
+  data.append 'source', source
   data.append 'target', lang
   settings =
     method: 'POST'

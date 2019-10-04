@@ -39,7 +39,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     $('#sampleModal-enjp').modal("hide")
   image: (file,group)->
     @perform('image',group_id:group,image:file,lang:"none")
-    
+
 reader = new FileReader
 reader2 = new FileReader
 String::bytes = ->
@@ -140,12 +140,16 @@ type_check=(type)->
 
 
 translate_google=(lang,words) ->
+  source = "en"
+  if lang == 'en'
+    source = "ja"
   key = window.ENV.RailsEnv
   url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
   data = new FormData
   data.append 'q', words
   data.append 'target', lang
-  data.append 'format', "text"
+  data.append 'source', source
+  data.append 'format', "html"
   settings =
     method: 'POST'
     body: data
@@ -154,6 +158,7 @@ translate_google=(lang,words) ->
   ).then (text) ->
     window.translated = true
     get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
+    console.log(text)
     translation = get_text
     if lang == "ja"
       #$(".only_en_form").val("");

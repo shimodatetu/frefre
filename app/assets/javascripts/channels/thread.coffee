@@ -126,6 +126,10 @@ cut_hash=(hash_data)->
 
 
 translate_google=(title,content,lang,hash_ary) ->
+
+  source = "en"
+  if lang == 'en'
+    source = "ja"
   key = window.ENV.RailsEnv
   url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
   data = new FormData
@@ -136,6 +140,7 @@ translate_google=(title,content,lang,hash_ary) ->
     data.append 'q', value
     hash_base.push(value)
   data.append 'target', lang
+  data.append 'source', source
   data.append 'format', "text"
   settings =
     method: 'POST'
