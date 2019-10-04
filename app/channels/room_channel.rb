@@ -29,7 +29,7 @@ class RoomChannel < ApplicationCable::Channel
       Please click on the url below and check the thread.
       https://www.frefreforum.com/thread/'+group.id.to_s+'/'+info_page.to_s
 
-      info.message_jp = '「'+group.title_jp'」に投稿がありました。
+      info.message_jp = '「'+group.title_jp+'」に投稿がありました。
       下記のURLをクリックしてスレッドを確認してください。
       https://www.frefreforum.com/thread/'+group.id.to_s+'/'+info_page.to_s
       info.user_id = group.user_id
