@@ -106,4 +106,5 @@ translate_google=(content,lang) ->
       #$(".explain_text .en").attr("style","display:none")
       #$(".explain_text .enjp").attr("style","display:none")
       #$("#noticeModal").modal("show")
+      trans_content = trans_content.replace("&#39;","'")
       $(".en_data_content").val(trans_content);

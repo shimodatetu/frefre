@@ -156,7 +156,7 @@ translate_google=(title,content,lang,hash_ary) ->
     hash_ary = []
     while(translate[i+1] != undefined)
       i += 1
-      hash_ary.push(translate[i]["translatedText"]);
+      hash_ary.push(translate[i]["translatedText"].replace("&#39;","'"));
     if lang == "ja"
       #$("#groupModal .en_form_hash").html("#"+hash_base.join("#"))
       #$("#groupModal .jp_form_hash").html("#"+hash_ary.join("#");)
@@ -184,6 +184,8 @@ translate_google=(title,content,lang,hash_ary) ->
       #$(".explain_text .enjp").attr("style","display:none")
       #$("#groupModal").modal("show")
 
+      trans_title = trans_title.replace("&#39;","'")
+      trans_content = trans_content.replace("&#39;","'")
       $(".en_data_title").val(trans_title);
       $(".en_data_content").html(trans_content);
       $(".hash_en").html("#"+hash_ary.join("#"))

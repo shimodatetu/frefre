@@ -24,8 +24,10 @@
     </div>
     <% there_be = false %>
     <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |notice| %>
-      <% send_user = notice.users.last %>
-      <% to_user = notice.users.last %>
+      <% opponent = notice.users.last %>
+      <% if notice.users.last.id == current_user.id %>
+        <%opponent = notice.users.first%>
+      <% end %>
       <%= link_to("/profile/5/#{notice.id}/0" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover link_cover">
@@ -33,25 +35,15 @@
             <div class="group_img_cover">
               <% if notice.users.last.id < 1 %>
                 <%= image_tag "info.png", :class => "group_img" %>
-              <% elsif send_user.id == current_user.id %>
-                <% if to_user.image == 0 %>
-                  <% if to_user.photo.nil? %>
-                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-                  <% else %>
-                    <%= image_tag show_image_user_path(to_user), :class => "group_img" %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag("/userimage/user#{to_user.image}.png", :class => "group_img") %>
-                <% end %>
               <% else %>
-                <% if send_user.image == 0 %>
-                  <% if send_user.photo.nil? %>
+                <% if opponent.image == 0 %>
+                  <% if opponent.photo.nil? %>
                     <%= image_tag("/userimage/user1.png", :class => "group_img") %>
                   <% else %>
-                    <%= image_tag show_image_user_path(send_user), :class => "group_img" %>
+                    <%= image_tag show_image_user_path(opponent), :class => "group_img" %>
                   <% end %>
                 <% else %>
-                  <%= image_tag("/userimage/user#{send_user.image}.png", :class => "group_img") %>
+                  <%= image_tag("/userimage/user#{opponent.image}.png", :class => "group_img") %>
                 <% end %>
               <% end %>
             </div>
@@ -62,7 +54,7 @@
                 <% if notice.users.last.id < 1 %>
                   <%= FreFre Office %>
                 <% else %>
-                  <%= User.find(notice.users.last.id).name %>
+                  <%= opponent.name %>
                 <% end %>
                 <div class="create_time"style="float:right">
                   <%= notice.created_at.strftime('%Y/%m/%d') %>
@@ -71,19 +63,10 @@
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <% if send_user.id == current_user.id %>
-                      Chat with <%= simple_format(text_url_to_link(h(to_user.name))) %>
-                    <% else %>
-                      Chat with <%= simple_format(text_url_to_link(h(send_user.name))) %>
-                    <% end %>
+                    Chat with <%= simple_format(text_url_to_link(h(opponent.name))) %>
                   </div>
                 </div>
-                <div class="post_content">
-                  <div class="post_content_text">
-                    <%= simple_format(text_url_to_link(h(notice.chats.last.main_en))) %>
-                  </div>
-                </div>
-                <div class="see_more">
+                <div class="see_more no_text">
                   See more
                 </div>
               </div>
@@ -93,20 +76,11 @@
               <div class="post_content_position jp_position">
                 <div class="thread_title">
                   <div class="title_padding">
-                    <% if send_user.id == current_user.id %>
-                      <%= simple_format(text_url_to_link(h(to_user.name))) %>とのチャット
-                    <% else %>
-                      <%= simple_format(text_url_to_link(h(send_user.name))) %>とのチャット
-                    <% end %>
+                    <%= simple_format(text_url_to_link(h(opponent.name))) %>とのチャット
                   </div>
                 </div>
-                <div class="post_content">
-                  <div class="post_content_text">
-                    <%= simple_format(text_url_to_link(h(notice.chats.last.main_jp))) %>
-                  </div>
-                </div>
-                <div class="see_more">
-                  See more
+                <div class="see_more no_text">
+                  もっと見る
                 </div>
               </div>
             </div>

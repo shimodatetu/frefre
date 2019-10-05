@@ -74,7 +74,7 @@
       border: solid 2px #dddddd;
       border-bottom: solid 1px #dddddd;
       a{
-        padding: 8px 15px;
+        padding: 7px 15px;
       }
     }
     .profile_contents_button{
@@ -186,6 +186,9 @@
           width:100%;
           margin-right:30px;
           font-size:18px;
+        }
+        .content_input.textarea{
+          font-size:15px;
         }
         .no_text{
           display: inline-block;

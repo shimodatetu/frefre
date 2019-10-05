@@ -108,4 +108,5 @@ translate_google=(profile_en,profile_jp,lang) ->
       $(".explain_text .enjp").attr("style","display:none")
       $("#profile_modal").modal("show")
       ###
+      trans_text = trans_text.replace("&#39;","'")
       $("#profile_en").val(trans_text)

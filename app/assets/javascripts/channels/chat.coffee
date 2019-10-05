@@ -139,6 +139,7 @@ translate_google=(lang,words) ->
       #$(".explain_text .en").attr("style","display:none")
       #$(".explain_text .enjp").attr("style","display:none")
       #$('#chatModal-enjp').modal("show")
+      translation = translation.replace("&#39;","'")
       $(".base_en_form").val(translation);
 
 bytes=(str) ->
