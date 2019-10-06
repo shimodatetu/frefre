@@ -23,7 +23,7 @@
       </div>
     </div>
     <% there_be = false %>
-    <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |notice| %>
+    <% current_user.notices.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).order().each do |notice| %>
       <% opponent = notice.users.last %>
       <% if notice.users.last.id == current_user.id %>
         <%opponent = notice.users.first%>

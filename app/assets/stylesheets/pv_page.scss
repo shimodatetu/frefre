@@ -1,5 +1,8 @@
 .pvpage_all{
   margin-top:40px;
+  p{
+    display: inline-block;
+  }
   .thread_link:hover{
     .thread_cover#1{
     	border: solid 3px #bee;
@@ -7,9 +10,6 @@
     .thread_cover{
       background-color: #dff5eaff ;
     }
-  }
-  .lang_bar_cover{
-
   }
   .panel-title{
     width:100%;

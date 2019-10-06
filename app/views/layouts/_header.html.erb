@@ -145,9 +145,10 @@
           </div>
         </div>
       <% end %>
+      <!--
       <%= link_to '/help/show',class:"link_text" do %>
         <div class="text_fill
-        <% if url.include?('category') %>
+        <% if url.include?('/help') %>
           <%= "now_page" %>
         <% end %>">
           <div class="height_control"></div>
@@ -158,6 +159,24 @@
             </div>
             <div class="base_en">
               Help
+            </div>
+          </div>
+        </div>
+      <% end %>
+      -->
+      <%= link_to '/search',class:"link_text" do %>
+        <div class="text_fill
+        <% if url.include?('search') %>
+          <%= "now_page" %>
+        <% end %>">
+          <div class="height_control"></div>
+          <span class="icon glyphicon glyphicon-search"></span>
+          <div class="float_text">
+            <div class="float_jap">
+              検索
+            </div>
+            <div class="base_en">
+              Search
             </div>
           </div>
         </div>

@@ -2,6 +2,8 @@
 <% if session["search_text"].nil? == false %>
   <% search_text = session["search_text"] %>
 <% end %>
+
+
 <% lang = session["lang"] %>
 <div class="search_result">
   <div class="category_show">
@@ -17,70 +19,94 @@
   </div>
   <div class="pvpage_head">
   </div>
-  <% search_text = search_text.downcase %>
   <div class="thread_all"style="padding-top:10px;">
     <% there_be = false %>
-    <% @groups.each do |group| %>
-      <% if group.title_en.downcase.include?(search_text) || group.title_jp.downcase.include?(search_text) %>
-        <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
-          <% there_be = true %>
-          <div class="thread_cover">
-            <div class="group_user_cover">
-              <div class="group_img_cover">
-                <% if group.user.photo.nil? %>
-                  <%= image_tag("/user2.png", :class => "group_img") %>
-                <% else %>
-                  <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
-                <% end %>
-              </div>
-            </div>
-            <div class="thread_content">
-              <div class="post_content_cover">
-                <div class="user_name">
-                  <% if !logged_in? || current_user.id != group.user.id %>
-                    <%= link_to "/other_profile/#{group.user.id}" do %>
-                      <%= group.user.name %>
-                    <% end %>
+    <% search_groups = @groups %>
+    <% if !search_text.nil? %>
+      <%# search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%")
+      .or(@groups.preload(:hashtags).where("hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%")) %>
+      <% search_groups = @groups.eager_load(:hashtags).where("hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
+    <% end %>
+    <% show_max = 10.0 %>
+    <% group_num = search_groups.all.count %>
+    <% page_num = (group_num / show_max).ceil %>
+    <% page_id = params[:page].to_i %>
+    <% if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1 %>
+      <% page_id = 1 %>
+    <% end %>
+    <% search_groups.order(seen_num: "DESC").offset(show_max*(page_id - 1)).limit(show_max).each do |group| %>
+      <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
+        <% there_be = true %>
+        <div class="thread_cover">
+          <div class="group_user_cover">
+            <div class="group_img_cover">
+              <object>
+              <%= link_to "/other_profile/#{group.user.id}" do %>
+                <% if group.user.image == 0 %>
+                  <% if group.user.photo.nil? %>
+                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
                   <% else %>
-                    <%= link_to "/profile" do %>
-                      <%= group.user.name %>
-                    <% end %>
+                    <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
                   <% end %>
-                  <div class="create_time"style="float:right">
-                    <%= group.created_at.strftime('%Y/%m/%d') %>
+                <% else %>
+                  <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
+                <% end %>
+              <% end %>
+              </object>
+            </div>
+          </div>
+          <div class="thread_content">
+            <div class="post_content_cover">
+              <div class="user_name">
+                <object>
+                <% if !logged_in? || current_user.id != group.user.id %>
+                  <%= link_to "/other_profile/#{group.user.id}" do %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                  <% end %>
+                <% else %>
+                  <%= link_to "/profile" do %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                  <% end %>
+                <% end %>
+                </object>
+                <div class="create_time"style="float:right">
+                  <%= group.created_at.strftime('%Y/%m/%d') %>
+                </div>
+              </div>
+              <div class="post_content_position en_position">
+                <div class="thread_title">
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(group.title_en))) %>
                   </div>
                 </div>
-                <div class="post_content_position en_position">
-                  <div class="thread_title">
-                    <div class="title_padding no_inline">
-                      <%= group.title_en %>
-                    </div>
-                  </div>
-                  <div class="post_content">
-                    <div class="post_content_text">
-                      <%= group.posts.first.content_eng %>
-                    </div>
+                <div class="post_content en">
+                  <div class="post_content_text">
+                    <% group.hashtags.each do |hash|%>
+                      #<%= simple_format(text_url_to_link(h(hash.hash_en))) %>　
+                    <% end %>
                   </div>
                 </div>
-                <div class="post_content_position_space">
-                  <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-                </div>
-                <div class="post_content_position jp_position">
-                  <div class="thread_title">
-                    <div class="title_padding no_inline">
-                      <%= group.title_jp %>
-                    </div>
+              </div>
+              <div class="post_content_position_space">
+                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+              </div>
+              <div class="post_content_position jp_position">
+                <div class="thread_title">
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(group.title_jp))) %>
                   </div>
-                  <div class="post_content">
-                    <div class="post_content_text">
-                      <%= group.posts.first.content_jap %>
-                    </div>
+                </div>
+                <div class="post_content en">
+                  <div class="post_content_text">
+                    <% group.hashtags.each do |hash|%>
+                      #<%= simple_format(text_url_to_link(h(hash.hash_jp))) %>　
+                    <% end %>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        <% end %>
+        </div>
       <% end %>
     <% end %>
     <% if there_be == false %>
@@ -91,6 +117,60 @@
         <div class="jp">
           「"<%=search_text%>"」の検索結果はありません。
         </div>
+      </div>
+    <% else %>
+      <% start_num = 1 %>
+      <% end_num = page_num %>
+      <% if page_num > 5.0 %>
+        <% if page_id - page_max_half < 0 %>
+         <% end_num = 5.0 %>
+        <% elsif page_id + page_max_half > page_num %>
+         <% start_num = end_num - 5.0 + 1 %>
+        <% else %>
+         <% start_num = page_id - page_max_half + 2 %>
+         <% end_num = start_num + 5.0 - 1 %>
+        <% end %>
+      <% end %>
+      <div class="page_button_cover">
+        <% if 1 >= page_id.round %>
+          <div class="page_button no_push">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </div>
+        <% else %>
+          <%= link_to("/search/#{page_id - 1}",class:"page_button ok_push") do %>
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          <% end %>
+        <% end %>
+        <% if start_num.round != 1 %>
+          <div class="page_button dot_show">
+            ...
+          </div>
+        <% end %>
+        <% for num in start_num.round..end_num.round do %>
+          <% if num == page_id %>
+            <div class="page_button now_page">
+              <%= num %>
+            </div>
+          <% else %>
+            <%= link_to("/search/#{num}",class:"page_button page_move") do %>
+              <%= num %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if end_num.round != page_num.round %>
+          <div class="page_button dot_show">
+            ...
+          </div>
+        <% end %>
+        <% if page_num.round <= page_id.round || page_num.round == 1 %>
+          <div class="page_button no_push">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </div>
+        <% else %>
+          <%= link_to("/search/#{page_id.round + 1}",class:"page_button ok_push") do %>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   </div>

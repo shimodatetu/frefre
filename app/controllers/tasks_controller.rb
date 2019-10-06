@@ -23,6 +23,10 @@ class TasksController < ApplicationController
   end
 
   def search_inside
+    flash[:search] = params[:search_text]
+  end
+
+  def search_inside_before
     search_text = params[:search_text]
     search_en = Bigcategory.find_by(name_en: search_text)
 

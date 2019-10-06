@@ -276,6 +276,21 @@
 
 <% end %>
 <div class="thread_post_cover">
+  <div class="modal fade zoom_modal" id="zoom_modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="btn btn-secondary close_button" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+          <img src="/">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="thread_post_cover">
   <div class="modal fade help_modal" id="help_slide" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -285,7 +300,6 @@
             <button type="button" class="btn btn-secondary close_button" data-dismiss="modal">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
               <div class="item active">

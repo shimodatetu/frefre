@@ -1,10 +1,13 @@
 .search_result{
+  p{
+    display: inline-block;
+  }
   .thread_link:hover{
     .thread_cover#1{
-	border: solid 3px #bee;
-}
-.thread_cover{
-      background-color: rgba(252,248,210,1);
+    	border: solid 3px #bee;
+    }
+    .thread_cover{
+      background-color: #dff5eaff;
     }
   }
   .lang_bar_cover{
@@ -82,8 +85,8 @@
       margin-left:10px;
       border-radius:4px;
       border:solid thin #dddddd;
-      background:#fff2a0;
-      color: #BF8454;
+      background:#66bfbf;
+      color: #fff;
       padding-left:25px;
       padding-right:25px;
     }
@@ -253,11 +256,11 @@
     }
 
     .thread_cover#1{
-	border: solid 3px #bee;
-}
-.thread_cover{
+    	border: solid 3px #bee;
+    }
+    .thread_cover{
       background-color: #ffffff;
-      padding:20px;
+      padding:10px;
       border-radius: 5px;
       margin-bottom:10px;
       border:solid thin #dddddd;
@@ -292,7 +295,7 @@
           padding-left:10px;
           padding-right:10px;
           font-size:18px;
-          background:#fff7cf;
+          background:#dff5eaff ;
           .title_padding{
             text-align: center;
             font-size:18px;

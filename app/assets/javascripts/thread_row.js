@@ -19,5 +19,8 @@ $(function(){
     modal.find('.delete_id').attr("value",recipient) //モーダルのタイトルに値を表示
     modal.find(".delete_html").html(recipient2)
   })
-
+  $(".zoom_modal_open").on("click",function(){
+    src = $(this).children("img").attr("src")
+    $("#zoom_modal img").attr("src",src)
+  })
 });

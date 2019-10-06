@@ -50,11 +50,11 @@
                 <object>
                   <% if !logged_in? || current_user.id != group.user.id %>
                     <%= link_to "/other_profile/#{group.user.id}" do %>
-                      <%= group.user.name %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% else %>
                     <%= link_to "/profile" do %>
-                      <%= group.user.name %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% end %>
                 </object>
@@ -65,13 +65,13 @@
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding no_inline">
-                    <%= group.title_en %>
+                    <%= simple_format(text_url_to_link(h(group.title_en))) %>
                   </div>
                 </div>
                 <div class="post_content en">
                   <div class="post_content_text">
                     <% group.hashtags.each do |hash|%>
-                      #<%= hash.hash_en %>　
+                      #<%= simple_format(text_url_to_link(h(hash.hash_en))) %>　
                     <% end %>
                   </div>
                 </div>
@@ -86,13 +86,13 @@
                 <div class="thread_title">
                   <div class="title_padding no_inline">
                     <% require 'uri' %>
-                    <%= URI.decode(group.title_jp) %>
+                    <%= simple_format(text_url_to_link(h(group.title_jp))) %>
                   </div>
                 </div>
                 <div class="post_content jp">
                   <div class="post_content_text">
                     <% group.hashtags.each do |hash|%>
-                      #<%= hash.hash_jp %>　
+                      #<%= simple_format(text_url_to_link(h(hash.hash_jp))) %>　
                     <% end %>
                   </div>
                 </div>
@@ -168,11 +168,11 @@
                 <object>
                   <% if !logged_in? || current_user.id != group.user.id %>
                     <%= link_to "/other_profile/#{group.user.id}" do %>
-                      <%= group.user.name %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% else %>
                     <%= link_to "/profile" do %>
-                      <%= group.user.name %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% end %>
                 </object>
@@ -183,13 +183,13 @@
               <div class="post_content_position en_position">
                 <div class="thread_title">
                   <div class="title_padding no_inline">
-                    <%= group.title_en %>
+                    <%= simple_format(text_url_to_link(h(group.title_en))) %>
                   </div>
                 </div>
                 <div class="post_content en">
                   <div class="post_content_text">
                     <% group.hashtags.each do |hash|%>
-                      #<%= hash.hash_en %>　
+                      #<%= simple_format(text_url_to_link(h(hash.hash_en))) %>　
                     <% end %>
                   </div>
                 </div>
@@ -204,13 +204,13 @@
                 <div class="thread_title">
                   <div class="title_padding no_inline">
                     <% require 'uri' %>
-                    <%= URI.decode(group.title_jp) %>
+                    <%= simple_format(text_url_to_link(h(group.title_jp))) %>
                   </div>
                 </div>
                 <div class="post_content jp">
                   <div class="post_content_text">
                     <% group.hashtags.each do |hash|%>
-                      #<%= hash.hash_jp %>　
+                      #<%= simple_format(text_url_to_link(h(hash.hash_jp))) %>　
                     <% end %>
                   </div>
                 </div>

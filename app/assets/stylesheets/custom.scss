@@ -28,6 +28,23 @@ p{
   }
 }
 
+.zoom_modal{
+  .modal-dialog{
+    text-align: center;
+    img{
+      height:80vh;
+    }
+    .close_button{
+      position: absolute;
+      right: 0px;
+      z-index: 3;
+      background-color: rgba(0,0,0,0);
+      font-size: 20px;
+    }
+  }
+}
+
+
 .help_modal{
   .modal-dialog{
     width:60vw;
