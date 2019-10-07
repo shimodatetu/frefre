@@ -23,8 +23,7 @@
     <% there_be = false %>
     <% search_groups = @groups %>
     <% if !search_text.nil? %>
-      <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
-      <% search_groups2 = @groups.joins(:hashtags).where("hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
+      <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ? OR hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
     <% end %>
     <% show_max = 10.0 %>
     <% group_num = search_groups.count %>
