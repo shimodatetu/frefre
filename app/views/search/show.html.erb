@@ -23,12 +23,11 @@
     <% there_be = false %>
     <% search_groups = @groups %>
     <% if !search_text.nil? %>
-      <%# search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%")
-      .or(@groups.preload(:hashtags).where("hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%")) %>
-      <% search_groups = @groups.eager_load(:hashtags).where("hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
+      <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
+      <% search_groups2 = @groups.joins(:hashtags).where("hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
     <% end %>
     <% show_max = 10.0 %>
-    <% group_num = search_groups.all.count %>
+    <% group_num = search_groups.count %>
     <% page_num = (group_num / show_max).ceil %>
     <% page_id = params[:page].to_i %>
     <% if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1 %>

@@ -1,6 +1,16 @@
 class PvPageController < ApplicationController
   def show
     @groups = Group.all
+    @groups.each {|group|
+      hash_jp = ""
+      hash_en = ""
+      group.hashtags.each{|hash|
+        hash_jp += "#"+hash.hash_jp + " "
+        hash_en += "#"+hash.hash_en + " "
+      }
+      group.update(hash_en:hash_en,hash_jp:hash_jp)
+      p group
+    }
     #set_group_data
   end
   def new

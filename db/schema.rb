@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_025411) do
+ActiveRecord::Schema.define(version: 2019_10_06_110618) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 2019_09_21_025411) do
     t.integer "seen_num", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hash_jp"
+    t.string "hash_en"
   end
 
   create_table "hashtags", force: :cascade do |t|
