@@ -9,7 +9,6 @@ class PvPageController < ApplicationController
         hash_en += "#"+hash.hash_en + " "
       }
       group.update(hash_en:hash_en,hash_jp:hash_jp)
-      p group
     }
     #set_group_data
   end
