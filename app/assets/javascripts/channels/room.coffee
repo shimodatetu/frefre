@@ -33,10 +33,11 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   speak: (lang,mes_jp,mes_en, group)->
     mes_jp = mes_jp.replace("// n", '').replace("//n", '');
     mes_en = mes_en.replace("//n", '').replace("// n", '');
+    #alert("id:"+group+"/mes_jp:"+mes_jp+"/mes_en:"+mes_en)
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
-    $(".base_en_form").val("")
-    $(".base_jp_form").val("")
-    $('#sampleModal-enjp').modal("hide")
+    #$(".base_en_form").val("")
+    #$(".base_jp_form").val("")
+    #$('#sampleModal-enjp').modal("hide")
   image: (file,group)->
     @perform('image',group_id:group,image:file,lang:"none")
 
