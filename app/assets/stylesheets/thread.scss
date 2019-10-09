@@ -233,7 +233,8 @@
           .post_image_cover{
             padding:auto;
             img{
-              height:200px;
+              max-height: 150px;
+              max-width: 80%;
             }
             .post_image{
               margin-top:10px;
@@ -251,6 +252,9 @@
             margin-top:2px;
             .post_content_text{
               margin:auto;
+              p{
+                display: block;
+              }
             }
             .post_image{
               width:100%;

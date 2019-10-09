@@ -11,7 +11,6 @@ $(function(){
   var options ={"backdrop":"static"}
 
   $('#deleteModal').on('show.bs.modal', function (event) {
-
     var button = $(event.relatedTarget) //モーダルを呼び出すときに使われたボタンを取得
     var recipient = button.data('whatever') //data-whatever の値を取得
     var recipient2 = $(".thread_cover" + "#"+recipient).prop('outerHTML')//data-whereverの値を取得

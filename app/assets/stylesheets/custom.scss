@@ -32,7 +32,8 @@ p{
   .modal-dialog{
     text-align: center;
     img{
-      height:80vh;
+      max-height: 80vh;
+      max-width: 60vw;
     }
     .close_button{
       position: absolute;
