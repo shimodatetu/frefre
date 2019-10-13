@@ -8,12 +8,12 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
+    location.reload()
 
   change: (username,gender,country,profile_en,profile_jp,able_see) ->
     @perform 'change',username:username,gender:gender,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
-    alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
-    location.reload()
 
 $(document).on 'click', '#profile_modal .btn_send', (event) ->
   ###

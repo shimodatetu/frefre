@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 2019_10_13_050529) do
     t.string "provider"
     t.string "oauth_token"
     t.string "uid"
+    t.boolean "oauth", default: false, null: false
     t.datetime "oauth_expires_at"
   end
 

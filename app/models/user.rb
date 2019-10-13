@@ -7,16 +7,16 @@ class User < ApplicationRecord
   has_many :chats
   has_many :userinfos
   has_and_belongs_to_many :notices
-  has_secure_password
-  validates :password, length: (6..32),on: :create, format: { with: /\A[a-z0-9]+\z/i }
-  validates :password, length: {minimum: 6}, on: :update, allow_blank: true
+  has_secure_password validations: false
+  validates :password, length: (6..32),on: :create, format: { with: /\A[a-z0-9]+\z/i }, unless: :uid?
+  validates :password, length: {minimum: 6}, on: :update, allow_blank: true, unless: :uid?
   #mount_uploader :image, ImageUploader
   after_update { ProfileBroadcastJob.perform_later self  }
 
-  validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }
+  validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }, unless: :uid?
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true,  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  validates :email, presence: true,  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, unless: :uid?
   def User.new_token
     SecureRandom.urlsafe_base64
   end
@@ -55,6 +55,8 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.email = auth.info.email
       user.photo = auth.info.image
+      user.oauth = true
+      user.password = ""
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       return user

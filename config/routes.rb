@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#create_auth'
+  get 'auth2/:provider/callback', to: 'user#new_auth'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
@@ -45,6 +46,7 @@ Rails.application.routes.draw do
   get 'thread/show/:id/:page' => 'thread#show'
   get 'thread_all/show/:id' => 'thread_all#show'
   get 'sessions/index'
+  get 'sessions/new'
   get 'posts/index'
   post "posts",to: "posts#create",as: "posts"
   post "chats",to: "chats#create",as: "chats"
