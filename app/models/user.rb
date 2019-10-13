@@ -62,6 +62,7 @@ class User < ApplicationRecord
       return user
     end
   end
+
   private
 
   def create_activation_digest
