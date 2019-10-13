@@ -19,18 +19,18 @@ class SessionsController < ApplicationController
     end
   end
   def create_auth
-    if user = User.find_by(uid: request.env["omniauth.auth"].auth)
+    #if user = User.find_by(uid: request.env["omniauth.auth"].auth)
+    #  session[:user_id] = user.id
+    #  redirect_to root_path
+    #else
+    user = User.from_omniauth(request.env["omniauth.auth"])
+    if user.save
       session[:user_id] = user.id
       redirect_to root_path
     else
-      user = User.from_omniauth(request.env["omniauth.auth"])
-      if user.save
-        session[:user_id] = user.id
-        redirect_to root_path
-      else
-        redirect_to "/sessions/new"
-      end
+      redirect_to "/sessions/new"
     end
+  #  end
   end
 
   def destroy
