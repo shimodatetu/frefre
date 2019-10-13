@@ -1,3 +1,3 @@
 class Threadtype < ApplicationRecord
-  has_many :groups
+  #has_many :groups
 end
