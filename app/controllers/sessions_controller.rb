@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
   def create
     user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password]) && user.activated? && user.oauth == true
+    if user && user.authenticate(params[:session][:password]) && user.activated? && user.oauth == false
       log_in user
       flash["alert_en"] = "You successed to login"
       flash["alert_jp"] = "ログインに成功しました。"
