@@ -1,5 +1,4 @@
-<%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-<%= link_to "Facebookアカウントでログイン", "/auth/facebook" %>
+
 <div class="login_page_cover">
   <div class="login_page">
     <div class="panel panel-default">
@@ -24,50 +23,64 @@
           <% flash["failed_en"] = nil %>
           <% flash["failed_jp"] = nil %>
         <% end %>
-        <%= form_for :session, url: login_path do |f| %>
-          <div class="input-groups">
-            <div class="input_title">
-              <div class="float_jp">
-                メールアドレス
-              </div>
-              Mail Address
-            </div>
-            <div class="">
-              <%= f.email_field :email, class: "form-control input_form" %>
-            </div>
-          </div>
-          <div class="input-groups">
-            <div class="input_title">
-              <div class="float_jp">
-                パスワード
-              </div>
-              <div class="base_en">
-                Passwords
-              </div>
-            </div>
-            <div class="">
-              <%= f.password_field :password, class: "form-control input_form" %>
-            </div>
-          </div>
-          <div class="password_reset">
-            <%= link_to  new_password_reset_path do %>
-            <div class="jp">
-              （パスワードを忘れた場合）
-            </div>
-            (Forgot Password)
+
+        <div class="row">
+
+          <div class="col-sm-6 oauth_cover">
+            <%= link_to "/auth/google_oauth2", id: "sign_in" do %>
+              <%= image_tag("google.png") %>
+            <% end %>
+            <%= link_to  "/auth/facebook" do %>
+              <%= image_tag("facebook.png") %>
             <% end %>
           </div>
-          <div class="submit_button_cover">
-            <button type="submit"class="submit_button btn btn-default">
-              <div class="float_jp">
-                ログイン
+          <div class="col-sm-6">
+            <%= form_for :session, url: login_path do |f| %>
+              <div class="input-groups">
+                <div class="input_title">
+                  <div class="float_jp">
+                    メールアドレス
+                  </div>
+                  Mail Address
+                </div>
+                <div class="">
+                  <%= f.email_field :email, class: "form-control input_form" %>
+                </div>
               </div>
-              <div class="base_en">
-                Log In
+              <div class="input-groups">
+                <div class="input_title">
+                  <div class="float_jp">
+                    パスワード
+                  </div>
+                  <div class="base_en">
+                    Passwords
+                  </div>
+                </div>
+                <div class="">
+                  <%= f.password_field :password, class: "form-control input_form" %>
+                </div>
               </div>
-            </button>
+              <div class="password_reset">
+                <%= link_to  new_password_reset_path do %>
+                <div class="jp">
+                  （パスワードを忘れた場合）
+                </div>
+                (Forgot Password)
+                <% end %>
+              </div>
+              <div class="submit_button_cover">
+                <button type="submit"class="submit_button btn btn-default">
+                  <div class="float_jp">
+                    ログイン
+                  </div>
+                  <div class="base_en">
+                    Log In
+                  </div>
+                </button>
+              </div>
+            <% end %>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
