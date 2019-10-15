@@ -57,10 +57,10 @@
                       <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% end %>
+                  <div class="create_time"style="float:right">
+                    <%= group.created_at.strftime('%Y/%m/%d') %>
+                  </div>
                 </object>
-                <div class="create_time"style="float:right">
-                  <%= group.created_at.strftime('%Y/%m/%d') %>
-                </div>
               </div>
               <div class="post_content_position en_position">
                 <div class="thread_title">
@@ -69,7 +69,7 @@
                   </div>
                 </div>
                 <div class="post_content en">
-                  <div class="post_content_text">
+                  <div class="post_content_text no_inline">
                     <%= simple_format(text_url_to_link(h(group.posts.first.content_eng))) %>
                   </div>
                 </div>
@@ -171,10 +171,10 @@
                       <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% end %>
+                  <div class="create_time"style="float:right">
+                    <%= group.created_at.strftime('%Y/%m/%d') %>
+                  </div>
                 </object>
-                <div class="create_time"style="float:right">
-                  <%= group.created_at.strftime('%Y/%m/%d') %>
-                </div>
               </div>
               <div class="post_content_position en_position">
                 <div class="thread_title">
@@ -202,7 +202,7 @@
                   </div>
                 </div>
                 <div class="post_content jp">
-                  <div class="post_content_text">
+                  <div class="post_content_text no_inline">
                     <%= simple_format(text_url_to_link(h(group.posts.first.content_jap))) %>
                   </div>
                 </div>
