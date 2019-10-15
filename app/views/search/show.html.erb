@@ -1,5 +1,5 @@
 <% search_text = "" %>
-<% if session["search_text"].nil? == false %>
+<% if session["search_text"].nil? == false && session["search_text"] != "" %>
   <% search_text = session["search_text"] %>
 <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_050529) do
+ActiveRecord::Schema.define(version: 2019_10_15_025735) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 2019_10_13_050529) do
     t.string "uid"
     t.boolean "oauth", default: false, null: false
     t.datetime "oauth_expires_at"
+    t.boolean "admit", default: true
   end
 
 end

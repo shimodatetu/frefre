@@ -1,0 +1,67 @@
+
+<div class="sign_page_cover">
+  <div class="login_page">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="title">
+          <div class="float_jp">
+            会員登録
+          </div>
+          <div class="base_en">
+            Sign Up
+          </div>
+        </div>
+        <% if !flash["failed_en"].nil? || !flash["failed_en"].nil? %>
+          <div class="alert alert-danger alert-message" role="alert">
+            <div class="error_jp">
+              <%= flash["failed_jp"] %>
+            </div>
+            <div class="error_en">
+              <%= flash["failed_en"] %>
+            </div>
+          </div>
+          <% flash["failed_en"] = nil %>
+          <% flash["failed_jp"] = nil %>
+        <% end %>
+        <%= form_for @user, url:"/create_oauth", html: {method: 'POST'} do |f| %>
+          <div class="input-groups">
+            <div class="input_title">
+              <div class="float_jp">
+                ユーザーネーム
+              </div>
+              User Name
+            </div>
+            <div class="">
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="input-groups">
+            <%= f.check_box :agreement_term, class: "checkbox_input" %>
+            <div class="input_title term_check">
+              <div class="float_jp">
+                利用規約に同意する
+              </div>
+              <div class="base_en">
+                Agree our Terms of service
+              </div>
+            </div>
+          </div>
+          <div class="box_srcollbar">
+            <%= render partial: "/policy/term_en" %>
+            <%= render partial: "/policy/term_jp" %>
+          </div>
+          <div class="submit_button_cover">
+            <button type="submit"class="submit_button btn btn-default">
+              <div class="float_jp">
+                サインアップ
+              </div>
+              <div class="base_en">
+                Sign Up
+              </div>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 class PvPageController < ApplicationController
   def show
     @groups = Group.all
+    p request.env["omniauth.auth"]
     #set_group_data
   end
   def new

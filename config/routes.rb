@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
-  get 'auth/:provider/callback', to: 'sessions#create_auth'
-  get '/users/auth/:provider/callback', to: 'sessions#create_auth'
+  get 'auth/:provider/callback', to: 'sessions#login_auth'
+  get '/users/auth/:provider/callback', to: 'sessions#login_auth'
   get 'auth/failure', to: redirect('/groups')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
+  get 'sessions/oauth_complete'
+  post 'session/create_oauth'
+  post 'create_oauth',to:'sessions#create_oauth'
   post 'user_info',to:'office#user_info'
   get 'user_office',to:'office#user_office'
 

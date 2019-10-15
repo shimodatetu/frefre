@@ -13,7 +13,7 @@ class User < ApplicationRecord
   #mount_uploader :image, ImageUploader
   after_update { ProfileBroadcastJob.perform_later self  }
 
-  validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }, unless: :uid?
+  validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }, length: {maximum: 32}, unless: :uid?
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true,  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, unless: :uid?
@@ -59,6 +59,7 @@ class User < ApplicationRecord
       user.password = ""
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.admit = false
       return user
     end
   end
