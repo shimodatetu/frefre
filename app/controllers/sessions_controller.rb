@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
       if user.save
         #session[:user_id] = user.id
         session[:oauth_id] = user.id
-        redirect_to '/sessions/oauth_complete'
+        redirect_to '/oauth_complete'
       else
         redirect_to "/sessions/new"
       end
@@ -48,26 +48,29 @@ class SessionsController < ApplicationController
     if params[:user][:agreement_term] == "0"
       flash.now[:failed_en] = "Please agree the terms of service"
       flash.now[:failed_jp] = "利用規約に同意してください"
-      render :index
+      render :oauth_complete
     else
-      if @user.update(name: params[:user][:name],admit:true)
+      name = params[:user][:name]
+      if name == ""
+        flash.now[:failed_en] = "Name can't be blank"
+        flash.now[:failed_jp] = "名前が空になっています。"
+        render :oauth_complete
+      elsif name.length > 32
+        flash.now[:failed_en] = "Username is too long (maximum is 32 characters)"
+        flash.now[:failed_jp] = "ユーザーネームが長すぎます。(最高32文字です)"
+        render :oauth_complete
+      elsif !(name =~ /\A[a-z0-9]+\z/i)
+        flash.now[:failed_jp] = "名前は半角英数字でお願いします。"
+        flash.now[:failed_en] = "Please input your username using half-width alphanumeric."
+        render :oauth_complete
+      else
+        @user.update(name: name,admit:true)
         log_in @user
+        #User.last.delete
         flash["alert_en"] = "You successed to signup."
         flash["alert_jp"] = "会員登録に成功しました。"
         flash["alert_type"] = "success"
         redirect_to "/profile"
-      else
-        flash.now[:failed_jp] = "登録に失敗しました"
-        if @user.errors.any?
-          @user.errors.full_messages.each do |message|
-            flash.now[:failed_en] = message
-            if message== "Name is invalid"
-              flash.now[:failed_jp] = "名前は半角英数字でお願いします。"
-              flash.now[:failed_en] = "Please input your username using half-width alphanumeric."
-            end
-          end
-        end
-        render :index
       end
     end
   end

@@ -92,6 +92,7 @@ Rails.application.routes.draw do
       get "show_image"
     end
   end
+  get "/oauth_complete", to:"sessions#oauth_complete"
   get    '/login',   to: 'sessions#index'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
