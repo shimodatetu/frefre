@@ -36,10 +36,14 @@
             <div class="group_img_cover">
               <object>
               <%= link_to "/other_profile/#{group.user.id}" do %>
-                <% if group.user.photo.nil? %>
-                  <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                <% if group.user.image == 0 %>
+                  <% if group.user.photo.nil? %>
+                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                  <% else %>
+                    <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
+                  <% end %>
                 <% else %>
-                  <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
+                  <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
                 <% end %>
               <% end %>
               </object>
@@ -71,9 +75,7 @@
                 </div>
                 <div class="post_content en">
                   <div class="post_content_text">
-                    <% group.hashtags.each do |hash|%>
-                      #<%= simple_format(text_url_to_link(h(hash.hash_en))) %>　
-                    <% end %>
+                    <%= simple_format(text_url_to_link(h(group.posts.first.content_eng))) %>
                   </div>
                 </div>
                 <div class="see_more">
@@ -92,9 +94,7 @@
                 </div>
                 <div class="post_content jp">
                   <div class="post_content_text">
-                    <% group.hashtags.each do |hash|%>
-                      #<%= simple_format(text_url_to_link(h(hash.hash_jp))) %>　
-                    <% end %>
+                    <%= simple_format(text_url_to_link(h(group.posts.first.content_jap))) %>
                   </div>
                 </div>
                 <div class="see_more">

@@ -127,7 +127,6 @@ cut_hash=(hash_data)->
 
 
 translate_google=(title,content,lang,hash_ary) ->
-
   source = "en"
   if lang == 'en'
     source = "ja"
@@ -149,7 +148,6 @@ translate_google=(title,content,lang,hash_ary) ->
   fetch(url, settings).then((res) ->
     res.text()
   ).then (text) ->
-    console.log(text)
     window.translated = true
     translate = JSON.parse(text)["data"]["translations"]
     trans_title = translate[0]["translatedText"]
