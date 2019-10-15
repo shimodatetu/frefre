@@ -1,7 +1,7 @@
 .sign_page_cover{
   //position:absolute;
-  margin-left: calc(23vw);
-  width: calc(50vw);
+  vertical-align: center;
+  padding-left: calc(48vw - 300px);
   .login_page{
     vertical-align: center;
     .panel {
@@ -10,6 +10,7 @@
     }
     .oauth_cover{
       img{
+        max-width:300px;
         width:100%;
         border-radius: 5px;
         margin-top:45px;
