@@ -1,5 +1,4 @@
-<%= link_to "Sign up with Google", "/auth/google_oauth2", id: "sign_up" %>
-<%= link_to "Facebookアカウントでログイン", "/auth/facebook" %>
+
 <div class="sign_page_cover">
   <div class="login_page">
     <div class="panel panel-default">
@@ -24,100 +23,112 @@
           <% flash["failed_en"] = nil %>
           <% flash["failed_jp"] = nil %>
         <% end %>
-        <%= form_for @user, url: "/users" do |f| %>
-          <div class="input-groups">
-            <div class="input_title">
-              <div class="float_jp">
-                メールアドレス
-              </div>
-              Mail Address
-            </div>
-            <div class="">
-              <%= f.text_field :email, class: "form-control input_form" %>
-            </div>
+        <div class="row">
+          <div class="col-sm-6 oauth_cover">
+            <%= link_to "/auth/google_oauth2", id: "sign_in" do %>
+              <%= image_tag("google.png") %>
+            <% end %>
+            <%= link_to  "/auth/facebook" do %>
+              <%= image_tag("facebook.png") %>
+            <% end %>
           </div>
-          <div class="input-groups">
-            <div class="input_title">
-              <div class="float_jp">
-                ユーザーネーム
+          <div class="col-sm-6">
+            <%= form_for @user, url: "/users" do |f| %>
+              <div class="input-groups">
+                <div class="input_title">
+                  <div class="float_jp">
+                    メールアドレス
+                  </div>
+                  Mail Address
+                </div>
+                <div class="">
+                  <%= f.text_field :email, class: "form-control input_form" %>
+                </div>
               </div>
-              User Name
-            </div>
-            <div class="">
-              <%= f.text_field :name, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="check_words_cover">
-            <div class="check_title">
-              For username and password<br>
-              ユーザーネームとパスワードについて
-            </div>
-            <div class="check_words">
-              ・6～32characters　 ・6～32文字
-            </div>
-            <div class="check_words">
-              ・Alphanumeric ・半角英数字
-            </div>
-            <div class="check_words">
-              ・”-”and”_”only 　・”-”と”_”のみ
-            </div>
-            <div class="check_words">
-              ・Case-sensitive・大文字と小文字を区別
-            </div>
-          </div>
-          <div class="input-groups">
-            <div class="input_title">
-              <div class="float_jp">
-                パスワード
+              <div class="input-groups">
+                <div class="input_title">
+                  <div class="float_jp">
+                    ユーザーネーム
+                  </div>
+                  User Name
+                </div>
+                <div class="">
+                  <%= f.text_field :name, class: 'form-control' %>
+                </div>
               </div>
-              <div class="base_en">
-                Password
+              <div class="check_words_cover"style="display:none">
+                <div class="check_title">
+                  For username and password<br>
+                  ユーザーネームとパスワードについて
+                </div>
+                <div class="check_words">
+                  ・6～32characters　 ・6～32文字
+                </div>
+                <div class="check_words">
+                  ・Alphanumeric ・半角英数字
+                </div>
+                <div class="check_words">
+                  ・”-”and”_”only 　・”-”と”_”のみ
+                </div>
+                <div class="check_words">
+                  ・Case-sensitive・大文字と小文字を区別
+                </div>
               </div>
-            </div>
-            <div class="">
-              <%= f.password_field :password, class: "form-control input_form" %>
-            </div>
-          </div>
-          <div class="input-groups">
-            <div class="input_title">
-              <div class="float_jp">
-                パスワード確認
+              <div class="input-groups">
+                <div class="input_title">
+                  <div class="float_jp">
+                    パスワード
+                  </div>
+                  <div class="base_en">
+                    Password
+                  </div>
+                </div>
+                <div class="">
+                  <%= f.password_field :password, class: "form-control input_form" %>
+                </div>
               </div>
-              <div class="base_en">
-                Password Confirmation
+              <div class="input-groups">
+                <div class="input_title">
+                  <div class="float_jp">
+                    パスワード確認
+                  </div>
+                  <div class="base_en">
+                    Password Confirmation
+                  </div>
+                </div>
+                <div class="">
+                  <%= f.password_field :password_confirmation, class: "form-control input_form" %>
+                </div>
               </div>
-            </div>
-            <div class="">
-              <%= f.password_field :password_confirmation, class: "form-control input_form" %>
-            </div>
-          </div>
-          <div class="input-groups">
-            <%= f.check_box :agreement_term, class: "checkbox_input" %>
-            <div class="input_title term_check">
-              <div class="float_jp">
-                利用規約に同意する
+              <div class="input-groups">
+                <%= f.check_box :agreement_term, class: "checkbox_input" %>
+                <div class="input_title term_check">
+                  <div class="float_jp">
+                    利用規約に同意する
+                  </div>
+                  <div class="base_en">
+                    Agree our Terms of service
+                  </div>
+                </div>
               </div>
-              <div class="base_en">
-                Agree our Terms of service
+              <div class="box_srcollbar">
+                <%= render partial: "/policy/term_en" %>
+                <%= render partial: "/policy/term_jp" %>
               </div>
-            </div>
-          </div>
-          <div class="box_srcollbar">
-            <%= render partial: "/policy/term_en" %>
-            <%= render partial: "/policy/term_jp" %>
-          </div>
 
-          <div class="submit_button_cover">
-            <button type="submit"class="submit_button btn btn-default">
-              <div class="float_jp">
-                サインイン
+              <div class="submit_button_cover">
+                <button type="submit"class="submit_button btn btn-default">
+                  <div class="float_jp">
+                    サインイン
+                  </div>
+                  <div class="base_en">
+                    Sign Up
+                  </div>
+                </button>
               </div>
-              <div class="base_en">
-                Sign Up
-              </div>
-            </button>
+            <% end %>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
