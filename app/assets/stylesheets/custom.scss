@@ -10,6 +10,11 @@ p{
     display:block!important;
   }
 }
+.inline{
+  p{
+    display:inline-block!important;
+  }
+}
 .help_show{
   border-radius: 5px;
   display: inline-block;
@@ -150,6 +155,20 @@ p{
         font-size:11px;
       }
     }
+    .text_box{
+      display: inline-block;
+      vertical-align: sub;
+    }
+    .icon{
+      padding-right: 2px;
+      font-size: 18px;
+    }
+  }
+  .green_button{
+    background: #66bfbf;
+  }
+  .fullwidth_button{
+    width:100%;
   }
 }
 #successModal{

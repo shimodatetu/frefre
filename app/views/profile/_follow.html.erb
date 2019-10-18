@@ -1,0 +1,134 @@
+<div class="profile_notice">
+  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+    <div class="lang_bar">
+      <div class="country_flag en_country">
+        <%= image_tag "/eng.png", class: "image" %>
+      </div>
+      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+          data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
+      <div class="country_flag jp_country">
+        <%= image_tag "jap.png", class: "image" %>
+      </div>
+    </div>
+  </div>
+  <div class="notice_cover">
+    <div class="panel-title"style="display:inline-block">
+      <div class="panel-title-text">
+        <div class="float_jp">
+          フォロワ一覧
+        </div>
+        <div class="float_en">
+          Follower List
+        </div>
+      </div>
+    </div>
+    <% there_be = false %>
+    <% current_user.followings.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |following| %>
+      <%= link_to("/profile/7/#{following.id}" , class:"thread_link") do %>
+        <% there_be = true %>
+        <div class="thread_cover link_cover">
+          <div class="group_user_cover">
+            <div class="group_img_cover">
+              <%= image_tag "info.png", :class => "group_img" %>
+            </div>
+          </div>
+          <div class="thread_content">
+            <div class="post_content_cover">
+              <div class="user_name">
+                frefre office
+                <div class="create_time"style="float:right">
+                  <%= following.created_at.strftime('%Y/%m/%d') %>
+                </div>
+              </div>
+              <div class="post_content_position en_position">
+                <div class="thread_title">
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(following.title_en))) %>
+                  </div>
+                </div>
+                <div class="post_content">
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(following.message_en))) %>
+                  </div>
+                </div>
+                <div class="see_more">
+                  See more
+                </div>
+              </div>
+              <div class="post_content_position_space">
+                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+              </div>
+              <div class="post_content_position jp_position">
+                <div class="thread_title">
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(following.title_jp))) %>
+                  </div>
+                </div>
+                <div class="post_content">
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(following.message_jp))) %>
+                  </div>
+                </div>
+                <div class="see_more">
+                  See more
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <% if there_be == false %>
+      <div class="not_found">
+        <div class="en">
+          There is no notices.
+        </div>
+        <div class="jp">
+          お知らせはありません
+        </div>
+      </div>
+    <% else %>
+      <div class="page_button_cover">
+        <% if 1 >= @page_id.round %>
+          <div class="page_button no_push">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </div>
+        <% else %>
+          <%= link_to("/profile/#{params[:id]}/#{@page_id - 1}/#{@page_id2}",class:"page_button ok_push") do %>
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          <% end %>
+        <% end %>
+        <% if @start_num.round != 1 %>
+          <div class="page_button dot_show">
+            ...
+          </div>
+        <% end %>
+        <% for num in @start_num.round..@end_num.round do %>
+          <% if num == @page_id %>
+            <div class="page_button now_page">
+              <%= num %>
+            </div>
+          <% else %>
+            <%= link_to("/profile/#{params[:id]}/#{num}/#{@page_id2}",class:"page_button page_move") do %>
+              <%= num %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if @end_num.round != @page_num.round %>
+          <div class="page_button dot_show">
+            ...
+          </div>
+        <% end %>
+        <% if @page_num.round <= @page_id.round || @page_num.round == 1 %>
+          <div class="page_button no_push">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </div>
+        <% else %>
+          <%= link_to("/profile/#{params[:id]}/#{@page_id.round + 1}/#{@page_id2}",class:"page_button ok_push") do %>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

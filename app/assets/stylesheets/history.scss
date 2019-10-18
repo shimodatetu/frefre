@@ -1,6 +1,11 @@
 .profile_history{
   margin-left:20px;
   width:70vw;
+  .nav{
+    a{
+      padding: 8px 15px;
+    }
+  }
   .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     background-color: #dff5eaff ;
   }
@@ -13,7 +18,7 @@
     padding-top:10px;
   }
   .tab-content{
-    padding-top:100px;
+    padding-top:80px;
     .thread_cover#1{
     	border: solid 3px #bee;
     }
@@ -28,9 +33,9 @@
     cursor: default;
   }
   .nav-link{
-    font-size:18px;
+    font-size:14px;
     .jp{
-      font-size:12px;
+      font-size:10px;
     }
   }
   .nav-link:hover{
@@ -54,10 +59,10 @@
     margin-top:18px;
     margin-bottom:10px;
     padding-left:20px;
-    font-size:20px;
+    font-size:18px;
     color:#07689f;
     .float_jp{
-      font-size:12px;
+      font-size:10px;
     }
     .panel-title-text{
       display:inline-block;
@@ -101,7 +106,7 @@
 .thread_cover{
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.2));
     background-color: #ffffff;
-    padding:20px;
+    padding:10px;
     border-radius: 5px;
     margin-top:10px;
     border:solid thin #dddddd;
@@ -131,14 +136,18 @@
       margin-top:10px;
       //margin-left:calc(50% - 75px);
       margin-left:40px;
-      max-width:180px;
-      max-height:200px;
+      max-height: 150px;
+      max-width: 80%;
     }
     .thread_content{
       display: inline-block;
       vertical-align: top;
       color:#000000;
-      width:calc(100%);
+      width:calc(100% - 60px);
+      .user_name{
+        color:#365899;
+        font-weight: bold;
+      }
       .thread_title{
         padding-left:10px;
         padding-right:10px;
@@ -215,7 +224,7 @@
     z-index: 20;
     background: #dff5eaff ;
     width:calc(70% + 10px);
-    margin-top:54px;
+    margin-top: 42px;
     margin-left: 0px;
     padding-top:0px;
     position:fixed;

@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   match '/type_new' => 'category#type_new', via: [ :post ]
   get 'category/show'
   get 'category/show2'
+
+  post '/follow_other',to:'tasks#follow_other'
   post 'tasks/en',to:'tasks#lang_change_en'
   post 'tasks/jp',to:'tasks#lang_change_jp'
   post 'delete',to:'tasks#delete'
@@ -74,8 +76,10 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get "show_image"
+      get :following, :followers
     end
   end
+  resources :relationships,       only: [:create, :destroy]
   resources :notice
   resources :profile do
     member do

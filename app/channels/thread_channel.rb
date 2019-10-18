@@ -45,7 +45,7 @@ class ThreadChannel < ApplicationCable::Channel
       else
         if group.errors.any?
           group.errors.full_messages.each do |message|
-            p message
+            #p message
           end
         end
       end

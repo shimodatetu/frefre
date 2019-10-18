@@ -25,6 +25,9 @@ class SessionsController < ApplicationController
       if user.admit == true
         session[:user_id] = user.id
         signup_yet = true
+        flash["alert_en"] = "You successed to login"
+        flash["alert_jp"] = "ログインに成功しました。"
+        flash["alert_type"] = "success"
         redirect_to root_path
       end
     end

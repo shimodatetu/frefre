@@ -26,6 +26,24 @@ class TasksController < ApplicationController
     flash[:search] = params[:search_text]
   end
 
+  def follow_other
+    if params[:follow] == "true"
+      follow_id = params[:follow_id].to_i
+      if current_user.following_id?(follow_id) == nil
+        current_user.follow_id!(follow_id)
+      end
+    else
+      follow_id = params[:follow_id].to_i
+      if current_user.following_id?(follow_id) != nil
+        current_user.unfollow_id!(follow_id)
+      end
+    end
+  end
+
+  def search_inside
+    flash[:search] = params[:search_text]
+  end
+
   def search_inside_before
     search_text = params[:search_text]
     search_en = Bigcategory.find_by(name_en: search_text)

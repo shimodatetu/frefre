@@ -50,7 +50,40 @@
         <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
           <% there_be = true %>
           <div class="thread_cover">
+            <div class="group_user_cover">
+              <div class="group_img_cover">
+                <object>
+                <%= link_to "/other_profile/#{group.user.id}" do %>
+                  <% if group.user.image == 0 %>
+                    <% if group.user.photo.nil? %>
+                      <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                    <% else %>
+                      <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
+                    <% end %>
+                  <% else %>
+                    <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
+                  <% end %>
+                <% end %>
+                </object>
+              </div>
+            </div>
             <div class="thread_content">
+              <div class="user_name inline">
+                <object>
+                  <% if !logged_in? || current_user.id != group.user.id %>
+                    <%= link_to "/other_profile/#{group.user.id}" do %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to "/profile" do %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                    <% end %>
+                  <% end %>
+                  <div class="create_time"style="float:right">
+                    <%= group.created_at.strftime('%Y/%m/%d') %>
+                  </div>
+                </object>
+              </div>
               <div class="post_content_cover">
                 <div class="post_content_position en_position">
                   <div class="thread_title">
@@ -167,9 +200,26 @@
         <% end %>
         <%= link_to("/thread/show/#{link_id}",class:"thread_cover_link") do %>
           <div class="thread_cover">
+            <div class="group_user_cover">
+              <div class="group_img_cover">
+                <object>
+                <%= link_to "/other_profile/#{post.user.id}" do %>
+                  <% if post.user.image == 0 %>
+                    <% if post.user.photo.nil? %>
+                      <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                    <% else %>
+                      <%= image_tag show_image_user_path(post.user), :class => "group_img" %>
+                    <% end %>
+                  <% else %>
+                    <%= image_tag("/userimage/user#{post.user.image}.png", :class => "group_img") %>
+                  <% end %>
+                <% end %>
+                </object>
+              </div>
+            </div>
             <div class="thread_content">
               <div class="post_content_cover">
-                <% if post.photo.nil? %>
+                <% if post.image.nil? %>
                   <div class="user_name">
                     <%= post.user.name %>
                     <div class="create_time"style="float:right">
@@ -195,13 +245,23 @@
                   </div>
                 <% else %>
                   <div class="user_name">
-                    <%= post.user.name %>
-                    <div class="create_time"style="float:right">
-                      <%= post.created_at.strftime('%Y/%m/%d') %>
+                    <object>
+                      <% if !logged_in? || current_user.id != post.user.id %>
+                        <%= link_to "/other_profile/#{group.user.id}" do %>
+                          <%= simple_format(text_url_to_link(h(post.user.name))) %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to "/profile" do %>
+                          <%= simple_format(text_url_to_link(h(post.user.name))) %>
+                        <% end %>
+                      <% end %>
+                      <div class="create_time"style="float:right">
+                        <%= post.created_at.strftime('%Y/%m/%d') %>
+                      </div>
+                    </object>
+                    <div class="post_image_cover">
+                      <%= image_tag post.image, :class => "post_image" %>
                     </div>
-                  </div>
-                  <div class="post_image_cover">
-                    <%= image_tag show_post_image_thread_path(post), :class => "post_image" %>
                   </div>
                 <% end %>
               </div>

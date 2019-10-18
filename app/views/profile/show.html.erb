@@ -70,6 +70,16 @@
               </div>
             <% end %>
           </li>
+          <li class="nav-item profile_contents_button">
+            <%= link_to '/profile/8',class:"nav-link" do %>
+              <div class="jp">
+                フォロワー
+              </div>
+              <div class="en">
+                Follower
+              </div>
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>
@@ -86,6 +96,8 @@
         <%= render partial:"notice" %>
       <% elsif params[:id] == "7" %>
         <%= render partial:"detail_notice" %>
+      <% elsif params[:id] == "8" %>
+        <%= render partial:"follow" %>
       <% end %>
     </div>
   </div>
