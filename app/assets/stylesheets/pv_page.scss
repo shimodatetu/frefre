@@ -3,6 +3,16 @@
   p{
     display: inline-block;
   }
+  .top_explain{
+    font-size: 16px;
+    border: solid 3px #4398a7;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: none;
+    border-left: none;
+    text-align: center;
+    color: #4398a7;
+  }
   .thread_link:hover{
     .thread_cover#1{
     	border: solid 3px #bee;

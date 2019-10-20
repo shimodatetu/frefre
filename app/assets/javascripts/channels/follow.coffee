@@ -7,7 +7,8 @@ App.follow = App.cable.subscriptions.create "FollowChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    alert("help")
+    console.log(data)
+    $(".follow_button .glyphicon-star").removeClass('glyphicon-star').addClass('glyphicon-star-empty');
   following: (type,id)->
     @perform('following',type:type,id:id)
 
