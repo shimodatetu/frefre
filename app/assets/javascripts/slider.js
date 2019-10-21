@@ -46,12 +46,14 @@ $(function(){
         var jp_per = (1000 - value) / 10;
         //var cover_width = window.innerWidth * 0.170
         //console.log(70/cover_width*500)
-        if(value < 200){
+        if(value < 150){
+        //if(value == 0){
           $(".en_position").attr("style","display:none;");
           $(".jp_position").attr("style","width:calc(100%)");
           $(".post_content_position_space").attr("style","display:none;");
         }
-        else if(value > 800){
+        else if(value > 850){
+        //else if(value == 1000){
           $(".en_position").attr("style","width:calc(100%)");
           $(".jp_position").attr("style","display:none");
           $(".post_content_position_space").attr("style","display:none;");

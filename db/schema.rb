@@ -51,16 +51,6 @@ ActiveRecord::Schema.define(version: 2019_10_16_040350) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "follows", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "following_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["follower_id", "following_id"], name: "index_follows_on_follower_id_and_following_id", unique: true
-    t.index ["follower_id"], name: "index_follows_on_follower_id"
-    t.index ["following_id"], name: "index_follows_on_following_id"
-  end
-
   create_table "groups", force: :cascade do |t|
     t.string "title_en"
     t.string "title_jp"

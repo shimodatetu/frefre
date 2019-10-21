@@ -1,7 +1,7 @@
 .pvpage_all{
   margin-top:40px;
   p{
-    display: inline-block;
+    display: block;
   }
   .top_explain{
     font-size: 16px;
@@ -151,6 +151,9 @@
           display: inline-block;
           font-size:14px;
           width:calc(100%);
+          a{
+            display: inline-block;
+          }
           .user_name{
             color:#365899;
             font-weight: bold;

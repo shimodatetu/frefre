@@ -24,12 +24,20 @@
     </div>
     <% there_be = false %>
     <% current_user.followings.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |following| %>
-      <%= link_to("/profile/7/#{following.id}" , class:"thread_link") do %>
+      <%= link_to("/other_profile/"+following.id.to_s , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover link_cover">
           <div class="group_user_cover">
             <div class="group_img_cover">
-              <%= image_tag "info.png", :class => "group_img" %>
+              <% if following.image == 0 %>
+                <% if following.photo.nil? %>
+                  <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                <% else %>
+                  <%= image_tag show_image_user_path(following), :class => "group_img" %>
+                <% end %>
+              <% else %>
+                <%= image_tag("/userimage/user#{following.image}.png", :class => "group_img") %>
+              <% end %>
             </div>
           </div>
           <div class="thread_content">
@@ -41,14 +49,13 @@
                 </div>
               </div>
               <div class="post_content_position en_position">
-                <div class="thread_title">
-                  <div class="title_padding no_inline">
-                    <%= simple_format(text_url_to_link(h(following.title_en))) %>
-                  </div>
-                </div>
                 <div class="post_content">
                   <div class="post_content_text no_inline">
-                    <%= simple_format(text_url_to_link(h(following.message_en))) %>
+                    <% if following.profile_en == nil || following.profile_en == "" %>
+                      Profile is none.
+                    <% else %>
+                      <%= simple_format(text_url_to_link(h(following.profile_en))) %>
+                    <% end %>
                   </div>
                 </div>
                 <div class="see_more">
@@ -59,14 +66,13 @@
                 <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
               </div>
               <div class="post_content_position jp_position">
-                <div class="thread_title">
-                  <div class="title_padding no_inline">
-                    <%= simple_format(text_url_to_link(h(following.title_jp))) %>
-                  </div>
-                </div>
                 <div class="post_content">
                   <div class="post_content_text no_inline">
-                    <%= simple_format(text_url_to_link(h(following.message_jp))) %>
+                    <% if following.profile_jp == nil || following.profile_jp == "" %>
+                      プロフィールなし
+                    <% else %>
+                      <%= simple_format(text_url_to_link(h(following.profile_jp))) %>
+                    <% end %>
                   </div>
                 </div>
                 <div class="see_more">
