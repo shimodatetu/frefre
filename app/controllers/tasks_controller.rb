@@ -74,7 +74,9 @@ class TasksController < ApplicationController
     end
   end
   def logout_inner
-    logout
+  
+    current_user = nil
+    session[:user_id] = nil
     redirect_to root_path
   end
 end

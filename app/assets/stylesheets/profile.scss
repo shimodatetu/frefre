@@ -425,4 +425,25 @@ input.cmn-toggle-round:checked + label:after {
       }
     }
   }
+  .text_box{
+    .text_jp{
+      font-size: 14px;
+    }
+    .text_en{
+      font-size:18px;
+    }
+  }
+  .follow_modal_footer{
+    padding:10px;
+    .follow_modal_button{
+      padding: 3px 12px;
+      width: 60px;
+      .jp{
+        font-size:10px;
+      }
+      .en{
+        font-size:14px;
+      }
+    }
+  }
 }

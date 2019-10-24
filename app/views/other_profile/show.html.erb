@@ -20,7 +20,7 @@
       </div>
     </div>
     <% if logged_in? %>
-      <div class="follow_button">
+      <div class="follow_button<%= other_user_id %>">
         <% if current_user.followings.find_by(id: other_user_id) %>
           <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:other_user_id do %>
             <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
@@ -38,7 +38,7 @@
             <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
             <div class="text_box">
               <div class="jp">
-                フォロー
+                フォローする
               </div>
               <div class="en">
                 Follow
@@ -200,5 +200,42 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="follow_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              フォローを解除してもよろしいですか？
+            </div>
+            <div class="text_en">
+              Is it ok to unfollow him or her?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-primary unfollow_modal_submit follow_modal_button">
+            <div class="jp">
+              実行
+            </div>
+            <div class="en">
+              OK
+            </div>
+          </button>
+          <button type="button" class="btn btn-default follow_modal_button" data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
+        </div>
+  		</div>
+  	</div>
   </div>
 </div>

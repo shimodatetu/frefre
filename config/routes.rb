@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'manager/show'
   get 'auth/:provider/callback', to: 'sessions#login_auth'
   get '/users/auth/:provider/callback', to: 'sessions#login_auth'
   get 'auth/failure', to: redirect('/groups')

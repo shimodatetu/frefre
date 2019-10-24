@@ -46,6 +46,14 @@
   .thread_cover#1{
   	border: solid 3px #bee;
   }
+  .follow_cover{
+    width: 250px;
+    display: inline-block;
+    margin-left: 15px;
+    .thread_content{
+      vertical-align: baseline!important;
+    }
+  }
   .thread_cover{
     background-color: #ffffff;
     padding:10px;
@@ -71,7 +79,8 @@
         padding-top:1px;
         font-size:15px;
         text-align: center;
-        color:#000000;
+        color:#365899;
+        font-weight: bold;
       }
     }
     .post_image{

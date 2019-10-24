@@ -50,7 +50,6 @@ p{
   }
 }
 
-
 .help_modal{
   .modal-dialog{
     width:60vw;
@@ -173,7 +172,17 @@ p{
   .fullwidth_button{
     width:100%;
   }
+  .follow_button_submit{
+    color:#ff9d3b;
+    border-color:#ff9d3b;
+    background:#fff;
+  }
+
+  .unfollow_button_submit{
+
+  }
 }
+
 #successModal{
   .modal-dialog{
     border-radius: 5px;

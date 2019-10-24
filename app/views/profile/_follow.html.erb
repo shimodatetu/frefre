@@ -23,68 +23,61 @@
       </div>
     </div>
     <% there_be = false %>
-    <% current_user.followings.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |following| %>
-      <%= link_to("/other_profile/"+following.id.to_s , class:"thread_link") do %>
-        <% there_be = true %>
-        <div class="thread_cover link_cover">
-          <div class="group_user_cover">
-            <div class="group_img_cover">
-              <% if following.image == 0 %>
-                <% if following.photo.nil? %>
-                  <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+    <div class="follow_all">
+        <% current_user.followings.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |following| %>
+          <% there_be = true %>
+          <div class="thread_cover link_cover follow_cover">
+            <div class="group_user_cover">
+              <div class="group_img_cover">
+                <% if following.image == 0 %>
+                  <% if following.photo.nil? %>
+                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                  <% else %>
+                    <%= image_tag show_image_user_path(following), :class => "group_img" %>
+                  <% end %>
                 <% else %>
-                  <%= image_tag show_image_user_path(following), :class => "group_img" %>
+                  <%= image_tag("/userimage/user#{following.image}.png", :class => "group_img") %>
                 <% end %>
-              <% else %>
-                <%= image_tag("/userimage/user#{following.image}.png", :class => "group_img") %>
-              <% end %>
+              </div>
+              <div class="group_name">
+                <%= simple_format(text_url_to_link(h(following.name))) %>
+              </div>
             </div>
-          </div>
-          <div class="thread_content">
-            <div class="post_content_cover">
-              <div class="user_name">
-                frefre office
-                <div class="create_time"style="float:right">
-                  <%= following.created_at.strftime('%Y/%m/%d') %>
-                </div>
-              </div>
-              <div class="post_content_position en_position">
-                <div class="post_content">
-                  <div class="post_content_text no_inline">
-                    <% if following.profile_en == nil || following.profile_en == "" %>
-                      Profile is none.
-                    <% else %>
-                      <%= simple_format(text_url_to_link(h(following.profile_en))) %>
+            <div class="thread_content">
+              <div class="post_content_cover">
+                <div class="follow_button<%= following.id %>">
+                  <% if current_user.followings.find_by(id: following.id) %>
+                    <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:following.id do %>
+                      <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
+                      <div class="text_box">
+                        <div class="jp">
+                          フォロー中
+                        </div>
+                        <div class="en">
+                          Following
+                        </div>
+                      </div>
                     <% end %>
-                  </div>
-                </div>
-                <div class="see_more">
-                  See more
-                </div>
-              </div>
-              <div class="post_content_position_space">
-                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-              </div>
-              <div class="post_content_position jp_position">
-                <div class="post_content">
-                  <div class="post_content_text no_inline">
-                    <% if following.profile_jp == nil || following.profile_jp == "" %>
-                      プロフィールなし
-                    <% else %>
-                      <%= simple_format(text_url_to_link(h(following.profile_jp))) %>
+                  <% else %>
+                    <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button follow_button_submit",id:following.id do %>
+                      <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
+                      <div class="text_box">
+                        <div class="jp">
+                          フォローする
+                        </div>
+                        <div class="en">
+                          Follow
+                        </div>
+                      </div>
                     <% end %>
-                  </div>
-                </div>
-                <div class="see_more">
-                  See more
+                  <% end %>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    <% end %>
-    <% if there_be == false %>
+        <% end %>
+      </div>
+      <% if there_be == false %>
       <div class="not_found">
         <div class="en">
           There is no notices.
@@ -136,5 +129,42 @@
         <% end %>
       </div>
     <% end %>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="follow_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              フォローを解除してもよろしいですか？
+            </div>
+            <div class="text_en">
+              Is it ok to unfollow him or her?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-primary unfollow_modal_submit follow_modal_button">
+            <div class="jp">
+              実行
+            </div>
+            <div class="en">
+              OK
+            </div>
+          </button>
+          <button type="button" class="btn btn-default follow_modal_button"data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
+        </div>
+  		</div>
+  	</div>
   </div>
 </div>
