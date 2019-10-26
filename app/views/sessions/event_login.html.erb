@@ -1,0 +1,75 @@
+
+<div class="login_page_cover">
+  <div class="login_page">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="title">
+          <div class="float_jp">
+            ログイン
+          </div>
+          <div class="base_en">
+            Log In
+          </div>
+        </div>
+        <% if !flash["failed_en"].nil? || !flash["failed_en"].nil? %>
+          <div class="alert alert-danger alert-message" role="alert">
+            <div class="error_jp">
+              <%= flash["failed_jp"] %>
+            </div>
+            <div class="error_en">
+              <%= flash["failed_en"] %>
+            </div>
+          </div>
+          <% flash["failed_en"] = nil %>
+          <% flash["failed_jp"] = nil %>
+        <% end %>
+        <div class="event_login_form">
+          <%= form_for :session, url: login2_path do |f| %>
+            <%= f.hidden_field :id,value:1%>
+            <button class="image_login"type="submit">
+              <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+            </button>
+            <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+              <div class="text_box">
+                <div class="jp">
+                  ユーザー①でログイン
+                </div>
+              </div>
+            </button>
+          <% end %>
+        </div>
+        <div class="event_login_form">
+          <%= form_for :session, url: login2_path do |f| %>
+            <%= f.hidden_field :id,value:2%>
+            <button class="image_login"type="submit">
+              <%= image_tag("/userimage/user2.png", :class => "group_img") %>
+            </button>
+            <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+              <div class="text_box">
+                <div class="jp">
+                  ユーザー②でログイン
+                </div>
+              </div>
+            </button>
+          <% end %>
+        </div>
+
+        <div class="event_login_form">
+          <%= form_for :session, url: login2_path do |f| %>
+            <%= f.hidden_field :id,value:3%>
+            <button class="image_login"type="submit">
+              <%= image_tag("/userimage/user3.png", :class => "group_img") %>
+            </button>
+            <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+              <div class="text_box">
+                <div class="jp">
+                  ユーザー③でログイン
+                </div>
+              </div>
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

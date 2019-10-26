@@ -2,6 +2,63 @@
   ::-webkit-input-placeholder {
     color: #bbbbbb;
   }
+  .nav{
+    a{
+      padding: 8px 15px;
+    }
+  }
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #dff5eaff ;
+  }
+  .nav-tabs{
+    position: fixed;
+    background-color: #fff;
+    z-index:5;
+    width:calc(70% + 10px);
+    margin-top:-20px;
+    padding-top:10px;
+  }
+
+  .no_lang_bar{
+    padding-top:20px!important;
+  }
+  .tab-content{
+    padding-top:80px;
+    .thread_cover#1{
+    	border: solid 3px #bee;
+    }
+    .thread_cover{
+      filter:none;
+    }
+  }
+  .nav-link:hover{
+    background-color: #dff5eaff ;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+  }
+  .nav-link{
+    font-size:14px;
+    .jp{
+      font-size:10px;
+    }
+  }
+  .nav-link:hover{
+    color:#07689f!important;
+  }
+  .active{
+    .nav-link{
+      color:#07689f!important;
+    }
+  }
+  .tab-pane.active{
+    display:block!important;
+    opacity:10!important;
+  }
+  .tab-pane:not(.active){
+    display:none!important;
+    font-size:10px;
+  }
   [disabled]{
     background: #fff;
     -webkit-appearance: none;

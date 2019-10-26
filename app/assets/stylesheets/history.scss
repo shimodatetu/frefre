@@ -1,51 +1,7 @@
 .profile_history{
   margin-left:20px;
   width:70vw;
-  .nav{
-    a{
-      padding: 8px 15px;
-    }
-  }
-  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    background-color: #dff5eaff ;
-  }
-  .nav-tabs{
-    position: fixed;
-    background-color: #fff;
-    z-index:5;
-    width:calc(70% + 10px);
-    margin-top:-20px;
-    padding-top:10px;
-  }
-  .tab-content{
-    padding-top:80px;
-    .thread_cover#1{
-    	border: solid 3px #bee;
-    }
-    .thread_cover{
-      filter:none;
-    }
-  }
-  .nav-link:hover{
-    background-color: #dff5eaff ;
-    border: 1px solid #ddd;
-    border-bottom-color: transparent;
-    cursor: default;
-  }
-  .nav-link{
-    font-size:14px;
-    .jp{
-      font-size:10px;
-    }
-  }
-  .nav-link:hover{
-    color:#07689f!important;
-  }
-  .active{
-    .nav-link{
-      color:#07689f!important;
-    }
-  }
+
   .thread_link:hover{
     .thread_cover#1{
     	border: solid 3px #bee;
@@ -86,24 +42,16 @@
   .pvpage_head{
     border-top:3px solid #ff9d3b;
   }
-  .tab-pane.active{
-    display:block!important;
-    opacity:10!important;
-  }
-  .tab-pane:not(.active){
-    display:none!important;
-    font-size:10px;
-  }
   .thread_cover#1{
-	border: solid 3px #bee;
-}
-.thread_cover:hover{
+	  border: solid 3px #bee;
+  }
+  .thread_cover:hover{
     background: #dff5eaff ;
   }
   .thread_cover#1{
-	border: solid 3px #bee;
-}
-.thread_cover{
+  	border: solid 3px #bee;
+  }
+  .thread_cover{
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.2));
     background-color: #ffffff;
     padding:10px;

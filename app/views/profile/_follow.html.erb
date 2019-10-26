@@ -1,134 +1,243 @@
 <div class="profile_notice">
-  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
-    <div class="lang_bar">
-      <div class="country_flag en_country">
-        <%= image_tag "/eng.png", class: "image" %>
-      </div>
-      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-          data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
-      <div class="country_flag jp_country">
-        <%= image_tag "jap.png", class: "image" %>
-      </div>
-    </div>
-  </div>
-  <div class="notice_cover">
-    <div class="panel-title"style="display:inline-block">
-      <div class="panel-title-text">
-        <div class="float_jp">
-          フォロワ一覧
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item
+    <% if params[:id] == "8" %>
+      <%= "active" %>
+    <% end %>">
+      <a class="nav-link profile_history_change8" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="true">
+        <div class="jp">
+          フォロー
         </div>
-        <div class="float_en">
-          Follower List
+        <div class="en">
+          Following
         </div>
-      </div>
-    </div>
-    <% there_be = false %>
-    <div class="follow_all">
-        <% current_user.followings.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |following| %>
-          <% there_be = true %>
-          <div class="thread_cover link_cover follow_cover">
-            <div class="group_user_cover">
-              <div class="group_img_cover">
-                <% if following.image == 0 %>
-                  <% if following.photo.nil? %>
-                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-                  <% else %>
-                    <%= image_tag show_image_user_path(following), :class => "group_img" %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag("/userimage/user#{following.image}.png", :class => "group_img") %>
-                <% end %>
-              </div>
-              <div class="group_name">
-                <%= simple_format(text_url_to_link(h(following.name))) %>
-              </div>
-            </div>
-            <div class="thread_content">
-              <div class="post_content_cover">
-                <div class="follow_button<%= following.id %>">
-                  <% if current_user.followings.find_by(id: following.id) %>
-                    <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:following.id do %>
-                      <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
-                      <div class="text_box">
-                        <div class="jp">
-                          フォロー中
-                        </div>
-                        <div class="en">
-                          Following
-                        </div>
-                      </div>
+      </a>
+    </li>
+    <li class="nav-item
+    <% if params[:id] == "9" %>
+      <%= "active" %>
+    <% end %>">
+      <a class="nav-link profile_history_change9" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">
+        <div class="jp">
+          フォロワー
+        </div>
+        <div class="en">
+          Follower
+        </div>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content no_lang_bar" id="myTabContent">
+    <div class="notice_cover">
+      <div class="follow_all">
+        <div class="tab-pane fade show
+        <% if params[:id] == "8" %>
+          <%= "active" %>
+        <% end %>" id="following" role="tabpanel" aria-labelledby="following-tab">
+          <% there_be = false %>
+          <% current_user.followings.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |following| %>
+            <% there_be = true %>
+            <div class="thread_cover link_cover follow_cover">
+              <div class="group_user_cover">
+                <div class="group_img_cover">
+                  <% if following.image == 0 %>
+                    <% if following.photo.nil? %>
+                      <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                    <% else %>
+                      <%= image_tag show_image_user_path(following), :class => "group_img" %>
                     <% end %>
                   <% else %>
-                    <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button follow_button_submit",id:following.id do %>
-                      <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
-                      <div class="text_box">
-                        <div class="jp">
-                          フォローする
-                        </div>
-                        <div class="en">
-                          Follow
-                        </div>
-                      </div>
-                    <% end %>
+                    <%= image_tag("/userimage/user#{following.image}.png", :class => "group_img") %>
                   <% end %>
+                </div>
+                <div class="group_name">
+                  <%= simple_format(text_url_to_link(h(following.name))) %>
+                </div>
+              </div>
+              <div class="thread_content">
+                <div class="post_content_cover">
+                  <div class="follow_button<%= following.id %>">
+                    <% if current_user.followings.find_by(id: following.id) %>
+                      <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:following.id do %>
+                        <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
+                        <div class="text_box">
+                          <div class="jp">
+                            フォロー中
+                          </div>
+                          <div class="en">
+                            Following
+                          </div>
+                        </div>
+                      <% end %>
+                    <% else %>
+                      <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button follow_button_submit",id:following.id do %>
+                        <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
+                        <div class="text_box">
+                          <div class="jp">
+                            フォローする
+                          </div>
+                          <div class="en">
+                            Follow
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-      <% if there_be == false %>
-      <div class="not_found">
-        <div class="en">
-          There is no notices.
-        </div>
-        <div class="jp">
-          お知らせはありません
-        </div>
-      </div>
-    <% else %>
-      <div class="page_button_cover">
-        <% if 1 >= @page_id.round %>
-          <div class="page_button no_push">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </div>
-        <% else %>
-          <%= link_to("/profile/#{params[:id]}/#{@page_id - 1}/#{@page_id2}",class:"page_button ok_push") do %>
-            <span class="glyphicon glyphicon-chevron-left"></span>
           <% end %>
-        <% end %>
-        <% if @start_num.round != 1 %>
-          <div class="page_button dot_show">
-            ...
-          </div>
-        <% end %>
-        <% for num in @start_num.round..@end_num.round do %>
-          <% if num == @page_id %>
-            <div class="page_button now_page">
-              <%= num %>
+          <% if there_be == false %>
+            <div class="not_found">
+              <div class="en">
+                There is no followings.
+              </div>
+              <div class="jp">
+                フォロー中のユーザーはいません
+              </div>
             </div>
           <% else %>
-            <%= link_to("/profile/#{params[:id]}/#{num}/#{@page_id2}",class:"page_button page_move") do %>
-              <%= num %>
-            <% end %>
+            <div class="page_button_cover">
+              <% if 1 >= @page_id.round %>
+                <div class="page_button no_push">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </div>
+              <% else %>
+                <%= link_to("/profile/#{params[:id]}/#{@page_id - 1}/#{@page_id2}",class:"page_button ok_push") do %>
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                <% end %>
+              <% end %>
+              <% if @start_num.round != 1 %>
+                <div class="page_button dot_show">
+                  ...
+                </div>
+              <% end %>
+              <% for num in @start_num.round..@end_num.round do %>
+                <% if num == @page_id %>
+                  <div class="page_button now_page">
+                    <%= num %>
+                  </div>
+                <% else %>
+                  <%= link_to("/profile/#{params[:id]}/#{num}/#{@page_id2}",class:"page_button page_move") do %>
+                    <%= num %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <% if @end_num.round != @page_num.round %>
+                <div class="page_button dot_show">
+                  ...
+                </div>
+              <% end %>
+              <% if @page_num.round <= @page_id.round || @page_num.round == 1 %>
+                <div class="page_button no_push">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </div>
+              <% else %>
+                <%= link_to("/profile/#{params[:id]}/#{@page_id.round + 1}/#{@page_id2}",class:"page_button ok_push") do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                <% end %>
+              <% end %>
+            </div>
           <% end %>
-        <% end %>
-        <% if @end_num.round != @page_num.round %>
-          <div class="page_button dot_show">
-            ...
-          </div>
-        <% end %>
-        <% if @page_num.round <= @page_id.round || @page_num.round == 1 %>
-          <div class="page_button no_push">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </div>
-        <% else %>
-          <%= link_to("/profile/#{params[:id]}/#{@page_id.round + 1}/#{@page_id2}",class:"page_button ok_push") do %>
-            <span class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+        <div class="tab-pane fade
+          <% if params[:id] == "9" %>
+            <%= 'active' %>
+          <% end %>" id="follower" role="tabpanel" aria-labelledby="follower-tab">
+          <% there_be = false %>
+          <% current_user.followers.offset(@thread_page_num2*(@page_id2 - 1)).limit(@thread_page_num2).each do |follower| %>
+            <% there_be = true %>
+            <div class="thread_cover link_cover follow_cover">
+              <div class="group_user_cover">
+                <div class="group_img_cover">
+                  <% if follower.image == 0 %>
+                    <% if following.photo.nil? %>
+                      <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                    <% else %>
+                      <%= image_tag show_image_user_path(follower), :class => "group_img" %>
+                    <% end %>
+                  <% else %>
+                    <%= image_tag("/userimage/user#{follower.image}.png", :class => "group_img") %>
+                  <% end %>
+                </div>
+                <div class="group_name">
+                  <%= simple_format(text_url_to_link(h(follower.name))) %>
+                </div>
+              </div>
+              <div class="thread_content">
+                <div class="post_content_cover">
+                  <div class="follow_button<%= follower.id %>">
+                    <div class="btn mes_button normal_button fullwidth_button">
+                      <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
+                      <div class="text_box">
+                        <div class="jp">
+                          フォロワー
+                        </div>
+                        <div class="en">
+                          Follower
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
-        <% end %>
+          <% if there_be == false %>
+            <div class="not_found">
+              <div class="en">
+                There is no follower.
+              </div>
+              <div class="jp">
+                フォロワーはいません。
+              </div>
+            </div>
+          <% else %>
+            <div class="page_button_cover">
+              <% if 1 >= @page_id2.round %>
+                <div class="page_button no_push">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </div>
+              <% else %>
+                <%= link_to("/profile/#{params[:id]}/#{@page_id - 1}/#{@page_id2}",class:"page_button ok_push") do %>
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                <% end %>
+              <% end %>
+              <% if @start_num2.round != 1 %>
+                <div class="page_button dot_show">
+                  ...
+                </div>
+              <% end %>
+              <% for num in @start_num2.round..@end_num2.round do %>
+                <% if num == @page_id2 %>
+                  <div class="page_button now_page">
+                    <%= num %>
+                  </div>
+                <% else %>
+                  <%= link_to("/profile/#{params[:id]}/#{num}/#{@page_id2}",class:"page_button page_move") do %>
+                    <%= num %>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <% if @end_num2.round != @page_num2.round %>
+                <div class="page_button dot_show">
+                  ...
+                </div>
+              <% end %>
+              <% if @page_num2.round <= @page_id2.round || @page_num2.round == 1 %>
+                <div class="page_button no_push">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </div>
+              <% else %>
+                <%= link_to("/profile/#{params[:id]}/#{@page_id.round + 1}/#{@page_id2}",class:"page_button ok_push") do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>
 

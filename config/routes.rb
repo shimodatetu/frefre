@@ -1,14 +1,35 @@
 Rails.application.routes.draw do
 
+  #resources :manager
   get 'manager/show'
+  get 'manager/search_post'
+  get 'manager/search_thread'
+  get 'manager/search_user'
+
+  post 'searcher/groups',to:'manager#search'
+  post '/manager/post',to:'manager#searcher_post'
+  post '/manager/profile',to:'manager#searcher_profile'
+  post '/manager/mail',to:'manager#searcher_mail'
+  post '/manager/user',to:'manager#searcher_user'
+
   get 'auth/:provider/callback', to: 'sessions#login_auth'
   get '/users/auth/:provider/callback', to: 'sessions#login_auth'
   get 'auth/failure', to: redirect('/groups')
   get 'signout', to: 'sessions#destroy', as: 'signout'
-
+  get 'sessions/index'
+  get 'sessions/new'
+  get '/sessions/event_login'
   get 'sessions/oauth_complete'
   post 'session/create_oauth'
   post 'create_oauth',to:'sessions#create_oauth'
+
+  get "/oauth_complete", to:"sessions#oauth_complete"
+  get    '/login',   to: 'sessions#index'
+  post   '/login',   to: 'sessions#login_post'
+  post   '/login2',   to: 'sessions#login_post2'
+  delete '/logout',  to: 'sessions#destroy'
+
+
   post 'user_info',to:'office#user_info'
   get 'user_office',to:'office#user_office'
 
@@ -44,15 +65,15 @@ Rails.application.routes.draw do
   post 'tasks/en',to:'tasks#lang_change_en'
   post 'tasks/jp',to:'tasks#lang_change_jp'
   post 'delete',to:'tasks#delete'
+
   post 'search/header',to:'tasks#search'
+
   post 'search/inside',to:'tasks#search_inside'
   post 'logout/inner',to:'tasks#logout_inner'
   get 'signup',to:'users#index'
   get 'thread/show/:id' => 'thread#show'
   get 'thread/show/:id/:page' => 'thread#show'
   get 'thread_all/show/:id' => 'thread_all#show'
-  get 'sessions/index'
-  get 'sessions/new'
   get 'posts/index'
   post "posts",to: "posts#create",as: "posts"
   post "chats",to: "chats#create",as: "chats"
@@ -97,10 +118,6 @@ Rails.application.routes.draw do
       get "show_image"
     end
   end
-  get "/oauth_complete", to:"sessions#oauth_complete"
-  get    '/login',   to: 'sessions#index'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
   root 'pv_page#show'
 
   get 'home/:id' => 'pv_page#show'

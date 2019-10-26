@@ -176,7 +176,6 @@
     <% end %>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <% show_group_id = -1 %>
       <% there_be = false %>
-
       <% current_user.posts.offset(@thread_page_num2*(@page_id2 - 1)).limit(@thread_page_num2).each do |post| %>
         <% if show_group_id != post.group_id %>
           <% show_group_id = post.group_id %>

@@ -13,12 +13,18 @@
     <%= javascript_include_tag 'application' %>
   </head>
   <body>
-    <%= render partial:'layouts/header' %>
-    <div class="main_content_cover"id="main_content_cover">
+    <% if url.include?('manager') %>
+      <%= render partial:'manager/header' %>
+      <div class="main_content_cover manager_content_cover"id="main_content_cover">
+    <% else %>
+      <%= render partial:'layouts/header' %>
+      <div class="main_content_cover"id="main_content_cover">
+    <% end %>
       <%= yield %>
     </div>
     <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
-    !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') %>
+    !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
+    !url.include?('manager') %>
       <div class="sub_content_cover">
         <%#= image_tag "/samune3.png", class: "image" %>
         <!--iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->

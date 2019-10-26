@@ -172,14 +172,28 @@ p{
   .fullwidth_button{
     width:100%;
   }
+  .glyphicon-star{
+    vertical-align: middle;
+  }
+  .glyphicon-star-empty{
+    vertical-align: middle;
+  }
   .follow_button_submit{
     color:#ff9d3b;
     border-color:#ff9d3b;
     background:#fff;
   }
-
   .unfollow_button_submit{
 
+  }
+}
+.manager_content_cover{
+  width:95vw;
+  padding-top:50px;
+  .thread_cover{
+    padding: 5px!important;
+    border-radius: 0px!important;
+    margin-bottom: 0px!important;
   }
 }
 
