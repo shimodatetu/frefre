@@ -1,4 +1,18 @@
 $(function(){
+  ok = true
+  if(ok == true){
+    $.ajax({
+      url: "https://apigw.mirai-api.net/trial/mt/v1.0/translate",
+      type: 'POST',
+      data: { subscription-key:'905b204cd12b4ab5b57881a353724123', en: 'おはよう' }
+    }).then(data　=> {
+      console.log(data.results[0]['reply']),
+      error => alert('エラー')
+    }）
+    ok = false
+  }
+
+
   var last_elem;
   var id = -1;
   $('.thread_page .thread_cover').each(function(i, elem){

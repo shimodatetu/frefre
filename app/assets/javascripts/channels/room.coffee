@@ -143,7 +143,7 @@ translate_google=(lang,words) ->
   if lang == 'en'
     source = "ja"
   key = window.ENV.RailsEnv
-  key = "905b204cd12b4ab5b57881a353724123"
+  #key = "905b204cd12b4ab5b57881a353724123"
   url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate'
   $.ajax(
     url: url
