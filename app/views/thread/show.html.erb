@@ -97,6 +97,9 @@
           </div>
         </div>
 			</div>
+      <!--<%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+        Powerd by MT
+      <% end %>-->
       <div class="post_footer_simple">
         <div class="post_button_cover thread_send">
           <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="post"
@@ -109,17 +112,6 @@
               Post
             </div>
           </button>
-          <!--<button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans"
-          name="<% if logged_in? %>logined<% end %>">
-            <div class="glyphicon glyphicon-comment picture_send"></div>
-            <div class="button_text">
-              <div class="float_jp">
-                翻訳
-              </div>
-              Translate
-            </div>
-          </button>-->
-          <%#= form_for @post,remote: true, :html => {:class => "image_post post_button_form"} do |f| %>
           <form class="thread_image_post post_button_form">
             <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
@@ -130,14 +122,14 @@
                 Image
               </div>
             </label>
-            <%#= f.file_field :photo,:id => "file_send", :class => "post_file", :style => "display:none"%>
             <input type="file"id="file_send"class="post_file"style="display:none">
             <input type="hidden"id="group" name="group" value="<%= params[:id] %>">
-            <%#= f.hidden_field :group_id,value: params[:id] %>
           </form>
-          <%# end %>
         </div>
-      </div>
+        <!--<%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+          翻訳提供　未来翻訳
+        <% end %>
+      </div>-->
     </div>
     <div class="page_button_cover">
       <% if 1 >= @page_id %>

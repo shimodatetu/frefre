@@ -1,7 +1,6 @@
 class PvPageController < ApplicationController
   def show
     @groups = Group.all.where("deleted = false")
-    User.find(1).update(usertype:"manager")
     #p request.env["omniauth.auth"]
     #set_group_data
   end

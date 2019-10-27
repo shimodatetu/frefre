@@ -2,13 +2,18 @@ Rails.application.routes.draw do
 
   get 'manager/show'
   get 'manager/search_post'
+  get 'manager/search_post_detail'
+  get 'manager/search_post_detail/:id' => 'manager#search_post_detail'
   get 'manager/search_thread'
   get 'manager/search_thread_detail'
   get 'manager/search_thread_detail/:id' => 'manager#search_thread_detail'
   get 'manager/search_user'
+  get 'manager/search_user_detail'
+  get 'manager/search_user_detail/:id' => 'manager#search_user_detail'
   get '/manager/prohibit'
 
   post 'mangaer/thread_delete', to:'manager#thread_delete'
+  post 'mangaer/post_delete', to:'manager#post_delete'
   post 'searcher/groups',to:'manager#search'
   post '/manager/post',to:'manager#searcher_post'
   post '/manager/profile',to:'manager#searcher_profile'

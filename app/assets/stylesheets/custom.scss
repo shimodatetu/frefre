@@ -107,6 +107,19 @@ p{
   padding-left:2%;
   width:calc(70%);
   display: inline-block;
+  .mirai_logo{
+    text-decoration: none;
+    position: absolute;
+    margin-top: 10px;
+    font-size: 16px;
+    border-bottom: solid thin;
+  }
+  .left_logo{
+    margin-left: 15px;
+  }
+  .right_logo{
+    margin-left: calc(30% - 220px);
+  }
   .top_explain{
     font-size:14px;
   }

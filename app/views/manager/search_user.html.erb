@@ -4,7 +4,7 @@
 <% end %>
 
 <% lang = session["lang"] %>
-<div class="search_result">
+<div class="search_result"style="margin-top: 50px;">
   <div class="category_show">
     <%= form_tag('/manager/search_user',method: :post,class: "search_form_top") do %>
       <%= text_field_tag :search_text ,search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
@@ -30,7 +30,7 @@
       <% page_id = 1 %>
     <% end %>
     <% search_users.offset(show_max*(page_id - 1)).limit(show_max).each do |user| %>
-      <%= link_to("/thread/show/#{user.id}" , class:"thread_link") do %>
+      <%= link_to("/manager/search_user_detail/#{user.id}" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover">
           <div class="group_user_cover">

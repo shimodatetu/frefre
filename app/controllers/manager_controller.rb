@@ -34,6 +34,13 @@ class ManagerController < ApplicationController
     end
     redirect_to "/manager/search_thread"
   end
+  def post_delete
+    id = params[:id]
+    if post = Post.find_by(id:id)
+      post.update(deleted:true)
+    end
+    redirect_to "/manager/search_post"
+  end
   def search_user
     @users = User.all
   end

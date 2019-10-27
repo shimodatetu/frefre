@@ -1,0 +1,114 @@
+<% lang = session["lang"] %>
+<% session["now_group"] = params[:id] %>
+<% user = User.find(params[:id]) %>
+
+<div class="search_result"style="margin-top:50px">
+  <div class="thread_all">
+    <% there_be = false %>
+    <%= link_to("/thread/show/#{user.id}" , class:"thread_link") do %>
+      <% there_be = true %>
+      <div class="thread_cover">
+        <div class="group_user_cover">
+          <div class="group_img_cover">
+            <object>
+            <%= link_to "/other_profile/#{user.id}" do %>
+              <% if user.image == 0 %>
+                <% if user.photo.nil? %>
+                  <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                <% else %>
+                  <%= image_tag show_image_user_path(user), :class => "group_img" %>
+                <% end %>
+              <% else %>
+                <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
+              <% end %>
+            <% end %>
+            </object>
+          </div>
+        </div>
+        <div class="thread_content">
+          <div class="post_content_cover">
+            <div class="user_name">
+              <object>
+              <% if !logged_in? || current_user.id !=user.id %>
+                <%= link_to "/other_profile/#{user.id}" do %>
+                  <%= simple_format(text_url_to_link(h(user.name))) %>
+                <% end %>
+              <% else %>
+                <%= link_to "/profile" do %>
+                  <%= simple_format(text_url_to_link(h(user.name))) %>
+                <% end %>
+              <% end %>
+              </object>
+            </div>
+            <div class="post_content_position en_position">
+              <div class="thread_title">
+                <div class="title_padding no_inline">
+                  <%= simple_format(text_url_to_link(h(user.email))) %>
+                </div>
+              </div>
+              <div class="post_content en">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(user.profile_en))) %>
+                </div>
+              </div>
+            </div>
+            <div class="post_content_position_space">
+              <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+            </div>
+            <div class="post_content_position jp_position">
+              <div class="thread_title">
+                <div class="title_padding no_inline">
+                  <%= simple_format(text_url_to_link(h(user.email))) %>
+                </div>
+              </div>
+              <div class="post_content en">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(user.profile_jp))) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
+    <%= hidden_field_tag :id,params[:id].to_i %>
+    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+      <div class="text_box">
+        <div class="jp">
+          消去
+        </div>
+        <div class="en">
+          Delete
+        </div>
+      </div>
+    </button>
+  <% end %>
+  <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
+    <%= hidden_field_tag :id,params[:id].to_i %>
+    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+      <div class="text_box">
+        <div class="jp">
+          消去
+        </div>
+        <div class="en">
+          Delete
+        </div>
+      </div>
+    </button>
+  <% end %>
+  <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
+    <%= hidden_field_tag :id,params[:id].to_i %>
+    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+      <div class="text_box">
+        <div class="jp">
+          消去
+        </div>
+        <div class="en">
+          Delete
+        </div>
+      </div>
+    </button>
+  <% end %>
+</div>

@@ -30,7 +30,7 @@
       <% page_id = 1 %>
     <% end %>
     <% search_posts.offset(show_max*(page_id - 1)).limit(show_max).each do |post| %>
-      <%= link_to("/thread/show/#{post.id}" , class:"thread_link") do %>
+      <%= link_to("/manager/search_post_detail/"+post.id.to_s , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover">
           <div class="group_user_cover">

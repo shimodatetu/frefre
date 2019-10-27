@@ -138,34 +138,23 @@ type_check=(type)->
       else
         translate_google("ja",text_en)
 
-translate_google2=(lang,words) ->
-
+translate_google=(lang,words) ->
   source = "en"
   if lang == 'en'
     source = "ja"
   key = window.ENV.RailsEnv
-  data = new FormData
-  if lang == 'en'
-    source = "ja"
-    data.append 'q', words
-  else
-    source = "en"
-    data.append 'q', words
+  key = "905b204cd12b4ab5b57881a353724123"
+  url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate'
+  $.ajax(
+    url: url
+    type: 'POST'
+    data:
+      'ja':words
+      'subscription-key':'905b204cd12b4ab5b57881a353724123'
+  ).done(res) ->
+    console.log(res)
 
-  data.append 'target', lang
-  data.append 'source', source
-  data.append 'format', "text"
-  method = "POST"
-  body = Object.keys(data).map((key)=>key+"="+encodeURIComponent(obj[key])).join("&");
-
-  mode = 'no-cors'
-  headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-  };
-  fetch("https://translation.googleapis.com/language/translate/v2", {method, headers, mode, body}).then((res)=> res.json()).then(console.log).catch(console.error);
-
-translate_google=(lang,words) ->
+translate_google2=(lang,words) ->
   source = "en"
   if lang == 'en'
     source = "ja"
@@ -178,6 +167,9 @@ translate_google=(lang,words) ->
   data.append 'format', "html"
   settings =
     method: 'POST'
+    header:{
+      header:"Access-Control-Allow-Origin: *"
+    }
     body: data
   fetch(url, settings).then((res) ->
     res.text()
