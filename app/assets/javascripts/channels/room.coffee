@@ -139,7 +139,7 @@ type_check=(type)->
       else
         translate_google("ja",text_en)
 
-translate_google=(lang,words) ->
+translate_google2=(lang,words) ->
 
   source = "en"
   if lang == 'en'
@@ -166,41 +166,28 @@ translate_google=(lang,words) ->
   };
   fetch("https://translation.googleapis.com/language/translate/v2", {method, headers, mode, body}).then((res)=> res.json()).then(console.log).catch(console.error);
 
-translate_google2=(lang,words) ->
-
+translate_google=(lang,words) ->
   source = "en"
   if lang == 'en'
     source = "ja"
   key = window.ENV.RailsEnv
-  url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate/key='+key
+  url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
   data = new FormData
-  if lang == 'en'
-    source = "ja"
-    data.append 'ja', words
-  else
-    source = "en"
-    data.append 'en', words
-
+  data.append 'q', words
   data.append 'target', lang
   data.append 'source', source
-  data.append 'format', "text"
+  data.append 'format', "html"
   settings =
-    method: 'POST',
-    mode: 'no-cors',
+    method: 'POST'
     body: data
-    headers : {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-    }
   fetch(url, settings).then((res) ->
     res.text()
-    console.log(res)
-  ).then((text) ->
+  ).then (text) ->
     window.translated = true
-    #get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
-    #console.log(text)
-    #translation = get_text
-    #if lang == "ja"
+    get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
+    console.log(text)
+    translation = get_text
+    if lang == "ja"
       #$(".only_en_form").val("");
       #App.room.speak(lang,translation,words, group)
       #$("#sampleModal-enjp .en_form").val(words)
@@ -211,9 +198,8 @@ translate_google2=(lang,words) ->
       #$(".explain_text .jp").attr("style","display:none")
       #$(".explain_text .enjp").attr("style","display:none")
       #$('#sampleModal-enjp').modal("show")
-
-    #  $(".base_jp_form").val(translation)
-    #else
+      $(".base_jp_form").val(translation)
+    else
       #$(".only_jp_form").val("");
       #App.room.speak(lang,words,translation, group)
       #$("#sampleModal-enjp .jp_form").val(words)
@@ -224,9 +210,9 @@ translate_google2=(lang,words) ->
       #$(".explain_text .en").attr("style","display:none")
       #$(".explain_text .enjp").attr("style","display:none")
       #$('#sampleModal-enjp').modal("show")
-    #  translation = translation.replace("&#39;","'")
-    #  $(".base_en_form").val(translation)
-    ).catch((error) => console.log(error));
+      translation = translation.replace("&#39;","'")
+      $(".base_en_form").val(translation)
+
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);
 isHalf=(str)->
