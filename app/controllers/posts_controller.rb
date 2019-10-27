@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
-    @groups = Group.all
+    @posts = Post.all.where("deleted = false")
+    @groups = Group.all.where("deleted = false")
   end
   def create
     #if !params[:post][:photo].nil? && !params[:post][:group_id].nil?

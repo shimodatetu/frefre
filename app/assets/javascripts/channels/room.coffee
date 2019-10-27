@@ -110,15 +110,14 @@ type_check=(type)->
   text_jp = $(".base_jp_form").val();
   if type == "post"
     if text_en != "" && text_jp != ""
-      ###
-      $("#sampleModal-enjp .en_form").val(text_en)
-      $("#sampleModal-enjp .jp_form").val(text_jp)
-      $(".explain_text .en").attr("style","display:none")
-      $(".explain_text .jp").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","")
-      $('#sampleModal-enjp').modal("show")
-      ###
-      App.room.speak("none",text_jp,text_en,parseInt($("#group").val()))
+      can_post = true
+      gon.prohibit.forEach (prohibit) ->
+        if text_en.match?(prohibit) || text_jp.match?(prohibit)
+          can_post = false
+      if can_post == true
+        App.room.speak("none",text_jp,text_en,parseInt($("#group").val()))
+      else
+        alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""

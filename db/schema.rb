@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_040350) do
+ActiveRecord::Schema.define(version: 2019_10_27_091723) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_040350) do
     t.datetime "updated_at", null: false
     t.string "hash_jp"
     t.string "hash_en"
+    t.boolean "deleted", default: false, null: false
   end
 
   create_table "hashtags", force: :cascade do |t|
@@ -103,6 +104,12 @@ ActiveRecord::Schema.define(version: 2019_10_16_040350) do
     t.binary "photo", limit: 1048576
     t.string "file_name"
     t.boolean "deleted", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prohibits", force: :cascade do |t|
+    t.string "prohibit_words"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -182,6 +189,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_040350) do
     t.boolean "oauth", default: false, null: false
     t.datetime "oauth_expires_at"
     t.boolean "admit", default: true
+    t.string "usertype", default: "normal"
   end
 
 end

@@ -1,0 +1,18 @@
+.prohibit_form{
+  margin-top:10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  .title{
+    font-weight: bold;
+  }
+  .prohibit_show{
+    display: inline-block;
+    border: solid thin;
+    padding-left:10px;
+    padding-right:10px;
+    font-size: 18px;
+  }
+  .make_prohibit{
+    margin-top:20px;
+  }
+}

@@ -1,0 +1,2 @@
+class Prohibit < ApplicationRecord
+end

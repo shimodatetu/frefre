@@ -54,43 +54,9 @@
           </div>
         </div>
       <% end %>
-      <%= link_to '/search',class:"link_text" do %>
+      <%= link_to '/manager/prohibit',class:"link_text" do %>
         <div class="text_fill
-        <% if url.include?('search') %>
-          <%= "now_page" %>
-        <% end %>">
-          <div class="height_control"></div>
-          <span class="icon glyphicon glyphicon-search"></span>
-          <div class="float_text">
-            <div class="float_jap">
-              違反投稿
-            </div>
-            <div class="base_en">
-              Warn Post
-            </div>
-          </div>
-        </div>
-      <% end %>
-      <%= link_to '/search',class:"link_text" do %>
-        <div class="text_fill
-        <% if url.include?('search') %>
-          <%= "now_page" %>
-        <% end %>">
-          <div class="height_control"></div>
-          <span class="icon glyphicon glyphicon-search"></span>
-          <div class="float_text">
-            <div class="float_jap">
-              違反ユーザー
-            </div>
-            <div class="base_en">
-              Warn User
-            </div>
-          </div>
-        </div>
-      <% end %>
-      <%= link_to '/search',class:"link_text" do %>
-        <div class="text_fill
-        <% if url.include?('search') %>
+        <% if url.include?('prohibit') %>
           <%= "now_page" %>
         <% end %>">
           <div class="height_control"></div>
@@ -111,7 +77,8 @@
 <div class="header_plus"></div>
 <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
 !url.include?('term') && !url.include?('contact') && !url.include?('groups') && !url.include?('notice') &&
-!url.include?('account_activations') && !url.include?('help') && !url.include?('oauth_complete') && !url.include?('create_oauth') %>
+!url.include?('account_activations') && !url.include?('help') && !url.include?('oauth_complete') &&
+!url.include?('create_oauth') && !url.include?('prohibit') %>
   <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
     <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
     <div class="lang_bar">

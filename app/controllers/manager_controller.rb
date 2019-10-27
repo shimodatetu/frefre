@@ -1,12 +1,38 @@
 class ManagerController < ApplicationController
+
+
   def show
   end
 
+  def prohibit
+    @prohibit_all = Prohibit.all
+    @prohibit = Prohibit.new
+  end
+
+  def prohibit_set
+    params[:prohibit][:prohibit_words].split(",").each do |prohibit|
+      new_prohibit = Prohibit.new
+      new_prohibit.prohibit_words = prohibit
+      new_prohibit.save
+    end
+    redirect_to "/manager/prohibit"
+  end
+
   def search_post
-    @posts = Post.all
+    @posts = Post.all.where("deleted = false")
   end
   def search_thread
-    @groups = Group.all
+    @groups = Group.all.where("deleted = false")
+  end
+  def thread_delete
+    id = params[:id]
+    if group = Group.find_by(id:id)
+      group.update(deleted:true)
+      for post in group.posts do
+        post.update(deleted:true)
+      end
+    end
+    redirect_to "/manager/search_thread"
   end
   def search_user
     @users = User.all

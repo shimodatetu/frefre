@@ -8,7 +8,7 @@ class ThreadListController < ApplicationController
 
   def set_group_data
     if Group.present?
-      @groups = Group.all
+      @groups = Group.all.where("deleted = false")
       thread_page_num = 10.to_f
       page_show_max = 5.to_f
       page_max_half = (page_show_max / 2).ceil

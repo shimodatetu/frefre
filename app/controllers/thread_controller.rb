@@ -1,5 +1,10 @@
 class ThreadController < ApplicationController
   def show
+
+    gon.prohibit = []
+    for prohibit in Prohibit.all do
+      gon.prohibit.push(prohibit.prohibit_words)
+    end
     @post = Post.new
     gon.login = logged_in?
     thread = Group.find(params[:id])
