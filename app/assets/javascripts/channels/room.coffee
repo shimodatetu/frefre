@@ -145,7 +145,7 @@ translate_google=(lang,words) ->
     if lang == 'en'
       source = "ja"
     key = window.ENV.RailsEnv
-    url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom='+source+'&langTo='+lang+'&profile=default&subscription-key='+key
+    url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&subscription-key=905b204cd12b4ab5b57881a353724123'
     console.log(url)
     data = {
       'source': words
