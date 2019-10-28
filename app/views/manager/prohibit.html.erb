@@ -1,24 +1,26 @@
-<div class="prohibit_form">
-  <div class="title">
-    禁止ワード一覧
-  </div>
-  <table class="category"border="1"style="font-size:16px;">
-    <% @prohibit_all.each do |prohibit_data| %>
-      <div class="prohibit_show">
-        <%= prohibit_data.prohibit_words %>
-      </div>
-    <% end %>
-  </table>
-
-  <div class="make_prohibit">
-    <%= form_for @prohibit, url: "/manager/prohibit" do |prohibit| %>
-      <div class="row">
-        <div class="col-sm-12">
-          <%= label_tag :禁止ワード作成 %>
-          <%= prohibit.text_area :prohibit_words ,placeholder:"禁止ワード",rows:"5" ,class: "form-control" %>
+<% if manager_logged_in? %>
+  <div class="prohibit_form">
+    <div class="title">
+      禁止ワード一覧
+    </div>
+    <table class="category"border="1"style="font-size:16px;">
+      <% @prohibit_all.each do |prohibit_data| %>
+        <div class="prohibit_show">
+          <%= prohibit_data.prohibit_words %>
         </div>
-        <%= submit_tag "追加" ,class:"btn btn-default",style:"margin-top:10px;margin-left:calc(50% - 25px)"%>
-      </div>
-    <% end %>
+      <% end %>
+    </table>
+
+    <div class="make_prohibit">
+      <%= form_for @prohibit, url: "/manager/prohibit" do |prohibit| %>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= label_tag :禁止ワード作成 %>
+            <%= prohibit.text_area :prohibit_words ,placeholder:"禁止ワード",rows:"5" ,class: "form-control" %>
+          </div>
+          <%= submit_tag "追加" ,class:"btn btn-default",style:"margin-top:10px;margin-left:calc(50% - 25px)"%>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

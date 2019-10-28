@@ -1,7 +1,7 @@
 class ManagerController < ApplicationController
 
   def manager_logged_in?
-    if !current_user.nil && current_user.usertype == "manager"
+    if !current_user.nil? && current_user.usertype == "manager"
       return current_user
     else
       return false

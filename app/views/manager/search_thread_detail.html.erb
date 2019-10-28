@@ -1,66 +1,68 @@
-<% lang = session["lang"] %>
-<% session["now_group"] = params[:id] %>
-<% thread = Group.find(params[:id]) %>
-<% thread.seen_num+=1 %>
-<% thread.save %>
+<% if manager_logged_in? %>
+  <% lang = session["lang"] %>
+  <% session["now_group"] = params[:id] %>
+  <% thread = Group.find(params[:id]) %>
+  <% thread.seen_num+=1 %>
+  <% thread.save %>
 
-<div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
-<div class="thread_page">
-  <div class="panel-title"style="display:inline-block">
-    <div class="panel-title-text">
-      <div class="float_jp">
-        <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
+  <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
+  <div class="thread_page">
+    <div class="panel-title"style="display:inline-block">
+      <div class="panel-title-text">
+        <div class="float_jp">
+          <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
+        </div>
+        <div class="float_en">
+          <%= simple_format(text_url_to_link(h(thread.title_en))) %>
+        </div>
       </div>
-      <div class="float_en">
-        <%= simple_format(text_url_to_link(h(thread.title_en))) %>
+      <% thread.hashtags.each do |hashtag| %>
+        <div class="hash_tag">
+          <div class="hash_icon">
+            #
+          </div>
+          <div class="hash_text">
+            <div class="hash_jp">
+              <%= simple_format(text_url_to_link(h(hashtag.hash_jp))) %>
+            </div>
+            <div class="hash_en">
+              <%= simple_format(text_url_to_link(h(hashtag.hash_en))) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="pvpage_head">
+    </div>
+    <div class="thread_all"style="padding-top:10px;">
+      <div class="thread_cover_cover">
+        <%= render thread.posts.first %>
       </div>
     </div>
-    <% thread.hashtags.each do |hashtag| %>
-      <div class="hash_tag">
-        <div class="hash_icon">
-          #
-        </div>
-        <div class="hash_text">
-          <div class="hash_jp">
-            <%= simple_format(text_url_to_link(h(hashtag.hash_jp))) %>
+    <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
+      <%= hidden_field_tag :id,params[:id].to_i %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            消去
           </div>
-          <div class="hash_en">
-            <%= simple_format(text_url_to_link(h(hashtag.hash_en))) %>
+          <div class="en">
+            Delete
           </div>
         </div>
-      </div>
+      </button>
+    <% end %>
+    <%= link_to "/thread/show/"+params[:id] do %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            スレッドへ飛ぶ
+          </div>
+          <div class="en">
+            Jump to Thread
+          </div>
+        </div>
+      </button>
     <% end %>
   </div>
-  <div class="pvpage_head">
-  </div>
-  <div class="thread_all"style="padding-top:10px;">
-    <div class="thread_cover_cover">
-      <%= render thread.posts.first %>
-    </div>
-  </div>
-  <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
-    <%= hidden_field_tag :id,params[:id].to_i %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          消去
-        </div>
-        <div class="en">
-          Delete
-        </div>
-      </div>
-    </button>
-  <% end %>
-  <%= link_to "/thread/show/"+params[:id] do %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          スレッドへ飛ぶ
-        </div>
-        <div class="en">
-          Jump to Thread
-        </div>
-      </div>
-    </button>
-  <% end %>
-</div>
+<% end %>

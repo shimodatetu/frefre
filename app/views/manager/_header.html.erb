@@ -1,103 +1,105 @@
-<% url = request.fullpath %>
-<div class="header">
-  <div class="width_set"style="width:100vw;">
-    <div class="nav-fall border border-primary">
-      <%= link_to '/manager/search_thread',class:"link_text" do %>
-        <div class="text_fill
-        <% if url == '/' || url.include?('search_thread')%>
-          <%= "now_page" %>
-        <% end %>">
-          <div class="height_control"></div>
-          <div class="icon glyphicon glyphicon-home"></div>
-          <div style=""class="float_text">
-            <div class="float_jap">
-              スレッド検索
-            </div>
-            <div class="base_en">
-              Thread Search
-            </div>
-          </div>
-        </div>
-      <% end %>
-      <%= link_to '/manager/search_post',class:"link_text" do %>
-        <div class="text_fill
-        <% if url == '/' || url.include?('search_post')%>
-          <%= "now_page" %>
-        <% end %>">
-          <div class="height_control"></div>
-          <div class="icon glyphicon glyphicon-home"></div>
-          <div style=""class="float_text">
-            <div class="float_jap">
-              投稿検索
-            </div>
-            <div class="base_en">
-              Post Search
+<% if manager_logged_in? %>
+  <% url = request.fullpath %>
+  <div class="header">
+    <div class="width_set"style="width:100vw;">
+      <div class="nav-fall border border-primary">
+        <%= link_to '/manager/search_thread',class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('search_thread')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <div class="icon glyphicon glyphicon-home"></div>
+            <div style=""class="float_text">
+              <div class="float_jap">
+                スレッド検索
+              </div>
+              <div class="base_en">
+                Thread Search
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+        <%= link_to '/manager/search_post',class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('search_post')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <div class="icon glyphicon glyphicon-home"></div>
+            <div style=""class="float_text">
+              <div class="float_jap">
+                投稿検索
+              </div>
+              <div class="base_en">
+                Post Search
+              </div>
+            </div>
+          </div>
+        <% end %>
 
-      <%= link_to '/manager/search_user', data: {"turbolinks"=>false},class:"link_text" do %>
-        <div class="text_fill
-        <% if url == '/' || url.include?('search_user')%>
-          <%= "now_page" %>
-        <% end %>">
-          <div class="height_control"></div>
-          <span class="icon glyphicon glyphicon-comment"></span>
-          <div class="float_text">
-            <div class="float_jap">
-              ユーザー検索
-            </div>
-            <div class="base_en">
-              User Search
-            </div>
-          </div>
-        </div>
-      <% end %>
-      <%= link_to '/manager/prohibit',class:"link_text" do %>
-        <div class="text_fill
-        <% if url.include?('prohibit') %>
-          <%= "now_page" %>
-        <% end %>">
-          <div class="height_control"></div>
-          <span class="icon glyphicon glyphicon-search"></span>
-          <div class="float_text">
-            <div class="float_jap">
-              禁止ワード設定
-            </div>
-            <div class="base_en">
-              Warn Ward
+        <%= link_to '/manager/search_user', data: {"turbolinks"=>false},class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('search_user')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-comment"></span>
+            <div class="float_text">
+              <div class="float_jap">
+                ユーザー検索
+              </div>
+              <div class="base_en">
+                User Search
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-<div class="header_plus"></div>
-<% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
-!url.include?('term') && !url.include?('contact') && !url.include?('groups') && !url.include?('notice') &&
-!url.include?('account_activations') && !url.include?('help') && !url.include?('oauth_complete') &&
-!url.include?('create_oauth') && !url.include?('prohibit') %>
-  <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
-    <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
-    <div class="lang_bar">
-      <div class="country_flag en_country">
-        <%= image_tag "/eng.png", class: "image" %>
-      </div>
-      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-          data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
-      <div class="country_flag jp_country">
-        <%= image_tag "/jap.png", class: "image" %>
+        <% end %>
+        <%= link_to '/manager/prohibit',class:"link_text" do %>
+          <div class="text_fill
+          <% if url.include?('prohibit') %>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-search"></span>
+            <div class="float_text">
+              <div class="float_jap">
+                禁止ワード設定
+              </div>
+              <div class="base_en">
+                Warn Ward
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
-  <span class="glyphicon glyphicon-chevron-down down_slider" aria-hidden="true"></span>
+  <div class="header_plus"></div>
+  <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
+  !url.include?('term') && !url.include?('contact') && !url.include?('groups') && !url.include?('notice') &&
+  !url.include?('account_activations') && !url.include?('help') && !url.include?('oauth_complete') &&
+  !url.include?('create_oauth') && !url.include?('prohibit') %>
+    <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+      <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
+      <div class="lang_bar">
+        <div class="country_flag en_country">
+          <%= image_tag "/eng.png", class: "image" %>
+        </div>
+        <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+            data-slider-max="1000" data-slider-step="1" data-slider-value="500"/>
+        <div class="country_flag jp_country">
+          <%= image_tag "/jap.png", class: "image" %>
+        </div>
+      </div>
+    </div>
+    <span class="glyphicon glyphicon-chevron-down down_slider" aria-hidden="true"></span>
+  <% end %>
+
+
+  <style>
+    .dropdown:hover > .dropdown-menu{
+      display:block;
+    }
+  </style>
 <% end %>
-
-
-<style>
-  .dropdown:hover > .dropdown-menu{
-    display:block;
-  }
-</style>

@@ -1,54 +1,56 @@
-<% lang = session["lang"] %>
-<% session["now_group"] = params[:id] %>
-<% post = Post.find(params[:id].to_i) %>
-<% thread = post.group %>
+<% if manager_logged_in? %>
+  <% lang = session["lang"] %>
+  <% session["now_group"] = params[:id] %>
+  <% post = Post.find(params[:id].to_i) %>
+  <% thread = post.group %>
 
-<div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
-<div class="thread_page">
-  <div class="panel-title"style="display:inline-block">
-    <div class="panel-title-text">
-      <div class="float_jp">
-        <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
-      </div>
-      <div class="float_en">
-        <%= simple_format(text_url_to_link(h(thread.title_en))) %>
+  <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
+  <div class="thread_page">
+    <div class="panel-title"style="display:inline-block">
+      <div class="panel-title-text">
+        <div class="float_jp">
+          <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
+        </div>
+        <div class="float_en">
+          <%= simple_format(text_url_to_link(h(thread.title_en))) %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="pvpage_head">
-  </div>
-  <div class="thread_all"style="padding-top:10px;">
-    <div class="thread_cover_cover">
-      <%= render post %>
+    <div class="pvpage_head">
     </div>
+    <div class="thread_all"style="padding-top:10px;">
+      <div class="thread_cover_cover">
+        <%= render post %>
+      </div>
+    </div>
+    <%= form_tag({controller: :manager, action: :post_delete}, { method: :post})  do  %>
+      <%= hidden_field_tag :id,params[:id].to_i %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            消去
+          </div>
+          <div class="en">
+            Delete
+          </div>
+        </div>
+      </button>
+    <% end %>
+    <% link_id = (post.id_ingroup - 1) / 10 + 1 %>
+    <% if link_id < 1 %>
+      <% link_id = 1 %>
+    <% end %>
+    <%= link_to "/thread/show/"+thread.id.to_s+"/"+link_id.to_s do %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            スレッドへ飛ぶ
+          </div>
+          <div class="en">
+            Jump to Thread
+          </div>
+        </div>
+      </button>
+    <% end %>
   </div>
-  <%= form_tag({controller: :manager, action: :post_delete}, { method: :post})  do  %>
-    <%= hidden_field_tag :id,params[:id].to_i %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          消去
-        </div>
-        <div class="en">
-          Delete
-        </div>
-      </div>
-    </button>
-  <% end %>
-  <% link_id = (post.id_ingroup - 1) / 10 + 1 %>
-  <% if link_id < 1 %>
-    <% link_id = 1 %>
-  <% end %>
-  <%= link_to "/thread/show/"+thread.id.to_s+"/"+link_id.to_s do %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          スレッドへ飛ぶ
-        </div>
-        <div class="en">
-          Jump to Thread
-        </div>
-      </div>
-    </button>
-  <% end %>
-</div>
+<% end %>

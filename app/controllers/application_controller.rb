@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
  def current_user
    @current_user ||= User.find_by(id:session[:user_id])
  end
+ def manager_logged_in?
+   if !current_user.nil && current_user.usertype == "manager"
+     return current_user
+   else
+     return false
+   end
+ end
  def logged_in?
    !current_user.nil?
  end
