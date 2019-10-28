@@ -118,7 +118,7 @@
             <span class="glyphicon glyphicon-chevron-left"></span>
           </div>
         <% else %>
-          <%= link_to("/search/#{page_id - 1}",class:"page_button ok_push") do %>
+          <%= link_to("/manager/search_post/#{page_id - 1}",class:"page_button ok_push") do %>
             <span class="glyphicon glyphicon-chevron-left"></span>
           <% end %>
         <% end %>
@@ -133,7 +133,7 @@
               <%= num %>
             </div>
           <% else %>
-            <%= link_to("/search/#{num}",class:"page_button page_move") do %>
+            <%= link_to("/manager/search_post/#{num}",class:"page_button page_move") do %>
               <%= num %>
             <% end %>
           <% end %>
@@ -148,7 +148,7 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
           </div>
         <% else %>
-          <%= link_to("/search/#{page_id.round + 1}",class:"page_button ok_push") do %>
+          <%= link_to("/manager/search_post/#{page_id.round + 1}",class:"page_button ok_push") do %>
             <span class="glyphicon glyphicon-chevron-right"></span>
           <% end %>
         <% end %>
