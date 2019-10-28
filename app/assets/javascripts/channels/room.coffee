@@ -145,17 +145,20 @@ translate_google=(lang,words) ->
     if lang == 'en'
       source = "ja"
     key = window.ENV.RailsEnv
-    url = 'https://gw.mirai-api.net/mt/v1.0/translate?langFrom='+source+'&langTo='+lang+'&subscription-key='+key
+    url = 'https://gw.mirai-api.net/mt/v1.0/translate?langFrom='+source+'&langTo='+lang+'&profile=default&subscription-key='+key
+    console.log(url)
     data = new FormData
     data.append 'source', words
     settings =
-      method: 'POST'
+      method: 'POST',
       header:{
         "Content-Type":"application/json; charset=UTF-8",
         "Content-Length":bytes(words).to_s,
-        "HOST":"www.frefreforum.com"
+        "Host":"www.frefreforum.com"
+      },
+      body: {
+        'source': words
       }
-      body: data
     fetch(url, settings).then((res) ->
       res.text()
     ).then (text) ->
