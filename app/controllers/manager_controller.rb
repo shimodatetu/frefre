@@ -1,7 +1,22 @@
 class ManagerController < ApplicationController
 
+  def manager_logged_in?
+    if !current_user.nil && current_user.usertype == "manager"
+      return current_user
+    else
+      return false
+    end
+  end
 
   def show
+  end
+
+  def user_change
+    user_id = params[:id]
+    usertype = params[:type]
+    User.find_by(id:user_id).update(usertype:usertype)
+
+    redirect_to "/manager/search_user_detail/"+params[:id].to_s
   end
 
   def prohibit

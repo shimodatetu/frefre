@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'manager/search_user_detail/:id' => 'manager#search_user_detail'
   get '/manager/prohibit'
 
+  post 'mangaer/user_change', to:'manager#user_change'
+
   post 'mangaer/thread_delete', to:'manager#thread_delete'
   post 'mangaer/post_delete', to:'manager#post_delete'
   post 'searcher/groups',to:'manager#search'

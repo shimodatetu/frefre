@@ -72,43 +72,70 @@
       </div>
     <% end %>
   </div>
-  <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
-    <%= hidden_field_tag :id,params[:id].to_i %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          消去
+  <% if user.usertype != "normal" %>
+    <%= form_tag({controller: :manager, action: :user_change}, { method: :post})  do  %>
+      <%= hidden_field_tag :id,params[:id].to_i %>
+      <%= hidden_field_tag :type,"normal" %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            一般ユーザーにする
+          </div>
+          <div class="en">
+            Make him normal
+          </div>
         </div>
-        <div class="en">
-          Delete
-        </div>
-      </div>
-    </button>
+      </button>
+    <% end %>
   <% end %>
-  <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
-    <%= hidden_field_tag :id,params[:id].to_i %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          消去
+  <% if user.usertype != "manager" %>
+    <%= form_tag({controller: :manager, action: :user_change}, { method: :post})  do  %>
+      <%= hidden_field_tag :id,params[:id].to_i %>
+      <%= hidden_field_tag :type,"manager" %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            管理者にする
+          </div>
+          <div class="en">
+            Make him manager
+          </div>
         </div>
-        <div class="en">
-          Delete
-        </div>
-      </div>
-    </button>
+      </button>
+    <% end %>
   <% end %>
-  <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
-    <%= hidden_field_tag :id,params[:id].to_i %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          消去
+
+  <% if user.usertype != "event" %>
+    <%= form_tag({controller: :manager, action: :user_change}, { method: :post})  do  %>
+      <%= hidden_field_tag :id,params[:id].to_i %>
+      <%= hidden_field_tag :type,"event" %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            イベントユーザーにする
+          </div>
+          <div class="en">
+            Make him Event user
+          </div>
         </div>
-        <div class="en">
-          Delete
+      </button>
+    <% end %>
+  <% end %>
+
+  <% if user.usertype != "delete" %>
+    <%= form_tag({controller: :manager, action: :user_change}, { method: :post})  do  %>
+      <%= hidden_field_tag :id,params[:id].to_i %>
+      <%= hidden_field_tag :type,"delete" %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            消去する
+          </div>
+          <div class="en">
+            Delete
+          </div>
         </div>
-      </div>
-    </button>
+      </button>
+    <% end %>
   <% end %>
 </div>

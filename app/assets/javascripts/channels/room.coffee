@@ -138,24 +138,7 @@ type_check=(type)->
       else
         translate_google("ja",text_en)
 
-translate_google=(lang,words) ->
-  key = "905b204cd12b4ab5b57881a353724123"
-  $.ajax
-      url: 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&subscription-key='+key
-      type: 'post'  #get,postの指定
-      dataType: 'json' #レスポンスのデータタイプ指定
-      async: true #非同期通信フラグ
-      header:{
-        "Content-Type":"application/json; charset=UTF-8",
-        "Content-Length":bytes(words),
-        "Host":"www.frefreforum.com"
-      }
-    .done (response) ->
-      console.log(response)
-    .fail (response) ->
-      console.log(response)
-      #処理が失敗した時の処理
-      alert 'fail'
+
 
 translate_google3=(lang,words) ->
   source = "en"
@@ -163,22 +146,19 @@ translate_google3=(lang,words) ->
     source = "ja"
   words = "hello"
   key = window.ENV.RailsEnv
-  key = "905b204cd12b4ab5b57881a353724123"
   url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&profile=default&subscription-key='+key
   console.log(url)
   data = {
-    'source': words
+    "source": "The quick brown fox jumps over the lazy dog."
   }
   settings =
     method: 'POST',
     header:{
       "Content-Type":"application/json; charset=UTF-8",
-      "Content-Length":bytes(words),
+      "Content-Length":bytes(data),
       "Host":"www.frefreforum.com"
     },
-    body:{
-      "source": "The quick brown fox jumps over the lazy dog."
-    }
+    body:data
   fetch(url, settings).then((res) ->
     console.log(res)
     res.text()
