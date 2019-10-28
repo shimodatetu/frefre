@@ -1,21 +1,4 @@
 $(function(){
-  $(".thread_send .btn_send").on("click",function(){
-    ok = true
-    if(ok == true){
-      var key = window.ENV.RailsEnv
-      $.ajax({
-        url: "https://apigw.mirai-api.net/trial/mt/v1.0/translate",
-        type: 'POST',
-        data: { apikey:key, en: 'おはよう' }
-      }).then(data　=> {
-        console.log(data.results[0]['reply']),
-        error => alert('エラー')
-      });
-      ok = false
-    }
-  })
-
-
   var last_elem;
   var id = -1;
   $('.thread_page .thread_cover').each(function(i, elem){

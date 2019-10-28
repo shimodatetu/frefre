@@ -139,20 +139,16 @@ type_check=(type)->
         translate_google("ja",text_en)
 
 translate_google=(lang,words) ->
-  source = "en"
-  if lang == 'en'
-    source = "ja"
   key = window.ENV.RailsEnv
-  alert(key)
-  url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate'
   $.ajax(
-    url: url
+    url: 'https://apigw.mirai-api.net/trial/mt/v1.0/translate'
     type: 'POST'
     data:
-      'ja':words
-      'subscription-key':'905b204cd12b4ab5b57881a353724123'
-  ).done(res) ->
-    console.log(res)
+      'subscription-key': key
+      'en': 'おはよう'
+    ).then (data) ->
+      console.log data.results[0]['reply']
+      return
 
 translate_google2=(lang,words) ->
   source = "en"
