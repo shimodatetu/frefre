@@ -145,13 +145,14 @@ translate_google=(lang,words) ->
     if lang == 'en'
       source = "ja"
     key = window.ENV.RailsEnv
-    url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&subscription-key=905b204cd12b4ab5b57881a353724123'
+    url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&subscription-key='
     console.log(url)
     data = {
       'source': words
     }
     settings =
       method: 'POST',
+      mode: "no-cors",
       header:{
         "Content-Type":"application/json; charset=UTF-8",
         "Content-Length":words.length.toString(),
