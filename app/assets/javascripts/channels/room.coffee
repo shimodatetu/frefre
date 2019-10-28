@@ -142,8 +142,8 @@ translate_google=(lang,words) ->
   source = "en"
   if lang == 'en'
     source = "ja"
+  words = "hello"
   key = window.ENV.RailsEnv
-  alert("key："+key)
   key = "905b204cd12b4ab5b57881a353724123"
   url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&subscription-key='+key
   console.log(url)
@@ -154,7 +154,7 @@ translate_google=(lang,words) ->
     method: 'POST',
     header:{
       "Content-Type":"application/json; charset=UTF-8",
-      "Content-Length":words.length.toString(),
+      "Content-Length":bytes(words),
       "Host":"www.frefreforum.com"
     },
     body:data
