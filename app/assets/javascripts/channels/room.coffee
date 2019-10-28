@@ -139,31 +139,28 @@ type_check=(type)->
         translate_google("ja",text_en)
 
 translate_google=(lang,words) ->
+  source = "en"
+  if lang == 'en'
+    source = "ja"
   key = window.ENV.RailsEnv
-  $.ajax(
-    source = "en"
-    if lang == 'en'
-      source = "ja"
-    key = window.ENV.RailsEnv
-    url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&subscription-key='
-    console.log(url)
-    data = {
-      'source': words
-    }
-    settings =
-      method: 'POST',
-      mode: "no-cors",
-      header:{
-        "Content-Type":"application/json; charset=UTF-8",
-        "Content-Length":words.length.toString(),
-        "Host":"www.frefreforum.com"
-      },
-      body:data
-    fetch(url, settings).then((res) ->
-      console.log(res)
-      res.text()
-    ).then (text) ->
-    )
+  url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&subscription-key='+key
+  console.log(url)
+  data = {
+    'source': words
+  }
+  settings =
+    method: 'POST',
+    header:{
+      "Content-Type":"application/json; charset=UTF-8",
+      "Content-Length":words.length.toString(),
+      "Host":"www.frefreforum.com"
+    },
+    body:data
+  fetch(url, settings).then((res) ->
+    console.log(res)
+    res.text()
+  ).then (text) ->
+
 
 translate_google2=(lang,words) ->
   source = "en"
