@@ -233,6 +233,11 @@ p{
 body{
   //background:#fff0a017;
 }
+@media screen and (max-width: 1000px){
+  .help_show_small{
+    margin-top: -22px;
+  }
+}
 @media screen and (max-width: 600px){
   .profile{
     .lang_bar_cover{
