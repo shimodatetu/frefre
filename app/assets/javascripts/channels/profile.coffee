@@ -9,6 +9,7 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
 
   received: (data) ->
     user_id = data["message"]["id"].to_s
+    alert($(".user_id").attr('id')+"/"+ user_id)
     if $(".user_id").attr('id') == user_id
       alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
       location.reload()

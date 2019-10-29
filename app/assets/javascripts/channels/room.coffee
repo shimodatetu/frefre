@@ -6,9 +6,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
+    console.log(url)
     urls = location.pathname.split("/")
     now_id = urls[3]
-    console.log(url)
     window.translated = false
     if Number(now_id) == data['group_id']
       user_id = Number($(".user_login").attr("id"))
