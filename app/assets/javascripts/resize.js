@@ -1,4 +1,4 @@
-
+/*
 (function($){
 	var API = function(api){
 		var api = $(api),api0 = api[0];
@@ -109,3 +109,4 @@
 		return option && option.api ? API(api) : targets;
 	}
 })(jQuery);
+*/

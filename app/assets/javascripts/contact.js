@@ -1,4 +1,4 @@
-
+/*
 $(function(){
   $(".send_contact").on('click',function(){
     name = $(".content_input_form#content_name").val()
@@ -31,3 +31,4 @@ $(function(){
     }
   })
 })
+*/

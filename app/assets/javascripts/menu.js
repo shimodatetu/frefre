@@ -1,4 +1,4 @@
-var opened = false;
+/*var opened = false;
 $(document).on('click','.menu_icon', function() {
   if(opened == false){
       $(".menu").animate({left: 0});
@@ -9,3 +9,4 @@ $(document).on('click','.menu_icon', function() {
     opened = false;
   }
 });
+*/

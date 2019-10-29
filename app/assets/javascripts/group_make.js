@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
   $(".make_thread_cover .category_title").on("click",function(){
     var scroll_place = $(".category_panel"+$(this).attr("id")).offset().top;
     scroll_place -= 10;
@@ -32,3 +32,4 @@ $(function(){
     $(".category_modal").animate({scrollTop:0},"normal");
   })
 });
+*/
