@@ -1,6 +1,5 @@
 class ThreadController < ApplicationController
   def show
-
     gon.prohibit = []
     for prohibit in Prohibit.all do
       gon.prohibit.push(prohibit.prohibit_words)
@@ -9,8 +8,8 @@ class ThreadController < ApplicationController
     gon.login = logged_in?
     thread = Group.find(params[:id])
     thread_page_num = 10.to_f
-    page_show_max = 5.to_f
-    page_max_half = (page_show_max / 2).ceil
+    page_show_max = 6.to_f
+    page_max_half = (page_show_max / 2).ceil + 1
     group_num = thread.posts.all.count - 1
     page_num = (group_num / thread_page_num).ceil
     if page_num == 0

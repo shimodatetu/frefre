@@ -1,0 +1,54 @@
+<div class="page_button_cover">
+  <% if 1 >= @page_id %>
+    <div class="page_button no_push">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </div>
+  <% else %>
+    <%= link_to("/thread/show/#{params[:id]}/#{@page_id - 1}",class:"page_button ok_push") do %>
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    <% end %>
+  <% end %>
+
+  <% start_num_data = @start_num.round %>
+  <% if @start_num != 1 %>
+    <% start_num_data += 1 %>
+    <%= link_to("/thread/show/#{params[:id]}/1",class:"page_button") do %>
+      1
+    <% end %>
+    <div class="page_button dot_show">
+      ...
+    </div>
+  <% end %>
+  <% end_num_data = @end_num.round %>
+  <% if @end_num.round != @page_num.round %>
+    <% end_num_data -= 1 %>
+  <% end %>
+  <% for num in start_num_data..end_num_data do %>
+    <% if num == @page_id.round %>
+      <div class="page_button now_page">
+        <%= num %>
+      </div>
+    <% else %>
+      <%= link_to("/thread/show/#{params[:id]}/#{num}",class:"page_button") do %>
+        <%= num %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% if @end_num.round != @page_num.round %>
+    <div class="page_button dot_show">
+      ...
+    </div>
+    <%= link_to("/thread/show/#{params[:id]}/#{@page_num}",class:"page_button") do %>
+      <%= @page_num %>
+    <% end %>
+  <% end %>
+  <% if @page_num.round <= @page_id.round %>
+    <div class="page_button no_push">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </div>
+  <% else %>
+    <%= link_to("/thread/show/#{params[:id]}/#{@page_id.round + 1}",class:"page_button ok_push") do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    <% end %>
+  <% end %>
+</div>

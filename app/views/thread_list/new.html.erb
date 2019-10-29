@@ -116,47 +116,7 @@
         </div>
       </div>
     <% else %>
-      <div class="page_button_cover">
-        <% if 1 >= @page_id.round %>
-          <div class="page_button no_push">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </div>
-        <% else %>
-          <%= link_to("/thread_list/new/#{@page_id - 1}",class:"page_button ok_push") do %>
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          <% end %>
-        <% end %>
-        <% if @start_num.round != 1 %>
-          <div class="page_button dot_show">
-            ...
-          </div>
-        <% end %>
-        <% for num in @start_num.round..@end_num.round do %>
-          <% if num == @page_id %>
-            <div class="page_button now_page">
-              <%= num %>
-            </div>
-          <% else %>
-            <%= link_to("/thread_list/new/#{num}",class:"page_button page_move") do %>
-              <%= num %>
-            <% end %>
-          <% end %>
-        <% end %>
-        <% if @end_num.round != @page_num.round %>
-          <div class="page_button dot_show">
-            ...
-          </div>
-        <% end %>
-        <% if @page_num.round <= @page_id.round || @page_num.round == 1 %>
-          <div class="page_button no_push">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </div>
-        <% else %>
-          <%= link_to("/thread_list/new/#{@page_id.round + 1}",class:"page_button ok_push") do %>
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          <% end %>
-        <% end %>
-      </div>
+      <%= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
     <% end %>
   </div>
 </div>

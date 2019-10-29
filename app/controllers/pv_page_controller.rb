@@ -15,8 +15,8 @@ class PvPageController < ApplicationController
     if Group.present?
       @groups = Group.all.where("deleted = false")
       thread_page_num = 10.to_f
-      page_show_max = 5.to_f
-      page_max_half = (page_show_max / 2).ceil
+      page_show_max = 6.to_f
+      page_max_half = (page_show_max / 2).ceil + 1
       group_num = Group.all.count
       page_num = (group_num / thread_page_num).ceil
       if page_num == 0
