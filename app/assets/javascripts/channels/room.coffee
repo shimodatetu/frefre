@@ -26,6 +26,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
           alert_modal("You successed to post.","投稿に成功しました","success")
+
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
         if user_id == data['user_id']
