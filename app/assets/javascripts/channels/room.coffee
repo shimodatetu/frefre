@@ -8,6 +8,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   received: (data) ->
     urls = location.pathname.split("/")
     now_id = urls[3]
+    console.log(url)
     window.translated = false
     if Number(now_id) == data['group_id']
       user_id = Number($(".user_login").attr("id"))
