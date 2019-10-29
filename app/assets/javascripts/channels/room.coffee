@@ -17,8 +17,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       page_id_max = Number($(".thread_page_num").attr("id"))
       page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
       if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-        window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
         if user_id == data['user_id']
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
           alert_set("You successed to post.","投稿に成功しました","success")
       else if Number(now_page) == page
         add_post(data)
@@ -26,7 +26,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
           alert_modal("You successed to post.","投稿に成功しました","success")
-
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
         if user_id == data['user_id']
