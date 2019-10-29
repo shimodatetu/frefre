@@ -8,8 +8,10 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
-    location.reload()
+    user_id = data["message"]["id"].to_s
+    if $(".user_id").attr('id') == user_id
+      alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
+      location.reload()
 
   change: (username,gender,country,profile_en,profile_jp,able_see) ->
     @perform 'change',username:username,gender:gender,
@@ -35,7 +37,7 @@ $(document).on 'click', '#profile_modal .btn_send', (event) ->
 $(document).on 'click', '.prof_trans .words_post_button', (event) ->
   profile_en = $(".profile_page #profile_en").val();
   profile_jp = $(".profile_page #profile_jp").val();
-  if window.translated == true
+  if window.translated == true && 1 == 2
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if this.id == "trans_to_en"
     if profile_jp == ""
@@ -49,6 +51,9 @@ $(document).on 'click', '.prof_trans .words_post_button', (event) ->
       translate_google(profile_en,profile_jp,"ja")
   else
     alert("asd");
+
+$(document).on 'click', '.profile_cannot_save', (event) ->
+  alert_modal("The event acount cannot be changed.","イベント用アカウントは変更できません","fail")
 
 $(document).on 'click', '.profile_save_button', (event) ->
   #year = $(".profile_page #year").val();

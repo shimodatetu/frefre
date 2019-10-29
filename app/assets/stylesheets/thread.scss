@@ -161,6 +161,9 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
+            p{
+              word-break: break-all;
+            }
           }
         }
         .post_content_cover{
@@ -254,6 +257,7 @@
               margin:auto;
               p{
                 display: block;
+                word-break: break-all;
               }
             }
             .post_image{
@@ -594,9 +598,9 @@
       padding-bottom:3px;
       padding-left:16px;
       padding-right:16px;
-      background: #fff0a0;
+      background: #66bfbfff;
       border:solid thin #ddd;
-      color: #f00;
+      color: #fff;
     }
     .float_jp{
       font-size:12px;

@@ -3,9 +3,6 @@ class SessionsController < ApplicationController
   end
 
   def event_login
-    @user1 = User.find(1)
-    @user2 = User.find(2)
-    @user3 = User.find(3)
   end
 
   def new
@@ -24,16 +21,18 @@ class SessionsController < ApplicationController
       render :index
     end
   end
+
   def login_post2
-    if user = User.find_by(id: params[:session][:id])
+    p params[:session][:id].to_i
+    if user = User.find_by(id: params[:session][:id].to_i)
       log_in user
       flash["alert_en"] = "You successed to login"
       flash["alert_jp"] = "ログインに成功しました。"
       flash["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     else
-      flash.now[:failed_en] = "Mail address or password is wrong."+"/"+params[:session][:email]
-      flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"+"/"+params[:session][:password]
+      flash.now[:failed_en] = "Mail address or password is wrong."
+      flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"
       render :event_login
     end
   end

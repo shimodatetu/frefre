@@ -23,6 +23,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       else if Number(now_page) == page
         add_post(data)
         if user_id == data['user_id']
+          $(".base_en_form").val("");
+          $(".base_jp_form").val("");
           alert_modal("You successed to post.","投稿に成功しました","success")
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
@@ -125,7 +127,7 @@ type_check=(type)->
     else
       alert_modal("This form is empty.","入力欄に何も書かれていません","fail");
   else
-    if window.translated == true
+    if window.translated == true && 1 == 2
       alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
     else if type == "trans_to_en"
       if text_jp == ""
@@ -147,7 +149,6 @@ translate_google3=(lang,words) ->
   words = "hello"
   key = window.ENV.RailsEnv
   url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&profile=default&subscription-key='+key
-  console.log(url)
   data = {
     "source": "The quick brown fox jumps over the lazy dog."
   }
@@ -160,12 +161,11 @@ translate_google3=(lang,words) ->
     },
     body:data
   fetch(url, settings).then((res) ->
-    console.log(res)
     res.text()
   ).then (text) ->
 
 
-translate_google2=(lang,words) ->
+translate_google=(lang,words) ->
   source = "en"
   if lang == 'en'
     source = "ja"
@@ -187,7 +187,6 @@ translate_google2=(lang,words) ->
   ).then (text) ->
     window.translated = true
     get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
-    console.log(text)
     translation = get_text
     if lang == "ja"
       #$(".only_en_form").val("");

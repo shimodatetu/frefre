@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'manager',to:"manager#show"
   get 'manager/show'
   get 'manager/search_post'
   get 'manager/search_post/:page' => 'manager#search_post'

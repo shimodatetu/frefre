@@ -41,18 +41,23 @@ $(function(){
     value:first_value,
     formatter: function(value) {
       if(true){
+        var left_max = 150
+        var right_max = 850
+        if($('.thread_all_post').length){
+            left_max = 50
+            right_max = 950
+        }
         localStorage.setItem("frefre_slider",value);
         var en_per = value / 10;
         var jp_per = (1000 - value) / 10;
         //var cover_width = window.innerWidth * 0.170
-        //console.log(70/cover_width*500)
-        if(value < 150){
+        if(value < left_max){
         //if(value == 0){
           $(".en_position").attr("style","display:none;");
           $(".jp_position").attr("style","width:calc(100%)");
           $(".post_content_position_space").attr("style","display:none;");
         }
-        else if(value > 850){
+        else if(value > right_max){
         //else if(value == 1000){
           $(".en_position").attr("style","width:calc(100%)");
           $(".jp_position").attr("style","display:none");

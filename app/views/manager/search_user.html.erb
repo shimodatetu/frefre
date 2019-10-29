@@ -1,4 +1,4 @@
-<% if manager_logged_in? || 1 == 1%>
+<% if manager_logged_in? %>
   <% search_text = "" %>
   <% if session["search_text"].nil? == false && session["search_text"] != "" %>
     <% search_text = session["search_text"] %>
@@ -17,7 +17,7 @@
         </span>
       <% end %>
     </div>
-    <div class="thread_all">
+    <div class="thread_all thread_all_post">
       <% there_be = false %>
       <% search_users = @users %>
       <% if !search_text.nil? %>

@@ -29,7 +29,7 @@
   </div>
   <div class="pvpage_head">
   </div>
-  <div class="thread_all"style="padding-top:10px;">
+  <div class="thread_all thread_all_group"style="padding-top:10px;">
     <% there_be = false %>
     <% @groups.order(seen_num: "DESC").limit(3).each do |group| %>
       <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
@@ -143,7 +143,7 @@
   </div>
   <div class="pvpage_head">
   </div>
-  <div class="thread_all"style="padding-top:10px;">
+  <div class="thread_all thread_all_group"style="padding-top:10px;">
     <% there_be = false %>
     <% @groups.order("id DESC").limit(3).each do |group| %>
       <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>

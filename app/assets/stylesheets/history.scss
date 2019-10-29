@@ -109,6 +109,9 @@
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 1;
+          p{
+            word-break: break-all;
+          }
         }
       }
       .post_content_cover{
@@ -145,6 +148,7 @@
           .post_content_text{
             p{
               display: block;
+              word-break: break-all;
             }
             margin:auto;
             margin-top:5px;

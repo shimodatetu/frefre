@@ -88,7 +88,7 @@ type_check=(id)->
       alert_modal("The Japanese form is empty.","日本語入力欄に何も書かれていません","fail");
     else
       alert_modal("This form is empty.","入力欄に何も書かれていません","fail");
-  else if window.translated == true
+  else if window.translated == true && 1 == 2
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if id == "trans_to_en"
     if text_jp == ""

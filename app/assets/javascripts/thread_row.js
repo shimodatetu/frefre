@@ -21,6 +21,10 @@ $(function(){
   });
   var options ={"backdrop":"static"}
 
+  $(".cannot_delete").on("click", function (event) {
+    alert_modal("You cannot delete this by the event acount.","イベント用アカウントでは削除できません","fail")
+  })
+
   $('#deleteModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) //モーダルを呼び出すときに使われたボタンを取得
     var recipient = button.data('whatever') //data-whatever の値を取得
@@ -29,6 +33,7 @@ $(function(){
     modal.find('.delete_id').attr("value",recipient) //モーダルのタイトルに値を表示
     modal.find(".delete_html").html(recipient2)
   })
+
   $(".zoom_modal_open").on("click",function(){
     src = $(this).children("img").attr("src")
     $("#zoom_modal img").attr("src",src)

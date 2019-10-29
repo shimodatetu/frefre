@@ -1,12 +1,13 @@
 
-<% if manager_logged_in? || 1==1%>
+<% if manager_logged_in? %>
   <% lang = session["lang"] %>
   <% session["now_group"] = params[:id] %>
   <% user = User.find(params[:id]) %>
 
   <div class="search_result"style="margin-top:50px">
-    <div class="thread_all">
+    <div class="thread_all thread_all_post">
       <% there_be = false %>
+      <div class="user_id"id="<%= current_user.id %>"></div>
       <%= link_to("/other_profile/show/#{user.id}" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover">

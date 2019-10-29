@@ -6,7 +6,13 @@
         プロフィール
       </div>
       My Profile
-      <div class="profile_save_button btn btn-default">
+      <div class="
+      <% if current_user.usertype == "event" %>
+        profile_cannot_save
+      <% else %>
+        profile_save_button
+      <% end %>
+        btn btn-default">
         Save / 保存
       </div>
     </div>

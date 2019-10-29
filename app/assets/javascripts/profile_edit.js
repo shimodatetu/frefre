@@ -23,7 +23,6 @@ $(function(){
         });
         var cHeight = $(".top-page").height();
         var bHeight = window.parent.screen.height;
-        console.log((cHeight - bHeight) < 0)
         if((cHeight - bHeight) < 0){
           $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
         }
@@ -52,7 +51,6 @@ $(function(){
         });
         var cHeight = $(".top-page").height();
         var bHeight = window.parent.screen.height;
-        console.log((cHeight - bHeight) < 0)
         if((cHeight - bHeight) < 0){
           $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
         }
@@ -82,7 +80,6 @@ $(function(){
         });
         var cHeight = $(".top-page").height();
         var bHeight = window.parent.screen.height;
-        console.log((cHeight - bHeight) < 0)
         if((cHeight - bHeight) < 0){
           $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
         }
@@ -111,7 +108,6 @@ $(function(){
         });
         var cHeight = $(".top-page").height();
         var bHeight = window.parent.screen.height;
-        console.log((cHeight - bHeight) < 0)
         if((cHeight - bHeight) < 0){
           $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
         }

@@ -57,7 +57,7 @@ type_check=(id,type)->
         #$(".explain_text .jp").attr("style","display:none")
         #$(".explain_text .enjp").attr("style","")
         #$("#noticeModal").modal("show")
-    else if window.translated == true
+    else if window.translated == true && 1 == 2
       alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
     else if id == "trans_to_jp"
       if content_en == ""

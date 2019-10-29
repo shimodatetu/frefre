@@ -245,6 +245,9 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
+            p{
+              word-break: break-all;
+            }
           }
         }
         .post_content_cover{
@@ -293,6 +296,7 @@
               -webkit-line-clamp: 1;
               p{
                 display: block;
+                word-break: break-all;
               }
             }
           }

@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   def delete
     delete_id = params[:delete_id].to_i
     post = Post.find(delete_id)
-    if post && post.user.id == current_user.id
+    if post && logged_in? && post.user.id == current_user.id
       post.update(deleted: true)
       redirect_to params[:url]
     end

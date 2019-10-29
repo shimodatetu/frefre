@@ -12,7 +12,7 @@ class ProfileChannel < ApplicationCable::Channel
   end
 
   def change(data)
-    if logged_in?
+    if logged_in? && current_user.usertype != "event"
       user = current_user;
       if user.update(name:data["username"],country:data["country"],gender:data["gender"],profile_en:data["profile_en"],
         profile_jp:data["profile_jp"],able_see:data["able_see"])
