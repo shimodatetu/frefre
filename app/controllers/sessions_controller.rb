@@ -24,12 +24,13 @@ class SessionsController < ApplicationController
 
   def login_post2
     p params[:session][:id].to_i
-    if user = User.find_by(id: params[:session][:id].to_i)
+    user = User.find_by(id: params[:session][:id].to_i)
+    if user && user.usertype == "event"
       log_in user
       flash["alert_en"] = "You successed to login"
       flash["alert_jp"] = "ログインに成功しました。"
       flash["alert_type"] = "success"
-      redirect_to root_path, success: 'ログインに成功しました'
+      redirect_to "/thread/show/11", success: 'ログインに成功しました'
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
       flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"
