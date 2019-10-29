@@ -11,6 +11,12 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     window.translated = false
     if Number(now_id) == data['group_id']
       user_id = Number($(".user_login").attr("id"))
+      add_post(data)
+      if user_id == data['user_id']
+        $(".base_en_form").val("");
+        $(".base_jp_form").val("");
+      ###
+
       now_page = 1
       if urls.length >= 5
         now_page = urls[4]
@@ -30,6 +36,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
         #if user_id == data['user_id']
           #alert_set("You successed to post.","投稿に成功しました","success")
+      ###
 
 
   speak: (lang,mes_jp,mes_en, group)->
