@@ -71,47 +71,25 @@ $(document).on 'click', '.profile_save_button', (event) ->
   App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
 
 translate_google=(profile_en,profile_jp,lang) ->
-  source = "en"
-  if lang == 'en'
-    source = "ja"
   words = profile_jp
   if lang == "ja"
     words = profile_en
-  key = window.ENV.RailsEnv
-  url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
-  data = new FormData
-  data.append 'q', words
-  data.append 'source', source
-  data.append 'target', lang
-  settings =
-    method: 'POST'
-    body: data
-  fetch(url, settings).then((res) ->
-    res.text()
-  ).then (text) ->
-    ary = text.split('"');
-    trans_text = ary[7]#7番はテキスト
+  $.ajax(
+    async: false
+    url: 'https://still-plains-44123.herokuapp.com/translate',
+    type: 'post'
+    data:
+      'lang': lang
+      'words': words
+    dataType: 'json').done((res) ->
     window.translated = true
+    translation = res[0]
     if lang == "ja"
-      #App.profile.change(username,gender,year,month,date,country,profile_en,trans_text,able_see)
-      ###
-      $("#profile_modal .en_form").val(words)
-      $("#profile_modal .jp_form").val(trans_text)
-      $(".explain_text .en").attr("style","")
-      $(".explain_text .jp").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $("#profile_modal").modal("show")
-      ###
-      $("#profile_jp").val(trans_text)
+      $("#profile_jp").val(translation)
     else
-      #App.profile.change(username,gender,year,month,date,country,trans_text,profile_jp,able_see)
-      ###
-      $("#profile_modal .en_form").val(trans_text)
-      $("#profile_modal .jp_form").val(words)
-      $(".explain_text .jp").attr("style","")
-      $(".explain_text .en").attr("style","display:none")
-      $(".explain_text .enjp").attr("style","display:none")
-      $("#profile_modal").modal("show")
-      ###
-      trans_text = trans_text.replace("&#39;","'")
-      $("#profile_en").val(trans_text)
+      translation = translation.replace("&#39;","'")
+      $("#profile_en").val(translation)
+    return
+  ).fail (xhr, status, error) ->
+    alert status
+    return

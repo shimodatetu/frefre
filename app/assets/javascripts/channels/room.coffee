@@ -97,13 +97,13 @@ add_post=(data)->
     plus_post.find(".jp_content_row").attr("style","-webkit-line-clamp:"+Math.ceil(row));
     plus_post.find(".en_content_row").attr("style","-webkit-line-clamp:"+Math.ceil(row));
     slider = $(".slider-handle").attr("aria-valuenow");
-    en_per = slider / 10;
-    jp_per = (1000 - slider) / 10;
-    if slider < 100
+    en_per = slider;
+    jp_per = (100 - slider);
+    if slider < 5
       plus_post.find(".en_position").attr("style","display:none;");
       plus_post.find(".jp_position").attr("style","width:calc(100%)");
       plus_post.find(".post_content_position_space").attr("style","display:none;");
-    else if slider > 900
+    else if slider > 95
       plus_post.find(".en_position").attr("style","width:calc(100%)");
       plus_post.find(".jp_position").attr("style","display:none");
       plus_post.find(".post_content_position_space").attr("style","display:none;");
@@ -173,6 +173,30 @@ translate_google3=(lang,words) ->
 
 
 translate_google=(lang,words) ->
+  $.ajax(
+    async: false
+    url: 'https://still-plains-44123.herokuapp.com/translate',
+    type: 'post'
+    data:
+      'lang': lang
+      'words': words
+    dataType: 'json').done((res) ->
+    window.translated = true
+    translation = res[0]
+    if lang == "ja"
+      $(".base_jp_form").val(translation)
+    else
+      translation = translation.replace("&#39;","'")
+      $(".base_en_form").val(translation)
+    return
+  ).fail (xhr, status, error) ->
+    alert status
+    return
+
+
+
+###
+translate_google4=(lang,words) ->
   source = "en"
   if lang == 'en'
     source = "ja"
@@ -183,6 +207,7 @@ translate_google=(lang,words) ->
   data.append 'target', lang
   data.append 'source', source
   data.append 'format', "html"
+  console.log(data)
   settings =
     method: 'POST'
     header:{
@@ -220,7 +245,7 @@ translate_google=(lang,words) ->
       #$('#sampleModal-enjp').modal("show")
       translation = translation.replace("&#39;","'")
       $(".base_en_form").val(translation)
-
+###
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);
 isHalf=(str)->

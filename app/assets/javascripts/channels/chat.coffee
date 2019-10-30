@@ -103,44 +103,25 @@ type_check=(id)->
 
 
 translate_google=(lang,words) ->
-  source = "en"
-  if lang == 'en'
-    source = "ja"
-  key = window.ENV.RailsEnv
-  url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
-  data = new FormData
-  data.append 'q', words
-  data.append 'target', lang
-  data.append 'source', source
-  data.append 'format', "text"
-  settings =
-    method: 'POST'
-    body: data
-  fetch(url, settings).then((res) ->
-    res.text()
-  ).then (text) ->
+  $.ajax(
+    async: false
+    url: 'https://still-plains-44123.herokuapp.com/translate',
+    type: 'post'
+    data:
+      'lang': lang
+      'words': words
+    dataType: 'json').done((res) ->
     window.translated = true
-    get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
-    translation = get_text
+    translation = res[0]
     if lang == "ja"
-      #$(".only_en_form").val("");
-      #$("#chatModal-enjp .en_form").val(words)
-      #$("#chatModal-enjp .jp_form").val(translation)
-      #$(".explain_text .en").attr("style","")
-      #$(".explain_text .jp").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$('#chatModal-enjp').modal("show")
       $(".base_jp_form").val(translation);
     else
-      #$(".only_jp_form").val("");
-      #$("#chatModal-enjp .jp_form").val(words)
-      #$("#chatModal-enjp .en_form").val(translation)
-      #$(".explain_text .jp").attr("style","")
-      #$(".explain_text .en").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$('#chatModal-enjp').modal("show")
       translation = translation.replace("&#39;","'")
       $(".base_en_form").val(translation);
+    return
+  ).fail (xhr, status, error) ->
+    alert status
+    return
 
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);

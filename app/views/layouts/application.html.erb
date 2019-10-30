@@ -13,23 +13,6 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <script>
-    $(function(){
-        $.ajax({
-          async: false,
-          //url: 'http://localhost:5000/set',
-          url: 'https://still-plains-44123.herokuapp.com/set',
-          type: 'post',
-          data:{"name": "musa"},
-          dataType: 'json'
-        }).done(function(res){
-          console.log(res)
-        }).fail(function(xhr, status, error){
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        });
-
-    });
   </script>
   </head>
   <body>

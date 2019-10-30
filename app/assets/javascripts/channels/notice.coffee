@@ -72,39 +72,22 @@ type_check=(id,type)->
 
 
 translate_google=(content,lang) ->
-  source = "en"
-  if lang == 'en'
-    source = "ja"
-  key = window.ENV.RailsEnv
-  url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
-  data = new FormData
-  data.append 'q', content
-  data.append 'target', lang
-  data.append 'source', source
-  data.append 'format', "text"
-  settings =
-    method: 'POST'
-    body: data
-  fetch(url, settings).then((res) ->
-    res.text()
-  ).then (text) ->
-    translate = JSON.parse(text)["data"]["translations"]
-    trans_content = translate[0]["translatedText"]
+  $.ajax(
+    async: false
+    url: 'https://still-plains-44123.herokuapp.com/translate',
+    type: 'post'
+    data:
+      'lang': lang
+      'words': content
+    dataType: 'json').done((res) ->
     window.translated = true
+    translation = res[0]
     if lang == "ja"
-      #$("#noticeModal .en_form_content").html(content)
-      #$("#noticeModal .jp_form_content").html(trans_content)
-      #$(".explain_text .en").attr("style","")
-      #$(".explain_text .jp").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$("#noticeModal").modal("show")
-      $(".jp_data_content").val(trans_content);
+      $(".jp_data_content").val(translation);
     else
-      #$("#noticeModal .en_form_content").html(trans_content)
-      #$("#noticeModal .jp_form_content").html(content)
-      #$(".explain_text .jp").attr("style","")
-      #$(".explain_text .en").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$("#noticeModal").modal("show")
-      trans_content = trans_content.replace("&#39;","'")
-      $(".en_data_content").val(trans_content);
+      translation = translation.replace("&#39;","'")
+      $(".en_data_content").val(translation);
+    return
+  ).fail (xhr, status, error) ->
+    alert status
+    return
