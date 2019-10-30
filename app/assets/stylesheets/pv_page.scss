@@ -89,15 +89,15 @@
     }
 
     .thread_cover#1{
-	border: solid 3px #bee;
-}
-.thread_cover{
+    	border: solid 3px #bee;
+    }
+    .thread_cover{
       //filter: drop-shadow(2px 5px 5px rgba(0,0,0,0.2));
       cursor: pointer;
       background-color: #ffffff;
-      padding:10px;
+      padding:5px;
       border-radius: 5px;
-      margin-bottom:10px;
+      margin-bottom:5px;
       border:solid thin #dddddd;
       .group_user_cover{
         display: inline-block;

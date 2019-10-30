@@ -1,7 +1,8 @@
 .sign_page_cover{
   //position:absolute;
-  vertical-align: center;
-  padding-left: calc(48vw - 300px);
+  width: 60vw;
+  max-width: 600px;
+  margin-left: calc(47vw - 300px);
   .login_page{
     vertical-align: center;
     .panel {
