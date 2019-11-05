@@ -1,7 +1,6 @@
 class PvPageController < ApplicationController
   def show
     @groups = Group.all.where("deleted = false")
-    
   end
   def new
     set_group_data
