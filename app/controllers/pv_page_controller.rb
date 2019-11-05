@@ -1,11 +1,7 @@
 class PvPageController < ApplicationController
   def show
     @groups = Group.all.where("deleted = false")
-    Group.all.each do |group|
-      group.first_content_en = group.posts.first.content_eng
-      group.first_content_jp = group.posts.first.content_jap
-      group.save
-    end
+    
   end
   def new
     set_group_data
