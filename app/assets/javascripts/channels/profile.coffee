@@ -76,7 +76,7 @@ translate_google=(profile_en,profile_jp,lang) ->
     words = profile_en
   $.ajax(
     async: false
-    url: 'https://still-plains-44123.herokuapp.com/translate',
+    url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
     type: 'post'
     data:
       'lang': lang

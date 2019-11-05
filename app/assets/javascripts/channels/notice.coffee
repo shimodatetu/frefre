@@ -74,7 +74,7 @@ type_check=(id,type)->
 translate_google=(content,lang) ->
   $.ajax(
     async: false
-    url: 'https://still-plains-44123.herokuapp.com/translate',
+    url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
     type: 'post'
     data:
       'lang': lang

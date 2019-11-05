@@ -8,12 +8,11 @@
     <title>FreFre / Forum with Japanese : 外国人との掲示板</title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name=”description” content=”Forum with Japanese(make friends,travel, culture, problems) / 翻訳機能で簡単に外国人と話せる掲示板 。英語が苦手でも大丈夫。チャットで困ったこと・知りたいことに答えて、外国人と仲良くなれます。”>
+    <meta name=”description” content=”Forum with Japanese(make friends,travel, culture, problems) / 翻訳機能で簡単に外国人と話せる掲示板 。英語が苦手でも大丈夫。
+    チャットで困ったこと・知りたいことに答えて、外国人と仲良くなれます。”>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <script>
-  </script>
   </head>
   <body>
     <% if url.include?('manager') %>
@@ -25,14 +24,15 @@
     <% end %>
       <%= yield %>
     </div>
+    <!--
     <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
     !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
     !url.include?('manager') %>
       <div class="sub_content_cover">
-        <%#= image_tag "/samune3.png", class: "image" %>
-        <!--iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
+        <iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     <% end %>
+    -->
     <%= render partial:'layouts/footer' %>
   </body>
   <div class="modal fade" id="successModal" tabindex="-1">

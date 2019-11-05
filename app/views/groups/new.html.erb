@@ -24,27 +24,6 @@
         </div>
       </button>
     </div>
-    <!--<div class="panel panel-warning make_thread_category">
-      <div class='make_content panel-body'>
-        <div class="row">
-          <div class="select_category_title">
-            <div class="jp">
-              カテゴリー選択
-            </div>
-            Category Select
-          </div>
-          <button type="button" class="category_modal_open btn " data-toggle="modal" data-target="#category_modal">
-            <div class="jp">
-              カテゴリーを選ぶ
-            </div>
-            Choose category
-          </button>
-        </div>
-        <input class="small_select"type="text"value=""style="display:none">
-        <div class="now_category">
-        </div>
-      </div>
-    </div>-->
     <div class="panel panel-warning make_thread_category">
       <div class="flag_show">
         <div class="flag_image">
@@ -54,19 +33,6 @@
         <div class="flag_image flag_jp">
           <%= image_tag "jap.png", class: "image" %>
           <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
-        </div>
-      </div>
-      <div class="make_content">
-        <div class="title_text">
-          <div class="jp">
-            ハッシュタグの追加
-          </div>
-          Add Hashtags
-        </div>
-        <div class="hash_form">
-          <textarea id="content"class="hash_input form-control hash_en" rows="3" cols="65"></textarea>
-          <div class="sub_space"></div>
-          <textarea id="content"class="hash_input form-control hash_jp" rows="3" cols="65"></textarea>
         </div>
       </div>
       <div class="panel-body content_cover">
@@ -80,26 +46,7 @@
         </div>
         <div class="title_input">
           <input id="title"class="form-control form_lang en_data_title"id="title" rows="2" cols="65">
-          <div class="space_form">
-            <div class="trans_cover">
-              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
-              name="<% if logged_in? %>logined<% end %>">
-                <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                <div class="button_text">
-                  翻訳
-                </div>
-              </button>
-            </div>
-            <div class="trans_cover">
-              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
-              name="<% if logged_in? %>logined<% end %>">
-                <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                <div class="button_text">
-                  Trans
-                </div>
-              </button>
-            </div>
-          </div>
+          <div class="sub_space"></div>
           <input id="title"class="form-control form_lang jp_data_title"id="title" rows="2" cols="65">
         </div>
       </div>
@@ -114,7 +61,26 @@
         </div>
         <div class="content_input">
           <textarea id="content"class="content_input_form form-control form_lang en_data_content" rows="5" cols="65"></textarea>
-          <div class="sub_space"></div>
+          <div class="space_form">
+            <div class="trans_cover">
+              <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_en"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                <div class="button_text">
+                  翻訳
+                </div>
+              </button>
+            </div>
+            <div class="trans_cover">
+              <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_jp"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                <div class="button_text">
+                  Trans
+                </div>
+              </button>
+            </div>
+          </div>
           <textarea id="content"class="content_input_form form-control form_lang jp_data_content" rows="5" cols="65"></textarea>
         </div>
       </div>

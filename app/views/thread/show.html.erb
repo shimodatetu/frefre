@@ -39,7 +39,7 @@
   <div class="thread_all thread_all_post"style="padding-top:10px;">
     <div class="thread_cover_cover">
       <%= render thread.posts.first %>
-      <%= render thread.posts.offset(2) %>
+      <%= render thread.posts.offset(@thread_page_num*(@page_id - 1)+1).limit(@thread_page_num) %>
     </div>
   </div>
   <div class="footer thread_footer">
@@ -132,7 +132,7 @@
         <% end %>
       </div>-->
     </div>
-      <%#= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
+      <%= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
   </div>
   <% if logged_in? %>
     <div class="thread_post_cover check_delete">
