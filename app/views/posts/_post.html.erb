@@ -38,8 +38,6 @@
                 <%= simple_format(text_url_to_link(h(post.user.name))) %>
               <% end %>
             <% end %>
-
-
           </div>
           <% if params[:id].nil? || current_user != post.user || (post.id != first_id && logged_in? && current_user.id == post.user.id)%>
             <div class="dropdown">

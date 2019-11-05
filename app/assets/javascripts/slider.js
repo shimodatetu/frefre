@@ -23,12 +23,12 @@ $(function(){
         if(value < left_max){
         //if(value == 0){
           $(".en_position").attr("style","display:none;");
-          $(".jp_position").attr("style","width:calc(100% - 40px)");
+          $(".jp_position").attr("style","width:calc(100%)");
           $(".post_content_position_space").attr("style","display:none;");
         }
         else if(value > right_max){
         //else if(value == 1000){
-          $(".en_position").attr("style","width:calc(100% - 40px)");
+          $(".en_position").attr("style","width:calc(100%)");
           $(".jp_position").attr("style","display:none");
           $(".post_content_position_space").attr("style","display:none;");
         }
