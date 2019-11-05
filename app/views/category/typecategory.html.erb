@@ -79,9 +79,7 @@
                 </div>
                 <div class="post_content en">
                   <div class="post_content_text">
-                    <% group.hashtags.each do |hash|%>
-                      #<%= simple_format(text_url_to_link(h(hash.hash_en))) %>　
-                    <% end %>
+                    <%= simple_format(text_url_to_link(h(group.first_content_eng))) %>
                   </div>
                 </div>
                 <div class="see_more">
@@ -99,9 +97,7 @@
                 </div>
                 <div class="post_content jp">
                   <div class="post_content_text">
-                    <% group.hashtags.each do |hash|%>
-                      #<%= simple_format(text_url_to_link(h(hash.hash_jp))) %>　
-                    <% end %>
+                    <%= simple_format(text_url_to_link(h(group.first_content_jap))) %>
                   </div>
                 </div>
                 <div class="see_more">

@@ -73,9 +73,7 @@
                     </div>
                     <div class="post_content en">
                       <div class="post_content_text">
-                        <% group.hashtags.each do |hash|%>
-                          #<%= hash.hash_en %>　
-                        <% end %>
+                        <%= group.first_content_eng %>
                       </div>
                     </div>
                     <div class="see_more">
@@ -94,9 +92,7 @@
                     </div>
                     <div class="post_content jp">
                       <div class="post_content_text">
-                        <% group.hashtags.each do |hash|%>
-                          #<%= hash.hash_jp %>　
-                        <% end %>
+                        <%= group.first_content_jap %>
                       </div>
                     </div>
                     <div class="see_more">

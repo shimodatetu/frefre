@@ -19,17 +19,6 @@ class ThreadChannel < ApplicationCable::Channel
       group.title_en = data['title_en']
       group.user_id = current_user.id
 
-      hash_jp = data["hash_jp"]
-      hash_en = data["hash_en"]
-      hash_jp_text = ""
-      hash_en_text = ""
-      hash_jp.length.times do |id|
-        hash_jp_text += "#"+hash_jp[id] + " "
-        hash_en_text += "#"+hash_en[id] + " "
-      end
-      group.hash_en = hash_en_text
-      group.hash_jp = hash_jp_text
-
       if group.save
         post = Post.new()
         post.lang = data['lang']
@@ -39,15 +28,6 @@ class ThreadChannel < ApplicationCable::Channel
         post.group_id = group.id
         post.user_id = current_user.id
         post.save
-        hash_jp.length.times do |id|
-          Hashtag.create(hash_jp: hash_jp[id],hash_en: hash_en[id],group_id: group.id)
-        end
-      else
-        if group.errors.any?
-          group.errors.full_messages.each do |message|
-            #p message
-          end
-        end
       end
     end
   end

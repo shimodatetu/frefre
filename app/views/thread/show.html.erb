@@ -16,21 +16,6 @@
         <%= simple_format(text_url_to_link(h(thread.title_en))) %>
       </div>
     </div>
-    <% thread.hashtags.each do |hashtag| %>
-      <div class="hash_tag">
-        <div class="hash_icon">
-          #
-        </div>
-        <div class="hash_text">
-          <div class="hash_jp">
-            <%= simple_format(text_url_to_link(h(hashtag.hash_jp))) %>
-          </div>
-          <div class="hash_en">
-            <%= simple_format(text_url_to_link(h(hashtag.hash_en))) %>
-          </div>
-        </div>
-      </div>
-    <% end %>
   </div>
 
   <div class="pvpage_head">

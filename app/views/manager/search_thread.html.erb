@@ -22,7 +22,9 @@
       <% there_be = false %>
       <% search_groups = @groups %>
       <% if !search_text.nil? %>
-        <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ? OR hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
+        <%# search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ? OR hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
+
+        <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
       <% end %>
       <% show_max = 10.0 %>
       <% group_num = search_groups.count %>
@@ -78,7 +80,7 @@
                   </div>
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(group.hash_jp))) %>
+                      <%= simple_format(text_url_to_link(h(group.content_eng))) %>
                     </div>
                   </div>
                 </div>
@@ -93,7 +95,7 @@
                   </div>
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(group.hash_en))) %>
+                      <%= simple_format(text_url_to_link(h(group.content_jap))) %>
                     </div>
                   </div>
                 </div>
