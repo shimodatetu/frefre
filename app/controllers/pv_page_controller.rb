@@ -4,6 +4,7 @@ class PvPageController < ApplicationController
     Group.all.each do |group|
       group.first_content_en = group.posts.first.content_eng
       group.first_content_jp = group.posts.first.content_jap
+      group.save
     end
   end
   def new

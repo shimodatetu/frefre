@@ -26,9 +26,9 @@
             <div class="post_content">
               <div class="post_content_l">
                 <% if lang != "jap" %>
-                  <%= simple_format(text_url_to_link(h(group.posts.first.content_eng))) %>
+                  <%= simple_format(text_url_to_link(h(group.first_content_en))) %>
                 <% else %>
-                  <%= simple_format(text_url_to_link(h(group.posts.first.content_jap))) %>
+                  <%= simple_format(text_url_to_link(h(group.first_content_jp))) %>
                 <% end %>
               </div>
             </div>
