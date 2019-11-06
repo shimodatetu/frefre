@@ -2,6 +2,7 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
   attr_accessor :remember_token, :activation_token, :reset_token
+  belongs_to :reportuser
   has_many :posts
   has_many :groups
   has_many :chats
