@@ -62,16 +62,30 @@
         <% else %>
           <%= link_to "/notice/new/#{params[:id]}" do %>
             <button class="btn mes_button normal_button green_button fullwidth_button">
-              <div class="jp">
-                ダイレクトメッセージ
-              </div>
-              <div class="en">
-                Direct Message
+              <span class="glyphicon glyphicon-envelope icon" aria-hidden="true"></span>
+              <div class="text_box">
+                <div class="jp">
+                  メッセージ
+                </div>
+                <div class="en">
+                  Message
+                </div>
               </div>
             </button>
           <% end %>
         <% end %>
       </div>
+      <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button report_button",id:other_user_id do %>
+        <span class="glyphicon glyphicon-exclamation-sign icon" aria-hidden="true"></span>
+        <div class="text_box">
+          <div class="jp">
+            通報する
+          </div>
+          <div class="en">
+            Report
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <div class="profile_main">
@@ -227,6 +241,46 @@
             </div>
           </button>
           <button type="button" class="btn btn-default follow_modal_button" data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
+        </div>
+  		</div>
+  	</div>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="report_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              このユーザーを通報しますか？
+            </div>
+            <div class="text_en">
+              Do you report this user?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <%= form_tag('/report/user',method: :post,class: "search_form_top") do %>
+            <%= hidden_field_tag :report_id , class: "form-control form_input",:value=>other_user_id %>
+            <button type="submit" class="btn btn-primary report_button_submit">
+              <div class="jp">
+                実行
+              </div>
+              <div class="en">
+                OK
+              </div>
+            </button
+          <% end %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
             <div class="jp">
               戻る
             </div>

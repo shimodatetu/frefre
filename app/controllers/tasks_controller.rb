@@ -1,4 +1,11 @@
 class TasksController < ApplicationController
+  def report
+    id = session["report_user"]
+    user = User.find_by(id:id.to_i)
+    if user && logged_in?
+      redirect_to "/other_profile/"+id
+    end
+  end
   def lang_change_jp
     session["lang"] = "jap"
     redirect_to params[:url]
@@ -15,7 +22,7 @@ class TasksController < ApplicationController
 
   def delete
     delete_id = params[:delete_id].to_i
-    post = Post.find(delete_id)
+    post = Post.find_by(id:delete_id)
     if post && logged_in? && post.user.id == current_user.id
       post.update(deleted: true)
       redirect_to params[:url]

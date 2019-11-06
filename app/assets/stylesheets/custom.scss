@@ -171,10 +171,13 @@ p{
       }
     }
     .text_box{
+      margin-left: -2px;
       display: inline-block;
       vertical-align: sub;
     }
     .icon{
+      float:left;
+      margin-top:10px;
       padding-right: 2px;
       font-size: 18px;
     }
@@ -196,8 +199,10 @@ p{
     border-color:#ff9d3b;
     background:#fff;
   }
-  .unfollow_button_submit{
-
+  .report_button{
+    color: #fff;
+    border-color: #ff3b3b;
+    background: #e60909;
   }
 }
 .manager_content_cover{

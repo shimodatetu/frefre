@@ -1,0 +1,2 @@
+class Reportpost < ApplicationRecord
+end

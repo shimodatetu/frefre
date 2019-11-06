@@ -6,8 +6,10 @@ App.follow = App.cable.subscriptions.create "FollowChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
     button_change(data.data.following_id)
+  following: (type,id)->
+    @perform('following',type:type,id:id)
+
   following: (type,id)->
     @perform('following',type:type,id:id)
 
@@ -17,13 +19,18 @@ $(document).on 'click', '.unfollow_button_submit', (event) ->
   $("#follow_modal").modal("show")
   follow_id = this.id
 
+$(document).on 'click', '.report_button', (event) ->
+  $("#report_modal").modal("show")
+  follow_id = this.id
+
+$(document).on 'click', '.report_button_submit', (event) ->
+  App.follow.following("follow",parseInt(this.id))
+
 $(document).on 'click', '.unfollow_modal_submit', (event) ->
   App.follow.following("unfollow",parseInt(follow_id))
-  #button_change(follow_id)
   $("#follow_modal").modal("hide")
 
 $(document).on 'click', '.follow_button_submit', (event) ->
-  #button_change(follow_id)
   App.follow.following("follow",parseInt(this.id))
 
 button_change=(id) ->
