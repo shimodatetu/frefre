@@ -8,7 +8,7 @@
   <% lang = session["lang"] %>
   <div class="search_result">
     <div class="category_show">
-      <%= form_tag('/search/groups',method: :post,class: "search_form_top") do %>
+      <%= form_tag('/manager/group',method: :post,class: "search_form_top") do %>
         <%= text_field_tag :search_text ,search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
         <span class="input-group-btn">
           <button type="submit"class="btn btn-warning form_button">
@@ -24,7 +24,7 @@
       <% if !search_text.nil? %>
         <%# search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ? OR hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
 
-        <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
+        <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ? OR first_content_en LIKE ? OR first_content_jp LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
       <% end %>
       <% show_max = 10.0 %>
       <% group_num = search_groups.count %>

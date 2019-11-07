@@ -72,6 +72,23 @@
             </div>
           </div>
         <% end %>
+        <%= link_to '/manager/search_report_post', data: {"turbolinks"=>false},class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('search_report_post')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-comment"></span>
+            <div class="float_text">
+              <div class="float_jap">
+                通報投稿検索
+              </div>
+              <div class="base_en">
+                Reported Post
+              </div>
+            </div>
+          </div>
+        <% end %>
         <%= link_to '/manager/prohibit',class:"link_text" do %>
           <div class="text_fill
           <% if url.include?('prohibit') %>

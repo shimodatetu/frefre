@@ -5,9 +5,9 @@
   <% end %>
 
   <% lang = session["lang"] %>
-  <div class="search_result"style="margin-top: 50px;">
+  <div class="search_result">
     <div class="category_show">
-      <%= form_tag('/manager/user',method: :post,class: "search_form_top") do %>
+      <%= form_tag('/manager/post',method: :post,class: "search_form_top") do %>
         <%= text_field_tag :search_text ,search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
         <span class="input-group-btn">
           <button type="submit"class="btn btn-warning form_button">
@@ -19,33 +19,34 @@
     </div>
     <div class="thread_all thread_all_post">
       <% there_be = false %>
-      <% search_users = @users %>
+      <% search_posts = @report_posts %>
       <% if !search_text.nil? %>
-        <% search_users = @users.where("profile_jp LIKE ? OR profile_en LIKE ? OR email LIKE ? OR name LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
+        <% search_posts = @report_posts.eager_load(:post).where("content_jap LIKE ? OR content_eng LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
       <% end %>
       <% show_max = 10.0 %>
-      <% group_num = search_users.count %>
+      <% group_num = search_posts.count %>
       <% page_num = (group_num / show_max).ceil %>
       <% page_id = params[:page].to_i %>
       <% if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1 %>
         <% page_id = 1 %>
       <% end %>
-      <% search_users.offset(show_max*(page_id - 1)).limit(show_max).each do |user| %>
-        <%= link_to("/manager/search_user_detail/#{user.id}" , class:"thread_link") do %>
+      <% search_posts.offset(show_max*(page_id - 1)).limit(show_max).each do |report_post| %>
+        <% post = report_post.post %>
+        <%= link_to("/manager/search_report_post_detail/"+report_post.id.to_s , class:"thread_link") do %>
           <% there_be = true %>
           <div class="thread_cover">
             <div class="group_user_cover">
               <div class="group_img_cover">
                 <object>
-                <%= link_to "/other_profile/#{user.id}" do %>
-                  <% if user.image == 0 %>
-                    <% if user.photo.nil? %>
+                <%= link_to "/other_profile/#{post.user.id}" do %>
+                  <% if post.user.image == 0 %>
+                    <% if post.user.photo.nil? %>
                       <%= image_tag("/userimage/user1.png", :class => "group_img") %>
                     <% else %>
-                      <%= image_tag show_image_user_path(user), :class => "group_img" %>
+                      <%= image_tag show_image_user_path(post.user), :class => "group_img" %>
                     <% end %>
                   <% else %>
-                    <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
+                    <%= image_tag("/userimage/user#{post.user.image}.png", :class => "group_img") %>
                   <% end %>
                 <% end %>
                 </object>
@@ -55,26 +56,24 @@
               <div class="post_content_cover">
                 <div class="user_name">
                   <object>
-                  <% if !logged_in? || current_user.id !=user.id %>
-                    <%= link_to "/other_profile/#{user.id}" do %>
-                      <%= simple_format(text_url_to_link(h(user.name))) %>
+                  <% if !logged_in? || current_user.id != post.user.id %>
+                    <%= link_to "/other_profile/#{post.user.id}" do %>
+                      <%= simple_format(text_url_to_link(h(post.user.name))) %>
                     <% end %>
                   <% else %>
                     <%= link_to "/profile" do %>
-                      <%= simple_format(text_url_to_link(h(user.name))) %>
+                      <%= simple_format(text_url_to_link(h(post.user.name))) %>
                     <% end %>
                   <% end %>
                   </object>
+                  <div class="create_time"style="float:right">
+                    <%= post.created_at.strftime('%Y/%m/%d') %>
+                  </div>
                 </div>
                 <div class="post_content_position en_position">
-                  <div class="thread_title">
-                    <div class="title_padding no_inline">
-                      <%= simple_format(text_url_to_link(h(user.email))) %>
-                    </div>
-                  </div>
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(user.profile_en))) %>
+                      <%= simple_format(text_url_to_link(h(post.content_eng))) %>
                     </div>
                   </div>
                 </div>
@@ -82,14 +81,9 @@
                   <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
                 </div>
                 <div class="post_content_position jp_position">
-                  <div class="thread_title">
-                    <div class="title_padding no_inline">
-                      <%= simple_format(text_url_to_link(h(user.email))) %>
-                    </div>
-                  </div>
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(user.profile_jp))) %>
+                      <%= simple_format(text_url_to_link(h(post.content_jap))) %>
                     </div>
                   </div>
                 </div>
@@ -128,7 +122,7 @@
               <span class="glyphicon glyphicon-chevron-left"></span>
             </div>
           <% else %>
-            <%= link_to("/manager/search_user/#{page_id - 1}",class:"page_button ok_push") do %>
+            <%= link_to("/manager/search_post/#{page_id - 1}",class:"page_button ok_push") do %>
               <span class="glyphicon glyphicon-chevron-left"></span>
             <% end %>
           <% end %>
@@ -143,7 +137,7 @@
                 <%= num %>
               </div>
             <% else %>
-              <%= link_to("/manager/search_user/#{num}",class:"page_button page_move") do %>
+              <%= link_to("/manager/search_post/#{num}",class:"page_button page_move") do %>
                 <%= num %>
               <% end %>
             <% end %>
@@ -158,7 +152,7 @@
               <span class="glyphicon glyphicon-chevron-right"></span>
             </div>
           <% else %>
-            <%= link_to("/manager/search_user/#{page_id.round + 1}",class:"page_button ok_push") do %>
+            <%= link_to("/manager/search_post/#{page_id.round + 1}",class:"page_button ok_push") do %>
               <span class="glyphicon glyphicon-chevron-right"></span>
             <% end %>
           <% end %>

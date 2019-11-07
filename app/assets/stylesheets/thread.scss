@@ -6,11 +6,15 @@
   .panel-title{
     display: inline-block;
     width:100%;
-    margin-bottom:10px;
     padding-left:20px;
-    font-size:18px;
+    font-size:20px;
+    color:#365899;
     .float_jp{
-      font-size:12px;
+      display: inline-block;
+      font-size:18px;
+    }
+    .float_en{
+      display: inline-block;
     }
     .hash_tag{
       margin-top:10px;
@@ -188,7 +192,7 @@
               border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #000000;
             }
             .dropdown-menu{
-              margin-left:-130px;
+              margin-left:-60px;
               font-size:14px;
               z-index:10;
               margin-top: -3px;

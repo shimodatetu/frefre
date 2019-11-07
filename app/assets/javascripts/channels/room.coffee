@@ -19,13 +19,11 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
         if user_id == data['user_id']
           window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-          #alert_set("You successed to post.","投稿に成功しました","success")
       else if Number(now_page) == page
         add_post(data,user_id)
         if user_id == data['user_id']
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
-          #alert_modal("You successed to post.","投稿に成功しました","success")
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
         #if user_id == data['user_id']
@@ -61,6 +59,11 @@ reader.addEventListener 'load', ->
 reader2.addEventListener 'load', ->
   text = "<img src='" + String(reader2.result) + "'>"
   $(".thread_all").append(text)
+
+
+$(document).on 'click', '.report_post_button', (event) ->
+  $(".report_post_input").val(this.id)
+  $("#report_modal").modal("show")
 
 $(document).on 'change', '.thread_image_post .post_file', (event) ->
   if (this.files[0].type != 'text/plain')

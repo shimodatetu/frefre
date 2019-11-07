@@ -45,6 +45,9 @@ class ManagerController < ApplicationController
     @report_users = Reportuser.all
   end
 
+  def search_report_post
+    @report_posts = Reportpost.all
+  end
   def search_post
     @posts = Post.all.where("deleted = false")
   end
@@ -87,8 +90,16 @@ class ManagerController < ApplicationController
     session["search_mail"] = params[:search_text]
     redirect_to "/manager/search_user"
   end
-  def searcher_groups
+  def searcher_group
     session["search_text"] = params[:search_text]
-    redirect_to "/manager/search_groups"
+    redirect_to "/manager/search_thread"
+  end
+  def searcher_report_post
+    session["search_text"] = params[:search_text]
+    redirect_to "/manager/search_report_post"
+  end
+  def searcher_report_user
+    session["search_text"] = params[:search_text]
+    redirect_to "/manager/search_report_user"
   end
 end

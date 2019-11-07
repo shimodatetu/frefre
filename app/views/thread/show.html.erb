@@ -9,16 +9,13 @@
 <div class="thread_page">
   <div class="panel-title"style="display:inline-block">
     <div class="panel-title-text">
-      <div class="float_jp">
-        <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
-      </div>
-      <div class="float_en">
+      <span class="float_en">
         <%= simple_format(text_url_to_link(h(thread.title_en))) %>
-      </div>
+      </span>
+      <span class="float_jp">
+        <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
+      </span>
     </div>
-  </div>
-
-  <div class="pvpage_head">
   </div>
 
   <div class="thread_all thread_all_post"style="padding-top:10px;">
@@ -287,6 +284,48 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="report_modal">
+  <div class="modal fade" id="report_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              この投稿を通報しますか？
+            </div>
+            <div class="text_en">
+              Do you report this post?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <%= form_tag('/report/post',method: :post,class: "search_form_top") do %>
+            <%= hidden_field_tag :report_id,"", class: "form-control form_input report_post_input" %>
+            <%= hidden_field_tag :thread_id,thread.id %>
+            <%= hidden_field_tag :page_id,params[:id] %>
+            <button type="submit" class="btn btn-primary report_button_submit">
+              <div class="jp">
+                実行
+              </div>
+              <div class="en">
+                OK
+              </div>
+            </button
+          <% end %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
+        </div>
+  		</div>
+  	</div>
   </div>
 </div>
 <button class="delete_button_destroy"style="display:none">

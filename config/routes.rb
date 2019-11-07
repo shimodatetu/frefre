@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get 'manager/search_report_user_detail'
   get 'manager/search_report_user_detail/:id' => 'manager#search_report_user_detail'
 
+  get 'manager/search_report_post'
+  get 'manager/search_report_post/:page' => 'manager#search_post'
+  get 'manager/search_report_post_detail'
+  get 'manager/search_report_post_detail/:id' => 'manager#search_report_post_detail'
+
   get '/manager/prohibit'
 
   post 'mangaer/user_change', to:'manager#user_change'
@@ -27,12 +32,15 @@ Rails.application.routes.draw do
   post 'mangaer/thread_delete', to:'manager#thread_delete'
   post 'mangaer/post_delete', to:'manager#post_delete'
   post 'searcher/groups',to:'manager#search'
+  post '/manager/group',to:'manager#searcher_group'
   post '/manager/post',to:'manager#searcher_post'
   post '/manager/profile',to:'manager#searcher_profile'
   post '/manager/mail',to:'manager#searcher_mail'
   post '/manager/user',to:'manager#searcher_user'
   post '/manager/prohibit',to:'manager#prohibit_set'
   post '/manager/prohibit_delete',to:'manager#prohibit_delete'
+  post '/manager/report_user',to:'manager#searcher_report_user'
+  post '/manager/report_post',to:'manager#searcher_report_post'
 
   get 'auth/:provider/callback', to: 'sessions#login_auth'
   get '/users/auth/:provider/callback', to: 'sessions#login_auth'
@@ -61,7 +69,6 @@ Rails.application.routes.draw do
   post 'contact/mail',to:'policy#mail'
 
   get 'notice/show/:id' => 'notice#show'
-  get 'other_profile/show'
   get 'account_activations/check'
   get 'password_resets/new'
   get 'password_resets/new_check'
@@ -87,7 +94,8 @@ Rails.application.routes.draw do
   post 'tasks/en',to:'tasks#lang_change_en'
   post 'tasks/jp',to:'tasks#lang_change_jp'
   post 'delete',to:'tasks#delete'
-  post '/report/user',to:"tasks#report"
+  post '/report/user',to:"tasks#report_user"
+  post '/report/post',to:"tasks#report_post"
 
   post 'search/header',to:'tasks#search'
 

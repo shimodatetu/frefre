@@ -15,7 +15,7 @@
     <div class="thread_all thread_all_post">
       <% there_be = false %>
       <div class="user_id"id="<%= current_user.id %>"></div>
-      <%= link_to("/other_profile/show/#{user.id}" , class:"thread_link") do %>
+      <%= link_to("/other_profile/#{user.id}" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover">
           <div class="group_user_cover">
@@ -90,18 +90,18 @@
     <div class="thread_all thread_all_post">
       <% there_be = false %>
       <div class="user_id"id="<%= current_user.id %>"></div>
-      <%= link_to("/other_profile/show/#{from_user.id}" , class:"thread_link") do %>
+      <%= link_to("/other_profile/#{from_user.id}" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover">
           <div class="group_user_cover">
             <div class="group_img_cover">
               <object>
               <%= link_to "/other_profile/#{from_user.id}" do %>
-                <% if user.image == 0 %>
-                  <% if user.photo.nil? %>
+                <% if from_user.image == 0 %>
+                  <% if from_user.photo.nil? %>
                     <%= image_tag("/userimage/user1.png", :class => "group_img") %>
                   <% else %>
-                    <%= image_tag show_image_user_path(user), :class => "group_img" %>
+                    <%= image_tag show_image_user_path(from_user), :class => "group_img" %>
                   <% end %>
                 <% else %>
                   <%= image_tag("/userimage/user#{from_user.image}.png", :class => "group_img") %>
@@ -114,8 +114,8 @@
             <div class="post_content_cover">
               <div class="user_name">
                 <object>
-                <% if !logged_in? || current_user.id !=user.id %>
-                  <%= link_to "/other_profile/#{user.id}" do %>
+                <% if !logged_in? || current_user.id != from_user.id %>
+                  <%= link_to "/other_profile/#{from_user.id}" do %>
                     <%= simple_format(text_url_to_link(h(from_user.name))) %>
                   <% end %>
                 <% else %>
