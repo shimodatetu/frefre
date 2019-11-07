@@ -291,13 +291,27 @@
 </div>
 <button class="delete_button_destroy"style="display:none">
 </button>
+<button class="profile_button_destroy"style="display:none">
+</button>
 <% if logged_in? == true %>
   <script>
+    $(document).on("click", ".profile_button_destroy", function(){
+      if($(".profile_button_set").attr("id") != "<%= current_user.id %>"){
+          $(".profile_button_set").removeAttr("id");
+          $(".profile_button_set").attr("style","display:none");
+          $(".profile_button_set").attr("class","delete_button");
+      }
+      else {
+        $(".profile_button_set").removeAttr("id");
+        $(".profile_button_set").attr("class","profile_button");
+      }
+    });
     $(document).on("click", ".delete_button_destroy", function(){
       if($(".delete_button_set").attr("id") != "<%= current_user.id %>"){
           $(".delete_button_set").removeAttr("id");
           $(".delete_button_set").attr("style","display:none");
           $(".delete_button_set").attr("class","delete_button");
+          $(".profile_button_set").attr("style","border-top:none");
       }
       else {
         $(".delete_button_set").removeAttr("id");

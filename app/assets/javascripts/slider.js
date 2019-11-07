@@ -2,7 +2,7 @@
 
 $(function(){
 
-  var first_value = 500;
+  var first_value = 50;
   if(localStorage.getItem("frefre_slider") != null){
     first_value = localStorage.getItem("frefre_slider")
   }

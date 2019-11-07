@@ -9,7 +9,7 @@
             <%= "now_page" %>
           <% end %>">
             <div class="height_control"></div>
-            <div class="icon glyphicon glyphicon-home"></div>
+            <span class="icon glyphicon glyphicon-comment"></span>
             <div style=""class="float_text">
               <div class="float_jap">
                 スレッド検索
@@ -26,7 +26,7 @@
             <%= "now_page" %>
           <% end %>">
             <div class="height_control"></div>
-            <div class="icon glyphicon glyphicon-home"></div>
+            <span class="icon glyphicon glyphicon-comment"></span>
             <div style=""class="float_text">
               <div class="float_jap">
                 投稿検索
@@ -44,13 +44,30 @@
             <%= "now_page" %>
           <% end %>">
             <div class="height_control"></div>
-            <span class="icon glyphicon glyphicon-comment"></span>
+            <span class="icon glyphicon glyphicon-user" aria-hidden="true"></span>
             <div class="float_text">
               <div class="float_jap">
                 ユーザー検索
               </div>
               <div class="base_en">
                 User Search
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to '/manager/search_report_user', data: {"turbolinks"=>false},class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('search_report_user')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-user" aria-hidden="true"></span>
+            <div class="float_text">
+              <div class="float_jap">
+                通報ユーザー検索
+              </div>
+              <div class="base_en">
+                Reported User
               </div>
             </div>
           </div>

@@ -56,7 +56,7 @@
                       Delete this comment
                     </button>
                   </div>
-                  <div class="one_topic">
+                  <div class="one_topic profile_button_set">
                     <%= link_to "/other_profile/#{post.user.id}" do %>
                       <div class="jp">プロフィールへ飛ぶ</div>
                       Jump to the profile.
@@ -70,9 +70,15 @@
                         Jump to the profile.
                       <% end %>
                     </div>
+                    <div class="one_topic">
+                      <%= link_to(manager_prohibit_delete_path(id: prohibit_data.id,authenticity_token: form_authenticity_token),method: :post) do %>
+                        <div class="jp">この投稿を通報する。</div>
+                        Report this post.
+                      <% end %>
+                    </div>
                   <% end %>
                   <% if post.id != first_id && logged_in? && current_user.id == post.user.id %>
-                    <div class="one_topic">
+                    <div class="one_topic delete_button_cover">
                       <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
                           data-whatever="<%= post.id %>">
                         <div class="jp">投稿を削除する</div>
@@ -131,16 +137,5 @@
         <% end %>
       </div>
     </div>
-    <!--<% if params[:id].nil? %>
-      <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
-          data-whatever="<%= post.id %>">
-        Delete / 削除
-      </button>
-    <% elsif post.id != first_id && logged_in? && current_user.id == post.user.id %>
-      <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
-          data-whatever="<%= post.id %>">
-        Delete / 削除
-      </button>
-    <% end %>-->
   </div>
 <% end %>

@@ -11,12 +11,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     window.translated = false
     if Number(now_id) == data['group_id']
       user_id = Number($(".user_login").attr("id"))
-      add_post(data)
-      if user_id == data['user_id']
-        $(".base_en_form").val("");
-        $(".base_jp_form").val("");
-      ###
-
       now_page = 1
       if urls.length >= 5
         now_page = urls[4]
@@ -27,7 +21,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
           #alert_set("You successed to post.","投稿に成功しました","success")
       else if Number(now_page) == page
-        add_post(data)
+        add_post(data,user_id)
         if user_id == data['user_id']
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
@@ -36,7 +30,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
         #if user_id == data['user_id']
           #alert_set("You successed to post.","投稿に成功しました","success")
-      ###
 
 
   speak: (lang,mes_jp,mes_en, group)->
@@ -86,11 +79,18 @@ $(document).on 'click', '#sampleModal-enjp .btn_send', (event) ->
   App.room.speak("none",text_jp,text_en,parseInt($("#group").val()))
 ###
 
-add_post=(data)->
+add_post=(data,user_id)->
   plus_post = $(data["message"])
   $(".thread_cover_cover").append plus_post
   plus_post.ready ->
-    $(".delete_button_destroy").click();
+
+    if user_id == data['user_id']
+      $(".profile_button_destroy").click();
+      alert("delete")
+    else
+      $(".delete_button_destroy").click();
+      alert("profile")
+
     jp_height = plus_post.find(".jp_content_row .post_content_text").height();
     en_height = plus_post.find(".en_content_row .post_content_text").height();
     row = (Math.max(jp_height,en_height) - 10) / 22;

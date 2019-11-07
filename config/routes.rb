@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   get 'manager/search_user/:page' => 'manager#search_user'
   get 'manager/search_user_detail'
   get 'manager/search_user_detail/:id' => 'manager#search_user_detail'
+
+  get 'manager/search_report_user'
+  get 'manager/search_report_user/:page' => 'manager#search_user'
+  get 'manager/search_report_user_detail'
+  get 'manager/search_report_user_detail/:id' => 'manager#search_report_user_detail'
+
   get '/manager/prohibit'
 
   post 'mangaer/user_change', to:'manager#user_change'
@@ -26,7 +32,7 @@ Rails.application.routes.draw do
   post '/manager/mail',to:'manager#searcher_mail'
   post '/manager/user',to:'manager#searcher_user'
   post '/manager/prohibit',to:'manager#prohibit_set'
-  post '/manager/prohibit',to:'manager#prohibit_set'
+  post '/manager/prohibit_delete',to:'manager#prohibit_delete'
 
   get 'auth/:provider/callback', to: 'sessions#login_auth'
   get '/users/auth/:provider/callback', to: 'sessions#login_auth'

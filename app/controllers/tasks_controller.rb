@@ -1,13 +1,21 @@
 class TasksController < ApplicationController
   def report
-    id = session["report_user"]
+    id = params[:report_id]
     user = User.find_by(id:id.to_i)
     reportuser = Reportuser.find_by(user_id: id.to_i)
     if user && logged_in? && !(reportuser && reportuser.from_user == current_user.id)
-      Reportuser.save(user_id:user.id,from_user:current_user.id)
+      Reportuser.create(user_id:user.id,from_user:current_user.id)
       redirect_to "/other_profile/"+id
+      flash["alert_en"] = "You reported this user"
+      flash["alert_jp"] = "このユーザーを通報しました。"
+      flash["alert_type"] = "success"
+    else
+      flash["alert_en"] = "You reported this user"
+      flash["alert_jp"] = "このユーザーを通報しました。"
+      flash["alert_type"] = "success"
     end
   end
+
   def lang_change_jp
     session["lang"] = "jap"
     redirect_to params[:url]

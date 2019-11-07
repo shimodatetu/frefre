@@ -2,13 +2,19 @@ $(function(){
   var last_elem;
   var id = -1;
   $('.thread_page .thread_cover').each(function(i, elem){
+    var left_value = 50;
+    if(localStorage.getItem("frefre_slider") != null){
+      left_value = localStorage.getItem("frefre_slider")
+    }
+    var right_value = 100 - left_value
     var jp_height = $(elem).find(".jp_content_row .post_content_text").height();
     var en_height = $(elem).find(".en_content_row .post_content_text").height();
     if(jp_height == 0){jp_height = 99;}
     if(en_height == 0){en_height = 99;}
-    var row = ((Math.min(jp_height,en_height) - 10) / 22);
-    $(elem).find(".jp_content_row").attr("style","-webkit-line-clamp:"+Math.ceil(row)*2);
-    $(elem).find(".en_content_row").attr("style","-webkit-line-clamp:"+Math.ceil(row)*2);
+    var row = Math.ceil((Math.min(jp_height,en_height) - 10) / 22);
+    row += row * 50 / (50 - Math.min(left_value,right_value))
+    $(elem).find(".jp_content_row").attr("style","-webkit-line-clamp:"+row);
+    $(elem).find(".en_content_row").attr("style","-webkit-line-clamp:"+row);
   });
   $('.pvpage_all .thread_cover').each(function(i, elem){
     var jp_height = $(elem).find(".jp_position .post_content_text").height();

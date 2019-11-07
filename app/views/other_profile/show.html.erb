@@ -270,7 +270,7 @@
   			</div>
         <div class="modal-footer follow_modal_footer">
           <%= form_tag('/report/user',method: :post,class: "search_form_top") do %>
-            <%= hidden_field_tag :report_id , class: "form-control form_input",:value=>other_user_id %>
+            <%= hidden_field_tag :report_id,other_user_id, class: "form-control form_input" %>
             <button type="submit" class="btn btn-primary report_button_submit">
               <div class="jp">
                 実行

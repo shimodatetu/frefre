@@ -6,6 +6,9 @@
     <table class="category"border="1"style="font-size:16px;">
       <% @prohibit_all.each do |prohibit_data| %>
         <div class="prohibit_show">
+          <%= link_to(manager_prohibit_delete_path(id: prohibit_data.id,authenticity_token: form_authenticity_token),method: :post) do %>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          <% end %>
           <%= prohibit_data.prohibit_words %>
         </div>
       <% end %>

@@ -33,6 +33,18 @@ class ManagerController < ApplicationController
     redirect_to "/manager/prohibit"
   end
 
+
+  def prohibit_delete
+    if prohibit = Prohibit.find_by(id:params[:id].to_i)
+      prohibit.delete
+    end
+    redirect_to "/manager/prohibit"
+  end
+
+  def search_report_user
+    @report_users = Reportuser.all
+  end
+
   def search_post
     @posts = Post.all.where("deleted = false")
   end
