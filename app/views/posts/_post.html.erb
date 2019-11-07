@@ -62,6 +62,12 @@
                       Jump to the profile.
                     <% end %>
                   </div>
+                  <div class="one_topic report_button_set">
+                    <button class="report_post_button none_button"id="<%= post.id %>"style="width:100%">
+                      <div class="jp">この投稿を通報する。</div>
+                      Report this post.
+                    </button>
+                  </div>
                 <% else %>
                   <% if current_user != post.user %>
                     <div class="one_topic">

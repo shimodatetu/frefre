@@ -6,11 +6,13 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
+    alert("asd")
     urls = location.pathname.split("/")
     now_id = urls[3]
     window.translated = false
     if Number(now_id) == data['group_id']
       user_id = Number($(".user_login").attr("id"))
+      alert(user_id)
       now_page = 1
       if urls.length >= 5
         now_page = urls[4]
@@ -89,10 +91,9 @@ add_post=(data,user_id)->
 
     if user_id == data['user_id']
       $(".profile_button_destroy").click();
-      alert("delete")
     else
       $(".delete_button_destroy").click();
-      alert("profile")
+      $(".report_button_destroy").click();
 
     jp_height = plus_post.find(".jp_content_row .post_content_text").height();
     en_height = plus_post.find(".en_content_row .post_content_text").height();

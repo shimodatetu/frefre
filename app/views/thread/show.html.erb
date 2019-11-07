@@ -302,10 +302,6 @@
           </div>
   			</div>
         <div class="modal-footer follow_modal_footer">
-          <%= form_tag('/report/post',method: :post,class: "search_form_top") do %>
-            <%= hidden_field_tag :report_id,"", class: "form-control form_input report_post_input" %>
-            <%= hidden_field_tag :thread_id,thread.id %>
-            <%= hidden_field_tag :page_id,params[:id] %>
             <button type="submit" class="btn btn-primary report_button_submit">
               <div class="jp">
                 実行
@@ -314,7 +310,7 @@
                 OK
               </div>
             </button
-          <% end %>
+
           <button type="button" class="btn btn-default" data-dismiss="modal">
             <div class="jp">
               戻る
@@ -332,13 +328,15 @@
 </button>
 <button class="profile_button_destroy"style="display:none">
 </button>
+<button class="report_button_destroy"style="display:none">
+</button>
 <% if logged_in? == true %>
   <script>
     $(document).on("click", ".profile_button_destroy", function(){
       if($(".profile_button_set").attr("id") != "<%= current_user.id %>"){
           $(".profile_button_set").removeAttr("id");
           $(".profile_button_set").attr("style","display:none");
-          $(".profile_button_set").attr("class","delete_button");
+          $(".profile_button_set").attr("class","profile_button");
       }
       else {
         $(".profile_button_set").removeAttr("id");
@@ -357,5 +355,18 @@
         $(".delete_button_set").attr("class","delete_button");
       }
     });
+    <% if !logged_in? %>
+      $(document).on("click", ".report_button_destroy", function(){
+        if($(".report_button_set").attr("id") != "<%= current_user.id %>"){
+          $(".report_button_set").removeAttr("id");
+          $(".report_button_set").attr("style","display:none");
+          $(".report_button_set").attr("class","report_button");
+        }
+        else {
+          $(".report_button_set").removeAttr("id");
+          $(".report_button_set").attr("class","report_button");
+        }
+      });
+    <% end %>
   </script>
 <% end %>
