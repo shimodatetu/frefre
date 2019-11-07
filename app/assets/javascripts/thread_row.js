@@ -12,7 +12,7 @@ $(function(){
     if(jp_height == 0){jp_height = 99;}
     if(en_height == 0){en_height = 99;}
     var row = Math.ceil((Math.min(jp_height,en_height) - 10) / 22);
-    row += row * 50 / (50 - Math.min(left_value,right_value))
+    row += row * (50 - Math.min(left_value,right_value)) / 50
     $(elem).find(".jp_content_row").attr("style","-webkit-line-clamp:"+row);
     $(elem).find(".en_content_row").attr("style","-webkit-line-clamp:"+row);
   });
