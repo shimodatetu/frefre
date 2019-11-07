@@ -1,12 +1,12 @@
 $(function(){
   var last_elem;
   var id = -1;
+  var left_value = 50;
+  if(localStorage.getItem("frefre_slider") != null){
+    left_value = localStorage.getItem("frefre_slider")
+  }
+  var right_value = 100 - left_value
   $('.thread_page .thread_cover').each(function(i, elem){
-    var left_value = 50;
-    if(localStorage.getItem("frefre_slider") != null){
-      left_value = localStorage.getItem("frefre_slider")
-    }
-    var right_value = 100 - left_value
     var jp_height = $(elem).find(".jp_content_row .post_content_text").height();
     var en_height = $(elem).find(".en_content_row .post_content_text").height();
     if(jp_height == 0){jp_height = 99;}
