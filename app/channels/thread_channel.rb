@@ -18,7 +18,8 @@ class ThreadChannel < ApplicationCable::Channel
       group.title_jp = data['title_jp']
       group.title_en = data['title_en']
       group.user_id = current_user.id
-
+      group.first_content_jp = data['message_jp']
+      group.first_content_en = data['message_en']
       if group.save
         post = Post.new()
         post.lang = data['lang']
