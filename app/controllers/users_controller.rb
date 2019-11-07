@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     elsif mes_en == "Password is invalid"
       flash.now[:failed_jp] = "パスワードは半角英数字でお願いします。"
       flash.now[:failed_en] = "Please input your password using half-width alphanumeric."
-    elsif mes_en = "Email is invalid"
+    elsif mes_en == "Email is invalid"
       flash.now[:failed_jp] = "無効なメールアドレスです。"
       flash.now[:failed_en] = "Email is invalid."
     end

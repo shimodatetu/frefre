@@ -2,8 +2,9 @@ class TasksController < ApplicationController
   def report
     id = session["report_user"]
     user = User.find_by(id:id.to_i)
-    if user && logged_in?
-      Reportuser.new(user_id:user.id,from_user:current_user.id)
+    reportuser = Reportuser.find_by(user_id: id.to_i)
+    if user && logged_in? && !(reportuser && reportuser.from_user == current_user.id)
+      Reportuser.save(user_id:user.id,from_user:current_user.id)
       redirect_to "/other_profile/"+id
     end
   end

@@ -133,10 +133,9 @@ ActiveRecord::Schema.define(version: 2019_11_06_062155) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reports", force: :cascade do |t|
-    t.integer "to_id"
+  create_table "reportusers", force: :cascade do |t|
+    t.integer "from_user"
     t.integer "user_id"
-    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

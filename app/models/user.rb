@@ -2,7 +2,7 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
   attr_accessor :remember_token, :activation_token, :reset_token
-  belongs_to :reportuser
+  has_many :reportusers
   has_many :posts
   has_many :groups
   has_many :chats
@@ -48,7 +48,6 @@ class User < ApplicationRecord
   validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }, length: {maximum: 32}, unless: :uid?
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true,  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, unless: :uid?
   def User.new_token
     SecureRandom.urlsafe_base64
   end
