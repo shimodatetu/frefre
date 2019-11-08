@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   end
   def login_post
     user = User.find_by(email: params[:session][:email])
-    if user.activated? && user.oauth == false && user.admit == true && user && user.authenticate(params[:session][:password])
+    if user && user.activated? && user.oauth == false && user.admit == true && user.authenticate(params[:session][:password])
       log_in user
       flash["alert_en"] = "You successed to login"
       flash["alert_jp"] = "ログインに成功しました。"
