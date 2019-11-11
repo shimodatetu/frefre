@@ -161,8 +161,6 @@ translate_google=(title,content,lang,hash_ary) ->
       hash_base += value
     else
       hash_base += "</>"+value
-  alert(hash_base)
-  console.log([title,content,hash_base])
   $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/translate_thread',
@@ -171,7 +169,6 @@ translate_google=(title,content,lang,hash_ary) ->
       'lang': lang,
       'words':[title,content,hash_base]
     dataType: 'json').done((res) ->
-    console.log(res)
     window.translated = true
     trans_title = res[0]
     trans_content = res[1]
@@ -205,7 +202,6 @@ translate_google=(title,content,lang) ->
     trans_title = res[0]
     trans_content = res[1]
 
-    console.log(res)
     if lang == "ja"
       $(".jp_data_title").val(trans_title);
       $(".jp_data_content").val(trans_content);

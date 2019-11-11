@@ -33,7 +33,6 @@ send_check=()->
     App.notice.make("enjp",content_jp,content_en,$(".get_other_id").attr("id"));
 
 $(document).on 'click', '.make_thread_cover .mes_post_button', (event) ->
-  #alert($('input[name=type_select]:checked').val())
   type_check($(@).attr("id"),$(".get_other_id").attr("id"))
   event.preventDefault()
 

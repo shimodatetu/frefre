@@ -12,7 +12,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     user_id = Number($(".user_login").attr("id"))
     if user_id == data['user_id']
       $('#post_id').val data['id']
-      alert("asd")
       $('.post_image_submit').click()
       if Number(now_id) == data['group_id']
         now_page = 1
@@ -40,7 +39,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   speak: (lang,mes_jp,mes_en, group)->
     mes_jp = mes_jp.replace("// n", '').replace("//n", '');
     mes_en = mes_en.replace("//n", '').replace("// n", '');
-    #alert("id:"+group+"/mes_jp:"+mes_jp+"/mes_en:"+mes_en)
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
     #$(".base_en_form").val("")
     #$(".base_jp_form").val("")
@@ -214,7 +212,6 @@ translate_google4=(lang,words) ->
   data.append 'target', lang
   data.append 'source', source
   data.append 'format', "html"
-  console.log(data)
   settings =
     method: 'POST'
     header:{
