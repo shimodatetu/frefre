@@ -74,7 +74,7 @@ class CategoryController < ApplicationController
     typecategory_id = params[:id].to_i
     a_type =  @threadtypes.find(typecategory_id)
     if a_type.present?
-      thread_page_num = 10.to_f
+      thread_page_num = 20.to_f
       page_show_max = 5.to_f
       page_max_half = (page_show_max / 2).ceil
       group_num = a_type.groups.all.count
@@ -119,7 +119,7 @@ class CategoryController < ApplicationController
     smallcategory_id = params[:id].to_i
     a_smallcategory =  @categories.find(smallcategory_id)
     if a_smallcategory.present?
-      thread_page_num = 10.to_f
+      thread_page_num = 20.to_f
       page_show_max = 5.to_f
       page_max_half = (page_show_max / 2).ceil
       group_num = a_smallcategory.groups.all.count

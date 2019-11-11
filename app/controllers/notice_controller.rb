@@ -3,7 +3,7 @@ class NoticeController < ApplicationController
     if Chat.present?
       @notice = Notice.find(params[:id])
       @chat = Chat.new
-      thread_page_num = 10.to_f
+      thread_page_num = 20.to_f
       page_show_max = 5.to_f
       page_max_half = (page_show_max / 2).ceil
       group_num = @notice.chats.all.count
