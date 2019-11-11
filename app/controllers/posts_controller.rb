@@ -4,10 +4,7 @@ class PostsController < ApplicationController
     @groups = Group.all.where("deleted = false")
   end
   def create
-    #if !params[:post][:photo].nil? && !params[:post][:group_id].nil?
-    #  @post = Post.new(photo:params[:post]["photo"].read,group_id: params[:post][:group_id],user_id: current_user.id,file_name: params[:post]["photo"].original_filename)
-    #  @post.save
-    #end
+    Post.find_by(id:params[:post][:post_id]).update(picture:params[:post][:picture])
   end
 end
 private

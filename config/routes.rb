@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'users/test'
+
   get 'manager',to:"manager#show"
   get 'manager/show'
   get 'manager/search_post'

@@ -1,0 +1,10 @@
+
+<%= form_for current_user do |form| %>
+  <%= form.file_field :avater %><br>
+  <%= form.text_field :name %><br>
+  <%= form.submit %>
+<% end %>
+
+<% if current_user.avater.attached? %>
+  <%= image_tag current_user.avater %>
+<% end %>

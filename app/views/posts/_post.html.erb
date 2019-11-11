@@ -99,7 +99,7 @@
             </div>
           <% end %>
         </div>
-        <% if post.image.nil? %>
+        <% if post.image.nil? && !post.picture.attached?%>
           <div class="post_content_position en_position">
             <% if post.id == first_id %>
               <div class="thread_title">
@@ -136,11 +136,13 @@
             </div>
           </div>
         <% else %>
-          <script>
-          </script>
           <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
-            <img src="<%= post.image %>">
-            <%#= image_tag show_post_image_thread_path(post), :class => "post_image" %>
+
+            <% if params[:id].nil? %>
+              <img src="<%= post.image %>">
+            <% elsif post.picture.attached? %>
+              <%= image_tag post.picture , :class => "group_img"%>
+            <% end %>
           </div>
         <% end %>
       </div>

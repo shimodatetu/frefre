@@ -6,13 +6,11 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    alert("asd")
     urls = location.pathname.split("/")
     now_id = urls[3]
     window.translated = false
     if Number(now_id) == data['group_id']
       user_id = Number($(".user_login").attr("id"))
-      alert(user_id)
       now_page = 1
       if urls.length >= 5
         now_page = urls[4]
@@ -22,6 +20,14 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         if user_id == data['user_id']
           window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
       else if Number(now_page) == page
+        promise1 = new Promise((resolve, reject) ->
+          $('#post_id').val data['id']
+          resolve()
+          return
+        )
+        promise1.then (value) ->
+          $('#post_image_submit').click()
+          return
         add_post(data,user_id)
         if user_id == data['user_id']
           $(".base_en_form").val("");
@@ -49,9 +55,8 @@ String::bytes = ->
   encodeURIComponent(this).replace(/%../g, 'x').length
 
 reader.addEventListener 'load', ->
-
   text = "<img src='" + String(reader.result) + "'>"
-  App.room.image(reader.result,parseInt($("#group").val()))
+  App.room.image(reader.result,parseInt($("#group_id").val()))
 
   #blob = new Blob([result], {type: "application/octet-binary"})
   #App.room.image(result,parseInt($("#group").val()))

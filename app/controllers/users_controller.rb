@@ -3,8 +3,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
   def new_auth
-
   end
+  def test
+    @user = current_user
+  end
+
+
   def create
     @user = User.new(user_params)
     if params[:user][:agreement_term] == "0"
@@ -61,6 +65,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    current_user.update params.require(:user).permit(:avater)
   end
   def show_image
     @image = User.find(params[:id])

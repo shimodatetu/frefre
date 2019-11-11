@@ -4,14 +4,19 @@
     <div class="user_id"id="<%= current_user.id %>"></div>
     <div class="profile_sub"style="display:inline-block">
       <div class="profile_picture">
-        <% if current_user.image == 0 %>
-          <% if current_user.photo.nil? %>
-            <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-          <% else %>
-            <%= image_tag show_image_user_path(current_user), :class => "group_img" %>
-          <% end %>
+
+        <% if current_user.avater.attached? %>
+          <%= image_tag current_user.avater , :class => "group_img"%>
         <% else %>
-          <%= image_tag("/userimage/user#{current_user.image}.png", :class => "group_img") %>
+          <% if current_user.image == 0 %>
+            <% if current_user.photo.nil? %>
+              <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+            <% else %>
+              <%= image_tag show_image_user_path(current_user), :class => "group_img" %>
+            <% end %>
+          <% else %>
+            <%= image_tag("/userimage/user#{current_user.image}.png", :class => "group_img") %>
+          <% end %>
         <% end %>
         <div class="edit_user">
           <button type="button" class="profile_picture_change " data-toggle="modal" data-target="#image_modal" data-whatever="@mdo">
@@ -158,6 +163,21 @@
     			<div class="modal-body">
             <div class="image_change image_change_type">
               <%= image_tag("/user.png", :class=> "image") %>
+              <%= form_for current_user do |form| %>
+                <%= button_tag type: 'button',class:"profile_picture_change normal_button" do %>
+                  <label type="button" for="image">
+                    <div class="jp">
+                      自分で画像を用意する
+                    </div>
+                    <div class="en">
+                      Prepare photo by yourself.
+                    </div>
+                    <%= form.file_field :avater,id:"image",class:"profile_image_input",style:"display:none" %>
+                  </label>
+                <% end %>
+                <%= form.submit "send",id:"image_submit",style:"display:none" %>
+              <% end %>
+              <!--
               <%= form_for current_user,url: "/profile" do |f| %>
                 <%= button_tag type: 'button',class:"profile_picture_change normal_button" do %>
                   <label type="button" for="image">
@@ -172,6 +192,7 @@
                 <% end %>
                 <%= f.submit "send",id:"image_submit",style:"display:none" %>
               <% end %>
+              -->
             </div>
             <div class="image_change image_change_type">
               <%= image_tag("/userimage/user1.png", :class=> "image") %>

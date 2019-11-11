@@ -81,8 +81,8 @@
         </div>
 			</div>
       <!--<%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-        Powerd by MT
-      <% end %>-->
+          Powerd by MT
+        <% end %>-->
       <div class="post_footer_simple">
         <div class="post_button_cover thread_send">
           <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="post"
@@ -95,7 +95,9 @@
               Post
             </div>
           </button>
-          <form class="thread_image_post post_button_form">
+          <%= form_for @post, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+            <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
+            <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
             <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
               <div class="button_text">
@@ -105,9 +107,11 @@
                 Image
               </div>
             </label>
-            <input type="file"id="file_send"class="post_file"style="display:none">
-            <input type="hidden"id="group" name="group" value="<%= params[:id] %>">
-          </form>
+            <%= form.file_field :picture,id:"file_send",class:"post_file",style:"display:none" %>
+            <%= form.submit :id=>"post_image_submit",:style=>"display:none" %>
+          <% end %>
+
+
         </div>
         <!--<%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
           翻訳提供　未来翻訳
@@ -221,22 +225,7 @@
 </div>
 
 <% end %>
-<!--
-<div class="thread_post_cover">
-  <div class="modal fade zoom_modal" id="zoom_modal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="btn btn-secondary close_button" data-dismiss="modal">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          </button>
-          <img src="/">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
--->
+
 <div class="thread_post_cover">
   <div class="modal fade help_modal" id="help_slide" tabindex="-1">
     <div class="modal-dialog">

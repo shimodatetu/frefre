@@ -49,8 +49,6 @@ $(document).on 'click', '.prof_trans .words_post_button', (event) ->
       alert_modal("English introduction is empty.","英語プロフィール欄に何も書かれていません","fail")
     else
       translate_google(profile_en,profile_jp,"ja")
-  else
-    alert("asd");
 
 $(document).on 'click', '.profile_cannot_save', (event) ->
   alert_modal("The event acount cannot be changed.","イベント用アカウントは変更できません","fail")

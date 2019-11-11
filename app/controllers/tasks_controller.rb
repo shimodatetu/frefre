@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+
   def report_user
     id = params[:report_id]
     user = User.find_by(id:id.to_i)
