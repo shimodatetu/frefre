@@ -107,8 +107,13 @@
                 Image
               </div>
             </label>
-            <%= form.file_field :picture,id:"file_send",class:"post_file",style:"display:none" %>
-            <%= form.submit :id=>"post_image_submit",:style=>"display:none" %>
+
+            <% if logged_in? %>
+              <%= form.file_field :picture,id:"file_send",class:"logined",style:"display:none" %>
+            <% else %>
+              <%= form.file_field :picture,id:"file_send",style:"display:none" %>
+            <% end %>
+            <%= form.submit :class=>"post_image_submit",:style=>"display:none" %>
           <% end %>
 
 

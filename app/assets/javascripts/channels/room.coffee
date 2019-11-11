@@ -9,33 +9,32 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     urls = location.pathname.split("/")
     now_id = urls[3]
     window.translated = false
-    if Number(now_id) == data['group_id']
-      user_id = Number($(".user_login").attr("id"))
-      now_page = 1
-      if urls.length >= 5
-        now_page = urls[4]
-      page_id_max = Number($(".thread_page_num").attr("id"))
-      page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-      if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-        if user_id == data['user_id']
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-      else if Number(now_page) == page
-        promise1 = new Promise((resolve, reject) ->
-          $('#post_id').val data['id']
-          resolve()
-          return
-        )
-        promise1.then (value) ->
-          $('#post_image_submit').click()
-          return
-        add_post(data,user_id)
-        if user_id == data['user_id']
-          $(".base_en_form").val("");
-          $(".base_jp_form").val("");
-      else
-        window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
-        #if user_id == data['user_id']
-          #alert_set("You successed to post.","投稿に成功しました","success")
+    user_id = Number($(".user_login").attr("id"))
+    if user_id == data['user_id']
+      $('#post_id').val data['id']
+      alert("asd")
+      $('.post_image_submit').click()
+      if Number(now_id) == data['group_id']
+        now_page = 1
+        if urls.length >= 5
+          now_page = urls[4]
+        page_id_max = Number($(".thread_page_num").attr("id"))
+        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+        if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+          if user_id == data['user_id']
+            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+        else if Number(now_page) == page
+          if user_id == data['user_id']
+            $(".base_en_form").val("");
+            $(".base_jp_form").val("");
+          add_post(data,user_id)
+        else
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+          #if user_id == data['user_id']
+            #alert_set("You successed to post.","投稿に成功しました","success")
+
+      $(".post_image_submit").prop('disabled', false)
+
 
 
   speak: (lang,mes_jp,mes_en, group)->
@@ -57,10 +56,6 @@ String::bytes = ->
 reader.addEventListener 'load', ->
   text = "<img src='" + String(reader.result) + "'>"
   App.room.image(reader.result,parseInt($("#group_id").val()))
-
-  #blob = new Blob([result], {type: "application/octet-binary"})
-  #App.room.image(result,parseInt($("#group").val()))
-  #reader2.readAsDataURL(blob);
   return
 
 reader2.addEventListener 'load', ->
@@ -72,9 +67,12 @@ $(document).on 'click', '.report_post_button', (event) ->
   $(".report_post_input").val(this.id)
   $("#report_modal").modal("show")
 
-$(document).on 'change', '.thread_image_post .post_file', (event) ->
-  if (this.files[0].type != 'text/plain')
-    reader.readAsDataURL(this.files[0], 'UTF-8');
+$(document).on 'change', '.thread_image_post #file_send', (event) ->
+  if($(this).attr("class") == "logined")
+    if (this.files[0].type != 'text/plain')
+      reader.readAsDataURL(this.files[0], 'UTF-8');
+  else
+    alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
 $(document).on 'click', '.thread_send .btn_send', (event) ->
   if($(this).attr("name") == "logined")
