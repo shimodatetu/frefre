@@ -21,7 +21,7 @@
   <div class="thread_all thread_all_post"style="padding-top:10px;">
     <div class="thread_cover_cover">
       <%= render thread.posts.first %>
-      <%= render thread.posts.offset(@thread_page_num*(@page_id - 1)+1).limit(@thread_page_num) %>
+      <%= render thread.posts.order(id: "ASC").offset(@thread_page_num*(@page_id - 1)+1).limit(@thread_page_num) %>
     </div>
   </div>
   <div class="footer thread_footer">
