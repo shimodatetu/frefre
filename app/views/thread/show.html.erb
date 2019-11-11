@@ -109,9 +109,9 @@
             </label>
 
             <% if logged_in? %>
-              <%= form.file_field :picture,id:"file_send",class:"logined",style:"display:none" %>
+              <%= form.file_field :pict,id:"file_send",class:"logined",style:"display:none" %>
             <% else %>
-              <%= form.file_field :picture,id:"file_send",style:"display:none" %>
+              <%= form.file_field :pict,id:"file_send",style:"display:none" %>
             <% end %>
             <%= form.submit :class=>"post_image_submit",:style=>"display:none" %>
           <% end %>

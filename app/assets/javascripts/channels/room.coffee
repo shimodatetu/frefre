@@ -29,20 +29,11 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           add_post(data,user_id)
         else
           window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
-          #if user_id == data['user_id']
-            #alert_set("You successed to post.","投稿に成功しました","success")
-
-      $(".post_image_submit").prop('disabled', false)
-
 
 
   speak: (lang,mes_jp,mes_en, group)->
-    mes_jp = mes_jp.replace("// n", '').replace("//n", '');
-    mes_en = mes_en.replace("//n", '').replace("// n", '');
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
-    #$(".base_en_form").val("")
-    #$(".base_jp_form").val("")
-    #$('#sampleModal-enjp').modal("hide")
+
   image: (file,group)->
     @perform('image',group_id:group,image:file,lang:"none")
 
@@ -61,14 +52,20 @@ reader2.addEventListener 'load', ->
   $(".thread_all").append(text)
 
 
+$(document).on 'click', '.post_image_submit', (event) ->
+  $('.post_image_submit').prop('disabled', false)
+
 $(document).on 'click', '.report_post_button', (event) ->
-  $(".report_post_input").val(this.id)
-  $("#report_modal").modal("show")
+  #$(".report_post_input").val(this.id)
+  #$("#report_modal").modal("show")
+
 
 $(document).on 'change', '.thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
     if (this.files[0].type != 'text/plain')
       reader.readAsDataURL(this.files[0], 'UTF-8');
+    event.preventDefault()
+
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
@@ -129,7 +126,7 @@ type_check=(type)->
         if text_en.match?(prohibit) || text_jp.match?(prohibit)
           can_post = false
       if can_post == true
-        App.room.speak("none",text_jp,text_en,parseInt($("#group").val()))
+        App.room.speak("none",text_jp,text_en,parseInt($("#group_id").val()))
       else
         alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
     else if text_jp != ""
