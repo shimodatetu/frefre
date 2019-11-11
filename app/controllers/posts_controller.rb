@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     @groups = Group.all.where("deleted = false")
   end
   def create
-    Post.find_by(id:params[:post][:post_id]).update(picture:params[:post][:picture])
+    Post.find_by(id:params[:post][:post_id]).update(pict:params[:post][:pict])
   end
 end
 private

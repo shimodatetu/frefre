@@ -11,24 +11,24 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     window.translated = false
     user_id = Number($(".user_login").attr("id"))
     if user_id == data['user_id']
-      $('#post_id').val data['id']
+      $('#post_id').val data['data_id']
       $('.post_image_submit').click()
-      if Number(now_id) == data['group_id']
-        now_page = 1
-        if urls.length >= 5
-          now_page = urls[4]
-        page_id_max = Number($(".thread_page_num").attr("id"))
-        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-        if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-          if user_id == data['user_id']
-            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-        else if Number(now_page) == page
-          if user_id == data['user_id']
-            $(".base_en_form").val("");
-            $(".base_jp_form").val("");
-          add_post(data,user_id)
-        else
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+    if Number(now_id) == data['group_id']
+      now_page = 1
+      if urls.length >= 5
+        now_page = urls[4]
+      page_id_max = Number($(".thread_page_num").attr("id"))
+      page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+      if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+        if user_id == data['user_id']
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+      else if Number(now_page) == page
+        if user_id == data['user_id']
+          $(".base_en_form").val("");
+          $(".base_jp_form").val("");
+        add_post(data,user_id)
+      else
+        window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
 
 
   speak: (lang,mes_jp,mes_en, group)->
@@ -64,8 +64,10 @@ $(document).on 'change', '.thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
     if (this.files[0].type != 'text/plain')
       reader.readAsDataURL(this.files[0], 'UTF-8');
-    event.preventDefault()
 
+    #$('#post_id').val data['id']
+    #$('.post_image_submit').click()
+    event.preventDefault()
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
