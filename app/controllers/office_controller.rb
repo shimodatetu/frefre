@@ -1,7 +1,6 @@
 class OfficeController < ApplicationController
   def user_info
     user_id = params[:user_id]
-    #p user_id.to_i
     if (user_id .to_i != 0 || user_id == "0") && params["title_en"] != "" && params["title_jp"] != "" && params["message_en"] != "" && params["message_jp"] != ""
       if user_id == "0"
         info = Userinfo.new()

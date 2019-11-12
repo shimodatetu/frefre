@@ -1,6 +1,12 @@
 <% group = post.group %>
 <% first_id = group.posts.first.id%>
 <% id = params[:id] %>
+<% current_user_id = -1 %>
+
+<% if logged_in? %>
+  <% current_user_id = current_user.id %>
+<% end %>
+
 <% if post.deleted %>
   <div class="thread_cover deleted_coment">
     この投稿は削除されました。<br>
@@ -29,7 +35,7 @@
       <div class="post_content_cover">
         <div>
           <div class="user_name">
-            <% if params[:id].nil? || !logged_in? || current_user.id != post.user.id %>
+            <% if params[:id].nil? || !logged_in? || current_user_id != post.user.id %>
               <%= link_to "/other_profile/#{post.user.id}" do %>
                 <%= simple_format(text_url_to_link(h(post.user.name))) %>
               <% end %>
@@ -39,7 +45,7 @@
               <% end %>
             <% end %>
           </div>
-          <% if params[:id].nil? || current_user != post.user || (post.id != first_id && logged_in? && current_user.id == post.user.id)%>
+          <% if params[:id].nil? || current_user_id != post.user.id || (post.id != first_id && logged_in? && current_user_id == post.user.id)%>
             <div class="dropdown">
               <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <div class="create_time">
@@ -69,7 +75,7 @@
                     </button>
                   </div>
                 <% else %>
-                  <% if current_user != post.user %>
+                  <% if current_user_id != post.user_id %>
                     <div class="one_topic">
                       <%= link_to "/other_profile/#{post.user.id}" do %>
                         <div class="jp">プロフィールへ飛ぶ</div>
@@ -85,7 +91,7 @@
                       </div>
                     <% end %>
                   <% end %>
-                  <% if post.id != first_id && logged_in? && current_user.id == post.user.id %>
+                  <% if post.id != first_id && logged_in? && current_user_id == post.user.id %>
                     <div class="one_topic">
                       <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
                           data-whatever="<%= post.id %>">

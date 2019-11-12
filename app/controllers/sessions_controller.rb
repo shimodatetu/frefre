@@ -23,7 +23,6 @@ class SessionsController < ApplicationController
   end
 
   def login_post2
-    p params[:session][:id].to_i
     user = User.find_by(id: params[:session][:id].to_i)
     if user && user.usertype == "event"
       log_in user
