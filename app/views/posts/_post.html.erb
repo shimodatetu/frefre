@@ -143,12 +143,9 @@
           </div>
         <% else %>
           <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
-            <% if params[:id].nil? %>
-              <img src="<%= post.image %>">
-            <% elsif post.pict.attached? %>
+            <% if post.pict.attached? %>
               <%= image_tag post.pict , :class => "group_img"%>
             <% else %>
-              <img src="<%= post.image %>">
               not
             <% end %>
           </div>

@@ -10,9 +10,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     now_id = urls[3]
     window.translated = false
     user_id = Number($(".user_login").attr("id"))
-    if user_id == data['user_id']
-      $('#post_id').val data['data_id']
-      $('.post_image_submit').click()
+    #if user_id == data['user_id']
+      #$('#post_id').val data['data_id']
+      #$('.post_image_submit').click()
     if Number(now_id) == data['group_id']
       now_page = 1
       if urls.length >= 5
@@ -62,11 +62,11 @@ $(document).on 'click', '.report_post_button', (event) ->
 
 $(document).on 'change', '.thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
-    if (this.files[0].type != 'text/plain')
-      reader.readAsDataURL(this.files[0], 'UTF-8');
+    #if (this.files[0].type != 'text/plain')
+    #  reader.readAsDataURL(this.files[0], 'UTF-8');
 
     #$('#post_id').val data['id']
-    #$('.post_image_submit').click()
+    $('.post_image_submit').click()
     event.preventDefault()
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")

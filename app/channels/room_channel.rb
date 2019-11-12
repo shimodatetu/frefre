@@ -27,7 +27,6 @@ class RoomChannel < ApplicationCable::Channel
 
   def image(data)
     group = Group.find(data['group_id'])
-    p data['image']
     if group
       post = Post.new()
       post.lang = data['lang']
