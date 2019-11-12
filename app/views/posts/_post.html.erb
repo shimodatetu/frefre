@@ -144,6 +144,7 @@
         <% else %>
           <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
             <% if post.pict.attached? %>
+              <%= post.pict %>
               <%= image_tag post.pict , :class => "group_img"%>
             <% else %>
               not
