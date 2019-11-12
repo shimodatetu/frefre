@@ -77,15 +77,11 @@ $(document).on 'click', '.thread_send .btn_send', (event) ->
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
-###
-$(document).on 'click', '#sampleModal-enjp .btn_send', (event) ->
-  text_en = $("#sampleModal-enjp .en_form").val();
-  text_jp = $("#sampleModal-enjp .jp_form").val();
-  App.room.speak("none",text_jp,text_en,parseInt($("#group").val()))
-###
-
 add_post=(data,user_id)->
-  plus_post = $(data["message"])
+  if location.href.match("localhost")
+    plus_post = $(data["message"].replace('example.org', 'localhost:3000'))
+  else
+    plus_post = $(data["message"].replace('example.org', 'www.frefreforum.com'))
   $(".thread_cover_cover").append plus_post
   plus_post.ready ->
 
@@ -94,7 +90,6 @@ add_post=(data,user_id)->
     else
       $(".delete_button_destroy").click();
       $(".report_button_destroy").click();
-
     jp_height = plus_post.find(".jp_content_row .post_content_text").height();
     en_height = plus_post.find(".en_content_row .post_content_text").height();
     row = (Math.max(jp_height,en_height) - 10) / 22;
