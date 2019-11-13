@@ -1,5 +1,6 @@
 
 window.translated = false
+window.touched = false
 App.room = App.cable.subscriptions.create "RoomChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
@@ -10,9 +11,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     now_id = urls[3]
     window.translated = false
     user_id = Number($(".user_login").attr("id"))
-    #if user_id == data['user_id']
-      #$('#post_id').val data['data_id']
-      #$('.post_image_submit').click()
     if Number(now_id) == data['group_id']
       now_page = 1
       if urls.length >= 5
@@ -75,7 +73,9 @@ $(document).on 'click', '.thread_send .btn_send', (event) ->
   if($(this).attr("name") == "logined")
     type_check(this.id);
   else
+    window.touched = false
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
+
 
 add_post=(data,user_id)->
   if location.href.match("localhost")
@@ -139,111 +139,45 @@ type_check=(type)->
       if text_jp == ""
         alert_modal("Japanese form is empty.","日本語入力欄に何も書かれていません","fail")
       else
-        translate_google("en",text_jp)
+        #translate_google("en",text_jp)
+        $("#fakeLoader").fakeLoader({},translate_google,["en",text_jp]);
     else if type == "trans_to_jp"
       if text_en == ""
         alert_modal("English form is empty.","英語入力欄に何も書かれていません","fail")
       else
-        translate_google("ja",text_en)
+        $("#fakeLoader").fakeLoader({},translate_google,["ja",text_en]);
+        #translate_google("ja",text_en)
+
+translate_google=(data) ->
+  lang = data[0]
+  words = data[1]
+  if window.touched == false
+    window.touched = true
+    $.ajax(
+      async: false
+      url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
+      type: 'post'
+      data:
+        'lang': lang
+        'words': words
+      dataType: 'json').done((res) ->
+      window.translated = true
+      translation = res[0]
+      if lang == "ja"
+        $(".base_jp_form").val(translation)
+      else
+        translation = translation.replace("&#39;","'")
+        $(".base_en_form").val(translation)
+      $("#fakeLoader").fadeOut();
+      window.touched = false
+      return
+    ).fail (xhr, status, error) ->
+      alert status
+      $("#fakeLoader").fadeOut();
+      window.touched = false
+      return
 
 
-
-translate_google3=(lang,words) ->
-  source = "en"
-  if lang == 'en'
-    source = "ja"
-  words = "hello"
-  key = window.ENV.RailsEnv
-  url = 'https://apigw.mirai-api.net/trial/mt/v1.0/translate?langFrom=en&langTo=ja&profile=default&subscription-key='+key
-  data = {
-    "source": "The quick brown fox jumps over the lazy dog."
-  }
-  settings =
-    method: 'POST',
-    header:{
-      "Content-Type":"application/json; charset=UTF-8",
-      "Content-Length":bytes(data),
-      "Host":"www.frefreforum.com"
-    },
-    body:data
-  fetch(url, settings).then((res) ->
-    res.text()
-  ).then (text) ->
-
-
-translate_google=(lang,words) ->
-  $.ajax(
-    async: false
-    url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
-    type: 'post'
-    data:
-      'lang': lang
-      'words': words
-    dataType: 'json').done((res) ->
-    window.translated = true
-    translation = res[0]
-    if lang == "ja"
-      $(".base_jp_form").val(translation)
-    else
-      translation = translation.replace("&#39;","'")
-      $(".base_en_form").val(translation)
-    return
-  ).fail (xhr, status, error) ->
-    alert status
-    return
-
-
-
-###
-translate_google4=(lang,words) ->
-  source = "en"
-  if lang == 'en'
-    source = "ja"
-  key = window.ENV.RailsEnv
-  url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
-  data = new FormData
-  data.append 'q', words
-  data.append 'target', lang
-  data.append 'source', source
-  data.append 'format', "html"
-  settings =
-    method: 'POST'
-    header:{
-      header:"Access-Control-Allow-Origin: *"
-    }
-    body: data
-  fetch(url, settings).then((res) ->
-    res.text()
-  ).then (text) ->
-    window.translated = true
-    get_text = JSON.parse(text)["data"]["translations"][0]["translatedText"]
-    translation = get_text
-    if lang == "ja"
-      #$(".only_en_form").val("");
-      #App.room.speak(lang,translation,words, group)
-      #$("#sampleModal-enjp .en_form").val(words)
-      #$("#sampleModal-enjp .jp_form").val(translation)
-      #$(".base_en_form").val("")
-      #$(".base_jp_form").val("")
-      #$(".explain_text .en").attr("style","")
-      #$(".explain_text .jp").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$('#sampleModal-enjp').modal("show")
-      $(".base_jp_form").val(translation)
-    else
-      #$(".only_jp_form").val("");
-      #App.room.speak(lang,words,translation, group)
-      #$("#sampleModal-enjp .jp_form").val(words)
-      #$("#sampleModal-enjp .en_form").val(translation)
-      #$(".base_en_form").val("")
-      #$(".base_jp_form").val("")
-      #$(".explain_text .jp").attr("style","")
-      #$(".explain_text .en").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$('#sampleModal-enjp').modal("show")
-      translation = translation.replace("&#39;","'")
-      $(".base_en_form").val(translation)
-###
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);
 isHalf=(str)->

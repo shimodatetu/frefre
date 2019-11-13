@@ -43,12 +43,14 @@ $(document).on 'click', '.prof_trans .words_post_button', (event) ->
     if profile_jp == ""
       alert_modal("Japanese introduction is empty.","日本語プロフィール欄に何も書かれていません","fail")
     else
-      translate_google(profile_en,profile_jp,"en")
+      $("#fakeLoader").fakeLoader({},translate_google,["en",profile_en,profile_jp]);
+      #translate_google(profile_en,profile_jp,"en")
   else if this.id == "trans_to_jp"
     if profile_en == ""
       alert_modal("English introduction is empty.","英語プロフィール欄に何も書かれていません","fail")
     else
-      translate_google(profile_en,profile_jp,"ja")
+      $("#fakeLoader").fakeLoader({},translate_google,["ja",profile_en,profile_jp]);
+      #translate_google(profile_en,profile_jp,"ja")
 
 $(document).on 'click', '.profile_cannot_save', (event) ->
   alert_modal("The event acount cannot be changed.","イベント用アカウントは変更できません","fail")
@@ -68,7 +70,11 @@ $(document).on 'click', '.profile_save_button', (event) ->
   profile_jp = $(".profile_page #profile_jp").val();
   App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
 
-translate_google=(profile_en,profile_jp,lang) ->
+translate_google=(data) ->
+  lang = data[0]
+  profile_en = data[1]
+  profile_jp = data[2]
+  $("#fakeLoader").fakeLoader();
   words = profile_jp
   if lang == "ja"
     words = profile_en
@@ -87,7 +93,9 @@ translate_google=(profile_en,profile_jp,lang) ->
     else
       translation = translation.replace("&#39;","'")
       $("#profile_en").val(translation)
+    $("#fakeLoader").fadeOut();
     return
   ).fail (xhr, status, error) ->
     alert status
+    $("#fakeLoader").fadeOut();
     return

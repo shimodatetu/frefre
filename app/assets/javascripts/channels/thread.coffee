@@ -67,14 +67,16 @@ type_check=(id)->
     else if content_jp == ""
       alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
     else
-      translate_google(title_jp,content_jp,"en")
+      #translate_google(title_jp,content_jp,"en")
+      $("#fakeLoader").fakeLoader({},translate_google,["en",title_jp,content_jp]);
   else if id == "trans_to_jp"
     if title_en == ""
       alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
     else if content_en == ""
       alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
     else
-      translate_google(title_en,content_en,"ja")
+      #translate_google(title_en,content_en,"ja")
+      $("#fakeLoader").fakeLoader({},translate_google,["ja",title_en,content_en]);
 
 cut_hash=(hash_data)->
   hash_ary_main = []
@@ -86,110 +88,10 @@ cut_hash=(hash_data)->
   hash_ary_main.shift()
   return hash_ary_main
 
-###
-translate_google=(title,content,lang,hash_ary) ->
-  source = "en"
-  if lang == 'en'
-    source = "ja"
-  key = window.ENV.RailsEnv
-  url = 'https://translation.googleapis.com/language/translate/v2?key=' + key
-  data = new FormData
-  data.append 'q', title
-  data.append 'q', content
-  hash_base = []
-  hash_ary.forEach (value) ->
-    data.append 'q', value
-    hash_base.push(value)
-  data.append 'target', lang
-  data.append 'source', source
-  data.append 'format', "text"
-  settings =
-    method: 'POST'
-    body: data
-  fetch(url, settings).then((res) ->
-    res.text()
-  ).then (text) ->
-    window.translated = true
-    translate = JSON.parse(text)["data"]["translations"]
-    trans_title = translate[0]["translatedText"]
-    trans_content = translate[1]["translatedText"]
-    i = 1
-    hash_ary = []
-    while(translate[i+1] != undefined)
-      i += 1
-      hash_ary.push(translate[i]["translatedText"].replace("&#39;","'"));
-    if lang == "ja"
-      #$("#groupModal .en_form_hash").html("#"+hash_base.join("#"))
-      #$("#groupModal .jp_form_hash").html("#"+hash_ary.join("#");)
-      #$("#groupModal .en_form_content").html(content)
-      #$("#groupModal .jp_form_content").html(trans_content)
-      #$("#groupModal .en_form_title").val(title)
-      #$("#groupModal .jp_form_title").val(trans_title)
-      #$(".explain_text .en").attr("style","")
-      #$(".explain_text .jp").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$("#groupModal").modal("show")
-
-      $(".jp_data_title").val(trans_title);
-      $(".jp_data_content").html(trans_content);
-      $(".hash_jp").html("#"+hash_ary.join("#"))
-    else
-      #$("#groupModal .en_form_hash").html("#"+hash_ary.join("#"))
-      #$("#groupModal .jp_form_hash").html("#"+hash_base.join("#"))
-      #$("#groupModal .en_form_content").html(trans_content)
-      #$("#groupModal .jp_form_content").html(content)
-      #$("#groupModal .en_form_title").val(trans_title)
-      #$("#groupModal .jp_form_title").val(title)
-      #$(".explain_text .jp").attr("style","")
-      #$(".explain_text .en").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","display:none")
-      #$("#groupModal").modal("show")
-
-      trans_title = trans_title.replace("&#39;","'")
-      trans_content = trans_content.replace("&#39;","'")
-      $(".en_data_title").val(trans_title);
-      $(".en_data_content").html(trans_content);
-      $(".hash_en").html("#"+hash_ary.join("#"))
-
-
-translate_google=(title,content,lang,hash_ary) ->
-  hash_base = ""
-  first = true
-  hash_ary.forEach (value) ->
-    if first == true
-      first = false
-      hash_base += value
-    else
-      hash_base += "</>"+value
-  $.ajax(
-    async: false
-    url: 'https://still-plains-44123.herokuapp.com/translate_thread',
-    type: 'post'
-    data:
-      'lang': lang,
-      'words':[title,content,hash_base]
-    dataType: 'json').done((res) ->
-    window.translated = true
-    trans_title = res[0]
-    trans_content = res[1]
-    hash_ary = res[2].split('</>')
-    if lang == "ja"
-      $(".jp_data_title").val(trans_title);
-      $(".jp_data_content").html(trans_content);
-      $(".hash_jp").html("#"+hash_ary.join("#"))
-    else
-      trans_title = trans_title.replace("&#39;","'")
-      trans_content = trans_content.replace("&#39;","'")
-      $(".en_data_title").val(trans_title);
-      $(".en_data_content").html(trans_content);
-      $(".hash_en").html("#"+hash_ary.join("#"))
-    return
-  ).fail (xhr, status, error) ->
-    alert status
-    return
-###
-
-translate_google=(title,content,lang) ->
+translate_google=(data) ->
+  lang = data[0]
+  title = data[1]
+  content = data[2]
   $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai_twice',
@@ -208,7 +110,9 @@ translate_google=(title,content,lang) ->
     else
       $(".en_data_title").val(trans_title);
       $(".en_data_content").val(trans_content);
+    $("#fakeLoader").fadeOut();
     return
   ).fail (xhr, status, error) ->
     alert status
+    $("#fakeLoader").fadeOut();
     return

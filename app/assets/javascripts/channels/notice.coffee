@@ -62,15 +62,20 @@ type_check=(id,type)->
       if content_en == ""
         alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
       else
-        translate_google(content_en,"ja")
+        #translate_google(content_en,"ja")
+        $("#fakeLoader").fakeLoader({},translate_google,["ja",content_en]);
     else if id == "trans_to_en"
       if content_jp == ""
         alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
       else
-        translate_google(content_jp,"en")
+        #translate_google(content_jp,"en")
+        $("#fakeLoader").fakeLoader({},translate_google,["en",content_jp]);
 
 
-translate_google=(content,lang) ->
+translate_google=(data) ->
+  lang = data[0]
+  content = data[1]
+  $("#fakeLoader").fakeLoader();
   $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
@@ -86,7 +91,9 @@ translate_google=(content,lang) ->
     else
       translation = translation.replace("&#39;","'")
       $(".en_data_content").val(translation);
+    $("#fakeLoader").fadeOut();
     return
   ).fail (xhr, status, error) ->
     alert status
+    $("#fakeLoader").fadeOut();
     return

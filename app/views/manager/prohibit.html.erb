@@ -3,6 +3,9 @@
     <div class="title">
       禁止ワード一覧
     </div>
+    <%= link_to(manager_prohibit_alldelete_path(authenticity_token: form_authenticity_token),method: :post) do %>
+      全て消す
+    <% end %>
     <table class="category"border="1"style="font-size:16px;">
       <% @prohibit_all.each do |prohibit_data| %>
         <div class="prohibit_show">

@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   post '/manager/user',to:'manager#searcher_user'
   post '/manager/prohibit',to:'manager#prohibit_set'
   post '/manager/prohibit_delete',to:'manager#prohibit_delete'
+  post '/manager/prohibit_alldelete',to:'manager#prohibit_alldelete'
   post '/manager/report_user',to:'manager#searcher_report_user'
   post '/manager/report_post',to:'manager#searcher_report_post'
 

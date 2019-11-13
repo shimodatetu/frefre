@@ -40,6 +40,10 @@ class ManagerController < ApplicationController
     end
     redirect_to "/manager/prohibit"
   end
+  def prohibit_alldelete
+    Prohibit.delete_all
+    redirect_to "/manager/prohibit"
+  end
 
   def search_report_user
     @report_users = Reportuser.all
