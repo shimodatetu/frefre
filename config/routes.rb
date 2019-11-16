@@ -27,6 +27,10 @@ Rails.application.routes.draw do
   get 'manager/search_report_post_detail'
   get 'manager/search_report_post_detail/:id' => 'manager#search_report_post_detail'
 
+  get 'manager/user_office',to:'manager#user_office'
+  get 'manager/user_office/:id' => 'manager#user_office'
+  post 'user_info',to:'manager#user_info'
+
   get '/manager/prohibit'
 
   post 'mangaer/user_change', to:'manager#user_change'
@@ -63,8 +67,6 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
 
-  post 'user_info',to:'office#user_info'
-  get 'user_office',to:'office#user_office'
 
   get 'policy',to:'policy#show_policy'
   get 'term',to:'policy#show_term'
@@ -115,6 +117,8 @@ Rails.application.routes.draw do
   get '/profile/:id' => 'profile#show'
   get '/profile/:id/:page1' => 'profile#show'
   get '/profile/:id/:page1/:page2' => 'profile#show'
+
+  post "profile/retire",to: "profile#retire"
   patch '/profile', to: 'profile#update'
   get '/notice/new/:id' => 'notice#new'
   get '/groups',to:'groups#new'

@@ -9,12 +9,16 @@ class SessionsController < ApplicationController
   end
   def login_post
     user = User.find_by(email: params[:session][:email])
-    if user && user.activated? && user.oauth == false && user.admit == true && user.authenticate(params[:session][:password])
+    if user && user.activated? && user.oauth == false && user.admit == true && user.usertype != "delete" && user.authenticate(params[:session][:password])
       log_in user
       flash["alert_en"] = "You successed to login"
       flash["alert_jp"] = "ログインに成功しました。"
       flash["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
+    elsif user && user.usertype == "delete"
+      flash.now[:failed_en] = "This acount is freezed."
+      flash.now[:failed_jp] = "このアカウントは凍結しています"
+      render :index
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
       flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"
@@ -54,7 +58,12 @@ class SessionsController < ApplicationController
     user_uid = request.env["omniauth.auth"].uid
     signup_yet = false
     if user_uid != nil && user = User.find_by(uid: user_uid)
-      if user.admit == true
+      if user.usertype == "delete"
+        signup_yet = true
+        flash.now[:failed_en] = "This acount is freezed."
+        flash.now[:failed_jp] = "このアカウントは凍結しています"
+        render :index
+      elsif user.admit == true
         session[:user_id] = user.id
         signup_yet = true
         flash["alert_en"] = "You successed to login"
@@ -66,7 +75,6 @@ class SessionsController < ApplicationController
     if signup_yet == false
       user = User.from_omniauth(request.env["omniauth.auth"])
       if user.save
-        #session[:user_id] = user.id
         session[:oauth_id] = user.id
         redirect_to '/oauth_complete'
       else

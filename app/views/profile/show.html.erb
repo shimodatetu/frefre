@@ -86,6 +86,16 @@
               </div>
             <% end %>
           </li>
+          <li class="nav-item profile_contents_button">
+            <%= link_to '/profile/10',class:"nav-link" do %>
+              <div class="jp">
+                退会する
+              </div>
+              <div class="en">
+                Unsubscribe
+              </div>
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>
@@ -104,7 +114,10 @@
         <%= render partial:"detail_notice" %>
       <% elsif params[:id] == "8" || params[:id] == "9" %>
         <%= render partial:"follow" %>
+      <% elsif params[:id] == "10" %>
+        <%= render partial:"retire" %>
       <% end %>
+
     </div>
   </div>
   <div class="profile_modal">

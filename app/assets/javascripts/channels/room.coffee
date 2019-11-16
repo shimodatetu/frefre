@@ -119,8 +119,10 @@ type_check=(type)->
   if type == "post"
     if text_en != "" && text_jp != ""
       can_post = true
+      check_text_en = text_en.toLowerCase()
+      check_text_jp = text_jp.toLowerCase()
       gon.prohibit.forEach (prohibit) ->
-        if text_en.match?(prohibit) || text_jp.match?(prohibit)
+        if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
           can_post = false
       if can_post == true
         App.room.speak("none",text_jp,text_en,parseInt($("#group_id").val()))

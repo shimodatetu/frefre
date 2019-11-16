@@ -16,10 +16,13 @@ class UsersController < ApplicationController
       flash.now[:failed_jp] = "利用規約に同意してください"
       render :index
     else
-      if @user.save
+      if @user.usertype == "delete"
+        flash.now[:failed_en] = "This acount is freezed."
+        flash.now[:failed_jp] = "このアカウントは凍結しています"
+        render :index
+      elsif @user.save
         flash.now[:success] = "メールに届いたURLをクリックして、アカウントを有効かしてください。"
         UserMailer.account_activation(@user).deliver_now
-        #RegisterMailer.send_confirm_mail(@user).deliver_now
         redirect_to '/account_activations/check'
       else
         flash.now[:failed_jp] = "登録に失敗しました"

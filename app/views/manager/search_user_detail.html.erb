@@ -124,7 +124,18 @@
         </button>
       <% end %>
     <% end %>
-
+    <%= link_to "/manager/user_office/"+params[:id] do %>
+      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+        <div class="text_box">
+          <div class="jp">
+            お知らせを送る
+          </div>
+          <div class="en">
+            Send a notice
+          </div>
+        </div>
+      </button>
+    <% end %>
     <% if user.usertype != "delete" %>
       <%= form_tag({controller: :manager, action: :user_change}, { method: :post})  do  %>
         <%= hidden_field_tag :id,params[:id].to_i %>

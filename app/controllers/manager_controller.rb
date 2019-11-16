@@ -11,6 +11,49 @@ class ManagerController < ApplicationController
   def show
   end
 
+  def user_info
+    user_id = params[:user_id]
+    if (user_id.to_i != 0 || user_id == "0") && params["title_en"] != "" && params["title_jp"] != "" && params["message_en"] != "" && params["message_jp"] != ""
+      if user_id == "0"
+        for user in User.all
+          info = Userinfo.new()
+          info.title_en = params[:title_en]
+          info.title_jp = params[:title_jp]
+
+          info.message_en = params[:message_en]
+          info.message_jp = params[:message_jp]
+
+          info.user_id = user.id
+          info.save
+        end
+      else
+        message_en = params[:message_en]
+        message_jp = params[:message_jp]
+        if params[:url_data] != ""
+          if request.url.include?("localhost")
+            message_en = params[:message_en]+"https://localhost:9292/"+params[:url_data]
+            message_jp = params[:message_jp]+"<br>https://localhost:9292/"+params[:url_data]
+          else
+            message_en = params[:message_en]+"<br>https://frefreforum.com/"+params[:url_data]
+            message_jp = params[:message_jp]+"<br>https://frefreforum.com/"+params[:url_data]
+          end
+        end
+        user_id.split(",").each do |id|
+          info = Userinfo.new()
+          info.title_en = params[:title_en]
+          info.title_jp = params[:title_jp]
+          info.message_en = message_en
+          info.message_jp = message_jp
+          info.user_id = id.to_i
+          if info.save
+            NoticeMailer.notice_mail([User.find_by(id:id.to_i).email,info.title_en,info.title_jp,
+              info.message_en,info.message_jp,params[:url_data]]).deliver_now
+          end
+        end
+      end
+    end
+  end
+
   def user_change
     user_id = params[:id]
     usertype = params[:type]

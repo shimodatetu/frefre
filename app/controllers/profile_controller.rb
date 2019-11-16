@@ -225,6 +225,12 @@ class ProfileController < ApplicationController
       @end_num = 0
     end
   end
+  def retire
+    current_user.update(usertype:"delete")
+    current_user = nil
+    session[:user_id] = nil
+    redirect_to "/"
+  end
   def update
     if params[:user]["photo"].nil?
       if current_user.update!(image:params[:user]["image"].to_i)

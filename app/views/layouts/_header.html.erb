@@ -222,6 +222,24 @@
               </div>
               History
             <% end %></li>
+            <li><%= link_to("/profile/2" , class:"url_tab") do%>
+              <div class="jp">
+                チャット
+              </div>
+              Chat
+            <% end %></li>
+            <li><%= link_to("/profile/2" , class:"url_tab") do%>
+              <div class="jp">
+                お知らせ
+              </div>
+              Notice
+            <% end %></li>
+            <li><%= link_to("/profile/2" , class:"url_tab") do%>
+              <div class="jp">
+                フォロワー
+              </div>
+              Follower
+            <% end %></li>
             <li>
               <%= form_tag('/logout/inner',method: :post,class:"url_tab url_tab_form") do %>
                 <button type="submit"class="logout_button">
