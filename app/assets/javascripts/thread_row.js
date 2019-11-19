@@ -20,7 +20,7 @@ $(function(){
     var jp_height = $(elem).find(".jp_position .post_content_text").height();
     var en_height = $(elem).find(".jp_position .post_content_text").height();
     var row = (Math.max(jp_height,en_height) - 10) / 22;
-    if (row < 2.0){
+    if (row <= 1.0){
       $(elem).find(".jp_position .post_content_text").attr("style","-webkit-line-clamp:1");
       $(elem).find(".en_position .post_content_text").attr("style","-webkit-line-clamp:1");
       $(elem).find(".jp_position .post_content").attr("style","-webkit-line-clamp:1");
