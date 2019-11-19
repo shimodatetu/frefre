@@ -33,8 +33,8 @@ $(function(){
           $(".post_content_position_space").attr("style","display:none;");
         }
         else{
-          $(".en_position").attr("style","width:calc("+en_per+"% - 15px)");
-          $(".jp_position").attr("style","width:calc("+jp_per+"% - 15px)");
+          $(".en_position").attr("style","width:calc("+en_per+"% - 12px)");
+          $(".jp_position").attr("style","width:calc("+jp_per+"% - 12px)");
           $(".post_content_position_space").removeAttr("style");
         }
       }
