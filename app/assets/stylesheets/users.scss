@@ -14,7 +14,7 @@
         max-width:250px;
         width:100%;
         border-radius: 5px;
-        margin-top:3vw;
+        margin-top:40px;
       }
     }
     .first_coment{
@@ -97,6 +97,16 @@
         .base_en{
           margin-top:-3px;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .sign_page_cover{
+    .oauth_cover{
+      img{
+        margin-top:10px!important;
       }
     }
   }
