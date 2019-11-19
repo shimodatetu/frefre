@@ -1,5 +1,8 @@
 <% url = request.fullpath %>
 <div class="header">
+  <% if logged_in? %>
+    <div class="user_id"id="<%= current_user.id %>"></div>
+  <%end%>
   <!--
   <div class="header_logo">
     <%= link_to "/" do%>

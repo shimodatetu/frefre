@@ -7,10 +7,10 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    window.translated = false
-    local = '/thread/show/'+data['id']
-    $('#groups').append data['message']
     if String(data['user_id']) == $(".get_user_id").attr("id")
+      window.translated = false
+      local = '/thread/show/'+data['id']
+      $('#groups').append data['message']
       location.href=local
       alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
     # Called when there's incoming data on the websocket for this channel

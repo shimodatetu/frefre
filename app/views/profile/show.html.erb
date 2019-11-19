@@ -4,7 +4,6 @@
     <div class="user_id"id="<%= current_user.id %>"></div>
     <div class="profile_sub"style="display:inline-block">
       <div class="profile_picture">
-
         <% if current_user.avater.attached? %>
           <%= image_tag current_user.avater , :class => "group_img"%>
         <% else %>
@@ -87,14 +86,14 @@
             <% end %>
           </li>
           <li class="nav-item profile_contents_button">
-            <%= link_to '/profile/10',class:"nav-link" do %>
+            <div class="unsubscribe_modal nav-link"data-toggle="modal" data-target="#unsubscribe_modal">
               <div class="jp">
                 退会する
               </div>
               <div class="en">
                 Unsubscribe
               </div>
-            <% end %>
+            </div>
           </li>
         </ul>
       </div>
@@ -169,6 +168,32 @@
     	</div>
     </div>
   </div>
+
+  <div class="profile_modal">
+    <div class="modal fade" id="unsubscribe_modal" tabindex="-1">
+    	<div class="modal-dialog"style="width:90vw">
+    		<div class="modal-content">
+    			<div class="modal-body"style="font-size: 18px;">
+            アカウントを解除してよろしいですか?<br>
+            Do you want to delete your account?
+    			</div>
+    			<div class="modal-footer">
+            <%= form_tag({controller: :profile, action: :retire}, { method: :post,style:"display:inline-block"})  do  %>
+              <button type="submit" class="btn btn-default btn_send"id="enjp"style="background:#ff2222">
+                <div class="float_jp">削除</div>
+                <div class="base_en">Delete</div>
+              </button>
+            <% end %>
+            <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+              <div class="float_jp">戻る</div>
+              <div class="base_en">Back</div>
+            </button>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+  </div>
+
   <div class="profile_modal">
     <div class="modal fade" id="image_modal" tabindex="-1">
     	<div class="modal-dialog"style="width:90vw">

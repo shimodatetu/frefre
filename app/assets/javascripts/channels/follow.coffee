@@ -6,7 +6,9 @@ App.follow = App.cable.subscriptions.create "FollowChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    button_change(data.data.following_id)
+    if $(".user_id").attr('id') == user_id
+      button_change(data.data.following_id)
+
   following: (type,id)->
     @perform('following',type:type,id:id)
 
