@@ -449,7 +449,28 @@ body{
       //display:none!important;
     }
   }
-
+  .thread_cover{
+    padding:5px!important;
+    .group_user_cover{
+      margin-top:0px!important;
+      margin-right:0px!important;
+      img{
+        width:25px!important;
+        height:25px!important;
+      }
+    }
+    .thread_content{
+      width:100%!important;
+      margin-top: -22px;
+      display: block!important;
+      .user_name{
+        margin-left: 35px;
+      }
+      .post_content_position{
+        margin-top: 5px;
+      }
+    }
+  }
   .nav-link{
     font-size: calc(4vw - 3px)!important;
     .jp{
