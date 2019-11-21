@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'users/test'
+  get 'users/unsubscribe'
 
   get 'manager',to:"manager#show"
   get 'manager/show'

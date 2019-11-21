@@ -68,20 +68,26 @@ add_post=(data)->
       plus_post.find(".jp_position").attr("style","width:calc("+jp_per+"% - 15px)");
       plus_post.find(".post_content_position_space").removeAttr("style");
 
-
+prohibit_check=(text_en,text_jp)->
+  can_post = true
+  check_text_en = text_en.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  check_text_jp = text_jp.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  gon.prohibit.forEach (prohibit) ->
+    if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
+      console.log("not")
+      can_post = false
+      return
+  return can_post
 
 type_check=(id)->
   text_en = $(".base_en_form").val();
   text_jp = $(".base_jp_form").val();
   if id == "post"
     if text_en != "" && text_jp != ""
-      #$("#chatModal-enjp .en_form").val(text_en)
-      #$("#chatModal-enjp .jp_form").val(text_jp)
-      #$(".explain_text .en").attr("style","display:none")
-      #$(".explain_text .jp").attr("style","display:none")
-      #$(".explain_text .enjp").attr("style","")
-      #$('#chatModal-enjp').modal("show")
-      App.chat.make("none",text_jp,text_en,parseInt($("#group").val()))
+      if prohibit_check(text_en,text_jp) == true
+        App.chat.make("none",text_jp,text_en,parseInt($("#group").val()))
+      else
+        alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""

@@ -112,19 +112,24 @@ add_post=(data,user_id)->
       plus_post.find(".post_content_position_space").removeAttr("style");
 
 
+prohibit_check=(text_en,text_jp)->
+  can_post = true
+  check_text_en = text_en.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
+  check_text_jp = text_jp.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
+  alert(check_text_jp)
+  gon.prohibit.forEach (prohibit) ->
+    if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
+      console.log("not")
+      can_post = false
+      return
+  return can_post
 
 type_check=(type)->
   text_en = $(".base_en_form").val();
   text_jp = $(".base_jp_form").val();
   if type == "post"
     if text_en != "" && text_jp != ""
-      can_post = true
-      check_text_en = text_en.toLowerCase()
-      check_text_jp = text_jp.toLowerCase()
-      gon.prohibit.forEach (prohibit) ->
-        if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
-          can_post = false
-      if can_post == true
+      if prohibit_check(text_en,text_jp) == true
         App.room.speak("none",text_jp,text_en,parseInt($("#group_id").val()))
       else
         alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");

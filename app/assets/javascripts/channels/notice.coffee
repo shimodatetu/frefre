@@ -7,12 +7,13 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    window.translated = false
-    if location.href.indexOf("/profile/5") == -1
-      location.href = "/profile/5/"+data['notice_id']
-    else
-      $(".chat_all").append(data['message'])
-    # Called when there's incoming data on the websocket for this channel
+    if String(data['users'][0]) == $(".get_user_id").attr("id") || String(data['users'][1]) == $(".get_user_id").attr("id")
+      window.translated = false
+      if location.href.indexOf("/profile/5") == -1
+        location.href = "/profile/5/"+data['notice_id']
+      else
+        $(".chat_all").append(data['message'])
+      # Called when there's incoming data on the websocket for this channel
   make: (lang, mes_jp,mes_en,address) ->
     address = Number(address)
     @perform('make',lang:lang,mes_jp:mes_jp,address:address,mes_en:mes_en)
@@ -36,6 +37,18 @@ $(document).on 'click', '.make_thread_cover .mes_post_button', (event) ->
   type_check($(@).attr("id"),$(".get_other_id").attr("id"))
   event.preventDefault()
 
+
+prohibit_check=(text_en,text_jp)->
+  can_post = true
+  check_text_en = text_en.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  check_text_jp = text_jp.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  gon.prohibit.forEach (prohibit) ->
+    if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
+      console.log("not")
+      can_post = false
+      return
+  return can_post
+
 type_check=(id,type)->
   if type == undefined
     alert_modal("Distination is not selected.","宛先が選択されていません。","fail");
@@ -49,7 +62,10 @@ type_check=(id,type)->
         alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
       else
         $("#noticeModal").modal("hide")
-        App.notice.make("enjp",content_jp,content_en,$(".get_other_id").attr("id"));
+        if prohibit_check(text_en,text_jp) == true
+          App.chat.make("none",content_jp,content_en,parseInt($("#group").val()))
+        else
+          alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
         #$("#noticeModal .en_form_content").html(content_en)
         #$("#noticeModal .jp_form_content").html(content_jp)
         #$(".explain_text .en").attr("style","display:none")

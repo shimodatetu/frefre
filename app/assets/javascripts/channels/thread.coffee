@@ -21,6 +21,17 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
 $(document).on 'click', '#groupModal .btn_send',(event) ->
   send_check()
 
+prohibit_check=(text_en,text_jp)->
+  can_post = true
+  check_text_en = text_en.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  check_text_jp = text_jp.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  gon.prohibit.forEach (prohibit) ->
+    if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
+      console.log("not")
+      can_post = false
+      return
+  return can_post
+
 send_check=()->
   title_en = $("#groupModal .en_form_title").val();
   title_jp = $("#groupModal .jp_form_title").val();
@@ -36,7 +47,10 @@ send_check=()->
     alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
   else
     $("#groupModal").modal("hide")
-    App.thread.make("enjp",title_jp,content_jp,title_en,content_en);
+    if prohibit_check(title_en,title_jp) == true && prohibit_check(content_en,content_jp) == true
+      App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
+    else
+      alert_modal("You cannot save because it contains prohibited words.","禁止ワードが含まれているので保存できません。","fail");
 
 $(document).on 'click', '.make_thread_cover .words_post_button', (event) ->
   type_check($(@).attr("id"))

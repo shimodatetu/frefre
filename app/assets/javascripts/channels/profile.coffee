@@ -55,6 +55,18 @@ $(document).on 'click', '.prof_trans .words_post_button', (event) ->
 $(document).on 'click', '.profile_cannot_save', (event) ->
   alert_modal("The event acount cannot be changed.","イベント用アカウントは変更できません","fail")
 
+prohibit_check=(text_en,text_jp)->
+  can_post = true
+  check_text_en = text_en.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  check_text_jp = text_jp.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  gon.prohibit.forEach (prohibit) ->
+    if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
+      console.log("not")
+      can_post = false
+      return
+  return can_post
+
+
 $(document).on 'click', '.profile_save_button', (event) ->
   #year = $(".profile_page #year").val();
   #month = $(".profile_page #month").val();
@@ -68,7 +80,11 @@ $(document).on 'click', '.profile_save_button', (event) ->
   country = $(".profile_page #country").val();
   profile_en = $(".profile_page #profile_en").val();
   profile_jp = $(".profile_page #profile_jp").val();
-  App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
+
+  if prohibit_check(text_en,text_jp) == true
+    App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
+  else
+    alert_modal("You cannot save because it contains prohibited words.","禁止ワードが含まれているので保存できません。","fail");
 
 translate_google=(data) ->
   lang = data[0]
