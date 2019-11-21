@@ -23,8 +23,8 @@ $(document).on 'click', '#groupModal .btn_send',(event) ->
 
 prohibit_check=(text_en,text_jp)->
   can_post = true
-  check_text_en = text_en.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
-  check_text_jp = text_jp.toLowerCase().replace('-', '').replace('.', '').replace('_', '').replace(' ', '')
+  check_text_en = text_en.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
+  check_text_jp = text_jp.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
   gon.prohibit.forEach (prohibit) ->
     if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
       console.log("not")

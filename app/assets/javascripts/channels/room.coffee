@@ -116,7 +116,6 @@ prohibit_check=(text_en,text_jp)->
   can_post = true
   check_text_en = text_en.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
   check_text_jp = text_jp.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
-  alert(check_text_jp)
   gon.prohibit.forEach (prohibit) ->
     if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
       console.log("not")
