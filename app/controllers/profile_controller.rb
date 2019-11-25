@@ -229,7 +229,7 @@ class ProfileController < ApplicationController
     current_user.update(usertype:"delete")
     current_user = nil
     session[:user_id] = nil
-    redirect_to "/useres/unsubscribe"
+    redirect_to "/users/unsubscribe"
   end
   def update
     if params[:user]["photo"].nil?

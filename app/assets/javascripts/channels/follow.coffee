@@ -22,7 +22,7 @@ $(document).on 'click', '.unfollow_button_submit', (event) ->
   follow_id = this.id
 
 $(document).on 'click', '.report_button', (event) ->
-  $("#report_modal").modal("show")
+  $("#report_user_modal").modal("show")
   follow_id = this.id
 
 $(document).on 'click', '.report_button_submit', (event) ->

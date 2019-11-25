@@ -27,7 +27,7 @@ class TasksController < ApplicationController
       flash["alert_en"] = "You reported this post"
       flash["alert_jp"] = "この投稿を通報しました。"
       flash["alert_type"] = "success"
-      if params[:page_id] == nil
+      if params[:page_id] == "0"
         redirect_to "/thread/show/"+params[:thread_id]
       else
         redirect_to "/thread/show/"+params[:thread_id]+"/"+params[:page_id]
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
       flash["alert_en"] = "You reported this post"
       flash["alert_jp"] = "この投稿を通報しました。"
       flash["alert_type"] = "success"
-      if params[:page_id] == nil
+      if params[:page_id] == "0"
         redirect_to "/thread/show/"+params[:thread_id]
       else
         redirect_to "/thread/show/"+params[:thread_id]+"/"+params[:page_id]

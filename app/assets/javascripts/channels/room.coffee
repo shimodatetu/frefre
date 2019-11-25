@@ -54,8 +54,8 @@ $(document).on 'click', '.post_image_submit', (event) ->
   $('.post_image_submit').prop('disabled', false)
 
 $(document).on 'click', '.report_post_button', (event) ->
-  #$(".report_post_input").val(this.id)
-  #$("#report_modal").modal("show")
+  $(".report_post_input").val(this.id)
+  $("#report_post_modal").modal("show")
 
 
 $(document).on 'change', '.thread_image_post #file_send', (event) ->

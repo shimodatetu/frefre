@@ -23,7 +23,6 @@
       <% search_groups = @groups %>
       <% if !search_text.nil? %>
         <%# search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ? OR hash_jp LIKE ? OR hash_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
-
         <% search_groups = @groups.where("title_jp LIKE ? OR title_en LIKE ? OR first_content_en LIKE ? OR first_content_jp LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%", "%"+ search_text +"%") %>
       <% end %>
       <% show_max = 10.0 %>
@@ -36,7 +35,11 @@
       <% search_groups.order(seen_num: "DESC").offset(show_max*(page_id - 1)).limit(show_max).each do |group| %>
         <%= link_to("/manager/search_thread_detail/#{group.id}" , class:"thread_link") do %>
           <% there_be = true %>
-          <div class="thread_cover">
+          <div class="thread_cover"
+            <% if group.deleted == true %>
+              style="background:#ff5555;"
+            <% end %>
+            >
             <div class="group_user_cover">
               <div class="group_img_cover">
                 <object>

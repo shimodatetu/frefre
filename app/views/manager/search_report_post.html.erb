@@ -34,7 +34,10 @@
         <% post = report_post.post %>
         <%= link_to("/manager/search_report_post_detail/"+report_post.id.to_s , class:"thread_link") do %>
           <% there_be = true %>
-          <div class="thread_cover">
+          <div class="thread_cover"
+            <% if post.deleted == true %>
+              style="background:#ff5555;"
+            <% end %>>
             <div class="group_user_cover">
               <div class="group_img_cover">
                 <object>

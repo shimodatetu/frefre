@@ -33,7 +33,13 @@
       <% search_users.offset(show_max*(page_id - 1)).limit(show_max).each do |user| %>
         <%= link_to("/manager/search_user_detail/#{user.id}" , class:"thread_link") do %>
           <% there_be = true %>
-          <div class="thread_cover">
+          <div class="thread_cover"
+            <% if user.usertype == "delete" %>
+              style="background:#ff5555;"
+            <% elsif user.usertype == "manager" %>
+              style="background:#ff9d3b;"
+            <% end %>
+            >
             <div class="group_user_cover">
               <div class="group_img_cover">
                 <object>

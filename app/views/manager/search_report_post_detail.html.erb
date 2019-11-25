@@ -48,7 +48,7 @@
           </div>
           <div class="thread_content">
             <div class="post_content_cover">
-              <div class="user_name">
+              <div class="user_name"style="display:block">
                 <object>
                 <% if !logged_in? || current_user.id != from_user.id %>
                   <%= link_to "/other_profile/#{from_user.id}" do %>

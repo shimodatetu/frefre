@@ -96,10 +96,13 @@ class ManagerController < ApplicationController
     @report_posts = Reportpost.all
   end
   def search_post
-    @posts = Post.all.where("deleted = false")
+    @posts = Post.all.order(deleted: "ASC")
   end
   def search_thread
-    @groups = Group.all.where("deleted = false")
+    @groups = Group.all.order(deleted: "ASC")
+  end
+  def search_user
+    @users = User.all.order(usertype: "DESC")
   end
   def thread_delete
     id = params[:id]
@@ -117,9 +120,6 @@ class ManagerController < ApplicationController
       post.update(deleted:true)
     end
     redirect_to "/manager/search_post"
-  end
-  def search_user
-    @users = User.all
   end
   def searcher_post
     session["search_text"] = params[:search_text]

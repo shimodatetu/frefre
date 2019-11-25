@@ -1,6 +1,8 @@
 <% lang = session["lang"] %>
-<% session["now_group"] = params[:id] %>
-<% thread = Group.find(params[:id]) %>
+<% thread_id = params[:id].to_i %>
+<% post_id = params[:page].to_i %>
+<% session["now_group"] = thread_id %>
+<% thread = Group.find(thread_id) %>
 
 <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
 <% if logged_in? %>
@@ -280,8 +282,8 @@
   </div>
 </div>
 
-<div class="report_modal">
-  <div class="modal fade" id="report_modal" tabindex="-1">
+<div class="profile_modal">
+  <div class="modal fade" id="report_post_modal" tabindex="-1">
   	<div class="modal-dialog"style="width:90vw">
   		<div class="modal-content">
   			<div class="modal-body">
@@ -295,6 +297,10 @@
           </div>
   			</div>
         <div class="modal-footer follow_modal_footer">
+          <%= form_tag('/report/post',method: :post,class: "search_form_top") do %>
+            <%= hidden_field_tag :report_id,"-1", class: "form-control form_input report_post_input" %>
+            <%= hidden_field_tag :thread_id,thread_id %>
+            <%= hidden_field_tag :page_id,post_id %>
             <button type="submit" class="btn btn-primary report_button_submit">
               <div class="jp">
                 実行
@@ -303,7 +309,7 @@
                 OK
               </div>
             </button
-
+          <% end %>
           <button type="button" class="btn btn-default" data-dismiss="modal">
             <div class="jp">
               戻る
