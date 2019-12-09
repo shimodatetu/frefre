@@ -18,7 +18,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def report_post
+  def report_post_task
     id = params[:report_id]
     post = Post.find_by(id:id.to_i)
     reportpost = Reportpost.find_by(post_id: id.to_i)

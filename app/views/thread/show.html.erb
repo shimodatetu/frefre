@@ -5,6 +5,7 @@
 <% thread = Group.find(thread_id) %>
 
 <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
+
 <% if logged_in? %>
   <div class="user_login"style="display:none"id="<%= current_user.id %>"></div>
 <% end %>
@@ -100,6 +101,7 @@
           <%= form_for @post, :html => {:class => "thread_image_post post_button_form"} do |form| %>
             <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
             <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
+            <%= form.hidden_field :type, :value => "image"  %>
             <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
               <div class="button_text">
@@ -117,10 +119,30 @@
             <%= form.submit :class=>"post_image_submit",:style=>"display:none" %>
           <% end %>
 
+          <%= form_for @post, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+            <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
+            <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
+            <%= form.hidden_field :type, :value => "video" %>
+            <label for="video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
+              <div class="glyphicon glyphicon-facetime-video picture_send"></div>
+              <div class="button_text">
+                <div class="float_jp">
+                  動画
+                </div>
+                Video
+              </div>
+            </label>
+            <% if logged_in? %>
+              <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+            <% else %>
+              <%= form.file_field :video,id:"video_send",style:"display:none" %>
+            <% end %>
+            <%= form.submit :class=>"post_video_submit",:style=>"display:none" %>
+          <% end %>
 
         </div>
         <!--<%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
-          翻訳提供　未来翻訳
+          翻訳提供 未来翻訳
         <% end %>
       </div>-->
     </div>
@@ -287,14 +309,30 @@
   	<div class="modal-dialog"style="width:90vw">
   		<div class="modal-content">
   			<div class="modal-body">
-          <div class="text_box">
-            <div class="text_jp">
-              この投稿を通報しますか？
-            </div>
-            <div class="text_en">
-              Do you report this post?
-            </div>
+          <div class="title">
+            通報の理由 / Report Reason
           </div>
+          <select class="selectpicker big_select" style="font-size:15px;">
+            <option style="font-size:15px;">
+              種類選択 | Choose Type
+            </option>
+            <option class="big_select"value="1">
+              不適切な投稿 | Sensitive Content
+            </option>
+            <option class="big_select"value="2">
+              乗っ取られたアカウント | Hacked Account
+            </option>
+            <option class="big_select"value="3">
+              偽のアカウント | False Account
+            </option>
+            <option class="big_select"value="4">
+              その他 | Others
+            </option>
+          </select>
+          <div class="title">
+            Specific Content / 具体的な内容
+          </div>
+          <%= text_area_tag :report_content,"", class: "form-control form_input" ,placeholder:"" %>
   			</div>
         <div class="modal-footer follow_modal_footer">
           <%= form_tag('/report/post',method: :post,class: "search_form_top") do %>

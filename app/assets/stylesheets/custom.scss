@@ -15,6 +15,19 @@ p{
     display:inline-block!important;
   }
 }
+.video-js{
+  width: 60vw;
+  height: 40vw;
+  #my-video_html5_api{
+    z-index:2;
+  }
+  .vjs-big-play-button{
+    z-index:3;
+  }
+  .vjs-control-bar{
+    z-index:3;
+  }
+}
 .help_show{
   border-radius: 5px;
   display: inline-block;

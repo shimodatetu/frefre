@@ -27,9 +27,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         add_post(data,user_id)
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
-
-
   speak: (lang,mes_jp,mes_en, group)->
+    console.log(content_jap:mes_jp,content_eng:mes_en,lang:lang)
+
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
   image: (file,group)->
@@ -60,11 +60,14 @@ $(document).on 'click', '.report_post_button', (event) ->
 
 $(document).on 'change', '.thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
-    #if (this.files[0].type != 'text/plain')
-    #  reader.readAsDataURL(this.files[0], 'UTF-8');
-
-    #$('#post_id').val data['id']
     $('.post_image_submit').click()
+    event.preventDefault()
+  else
+    alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
+
+$(document).on 'change', '.thread_image_post #video_send', (event) ->
+  if($(this).attr("class") == "logined")
+    $('.post_video_submit').click()
     event.preventDefault()
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
@@ -84,7 +87,6 @@ add_post=(data,user_id)->
     plus_post = $(data["message"].replace('example.org', 'www.frefreforum.com'))
   $(".thread_cover_cover").append plus_post
   plus_post.ready ->
-
     if user_id == data['user_id']
       $(".profile_button_destroy").click();
     else
@@ -153,6 +155,7 @@ type_check=(type)->
       else
         $("#fakeLoader").fakeLoader({},translate_google,["ja",text_en]);
         #translate_google("ja",text_en)
+
 
 translate_google=(data) ->
   lang = data[0]

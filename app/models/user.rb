@@ -42,6 +42,13 @@ class User < ApplicationRecord
   def unfollow_id!(other_user_id)
     following_relationships.find_by(following_id: other_user_id).destroy
   end
+  def check_image
+    if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
+        errors.add(:image, "JPG, PNG, GIFのみアップロードできます。")
+    elsif file.size > 1.megabyte
+        errors.add(:image, "1MBまでアップロードできます")
+    end
+  end
   #mount_uploader :image, ImageUploader
   after_update { ProfileBroadcastJob.perform_later self  }
 

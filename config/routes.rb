@@ -101,7 +101,7 @@ Rails.application.routes.draw do
   post 'tasks/jp',to:'tasks#lang_change_jp'
   post 'delete',to:'tasks#delete'
   post '/report/user',to:"tasks#report_user"
-  post '/report/post',to:"tasks#report_post"
+  post '/report/post',to:"tasks#report_post_task"
 
   post 'search/header',to:'tasks#search'
 

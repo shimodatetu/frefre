@@ -14,6 +14,8 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
   </head>
   <body>
     <% if url.include?('manager') %>
@@ -24,6 +26,7 @@
       <div class="main_content_cover"id="main_content_cover">
     <% end %>
       <%= yield %>
+      <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
     </div>
     <!--
     <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
