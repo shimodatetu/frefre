@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_22_033332) do
+ActiveRecord::Schema.define(version: 2019_12_13_052539) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -108,6 +108,8 @@ ActiveRecord::Schema.define(version: 2019_11_22_033332) do
     t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subtitle_en", default: ""
+    t.string "subtitle_jp", default: ""
   end
 
   create_table "prohibits", force: :cascade do |t|

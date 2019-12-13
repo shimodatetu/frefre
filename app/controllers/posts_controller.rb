@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  require 'tempfile'
   def index
     @posts = Post.all.where("deleted = false")
     @groups = Group.all.where("deleted = false")
@@ -12,20 +13,14 @@ class PostsController < ApplicationController
       post.id_ingroup = group.posts.count
       post.group_id = group.id
       post.user_id = current_user.id
-      p  data[:type]
       if data[:type] == "image"
-        p "video"
         post.pict = data[:pict]
         post.save
       else
-        p "video"
         post.video = data[:video]
+        post.subtitle_en = "ready"
+        post.subtitle_jp = "ready"
         if post.save
-          p "-----------------------"
-          p "error"
-          p data[:pict]
-          p data[:video]
-          p "-----------------------"
         end
       end
     end

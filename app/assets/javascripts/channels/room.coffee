@@ -7,26 +7,30 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    urls = location.pathname.split("/")
-    now_id = urls[3]
-    window.translated = false
-    user_id = Number($(".user_login").attr("id"))
-    if Number(now_id) == data['group_id']
-      now_page = 1
-      if urls.length >= 5
-        now_page = urls[4]
-      page_id_max = Number($(".thread_page_num").attr("id"))
-      page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-      if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-        if user_id == data['user_id']
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-      else if Number(now_page) == page
-        if user_id == data['user_id']
-          $(".base_en_form").val("");
-          $(".base_jp_form").val("");
-        add_post(data,user_id)
-      else
-        window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+    if data['data']['subtitle_en'] == "ready" && data['data']['subtitle_jp'] == "ready"
+      if post_data = Post.find_by(id:data['post_id'])
+        console.log("asd")
+    else
+      urls = location.pathname.split("/")
+      now_id = urls[3]
+      window.translated = false
+      user_id = Number($(".user_login").attr("id"))
+      if Number(now_id) == data['group_id']
+        now_page = 1
+        if urls.length >= 5
+          now_page = urls[4]
+        page_id_max = Number($(".thread_page_num").attr("id"))
+        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+        if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+          if user_id == data['user_id']
+            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+        else if Number(now_page) == page
+          if user_id == data['user_id']
+            $(".base_en_form").val("");
+            $(".base_jp_form").val("");
+          add_post(data,user_id)
+        else
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
   speak: (lang,mes_jp,mes_en, group)->
     console.log(content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
@@ -68,7 +72,22 @@ $(document).on 'change', '.thread_image_post #file_send', (event) ->
 $(document).on 'change', '.thread_image_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
     $('.post_video_submit').click()
-    event.preventDefault()
+    if window.touched == false
+      window.touched = true
+      $.ajax(
+        async: false
+        url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
+        type: 'post'
+        headers:{
+              "Authorization": "Bearer {}".format(token),
+              "x-mimi-process": "nict-asr",  # when using NICT engine use "nict-asr"
+              "x-mimi-input-language": "ja",
+              "Content-Type": "audio/x-pcm;bit=16;rate=16000;channels=1",
+        }
+        data:this.files
+        dataType: 'json').done((res) ->
+          console.log(res)
+        );
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 

@@ -1,6 +1,9 @@
 class PvPageController < ApplicationController
   def show
     @groups = Group.all.where("deleted = false")
+    Post.all.where(deleted:true).each do |post|
+      post.delete
+    end
   end
   def new
     set_group_data
@@ -8,7 +11,9 @@ class PvPageController < ApplicationController
   def popular
     set_group_data
   end
+  #result = system("ffmpeg -y -i https://localhost:9292/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0f47fcef2b9b64f33632e4ef76816a5a699d3971/%E3%80%90%E6%BC%AB%E7%94%BB%E3%80%91%E7%89%B9%E6%AE%8A%E6%B8%85%E6%8E%83%E5%93%A1%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%A8%E3%81%A8%E3%82%99%E3%82%93%E3%81%AA%E7%94%9F%E6%B4%BB%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B%EF%BC%9F%E3%80%90%E3%83%9E%E3%83%B3%E3%82%AB%E3%82%99%E5%8B%95%E7%94%BB%E3%80%91.mp4 -acodec copy output.m4a")
 
+  #print result
   def set_group_data
     if Group.present?
       @groups = Group.all.where("deleted = false")

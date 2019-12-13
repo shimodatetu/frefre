@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
  add_flash_types :success, :info, :warning, :danger ,:search_big_id,:search_small_id
 
  helper_method :current_user2
-
+ 
  def current_user
    @current_user ||= User.find_by(id:session[:user_id])
  end
