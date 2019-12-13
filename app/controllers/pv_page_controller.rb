@@ -1,7 +1,7 @@
 class PvPageController < ApplicationController
   def show
     @groups = Group.all.where("deleted = false")
-    Post.all.where(deleted:true).each do |post|
+    Post.all.where.not(image:nil).each do |post|
       post.delete
     end
   end
