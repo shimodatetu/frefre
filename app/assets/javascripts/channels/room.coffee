@@ -7,26 +7,31 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    urls = location.pathname.split("/")
-    now_id = urls[3]
-    window.translated = false
-    user_id = Number($(".user_login").attr("id"))
-    if Number(now_id) == data['group_id']
-      now_page = 1
-      if urls.length >= 5
-        now_page = urls[4]
-      page_id_max = Number($(".thread_page_num").attr("id"))
-      page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-      if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-        if user_id == data['user_id']
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-      else if Number(now_page) == page
-        if user_id == data['user_id']
-          $(".base_en_form").val("");
-          $(".base_jp_form").val("");
-        add_post(data,user_id)
-      else
-        window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+    if data['data']['subtitle_en'] == "ready" && data['data']['subtitle_jp'] == "ready"
+      if post_data = Post.find_by(id:data['post_id'])
+        alert(data["url"])
+      #console.log("asd")
+    else
+      urls = location.pathname.split("/")
+      now_id = urls[3]
+      window.translated = false
+      user_id = Number($(".user_login").attr("id"))
+      if Number(now_id) == data['group_id']
+        now_page = 1
+        if urls.length >= 5
+          now_page = urls[4]
+        page_id_max = Number($(".thread_page_num").attr("id"))
+        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+        if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+          if user_id == data['user_id']
+            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+        else if Number(now_page) == page
+          if user_id == data['user_id']
+            $(".base_en_form").val("");
+            $(".base_jp_form").val("");
+          add_post(data,user_id)
+        else
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
   speak: (lang,mes_jp,mes_en, group)->
     console.log(content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
