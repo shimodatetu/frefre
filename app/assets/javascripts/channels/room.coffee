@@ -8,8 +8,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     # Called when the subscription has been terminated by the server
   received: (data) ->
     if data['data']['subtitle_en'] == "ready" && data['data']['subtitle_jp'] == "ready"
-      if post_data = Post.find_by(id:data['post_id'])
-        console.log("asd")
+      #if post_data = Post.find_by(id:data['post_id'])
+      #  alert(data["url"])
+      console.log("asd")
     else
       urls = location.pathname.split("/")
       now_id = urls[3]

@@ -4,6 +4,9 @@ class PvPageController < ApplicationController
     Post.all.where.not(image:nil).each do |post|
       post.delete
     end
+    Post.all.where(deleted:true).each do |post|
+      post.delete
+    end
   end
   def new
     set_group_data
