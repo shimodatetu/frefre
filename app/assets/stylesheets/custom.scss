@@ -107,8 +107,12 @@ p{
   display: inline-block;
   width:25%;
   vertical-align: top;
-  margin-top: 150px;
-  margin-left: 2%;
+  margin-top: 130px;
+  margin-left: 1vw;
+  img{
+    width: 24vw;
+    height: 16vw;
+  }
   iframe{
     width: 27vw;
     height: 15.4vw;
@@ -117,7 +121,7 @@ p{
 .main_content_cover{
   padding-top:60px;
   padding-left:2%;
-  width:calc(95%);
+  width:calc(73%);
   display: inline-block;
   .mirai_logo{
     text-decoration: none;
@@ -277,13 +281,16 @@ body{
 }
 @media screen and (max-width: 750px){
   .sub_content_cover{
-    //display:none;
     width: 100%;
     text-align: center;
     margin-top: 10px;
     padding: 30px;
     padding-right: 50px;
     margin-bottom: 20px;
+    img{
+      width:60vw;
+      height:35vw
+    }
     iframe{
       width:80vw;
       height:45vw

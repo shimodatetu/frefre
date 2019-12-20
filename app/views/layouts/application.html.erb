@@ -16,6 +16,18 @@
     <%= javascript_include_tag 'application' %>
     <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    <script>
+      $.ajax({
+        async: false,
+        url: "https://still-plains-44123.herokuapp.com/video2",
+        type: 'post',
+        dataType: 'json'
+      }).done(function(res){
+        console.log(res)
+      }).fail(function(xhr, status, error){
+         alert(status);
+      });
+    </script>
   </head>
   <body>
     <% if url.include?('manager') %>
@@ -28,15 +40,14 @@
       <%= yield %>
       <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
     </div>
-    <!--
     <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
     !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
     !url.include?('manager') %>
       <div class="sub_content_cover">
-        <iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <%= image_tag("/mirai.png", :class => "group_img") %>
+        <!--iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
       </div>
     <% end %>
-    -->
     <%= render partial:'layouts/footer' %>
   </body>
   <div class="modal fade" id="successModal" tabindex="-1">
