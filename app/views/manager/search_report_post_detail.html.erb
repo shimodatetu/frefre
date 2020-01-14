@@ -1,7 +1,6 @@
 
 
 <% if manager_logged_in? %>
-
   <% report_post = Reportpost.find_by(id:params[:id]) %>
   <% post = report_post.post %>
   <% from_user = User.find_by(id:report_post.from_user) %>
@@ -26,74 +25,33 @@
     <div class="thread_all thread_all_post">
       <% there_be = false %>
       <div class="user_id"id="<%= current_user.id %>"></div>
-      <%= link_to("/other_profile/#{from_user.id}" , class:"thread_link") do %>
-        <% there_be = true %>
-        <div class="thread_cover">
-          <div class="group_user_cover">
-            <div class="group_img_cover">
-              <object>
-              <%= link_to "/other_profile/#{from_user.id}" do %>
-                <% if from_user.image == 0 %>
-                  <% if from_user.photo.nil? %>
-                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-                  <% else %>
-                    <%= image_tag show_image_user_path(from_user), :class => "group_img" %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag("/userimage/user#{from_user.image}.png", :class => "group_img") %>
-                <% end %>
-              <% end %>
-              </object>
-            </div>
-          </div>
-          <div class="thread_content">
-            <div class="post_content_cover">
-              <div class="user_name"style="display:block">
-                <object>
-                <% if !logged_in? || current_user.id != from_user.id %>
-                  <%= link_to "/other_profile/#{from_user.id}" do %>
-                    <%= simple_format(text_url_to_link(h(from_user.name))) %>
-                  <% end %>
-                <% else %>
-                  <%= link_to "/profile" do %>
-                    <%= simple_format(text_url_to_link(h(from_user.name))) %>
-                  <% end %>
-                <% end %>
-                </object>
-              </div>
-              <div class="post_content_position en_position">
-                <div class="thread_title">
-                  <div class="title_padding no_inline">
-                    <%= simple_format(text_url_to_link(h(from_user.email))) %>
-                  </div>
-                </div>
-                <div class="post_content en">
-                  <div class="post_content_text no_inline">
-                    <%= simple_format(text_url_to_link(h(from_user.profile_en))) %>
-                  </div>
-                </div>
-              </div>
-              <div class="post_content_position_space">
-                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-              </div>
-              <div class="post_content_position jp_position">
-                <div class="thread_title">
-                  <div class="title_padding no_inline">
-                    <%= simple_format(text_url_to_link(h(from_user.email))) %>
-                  </div>
-                </div>
-                <div class="post_content en">
-                  <div class="post_content_text no_inline">
-                    <%= simple_format(text_url_to_link(h(from_user.profile_jp))) %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render from_user %>
     </div>
-
+    <div class="panel-title" style="display:inline-block;margin-bottom:0px;margin-top:10px">
+      <div class="panel-title-text">
+        通報した理由：
+      </div>
+      <div style="color:#555">
+        <% if report_post.reporttype == "1" %>
+          　乗っ取られたアカウント / Hacked Account
+        <% elsif report_post.reporttype == "2" %>
+          　偽のアカウント / False Account
+        <% elsif report_post.reporttype == "3" %>
+          　その他 / Other
+        <% elsif report_post.reporttype == "4" %>
+          　不適切な投稿 / Sensitive Content
+        <% end %>
+      </div>
+      具体的な内容 / Specific Content
+      <div style="color:#555">
+        <% if report_post.content == nil %>
+          　なし / Nothing
+        <% else %>
+          　<%= simple_format(text_url_to_link(h(report_post.content))) %>
+        <% end %>
+      </div>
+    </div>
+    <br><br>
     <%= form_tag({controller: :manager, action: :post_delete}, { method: :post})  do  %>
       <%= hidden_field_tag :id,params[:id].to_i %>
       <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
@@ -125,3 +83,4 @@
     <% end %>
   </div>
 <% end %>
+<br>

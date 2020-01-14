@@ -7,10 +7,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
+    console.log(data['data'])
     if data['data']['subtitle_en'] == "ready" && data['data']['subtitle_jp'] == "ready"
-      if post_data = Post.find_by(id:data['post_id'])
-        alert(data["url"])
-      #console.log("asd")
+      console.log("asd")
     else
       urls = location.pathname.split("/")
       now_id = urls[3]
@@ -73,22 +72,6 @@ $(document).on 'change', '.thread_image_post #file_send', (event) ->
 $(document).on 'change', '.thread_image_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
     $('.post_video_submit').click()
-    if window.touched == false
-      window.touched = true
-      $.ajax(
-        async: false
-        url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
-        type: 'post'
-        headers:{
-              "Authorization": "Bearer {}".format(token),
-              "x-mimi-process": "nict-asr",  # when using NICT engine use "nict-asr"
-              "x-mimi-input-language": "ja",
-              "Content-Type": "audio/x-pcm;bit=16;rate=16000;channels=1",
-        }
-        data:this.files
-        dataType: 'json').done((res) ->
-          console.log(res)
-        );
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 

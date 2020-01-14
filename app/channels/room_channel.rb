@@ -20,11 +20,7 @@ class RoomChannel < ApplicationCable::Channel
         post.content_eng = data['content_eng']
         post.group_id = group.id
         post.user_id = current_user.id
-        post.pict = nil
-        post.video = nil
-        p post
-        post.save!
-        p "end2"
+        post.save
       end
     end
   end

@@ -103,9 +103,9 @@
       //filter: drop-shadow(2px 5px 5px rgba(0,0,0,0.2));
       cursor: pointer;
       background-color: #ffffff;
-      padding:5px;
+      padding:2px;
       border-radius: 5px;
-      margin-bottom:5px;
+      margin-bottom:3px;
       border:solid thin #dddddd;
       .group_user_cover{
         display: inline-block;
@@ -198,7 +198,6 @@
             -webkit-line-clamp: 2;
             .post_content_text{
               margin:auto;
-              margin-top:5px;
               overflow : hidden;
               text-overflow: ellipsis;
               display: -webkit-box;

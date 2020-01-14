@@ -1,0 +1,35 @@
+<% search_text = "" %>
+<% if session["search_text"].nil? == false && session["search_text"] != "" %>
+  <% search_text = session["search_text"] %>
+<% end %>
+
+<div class="search_result">
+  <div class="category_show">
+    <%= form_tag('/search/header',method: :post,class: "search_form_top") do %>
+      <%= text_field_tag :search_text ,search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
+      <span class="input-group-btn">
+        <button type="submit"class="btn btn-warning form_button">
+          <span class="glyphicon glyphicon-search"></span>
+          検索
+        </button>
+      </span>
+    <% end %>
+  </div>
+  <div class="pvpage_head">
+  </div>
+</div>
+<div class="thread_all thread_all_group"style="padding-top:10px;">
+  <% there_be = false %>
+  <% search_users = @users.where.not(id:current_user.id) %>
+  <% if !search_text.nil? %>
+    <% search_users = search_users.where("name LIKE ?", "%"+ search_text +"%") %>
+  <% end %>
+  <% show_max = 20.0 %>
+  <% group_num = search_users.count %>
+  <% page_num = (group_num / show_max).ceil %>
+  <% page_id = params[:page].to_i %>
+  <% if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1 %>
+    <% page_id = 1 %>
+  <% end %>
+  <%= render partial:"usershow", locals: { page_id: @page_id,page_id2: @page_id2,start_num: @start_num2,end_num: @end_num2,users:search_users.offset(show_max*(page_id - 1)).limit(show_max) } %>
+</div>

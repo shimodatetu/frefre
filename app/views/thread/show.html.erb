@@ -308,55 +308,42 @@
   <div class="modal fade" id="report_post_modal" tabindex="-1">
   	<div class="modal-dialog"style="width:90vw">
   		<div class="modal-content">
-  			<div class="modal-body">
-          <div class="title">
-            通報の理由 / Report Reason
-          </div>
-          <select class="selectpicker big_select" style="font-size:15px;">
-            <option style="font-size:15px;">
-              種類選択 | Choose Type
-            </option>
-            <option class="big_select"value="1">
-              不適切な投稿 | Sensitive Content
-            </option>
-            <option class="big_select"value="2">
-              乗っ取られたアカウント | Hacked Account
-            </option>
-            <option class="big_select"value="3">
-              偽のアカウント | False Account
-            </option>
-            <option class="big_select"value="4">
-              その他 | Others
-            </option>
-          </select>
-          <div class="title">
-            Specific Content / 具体的な内容
-          </div>
-          <%= text_area_tag :report_content,"", class: "form-control form_input" ,placeholder:"" %>
-  			</div>
-        <div class="modal-footer follow_modal_footer">
-          <%= form_tag('/report/post',method: :post,class: "search_form_top") do %>
+        <%= form_tag('/report/post',method: :post,class: "search_form_top") do %>
+    			<div class="modal-body">
+            <div class="title">
+              通報の理由 / Report Reason
+            </div>
+            <%= radio_button_tag :type, 4 ,"checked"%>不適切な投稿 / Sensitive Content<br>
+            <%= radio_button_tag :type, 1 %>乗っ取られたアカウント / Hacked Account<br>
+            <%= radio_button_tag :type, 2 %>偽のアカウント / False Account<br>
+            <%= radio_button_tag :type, 3 %>その他 / Other<br>
+            <div class="title"style="margin-top:10px;margin-bottom:5px;">
+              Specific Content / 具体的な内容
+            </div>
+            <%= text_area_tag :report_content,"", class: "form-control form_input" ,placeholder:"",rows:"4" %>
+    			</div>
+          <div class="modal-footer follow_modal_footer">
             <%= hidden_field_tag :report_id,"-1", class: "form-control form_input report_post_input" %>
             <%= hidden_field_tag :thread_id,thread_id %>
             <%= hidden_field_tag :page_id,post_id %>
             <button type="submit" class="btn btn-primary report_button_submit">
               <div class="jp">
-                実行
+                送信
               </div>
               <div class="en">
-                OK
+                Send
               </div>
             </button>
-          <% end %>
-          <button type="button" class="btn btn-default" data-dismiss="modal">
-            <div class="jp">
-              戻る
-            </div>
-            <div class="en">
-              Back
-            </div>
-          </button>
-        </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              <div class="jp">
+                戻る
+              </div>
+              <div class="en">
+                Back
+              </div>
+            </button>
+          </div>
+        <% end %>
   		</div>
   	</div>
   </div>

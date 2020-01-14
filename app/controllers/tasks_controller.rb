@@ -3,9 +3,11 @@ class TasksController < ApplicationController
   def report_user
     id = params[:report_id]
     user = User.find_by(id:id.to_i)
+    type = params[:type]
+    content = params[:content]
     reportuser = Reportuser.find_by(user_id: id.to_i)
     if user && logged_in? && !(reportuser && reportuser.from_user == current_user.id)
-      Reportuser.create(user_id:user.id,from_user:current_user.id)
+      Reportuser.create(user_id:user.id,from_user:current_user.id,content:content,reporttype:type)
       flash["alert_en"] = "You reported this user"
       flash["alert_jp"] = "このユーザーを通報しました。"
       flash["alert_type"] = "success"
@@ -21,9 +23,11 @@ class TasksController < ApplicationController
   def report_post_task
     id = params[:report_id]
     post = Post.find_by(id:id.to_i)
+    type = params[:type]
+    content = params[:content]
     reportpost = Reportpost.find_by(post_id: id.to_i)
     if post && logged_in? && !(reportpost && reportpost.from_user == current_user.id)
-      Reportpost.create(post_id:id.to_i,from_user:current_user.id)
+      Reportpost.create(post_id:id.to_i,from_user:current_user.id,content:content,reporttype:type)
       flash["alert_en"] = "You reported this post"
       flash["alert_jp"] = "この投稿を通報しました。"
       flash["alert_type"] = "success"

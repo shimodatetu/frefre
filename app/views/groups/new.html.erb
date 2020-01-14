@@ -40,6 +40,21 @@
       <div class="panel-body content_cover">
         <div class="title_input_name">
           <div class="sub_jp">
+            タグ (３つまで選択できます)
+          </div>
+          <div class="main_en">
+            Tag (You can choose then only 3)
+          </div>
+        </div>
+        <% Threadtype.all.each do |type| %>
+          <div class="checkbox_cover">
+            <%= check_box_tag :type, type.id %><%= type.type_jp %> / <%= type.type_en %>
+          </div>
+        <% end %>
+      </div>
+      <div class="panel-body content_cover">
+        <div class="title_input_name">
+          <div class="sub_jp">
             タイトル
           </div>
           <div class="main_en">
@@ -351,5 +366,17 @@
 <script src="https://rawgit.com/ainterpreting/jquery-multilineSelectmenu/master/jquery.multilineSelectmenu.js"></script>
 -->
 <script type="text/javascript">
-  //$(".type_select").multilineSelectmenu()
+  $("input[type=checkbox]").click(function(){
+    var $count = $("input[type=checkbox]:checked").length;
+    var $not = $('input[type=checkbox]').not(':checked')
+
+        //チェックが3つ付いたら、チェックされてないチェックボックスにdisabledを加える
+    if($count >= 3) {
+        $not.attr("disabled",true);
+    }else{
+        //3つ以下ならisabledを外す
+        $not.attr("disabled",false);
+    }
+  });
+  
 </script>

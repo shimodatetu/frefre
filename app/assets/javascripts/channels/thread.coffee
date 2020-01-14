@@ -14,8 +14,8 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
       location.href=local
       alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
     # Called when there's incoming data on the websocket for this channel
-  make: (lang, title_jp,mes_jp,title_en,mes_en) ->
-    @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,title_en:title_en,message_en:mes_en)
+  make: (lang, title_jp,mes_jp,title_en,mes_en,types) ->
+    @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,title_en:title_en,message_en:mes_en,types:types)
 
 
 $(document).on 'click', '#groupModal .btn_send',(event) ->
@@ -57,6 +57,10 @@ $(document).on 'click', '.make_thread_cover .words_post_button', (event) ->
   event.preventDefault()
 
 type_check=(id)->
+  types = []
+  $('input:checked').each ->
+    types.push( $(this).val() )
+    return
   title_en = $(".en_data_title").val();
   title_jp = $(".jp_data_title").val();
   content_en = $(".en_data_content").val();
@@ -72,7 +76,7 @@ type_check=(id)->
       alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
     else
       $("#groupModal").modal("hide")
-      App.thread.make("enjp",title_jp,content_jp,title_en,content_en);
+      App.thread.make("enjp",title_jp,content_jp,title_en,content_en,types);
   else if window.translated == true && 1 == 2
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if id == "trans_to_en"

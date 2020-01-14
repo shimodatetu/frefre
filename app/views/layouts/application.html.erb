@@ -16,18 +16,6 @@
     <%= javascript_include_tag 'application' %>
     <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-    <script>
-      $.ajax({
-        async: false,
-        url: "https://still-plains-44123.herokuapp.com/video2",
-        type: 'post',
-        dataType: 'json'
-      }).done(function(res){
-        console.log(res)
-      }).fail(function(xhr, status, error){
-         alert(status);
-      });
-    </script>
   </head>
   <body>
     <% if url.include?('manager') %>

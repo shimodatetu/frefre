@@ -1,7 +1,7 @@
 
 <form>
   <div class="profile_title">
-    <div class="title">
+    <div class="title"style="display:none">
       <div class="jp">
         プロフィール
       </div>
@@ -61,9 +61,6 @@
               <input id="username"class="form_control content_input form-control" placeholder="Blank"value="<%= current_user.name %>">
             </div>
           </div>
-        </div>
-
-        <div class="col-sm-12 profile_content">
           <div class="row profile_content_data">
             <div class="content_name">
               <div class="jp">
@@ -223,6 +220,15 @@
             </div>
             <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"><%=current_user.profile_jp%></textarea>
           </div>
+        </div>
+        <div class="save_button_bottom
+        <% if current_user.usertype == "event" %>
+          profile_cannot_save
+        <% else %>
+          profile_save_button
+        <% end %>
+          btn btn-default">
+          Save / 保存
         </div>
       </div>
     </div>

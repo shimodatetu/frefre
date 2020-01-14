@@ -2,6 +2,10 @@ class ProfileController < ApplicationController
   def show
     @user = User.new
     @users = User.all
+    gon.prohibit = []
+    for prohibit in Prohibit.all do
+      gon.prohibit.push(prohibit.prohibit_words)
+    end
     if params[:id] == "2" || params[:id] == "3"
       thread_page_num = 20.to_f
       page_show_max = 5.to_f
@@ -160,7 +164,7 @@ class ProfileController < ApplicationController
       @page_num = page_num
       @start_num = start_num
       @end_num = end_num
-    elsif params[:id] == "8" || params[:id] == "9"
+    elsif params[:id] == "8" || params[:id] == "9" || params[:id] == "10"
       thread_page_num = 20.to_f
       page_show_max = 5.to_f
       page_max_half = (page_show_max / 2).ceil
@@ -212,7 +216,7 @@ class ProfileController < ApplicationController
          end_num = start_num + page_show_max - 1
         end
       end
-      @thread_page_num2 = thread_page_num
+      @thread_page_num2 = @thread_page_num
       @page_id2 = page_id
       @page_num2 = page_num
       @start_num2 = start_num

@@ -13,6 +13,16 @@ class CategoryController < ApplicationController
     @type_all = Threadtype.all
     @type_new = Threadtype.new
   end
+  def threadtype_new
+    type_en = []
+    type_jp = []
+    params[:category_en].split(",").each do |en_cate|
+      type_en.push(en_cate)
+    end
+    params[:category_jp].split(",").each_with_index do |jp_cate, i|
+      Threadtype.create("type_en":type_en[i],"type_jp":jp_cate)
+    end
+  end
   def all_new
     big_ary_en = []
     small_ary_en = []

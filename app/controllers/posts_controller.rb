@@ -5,7 +5,6 @@ class PostsController < ApplicationController
     @groups = Group.all.where("deleted = false")
   end
   def create
-    p "start"
     data = params[:post]
     group = Group.find(data[:group_id])
     if group
@@ -20,8 +19,8 @@ class PostsController < ApplicationController
         post.video = data[:video]
         post.subtitle_en = "ready"
         post.subtitle_jp = "ready"
-        if post.save
-        end
+        post.save
+
       end
     end
     #Post.find_by(id:params[:post][:post_id]).update(pict:params[:post][:pict])

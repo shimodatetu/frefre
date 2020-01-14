@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_052539) do
+ActiveRecord::Schema.define(version: 2020_01_10_044741) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -133,9 +133,9 @@ ActiveRecord::Schema.define(version: 2019_12_13_052539) do
     t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type"
     t.string "content"
     t.boolean "deleted", default: false, null: false
+    t.string "reporttype"
   end
 
   create_table "reportusers", force: :cascade do |t|
@@ -143,9 +143,9 @@ ActiveRecord::Schema.define(version: 2019_12_13_052539) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type"
     t.string "content"
     t.boolean "deleted", default: false, null: false
+    t.string "reporttype"
   end
 
   create_table "secretcategories", force: :cascade do |t|
@@ -163,9 +163,23 @@ ActiveRecord::Schema.define(version: 2019_12_13_052539) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "threadtype_groups", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "threadtype_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "threadtypes", force: :cascade do |t|
     t.string "type_en"
     t.string "type_jp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_notices", force: :cascade do |t|
+    t.integer "notice_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -9,7 +9,8 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
 
   received: (data) ->
     user_id = String(data["message"]["id"])
-    if $(".user_id").attr('id') == user_id && user.usertype != "delete"
+    user_type = data["message"]["usertype"]
+    if $(".user_id").attr('id') == user_id && user_type != "delete"
       alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
       location.reload()
 
@@ -81,7 +82,7 @@ $(document).on 'click', '.profile_save_button', (event) ->
   profile_en = $(".profile_page #profile_en").val();
   profile_jp = $(".profile_page #profile_jp").val();
 
-  if prohibit_check(text_en,text_jp) == true
+  if prohibit_check(profile_en,profile_jp) == true
     App.profile.change(username,gender,country,profile_en,profile_jp,able_see)
   else
     alert_modal("You cannot save because it contains prohibited words.","禁止ワードが含まれているので保存できません。","fail");

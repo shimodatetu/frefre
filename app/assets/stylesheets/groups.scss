@@ -7,6 +7,18 @@
   }
 }
 .make_thread_cover{
+  .checkbox_cover{
+    min-width:33%;
+    display: inline-block;
+    input[type="checkbox"] {
+      margin-right: 5px;
+      margin-top: 10px;
+      font-size: 30px;
+      margin-top: 1px \9;
+      line-height: normal;
+      display: inline-block;
+    }
+  }
   .make_header{
     font-size: 20px;
     margin-left:10px;
@@ -57,7 +69,7 @@
       font-family:'alba';
     }
     .post_button_place{
-      margin-left: calc(50% - 45px);
+      margin-left: calc(50% - 35px);
       .post_button{
         display:inline-block;
         padding-left: 0px;
@@ -226,9 +238,8 @@
       }
     }
     .content_cover{
-      margin-right: 20px;
       padding-top:5px;
-      font-size:20px;
+      font-size:18px;
     }
     .sub_space{
       width:46px;
@@ -272,6 +283,7 @@
     }
     .title_input_name{
       margin-top:5px;
+      font-size:20px;
     }
     .content_input_name{
       margin-top:5px;

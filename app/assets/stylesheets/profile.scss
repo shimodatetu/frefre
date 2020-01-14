@@ -14,7 +14,7 @@
     position: fixed;
     background-color: #fff;
     z-index:5;
-    width:calc(70% + 10px);
+    width: calc(100% - 200px);
     margin-top:-20px;
     padding-top:10px;
   }
@@ -72,10 +72,10 @@
   }
   .profile_main{
     display:inline-block;
-    width: calc(93% - 50px);
+    width: calc(100vw - 200px);
     margin-left:120px;
     margin-bottom:10px;
-    min-height:400px;
+    min-height:calc(100vh - 150px);
   }
   .mes_button{
     .jp{
@@ -228,7 +228,6 @@
           padding-left: 5px;
         }
         .content_name{
-          padding-top:5px;
           color:#07689f;
           .jp{
             font-size:12px;
@@ -238,7 +237,7 @@
           }
         }
         .content_input{
-          margin-top:10px;
+          margin-top:5px;
           padding:2px;
           padding-left:10px;
           padding-right:10px;
@@ -277,11 +276,22 @@
     }
   }
   .save_button{
+    float:right;
     margin-left: 5px;
     margin-top:-10px;
     border:0px;
     font-size:15px;
     padding:10px;
+    background-color: #ff9d3b;
+    color: #fff;
+  }
+  .save_button_bottom{
+    margin-left: calc(50% - 50px);
+    margin-bottom: 10px;
+    margin-top: px;
+    border: 0px;
+    font-size: 15px;
+    padding: 10px;
     background-color: #ff9d3b;
     color: #fff;
   }
@@ -357,6 +367,10 @@ input.cmn-toggle-round:checked + label:after {
   margin-left: 90px;
 }
 .profile_modal{
+  font-size:16px;
+  .title{
+    font-size:17px;
+  }
   .btn_back{
     display: inline-block;
     margin-right:30px;
@@ -394,6 +408,13 @@ input.cmn-toggle-round:checked + label:after {
   }
   .base_en{
     margin-top:-3px;
+  }
+  input[type="radio"] {
+    margin-right: 5px;
+    margin-top: 10px;
+    font-size: 35px;
+    margin-top: 1px \9;
+    line-height: normal;
   }
   .thread_post{
     padding-left:10px;

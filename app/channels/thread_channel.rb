@@ -21,6 +21,12 @@ class ThreadChannel < ApplicationCable::Channel
       group.first_content_jp = data['message_jp']
       group.first_content_en = data['message_en']
       if group.save
+        data["types"].each do |type|
+          p "-------------------------------"
+          p type
+          p "-------------------------------"
+          Threadtype.find_by(id:type.to_i).groups << group
+        end
         post = Post.new()
         post.lang = data['lang']
         post.content_jap = data['message_jp']

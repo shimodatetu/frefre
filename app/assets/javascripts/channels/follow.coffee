@@ -6,34 +6,34 @@ App.follow = App.cable.subscriptions.create "FollowChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    if $(".user_id").attr('id') == user_id
-      button_change(data.data.following_id)
+    if $(".user_id").attr('id') == String(data["follower_id"])
+      $(".follow_button_submit , .unfollow_button_submit").attr("style","none;")
+      button_change(data["following_id"])
 
   following: (type,id)->
+    $(".follow_button_submit , .unfollow_button_submit").attr("style","pointer-events: none;")
     @perform('following',type:type,id:id)
-
-  following: (type,id)->
-    @perform('following',type:type,id:id)
-
-follow_id = 0
 
 $(document).on 'click', '.unfollow_button_submit', (event) ->
   $("#follow_modal").modal("show")
-  follow_id = this.id
-
-$(document).on 'click', '.report_button', (event) ->
-  $("#report_user_modal").modal("show")
-  follow_id = this.id
-
-$(document).on 'click', '.report_button_submit', (event) ->
-  App.follow.following("follow",parseInt(this.id))
+  $(".unfollow_modal_submit").attr("id",this.id)
 
 $(document).on 'click', '.unfollow_modal_submit', (event) ->
-  App.follow.following("unfollow",parseInt(follow_id))
+  App.follow.following("unfollow",parseInt(this.id))
   $("#follow_modal").modal("hide")
 
 $(document).on 'click', '.follow_button_submit', (event) ->
   App.follow.following("follow",parseInt(this.id))
+
+$(document).on 'click', '.report_button', (event) ->
+  $("#report_user_modal").modal("show")
+
+$(document).on 'click', '.report_button_submit', (event) ->
+  App.follow.following("follow",parseInt(this.id))
+
+$(document).on 'hidden.bs.modal', '#follow_modal', (event) ->
+  $(".follow_button_submit , .unfollow_button_submit").attr("style","none;");
+
 
 button_change=(id) ->
   if $('.follow_button'+id+' .glyphicon-star').length == 1

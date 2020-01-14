@@ -7,7 +7,8 @@ class User < ApplicationRecord
   has_many :groups
   has_many :chats
   has_many :userinfos
-  has_and_belongs_to_many :notices
+  has_many :user_notice
+  has_many :notices, through: :user_notices
   has_secure_password validations: false
   validates :password, length: (6..32),on: :create, format: { with: /\A[a-z0-9]+\z/i }, unless: :uid?
   validates :password, length: {minimum: 6}, on: :update, allow_blank: true, unless: :uid?
@@ -40,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def unfollow_id!(other_user_id)
-    following_relationships.find_by(following_id: other_user_id).destroy
+    following_relationships.find_by(following_id: other_user_id).destroy!
   end
   def check_image
     if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
