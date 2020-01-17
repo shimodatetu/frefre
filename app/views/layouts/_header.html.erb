@@ -12,7 +12,7 @@
     <div class="nav-fall border border-primary">
       <%= link_to '/',class:"link_text" do %>
         <div class="text_fill
-        <% if url == '/' || url.include?('thread_list')%>
+        <% if url == '/' || url.include?('thread_list') || url.include?('search')%>
           <%= "now_page" %>
         <% end %>">
           <div class="height_control"></div>
@@ -82,23 +82,6 @@
         </div>
       <% end %>
       -->
-      <%= link_to '/search',class:"link_text" do %>
-        <div class="text_fill
-        <% if url.include?('search') %>
-          <%= "now_page" %>
-        <% end %>">
-          <div class="height_control"></div>
-          <span class="icon glyphicon glyphicon-search"></span>
-          <div class="float_text">
-            <div class="float_jap">
-              検索
-            </div>
-            <div class="base_en">
-              Search
-            </div>
-          </div>
-        </div>
-      <% end %>
       <% if logged_in? && current_user.usertype == "manager" %>
         <%= link_to '/manager/search_thread', data: {"turbolinks"=>false},class:"link_text" do %>
           <div class="text_fill">

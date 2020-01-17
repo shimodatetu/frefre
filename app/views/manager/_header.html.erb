@@ -15,7 +15,7 @@
                 スレッド検索
               </div>
               <div class="base_en">
-                Thread Search
+                Thread
               </div>
             </div>
           </div>
@@ -29,15 +29,14 @@
             <span class="icon glyphicon glyphicon-comment"></span>
             <div style=""class="float_text">
               <div class="float_jap">
-                投稿検索
+                投稿
               </div>
               <div class="base_en">
-                Post Search
+                Post
               </div>
             </div>
           </div>
         <% end %>
-
         <%= link_to '/manager/search_user', data: {"turbolinks"=>false},class:"link_text" do %>
           <div class="text_fill
           <% if url == '/' || url.include?('search_user')%>
@@ -47,10 +46,10 @@
             <span class="icon glyphicon glyphicon-user" aria-hidden="true"></span>
             <div class="float_text">
               <div class="float_jap">
-                ユーザー検索
+                ユーザー
               </div>
               <div class="base_en">
-                User Search
+                User
               </div>
             </div>
           </div>
@@ -64,10 +63,10 @@
             <span class="icon glyphicon glyphicon-user" aria-hidden="true"></span>
             <div class="float_text">
               <div class="float_jap">
-                通報ユーザー検索
+                通報ユーザー
               </div>
               <div class="base_en">
-                Reported User
+                Report User
               </div>
             </div>
           </div>
@@ -81,10 +80,10 @@
             <span class="icon glyphicon glyphicon-comment"></span>
             <div class="float_text">
               <div class="float_jap">
-                通報投稿検索
+                通報投稿
               </div>
               <div class="base_en">
-                Reported Post
+                Report Post
               </div>
             </div>
           </div>
@@ -106,16 +105,33 @@
             </div>
           </div>
         <% end %>
+        <%= link_to '/manager/category', data: {"turbolinks"=>false},class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('category')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            <div class="float_text">
+              <div class="float_jap">
+                カテゴリー
+              </div>
+              <div class="base_en">
+                Category
+              </div>
+            </div>
+          </div>
+        <% end %>
         <%= link_to '/',class:"link_text" do %>
           <div class="text_fill">
             <div class="height_control"></div>
-            <span class="icon glyphicon glyphicon-home"></span>
+            <span class="icon glyphicon glyphicon-share-alt"></span>
             <div style=""class="float_text">
               <div class="float_jap">
-                ホーム
+                戻る
               </div>
               <div class="base_en">
-                Home
+                Back
               </div>
             </div>
           </div>

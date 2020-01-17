@@ -33,18 +33,16 @@
     </div>
     <div class="thread_content">
       <div class="post_content_cover">
-        <div>
-          <div class="user_name">
-            <% if params[:id].nil? || !logged_in? || current_user_id != post.user.id %>
-              <%= link_to "/other_profile/#{post.user.id}" do %>
-                <%= simple_format(text_url_to_link(h(post.user.name))) %>
-              <% end %>
-            <% else %>
-              <%= link_to "/profile" do %>
-                <%= simple_format(text_url_to_link(h(post.user.name))) %>
-              <% end %>
+        <div class="user_name">
+          <% if params[:id].nil? || !logged_in? || current_user_id != post.user.id %>
+            <%= link_to "/other_profile/#{post.user.id}" do %>
+              <%= simple_format(text_url_to_link(h(post.user.name))) %>
             <% end %>
-          </div>
+          <% else %>
+            <%= link_to "/profile" do %>
+              <%= simple_format(text_url_to_link(h(post.user.name))) %>
+            <% end %>
+          <% end %>
           <% if params[:id].nil? || current_user_id != post.user.id || (post.id != first_id && logged_in? && current_user_id == post.user.id)%>
             <div class="dropdown">
               <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

@@ -27,7 +27,29 @@
       </span>
     </div>
   </div>
+  <div class="category_show">
+    <%= form_tag('/search/header',method: :post,class: "search_form_top") do %>
+      <%= text_field_tag :search_text ,"", class: "form-control form_input",placeholder:"Search / 検索" %>
+      <span class="input-group-btn">
+        <% link_to "/" %>
+        <button type="submit"class="btn btn-warning form_button">
+          <span class="glyphicon glyphicon-search"></span>
+          検索
+        </button>
+      </span>
+    <% end %>
+  </div>
 
+  <div class="category_cover">
+    <div class="title">
+      カテゴリー覧 / Category List
+    </div>
+    <% Threadtype.all.each do |type| %>
+      <%= link_to "/category/show/"+type.id.to_s,class:"btn normal_button contract space" do %>
+        <%= type.type_jp %> / <%= type.type_en %>
+      <% end %>
+    <% end %>
+  </div>
   <div class="panel-title"style="display:inline-block">
     <%= link_to "thread_list/popular" do %>
       <div class="panel-title-text">
@@ -40,7 +62,7 @@
   </div>
   <div class="pvpage_head">
   </div>
-  <div class="thread_all thread_all_group"style="padding-top:10px;">
+  <div class="thread_all thread_all_group">
     <% there_be = false %>
     <% @groups.order(seen_num: "DESC").limit(3).each do |group| %>
       <% there_be = true %>
@@ -75,7 +97,7 @@
   </div>
   <div class="pvpage_head">
   </div>
-  <div class="thread_all thread_all_group"style="padding-top:10px;">
+  <div class="thread_all thread_all_group">
     <% there_be = false %>
     <% @groups.order("id DESC").limit(3).each do |group| %>
       <% there_be = true %>

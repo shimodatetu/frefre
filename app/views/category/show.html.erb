@@ -1,126 +1,98 @@
-<% lang = session["lang"] %>
-<div class="category_list_all_cover pvpage_all">
-  <div class="category_head">
-    <div class="panel-title">
-      <div class="panel-title-text">
-        <div class="float_jp">
-          カテゴリ一覧
-        </div>
-        Category List
-      </div>
+<div class="pvpage_all">
+  <div class="thread-panel-title" style="display:inline-block">
+    <div class="panel-title-text">
+      <span class="float_en">
+        <p><%= @threadtype.type_en %></p>
+      </span>
+      <span class="float_jp">
+        <p><%= @threadtype.type_jp %></p>
+      </span>
     </div>
   </div>
-  <div class="panel panel-default big_category_list all_category_list thread_all thread_all_group">
-    <div class="panel-body category_content">
-      <% @threadtypes.each do |type| %>
-        <%= link_to "/category/typecategory/#{type.id}" do %>
-          <div class="bigcategory_only">
-            <div id="<%= type.id %>"class="category_title">
-              <div class="cate_name">
-                <div class="float_jp">
-                  <%= type.type_jp %>
-                </div>
-                <%= type.type_en %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-        <% there_be = false %>
-        <% type.groups.order(seen_num: "DESC").limit(3).each do |group| %>
-          <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
-            <% there_be = true %>
-            <div class="thread_cover">
-              <div class="group_user_cover">
-                <div class="group_img_cover">
-                  <object>
-                  <%= link_to "/other_profile/#{group.user.id}" do %>
-                    <% if group.user.image == 0 %>
-                      <% if group.user.photo.nil? %>
-                        <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-                      <% else %>
-                        <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
-                      <% end %>
-                    <% else %>
-                      <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
-                    <% end %>
+  <% there_be = false %>
+  <div class="thread_all thread_all_group"style="padding-top:10px;">
+    <% @groups.order(seen_num: "DESC").offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |group| %>
+      <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
+        <% there_be = true %>
+        <div class="thread_cover">
+          <div class="group_user_cover">
+            <div class="group_img_cover">
+              <object>
+              <%= link_to "/other_profile/#{group.user.id}" do %>
+                <% if group.user.image == 0 %>
+                  <% if group.user.photo.nil? %>
+                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                  <% else %>
+                    <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
                   <% end %>
-                  </object>
-                </div>
-              </div>
-              <div class="thread_content">
-                <div class="post_content_cover">
-                  <div class="user_name">
-                  <object>
-                    <% if !logged_in? || current_user.id != group.user.id %>
-                      <%= link_to "/other_profile/#{group.user.id}" do %>
-                        <%= group.user.name %>
-                      <% end %>
-                    <% else %>
-                      <%= link_to "/profile" do %>
-                        <%= group.user.name %>
-                      <% end %>
-                    <% end %>
-                    </object>
-                    <div class="create_time"style="float:right">
-                      <%= group.created_at.strftime('%Y/%m/%d') %>
-                    </div>
-                  </div>
-                  <div class="post_content_position en_position">
-                    <div class="thread_title">
-                      <div class="title_padding no_inline">
-                        <%= group.title_en %>
-                      </div>
-                    </div>
-                    <div class="post_content en">
-                      <div class="post_content_text">
-                        <%= group.first_content_en %>
-                      </div>
-                    </div>
-                    <div class="see_more">
-                      See more
-                    </div>
-                  </div>
-                  <div class="post_content_position_space">
-                    <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-                  </div>
-                  <div class="post_content_position jp_position">
-                    <div class="thread_title">
-                      <div class="title_padding no_inline">
-                        <% require 'uri' %>
-                        <%= URI.decode(group.title_jp) %>
-                      </div>
-                    </div>
-                    <div class="post_content jp">
-                      <div class="post_content_text">
-                        <%= group.first_content_jp %>
-                      </div>
-                    </div>
-                    <div class="see_more">
-                      もっと見る
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-        <% if there_be == false %>
-          <div class="not_found">
-            <div class="en">
-              There is no thread created.
-            </div>
-            <div class="jp">
-              まだスレッドが作成されていません。
+                <% else %>
+                  <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
+                <% end %>
+              <% end %>
+              </object>
             </div>
           </div>
-        <% else %>
-          <%= link_to "/category/typecategory/#{type.id}" do %>
-            <div class="see_more_thread">
-              See More / もっと見る
+          <div class="thread_content">
+            <div class="post_content_cover">
+              <div class="user_name">
+                <object>
+                <% if !logged_in? || current_user.id != group.user.id %>
+                  <%= link_to "/other_profile/#{group.user.id}" do %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                  <% end %>
+                <% else %>
+                  <%= link_to "/profile" do %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                  <% end %>
+                <% end %>
+                </object>
+                <div class="create_time"style="float:right">
+                  <%= group.created_at.strftime('%Y/%m/%d') %>
+                </div>
+              </div>
+              <div class="post_content_position en_position">
+                <div class="thread_title">
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(group.title_en))) %>
+                  </div>
+                </div>
+                <div class="post_content en">
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(group.first_content_en))) %>
+                  </div>
+                </div>
+              </div>
+              <div class="post_content_position_space">
+                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+              </div>
+              <div class="post_content_position jp_position">
+                <div class="thread_title">
+                  <div class="title_padding no_inline">
+                    <%= simple_format(text_url_to_link(h(group.title_jp))) %>
+                  </div>
+                </div>
+                <div class="post_content en">
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(group.first_content_jp))) %>
+                  </div>
+                </div>
+              </div>
             </div>
-          <% end %>
-        <% end %>
+          </div>
+        </div>
       <% end %>
-    </div>
+    <% end %>
+    <% if there_be == false %>
+      <div class="not_found">
+        <div class="en">
+          There are no threads.
+        </div>
+        <div class="jp">
+          スレッドはありません。
+        </div>
+      </div>
+    <% else %>
+      <%= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
+    <% end %>
   </div>
 </div>

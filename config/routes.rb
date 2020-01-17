@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-
   get 'users/test'
   get 'users/unsubscribe'
-
   get 'manager',to:"manager#show"
   get 'manager/show'
   get 'manager/search_post'
@@ -17,7 +15,7 @@ Rails.application.routes.draw do
   get 'manager/search_user/:page' => 'manager#search_user'
   get 'manager/search_user_detail'
   get 'manager/search_user_detail/:id' => 'manager#search_user_detail'
-
+  get 'manager/category' => 'manager#category_make'
   get 'manager/search_report_user'
   get 'manager/search_report_user/:page' => 'manager#search_user'
   get 'manager/search_report_user_detail'
@@ -95,6 +93,8 @@ Rails.application.routes.draw do
   match '/threadtype_new' => 'category#threadtype_new', via: [ :post ]
   match '/type_new' => 'category#type_new', via: [ :post ]
   get 'category/show'
+  get 'category/show/:id' => 'category#show'
+  get 'category/show/:id/:page' => 'category#show'
   get 'category/show2'
 
   post '/follow_other',to:'tasks#follow_other'

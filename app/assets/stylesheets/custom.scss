@@ -163,10 +163,11 @@ p{
     padding: 0;
     appearance: none;
   }
+
   .normal_button{
     display: inline-block;
     background: #ff9d3b;
-    border: solid 1px #cd853f4d;
+    border: solid 1px #ff9d3b;
     color:#fff;
     word-wrap: break-word;
     border-radius: 5px;
@@ -205,6 +206,19 @@ p{
       padding-right: 2px;
       font-size: 18px;
     }
+  }
+
+  .contract{
+    color:#ff9d3b;
+    background: #fff;
+  }
+  .contract:hover{
+    color:#fff;
+    background: #ff9d3b;
+  }
+  .space{
+    margin-top: 5px;
+    margin-left: 5px;
   }
   .green_button{
     background: #66bfbf;

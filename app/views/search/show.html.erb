@@ -17,6 +17,10 @@
   </div>
   <div class="pvpage_head">
   </div>
+
+  <% if search_text != "" && 1 == 2%>
+    [<%= search_text %>]の検索結果 / Search result fo [<%= search_text %>]
+  <% end %>
   <div class="thread_all thread_all_group"style="padding-top:10px;">
     <% there_be = false %>
     <% search_groups = @groups %>
