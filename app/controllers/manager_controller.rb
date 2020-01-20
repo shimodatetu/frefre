@@ -11,6 +11,17 @@ class ManagerController < ApplicationController
   def show
   end
 
+  def threadtype_new
+    type_en = []
+    type_jp = []
+    params[:category_en].split(",").each do |en_cate|
+      type_en.push(en_cate)
+    end
+    params[:category_jp].split(",").each_with_index do |jp_cate, i|
+      Threadtype.create("type_en":type_en[i],"type_jp":jp_cate)
+    end
+    redirect_to "/manager/category"
+  end
   def user_info
     user_id = params[:user_id]
     if (user_id.to_i != 0 || user_id == "0") && params["title_en"] != "" && params["title_jp"] != "" && params["message_en"] != "" && params["message_jp"] != ""

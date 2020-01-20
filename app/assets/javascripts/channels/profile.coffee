@@ -107,10 +107,11 @@ translate_google=(data) ->
     translation = res[0]
     if lang == "ja"
       $("#profile_jp").val(translation)
+      $("#fakeLoader").fadeOut();
     else
       translation = translation.replace("&#39;","'")
       $("#profile_en").val(translation)
-    $("#fakeLoader").fadeOut();
+      $("#fakeLoader").fadeOut();
     return
   ).fail (xhr, status, error) ->
     alert status

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get 'manager/search_report_post_detail'
   get 'manager/search_report_post_detail/:id' => 'manager#search_report_post_detail'
 
+
+  post 'threadtype_new',to:'manager#threadtype_new'
   get 'manager/user_office',to:'manager#user_office'
   get 'manager/user_office/:id' => 'manager#user_office'
   post 'user_info',to:'manager#user_info'
