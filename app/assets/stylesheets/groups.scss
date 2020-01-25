@@ -213,6 +213,7 @@
     }
     .content_input{
       margin-top:5px;
+      min-height:60px;
       .content_input_form{
         width:100%;
         border-radius:3px;
@@ -240,6 +241,11 @@
     .content_cover{
       padding-top:5px;
       font-size:18px;
+      img{
+        max-height: 150px;
+        max-width: 80%;
+        margin: auto;
+      }
     }
     .sub_space{
       width:46px;

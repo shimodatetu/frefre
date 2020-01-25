@@ -115,6 +115,7 @@ Rails.application.routes.draw do
   get 'thread/show/:id/:page' => 'thread#show'
   get 'thread_all/show/:id' => 'thread_all#show'
   get 'posts/index'
+  post "posts/trans"
   post "posts",to: "posts#create",as: "posts"
   post "chats",to: "chats#create",as: "chats"
   get '/profile',to: 'profile#show'
@@ -126,6 +127,7 @@ Rails.application.routes.draw do
   patch '/profile', to: 'profile#update'
   get '/notice/new/:id' => 'notice#new'
   get '/groups',to:'groups#new'
+  post 'groups' => "groups#create"
   post 'profile/send_img'
   get 'users/index'
   get 'users/term'

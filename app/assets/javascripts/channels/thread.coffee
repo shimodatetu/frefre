@@ -56,6 +56,35 @@ $(document).on 'click', '.make_thread_cover .words_post_button', (event) ->
   type_check($(@).attr("id"))
   event.preventDefault()
 
+
+$(document).on 'change', '.make_thread_cover #image_send', (event) ->
+  $(".post_type").val("image")
+  $(".video_show").attr("style":"display:none");
+  reader = new FileReader
+  reader.onload = (e) ->
+    $(".image_show").attr("src": e.target.result);
+    $(".image_show").attr("style":"display:block");
+    return
+  reader.readAsDataURL @files[0]
+  $(".image_show").attr("style":"display:block");
+
+
+$(document).on 'change', '.make_thread_cover #video_send', (event) ->
+  $(".post_type").val("video")
+  $(".image_show").attr("style":"display:none");
+  fileList = @files
+  i = 0
+  l = fileList.length
+  while l > i
+    blobUrl = window.URL.createObjectURL(fileList[i])
+    i++
+  $(".vjs-tech").attr("style":"")
+  $(".vjs-tech").attr("poster":blobUrl)
+  $(".vjs-tech").attr("src":blobUrl)
+  $(".video_show").attr("style":"display:block");
+
+
+
 type_check=(id)->
   types = []
   $('input:checked').each ->
@@ -65,6 +94,7 @@ type_check=(id)->
   title_jp = $(".jp_data_title").val();
   content_en = $(".en_data_content").val();
   content_jp = $(".jp_data_content").val();
+
   if id == "post"
     if title_en == ""
       alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
@@ -76,7 +106,10 @@ type_check=(id)->
       alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
     else
       $("#groupModal").modal("hide")
-      App.thread.make("enjp",title_jp,content_jp,title_en,content_en,types);
+      if $(".post_type").val() == "text"
+        App.thread.make("enjp",title_jp,content_jp,title_en,content_en,types);
+      else
+        $(".thread_submit").click()
   else if window.translated == true && 1 == 2
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if id == "trans_to_en"

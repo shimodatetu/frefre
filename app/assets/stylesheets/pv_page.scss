@@ -12,6 +12,15 @@
       font-size: 16px;
       padding: 5px;
     }
+
+    .caret{
+      float: right;
+      margin-top: -15px;
+      border-top: 8px dashed;
+      border-top: 4px solid \9;
+      border-right: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
   }
   .panel-title{
     width:100%;

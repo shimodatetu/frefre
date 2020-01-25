@@ -37,111 +37,134 @@
           <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
         </div>
       </div>
-      <div class="panel-body content_cover">
-        <div class="title_input_name">
-          <div class="sub_jp">
-            タグ (３つまで選択できます)
+      <%= form_for Group.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+        <div class="panel-body content_cover">
+          <div class="title_input_name">
+            <div class="sub_jp">
+              タグ (３つまで選択できます)
+            </div>
+            <div class="main_en">
+              Tag (You can choose less than 3)
+            </div>
           </div>
-          <div class="main_en">
-            Tag (You can choose then only 3)
+          <% Threadtype.all.each do |type| %>
+
+            <%= hidden_field_tag 'threadtype[id][]' %>
+            <div class="checkbox_cover">
+              <%= check_box_tag 'threadtype[id][]', type.id, checked = false, :id => "image_#{type.id}" %><%= type.type_jp %> / <%= type.type_en %>
+            </div>
+          <% end %>
+        </div>
+        <div class="panel-body content_cover">
+          <div class="title_input_name">
+            <div class="sub_jp">
+              タイトル
+            </div>
+            <div class="main_en">
+              Title
+            </div>
+          </div>
+          <div class="title_input">
+            <%= form.text_field :title_en, id:"title",class:"form-control form_lang en_data_title" %>
+            <div class="sub_space"></div>
+            <%= form.text_field :title_jp, id:"title",class:"form-control form_lang jp_data_title" %>
           </div>
         </div>
-        <% Threadtype.all.each do |type| %>
-          <div class="checkbox_cover">
-            <%= check_box_tag :type, type.id %><%= type.type_jp %> / <%= type.type_en %>
+        <div class="panel-body content_cover">
+          <div class="content_input_name">
+            <div class="sub_jp">
+              内容
+            </div>
+            <div class="main_en">
+              Content
+            </div>
           </div>
-        <% end %>
-      </div>
-      <div class="panel-body content_cover">
-        <div class="title_input_name">
-          <div class="sub_jp">
-            タイトル
-          </div>
-          <div class="main_en">
-            Title
+          <div class="content_input">
+            <%= text_area_tag :content_eng,"", id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
+            <div class="space_form">
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_en"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                  <div class="button_text">
+                    翻訳
+                  </div>
+                </button>
+              </div>
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_jp"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                  <div class="button_text">
+                    Trans
+                  </div>
+                </button>
+              </div>
+            </div>
+            <%= text_area_tag :content_jap,"", id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x5" %>
           </div>
         </div>
-        <div class="title_input">
-          <input id="title"class="form-control form_lang en_data_title"id="title" rows="2" cols="65">
-          <div class="sub_space"></div>
-          <input id="title"class="form-control form_lang jp_data_title"id="title" rows="2" cols="65">
-        </div>
-      </div>
-      <div class="panel-body content_cover">
-        <div class="content_input_name">
-          <div class="sub_jp">
-            内容
+        <div class="panel-body content_cover">
+          <div class="content_input_name">
+            <div class="sub_jp">
+              追加資料
+            </div>
+            <div class="main_en">
+              Addon Files
+            </div>
           </div>
-          <div class="main_en">
-            Content
-          </div>
-        </div>
-        <div class="content_input">
-          <textarea id="content"class="content_input_form form-control form_lang en_data_content" rows="5" cols="65"></textarea>
-          <div class="space_form">
-            <div class="trans_cover">
-              <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_en"
-              name="<% if logged_in? %>logined<% end %>">
-                <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                <div class="button_text">
-                  翻訳
+          <div class="content_input">
+            <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
+            <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
+            <label for="image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button"style="margin-left: calc(50% - 160px);">
+              <div class="glyphicon glyphicon-picture picture_send"></div>
+              <div class="button_text">
+                <div class="float_jp">
+                  画像
                 </div>
-              </button>
-            </div>
-            <div class="trans_cover">
-              <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_jp"
-              name="<% if logged_in? %>logined<% end %>">
-                <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                <div class="button_text">
-                  Trans
+                Image
+              </div>
+            </label>
+            <% if logged_in? %>
+              <%= form.file_field :pict,id:"image_send",class:"logined",style:"display:none" %>
+            <% else %>
+              <%= form.file_field :pict,id:"image_send",style:"display:none" %>
+            <% end %>
+            <label for="video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
+              <div class="glyphicon glyphicon-facetime-video picture_send"></div>
+              <div class="button_text">
+                <div class="float_jp">
+                  動画
                 </div>
-              </button>
-            </div>
+                Video
+              </div>
+            </label>
           </div>
-          <textarea id="content"class="content_input_form form-control form_lang jp_data_content" rows="5" cols="65"></textarea>
+          <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
+            poster='/' data-setup='{}'style="display:none">
+            <source src='/' class="video_show_image"type='video/mp4'>
+          </video>
+          <img src="/"class="image_show"style="display:none;">
+          <% if logged_in? %>
+            <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+          <% else %>
+            <%= form.file_field :video,id:"video_send",style:"display:none" %>
+          <% end %>
+          <%= form.hidden_field :type, :value => "text",class:"post_type" %>
         </div>
-      </div>
-      <div class="post_button_place">
-        <button type="button" class="normal_button post_button btn words_post_button"id="post">
-          <div class="glyphicon glyphicon-comment picture_send"></div>
-          <div class="button_text">
-            <div class="float_jp">
-               投稿
+        <div class="post_button_place">
+          <button type="button" class="normal_button post_button btn words_post_button"id="post">
+            <div class="glyphicon glyphicon-comment picture_send"></div>
+            <div class="button_text">
+              <div class="float_jp">
+                 作成
+              </div>
+              Make
             </div>
-            Post
-          </div>
-        </button>
-      </div>
-      <!--<div class="post_footer">
-        <button type="button" class="post_button btn  words_post_button"id="en">
-          <div class="button_text">
-            <div class="float_jp">
-               投稿
-            </div>
-            Post
-          </div>
-          <div class="glyphicon glyphicon-comment picture_send"></div>
-        </button>
-        <button type="button" class="post_button btn  words_post_button"id="enjp">
-          <div class="button_text">
-            <div class="float_jp">
-              書き込み
-            </div>
-            Write
-          </div>
-          <%= image_tag "/eng.png", class: "image picture_send" %>
-          <%= image_tag "jap.png", class: "image picture_send" %>
-        </button>
-        <button type="button" class="post_button btn  words_post_button"id="jp">
-          <div class="button_text">
-            <div class="float_jp">
-               書き込み
-            </div>
-            Write
-          </div>
-          <%= image_tag "jap.png", class: "image picture_send" %>
-        </button>
-      </div>-->
+          </button>
+        </div>
+        <%= form.submit "",class:"thread_submit",style:"display:none" %>
+      <% end %>
     </div>
     <div class="modal fade category_modal" id="category_modal" tabindex="-1">
     	<div class="modal-dialog"style="width:90vw">
@@ -293,12 +316,9 @@
       		<div class="modal-content">
       			<div class="modal-body">
               <div id="carousel-example-generic" class="carousel slide"data-interval="false">
-                <!-- Indicators -->
                 <button type="button" class="btn btn-secondary close_button" data-dismiss="modal">
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
-
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
                     <img src="/frefre_explain/make_thread_1.png">

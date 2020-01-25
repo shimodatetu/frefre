@@ -28,7 +28,7 @@
     </div>
   </div>
   <div class="footer thread_footer">
-    <div class="thread_post_cover">
+    <div class="thread_post_cover form_cover">
 			<div class="modal-body">
         <div class="thread_post">
           <div class="post_form_cover post_form_cover_enjp connect_btn">
@@ -86,22 +86,28 @@
       <!--<%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
           Powerd by MT
         <% end %>-->
+      <div style="margin-left:50%;margin-top:10px;">
+        <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
+          poster='/' data-setup='{}'style="display:none">
+          <source src='/' class="video_show_image"type='video/mp4'>
+        </video>
+      </div>
+      <img src="/"class="image_show"style="display:none;">
       <div class="post_footer_simple">
-        <div class="post_button_cover thread_send">
-          <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="post"
-          name="<% if logged_in? %>logined<% end %>">
-            <div class="glyphicon glyphicon-comment picture_send"></div>
-            <div class="button_text">
-              <div class="float_jp">
-                投稿
+        <%= form_for @post, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+          <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
+          <%= form.hidden_field :type, :value => "text",class:"post_type"  %>
+          <div class="post_button_cover thread_send">
+            <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="post"
+            name="<% if logged_in? %>logined<% end %>">
+              <div class="glyphicon glyphicon-comment picture_send"></div>
+              <div class="button_text">
+                <div class="float_jp">
+                  投稿
+                </div>
+                Post
               </div>
-              Post
-            </div>
-          </button>
-          <%= form_for @post, :html => {:class => "thread_image_post post_button_form"} do |form| %>
-            <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
-            <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
-            <%= form.hidden_field :type, :value => "image"  %>
+            </button>
             <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
               <div class="button_text">
@@ -116,13 +122,6 @@
             <% else %>
               <%= form.file_field :pict,id:"file_send",style:"display:none" %>
             <% end %>
-            <%= form.submit :class=>"post_image_submit",:style=>"display:none" %>
-          <% end %>
-
-          <%= form_for @post, :html => {:class => "thread_image_post post_button_form"} do |form| %>
-            <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
-            <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
-            <%= form.hidden_field :type, :value => "video" %>
             <label for="video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-facetime-video picture_send"></div>
               <div class="button_text">
@@ -137,15 +136,24 @@
             <% else %>
               <%= form.file_field :video,id:"video_send",style:"display:none" %>
             <% end %>
-            <%= form.submit :class=>"post_video_submit",:style=>"display:none" %>
+          </div>
+          <% if logged_in? %>
+            <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+          <% else %>
+            <%= form.file_field :video,id:"video_send",style:"display:none" %>
           <% end %>
 
-        </div>
+          <%= form.submit "",class:"thread_submit",style:"display:none" %>
+        <% end %>
         <!--<%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
           翻訳提供 未来翻訳
-        <% end %>
-      </div>-->
+        <% end %>-->
+      </div>
     </div>
+    <%= form_tag('/posts/trans', method: :post,style:"display;none") do %>
+      <%= hidden_field_tag :url, "",class:"file_url" %>
+      <%= submit_tag "" ,class:"submit_video",style:"display:none"%>
+    <% end %>
     <%= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
   </div>
   <% if logged_in? %>
@@ -249,7 +257,6 @@
   		</div>
   	</div>
   </div>
-</div>
 </div>
 
 <% end %>

@@ -16,12 +16,15 @@ p{
   }
 }
 .video-js{
+  margin-left: -50%;
   width: 30vw;
   height: 20vw;
   #my-video_html5_api{
     z-index:2;
   }
   .vjs-big-play-button{
+    top: calc(50% - 25px)!important;
+    left: calc(50% - 45px)!important;
     z-index:3;
   }
   .vjs-control-bar{
@@ -105,13 +108,13 @@ p{
 
 .sub_content_cover{
   display: inline-block;
-  width:25%;
+  width:250px;
   vertical-align: top;
   margin-top: 130px;
-  margin-left: 1vw;
   img{
-    width: 24vw;
-    height: 16vw;
+    margin-left:25px;
+    width: 200px;
+    height: 130px;
   }
   iframe{
     width: 27vw;
@@ -120,8 +123,8 @@ p{
 }
 .main_content_cover{
   padding-top:60px;
-  padding-left:2%;
-  width:calc(73%);
+  padding-left:5px;
+  width: calc(100% - 260px);
   display: inline-block;
   .mirai_logo{
     text-decoration: none;
@@ -295,6 +298,14 @@ body{
   }
 }
 @media screen and (max-width: 750px){
+  .category_cover{
+    .dropdown{
+      display:block!important;
+    }
+    .category_link.main:nth-child(n + 7) {
+      display:none;
+    }
+  }
   .sub_content_cover{
     width: 100%;
     text-align: center;
@@ -443,7 +454,7 @@ body{
     }
   }
   .make_thread_category{
-    width:93%!important;
+    width:95%!important;
     .hash_form{
       margin-right: 0px!important;
       .hash_input{

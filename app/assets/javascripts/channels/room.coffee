@@ -7,33 +7,35 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
+    alert("asd")
     console.log(data['data'])
-    if data['data']['subtitle_en'] == "ready" && data['data']['subtitle_jp'] == "ready"
-      console.log("asd")
-    else
-      urls = location.pathname.split("/")
-      now_id = urls[3]
-      window.translated = false
-      user_id = Number($(".user_login").attr("id"))
-      if Number(now_id) == data['group_id']
-        now_page = 1
-        if urls.length >= 5
-          now_page = urls[4]
-        page_id_max = Number($(".thread_page_num").attr("id"))
-        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-        if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-          if user_id == data['user_id']
-            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-        else if Number(now_page) == page
-          if user_id == data['user_id']
-            $(".base_en_form").val("");
-            $(".base_jp_form").val("");
-          add_post(data,user_id)
-        else
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
-  speak: (lang,mes_jp,mes_en, group)->
-    console.log(content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
+    urls = location.pathname.split("/")
+    now_id = urls[3]
+    window.translated = false
+    user_id = Number($(".user_login").attr("id"))
+    if user_id == data['user_id']
+      $(".image_show").attr("style":"display:none");
+      $(".video_show").attr("style":"display:none");
+    if Number(now_id) == data['group_id']
+      now_page = 1
+      if urls.length >= 5
+        now_page = urls[4]
+      page_id_max = Number($(".thread_page_num").attr("id"))
+      page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+      if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+        if user_id == data['user_id']
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+      else if Number(now_page) == page
+        if user_id == data['user_id']
+          $(".base_en_form").val("");
+          $(".base_jp_form").val("");
+        alert("good")
+        add_post(data,user_id)
+      else
+        window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+  speak: (lang,mes_jp,mes_en, group)->
+    console.log(content_jap:mes_jp,content_eng:mes_en,lang:lang,group:group)
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
   image: (file,group)->
@@ -62,16 +64,49 @@ $(document).on 'click', '.report_post_button', (event) ->
   $("#report_post_modal").modal("show")
 
 
-$(document).on 'change', '.thread_image_post #file_send', (event) ->
+$(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
-    $('.post_image_submit').click()
-    event.preventDefault()
+    $(".post_type").val("image")
+    $(".video_show").attr("style":"display:none");
+    reader = new FileReader
+    reader.onload = (e) ->
+      $(".image_show").attr("src": e.target.result);
+      $(".image_show").attr("style":"display:block");
+      return
+    reader.readAsDataURL @files[0]
+    $(".image_show").attr("style":"display:block");
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
-$(document).on 'change', '.thread_image_post #video_send', (event) ->
+
+alert_show=()->
+  alert("asd")
+  
+$(document).on 'change', '.thread_page .thread_image_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
-    $('.post_video_submit').click()
+    $(".post_type").val("video")
+    $(".image_show").attr("style":"display:none");
+
+    fileList = @files
+    i = 0
+    l = fileList.length
+    while l > i
+      blobUrl = window.URL.createObjectURL(fileList[i])
+      i++
+    $(".video_show .vjs-tech").attr("style":"")
+    $(".video_show .vjs-tech").attr("poster":blobUrl)
+    $(".video_show .vjs-tech").attr("src":blobUrl)
+    $(".video_show").attr("style":"display:block")
+    ###
+    reader  = new FileReader();
+    reader.addEventListener 'load', (->
+      $('.file_url').attr 'value', reader.result
+      $('.submit_video').click()
+      return
+    ), false
+
+    reader.readAsDataURL(@files[0]);
+    ###
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
@@ -134,7 +169,10 @@ type_check=(type)->
   if type == "post"
     if text_en != "" && text_jp != ""
       if prohibit_check(text_en,text_jp) == true
-        App.room.speak("none",text_jp,text_en,parseInt($("#group_id").val()))
+        if $(".post_type").val() == "text"
+          App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
+        else
+          $(".thread_submit").click()
       else
         alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
     else if text_jp != ""

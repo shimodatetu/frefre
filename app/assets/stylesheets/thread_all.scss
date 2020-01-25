@@ -73,7 +73,6 @@
 }
 .thread_cover{
   //filter: drop-shadow(2px 5px 5px rgba(0,0,0,0.2));
-  cursor: pointer;
   background-color: #ffffff;
   padding:2px;
   border-radius: 5px;
@@ -83,9 +82,8 @@
     display: inline-block;
     vertical-align: middle;
     height:100%;
-    margin-right: 10px;
-    margin-top:10px;
     margin:5px;
+    margin-right:0px;
     .group_img_cover{
       text-align: center;
       .group_img:hover{
@@ -133,6 +131,7 @@
     }
     .post_content_cover{
       display: inline-block;
+      margin-left:5px;
       font-size:14px;
       width:calc(100%);
       a{
@@ -230,7 +229,9 @@
       }
       .post_image_cover{
         padding:auto;
+        margin-left:50%;
         img{
+          margin-left:calc(-50% + 20px);
           max-height: 150px;
           max-width: 80%;
         }

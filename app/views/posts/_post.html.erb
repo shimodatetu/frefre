@@ -103,7 +103,7 @@
             </div>
           <% end %>
         </div>
-        <% if post.image.nil? && !post.pict.attached? && !post.video.attached?%>
+        <% if post.content_eng != nil && post.content_jap != nil%>
           <div class="post_content_position en_position">
             <% if post.id == first_id %>
               <div class="thread_title">
@@ -130,7 +130,6 @@
                   <%= simple_format(text_url_to_link(h(post.group.title_jp))) %>
                 </div>
               </div>
-
             <% else %>
               <div class="title_space"></div>
             <% end %>
@@ -140,7 +139,8 @@
               </div>
             </div>
           </div>
-        <% else %>
+        <% end %>
+        <% if post.pict.attached? || post.video.attached? %>
           <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
             <% if post.pict.attached?%>
               <%= image_tag post.pict , :class => "group_img"+post.id.to_s%>

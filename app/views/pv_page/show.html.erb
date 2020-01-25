@@ -43,12 +43,28 @@
   <div class="category_cover">
     <div class="title">
       カテゴリー覧 / Category List
+      <div class="dropdown"style="display:none">
+        <div class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="caret"></span>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <div class="one_topic">
+            <% Threadtype.all.offset(6).each do |type| %>
+              <%= link_to "/category/show/"+type.id.to_s,class:"btn normal_button contract space category_link" do %>
+                <%= type.type_jp %> / <%= type.type_en %>
+              <% end %>
+            <% end %>
+          </div>
+        </ul>
+      </div>
     </div>
-    <% Threadtype.all.each do |type| %>
-      <%= link_to "/category/show/"+type.id.to_s,class:"btn normal_button contract space" do %>
-        <%= type.type_jp %> / <%= type.type_en %>
+    <div>
+      <% Threadtype.all.each do |type| %>
+        <%= link_to "/category/show/"+type.id.to_s,class:"btn normal_button contract space category_link main" do %>
+          <%= type.type_jp %> / <%= type.type_en %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
   <div class="panel-title"style="display:inline-block">
     <%= link_to "thread_list/popular" do %>
