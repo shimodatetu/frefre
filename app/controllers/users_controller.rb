@@ -69,6 +69,7 @@ class UsersController < ApplicationController
 
   def update
     current_user.update params.require(:user).permit(:avater)
+    current_user.update("image":0)
   end
   def show_image
     @image = User.find(params[:id])
