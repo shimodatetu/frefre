@@ -2,24 +2,29 @@
 <% users.each do |user| %>
   <% there_be = true %>
   <div class="thread_cover link_cover follow_cover">
-    <div class="group_user_cover">
+    <div class="group_user_cover"style="margin: -10px 2px 0px 0px;">
       <div class="group_img_cover">
-        <% if user.image == 0 %>
-          <% if user.photo.nil? %>
-            <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+        <%= link_to "/other_profile/#{user.id}" do %>
+          <% if user.image == 0 %>
+            <% if user.photo.nil? %>
+              <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+            <% else %>
+              <%= image_tag show_image_user_path(user), :class => "group_img" %>
+            <% end %>
           <% else %>
-            <%= image_tag show_image_user_path(user), :class => "group_img" %>
+            <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
           <% end %>
-        <% else %>
-          <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
         <% end %>
       </div>
     </div>
     <div class="thread_content">
       <div class="post_content_cover">
-        <div class="group_name"style="color:#07689f;font-weight:bold">
-          <%= simple_format(text_url_to_link(h(user.name))) %>
-        </div>
+
+        <%= link_to "/other_profile/#{user.id}" do %>
+          <div class="group_name"style="color:#07689f;font-weight:bold">
+            <%= simple_format(text_url_to_link(h(user.name))) %>
+          </div>
+        <% end %>
         <div class="follow_button<%= user.id %>">
           <% if current_user.followings.find_by(id: user.id) %>
             <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:user.id do %>

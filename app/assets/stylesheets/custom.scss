@@ -172,7 +172,6 @@ p{
   .normal_button{
     display: inline-block;
     background: #ff9d3b;
-    border: solid 1px #ff9d3b;
     color:#fff;
     word-wrap: break-word;
     border-radius: 5px;
@@ -214,6 +213,8 @@ p{
   }
 
   .contract{
+
+    border: solid 1px #ff9d3b;
     font-weight:bold;
     color:#ff9d3b;
     background: #fff;
