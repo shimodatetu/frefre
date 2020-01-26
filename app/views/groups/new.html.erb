@@ -27,18 +27,8 @@
       </button>
     </div>
     <div class="panel panel-warning make_thread_category">
-      <div class="flag_show">
-        <div class="flag_image">
-          <%= image_tag "/eng.png", class: "image" %>
-          <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
-        </div>
-        <div class="flag_image flag_jp">
-          <%= image_tag "jap.png", class: "image" %>
-          <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
-        </div>
-      </div>
       <%= form_for Group.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
-        <div class="panel-body content_cover">
+        <div class="panel-body content_cover"style="margin-top:20px;">
           <div class="title_input_name">
             <div class="sub_jp">
               タグ (３つまで選択できます)
@@ -55,6 +45,17 @@
             </div>
           <% end %>
         </div>
+        <div class="flag_show">
+          <div class="flag_image">
+            <%= image_tag "/eng.png", class: "image" %>
+            <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
+          </div>
+          <div class="flag_image flag_jp">
+            <%= image_tag "jap.png", class: "image" %>
+            <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
+          </div>
+        </div>
+
         <div class="panel-body content_cover">
           <div class="title_input_name">
             <div class="sub_jp">
