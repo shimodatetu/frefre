@@ -44,13 +44,13 @@ $(document).on 'click', '.prof_trans .words_post_button', (event) ->
     if profile_jp == ""
       alert_modal("Japanese introduction is empty.","日本語プロフィール欄に何も書かれていません","fail")
     else
-      $("#fakeLoader").fakeLoader({},translate_google,["en",profile_en,profile_jp]);
+      $("#fakeLoader").fakeLoader({},translate_google2,["en",profile_en,profile_jp]);
       #translate_google(profile_en,profile_jp,"en")
   else if this.id == "trans_to_jp"
     if profile_en == ""
       alert_modal("English introduction is empty.","英語プロフィール欄に何も書かれていません","fail")
     else
-      $("#fakeLoader").fakeLoader({},translate_google,["ja",profile_en,profile_jp]);
+      $("#fakeLoader").fakeLoader({},translate_google2,["ja",profile_en,profile_jp]);
       #translate_google(profile_en,profile_jp,"ja")
 
 $(document).on 'click', '.profile_cannot_save', (event) ->
@@ -87,11 +87,10 @@ $(document).on 'click', '.profile_save_button', (event) ->
   else
     alert_modal("You cannot save because it contains prohibited words.","禁止ワードが含まれているので保存できません。","fail");
 
-translate_google=(data) ->
+translate_google2=(data) ->
   lang = data[0]
   profile_en = data[1]
   profile_jp = data[2]
-  $("#fakeLoader").fakeLoader();
   words = profile_jp
   if lang == "ja"
     words = profile_en
@@ -105,13 +104,12 @@ translate_google=(data) ->
     dataType: 'json').done((res) ->
     window.translated = true
     translation = res[0]
+    $("#fakeLoader").fadeOut();
     if lang == "ja"
       $("#profile_jp").val(translation)
-      $("#fakeLoader").fadeOut();
     else
       translation = translation.replace("&#39;","'")
       $("#profile_en").val(translation)
-      $("#fakeLoader").fadeOut();
     return
   ).fail (xhr, status, error) ->
     alert status

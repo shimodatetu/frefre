@@ -126,6 +126,7 @@ p{
   padding-left:5px;
   width: calc(100% - 260px);
   display: inline-block;
+  min-height: calc(100vh - 70px);
   .mirai_logo{
     text-decoration: none;
     font-size: 12px;
