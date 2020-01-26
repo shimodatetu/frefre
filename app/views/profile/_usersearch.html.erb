@@ -20,6 +20,7 @@
 </div>
 <div class="thread_all thread_all_group"style="padding-top:10px;">
   <% there_be = false %>
+
   <% search_users = @users.where.not(id:current_user.id) %>
   <% if !search_text.nil? %>
     <% search_users = search_users.where("name LIKE ?", "%"+ search_text +"%") %>
@@ -32,8 +33,17 @@
     <% page_id = 1 %>
   <% end %>
   <% page_id2 = params[:page2].to_i %>
-  <% if page_id2.nil? || page_id2.to_i > page_num || page_id2.to_i < 1 %>
-    <% page_id2 = 1 %>
+  <% start_num = 1 %>
+  <% end_num = page_num %>
+  <% if page_num > 5.0 %>
+    <% if page_id - page_max_half < 0 %>
+     <% end_num = 5.0 %>
+    <% elsif page_id + page_max_half > page_num %>
+     <% start_num = end_num - 5.0 + 1 %>
+    <% else %>
+     <% start_num = page_id - page_max_half + 2 %>
+     <% end_num = start_num + 5.0 - 1 %>
+    <% end %>
   <% end %>
   <%= render partial:"usershow", locals: { page_id: page_id,page_id2: page_id2,start_num: @start_num2,end_num: @end_num2,users:search_users.offset(show_max*(page_id - 1)).limit(show_max) } %>
 </div>
