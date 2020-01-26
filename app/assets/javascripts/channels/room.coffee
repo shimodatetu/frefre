@@ -7,7 +7,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    alert("asd")
     console.log(data['data'])
 
     urls = location.pathname.split("/")
@@ -30,7 +29,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         if user_id == data['user_id']
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
-        alert("good")
         add_post(data,user_id)
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)

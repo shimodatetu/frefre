@@ -165,5 +165,7 @@ translate_google=(data) ->
     return
   ).fail (xhr, status, error) ->
     alert status
+    console.log(xhr)
+    console.log(error)
     $("#fakeLoader").fadeOut();
     return
