@@ -305,6 +305,9 @@ GEM
     hashie (3.6.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.17.3)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     i18n (1.5.1)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -531,6 +534,7 @@ DEPENDENCIES
   fog
   gon
   google-cloud-translate
+  httparty
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks

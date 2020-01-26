@@ -72,7 +72,6 @@ $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) -
     reader.onload = (e) ->
       $(".image_show").attr("src": e.target.result);
       $(".image_show").attr("style":"display:block");
-      return
     reader.readAsDataURL @files[0]
     $(".image_show").attr("style":"display:block");
   else
@@ -81,7 +80,7 @@ $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) -
 
 alert_show=()->
   alert("asd")
-  
+
 $(document).on 'change', '.thread_page .thread_image_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
     $(".post_type").val("video")
@@ -93,6 +92,17 @@ $(document).on 'change', '.thread_page .thread_image_post #video_send', (event) 
     while l > i
       blobUrl = window.URL.createObjectURL(fileList[i])
       i++
+    console.log(@files[0])
+    ###
+    fetch('https://still-plains-44123.herokuapp.com/video3',
+      method: 'POST'
+      body: @files[0],
+      mode: "no-cors",
+      headers: {
+          "Content-Type": "application/json; charset=utf-8"
+      }
+    ).then(console.log(res))
+    ###
     $(".video_show .vjs-tech").attr("style":"")
     $(".video_show .vjs-tech").attr("poster":blobUrl)
     $(".video_show .vjs-tech").attr("src":blobUrl)
