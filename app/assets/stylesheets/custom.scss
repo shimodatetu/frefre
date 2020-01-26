@@ -128,16 +128,18 @@ p{
   display: inline-block;
   .mirai_logo{
     text-decoration: none;
-    position: absolute;
-    margin-top: 10px;
-    font-size: 16px;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-bottom: 5px;
     border-bottom: solid thin;
   }
   .left_logo{
     margin-left: 15px;
+    float:left;
   }
   .right_logo{
-    margin-left: calc(30% - 220px);
+    float:right;
+    margin-right:10px;
   }
   .top_explain{
     font-size:14px;
