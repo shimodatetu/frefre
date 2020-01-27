@@ -127,20 +127,17 @@
       <div class="profile_content">
         <div class="col-sm-6"style="padding-left:0px">
           <div class="row profile_content_data self_introduction">
-            <div class="content_name">
-              <div class="jp">
-                自己紹介(英語)
-              </div>
-              <div class="en">
-                Self Introduction
-                (English)
-              </div>
+            <div class="content_data">
+              <% if other_user.able_see %>
+                <% if other_user.profile_en == "" %>
+                  
+                <% else %>
+                  <%= other_user.profile_en%>
+                <% end %>
+              <% else %>
+                Introduction is private
+              <% end %>
             </div>
-            <% if other_user.able_see %>
-              <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_en%></textarea>
-            <% else %>
-              <textarea id="profile_en"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
-            <% end %>
           </div>
         </div>
         <div class="col-sm-6">
