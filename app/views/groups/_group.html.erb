@@ -32,7 +32,8 @@
               <% end %>
             <% end %>
             <div class="create_time"style="float:right">
-              <%= group.posts.count %> reply　<%= group.created_at.strftime('%Y/%m/%d') %>
+              <% replys = group.posts.count %>
+              <span <% if replys == 0 %>style="color:#f00"<% end %>><%= replys %> reply</span>　<%= (time_ago_in_words(group.created_at)).sub(/about/, '') %>
             </div>
           </object>
         </div>
