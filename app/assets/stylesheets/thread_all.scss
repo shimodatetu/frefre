@@ -206,13 +206,13 @@
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
         .post_content_text{
           margin:auto;
           overflow : hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
           p{
             word-break: break-all;
           }
