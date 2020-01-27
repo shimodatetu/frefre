@@ -47,7 +47,7 @@
             <div class="dropdown">
               <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <div class="create_time">
-                  <%= post.created_at.strftime('%Y/%m/%d') %>
+                  <%= (time_ago_in_words(group.created_at)).sub(/about/, '') %>
                 </div>
                 <span class="caret"></span>
               </div>
