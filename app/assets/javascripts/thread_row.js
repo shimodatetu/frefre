@@ -14,9 +14,9 @@ $(function(){
     var row = Math.ceil((Math.min(jp_height,en_height) - 10) / 22);
     row += row * (50 - Math.min(left_value,right_value)) / 50 + 1
 
-    $('.post_content_text').each(function(i, elem){
-      $(elem).attr("style","-webkit-line-clamp:"+Math.ceil(row));
-    }
+    $('.post_content_text').each(function(i, class_elem){
+      $(class_elem).attr("style","-webkit-line-clamp:"+Math.ceil(row));
+    })
   });
   $('.pvpage_all .thread_cover').each(function(i, elem){
     var jp_height = $(elem).find(".jp_position .post_content_text").height();
