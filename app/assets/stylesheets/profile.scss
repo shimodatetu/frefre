@@ -229,12 +229,17 @@
         }
         .content_name{
           color:#07689f;
+          display:inline-block;
           .jp{
             font-size:12px;
           }
           .en{
             margin-top:-2px;
           }
+        }
+        .content_data{
+          color:#07689f;
+          display:inline-block;
         }
         .content_input{
           margin-top:5px;

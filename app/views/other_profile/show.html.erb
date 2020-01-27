@@ -15,7 +15,7 @@
       <% else %>
         <%= image_tag("/userimage/user#{other_user.image}.png", :class => "group_img") %>
       <% end %>
-      <div class="name_show">
+      <div class="name_show"style="font-size:20px">
         <%= simple_format(text_url_to_link(h(other_user.name))) %>
       </div>
     </div>
@@ -89,59 +89,19 @@
     <% end %>
   </div>
   <div class="profile_main">
-    <div class="profile_title"style="display: none;">
-      <div class="title">
-        <div class="jp">
-          <%= simple_format(text_url_to_link(h(other_user.name))) %>のプロフィール
-        </div>
-        <%= simple_format(text_url_to_link(h(other_user.name))) %>'s profile
-      </div>
-    </div>
     <div class="profile_page row">
       <div class="profile_page_en">
         <div class="col-sm-12">
           <div class="col-sm-12 profile_content">
             <div class="row profile_content_data">
-              <div class="content_name">
-                <div class="jp">
-                  ユーザーネーム
-                </div>
-                <div class="en">
-                  Username
-                </div>
-                <div class="">
-                  <%= other_user.name %>
-                </div>
-              </div>
-            </div>
-            <div class="row profile_content_data">
-              <div class="content_name">
-                <div class="jp">
-                  性別
-                </div>
-                <div class="en">
-                  Gender
-                </div>
-              </div>
               <% if other_user.able_see %>
-                <select id="gender"class="content_select" disabled>
-                  <option value="">No Selected</option>
-                  <% if other_user.gender == "Male" %>
-                    <option value="Male" selected>Male / 男性</option>
-                  <% else %>
-                    <option value="Male">Male / 男性</option>
+                <div class="content_data">
+                  <% if other_user.gender == "Male" %>Male / 男性
+                  <% elsif other_user.gender == "Female" %>Female / 女性
+                  <% elsif other_user.gender == "Neuter" %>Neuter / 中性
+                  <% else %>Gender Unknown / 性別不明
                   <% end %>
-                  <% if other_user.gender == "Female" %>
-                    <option value="Female" selected>Female / 女性</option>
-                  <% else %>
-                    <option value="Female">Female / 女性</option>
-                  <% end %>
-                  <% if other_user.gender == "Neuter" %>
-                    <option value="Neuter" selected>Neuter / 中性</option>
-                  <% else %>
-                    <option value="Neuter">Neuter / 中性</option>
-                  <% end %>
-                </select>
+                </div>
               <% else %>
                 <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country">
               <% end %>
@@ -149,22 +109,13 @@
           </div>
           <div class="col-sm-12 profile_content">
             <div class="row profile_content_data">
-              <div class="content_name">
-                <div class="jp">
-                  出身国
-                </div>
-                <div class="en">
-                  Country
-                </div>
-              </div>
-              <div class="">
+              <div class="content_data">
                 <% if other_user.able_see %>
-                  <select value="<%= other_user.country %>"class="content_select"disabled id="country"name="country">
-                    <option value="">No selected</option>
-                  </select>
-                  <script type="text/javascript">
-                    $("#country option[value='<%= other_user.country %>']").prop("selected","selected");
-                  </script>
+                  <% if other_user.country == "" %>
+                    Country Unknown / 出身国不明
+                  <% else %>
+                    <%= other_user.country %>
+                  <% end %>
                 <% else %>
                   <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country"">
                 <% end %>
