@@ -132,11 +132,11 @@ class PostsController < ApplicationController
         post.pict = data[:pict]
         post.save
       else
-        trans(params)
-        #post.video = data[:video]
-        #post.subtitle_en = "ready"
-        #post.subtitle_jp = "ready"
-        #post.save
+        #trans(params)
+        post.video = data[:video]
+        post.subtitle_en = "ready"
+        post.subtitle_jp = "ready"
+        post.save
       end
     end
     #Post.find_by(id:params[:post][:post_id]).update(pict:params[:post][:pict])
