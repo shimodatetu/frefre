@@ -3,7 +3,7 @@
   <% other_user = User.find(params[:id].to_i) %>
 <% end %>
 <% other_user_id = other_user.id %>
-<div class="profile">
+<div class="other_profile profile">
   <div class="profile_sub"style="display:inline-block">
     <div class="profile_picture">
       <% if other_user.image == 0 %>
@@ -89,30 +89,44 @@
     <% end %>
   </div>
   <div class="profile_main">
+    <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+      <div class="lang_bar">
+        <div class="country_flag en_country">
+          <%= image_tag "/eng.png", class: "image" %>
+        </div>
+        <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+            data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+        <div class="country_flag jp_country">
+          <%= image_tag "jap.png", class: "image" %>
+        </div>
+      </div>
+    </div>
     <div class="profile_page row">
       <div class="profile_page_en">
         <div class="col-sm-12">
           <div class="col-sm-12 profile_content">
             <div class="row profile_content_data">
-              <% if other_user.able_see %>
-                <div class="content_data">
+              <div class="content_data">
+                Gender :
+                <% if other_user.able_see %>
                   <% if other_user.gender == "Male" %>Male / 男性
                   <% elsif other_user.gender == "Female" %>Female / 女性
                   <% elsif other_user.gender == "Neuter" %>Neuter / 中性
-                  <% else %>Gender Unknown / 性別不明
+                  <% else %>Unknown / 不明
                   <% end %>
-                </div>
-              <% else %>
-                <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country">
-              <% end %>
+                <% else %>
+                  <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country">
+                <% end %>
+              </div>
             </div>
           </div>
-          <div class="col-sm-12 profile_content">
+          <div class="col-sm-12 profile_content"style="padding-top:0px;">
             <div class="row profile_content_data">
               <div class="content_data">
+                Country :
                 <% if other_user.able_see %>
-                  <% if other_user.country == "" %>
-                    Country Unknown / 出身国不明
+                  <% if other_user.country == "" || other_user.country == nil %>
+                    Unknown / 不明
                   <% else %>
                     <%= other_user.country %>
                   <% end %>
@@ -127,10 +141,19 @@
       <div class="profile_content">
         <div class="col-sm-6"style="padding-left:0px">
           <div class="row profile_content_data self_introduction">
-            <div class="content_data">
+            <div class=" content_name"style="margin-top:5px;">
+              <div class="jp">
+                自己紹介(日本語)
+              </div>
+              <div class="en">
+                Self Introduction
+                (Japanese)
+              </div>
+            </div>
+            <div class="content_data"style="margin-top: 5px;">
               <% if other_user.able_see %>
-                <% if other_user.profile_en == "" %>
-                  
+                <% if other_user.profile_en == "" || other_user.profile_en == nil %>
+                  Not inputed / 記入なし
                 <% else %>
                   <%= other_user.profile_en%>
                 <% end %>
@@ -142,7 +165,7 @@
         </div>
         <div class="col-sm-6">
           <div class="row profile_content_data self_introduction">
-            <div class=" content_name">
+            <div class="content_name"style="margin-top:5px">
               <div class="jp">
                 自己紹介(日本語)
               </div>
@@ -151,11 +174,17 @@
                 (Japanese)
               </div>
             </div>
-            <% if other_user.able_see %>
-              <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"disabled><%=other_user.profile_jp%></textarea>
-            <% else %>
-              <textarea id="profile_jp"placeholder="非公開&#13;&#10;Private"class="form-control content_input textarea"rows="3"disabled></textarea>
-            <% end %>
+            <div class="content_data"style="margin-top:5px;">
+              <% if other_user.able_see %>
+                <% if other_user.profile_jp == "" || other_user.profile_jp == nil %>
+                  Not inputed / 記入なし
+                <% else %>
+                  <%= other_user.profile_jp%>
+                <% end %>
+              <% else %>
+                Introduction is private
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

@@ -9,8 +9,31 @@ class PostsController < ApplicationController
     @posts = Post.all.where("deleted = false")
     @groups = Group.all.where("deleted = false")
   end
-
   def trans(params)
+    p "trans"
+    @uri = URI.parse("http://localhost:5000/api/file")
+    @http = Net::HTTP.new(@uri.host, @uri.port)
+    #@http.use_ssl = true
+    #@http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    def apipost(filename)
+      req = Net::HTTP::Post.new(@uri.path)
+      File.open("files/output1.raw") do |file|
+        data = [
+          ["file", file.read, {"filename" => "output1.raw"}]
+        ]
+        req.set_form(data, "multipart/form-data")
+        p req
+        res = @http.request(req)
+        p res
+        p res.code
+        p res.message
+        p res.body
+      end
+    end
+    apipost("filename")
+  end
+  def trans2(params)
     require "execjs"
     num = 0
     file = File.open("files/data.txt", "r+")
@@ -50,13 +73,16 @@ class PostsController < ApplicationController
         "scope"=>"https://apis.mimi.fd.ai/auth/nict-tts/http-api-service;https://apis.mimi.fd.ai/auth/nict-tra/http-api-service;https://apis.mimi.fd.ai/auth/nict-asr/http-api-service;https://apis.mimi.fd.ai/auth/nict-asr/websocket-api-service;https://apis.mimi.fd.ai/auth/applications.r",
         "grant_type"=>"https://auth.mimi.fd.ai/grant_type/application_credentials"
     }.to_json
-
+    headers = {
+      "Content-Type": "application/json"
+    }
     req.body = data
+    req.initialize_http_header(headers)
     res = http.request(req)
     p "----------------------"
     p res.body.split(",")[0].split("\"")[3]
 
-    uri = URI.parse("https://auth.mimi.fd.ai/v2/token")
+    uri = URI.parse("https://sandbox-sr.mimi.fd.ai/")
     http = Net::HTTP.new(uri.host, uri.port)
 
     http.use_ssl = true
@@ -66,27 +92,31 @@ class PostsController < ApplicationController
     req["Content-Type"] = "application/json"
     headers = {
       "Authorization":"Bearer "+res.body.split(",")[0].split("\"")[3],
-      "x-mimi-process": "nict-asr",
+      "x-mimi-process":"nict-asr",
       "x-mimi-input-language": "ja",
-      "Content-Type": "audio/x-pcm;bit=16;rate=48000;channels=1",
+      "Content-Type":"audio/x-pcm;bit=16;rate=48000;channels=1"
     }
     file = File.open("files/output1.raw", "r+")
       file_data = file.read
     file.close
     data = {
-        url: 'https://sandbox-sr.mimi.fd.ai/',
         method: 'POST',
-        headers: headers,
+        headers: headers
     }.to_json
-    p data
-    data = data.chop + ",\"body\":"+ file_data +"}"
-    p "---------------------------------"
+
+    data = data.chop + ",\"body\":"+ "file_data" +"}"
+    data.gsub!(/\"/,'')
     p data
     req.body = data
+    req.initialize_http_header(headers)
     res = http.request(req)
     p "================================"
-    p res
+    p res.body
+    p res.message
+    p res.code
+
   end
+
   def create
     data = params[:post]
     group = Group.find(params["group_num"])
@@ -102,11 +132,11 @@ class PostsController < ApplicationController
         post.pict = data[:pict]
         post.save
       else
-        #trans(params)
-        post.video = data[:video]
-        post.subtitle_en = "ready"
-        post.subtitle_jp = "ready"
-        post.save
+        trans(params)
+        #post.video = data[:video]
+        #post.subtitle_en = "ready"
+        #post.subtitle_jp = "ready"
+        #post.save
       end
     end
     #Post.find_by(id:params[:post][:post_id]).update(pict:params[:post][:pict])

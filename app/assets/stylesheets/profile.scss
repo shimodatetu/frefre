@@ -1,4 +1,62 @@
 .profile{
+  .lang_bar_cover{
+    z-index: 20;
+    background: #dff5ea;
+    width:calc(100vw - 200px);
+    margin-top: 42px;
+    margin-left: 0px;
+    padding-top:0px;
+    position:fixed;
+    border: solid thin #ddd;
+    border-top:none;
+    .lang_bar{
+      padding-left:calc(14% - 10px);
+      padding-top:8px;
+      padding-bottom:8px;
+      .slider{
+        width:calc(60%);
+        display: inline-block;
+        .tooltip{
+          display: none !important;
+        }
+        .slider-handle{
+          top: -5px !important;
+          width: 30px !important;
+          height: 30px !important;
+          background: rgb(80, 120, 220);
+          z-index:50;
+          .slider_icon{
+            color:#fff;
+            margin-left: -10px;
+            margin-top: -1px;
+            font-size:25px;
+          }
+        }
+        .slider-selection{
+          //height: 20px !important;
+          //top: -5px !important;
+          background: rgb(46, 82, 189);
+        }
+        .slider-track-high{
+          //top: -5px;
+          //height:20px;
+          background: #fff;
+          -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2)
+        }
+      }
+      .country_flag{
+        display: inline-block;
+        margin-right: 10px;
+        .image{
+          height:28px;
+          width:40px;
+        }
+      }
+      .jp_country{
+        margin-left:18px;
+      }
+    }
+  }
   ::-webkit-input-placeholder {
     color: #bbbbbb;
   }
@@ -14,7 +72,7 @@
     position: fixed;
     background-color: #fff;
     z-index:5;
-    width: calc(100% - 200px);
+    width: calc(100vw - 200px);
     margin-top:-20px;
     padding-top:10px;
   }
@@ -23,7 +81,7 @@
     padding-top:20px!important;
   }
   .tab-content{
-    padding-top:80px;
+    padding-top:90px;
     .thread_cover#1{
     	border: solid 3px #bee;
     }
@@ -228,7 +286,7 @@
           padding-left: 5px;
         }
         .content_name{
-          color:#07689f;
+          color:#777;
           display:inline-block;
           .jp{
             font-size:12px;
@@ -238,7 +296,7 @@
           }
         }
         .content_data{
-          color:#07689f;
+          color:#777;
           display:inline-block;
         }
         .content_input{
