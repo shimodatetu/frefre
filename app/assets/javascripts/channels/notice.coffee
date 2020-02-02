@@ -91,7 +91,6 @@ type_check=(id,type)->
 translate_google=(data) ->
   lang = data[0]
   content = data[1]
-  $("#fakeLoader").fakeLoader();
   $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
