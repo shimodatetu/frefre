@@ -19,12 +19,12 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
     @perform('make',lang:lang,mes_jp:mes_jp,address:address,mes_en:mes_en)
     alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
 
-$(document).on 'click', '#noticeModal .btn_send',(event) ->
+$(document).on 'click', '.notice_post .mes_post_button',(event) ->
   send_check()
 
 send_check=()->
-  content_en = $("#noticeModal .en_form_content").val();
-  content_jp = $("#noticeModal .jp_form_content").val();
+  content_en = $(".notice_post .en_form_content").val();
+  content_jp = $(".notice_post .jp_form_content").val();
   if content_en == ""
     alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
   else if content_jp == ""
@@ -62,7 +62,7 @@ type_check=(id,type)->
         alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
       else
         $("#noticeModal").modal("hide")
-        if prohibit_check(text_en,text_jp) == true
+        if prohibit_check(content_en,content_jp) == true
           App.chat.make("none",content_jp,content_en,parseInt($("#group").val()))
         else
           alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
@@ -107,6 +107,7 @@ translate_google=(data) ->
       translation = translation.replace("&#39;","'")
       $(".en_data_content").val(translation);
     $("#fakeLoader").fadeOut();
+
     return
   ).fail (xhr, status, error) ->
     alert status

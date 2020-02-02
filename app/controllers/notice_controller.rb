@@ -43,5 +43,9 @@ class NoticeController < ApplicationController
 
   def new
     @notice = Notice.new
+    gon.prohibit = []
+    for prohibit in Prohibit.all do
+      gon.prohibit.push(prohibit.prohibit_words)
+    end
   end
 end

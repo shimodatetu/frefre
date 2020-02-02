@@ -150,7 +150,7 @@
                <source src='<%= url_for(post.video) %>' type='video/mp4'>
              </video>
              <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != ""%>
-               <div class="post_content_position en_position">
+               <div class="post_content_position post_subtitle_position en_position">
                  <div class="title_space"></div>
                  <div class="post_content en_content_row">
                    <div class="post_content_text">
@@ -161,7 +161,7 @@
                <div class="post_content_position_space">
                  <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
                </div>
-               <div class="post_content_position jp_position">
+               <div class="post_content_position post_subtitle_position jp_position">
                  <div class="title_space"></div>
                  <div class="post_content jp_content_row">
                    <div class="post_content_text">

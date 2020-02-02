@@ -73,7 +73,7 @@
           </div>
   			</div>
         <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-          Powerd by MT
+          Powered by MT
         <% end %>
 
         <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
@@ -126,7 +126,7 @@
             </div>
     			</div>
           <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-            Powerd by MT
+            Powered by MT
           <% end %>
 
           <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
@@ -181,12 +181,10 @@
       <% end %>
     </div>
     <%= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
-    <form id        =  "uploadForm"
-         enctype   =  "multipart/form-data"
-         method    =  "post"
-    >
-    <input type="file" id="file_input"name="userFile" />
-    </form>
+    <%= form_for @post, :html => {:class => "thread_image_post video_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"} do |form| %>
+      <input type="file" id="file_input"name="userFile">
+      <input type="submit"class="display:none">
+    <% end %>
   </div>
   <% if logged_in? %>
     <div class="thread_post_cover check_delete">
@@ -431,12 +429,10 @@
         }
       });
     <% end %>
-    $('.auto_subtitle').click(function(){
-      var formData = new FormData();
-    	var files = $("#video_send").files;
-    	$.each(files, function(i, file){
-    		formData.append('file', file);
-    	});
+    $('#file_input').change(function(){
+
+      var $form = $(".file_form");
+      var formData = new FormData($form[0]);
 
       for(item of formData)
         console.log(item);
