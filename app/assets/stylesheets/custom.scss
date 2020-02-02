@@ -110,11 +110,11 @@ p{
 
 .sub_content_cover{
   display: inline-block;
-  width:250px;
+  width:300px;
   vertical-align: top;
   margin-top: 130px;
   img{
-    margin-left:25px;
+    margin-left:50px;
     width: 200px;
     height: 130px;
   }
@@ -126,7 +126,7 @@ p{
 .main_content_cover{
   padding-top:60px;
   padding-left:5px;
-  width: calc(100% - 260px);
+  width: calc(100% - 310px);
   display: inline-block;
   min-height: calc(100vh - 70px);
   .mirai_logo{
