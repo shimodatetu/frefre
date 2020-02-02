@@ -33,7 +33,7 @@
             <% end %>
             <div class="create_time"style="float:right">
               <% replys = group.posts.count - 1 %>
-              <span <% if replys == 0 %>style="color:#f00"<% end %>><%= replys %> reply</span>　<%= (time_ago_in_words(group.created_at)).sub(/about/, '') %>
+              <span <% if replys == 0 %>style="color:#b3424a"<% end %>><%= replys %> reply</span>　<%= (time_ago_in_words(group.created_at)).sub(/about/, '') %>
             </div>
           </object>
         </div>
