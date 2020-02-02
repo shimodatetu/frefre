@@ -150,6 +150,42 @@
               </div>
             </label>
           </div>
+        </div>
+        <div class="panel-body content_cover"style="display:none">
+          <div class="content_input_name">
+            <div class="sub_jp">
+              字幕
+            </div>
+            <div class="main_en">
+              Subtitles
+            </div>
+          </div>
+          <div class="content_input">
+            <%= text_area_tag :subcontent_eng,"", id:"content",class:"content_input_form form-control form_lang sub_en_data_content",size:"65x5" %>
+            <div class="space_form subtitle_spaceform">
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn btn_send words_post_button2"id="subtrans_to_en"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                  <div class="button_text">
+                    翻訳
+                  </div>
+                </button>
+              </div>
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn btn_send words_post_button2"id="subtrans_to_jp"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                  <div class="button_text">
+                    Trans
+                  </div>
+                </button>
+              </div>
+            </div>
+            <%= text_area_tag :subcontent_jap,"", id:"content",class:"content_input_form form-control form_lang sub_jp_data_content",size:"65x5" %>
+          </div>
+        </div>
+        <div>
           <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
             poster='/' data-setup='{}'style="display:none">
             <source src='/' class="video_show_image"type='video/mp4'>

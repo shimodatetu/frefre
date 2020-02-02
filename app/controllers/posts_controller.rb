@@ -9,31 +9,27 @@ class PostsController < ApplicationController
     @posts = Post.all.where("deleted = false")
     @groups = Group.all.where("deleted = false")
   end
-  def trans(params)
+  def trans2(params)
     p "trans"
     @uri = URI.parse("http://localhost:5000/api/file")
     @http = Net::HTTP.new(@uri.host, @uri.port)
-    #@http.use_ssl = true
+    @http.use_ssl = false
     #@http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     def apipost(filename)
       req = Net::HTTP::Post.new(@uri.path)
-      File.open("files/output1.raw") do |file|
-        data = [
-          ["file", file.read, {"filename" => "output1.raw"}]
-        ]
-        req.set_form(data, "multipart/form-data")
-        p req
-        res = @http.request(req)
-        p res
-        p res.code
-        p res.message
-        p res.body
-      end
+      file = File.open("files/output1.raw","r+")
+      data = [
+        ["file", "file.read", {"filename" => "output1.raw"}]
+      ]
+      req.set_form(data, "multipart/form-data")
+      p req
+      res = @http.request(req)
+      file.close
     end
     apipost("filename")
   end
-  def trans2(params)
+  def trans(params)
     require "execjs"
     num = 0
     file = File.open("files/data.txt", "r+")
@@ -82,39 +78,31 @@ class PostsController < ApplicationController
     p "----------------------"
     p res.body.split(",")[0].split("\"")[3]
 
-    uri = URI.parse("https://sandbox-sr.mimi.fd.ai/")
+    uri = URI.parse("https://service.mimi.fd.ai")
     http = Net::HTTP.new(uri.host, uri.port)
 
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
+    p http
     req = Net::HTTP::Post.new(uri.request_uri)
     req["Content-Type"] = "application/json"
-    headers = {
-      "Authorization":"Bearer "+res.body.split(",")[0].split("\"")[3],
-      "x-mimi-process":"nict-asr",
-      "x-mimi-input-language": "ja",
-      "Content-Type":"audio/x-pcm;bit=16;rate=48000;channels=1"
-    }
-    file = File.open("files/output1.raw", "r+")
-      file_data = file.read
-    file.close
-    data = {
-        method: 'POST',
-        headers: headers
-    }.to_json
 
-    data = data.chop + ",\"body\":"+ "file_data" +"}"
-    data.gsub!(/\"/,'')
-    p data
-    req.body = data
+    req = Net::HTTP::Post.new(uri)
+    req.content_type = "audio/x-pcm;bit=16;rate=48000;channels=1"
+    req["X-Mimi-Process"] = "asr"
+    req["X-Mimi-Input-Language"] = "ja"
+    req["Authorization"] = "Bearer "+res.body.split(",")[0].split("\"")[3]
     req.initialize_http_header(headers)
-    res = http.request(req)
-    p "================================"
-    p res.body
-    p res.message
-    p res.code
+    file = File.open("files/output.raw","r")
+    data = [
+      ["file", file.read, {"filename" => "output.raw"}]
+    ]
+    file.close
+    req.set_form(data, "multipart/form-data")
 
+    res = http.request(req)
+    p "----------------------"
+    p res.body
   end
 
   def create
@@ -127,15 +115,20 @@ class PostsController < ApplicationController
       post.user_id = current_user.id
 
       p data[:video]
+      p params
       p "================================="
       if data[:type] == "image"
+        post.content_eng = params[:content_en]
+        post.content_jap = params[:content_jp]
         post.pict = data[:pict]
         post.save
       else
         #trans(params)
+        post.content_eng = params[:content_en]
+        post.content_jap = params[:content_jp]
+        post.subtitle_en = params[:sub_content_en]
+        post.subtitle_jp = params[:sub_content_jp]
         post.video = data[:video]
-        post.subtitle_en = "ready"
-        post.subtitle_jp = "ready"
         post.save
       end
     end

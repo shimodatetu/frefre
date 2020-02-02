@@ -27,26 +27,27 @@
       </a>
     </li>
   </ul>
-  <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
-    <div class="lang_bar">
-      <div class="country_flag en_country">
-        <%= image_tag "/eng.png", class: "image" %>
-      </div>
-      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-          data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
-      <div class="country_flag jp_country">
-        <%= image_tag "jap.png", class: "image" %>
+  <% if type == "mine" %>
+    <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+      <div class="lang_bar">
+        <div class="country_flag en_country">
+          <%= image_tag "/eng.png", class: "image" %>
+        </div>
+        <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+            data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+        <div class="country_flag jp_country">
+          <%= image_tag "jap.png", class: "image" %>
+        </div>
       </div>
     </div>
-  </div>
-
+  <% end %>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show
     <% if params[:id] == "2" %>
       <%= "active" %>
     <% end %>" id="home" role="tabpanel" aria-labelledby="home-tab">
       <% there_be = false %>
-      <% current_user.groups.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |group| %>
+      <% user.groups.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |group| %>
         <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
           <% there_be = true %>
           <div class="thread_cover">
@@ -176,7 +177,7 @@
     <% end %>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <% show_group_id = -1 %>
       <% there_be = false %>
-      <% current_user.posts.offset(@thread_page_num2*(@page_id2 - 1)).limit(@thread_page_num2).each do |post| %>
+      <% user.posts.offset(@thread_page_num2*(@page_id2 - 1)).limit(@thread_page_num2).each do |post| %>
         <% if show_group_id != post.group_id %>
           <% show_group_id = post.group_id %>
           <%= link_to("/thread/show/#{post.group_id}" , class:"thread_link") do %>

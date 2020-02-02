@@ -103,7 +103,7 @@
             </div>
           <% end %>
         </div>
-        <% if post.content_eng != nil && post.content_jap != nil%>
+        <% if post.content_eng != nil && post.content_jap != nil && post.content_eng != "" && post.content_jap != ""%>
           <div class="post_content_position en_position">
             <% if post.id == first_id %>
               <div class="thread_title">
@@ -149,6 +149,27 @@
                poster='<%= url_for(post.video) %>' data-setup='{}'>
                <source src='<%= url_for(post.video) %>' type='video/mp4'>
              </video>
+             <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != ""%>
+               <div class="post_content_position en_position">
+                 <div class="title_space"></div>
+                 <div class="post_content en_content_row">
+                   <div class="post_content_text">
+                     <%= simple_format(Rinku.auto_link(h(post.content_eng))) %>
+                   </div>
+                 </div>
+               </div>
+               <div class="post_content_position_space">
+                 <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+               </div>
+               <div class="post_content_position jp_position">
+                 <div class="title_space"></div>
+                 <div class="post_content jp_content_row">
+                   <div class="post_content_text">
+                     <%= simple_format(Rinku.auto_link(h(post.content_jap))) %>
+                   </div>
+                 </div>
+               </div>
+             <% end %>
             <% else %>
               Picture is deleted.
             <% end %>

@@ -31,8 +31,8 @@ class GroupsController < ApplicationController
           post.pict = data[:pict]
         else
           post.video = data[:video]
-          post.subtitle_en = "ready"
-          post.subtitle_jp = "ready"
+          post.subtitle_en = params['subcontent_jap']
+          post.subtitle_jp = params['subcontent_jap']
         end
         post.id_ingroup = group.posts.count
         post.group_id = group.id

@@ -128,6 +128,20 @@ type_check=(id)->
     else
       #translate_google(title_en,content_en,"ja")
       $("#fakeLoader").fakeLoader({},translate_google,["ja",title_en,content_en]);
+  else if id == "subtrans_to_en"
+    content_jp = $(".sub_jp_data_content").val();
+    if content_jp == ""
+      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+    else
+      #translate_google(title_jp,content_jp,"en")
+      $("#fakeLoader").fakeLoader({},translate_google2,["en",content_jp]);
+  else if id == "subtrans_to_jp"
+    content_en = $(".sub_en_data_content").val();
+    if content_en == ""
+      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+    else
+      #translate_google(title_en,content_en,"ja")
+      $("#fakeLoader").fakeLoader({},translate_google2,["ja",content_en]);
 
 cut_hash=(hash_data)->
   hash_ary_main = []
@@ -167,5 +181,28 @@ translate_google=(data) ->
     alert status
     console.log(xhr)
     console.log(error)
+    $("#fakeLoader").fadeOut();
+    return
+
+translate_googl2e=(data) ->
+  lang = data[0]
+  subtitle = data[1]
+  $.ajax(
+    async: false
+    url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
+    type: 'post'
+    data:
+      'lang': lang,
+      'words':subtitle
+    dataType: 'json').done((res) ->
+    window.translated = true
+    trans_subtitle = res[0]
+    if lang == "ja"
+      $(".sub_jp_data_content").val(trans_subtitle);
+    else
+      $(".sub_en_data_content").val(trans_subtitle);
+    $("#fakeLoader").fadeOut();
+    return
+  ).fail (xhr, status, error) ->
     $("#fakeLoader").fadeOut();
     return

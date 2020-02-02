@@ -33,7 +33,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
   speak: (lang,mes_jp,mes_en, group)->
-    console.log(content_jap:mes_jp,content_eng:mes_en,lang:lang,group:group)
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
   image: (file,group)->
@@ -72,12 +71,41 @@ $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) -
       $(".image_show").attr("style":"display:block");
     reader.readAsDataURL @files[0]
     $(".image_show").attr("style":"display:block");
+    $(".jimaku_form").attr("style":"display:none");
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
 
 alert_show=()->
   alert("asd")
+
+$(document).on 'click', 'auto_subtitle', (event) ->
+  form = $("#form_input")
+  fd = new FormData(form[0]);
+
+  fd.delete('post[type]')
+  fd.delete('post[pict]')
+  fd.delete("content_en")
+  fd.delete("content_jp")
+  fd.delete("sub_content_en")
+  fd.delete("sub_content_jp")
+  fd.delete("group_num")
+  fd.delete("authenticity_token")
+  fd.delete("utf8")
+
+  for item of fd
+    console.log(item);
+  $.ajax 'http://localhost:5000/api/file',
+    type: 'post'
+    processData: false
+    contentType: false
+    enctype: 'multipart/form-data'
+    data: fd
+    dataType: 'html'
+    success: (data) ->
+      console.log data
+      return
+  false
 
 $(document).on 'change', '.thread_page .thread_image_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
@@ -91,30 +119,11 @@ $(document).on 'change', '.thread_page .thread_image_post #video_send', (event) 
       blobUrl = window.URL.createObjectURL(fileList[i])
       i++
     console.log(@files[0])
-    ###
-    fetch('https://still-plains-44123.herokuapp.com/video3',
-      method: 'POST'
-      body: @files[0],
-      mode: "no-cors",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8"
-      }
-    ).then(console.log(res))
-    ###
     $(".video_show .vjs-tech").attr("style":"")
     $(".video_show .vjs-tech").attr("poster":blobUrl)
     $(".video_show .vjs-tech").attr("src":blobUrl)
     $(".video_show").attr("style":"display:block")
-    ###
-    reader  = new FileReader();
-    reader.addEventListener 'load', (->
-      $('.file_url').attr 'value', reader.result
-      $('.submit_video').click()
-      return
-    ), false
-
-    reader.readAsDataURL(@files[0]);
-    ###
+    $(".jimaku_form").attr("style":"")
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
@@ -162,27 +171,29 @@ add_post=(data,user_id)->
 
 prohibit_check=(text_en,text_jp)->
   can_post = true
-  check_text_en = text_en.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
-  check_text_jp = text_jp.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
+  check_text_en = text_en.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '').replace(/@/g, '')
+  check_text_jp = text_jp.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '').replace(/@/g, '')
   gon.prohibit.forEach (prohibit) ->
     if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
-      console.log("not")
       can_post = false
       return
   return can_post
 
 type_check=(type)->
-  text_en = $(".base_en_form").val();
-  text_jp = $(".base_jp_form").val();
   if type == "post"
+    text_en = $(".base_en_form").val();
+    text_jp = $(".base_jp_form").val();
     if text_en != "" && text_jp != ""
       if prohibit_check(text_en,text_jp) == true
+        $(".jimaku_form").attr("style":"display:none");
         if $(".post_type").val() == "text"
           App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
         else
           $(".thread_submit").click()
       else
         alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
+    else if $(".post_type").val() != "text"
+      $(".thread_submit").click()
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""
@@ -193,17 +204,38 @@ type_check=(type)->
     if window.translated == true && 1 == 2
       alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
     else if type == "trans_to_en"
+      text_en = $(".base_en_form").val();
+      text_jp = $(".base_jp_form").val();
       if text_jp == ""
         alert_modal("Japanese form is empty.","日本語入力欄に何も書かれていません","fail")
       else
         #translate_google("en",text_jp)
         $("#fakeLoader").fakeLoader({},translate_google,["en",text_jp]);
     else if type == "trans_to_jp"
+      text_en = $(".base_en_form").val();
+      text_jp = $(".base_jp_form").val();
       if text_en == ""
         alert_modal("English form is empty.","英語入力欄に何も書かれていません","fail")
       else
         $("#fakeLoader").fakeLoader({},translate_google,["ja",text_en]);
         #translate_google("ja",text_en)
+    else if type == "subtrans_to_en"
+      text_en = $(".subbase_en_form").val();
+      text_jp = $(".subbase_jp_form").val();
+      if text_jp == ""
+        alert_modal("Japanese subtitle form is empty.","日本語字幕入力欄に何も書かれていません","fail")
+      else
+        #translate_google("en",text_jp)
+        $("#fakeLoader").fakeLoader({},translate_google2,["en",text_jp]);
+    else if type == "subtrans_to_jp"
+      text_en = $(".subbase_en_form").val();
+      text_jp = $(".subbase_jp_form").val();
+      if text_en == ""
+        alert_modal("English subtitle form is empty.","英語字幕入力欄に何も書かれていません","fail")
+      else
+        $("#fakeLoader").fakeLoader({},translate_google2,["ja",text_en]);
+        #translate_google("ja",text_en)
+
 
 
 translate_google=(data) ->
@@ -226,6 +258,35 @@ translate_google=(data) ->
       else
         translation = translation.replace("&#39;","'")
         $(".base_en_form").val(translation)
+      $("#fakeLoader").fadeOut();
+      window.touched = false
+      return
+    ).fail (xhr, status, error) ->
+      alert status
+      $("#fakeLoader").fadeOut();
+      window.touched = false
+      return
+
+translate_google2=(data) ->
+  lang = data[0]
+  words = data[1]
+  if window.touched == false
+    window.touched = true
+    $.ajax(
+      async: false
+      url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
+      type: 'post'
+      data:
+        'lang': lang
+        'words': words
+      dataType: 'json').done((res) ->
+      window.translated = true
+      translation = res[0]
+      if lang == "ja"
+        $(".subbase_jp_form").val(translation)
+      else
+        translation = translation.replace("&#39;","'")
+        $(".subbase_en_form").val(translation)
       $("#fakeLoader").fadeOut();
       window.touched = false
       return

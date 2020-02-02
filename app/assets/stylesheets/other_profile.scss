@@ -1,0 +1,54 @@
+.other_profile{
+  .lang_bar_cover{
+    margin-top: -10px;
+    margin-left: 15px;
+  }
+  .profile_page{
+    margin-top:30px;
+    border: solid #dff5ea;
+    background: #fff;
+  }
+  .profile_history{
+    margin-left:5px;
+    width:calc(100% - 15px);
+    .thread_content{
+      .user_name{
+        font-size:14px;
+      }
+    }
+    .nav-tabs{
+      position:unset;
+      margin-left: -5px;
+      width: calc(100% + 15px);
+    }
+    .tab-content{
+      padding-top: 0px;
+    }
+    .nav-link{
+      border:none;
+      border-bottom:1px solid #ddd;
+      color:#999;
+      background-color: #fff !important;
+      cursor: pointer;
+      li.active{
+        a{
+          border:none;
+          border-bottom:1px solid #ddd;
+          color:#07689f;
+        }
+      }
+    }
+    .nav-tabs > li.active > a:hover{
+      border:none;
+      border-bottom:1px solid #ddd;
+    }
+    .nav-tabs > li.active > a:focus{
+      border:none;
+      border-bottom:1px solid #ddd;
+    }
+    .nav-tabs > li > a:hover{
+      background-color: #dff5ea!important;
+      border-radius: 0px;
+    }
+  }
+}

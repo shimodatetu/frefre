@@ -29,76 +29,111 @@
   </div>
   <div class="footer thread_footer">
     <div class="thread_post_cover form_cover">
-			<div class="modal-body">
-        <div class="thread_post">
-          <div class="post_form_cover post_form_cover_enjp connect_btn">
-            <button class="btn help_show_small"data-toggle="modal" data-target="#help_slide">
-              <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-              <div class="en help_text">
-                Usage
-              </div>
-              <div class="jp help_text">
-                使い方
-              </div>
-            </button>
-            <%= image_tag "/eng.png", class: "image" %>
-            <textarea name="content"class="base_en_form connect_btn content_post form-control" rows="6"
-            placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
-          </div>
-          <div class="space_form thread_send">
-            <div class="trans_cover">
-              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
-              name="<% if logged_in? %>logined<% end %>">
-                <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                <div class="button_text">
-                  翻訳
+      <%= form_for @post, :html => {:class => "thread_image_post post_button_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"} do |form| %>
+        <div class="modal-body">
+          <div class="thread_post">
+            <div class="post_form_cover post_form_cover_enjp connect_btn">
+              <button class="btn help_show_small"data-toggle="modal" data-target="#help_slide">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                <div class="en help_text">
+                  Usage
+                </div>
+                <div class="jp help_text">
+                  使い方
                 </div>
               </button>
-            </div>
-            <div class="trans_cover">
-              <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
-              name="<% if logged_in? %>logined<% end %>">
-                <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                <div class="button_text">
-                  Trans
-                </div>
-              </button>
-            </div>
-            <!--<button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans"
-            name="<% if logged_in? %>logined<% end %>">
-              <div class="glyphicon glyphicon-resize-horizontal picture_send"></div>
-              <div class="button_text">
-                <div class="float_jp">
-                  翻訳
-                </div>
-                <div class="right_en">
-                Translate
-              </div>
-            </button>-->
-          </div>
-          <div class="post_form_cover post_form_cover_enjp">
-            <%= image_tag "jap.png", class: "image" %>
-            <textarea name="content"class="base_jp_form content_post form-control" rows="6"
-            placeholder="&#13;&#10;This side is Japanese form.&#13;&#10;こちらは日本語投稿欄です"></textarea>
-          </div>
-        </div>
-			</div>
-      <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-        Powerd by MT
-      <% end %>
+              <%= image_tag "/eng.png", class: "image" %>
 
-      <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
-        翻訳提供 未来翻訳
-      <% end %>
-      <div style="margin-left:50%;margin-top:10px;">
-        <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
-          poster='/' data-setup='{}'style="display:none">
-          <source src='/' class="video_show_image"type='video/mp4'>
-        </video>
-      </div>
-      <img src="/"class="image_show"style="display:none;">
-      <div class="post_footer_simple">
-        <%= form_for @post, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+              <%= text_area_tag :content_en,"",class:"base_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
+            </div>
+            <div class="space_form thread_send">
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                  <div class="button_text">
+                    翻訳
+                  </div>
+                </button>
+              </div>
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                  <div class="button_text">
+                    Trans
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="post_form_cover post_form_cover_enjp">
+              <%= image_tag "jap.png", class: "image" %>
+              <%= text_area_tag :content_jp,"",class:"base_jp_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
+            </div>
+          </div>
+  			</div>
+        <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+          Powerd by MT
+        <% end %>
+
+        <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+          翻訳提供 未来翻訳
+        <% end %>
+        <div style="margin-top:10px;">
+          <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
+            poster='/' data-setup='{}'style="display:none">
+            <source src='/' class="video_show_image"type='video/mp4'>
+          </video>
+        </div>
+        <img src="/"class="image_show"style="display:none;">
+        <div class="jimaku_form"style="display:none">
+          <div class="modal-body">
+            <div class="thread_post">
+              <button class="btn help_show_small auto_subtitle"style="float:right;background:#408bc9">
+                <div class="en help_text">
+                  Auto subtitle
+                </div>
+                <div class="jp help_text">
+                  自動字幕
+                </div>
+              </button>
+              <div class="post_form_cover post_form_cover_enjp connect_btn">
+                <%= text_area_tag :sub_content_en,"",class:"subbase_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
+              </div>
+              <div class="space_form thread_send">
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="subtrans_to_en"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                    <div class="button_text">
+                      翻訳
+                    </div>
+                  </button>
+                </div>
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="subtrans_to_jp"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                    <div class="button_text">
+                      Trans
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="post_form_cover post_form_cover_enjp">
+                <%= text_area_tag :sub_content_jp,"",class:"subbase_jp_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
+              </div>
+            </div>
+    			</div>
+          <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+            Powerd by MT
+          <% end %>
+
+          <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+            翻訳提供 未来翻訳
+          <% end %>
+        </div>
+        <div class="post_footer_simple">
           <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
           <%= form.hidden_field :type, :value => "text",class:"post_type"  %>
           <div class="post_button_cover thread_send">
@@ -141,21 +176,17 @@
               <%= form.file_field :video,id:"video_send",style:"display:none" %>
             <% end %>
           </div>
-          <% if logged_in? %>
-            <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
-          <% else %>
-            <%= form.file_field :video,id:"video_send",style:"display:none" %>
-          <% end %>
-
           <%= form.submit "",class:"thread_submit",style:"display:none" %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
-    <%= form_tag('/posts/trans', method: :post,style:"display;none") do %>
-      <%= hidden_field_tag :url, "",class:"file_url" %>
-      <%= submit_tag "" ,class:"submit_video",style:"display:none"%>
-    <% end %>
     <%= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
+    <form id        =  "uploadForm"
+         enctype   =  "multipart/form-data"
+         method    =  "post"
+    >
+    <input type="file" id="file_input"name="userFile" />
+    </form>
   </div>
   <% if logged_in? %>
     <div class="thread_post_cover check_delete">
@@ -219,12 +250,12 @@
             <div class="post_form_cover post_form_cover_enjp connect_btn">
               <%= image_tag "/eng.png", class: "image" %>
               <textarea name="content"class="en_form connect_btn content_post form-control" rows="6"
-              placeholder="&#13;&#10;This side is English form.&#13;&#10;こちらは英語投稿欄です"></textarea>
+              placeholder="\r\nThis side is English form.\r\nこちらは英語投稿欄です"></textarea>
             </div>
             <div class="post_form_cover post_form_cover_enjp">
               <%= image_tag "jap.png", class: "image" %>
               <textarea name="content"class="jp_form content_post form-control" rows="6"
-              placeholder="&#13;&#10;This side is Japanese form.&#13;&#10;こちらは日本語投稿欄です"></textarea>
+              placeholder="\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です"></textarea>
             </div>
           </div>
           <div class="explain_text">
@@ -400,5 +431,27 @@
         }
       });
     <% end %>
+    $('.auto_subtitle').click(function(){
+      var formData = new FormData();
+    	var files = $("#video_send").files;
+    	$.each(files, function(i, file){
+    		formData.append('file', file);
+    	});
+
+      for(item of formData)
+        console.log(item);
+      $.ajax("http://localhost:5000/api/file", {
+        type: 'post',
+        processData: false,
+        contentType: false,
+        enctype:"multipart/form-data",
+        data: formData,
+        dataType: 'html',
+        success: function(data){
+          console.log(data);
+        }
+      });
+      return false;
+    });
   </script>
 <% end %>
