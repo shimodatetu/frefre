@@ -107,7 +107,7 @@ Rails.application.routes.draw do
   post '/report/post',to:"tasks#report_post_task"
 
   post 'search/header',to:'tasks#search'
-
+  post 'search/user',to:'tasks#search_user'
   post 'search/inside',to:'tasks#search_inside'
   post 'logout/inner',to:'tasks#logout_inner'
   get 'signup',to:'users#index'

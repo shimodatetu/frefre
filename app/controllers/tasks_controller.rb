@@ -62,6 +62,11 @@ class TasksController < ApplicationController
     redirect_to "/search/show"
   end
 
+  def search_user
+    session["search_text"] = params[:search_text]
+    redirect_to "/profile/10"
+  end
+
   def delete
     delete_id = params[:delete_id].to_i
     post = Post.find_by(id:delete_id)
