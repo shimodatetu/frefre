@@ -89,16 +89,20 @@
         <div class="jimaku_form"style="display:none">
           <div class="modal-body">
             <div class="thread_post">
-              <button class="btn help_show_small auto_subtitle"style="float:right;background:#408bc9">
-                <div class="en help_text">
-                  Auto subtitle
+              <div>
+                <button type="button"class="btn help_show_small auto_subtitle_en"style="background:#408bc9;position:static">
+                  <div class="en help_text">
+                    Auto subtitle(English)
+                  </div>
+                </button>
+                <button type="button"class="btn help_show_small auto_subtitle_ja"style="margin-left:130px;background:#408bc9;position:static">
+                  <div class="jp help_text">
+                    自動字幕（日本語）
+                  </div>
+                </button>
+                <div class="post_form_cover post_form_cover_enjp connect_btn">
+                  <%= text_area_tag :sub_content_en,"",class:"subbase_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
                 </div>
-                <div class="jp help_text">
-                  自動字幕
-                </div>
-              </button>
-              <div class="post_form_cover post_form_cover_enjp connect_btn">
-                <%= text_area_tag :sub_content_en,"",class:"subbase_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
               </div>
               <div class="space_form thread_send">
                 <div class="trans_cover">
@@ -429,25 +433,5 @@
         }
       });
     <% end %>
-    $('#file_input').change(function(){
-
-      var $form = $(".file_form");
-      var formData = new FormData($form[0]);
-
-      for(item of formData)
-        console.log(item);
-      $.ajax("http://localhost:5000/api/file", {
-        type: 'post',
-        processData: false,
-        contentType: false,
-        enctype:"multipart/form-data",
-        data: formData,
-        dataType: 'html',
-        success: function(data){
-          console.log(data);
-        }
-      });
-      return false;
-    });
   </script>
 <% end %>

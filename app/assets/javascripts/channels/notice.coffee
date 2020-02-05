@@ -19,6 +19,9 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
     @perform('make',lang:lang,mes_jp:mes_jp,address:address,mes_en:mes_en)
     alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
 
+
+
+
 $(document).on 'click', '.notice_post .mes_post_button',(event) ->
   send_check()
 

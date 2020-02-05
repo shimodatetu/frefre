@@ -32,9 +32,14 @@
     !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
     !url.include?('manager') %>
       <div class="sub_content_cover">
+        <a href="//af.moshimo.com/af/c/click?a_id=1672702&p_id=906&pc_id=1119&pl_id=19363&guid=ON" rel="nofollow">
+          <img src="//image.moshimo.com/af-img/0270/000000019363.jpg" width="300" height="250" style="border:none;">
+        </a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1672702&p_id=906&pc_id=1119&pl_id=19363" width="1" height="1" style="border:none;">
         <%= link_to "https://miraitranslate.com/" do %>
-          <%= image_tag("/mirai.png", :class => "group_img") %>
+          <%= image_tag("/mirai.png", :class => "mirai_img") %>
         <% end %>
+        <%= render partial:"news/news_top" %>
         <!--iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
       </div>
     <% end %>

@@ -1,0 +1,164 @@
+
+<div class="thread_cover"id="<%= news.id %>">
+  <div class="group_user_cover">
+    <div class="group_img_cover">
+      <%= link_to "/other_profile/#{news.user.id}" do %>
+        <% if news.user.image == 0 %>
+          <% if news.user.photo.nil? %>
+            <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+          <% else %>
+            <%= image_tag show_image_user_path(news.user), :class => "group_img" %>
+          <% end %>
+        <% else %>
+          <%= image_tag("/userimage/user#{news.user.image}.png", :class => "group_img") %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="thread_content">
+    <div class="post_content_cover">
+      <div class="user_name">
+        <% if params[:id].nil? || !logged_in? || current_user_id != news.user.id %>
+          <%= link_to "/other_profile/#{news.user.id}" do %>
+            <%= simple_format(text_url_to_link(h(news.user.name))) %>
+          <% end %>
+        <% else %>
+          <%= link_to "/profile" do %>
+            <%= simple_format(text_url_to_link(h(news.user.name))) %>
+          <% end %>
+        <% end %>
+        <% if params[:id].nil? || current_user_id != news.user.id || (news.id != first_id && logged_in? && current_user_id == news.user.id)%>
+          <div class="dropdown">
+            <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <div class="create_time">
+                <%= (time_ago_in_words(group.created_at)).sub(/about/, '') %>
+              </div>
+              <span class="caret"></span>
+            </div>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <% if params[:id].nil? %>
+                <div class="one_topic delete_button_set">
+                  <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
+                      data-whatever="<%= news.id %>">
+                    <div class="jp">投稿を削除する</div>
+                    Delete this comment
+                  </button>
+                </div>
+                <div class="one_topic profile_button_set">
+                  <%= link_to "/other_profile/#{news.user.id}" do %>
+                    <div class="jp">プロフィールへ飛ぶ</div>
+                    Jump to the profile.
+                  <% end %>
+                </div>
+                <div class="one_topic report_button_set">
+                  <button class="report_post_button none_button"id="<%= news.id %>"style="width:100%">
+                    <div class="jp">この投稿を通報する。</div>
+                    Report this news.
+                  </button>
+                </div>
+              <% else %>
+                <% if current_user_id != news.user_id %>
+                  <div class="one_topic">
+                    <%= link_to "/other_profile/#{news.user.id}" do %>
+                      <div class="jp">プロフィールへ飛ぶ</div>
+                      Jump to the profile.
+                    <% end %>
+                  </div>
+                  <% if logged_in? %>
+                    <div class="one_topic">
+                      <button class="report_post_button none_button"id="<%= news.id %>"style="width:100%">
+                        <div class="jp">この投稿を通報する。</div>
+                        Report this news.
+                      </button>
+                    </div>
+                  <% end %>
+                <% end %>
+                <% if news.id != first_id && logged_in? && current_user_id == news.user.id %>
+                  <div class="one_topic">
+                    <button type="button" class="delete_button" data-toggle="modal" data-target="#deleteModal"
+                        data-whatever="<%= news.id %>">
+                      <div class="jp">投稿を削除する</div>
+                      Delete this comment
+                    </button>
+                  </div>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <% if news.content_en != nil && news.content_jp != nil && news.content_en != "" && news.content_jp != ""%>
+        <div class="post_content_position en_position">
+          <% if news.id == first_id %>
+            <div class="thread_title">
+              <div class="title_padding no_inline">
+                <%= simple_format(text_url_to_link(h(news.group.title_en))) %>
+              </div>
+            </div>
+          <% else %>
+            <div class="title_space"></div>
+          <% end %>
+          <div class="post_content en_content_row">
+            <div class="post_content_text">
+              <%= simple_format(Rinku.auto_link(h(news.content_en))) %>
+            </div>
+          </div>
+        </div>
+        <div class="post_content_position_space">
+          <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+        </div>
+        <div class="post_content_position jp_position">
+          <% if news.id == first_id %>
+            <div class="thread_title">
+              <div class="title_padding no_inline">
+                <%= simple_format(text_url_to_link(h(news.group.title_jp))) %>
+              </div>
+            </div>
+          <% else %>
+            <div class="title_space"></div>
+          <% end %>
+          <div class="post_content jp_content_row">
+            <div class="post_content_text">
+              <%= simple_format(Rinku.auto_link(h(news.content_jp))) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if news.pict.attached? || news.video.attached? %>
+        <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
+          <% if news.pict.attached?%>
+            <%= image_tag news.pict , :class => "group_img"+news.id.to_s%>
+          <% elsif news.video.attached? %>
+           <video id='my-video' class='video-js' controls preload='auto' width='1108' height='600'
+             poster='<%= url_for(news.video) %>' data-setup='{}'>
+             <source src='<%= url_for(news.video) %>' type='video/mp4'>
+           </video>
+           <% if news.subtitle_en != nil && news.subtitle_jp != nil && news.subtitle_en != "" && news.subtitle_jp != "" %>
+             <div class="post_content_position post_subtitle_position en_position">
+               <div class="title_space"></div>
+               <div class="post_content en_content_row">
+                 <div class="post_content_text">
+                   <%= simple_format(Rinku.auto_link(h(news.subtitle_en))) %>
+                 </div>
+               </div>
+             </div>
+             <div class="post_content_position_space">
+               <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+             </div>
+             <div class="post_content_position post_subtitle_position jp_position">
+               <div class="title_space"></div>
+               <div class="post_content jp_content_row">
+                 <div class="post_content_text">
+                   <%= simple_format(Rinku.auto_link(h(news.subtitle_jp))) %>
+                 </div>
+               </div>
+             </div>
+           <% end %>
+          <% else %>
+            Picture is deleted.
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

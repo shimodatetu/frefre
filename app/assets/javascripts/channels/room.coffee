@@ -75,37 +75,50 @@ $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) -
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
-
 alert_show=()->
   alert("asd")
 
-$(document).on 'click', 'auto_subtitle', (event) ->
-  form = $("#form_input")
-  fd = new FormData(form[0]);
-
-  fd.delete('post[type]')
-  fd.delete('post[pict]')
-  fd.delete("content_en")
-  fd.delete("content_jp")
-  fd.delete("sub_content_en")
-  fd.delete("sub_content_jp")
-  fd.delete("group_num")
-  fd.delete("authenticity_token")
-  fd.delete("utf8")
-
-  for item of fd
-    console.log(item);
-  $.ajax 'http://localhost:5000/api/file',
-    type: 'post'
-    processData: false
-    contentType: false
-    enctype: 'multipart/form-data'
-    data: fd
-    dataType: 'html'
-    success: (data) ->
-      console.log data
-      return
+video_subtitle=(data) ->
+  lang = data[0]
+  reader = new FileReader
+  file = $('#video_send')[0].files[0]
+  reader.onload = (e) ->
+    fd = new FormData
+    imgBlob = new Blob([ e.target.result ], type: file.type)
+    fd.append 'video', imgBlob, file.name
+    fd.append 'lang', lang
+    $.ajax 'http://localhost:5000/user_photo',
+      processData: false
+      contentType: false
+      type: 'post'
+      enctype: 'multipart/form-data'
+      data: fd
+      dataType: 'html'
+      success: (data) ->
+        words = data.slice( 2 ).slice( 0,-2 ).split('\",\"')
+        console.log(words)
+        $("#fakeLoader").fadeOut();
+        if lang == "ja"
+          $("#sub_content_en").val(words[0])
+          $("#sub_content_jp").val(words[1])
+        else if lang == "en"
+          $("#sub_content_en").val(words[1])
+          $("#sub_content_jp").val(words[0])
+        return
+      error: (err)->
+        console.log(err)
+        $("#fakeLoader").fadeOut();
+        return
+  reader.readAsArrayBuffer(file)
   false
+
+$(document).on 'click', '.auto_subtitle_en', (event) ->
+  $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
+
+
+$(document).on 'click', '.auto_subtitle_ja', (event) ->
+  $("#fakeLoader").fakeLoader({},video_subtitle,["en"]);
+
 
 $(document).on 'change', '.thread_page .thread_image_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
@@ -118,7 +131,6 @@ $(document).on 'change', '.thread_page .thread_image_post #video_send', (event) 
     while l > i
       blobUrl = window.URL.createObjectURL(fileList[i])
       i++
-    console.log(@files[0])
     $(".video_show .vjs-tech").attr("style":"")
     $(".video_show .vjs-tech").attr("poster":blobUrl)
     $(".video_show .vjs-tech").attr("src":blobUrl)

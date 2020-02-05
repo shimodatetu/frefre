@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :groups
   has_many :chats
   has_many :userinfos
+  has_many :news
 
   has_many :user_notices
   has_many :notices, through: :user_notices

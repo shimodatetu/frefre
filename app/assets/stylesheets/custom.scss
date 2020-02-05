@@ -16,11 +16,11 @@ p{
   }
 }
 .video-js{
-  margin-left: calc(50% - 15vw);
-  margin-top:5px;
-  margin-bottom:5px;
-  width: 30vw;
-  height: 20vw;
+  margin-left: calc(50% - 150px);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 300px;
+  height: 200px;
   #my-video_html5_api{
     z-index:2;
   }
@@ -112,8 +112,9 @@ p{
   display: inline-block;
   width:300px;
   vertical-align: top;
-  margin-top: 130px;
-  img{
+  margin-top: 100px;
+  .mirai_img{
+    margin-top:20px;
     margin-left:50px;
     width: 200px;
     height: 130px;
@@ -330,9 +331,10 @@ body{
     padding: 30px;
     padding-right: 50px;
     margin-bottom: 20px;
-    img{
+    .mirai_img{
       width:60vw;
-      height:35vw
+      height:35vw;
+      margin-left:0px;
     }
     iframe{
       width:80vw;

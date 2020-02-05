@@ -149,12 +149,12 @@
                poster='<%= url_for(post.video) %>' data-setup='{}'>
                <source src='<%= url_for(post.video) %>' type='video/mp4'>
              </video>
-             <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != ""%>
+             <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != "" %>
                <div class="post_content_position post_subtitle_position en_position">
                  <div class="title_space"></div>
                  <div class="post_content en_content_row">
                    <div class="post_content_text">
-                     <%= simple_format(Rinku.auto_link(h(post.content_eng))) %>
+                     <%= simple_format(Rinku.auto_link(h(post.subtitle_en))) %>
                    </div>
                  </div>
                </div>
@@ -165,7 +165,7 @@
                  <div class="title_space"></div>
                  <div class="post_content jp_content_row">
                    <div class="post_content_text">
-                     <%= simple_format(Rinku.auto_link(h(post.content_jap))) %>
+                     <%= simple_format(Rinku.auto_link(h(post.subtitle_jp))) %>
                    </div>
                  </div>
                </div>

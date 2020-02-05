@@ -10,9 +10,9 @@
     <div class="category_head">
       <div class="panel-title"style="display:inline-block">
         <div class="panel-title-text">
-          Make Thread
+          Make News
           <span class="float_jp">
-            スレッド作成
+            お知らせ作成
           </span>
         </div>
       </div>
@@ -27,24 +27,7 @@
       </button>
     </div>
     <div class="panel panel-warning make_thread_category">
-      <%= form_for Group.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
-        <div class="panel-body content_cover"style="margin-top:20px;">
-          <div class="title_input_name">
-            <div class="sub_jp">
-              タグ (３つまで選択できます)
-            </div>
-            <div class="main_en">
-              Tag (You can choose less than 3)
-            </div>
-          </div>
-          <% Threadtype.all.each do |type| %>
-
-            <%= hidden_field_tag 'threadtype[id][]' %>
-            <div class="checkbox_cover">
-              <%= check_box_tag 'threadtype[id][]', type.id, checked = false, :id => "image_#{type.id}" %><%= type.type_jp %> / <%= type.type_en %>
-            </div>
-          <% end %>
-        </div>
+      <%= form_tag('/news_maker', method: :post,class:"thread_image_post post_button_form") do %>
         <div class="flag_show">
           <div class="flag_image">
             <%= image_tag "/eng.png", class: "image" %>
@@ -66,9 +49,9 @@
             </div>
           </div>
           <div class="title_input">
-            <%= form.text_field :title_en, id:"title",class:"form-control form_lang en_data_title" %>
+            <%= text_field_tag :title_en,"", id:"title",class:"form-control form_lang en_data_title" %>
             <div class="sub_space"></div>
-            <%= form.text_field :title_jp, id:"title",class:"form-control form_lang jp_data_title" %>
+            <%= text_field_tag :title_jp,"", id:"title",class:"form-control form_lang jp_data_title" %>
           </div>
         </div>
         <div class="panel-body content_cover"style="padding-bottom:0px">
@@ -81,7 +64,7 @@
             </div>
           </div>
           <div class="content_input">
-            <%= text_area_tag :content_eng,"", id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
+            <%= text_area_tag :content_en,"", id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
             <div class="space_form">
               <div class="trans_cover">
                 <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_en"
@@ -102,7 +85,7 @@
                 </button>
               </div>
             </div>
-            <%= text_area_tag :content_jap,"", id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x5" %>
+            <%= text_area_tag :content_ja,"", id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x5" %>
           </div>
         </div>
         <div style="width: 100%;height: 20px;">
@@ -124,8 +107,6 @@
             </div>
           </div>
           <div class="content_input">
-            <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
-            <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
             <label for="image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button"style="margin-left: calc(50% - 160px);">
               <div class="glyphicon glyphicon-picture picture_send"></div>
               <div class="button_text">
@@ -136,9 +117,9 @@
               </div>
             </label>
             <% if logged_in? %>
-              <%= form.file_field :pict,id:"image_send",class:"logined",style:"display:none" %>
+              <%= file_field_tag :pict,id:"image_send",class:"logined",style:"display:none" %>
             <% else %>
-              <%= form.file_field :pict,id:"image_send",style:"display:none" %>
+              <%= file_field_tag :pict,id:"image_send",style:"display:none" %>
             <% end %>
             <label for="video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-facetime-video picture_send"></div>
@@ -172,7 +153,7 @@
               </div>
             </button>
 
-            <%= text_area_tag :subcontent_eng,"", id:"subcontent_eng",class:"content_input_form form-control form_lang sub_en_data_content",size:"65x5" %>
+            <%= text_area_tag :subtitle_en,"", id:"subcontent_eng",class:"content_input_form form-control form_lang sub_en_data_content",size:"65x5" %>
             <div class="space_form subtitle_spaceform">
               <div class="trans_cover">
                 <button type="button" class="normal_button post_button btn btn_send words_post_button2"id="subtrans_to_en"
@@ -193,7 +174,7 @@
                 </button>
               </div>
             </div>
-            <%= text_area_tag :subcontent_jap,"", id:"subcontent_jap",class:"content_input_form form-control form_lang sub_jp_data_content",size:"65x5" %>
+            <%= text_area_tag :subtitle_jp,"", id:"subcontent_jap",class:"content_input_form form-control form_lang sub_jp_data_content",size:"65x5" %>
           </div>
         </div>
         <div>
@@ -203,11 +184,11 @@
           </video>
           <img src="/"class="image_show"style="display:none;">
           <% if logged_in? %>
-            <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+            <%= file_field_tag :video,id:"video_send",class:"logined",style:"display:none" %>
           <% else %>
-            <%= form.file_field :video,id:"video_send",style:"display:none" %>
+            <%= file_field_tag :video,id:"video_send",style:"display:none" %>
           <% end %>
-          <%= form.hidden_field :type, :value => "text",class:"post_type" %>
+          <%= hidden_field_tag :type, :value => "text",class:"post_type" %>
         </div>
         <div class="post_button_place">
           <button type="button" class="normal_button post_button btn words_post_button"id="post">
@@ -220,7 +201,7 @@
             </div>
           </button>
         </div>
-        <%= form.submit "",class:"thread_submit",style:"display:none" %>
+        <%= submit_tag "",class:"thread_submit",style:"display:none" %>
       <% end %>
     </div>
     <div class="modal fade category_modal" id="category_modal" tabindex="-1">
@@ -252,53 +233,6 @@
                   Close
                 </div>
               </button>
-            </div>
-            <div class="panel panel-warning all_category_list">
-              <div class="panel-body category_content">
-                <% @category.each do |cate| %>
-                  <div class="bigcategory_only">
-                    <div id="<%= cate.id %>"class="category_title">
-                      <div class="cate_icon">
-                        <div class="change_icon glyphicon glyphicon-chevron-down"></div>
-                      </div>
-                      <div class="cate_name">
-                        <div class="float_jp">
-                          <%= cate.name_jp %>
-                        </div>
-                        <%= cate.name_en %>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-              <!--<div class="panel-body category_all_content row">
-                <%# @category.each do |cate| %>
-                  <div class="panel panel-warning category_panel<%#= cate.id %>">
-                    <div class="bigcategory_add panel-heading">
-                      <div class="category_title panel-title">
-                        <div class="float_jp">
-                          <%#= cate.name_jp %>
-                        </div>
-                        <%#= cate.name_en %>
-                      </div>
-                    </div>
-                    <ul class="smallcategory panel-body">
-                      <%# cate.smallcategories.each do |s_cate| %>
-                        <li class="text col-sm-4">
-                          <div class="select_category_url"id="<%#= s_cate.id %>"
-                            data-s_name_jp="<%#=s_cate.name_jp%>"data-s_name_en="<%#=s_cate.name_en%>"
-                            data-b_name_jp="<%#=cate.name_jp%>"data-b_name_en="<%#=cate.name_en%>">
-                            <div class="float_jp">
-                              <%#= s_cate.name_jp %>
-                            </div>
-                            <%#= s_cate.name_en %>
-                          </div>
-                        </li>
-                      <%# end %>
-                    </ul>
-                  </div>
-                <%# end %>
-              </div>-->
             </div>
           </div>
         </div>

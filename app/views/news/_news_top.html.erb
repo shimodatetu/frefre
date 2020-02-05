@@ -1,0 +1,16 @@
+<div class="news_cover">
+  <div class="news_title">
+    News / お知らせ
+  </div>
+  <% News.all.limit(3).each do |news| %>
+    <%= link_to("/news/show/#{news.id}" , class:"thread_link") do %>
+      <% there_be = true %>
+      <div class="thread_cover thread_news_cover">
+        <div class="thread_content">
+          <%= simple_format(text_url_to_link(h(news.title_en + ...))) %>
+          <%= simple_format(text_url_to_link(h(news.title_jp + ...))) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

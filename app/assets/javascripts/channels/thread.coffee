@@ -82,7 +82,48 @@ $(document).on 'change', '.make_thread_cover #video_send', (event) ->
   $(".vjs-tech").attr("poster":blobUrl)
   $(".vjs-tech").attr("src":blobUrl)
   $(".video_show").attr("style":"display:block");
+  $(".jimaku_form").attr("style":"display:block")
 
+
+video_thread_subtitle=(data) ->
+  lang = data[0]
+  reader = new FileReader
+  file = $('#video_send')[0].files[0]
+  reader.onload = (e) ->
+    fd = new FormData
+    imgBlob = new Blob([ e.target.result ], type: file.type)
+    fd.append 'video', imgBlob, file.name
+    fd.append 'lang', lang
+    $.ajax 'http://localhost:5000/user_photo',
+      processData: false
+      contentType: false
+      type: 'post'
+      enctype: 'multipart/form-data'
+      data: fd
+      dataType: 'html'
+      success: (data) ->
+        words = data.slice( 2 ).slice( 0,-2 ).split('\",\"')
+        console.log(words)
+        $("#fakeLoader").fadeOut();
+        if lang == "ja"
+          $("#subcontent_eng").val(words[0])
+          $("#subcontent_jap").val(words[1])
+        else if lang == "en"
+          $("#subcontent_eng").val(words[1])
+          $("#subcontent_jap").val(words[0])
+        return
+      error: (err)->
+        console.log(err)
+        $("#fakeLoader").fadeOut();
+        return
+  reader.readAsArrayBuffer(file)
+  false
+
+$(document).on 'click', '.thread_auto_subtitle_en', (event) ->
+  $("#fakeLoader").fakeLoader({},video_thread_subtitle,["ja"]);
+
+$(document).on 'click', '.thread_auto_subtitle_ja', (event) ->
+  $("#fakeLoader").fakeLoader({},video_thread_subtitle,["en"]);
 
 
 type_check=(id)->

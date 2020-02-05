@@ -11,6 +11,29 @@ class ManagerController < ApplicationController
   def show
   end
 
+  def news_make
+    @news = News.new()
+  end
+  def news_maker
+    if manager_logged_in?
+      data = params[:news]
+      news = News.new()
+      #group.threadtype_id = data['category'].to_i
+      news.title_jp = params['title_jp']
+      news.title_en = params['title_en']
+      news.user_id = current_user.id
+      news.content_jp = params['content_ja']
+      news.content_en = params['content_en']
+      if params[:type] == "image"
+        news.pict = params[:pict]
+      elsif params[:type] == "video"
+        news.video = params[:video]
+        news.subtitle_en = params['subcontent_jap']
+        news.subtitle_jp = params['subcontent_jap']
+      end
+      news.save
+    end
+  end
   def threadtype_new
     type_en = []
     type_jp = []

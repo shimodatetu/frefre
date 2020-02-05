@@ -1,0 +1,28 @@
+.news_cover{
+  margin-top:20px;
+  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
+  border: solid thin #aaa;
+  .news_title{
+    padding-left: 5px;
+    border-bottom: solid thin #999;
+  }
+  .thread_cover{
+    border-radius: 0px;
+    margin-bottom: 0px;
+    .thread_content{
+      width:100%;
+      padding-left:5px;
+      .post_content_cover{
+        width:100%!important;
+      }
+      p{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+      }
+    }
+  }
+}
