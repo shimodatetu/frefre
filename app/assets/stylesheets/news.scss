@@ -2,17 +2,31 @@
   margin-top:20px;
   border-radius: 5px;
   border-radius: 5px 5px 0px 0px;
+  padding: 0px !important;
   border: solid thin #aaa;
+  text-align: left;
+
   .news_title{
-    padding-left: 5px;
+    padding: 5px;
     border-bottom: solid thin #999;
+    .title_text{
+      display:inline-block;
+    }
+    .glyphicon{
+      vertical-align: text-top;
+    }
   }
   .thread_cover{
     border-radius: 0px;
     margin-bottom: 0px;
+    padding:0px!important;
+    background: #fff!important;
     .thread_content{
       width:100%;
+      margin-left:5px;
       padding-left:5px;
+      margin-top: 0px;
+      color: #07689f;
       .post_content_cover{
         width:100%!important;
       }
@@ -23,6 +37,10 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
       }
+    }
+    .thread_content:hover{
+      color:#2e70a4;
+      text-decoration: underline;
     }
   }
 }

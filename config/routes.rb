@@ -33,7 +33,9 @@ Rails.application.routes.draw do
   get 'manager/user_office/:id' => 'manager#user_office'
   post 'user_info',to:'manager#user_info'
 
-  get 'news/show'
+  get 'news/show/:id' => 'news#show'
+  get 'news/show/:id/:page' => 'news#show'
+  get 'news/show_all'
   get '/manager/prohibit'
 
   post 'mangaer/user_change', to:'manager#user_change'

@@ -1,0 +1,34 @@
+<% lang = session["lang"] %>
+<style>
+  .ui-tooltip{background: #F2FBEF}
+  .tooltip-title{
+    background:#000;
+  }
+</style>
+<div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>">
+</div>
+<div class=" pvpage_all">
+  <div class="pvpage_head">
+  </div>
+  <div class="thread_all thread_all_group"style="padding-top:10px;">
+    <% there_be = false %>
+    <% @news.order("id DESC").offset(@thread_page_num*(@page_id - 1)).limit(
+    @thread_page_num
+    ).each do |news| %>
+      <% there_be = true %>
+      <%= render partial:"news_show_details", locals: { news:news }  %>
+    <% end %>
+    <% if there_be == false %>
+      <div class="not_found">
+        <div class="en">
+          There is no thread created.
+        </div>
+        <div class="jp">
+          まだスレッドが作成されていません。
+        </div>
+      </div>
+    <% else %>
+      <%= render partial:"/layouts/page", locals: { page_id:@page_id,page_num:@page_num,start_num:@start_num,end_num:@end_num } %>
+    <% end %>
+  </div>
+</div>

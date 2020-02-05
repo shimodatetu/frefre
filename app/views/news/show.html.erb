@@ -1,7 +1,7 @@
 <% lang = session["lang"] %>
 <% thread_id = params[:id].to_i %>
 <% session["now_group"] = thread_id %>
-<% mews = News.find(thread_id) %>
+<% news = News.find_by(id:thread_id) %>
 
 <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
 
@@ -19,11 +19,9 @@
       </span>
     </div>
   </div>
-
   <div class="thread_all thread_all_post"style="padding-top:10px;">
     <div class="thread_cover_cover">
       <%= render news %>
     </div>
   </div>
-
 </div>

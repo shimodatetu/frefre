@@ -1,7 +1,12 @@
 <div class="news_cover">
-  <div class="news_title">
-    News / お知らせ
-  </div>
+  <%= link_to("/news/show_all" , class:"thread_link") do %>
+    <div class="news_title">
+      <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+      <div class="title_text">
+        News / お知らせ
+      </div>
+    </div>
+  <% end %>
   <% News.all.limit(3).each do |news| %>
     <%= link_to("/news/show/#{news.id}" , class:"thread_link") do %>
       <% there_be = true %>
