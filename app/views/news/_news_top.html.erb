@@ -7,8 +7,8 @@
       <% there_be = true %>
       <div class="thread_cover thread_news_cover">
         <div class="thread_content">
-          <%= simple_format(text_url_to_link(h(news.title_en + ...))) %>
-          <%= simple_format(text_url_to_link(h(news.title_jp + ...))) %>
+          <%= simple_format(text_url_to_link(h(news.title_en + "..."))) %>
+          <%= simple_format(text_url_to_link(h(news.title_jp + "..."))) %>
         </div>
       </div>
     <% end %>

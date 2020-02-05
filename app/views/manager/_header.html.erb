@@ -122,6 +122,23 @@
             </div>
           </div>
         <% end %>
+        <%= link_to '/manager/news_make', data: {"turbolinks"=>false},class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('news_make')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-bell" aria-hidden="true"></span>
+            <div class="float_text">
+              <div class="float_jap">
+                お知らせ作成
+              </div>
+              <div class="base_en">
+                News Make
+              </div>
+            </div>
+          </div>
+        <% end %>
         <%= link_to '/',class:"link_text" do %>
           <div class="text_fill">
             <div class="height_control"></div>
@@ -143,7 +160,7 @@
   <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
   !url.include?('term') && !url.include?('contact') && !url.include?('groups') && !url.include?('notice') &&
   !url.include?('account_activations') && !url.include?('help') && !url.include?('oauth_complete') &&
-  !url.include?('create_oauth') && !url.include?('prohibit') %>
+  !url.include?('create_oauth') && !url.include?('prohibit') && !url.include?('news_make')%>
     <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
       <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
       <div class="lang_bar">
