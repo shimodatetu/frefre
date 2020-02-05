@@ -52,7 +52,7 @@ send_check=()->
     else
       alert_modal("You cannot save because it contains prohibited words.","禁止ワードが含まれているので保存できません。","fail");
 
-$(document).on 'click', '.make_thread_cover .words_post_button', (event) ->
+$(document).on 'click', '.make_thread_cover .thread_make .words_post_button', (event) ->
   type_check($(@).attr("id"))
   event.preventDefault()
 

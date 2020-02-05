@@ -9,7 +9,7 @@
   <% other_user = User.find(params[:id].to_i) %>
 <% end %>
 <% if logged_in? %>
-  <div class="make_thread_cover">
+  <div class="make_thread_cover notice_post">
     <div class="get_user_id"id="<%= current_user.id %>"></div>
     <div class="get_other_id"id="<%= other_user.id %>"></div>
     <div class="category_head">

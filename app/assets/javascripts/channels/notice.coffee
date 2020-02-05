@@ -7,7 +7,11 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    if String(data['users'][0]) == $(".get_user_id").attr("id") || String(data['users'][1]) == $(".get_user_id").attr("id")
+    console.log(data)
+    console.log(data['users'][0]["id"])
+    console.log($(".get_user_id").attr("id"))
+    if String(data['users'][0]["id"]) == $(".get_user_id").attr("id") || String(data['users'][1]["id"]) == $(".get_user_id").attr("id")
+      alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
       window.translated = false
       if location.href.indexOf("/profile/5") == -1
         location.href = "/profile/5/"+data['notice_id']
@@ -16,18 +20,16 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
       # Called when there's incoming data on the websocket for this channel
   make: (lang, mes_jp,mes_en,address) ->
     address = Number(address)
+    console.log(lang:lang,mes_jp:mes_jp,address:address,mes_en:mes_en)
     @perform('make',lang:lang,mes_jp:mes_jp,address:address,mes_en:mes_en)
-    alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
-
-
-
 
 $(document).on 'click', '.notice_post .mes_post_button',(event) ->
-  send_check()
+  #send_check()
+  type_check($(@).attr("id"),$(".get_other_id").attr("id"))
 
 send_check=()->
-  content_en = $(".notice_post .en_form_content").val();
-  content_jp = $(".notice_post .jp_form_content").val();
+  content_en = $(".notice_post .en_data_content").val();
+  content_jp = $(".notice_post .jp_data_content").val();
   if content_en == ""
     alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
   else if content_jp == ""
@@ -39,7 +41,6 @@ send_check=()->
 $(document).on 'click', '.make_thread_cover .mes_post_button', (event) ->
   type_check($(@).attr("id"),$(".get_other_id").attr("id"))
   event.preventDefault()
-
 
 prohibit_check=(text_en,text_jp)->
   can_post = true
@@ -66,7 +67,7 @@ type_check=(id,type)->
       else
         $("#noticeModal").modal("hide")
         if prohibit_check(content_en,content_jp) == true
-          App.chat.make("none",content_jp,content_en,parseInt($("#group").val()))
+          App.notice.make("none",content_jp,content_en,$(".get_other_id").attr("id"))
         else
           alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
         #$("#noticeModal .en_form_content").html(content_en)
