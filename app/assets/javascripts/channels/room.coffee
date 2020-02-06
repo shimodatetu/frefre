@@ -85,7 +85,7 @@ video_subtitle=(data) ->
     imgBlob = new Blob([ e.target.result ], type: file.type)
     fd.append 'video', imgBlob, file.name
     fd.append 'lang', lang
-    $.ajax 'https://localhost:5000/user_photo',
+    $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
       processData: false
       contentType: false
       type: 'post'
