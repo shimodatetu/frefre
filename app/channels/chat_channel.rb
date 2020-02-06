@@ -19,7 +19,10 @@ class ChatChannel < ApplicationCable::Channel
       chat.main_en = data['content_eng']
       chat.notice_id = notice.id
       chat.user_id = current_user.id
+      notice = chat.notice
+      ActionCable.server.broadcast 'chat_channel', chat_num:notice.chats.count,user:chat.user_id.to_s,notice_id:chat.notice_id
       chat.save!
+
     end
   end
   def image(data)

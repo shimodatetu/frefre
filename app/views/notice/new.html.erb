@@ -61,7 +61,8 @@
             </div>
           </div>
           <div class="content_input">
-            <textarea id="content"class="content_input_form form-control form_lang en_data_content" rows="5" cols="65"></textarea>
+
+            <%= text_area_tag :content_en,"",id:"content",class:"content_input_form form-control form_lang en_data_content",rows:"5",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
             <div class="space_form"style="margin-top:0px">
               <div class="trans_cover">
                 <button type="button" class="normal_button post_button btn  btn_send mes_post_button"id="trans_to_en"
@@ -82,7 +83,7 @@
                 </button>
               </div>
             </div>
-            <textarea id="content"class="content_input_form form-control form_lang jp_data_content" rows="5" cols="65"></textarea>
+            <%= text_area_tag :content_en,"",id:"content",class:"content_input_form form-control form_lang jp_data_content",rows:"5",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
           </div>
         </div>
         <div style="margin-top:30px;">
@@ -94,7 +95,7 @@
         <img src="/"class="image_show"style="display:none;">
         <div class="jimaku_form"style="display:none">
           <div class="modal-body">
-            <div class="thread_post">
+            <div class="thread_post content_input">
               <div>
                 <button type="button"class="btn help_show_small auto_subtitle auto_subtitle_en"style="background:#408bc9;position:static">
                   <div class="en help_text">
@@ -107,10 +108,10 @@
                   </div>
                 </button>
               </div>
-              <div class="post_form_cover post_form_cover_enjp connect_btn">
-                <%= text_area_tag :sub_content_en,"",class:"subbase_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
+              <div class="post_form_cover post_form_cover_enjp connect_btn form_lang">
+                <%= text_area_tag :sub_content_en,"",class:"subbase_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
               </div>
-              <div class="space_form thread_send">
+              <div class="space_form thread_send"style="margin-top:0px;">
                 <div class="trans_cover">
                   <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="subtrans_to_en"
                   name="<% if logged_in? %>logined<% end %>">
@@ -130,7 +131,7 @@
                   </button>
                 </div>
               </div>
-              <div class="post_form_cover post_form_cover_enjp">
+              <div class="post_form_cover post_form_cover_enjp form_lang">
                 <%= text_area_tag :sub_content_jp,"",class:"subbase_jp_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
               </div>
             </div>
@@ -143,8 +144,8 @@
             翻訳提供 未来翻訳
           <% end %>
         </div>
-        <div class="post_footer_simple"style="height: 60px;margin-left: calc(50% - 160px);">
-          <%= hidden_field_tag :type, :value => "text",class:"post_type"  %>
+        <div class="post_footer_simple"style="height: 60px;margin-left: calc(50% - 160px);margin-top: 30px;">
+          <%= hidden_field_tag :type,"", :value => "text",class:"post_type"  %>
           <div class="post_button_cover thread_send">
             <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
@@ -178,7 +179,8 @@
           <%= form.submit "",class:"thread_submit",style:"display:none" %>
         </div>
         <div class="post_button_place">
-          <button type="button" class="normal_button post_button btn mes_post_button"id="post">
+
+          <%= button_tag type:"button",class:"normal_button post_button btn mes_post_button",id:"post" do %>
             <div class="glyphicon glyphicon-comment picture_send"></div>
             <div class="button_text">
               <div class="float_jp">
@@ -186,7 +188,7 @@
               </div>
               Post
             </div>
-          </button>
+          <% end %>
         </div>
       </div>
     <% end %>

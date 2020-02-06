@@ -2,7 +2,8 @@ class ChatBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(message)
-    p "asd"
+    p "asdasd"
+    p message
     ActionCable.server.broadcast('notice_channel',notice_id: message.message.notice_id,[message.notice.users.first,message.notice.users.last] message: render_message(message))
   end
 

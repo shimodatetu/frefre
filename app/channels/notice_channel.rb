@@ -23,7 +23,7 @@ class NoticeChannel < ApplicationCable::Channel
           chat.main_jp = data['mes_jp']
           chat.user_id = current_user.id
           chat.notice_id = notice.id
-          chat.save!
+          chat.save
           info = Userinfo.new()
           info.title_en = 'You got a direct message from ' + h(notice.users[1].name) + '!'
 
@@ -45,7 +45,9 @@ class NoticeChannel < ApplicationCable::Channel
         chat.main_jp = data['mes_jp']
         chat.user_id = current_user.id
         chat.notice_id = notice[0].id
-        chat.save!
+        notice = chat.notice
+        ActionCable.server.broadcast 'notice_channel', profile_jump: notice.id,users:[notice.users.first.id.to_s,notice.users.last.id.to_s]
+        chat.save
       end
     end
   end

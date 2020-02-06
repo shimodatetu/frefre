@@ -6,7 +6,12 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-
+    console.log(data)
+    console.log($(".get_user_id").attr("id"))
+    if data["user"] == $(".get_user_id").attr("id")
+      page_id = String(parseInt(Number(data["chat_num"]) / 20) + 1)
+      if location.href != "/profile/5/"+data['notice_id']+"/"+page_id
+        location.href = "/profile/5/"+data['notice_id']+"/"+page_id
   make: (lang,mes_jp,mes_en, group)->
     window.translated = false
     mes_jp = mes_jp.replace("// n", '').replace("//n", '');

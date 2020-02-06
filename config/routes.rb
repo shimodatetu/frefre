@@ -132,6 +132,8 @@ Rails.application.routes.draw do
   post "profile/retire",to: "profile#retire"
   patch '/profile', to: 'profile#update'
   get '/notice/new/:id' => 'notice#new'
+
+  post 'notices' => "notices#create"
   get '/groups',to:'groups#new'
   post 'groups' => "groups#create"
   post 'profile/send_img'
@@ -145,7 +147,6 @@ Rails.application.routes.draw do
   get 'thread_list/popular/:id' => 'thread_list#popular'
   get 'thread_list/new/:id' => 'thread_list#new'
   resources :users
-  resources :notices
   resources :users do
     member do
       get "show_image"

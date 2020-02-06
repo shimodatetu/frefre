@@ -7,17 +7,22 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    console.log(data)
-    console.log(data['users'][0]["id"])
-    console.log($(".get_user_id").attr("id"))
-    if String(data['users'][0]["id"]) == $(".get_user_id").attr("id") || String(data['users'][1]["id"]) == $(".get_user_id").attr("id")
-      alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
+    if data["profile_jump"] != undefined && (data['users'][0] == $(".get_user_id").attr("id") || data['users'][1] == $(".get_user_id").attr("id"))
       window.translated = false
       if location.href.indexOf("/profile/5") == -1
+        alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
+        location.href = "/profile/5/"+data["profile_jump"]
+      else
+        $(".chat_all").append(data['message'])
+    else if String(data['users'][0]["id"]) == $(".get_user_id").attr("id") || String(data['users'][1]["id"]) == $(".get_user_id").attr("id")
+      window.translated = false
+      if location.href.indexOf("/profile/5") == -1
+        alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
         location.href = "/profile/5/"+data['notice_id']
       else
         $(".chat_all").append(data['message'])
       # Called when there's incoming data on the websocket for this channel
+
   make: (lang, mes_jp,mes_en,address) ->
     address = Number(address)
     console.log(lang:lang,mes_jp:mes_jp,address:address,mes_en:mes_en)
@@ -25,7 +30,6 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
 
 $(document).on 'click', '.notice_post .mes_post_button',(event) ->
   #send_check()
-  type_check($(@).attr("id"),$(".get_other_id").attr("id"))
 
 send_check=()->
   content_en = $(".notice_post .en_data_content").val();
@@ -48,7 +52,6 @@ prohibit_check=(text_en,text_jp)->
   check_text_jp = text_jp.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
   gon.prohibit.forEach (prohibit) ->
     if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
-      console.log("not")
       can_post = false
       return
   return can_post
@@ -67,7 +70,11 @@ type_check=(id,type)->
       else
         $("#noticeModal").modal("hide")
         if prohibit_check(content_en,content_jp) == true
-          App.notice.make("none",content_jp,content_en,$(".get_other_id").attr("id"))
+          $(".jimaku_form").attr("style":"display:none");
+          if $(".post_type").val() == "text"
+            App.notice.make("none",content_jp,content_en,$(".get_other_id").attr("id"))
+          else
+            $(".thread_submit").click()
         else
           alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
         #$("#noticeModal .en_form_content").html(content_en)

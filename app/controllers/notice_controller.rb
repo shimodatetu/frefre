@@ -40,7 +40,7 @@ class NoticeController < ApplicationController
       @end_num = 0
     end
   end
-  def make
+  def create
     if (notice = current_user.notices.includes(:users).where('users.id' => params['address'])).blank?
       notice = Notice.new()
       notice.users << User.find(params['address'])#最初相手
@@ -49,6 +49,13 @@ class NoticeController < ApplicationController
         chat = Chat.new()
         chat.main_en = params['mes_en']
         chat.main_jp = params['mes_jp']
+        if data[:type] == "image"
+          post.pict = data[:pict]
+        else
+          post.video = data[:video]
+          post.subtitle_en = params['subcontent_jap']
+          post.subtitle_jp = params['subcontent_jap']
+        end
         chat.user_id = current_user.id
         chat.notice_id = notice.id
         chat.save!
