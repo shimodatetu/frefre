@@ -1,9 +1,13 @@
 class OtherProfileController < ApplicationController
   def show
+    other_user = User.find(1)
+    if User.find_by(id:params[:id].to_i)
+      other_user = User.find_by(id:params[:id].to_i)
+    end
     thread_page_num = 20.to_f
     page_show_max = 5.to_f
     page_max_half = (page_show_max / 2).ceil
-    group_num = current_user.groups.all.count
+    group_num = other_user.groups.all.count
     page_num = (group_num / thread_page_num).ceil
     if page_num == 0
       page_num = 1
