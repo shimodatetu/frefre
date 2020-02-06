@@ -34,7 +34,7 @@ class OtherProfileController < ApplicationController
     @start_num = start_num
     @end_num = end_num
     page_max_half = (page_show_max / 2).ceil
-    group_num = current_user.posts.all.count
+    group_num = other_user.posts.all.count
     page_num = (group_num / thread_page_num).ceil
     if page_num == 0
       page_num = 1
