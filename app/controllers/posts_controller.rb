@@ -15,12 +15,16 @@ class PostsController < ApplicationController
     @http = Net::HTTP.new(@uri.host, @uri.port)
     @http.use_ssl = false
     #@http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    fd = new FormData
+    imgBlob = new Blob([ e.target.result ], type: file.type)
+    fd.append 'video', imgBlob, file.name
+    fd.append 'lang', lang
 
     def apipost(filename)
       req = Net::HTTP::Post.new(@uri.path)
       file = File.open("files/output1.raw","r+")
       data = [
-        ["file", "file.read", {"filename" => "output1.raw"}]
+        ["video", file.read, type:{"filename" => "output1.raw"}]
       ]
       req.set_form(data, "multipart/form-data")
       p req

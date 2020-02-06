@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   get 'sessions/oauth_complete'
   post 'session/create_oauth'
   post 'create_oauth',to:'sessions#create_oauth'
+  post 'notice/make',to:"notice#make"
+  post 'chat_make',to:"chat#make"
 
   get "/oauth_complete", to:"sessions#oauth_complete"
   get    '/login',   to: 'sessions#index'
@@ -143,6 +145,7 @@ Rails.application.routes.draw do
   get 'thread_list/popular/:id' => 'thread_list#popular'
   get 'thread_list/new/:id' => 'thread_list#new'
   resources :users
+  resources :notices
   resources :users do
     member do
       get "show_image"

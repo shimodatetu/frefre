@@ -94,7 +94,7 @@ video_thread_subtitle=(data) ->
     imgBlob = new Blob([ e.target.result ], type: file.type)
     fd.append 'video', imgBlob, file.name
     fd.append 'lang', lang
-    $.ajax 'http://localhost:5000/user_photo',
+    $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
       processData: false
       contentType: false
       type: 'post'
@@ -107,9 +107,9 @@ video_thread_subtitle=(data) ->
         $("#fakeLoader").fadeOut();
         if lang == "ja"
           $("#subcontent_eng").val(words[0])
-          $("#subcontent_jap").val(words[1])
+          #$("#subcontent_jap").val(words[1])
         else if lang == "en"
-          $("#subcontent_eng").val(words[1])
+          #$("#subcontent_eng").val(words[1])
           $("#subcontent_jap").val(words[0])
         return
       error: (err)->

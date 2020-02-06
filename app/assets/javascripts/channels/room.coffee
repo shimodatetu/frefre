@@ -85,7 +85,7 @@ video_subtitle=(data) ->
     imgBlob = new Blob([ e.target.result ], type: file.type)
     fd.append 'video', imgBlob, file.name
     fd.append 'lang', lang
-    $.ajax 'http://localhost:5000/user_photo',
+    $.ajax 'https://localhost:5000/user_photo',
       processData: false
       contentType: false
       type: 'post'
@@ -98,9 +98,9 @@ video_subtitle=(data) ->
         $("#fakeLoader").fadeOut();
         if lang == "ja"
           $("#sub_content_en").val(words[0])
-          $("#sub_content_jp").val(words[1])
+          #$("#sub_content_jp").val(words[1])
         else if lang == "en"
-          $("#sub_content_en").val(words[1])
+          #$("#sub_content_en").val(words[1])
           $("#sub_content_jp").val(words[0])
         return
       error: (err)->
