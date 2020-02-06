@@ -21,31 +21,6 @@
     </div>
     <% if logged_in? %>
       <div class="follow_button<%= other_user_id %>">
-        <% if current_user.followings.find_by(id: other_user_id) %>
-          <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:other_user_id do %>
-            <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
-            <div class="text_box">
-              <div class="jp">
-                フォロー中
-              </div>
-              <div class="en">
-                Following
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button follow_button_submit",id:other_user_id do %>
-            <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
-            <div class="text_box">
-              <div class="jp">
-                フォローする
-              </div>
-              <div class="en">
-                Follow
-              </div>
-            </div>
-          <% end %>
-        <% end %>
       </div>
       <div class="direct_mes_button">
         <% if a = current_user.notices.eager_load(:users).find_by(id: other_user_id) %>
