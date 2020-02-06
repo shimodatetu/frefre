@@ -1,0 +1,274 @@
+<% other_user = User.find(1) %>
+<% if User.find_by(id:params[:id].to_i) %>
+  <% other_user = User.find_by(id:params[:id].to_i) %>
+<% end %>
+<% other_user_id = other_user.id %>
+<div class="other_profile profile">
+  <div class="profile_sub"style="display:inline-block">
+    <div class="profile_picture">
+      <% if other_user.image == 0 %>
+        <% if other_user.photo.nil? %>
+          <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+        <% else %>
+          <%= image_tag show_image_user_path(other_user), :class => "group_img" %>
+        <% end %>
+      <% else %>
+        <%= image_tag("/userimage/user#{other_user.image}.png", :class => "group_img") %>
+      <% end %>
+      <div class="name_show"style="font-size:20px">
+        <%= simple_format(text_url_to_link(h(other_user.name))) %>
+      </div>
+    </div>
+    <% if logged_in? %>
+      <div class="follow_button<%= other_user_id %>">
+        <% if logged_in? && current_user.followings.find_by(id: other_user_id) %>
+          <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:other_user_id do %>
+            <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
+            <div class="text_box">
+              <div class="jp">
+                フォロー中
+              </div>
+              <div class="en">
+                Following
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button follow_button_submit",id:other_user_id do %>
+            <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
+            <div class="text_box">
+              <div class="jp">
+                フォローする
+              </div>
+              <div class="en">
+                Follow
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="direct_mes_button">
+        <% if logged_in? && a = current_user.notices.eager_load(:users).find_by(id: other_user_id) %>
+          <%= link_to "/profile/5/#{a.id}" do %>
+            <button class="btn mes_button normal_button green_button fullwidth_button">
+              <div class="jp">
+                チャットへ飛ぶ
+              </div>
+              <div class="en">
+                Jump to Chat
+              </div>
+            </button>
+          <% end %>
+        <% else %>
+          <%= link_to "/notice/new/#{params[:id]}" do %>
+            <button class="btn mes_button normal_button green_button fullwidth_button">
+              <span class="glyphicon glyphicon-envelope icon" aria-hidden="true"></span>
+              <div class="text_box">
+                <div class="jp">
+                  メッセージ
+                </div>
+                <div class="en">
+                  Message
+                </div>
+              </div>
+            </button>
+          <% end %>
+        <% end %>
+      </div>
+      <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button report_button",id:other_user_id do %>
+        <span class="glyphicon glyphicon-exclamation-sign icon" aria-hidden="true"></span>
+        <div class="text_box">
+          <div class="jp">
+            通報する
+          </div>
+          <div class="en">
+            Report
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="profile_main">
+    <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+      <div class="lang_bar">
+        <div class="country_flag en_country">
+          <%= image_tag "/eng.png", class: "image" %>
+        </div>
+        <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+            data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+        <div class="country_flag jp_country">
+          <%= image_tag "jap.png", class: "image" %>
+        </div>
+      </div>
+    </div>
+    <div class="profile_page row">
+      <div class="profile_page_en">
+        <div class="col-sm-12">
+          <div class="col-sm-12 profile_content">
+            <div class="row profile_content_data">
+              <div class="content_data">
+                Gender :
+                <% if other_user.able_see %>
+                  <% if other_user.gender == "Male" %>Male / 男性
+                  <% elsif other_user.gender == "Female" %>Female / 女性
+                  <% elsif other_user.gender == "Neuter" %>Neuter / 中性
+                  <% else %>Unknown / 不明
+                  <% end %>
+                <% else %>
+                  <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country">
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 profile_content"style="padding-top:0px;">
+            <div class="row profile_content_data">
+              <div class="content_data">
+                Country :
+                <% if other_user.able_see %>
+                  <% if other_user.country == "" || other_user.country == nil %>
+                    Unknown / 不明
+                  <% else %>
+                    <%= other_user.country %>
+                  <% end %>
+                <% else %>
+                  <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country"">
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="profile_content">
+        <div class="col-sm-6"style="padding-left:0px">
+          <div class="row profile_content_data self_introduction">
+            <div class=" content_name"style="margin-top:5px;">
+              <div class="jp">
+                自己紹介(日本語)
+              </div>
+              <div class="en">
+                Self Introduction
+                (Japanese)
+              </div>
+            </div>
+            <div class="content_data"style="margin-top: 5px;">
+              <% if other_user.able_see %>
+                <% if other_user.profile_en == "" || other_user.profile_en == nil %>
+                  Not inputed / 記入なし
+                <% else %>
+                  <%= other_user.profile_en%>
+                <% end %>
+              <% else %>
+                Introduction is private
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row profile_content_data self_introduction">
+            <div class="content_name"style="margin-top:5px">
+              <div class="jp">
+                自己紹介(日本語)
+              </div>
+              <div class="en">
+                Self Introduction
+                (Japanese)
+              </div>
+            </div>
+            <div class="content_data"style="margin-top:5px;">
+              <% if other_user.able_see %>
+                <% if other_user.profile_jp == "" || other_user.profile_jp == nil %>
+                  Not inputed / 記入なし
+                <% else %>
+                  <%= other_user.profile_jp%>
+                <% end %>
+              <% else %>
+                Introduction is private
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%#= render partial:"profile/history" ,locals: { user: other_user,type:"other"}%>
+    </div>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="follow_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              フォローを解除してもよろしいですか？
+            </div>
+            <div class="text_en">
+              Is it ok to unfollow him or her?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-primary unfollow_modal_submit follow_modal_button">
+            <div class="jp">
+              実行
+            </div>
+            <div class="en">
+              OK
+            </div>
+          </button>
+          <button type="button" class="btn btn-default follow_modal_button" data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
+        </div>
+  		</div>
+  	</div>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="report_user_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+      <%= form_tag('/report/user',method: :post,class: "search_form_top") do %>
+    		<div class="modal-content">
+    			<div class="modal-body">
+            <div class="title">
+              通報の理由 / Report Reason
+            </div>
+            <%= radio_button_tag :type, 4 ,"checked"%>不適切な投稿 / Sensitive Content<br>
+            <%= radio_button_tag :type, 1 %>乗っ取られたアカウント / Hacked Account<br>
+            <%= radio_button_tag :type, 2 %>偽のアカウント / False Account<br>
+            <%= radio_button_tag :type, 3 %>その他 / Other<br>
+            <div class="title"style="margin-top:10px;margin-bottom:5px;">
+              具体的な内容 / Specific Content
+            </div>
+            <%= text_area_tag :content, "",class: "base_en_form connect_btn content_post form-control" ,rows:"6" %>
+    			</div>
+          <div class="modal-footer follow_modal_footer">
+            <%= hidden_field_tag :report_id,other_user_id, class: "form-control form_input" %>
+            <button type="submit" class="btn btn-primary report_button_submit">
+              <div class="jp">
+                送信
+              </div>
+              <div class="en">
+                Send
+              </div>
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              <div class="jp">
+                戻る
+              </div>
+              <div class="en">
+                Back
+              </div>
+            </button>
+          </div>
+    		</div>
+      <% end %>
+  	</div>
+  </div>
+</div>
