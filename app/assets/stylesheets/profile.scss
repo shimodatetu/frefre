@@ -1,6 +1,6 @@
 .profile{
   .lang_bar_cover{
-    z-index: 20;
+    z-index: 3;
     background: #dff5ea;
     width:calc(100vw - 200px);
     margin-top: 42px;
@@ -483,7 +483,7 @@ input.cmn-toggle-round:checked + label:after {
     padding-left:10px;
     margin-top:30px;
     width:100%;
-    
+
     label > input {
       display:none;	/* アップロードボタンのスタイルを無効にする */
     }

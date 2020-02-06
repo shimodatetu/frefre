@@ -3,7 +3,7 @@ class ChatBroadcastJob < ApplicationJob
 
   def perform(message)
     p "asd"
-    ActionCable.server.broadcast('notice_channel',notice_id: message.message.notice_id,[message.notice.users.first,message.notice.users.last] message: render_message(message))
+    #ActionCable.server.broadcast('notice_channel',notice_id: message.message.notice_id,[message.notice.users.first,message.notice.users.last] message: render_message(message))
   end
 
   private
