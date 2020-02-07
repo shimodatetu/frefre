@@ -7,12 +7,17 @@
   <div class="search_result thread_page">
     <div class="panel-title"style="display:inline-block">
       <div class="panel-title-text">
-        <div class="float_jp">
-          <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
-        </div>
-        <div class="float_en">
-          <%= simple_format(text_url_to_link(h(thread.title_en))) %>
-        </div>
+
+        <% if post.group %>
+          <div class="float_jp">
+            <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
+          </div>
+          <div class="float_en">
+            <%= simple_format(text_url_to_link(h(thread.title_en))) %>
+          </div>
+        <% else %>
+          このスレッドは削除されています
+        <% end %>
       </div>
     </div>
     <div class="pvpage_head">
