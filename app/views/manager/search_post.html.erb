@@ -81,7 +81,7 @@
                 <div class="post_content_position en_position">
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(post.content_eng))) %>
+                      <%= text_url_to_link(post.content_eng).html_safe %>
                     </div>
                   </div>
                 </div>
@@ -91,7 +91,7 @@
                 <div class="post_content_position jp_position">
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(post.content_jap))) %>
+                      <%= text_url_to_link(post.content_jap).html_safe %>
                     </div>
                   </div>
                 </div>
