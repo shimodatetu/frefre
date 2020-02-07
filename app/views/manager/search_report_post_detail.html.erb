@@ -3,8 +3,6 @@
 <% if manager_logged_in? %>
   <% report_post = Reportpost.find_by(id:params[:id]) %>
   <% post = report_post.post %>
-  <%# from_user = User.find_by(id:report_post.from_user) %>
-  <% thread = post.group %>
   <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
   <div class="search_result thread_page">
     <div class="panel-title" style="display:inline-block;margin-bottom:0px;margin-top:10px">
@@ -69,17 +67,19 @@
     <% if link_id < 1 %>
       <% link_id = 1 %>
     <% end %>
-    <%= link_to "/thread/show/"+thread.id.to_s+"/"+link_id.to_s do %>
-      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-        <div class="text_box">
-          <div class="jp">
-            スレッドへ飛ぶ
+    <% if post.group %>
+      <%= link_to "/thread/show/"+post.group_id.to_s+"/"+link_id.to_s do %>
+        <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+          <div class="text_box">
+            <div class="jp">
+              スレッドへ飛ぶ
+            </div>
+            <div class="en">
+              Jump to Thread
+            </div>
           </div>
-          <div class="en">
-            Jump to Thread
-          </div>
-        </div>
-      </button>
+        </button>
+      <% end %>
     <% end %>
   </div>
 <% end %>
