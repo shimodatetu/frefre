@@ -10,10 +10,10 @@
 
         <% if post.group %>
           <div class="float_jp">
-            <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
+            <%= simple_format(text_url_to_link(h(post.group.title_jp))) %>
           </div>
           <div class="float_en">
-            <%= simple_format(text_url_to_link(h(thread.title_en))) %>
+            <%= simple_format(text_url_to_link(h(post.group.title_en))) %>
           </div>
         <% else %>
           このスレッドは削除されています
@@ -57,6 +57,6 @@
           </div>
         </button>
       <% end %>
-    <% ebd %>
+    <% end %>
   </div>
 <% end %>
