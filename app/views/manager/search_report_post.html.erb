@@ -41,7 +41,11 @@
             <div class="group_user_cover">
               <div class="group_img_cover">
                 <object>
-                <%= link_to "/other_profile/#{post.user.id}" do %>
+                <% url = "/profile" %>
+                <% if logged_in? && current_user.id != post.user.id %>
+                  <% url = "/other_profile/#{post.user.id}" %>
+                <% end %>
+                <%= link_to url do %>
                   <% if post.user.image == 0 %>
                     <% if post.user.photo.nil? %>
                       <%= image_tag("/userimage/user1.png", :class => "group_img") %>

@@ -4,17 +4,21 @@
     <div class="group_user_cover">
       <div class="group_img_cover">
         <object>
-        <%= link_to "/other_profile/#{group.user.id}" do %>
-          <% if group.user.image == 0 %>
-            <% if group.user.photo.nil? %>
-              <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-            <% else %>
-              <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
-            <% end %>
-          <% else %>
-            <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
+          <% url = "/profile" %>
+          <% if logged_in? && current_user.id != group.user.id %>
+            <% url = "/other_profile/#{group.user.id}" %>
           <% end %>
-        <% end %>
+          <%= link_to url do %>
+            <% if group.user.image == 0 %>
+              <% if group.user.photo.nil? %>
+                <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+              <% else %>
+                <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
+              <% end %>
+            <% else %>
+              <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
+            <% end %>
+          <% end %>
         </object>
       </div>
     </div>
@@ -22,7 +26,7 @@
       <div class="post_content_cover">
         <div class="user_name">
           <object>
-            <% if !logged_in? || current_user.id != group.user.id %>
+            <% if logged_in? && current_user.id != group.user.id %>
               <%= link_to "/other_profile/#{group.user.id}" do %>
                 <%= simple_format(text_url_to_link(h(group.user.name))) %>
               <% end %>

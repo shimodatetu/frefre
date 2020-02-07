@@ -4,6 +4,11 @@
   <div class="thread_cover link_cover follow_cover">
     <div class="group_user_cover"style="margin: -10px 2px 0px 0px;">
       <div class="group_img_cover">
+
+        <% url = "/profile" %>
+        <% if logged_in? && current_user.id != user.id %>
+          <% url = "/other_profile/#{user.id}" %>
+        <% end %>
         <%= link_to "/other_profile/#{user.id}" do %>
           <% if user.image == 0 %>
             <% if user.photo.nil? %>
