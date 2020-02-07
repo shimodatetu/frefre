@@ -179,6 +179,8 @@
     .edit_user{
       margin-top: -44px;
       opacity: 0.7;
+      filter:alpha(opacity=0.7);
+      -ms-filter:"alpha(opacity=0.7)";
     }
   }
   .profile_contents_change{
