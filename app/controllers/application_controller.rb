@@ -29,21 +29,7 @@ class ApplicationController < ActionController::Base
  def user_image_default
    return "/user2.png"
  end
- def alert_en
-    alert_en = flash["alert_en"]
-    flash["alert_en"] = nil
-    return alert_en
- end
- def alert_en
-    alert_en = flash["alert_en"]
-    flash["alert_en"] = nil
-    return alert_en
- end
 
-
- @alert_en = flash["alert_en"]
- @alert_jp = flash["alert_jp"]
- @alert_type = flash["alert_type"]
  #
  # require "google/cloud/translate"
  #

@@ -66,11 +66,11 @@
                   <object>
                   <% if !logged_in? || current_user.id != post.user.id %>
                     <%= link_to "/other_profile/#{post.user.id}" do %>
-                      <%= simple_format(post.user.name) %>
+                      <%= text_url_to_link(post.user.name).html_safe %>
                     <% end %>
                   <% else %>
                     <%= link_to "/profile" do %>
-                      <%= simple_format(post.user.name) %>
+                      <%= text_url_to_link(post.user.name).html_safe %>
                     <% end %>
                   <% end %>
                   </object>
