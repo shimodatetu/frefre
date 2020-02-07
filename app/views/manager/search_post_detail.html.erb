@@ -2,7 +2,6 @@
   <% lang = session["lang"] %>
   <% session["now_group"] = params[:id] %>
   <% post = Post.find(params[:id].to_i) %>
-  <% thread = post.group %>
 
   <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
   <div class="search_result thread_page">
@@ -40,17 +39,19 @@
     <% if link_id < 1 %>
       <% link_id = 1 %>
     <% end %>
-    <%= link_to "/thread/show/"+thread.id.to_s+"/"+link_id.to_s do %>
-      <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-        <div class="text_box">
-          <div class="jp">
-            スレッドへ飛ぶ
+    <% if post.group %>
+      <%= link_to "/thread/show/"+post.group_id.to_s+"/"+link_id.to_s do %>
+        <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
+          <div class="text_box">
+            <div class="jp">
+              スレッドへ飛ぶ
+            </div>
+            <div class="en">
+              Jump to Thread
+            </div>
           </div>
-          <div class="en">
-            Jump to Thread
-          </div>
-        </div>
-      </button>
-    <% end %>
+        </button>
+      <% end %>
+    <% ebd %>
   </div>
 <% end %>

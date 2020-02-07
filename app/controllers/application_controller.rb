@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
  add_flash_types :success, :info, :warning, :danger ,:search_big_id,:search_small_id
 
  helper_method :current_user2
- 
+
  def current_user
    @current_user ||= User.find_by(id:session[:user_id])
  end
@@ -29,6 +29,23 @@ class ApplicationController < ActionController::Base
  def user_image_default
    return "/user2.png"
  end
+ def alert_en
+    alert_en = flash["alert_en"]
+    flash["alert_en"] = nil
+    return alert_en
+ end
+ def alert_jp
+    alert_jp = flash["alert_jp"]
+    flash["alert_jp"] = nil
+    return alert_jp
+ end
+ def alert_type
+    alert_type = flash["alert_type"]
+    flash["alert_type"] = nil
+    return alert_type
+ end
+
+
  #
  # require "google/cloud/translate"
  #
