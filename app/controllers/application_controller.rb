@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
  protect_from_forgery with: :exception
 
- add_flash_types :success, :info, :warning, :danger ,:search_big_id,:search_small_id
+ add_flash_types :success, :info, :warning, :danger ,:search_big_id,:search_small_id, :alert_en, :alert_jp, :alert_type
 
  helper_method :current_user2
 
