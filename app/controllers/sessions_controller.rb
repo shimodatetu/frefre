@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     if user && user.activated? && user.oauth == false && user.admit == true && user.usertype != "delete" && user.authenticate(params[:session][:password])
       log_in user
       flash.now["alert_en"] = "You successed to login"
-      flash.now["alert_jp"] = "ログインに成功しました。"
+      flash.now["alert_jp"] = "1ログインに成功しました。"
       flash.now["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     elsif user && user.usertype == "delete"
@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
     if user && user.usertype == "event"
       log_in user
       flash.now["alert_en"] = "You successed to login"
-      flash.now["alert_jp"] = "ログインに成功しました。"
+      flash.now["alert_jp"] = "2ログインに成功しました。"
       flash.now["alert_type"] = "success"
       redirect_to "/thread/show/11", success: 'ログインに成功しました'
     else
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password]) && user.activated? && user.oauth == false && user.admit == true
       log_in user
       flash.now["alert_en"] = "You successed to login"
-      flash.now["alert_jp"] = "ログインに成功しました。"
+      flash.now["alert_jp"] = "3ログインに成功しました。"
       flash.now["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     else
@@ -67,7 +67,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         signup_yet = true
         flash.now["alert_en"] = "You successed to login"
-        flash.now["alert_jp"] = "ログインに成功しました。"
+        flash.now["alert_jp"] = "4ログインに成功しました。"
         flash.now["alert_type"] = "success"
         redirect_to root_path
       end

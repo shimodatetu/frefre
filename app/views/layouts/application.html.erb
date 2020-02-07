@@ -18,23 +18,6 @@
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
   </head>
   <body>
-    <script>
-
-    alert('<%= flash["alert_type"] %>')
-    <% if !flash["alert_en"].nil? && !flash["alert_jp"].nil? && !flash["alert_type"].nil? && !flash["alert_en"] != "" && !flash["alert_jp"].nil? && !flash["alert_type"].nil? %>
-      <% alert_en = flash["alert_en"] %>
-      <% alert_jp = flash["alert_jp"] %>
-      <% alert_type = flash["alert_type"] %>
-      <% flash["alert_en"] = nil %>
-      <% flash["alert_jp"] = nil %>
-      <% flash["alert_type"] = nil %>
-      alert(<% flash["alert_type"] %>)
-      alert_modal('<%= alert_en %>','<%= alert_jp %>','<%= alert_type %>')
-    <% end %>
-    <% flash.each do |key, value| %>
-      console.log("<%= key %>：<%= value %>")
-    <% end %>
-    </script>
     <% if url.include?('manager') %>
       <%= render partial:'manager/header' %>
       <div class="main_content_cover manager_content_cover"id="main_content_cover">
@@ -80,3 +63,14 @@
   <div id="fakeLoader"style="z-index:3"></div>
 
 </html>
+<script>
+
+  <% if !flash["alert_en"].nil? && !flash["alert_jp"].nil? && !flash["alert_type"].nil? && !flash["alert_en"] != "" && !flash["alert_jp"].nil? && !flash["alert_type"].nil? %>
+    <% alert_en = flash["alert_en"] %>
+    <% alert_jp = flash["alert_jp"] %>
+    <% alert_type = flash["alert_type"] %>
+    alert(<% flash["alert_type"] %>)
+    alert_modal('<%= alert_en %>','<%= alert_jp %>','<%= alert_type %>')
+  <% end %>
+
+</script>
