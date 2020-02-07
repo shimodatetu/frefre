@@ -11,9 +11,9 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.activated? && user.oauth == false && user.admit == true && user.usertype != "delete" && user.authenticate(params[:session][:password])
       log_in user
-      flash["alert_en"] = "You successed to login"
-      flash["alert_jp"] = "ログインに成功しました。"
-      flash["alert_type"] = "success"
+      flash.now["alert_en"] = "You successed to login"
+      flash.now["alert_jp"] = "ログインに成功しました。"
+      flash.now["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     elsif user && user.usertype == "delete"
       flash.now[:failed_en] = "This acount is freezed."
@@ -30,9 +30,9 @@ class SessionsController < ApplicationController
     user = User.find_by(id: params[:session][:id].to_i)
     if user && user.usertype == "event"
       log_in user
-      flash["alert_en"] = "You successed to login"
-      flash["alert_jp"] = "ログインに成功しました。"
-      flash["alert_type"] = "success"
+      flash.now["alert_en"] = "You successed to login"
+      flash.now["alert_jp"] = "ログインに成功しました。"
+      flash.now["alert_type"] = "success"
       redirect_to "/thread/show/11", success: 'ログインに成功しました'
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
@@ -44,9 +44,9 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password]) && user.activated? && user.oauth == false && user.admit == true
       log_in user
-      flash["alert_en"] = "You successed to login"
-      flash["alert_jp"] = "ログインに成功しました。"
-      flash["alert_type"] = "success"
+      flash.now["alert_en"] = "You successed to login"
+      flash.now["alert_jp"] = "ログインに成功しました。"
+      flash.now["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
@@ -66,9 +66,9 @@ class SessionsController < ApplicationController
       elsif user.admit == true
         session[:user_id] = user.id
         signup_yet = true
-        flash["alert_en"] = "You successed to login"
-        flash["alert_jp"] = "ログインに成功しました。"
-        flash["alert_type"] = "success"
+        flash.now["alert_en"] = "You successed to login"
+        flash.now["alert_jp"] = "ログインに成功しました。"
+        flash.now["alert_type"] = "success"
         redirect_to root_path
       end
     end

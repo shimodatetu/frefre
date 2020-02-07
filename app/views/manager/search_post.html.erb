@@ -66,11 +66,11 @@
                   <object>
                   <% if !logged_in? || current_user.id != post.user.id %>
                     <%= link_to "/other_profile/#{post.user.id}" do %>
-                      <%= text_url_to_link(post.user.name) %>
+                      <%= text_url_to_link(post.user.name).html_safe %>
                     <% end %>
                   <% else %>
                     <%= link_to "/profile" do %>
-                      <%= text_url_to_link(post.user.name) %>
+                      <%= post.user.name %>
                     <% end %>
                   <% end %>
                   </object>
@@ -81,7 +81,7 @@
                 <div class="post_content_position en_position">
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= text_url_to_link(post.content_eng) %>
+                      <%= post.content_eng %>
                     </div>
                   </div>
                 </div>
@@ -91,7 +91,7 @@
                 <div class="post_content_position jp_position">
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= text_url_to_link(post.content_jap) %>
+                      <%= post.content_jap %>
                     </div>
                   </div>
                 </div>
