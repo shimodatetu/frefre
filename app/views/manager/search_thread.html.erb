@@ -49,10 +49,14 @@
                 <% end %>
                 <%= link_to url do %>
                   <% if group.user.image == 0 %>
-                    <% if group.user.photo.nil? %>
-                      <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                    <% if group.user.avater.attached? %>
+                      <%= image_tag group.user.avater , :class => "group_img"%>
                     <% else %>
-                      <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
+                      <% if group.user.photo.nil? %>
+                        <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                      <% else %>
+                        <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
+                      <% end %>
                     <% end %>
                   <% else %>
                     <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>

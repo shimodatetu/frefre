@@ -11,10 +11,14 @@
         <% end %>
         <%= link_to url do %>
           <% if news.user.image == 0 %>
-            <% if news.user.photo.nil? %>
-              <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+            <% if news.user.avater.attached? %>
+              <%= image_tag news.user.avater , :class => "group_img"%>
             <% else %>
-              <%= image_tag show_image_user_path(news.user), :class => "group_img" %>
+              <% if news.user.photo.nil? %>
+                <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+              <% else %>
+                <%= image_tag show_image_user_path(news.user), :class => "group_img" %>
+              <% end %>
             <% end %>
           <% else %>
             <%= image_tag("/userimage/user#{news.user.image}.png", :class => "group_img") %>
