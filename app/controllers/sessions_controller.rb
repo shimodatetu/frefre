@@ -11,13 +11,13 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.activated? && user.oauth == false && user.admit == true && user.usertype != "delete" && user.authenticate(params[:session][:password])
       log_in user
-      flash.now["alert_en"] = "You successed to login"
-      flash.now["alert_jp"] = "1ログインに成功しました。"
-      flash.now["alert_type"] = "success"
+      flash["alert_en"] = "You successed to login"
+      flash["alert_jp"] = "ログインに成功しました。"
+      flash["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     elsif user && user.usertype == "delete"
-      flash.now[:failed_en] = "This acount is freezed."
-      flash.now[:failed_jp] = "このアカウントは凍結しています"
+      flash[:failed_en] = "This acount is freezed."
+      flash[:failed_jp] = "このアカウントは凍結しています"
       render :index
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
@@ -30,9 +30,9 @@ class SessionsController < ApplicationController
     user = User.find_by(id: params[:session][:id].to_i)
     if user && user.usertype == "event"
       log_in user
-      flash.now["alert_en"] = "You successed to login"
-      flash.now["alert_jp"] = "2ログインに成功しました。"
-      flash.now["alert_type"] = "success"
+      flash["alert_en"] = "You successed to login"
+      flash["alert_jp"] = "ログインに成功しました。"
+      flash["alert_type"] = "success"
       redirect_to "/thread/show/11", success: 'ログインに成功しました'
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
@@ -44,9 +44,9 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password]) && user.activated? && user.oauth == false && user.admit == true
       log_in user
-      flash.now["alert_en"] = "You successed to login"
-      flash.now["alert_jp"] = "3ログインに成功しました。"
-      flash.now["alert_type"] = "success"
+      flash["alert_en"] = "You successed to login"
+      flash["alert_jp"] = "ログインに成功しました。"
+      flash["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
@@ -67,7 +67,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         signup_yet = true
         flash.now["alert_en"] = "You successed to login"
-        flash.now["alert_jp"] = "4ログインに成功しました。"
+        flash.now["alert_jp"] = "ログインに成功しました。"
         flash.now["alert_type"] = "success"
         redirect_to root_path
       end
