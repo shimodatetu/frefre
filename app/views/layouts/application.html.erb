@@ -65,7 +65,11 @@
 </html>
 <script>
 
-  alert(<% flash["alert_type"] %>)
+  alert(<%= flash["alert_type"] %>)
+
+  <% flash["alert_en"] = nil %>
+  <% flash["alert_jp"] = nil %>
+  <% flash["alert_type"] = nil %>
   <% if !flash["alert_en"].nil? && !flash["alert_jp"].nil? && !flash["alert_type"].nil? && !flash["alert_en"] != "" && !flash["alert_jp"].nil? && !flash["alert_type"].nil? %>
     <% alert_en = flash["alert_en"] %>
     <% alert_jp = flash["alert_jp"] %>
@@ -74,7 +78,4 @@
     alert_modal('<%= alert_en %>','<%= alert_jp %>','<%= alert_type %>')
   <% end %>
 
-  <% flash["alert_en"] = nil %>
-  <% flash["alert_jp"] = nil %>
-  <% flash["alert_type"] = nil %>
 </script>
