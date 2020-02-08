@@ -15,8 +15,13 @@ p{
     display:inline-block!important;
   }
 }
+.fakeloader_cancel_button{
+    position: absolute;
+    margin-left: calc(50% - 75px);
+    margin-top: calc(50vh + 50px);
+    background:#ddd;
+}
 .modal-backdrop{
-
   opacity: 0.5;
   filter:alpha(opacity=0.5);
   -ms-filter:"alpha(opacity=0.5)";

@@ -61,15 +61,7 @@ $(document).on 'click', '.report_post_button', (event) ->
 
 $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
-    $(".post_type").val("image")
-    $(".video_show").attr("style":"display:none");
-    reader = new FileReader
-    reader.onload = (e) ->
-      $(".image_show").attr("src": e.target.result);
-      $(".image_show").attr("style":"display:block");
-    reader.readAsDataURL @files[0]
-    $(".image_show").attr("style":"display:block");
-    $(".jimaku_form").attr("style":"display:none");
+    $(".thread_submit_image").click()
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
@@ -79,7 +71,7 @@ alert_show=()->
 video_subtitle=(data) ->
   lang = data[0]
   reader = new FileReader
-  file = $('#video_send')[0].files[0]
+  file = $('.thread_page .thread_video_post #video_send')[0].files[0]
   reader.onload = (e) ->
     fd = new FormData
     imgBlob = new Blob([ e.target.result ], type: file.type)
@@ -93,49 +85,83 @@ video_subtitle=(data) ->
       data: fd
       dataType: 'html'
       success: (data) ->
+        console.log(data)
         words = data.slice( 2 ).slice( 0,-2 ).split('\",\"')
         console.log(words)
         $("#fakeLoader").fadeOut();
         if lang == "ja"
-          $("#sub_content_en").val(words[0])
+          $("#video-subtitle-modal .subbase_en_form").val(words[0])
+          $("#video-subtitle-modal").modal("show")
           #$("#sub_content_jp").val(words[1])
         else if lang == "en"
           #$("#sub_content_en").val(words[1])
-          $("#sub_content_jp").val(words[0])
+          $("#video-subtitle-modal .subbase_jp_form").val(words[0])
+          $("#video-subtitle-modal").modal("show")
         return
       error: (err)->
         console.log(err)
         $("#fakeLoader").fadeOut();
         return
   reader.readAsArrayBuffer(file)
-  false
 
 $(document).on 'click', '.auto_subtitle_en', (event) ->
   $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
 
-
 $(document).on 'click', '.auto_subtitle_ja', (event) ->
   $("#fakeLoader").fakeLoader({},video_subtitle,["en"]);
 
-
-$(document).on 'change', '.thread_page .thread_image_post #video_send', (event) ->
+$(document).on 'change', '.thread_page .thread_video_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
     $(".post_type").val("video")
     $(".image_show").attr("style":"display:none");
 
-    fileList = @files
-    i = 0
-    l = fileList.length
-    while l > i
-      blobUrl = window.URL.createObjectURL(fileList[i])
-      i++
-    $(".video_show .vjs-tech").attr("style":"")
-    $(".video_show .vjs-tech").attr("poster":blobUrl)
-    $(".video_show .vjs-tech").attr("src":blobUrl)
-    $(".video_show").attr("style":"display:block")
-    $(".jimaku_form").attr("style":"")
+    $("#video-modal").modal("show")
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
+
+$(document).on 'click', '#video-modal .non_add_subtitle', (event) ->
+  $(".form_subtitle_input_en").val("")
+  $(".form_subtitle_input_jp").val("")
+  $(".thread_submit_image").click()
+$(document).on 'click', '#video-modal .add_subtitle_jp', (event) ->
+  video_show()
+  $("#fakeLoader").fakeLoader({},video_subtitle,["en"]);
+$(document).on 'click', '#video-modal .add_subtitle_en', (event) ->
+  video_show()
+  $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
+
+$(document).on 'click', '#video-modal .add_subtitle_self', (event) ->
+  $("#video-subtitle-modal").modal("show")
+
+$(document).on 'click', '#video-subtitle-modal .btn_video_send', (event) ->
+  text_en = $(".subbase_en_form").val()
+  text_jp = $(".subbase_jp_form").val()
+  $(".form_subtitle_input_en").val(text_en)
+  $(".form_subtitle_input_jp").val(text_jp)
+  if text_en != "" && text_jp != ""
+    if prohibit_check(text_en,text_jp) == true
+      $("#video-subtitle-modal").modal("hide")
+      $("#video-modal").modal("hide")
+      $(".subbase_jp_form").val("")
+      $(".subbase_jp_form").val("")
+      $(".thread_submit_video").click()
+    else
+      alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
+
+
+
+video_show　=　->
+  fileList = $(".thread_page .thread_video_post #video_send")[0].files
+  i = 0
+  l = fileList.length
+  while l > i
+    blobUrl = window.URL.createObjectURL(fileList[i])
+    i++
+  $(".video_show .vjs-tech").attr("style":"")
+  $(".video_show .vjs-tech").attr("poster":blobUrl)
+  $(".video_show .vjs-tech").attr("src":blobUrl)
+  $(".video_show").attr("style":"display:block")
+  $(".jimaku_form").attr("style":"")
 
 $(document).on 'click', '.thread_send .btn_send', (event) ->
   if($(this).attr("name") == "logined")
@@ -178,7 +204,6 @@ add_post=(data,user_id)->
       plus_post.find(".jp_position").attr("style","width:calc("+jp_per+"% - 15px)");
       plus_post.find(".post_content_position_space").removeAttr("style");
 
-
 prohibit_check=(text_en,text_jp)->
   can_post = true
   check_text_en = text_en.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '').replace(/@/g, '')
@@ -196,10 +221,7 @@ type_check=(type)->
     if text_en != "" && text_jp != ""
       if prohibit_check(text_en,text_jp) == true
         $(".jimaku_form").attr("style":"display:none");
-        if $(".post_type").val() == "text"
-          App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
-        else
-          $(".thread_submit").click()
+        App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
       else
         alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
     else if $(".post_type").val() != "text"

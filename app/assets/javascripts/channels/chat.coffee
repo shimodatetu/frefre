@@ -119,7 +119,7 @@ type_check=(id)->
 translate_google=(data) ->
   lang = data[0]
   words = data[1]
-  $.ajax(
+  ajax_send = $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
     type: 'post'
@@ -140,6 +140,10 @@ translate_google=(data) ->
     alert status
     $("#fakeLoader").fadeOut();
     return
+
+  $(document).on 'click', '.fakeloader_cancel_button', (event) ->
+    ajax_send.abort();
+    $("#fakeLoader").fadeOut();
 
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);

@@ -117,21 +117,13 @@ class PostsController < ApplicationController
       post.id_ingroup = group.posts.count
       post.group_id = group.id
       post.user_id = current_user.id
-
-      p data[:video]
-      p params
-      p "================================="
-      if data[:type] == "image"
-        post.content_eng = params[:content_en]
-        post.content_jap = params[:content_jp]
+      if data[:type] == "image" && data[:pict] != nil
         post.pict = data[:pict]
         post.save
-      else
-        #trans(params)
-        post.content_eng = params[:content_en]
-        post.content_jap = params[:content_jp]
-        post.subtitle_en = params[:sub_content_en]
-        post.subtitle_jp = params[:sub_content_jp]
+      elsif data[:type] == "video" && data[:video] != nil
+        #trans(params)d
+        post.subtitle_en = params[:post][:subtitle_en]
+        post.subtitle_jp = params[:post][:subtitle_jp]
         post.video = data[:video]
         post.save
       end

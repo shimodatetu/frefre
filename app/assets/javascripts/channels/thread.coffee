@@ -15,6 +15,7 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
       alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
     # Called when there's incoming data on the websocket for this channel
   make: (lang, title_jp,mes_jp,title_en,mes_en,types) ->
+    $(".jimaku_form").attr("style":"display:none");
     @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,title_en:title_en,message_en:mes_en,types:types)
 
 

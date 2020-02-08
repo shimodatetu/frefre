@@ -16,7 +16,7 @@
             left:'0px', // Default Left value
             width:'100%', // Default width
             height:'100%', // Default Height
-            zIndex: '999',  // Default zIndex
+            zIndex: '2000',  // Default zIndex
             bgColor: '#00000099', // Default background color
             spinner:'spinner2', // Default Spinner
             imagePath:'' // Default Path custom image
@@ -29,7 +29,8 @@
         var spinner05 = '<div class="fl spinner5"><div class="cube1"></div><div class="cube2"></div></div>';
         var spinner06 = '<div class="fl spinner6"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div>';
         var spinner07 = '<div class="fl spinner7"><div class="circ1"></div><div class="circ2"></div><div class="circ3"></div><div class="circ4"></div></div>';
-
+        var cancel = '<button class="fakeloader_cancel_button btn btn-default">cancel / キャンセル</button>'
+        spinner02 += cancel
         //The target
         var el = $("#fakeLoader");
 
