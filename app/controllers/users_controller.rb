@@ -8,7 +8,6 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-
   def create
     @user = User.new(user_params)
     if params[:user][:agreement_term] == "0"
@@ -65,6 +64,7 @@ class UsersController < ApplicationController
       flash.now[:failed_jp] = "無効なメールアドレスです。"
       flash.now[:failed_en] = "Email is invalid."
     end
+    @user = User.new(name:params[:user][:name],email:params[:user][:email],agreement_term:params[:user][:agreement_term])
   end
 
   def update

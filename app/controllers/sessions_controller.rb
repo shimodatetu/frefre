@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def index
+    @email = ""
   end
 
   def event_login
@@ -7,6 +8,7 @@ class SessionsController < ApplicationController
 
   def new
   end
+
   def login_post
     user = User.find_by(email: params[:session][:email])
     if user && user.activated? && user.oauth == false && user.admit == true && user.usertype != "delete" && user.authenticate(params[:session][:password])
@@ -14,6 +16,7 @@ class SessionsController < ApplicationController
       flash["alert_en"] = "You successed to login"
       flash["alert_jp"] = "ログインに成功しました。"
       flash["alert_type"] = "success"
+      @email = ""
       redirect_to root_path, success: 'ログインに成功しました'
     elsif user && user.usertype == "delete"
       flash[:failed_en] = "This acount is freezed."
@@ -22,6 +25,7 @@ class SessionsController < ApplicationController
     else
       flash.now[:failed_en] = "Mail address or password is wrong."
       flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"
+      @email = params[:session][:email]
       render :index
     end
   end
@@ -87,7 +91,8 @@ class SessionsController < ApplicationController
     @user = User.find_by(id: session[:oauth_id])
   end
   def create_oauth
-    @user = User.find_by(id: session[:oauth_id])
+    user = User.find_by(id: session[:oauth_id])
+    @user = User.new(name:params[:user][:name],agreement_term:params[:user][:agreement_term])
     if params[:user][:agreement_term] == "0"
       flash.now[:failed_en] = "Please agree the terms of service"
       flash.now[:failed_jp] = "利用規約に同意してください"
@@ -107,8 +112,8 @@ class SessionsController < ApplicationController
         flash.now[:failed_en] = "Please input your username using half-width alphanumeric."
         render :oauth_complete
       else
-        @user.update(name: name,admit:true)
-        log_in @user
+        user.update(name: name,admit:true)
+        log_in user
         #User.last.delete
         flash["alert_en"] = "You successed to signup."
         flash["alert_jp"] = "会員登録に成功しました。"

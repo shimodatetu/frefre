@@ -11,6 +11,9 @@
             Sign Up
           </div>
         </div>
+        <div class="warn_input">
+          ※ : 必須 / Required
+        </div>
         <% if !flash["failed_en"].nil? || !flash["failed_en"].nil? %>
           <div class="alert alert-danger alert-message" role="alert">
             <div class="error_jp">
@@ -31,8 +34,19 @@
               </div>
               User Name
             </div>
+            <div class="warn">
+              ※
+            </div>
             <div class="">
-              <%= f.text_field :name, class: 'form-control',value:"" %>
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="check_words_cover">
+            <div class="check_words">
+              ・6～32characters　 ・6～32文字
+            </div>
+            <div class="check_words">
+              ・Alphanumeric ・半角英数字
             </div>
           </div>
           <div class="input-groups">
@@ -42,8 +56,11 @@
                 利用規約に同意する
               </div>
               <div class="base_en">
-                Agree our Terms of service
+                Agree Terms of service
               </div>
+            </div>
+            <div class="warn"style="margin-top: 0px;">
+              ※
             </div>
           </div>
           <div class="box_srcollbar">

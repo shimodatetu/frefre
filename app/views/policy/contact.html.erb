@@ -1,6 +1,11 @@
 
 <%= form_tag("/contact/mail",method: :post) do %>
-  <div class="make_thread_cover">
+  <div class="make_thread_cover contact_cover">
+    <div class="category_head">
+      <div class="panel-title">
+        お問い合わせ / Contact Us
+      </div>
+    </div>
     <div class="panel panel-warning make_thread_category">
       <div class="panel-body content_cover">
         <div class="content_input_name"style="margin-top:20px">
@@ -10,7 +15,10 @@
           <div class="main_en">
             Real Name
           </div>
-          <div class="content_input">
+          <div class="warn">
+            ※必須 / Required
+          </div>
+          <div class="content_input contact_input">
             <%= text_field :contact_data ,"", id:"content_name",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
           </div>
         </div>
@@ -21,8 +29,11 @@
           <div class="main_en">
             Username
           </div>
+          <div class="warn">
+            ※必須 / Required
+          </div>
         </div>
-        <div class="content_input">
+        <div class="content_input contact_input">
           <%= text_field :contact_data ,"", id:"content_username",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
         </div>
         <div class="content_input_name"style="margin-top:20px">
@@ -32,8 +43,11 @@
           <div class="main_en">
             Mail Address
           </div>
+          <div class="warn">
+            ※必須 / Required
+          </div>
         </div>
-        <div class="content_input">
+        <div class="content_input contact_input">
           <%= text_field :contact_data ,"",type:"mail", id:"content_mail",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
         </div>
         <div class="content_input_name"style="margin-top:20px">
@@ -43,8 +57,11 @@
           <div class="main_en">
             Phone Number
           </div>
+          <div class="warn">
+            ※必須 / Required
+          </div>
         </div>
-        <div class="content_input">
+        <div class="content_input contact_input">
           <%= text_field :contact_data ,"", id:"content_phone",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
         </div>
         <div class="content_input_name"style="margin-top:20px">
@@ -54,8 +71,11 @@
           <div class="main_en">
             Country
           </div>
+          <div class="warn">
+            ※必須 / Required
+          </div>
         </div>
-        <div class="content_input">
+        <div class="content_input contact_input">
           <%= text_field :contact_data ,"", id:"content_country",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
         </div>
         <div class="content_input_name"style="margin-top:20px">
@@ -65,8 +85,11 @@
           <div class="main_en">
             Inquiry Details
           </div>
+          <div class="warn">
+            ※必須 / Required
+          </div>
         </div>
-        <div class="content_input">
+        <div class="content_input contact_input">
           <%= text_area :contact_data ,"", id:"content_message",class:"content_input_form form-control jp_data_content",rows:"5",cols:"65"%>
         </div>
       </div>
