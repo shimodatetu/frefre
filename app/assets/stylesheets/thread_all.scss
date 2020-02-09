@@ -45,6 +45,11 @@
     background-color: #dff5ea;
   }
 }
+.thread_link{
+  .post_content_text{
+    -webkit-line-clamp:2
+  }
+}
 .pvpage_head{
   border-top:3px solid #ff9d3b;
   .pvpage_lang{
@@ -245,7 +250,7 @@
         }
       }
       .post_video_cover{
-        
+
       }
       .see_more{
         float:right;
