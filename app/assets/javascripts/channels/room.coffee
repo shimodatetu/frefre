@@ -125,7 +125,6 @@ $(document).on 'click', '.auto_subtitle_ja', (event) ->
 $(document).on 'change', '.thread_page .thread_video_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
     video_show2()
-
     $("#video-modal").modal("show")
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
@@ -174,7 +173,7 @@ video_show　=　->
   $("#video-subtitle-modal .video_show").attr("style":"display:block")
 
 video_show2　=　->
-  fileList = $(".notice_cover .thread_video_post #chat_video_send")[0].files
+  fileList = $(".thread_page .thread_video_post #video_send")[0].files
   i = 0
   l = fileList.length
   while l > i
