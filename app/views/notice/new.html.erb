@@ -102,7 +102,7 @@
                     Auto subtitle(English)
                   </div>
                 </button>
-                <button type="button"class="btn help_show_small auto_subtitle auto_subtitle_ja"style="margin-left:130px;background:#408bc9;position:static">
+                <button type="button"class="btn help_show_small auto_subtitle auto_subtitle_ja"style="margin-left:10px;background:#408bc9;position:static">
                   <div class="jp help_text">
                     自動字幕（日本語）
                   </div>
@@ -147,7 +147,7 @@
         <div class="post_footer_simple"style="height: 60px;margin-left: calc(50% - 160px);margin-top: 30px;">
           <%= hidden_field_tag :type,"", :value => "text",class:"post_type"  %>
           <div class="post_button_cover thread_send">
-            <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
+            <label for="notice_image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
               <div class="button_text">
                 <div class="float_jp">
@@ -157,11 +157,11 @@
               </div>
             </label>
             <% if logged_in? %>
-              <%= form.file_field :pict,id:"file_send",class:"logined",style:"display:none" %>
+              <%= form.file_field :pict,id:"notice_image_send",class:"logined",style:"display:none" %>
             <% else %>
-              <%= form.file_field :pict,id:"file_send",style:"display:none" %>
+              <%= form.file_field :pict,id:"notice_image_send",style:"display:none" %>
             <% end %>
-            <label for="video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
+            <label for="notice_video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-facetime-video picture_send"></div>
               <div class="button_text">
                 <div class="float_jp">
@@ -171,9 +171,9 @@
               </div>
             </label>
             <% if logged_in? %>
-              <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+              <%= form.file_field :video,id:"notice_video_send",class:"logined",style:"display:none" %>
             <% else %>
-              <%= form.file_field :video,id:"video_send",style:"display:none" %>
+              <%= form.file_field :video,id:"notice_video_send",style:"display:none" %>
             <% end %>
           </div>
           <%= form.submit "",class:"thread_submit",style:"display:none" %>

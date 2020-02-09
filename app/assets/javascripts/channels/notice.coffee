@@ -9,7 +9,7 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    
+
       # Called when there's incoming data on the websocket for this channel
 
   make: (lang, mes_jp,mes_en,address) ->
@@ -20,6 +20,32 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
 
 $(document).on 'click', '.notice_post .mes_post_button',(event) ->
   #send_check()
+
+$(document).on 'change', '.make_thread_cover #notice_image_send', (event) ->
+  $(".post_type").val("image")
+  $(".video_show").attr("style":"display:none");
+  reader = new FileReader
+  reader.onload = (e) ->
+    $(".image_show").attr("src": e.target.result);
+    $(".image_show").attr("style":"display:block");
+    return
+  reader.readAsDataURL @files[0]
+  $(".image_show").attr("style":"display:block");
+
+$(document).on 'change', '.make_thread_cover #notice_video_send', (event) ->
+  $(".post_type").val("video")
+  $(".image_show").attr("style":"display:none");
+  fileList = @files
+  i = 0
+  l = fileList.length
+  while l > i
+    blobUrl = window.URL.createObjectURL(fileList[i])
+    i++
+  $(".vjs-tech").attr("style":"")
+  $(".vjs-tech").attr("poster":blobUrl)
+  $(".vjs-tech").attr("src":blobUrl)
+  $(".video_show").attr("style":"display:block");
+  $(".jimaku_form").attr("style":"display:block;margin-top:30px")
 
 send_check=()->
   content_en = $(".notice_post .en_data_content").val();

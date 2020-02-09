@@ -230,7 +230,9 @@
       }
       .post_image_cover{
         padding:auto;
+        margin-left:50%;
         img{
+          margin-left: -50%;
           max-height: 150px;
           max-width: 80%;
         }
@@ -241,6 +243,9 @@
           max-width:180px;
           max-height:200px;
         }
+      }
+      .post_video_cover{
+        
       }
       .see_more{
         float:right;

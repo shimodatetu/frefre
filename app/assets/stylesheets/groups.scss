@@ -10,6 +10,12 @@
   width: 95vw;
 }
 .make_thread_cover{
+  .image_show{
+    display: block;
+    width: 300px;
+    margin-left: calc(50% - 150px);
+    margin-bottom: 10px;
+  }
   .checkbox_cover{
     min-width:33%;
     display: inline-block;

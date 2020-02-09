@@ -34,7 +34,7 @@
   </div>
   <div class="thread_content">
     <div class="post_content_cover">
-      <div class="user_name">
+      <div class="user_name"><%= chat.id %>
         <% if notice.users.first.id < 1 %>
           <%= FreFre Office %>
         <% else %>
@@ -64,36 +64,34 @@
           </div>
         </div>
       <% end %>
-      <% if chat.pict.attached? || chat.video.attached? %>
+      <% if chat.pict.attached?%>
         <div class="post_image_cover zoom_modal_open"data-toggle="modala" data-target="#zoom_modala">
-          <% if chat.pict.attached?%>
-            <%= image_tag chat.pict , :class => "group_img"+chat.id.to_s%>
-          <% elsif chat.video.attached? %>
-           <video id='my-video' class='video-js' controls preload='auto' width='1108' height='600'
-             poster='<%= url_for(chat.video) %>' data-setup='{}'>
-             <source src='<%= url_for(chat.video) %>' type='video/mp4'>
-           </video>
-           <% if chat.subtitle_en != nil && chat.subtitle_jp != nil && chat.subtitle_en != "" && chat.subtitle_jp != "" %>
-             <div class="post_content_position post_subtitle_position en_position jimaku_post">
-               <div class="en_content_row">
-                 <div class="post_content_text">
-                   <%= simple_format(Rinku.auto_link(h(chat.subtitle_en))) %>
-                 </div>
+          <%= image_tag chat.pict , :class => "group_img"+chat.id.to_s%>
+        </div>
+      <% elsif chat.video.attached? %>
+        <div class="post_image_cover zoom_modal_open"data-toggle="modala" data-target="#zoom_modala">
+          <video id='my-video' class='video-js' controls preload='auto' width='1108' height='600'
+           poster='<%= url_for(chat.video) %>' data-setup='{}'>
+           <source src='<%= url_for(chat.video) %>' type='video/mp4'>
+          </video>
+          <% if chat.subtitle_en != nil && chat.subtitle_jp != nil && chat.subtitle_en != "" && chat.subtitle_jp != "" %>
+           <div class="post_content_position post_subtitle_position en_position jimaku_post">
+             <div class="en_content_row">
+               <div class="post_content_text">
+                 <%= simple_format(Rinku.auto_link(h(chat.subtitle_en))) %>
                </div>
              </div>
-             <div class="post_content_position_space">
-               <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-             </div>
-             <div class="post_content_position post_subtitle_position jp_position jimaku_post">
-               <div class="jp_content_row">
-                 <div class="post_content_text">
-                   <%= simple_format(Rinku.auto_link(h(chat.subtitle_jp))) %>
-                 </div>
+           </div>
+           <div class="post_content_position_space">
+             <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+           </div>
+           <div class="post_content_position post_subtitle_position jp_position jimaku_post">
+             <div class="jp_content_row">
+               <div class="post_content_text">
+                 <%= simple_format(Rinku.auto_link(h(chat.subtitle_jp))) %>
                </div>
              </div>
-           <% end %>
-          <% else %>
-            Picture is deleted.
+           </div>
           <% end %>
         </div>
       <% end %>

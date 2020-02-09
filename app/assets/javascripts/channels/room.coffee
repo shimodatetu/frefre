@@ -21,7 +21,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     now_page = 1
     if urls.length >= 5
       now_page = urls[4]
-    page_id_max = Number($(".thread_page_num").attr("id"))
+    page_id_max = 20
     page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
     if url.indexOf("groups") != -1 && user_id == data['user_id']
       alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")

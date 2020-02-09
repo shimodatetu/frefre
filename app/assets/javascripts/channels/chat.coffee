@@ -171,6 +171,17 @@ type_check=(id)->
       #translate_google("ja",text_en)
       $("#fakeLoader").fakeLoader({},translate_google,["ja",text_en]);
 
+$(document).on 'change', '.notice_cover #image_send', (event) ->
+  $(".post_type").val("image")
+  $(".video_show").attr("style":"display:none");
+  reader = new FileReader
+  reader.onload = (e) ->
+    $(".image_show").attr("src": e.target.result);
+    $(".image_show").attr("style":"display:block");
+    return
+  reader.readAsDataURL @files[0]
+  $(".image_show").attr("style":"display:block");
+
 $(document).on 'change', '.notice_cover .chat_thread_image_post #chat_file_send', (event) ->
   if($(this).attr("class") == "logined")
     $(".chat_thread_submit_image").click()
