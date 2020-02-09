@@ -55,7 +55,7 @@ class User < ApplicationRecord
     end
   end
   #mount_uploader :image, ImageUploader
-  after_update { ProfileBroadcastJob.perform_later self  }
+  #after_update { ProfileBroadcastJob.perform_later self  }
 
   validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }, length: {maximum: 32}, unless: :uid?
 
