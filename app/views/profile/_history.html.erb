@@ -111,7 +111,9 @@
       <% show_group_id = -1 %>
       <% there_be = false %>
       <% user.posts.offset(@thread_page_num2*(@page_id2 - 1)).limit(@thread_page_num2).each do |post| %>
-        <%= render post %>
+        <% if post.group != nil %>
+          <%= render post %>
+        <% end %>
       <% end %>
       <% if there_be == false %>
         <div class="not_found">
