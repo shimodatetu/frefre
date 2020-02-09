@@ -7,10 +7,14 @@
   <div class="profile_sub"style="display:inline-block">
     <div class="profile_picture">
       <% if other_user.image == 0 %>
-        <% if other_user.photo.nil? %>
-          <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+        <% if other_user.avater.attached? %>
+          <%= image_tag other_user.avater , :class => "group_img"%>
         <% else %>
-          <%= image_tag show_image_user_path(other_user), :class => "group_img" %>
+          <% if other_user.photo.nil? %>
+            <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+          <% else %>
+            <%= image_tag show_image_user_path(other_user), :class => "group_img" %>
+          <% end %>
         <% end %>
       <% else %>
         <%= image_tag("/userimage/user#{other_user.image}.png", :class => "group_img") %>
