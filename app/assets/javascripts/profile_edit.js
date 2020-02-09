@@ -1,7 +1,7 @@
 
 $(function(){
   $(".profile_image_input").on("change",function(){
-    $('#image_submit').click();
+    $('#image_submit_change').click();
   });
   $(".profile_history_change3").click(function(){
     setTimeout(
