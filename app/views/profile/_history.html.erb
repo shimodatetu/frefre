@@ -48,6 +48,7 @@
     <% end %>" id="home" role="tabpanel" aria-labelledby="home-tab">
       <% there_be = false %>
       <% user.groups.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |group| %>
+        <% there_be = true %>
         <%= render partial:"/groups/group", locals: { group:group } %>
       <% end %>
       <% if there_be == false %>
