@@ -10,7 +10,7 @@
   <div class="user_login"style="display:none"id="<%= current_user.id %>"></div>
 <% end %>
 <div class="thread_page">
-  <div class="thread-panel-title"style="display:inline-block">
+  <div class="thread-panel-title"style="display:inline-block;display:none">
     <div class="panel-title-text">
       <span class="float_en">
         <%= simple_format(text_url_to_link(h(thread.title_en))) %>
