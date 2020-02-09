@@ -68,6 +68,9 @@ class UsersController < ApplicationController
   end
 
   def update
+    p "----------------------"
+    p current_user
+    p "----------------------"
     current_user.update(avater:params[:user][:avater],image:0)
   end
   def show_image
