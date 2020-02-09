@@ -68,7 +68,9 @@ class UsersController < ApplicationController
   end
 
   def update
+    p "---------------------"
     p current_user
+    p "---------------------"
     User.find_by(id:current_user.id).update(avater:params[:user][:avater],image:0)
   end
   def show_image
