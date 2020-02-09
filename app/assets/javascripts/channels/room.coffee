@@ -1,25 +1,32 @@
 
 window.translated = false
 window.touched = false
+ajax_send = ""
 App.room = App.cable.subscriptions.create "RoomChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    urls = location.pathname.split("/")
+    url = location.pathname
+    urls = url.split("/")
     now_id = urls[3]
     window.translated = false
     user_id = Number($(".user_login").attr("id"))
     if user_id == data['user_id']
-      $(".image_show").attr("style":"display:none");
-      $(".video_show").attr("style":"display:none");
-    if Number(now_id) == data['group_id']
-      now_page = 1
-      if urls.length >= 5
-        now_page = urls[4]
-      page_id_max = Number($(".thread_page_num").attr("id"))
-      page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+      $(".thread_send #post").attr("style","")
+      $(".thread_submit_image").attr("style","display:none")
+      $(".thread_submit_video").attr("style","display:none")
+
+    now_page = 1
+    if urls.length >= 5
+      now_page = urls[4]
+    page_id_max = Number($(".thread_page_num").attr("id"))
+    page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+    if url.indexOf("groups") != -1 && user_id == data['user_id']
+      alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
+      window.location.href = "/thread/show/" + data["data"]["group_id"] + "/" + String(Number(page))
+    else if url.indexOf('thread/show') != -1 && Number(now_id) == data['group_id']
       if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
         if user_id == data['user_id']
           window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
@@ -31,10 +38,13 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       else
         window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
   speak: (lang,mes_jp,mes_en, group)->
+    $(".thread_send #post").attr("style","pointer-events: none;")
+    $(".thread_submit_image").attr("style","display:none;pointer-events: none;")
+    $(".thread_submit_video").attr("style","display:none;pointer-events: none;")
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
-  image: (file,group)->
-    @perform('image',group_id:group,image:file,lang:"none")
+  #image: (file,group)->
+  #  @perform('image',group_id:group,image:file,lang:"none")
 
 reader = new FileReader
 reader2 = new FileReader
@@ -77,7 +87,7 @@ video_subtitle=(data) ->
     imgBlob = new Blob([ e.target.result ], type: file.type)
     fd.append 'video', imgBlob, file.name
     fd.append 'lang', lang
-    $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
+    ajax_send = $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
       processData: false
       contentType: false
       type: 'post'
@@ -91,10 +101,12 @@ video_subtitle=(data) ->
         $("#fakeLoader").fadeOut();
         if lang == "ja"
           $("#video-subtitle-modal .subbase_en_form").val(words[0])
+          $("#video-subtitle-modal .subbase_jp_form").val("")
           $("#video-subtitle-modal").modal("show")
           #$("#sub_content_jp").val(words[1])
         else if lang == "en"
           #$("#sub_content_en").val(words[1])
+          $("#video-subtitle-modal .subbase_en_form").val("")
           $("#video-subtitle-modal .subbase_jp_form").val(words[0])
           $("#video-subtitle-modal").modal("show")
         return
@@ -112,8 +124,7 @@ $(document).on 'click', '.auto_subtitle_ja', (event) ->
 
 $(document).on 'change', '.thread_page .thread_video_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
-    $(".post_type").val("video")
-    $(".image_show").attr("style":"display:none");
+    video_show2()
 
     $("#video-modal").modal("show")
   else
@@ -143,7 +154,7 @@ $(document).on 'click', '#video-subtitle-modal .btn_video_send', (event) ->
       $("#video-subtitle-modal").modal("hide")
       $("#video-modal").modal("hide")
       $(".subbase_jp_form").val("")
-      $(".subbase_jp_form").val("")
+      $(".subbase_en_form").val("")
       $(".thread_submit_video").click()
     else
       alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
@@ -157,11 +168,22 @@ video_show　=　->
   while l > i
     blobUrl = window.URL.createObjectURL(fileList[i])
     i++
-  $(".video_show .vjs-tech").attr("style":"")
-  $(".video_show .vjs-tech").attr("poster":blobUrl)
-  $(".video_show .vjs-tech").attr("src":blobUrl)
-  $(".video_show").attr("style":"display:block")
-  $(".jimaku_form").attr("style":"")
+  $("#video-subtitle-modal .video_show .vjs-tech").attr("style":"")
+  $("#video-subtitle-modal .video_show .vjs-tech").attr("poster":blobUrl)
+  $("#video-subtitle-modal .video_show .vjs-tech").attr("src":blobUrl)
+  $("#video-subtitle-modal .video_show").attr("style":"display:block")
+
+video_show2　=　->
+  fileList = $(".notice_cover .thread_video_post #chat_video_send")[0].files
+  i = 0
+  l = fileList.length
+  while l > i
+    blobUrl = window.URL.createObjectURL(fileList[i])
+    i++
+  $("#video-modal .video_show .vjs-tech").attr("style":"")
+  $("#video-modal .video_show .vjs-tech").attr("poster":blobUrl)
+  $("#video-modal .video_show .vjs-tech").attr("src":blobUrl)
+  $("#video-modal .video_show").attr("style":"display:block")
 
 $(document).on 'click', '.thread_send .btn_send', (event) ->
   if($(this).attr("name") == "logined")
@@ -220,12 +242,9 @@ type_check=(type)->
     text_jp = $(".base_jp_form").val();
     if text_en != "" && text_jp != ""
       if prohibit_check(text_en,text_jp) == true
-        $(".jimaku_form").attr("style":"display:none");
         App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
       else
         alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
-    else if $(".post_type").val() != "text"
-      $(".thread_submit").click()
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""
@@ -275,7 +294,7 @@ translate_google=(data) ->
   words = data[1]
   if window.touched == false
     window.touched = true
-    $.ajax(
+    ajax_send = $.ajax(
       async: false
       url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
       type: 'post'
@@ -304,7 +323,7 @@ translate_google2=(data) ->
   words = data[1]
   if window.touched == false
     window.touched = true
-    $.ajax(
+    ajax_send = $.ajax(
       async: false
       url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
       type: 'post'
@@ -335,3 +354,7 @@ isHalf=(str)->
   str_length = str.length
   str_byte = bytes(str)
   return str_length == str_byte
+
+$(document).on 'click', '.fakeloader_cancel_button', (event) ->
+  ajax_send.abort();
+  $("#fakeLoader").fadeOut();

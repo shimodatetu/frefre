@@ -41,10 +41,10 @@ function alert_get(){
   alert_type = localStorage.getItem("alert_type")
   if(alert_en != null && alert_jp != null){
     alert_modal(alert_en,alert_jp,alert_type)
+    alert_en = localStorage.removeItem("alert_en")
+    alert_jp = localStorage.removeItem("alert_jp")
+    alert_type = localStorage.removeItem("alert_type")
   }
-  alert_en = localStorage.removeItem("alert_en")
-  alert_jp = localStorage.removeItem("alert_jp")
-  alert_type = localStorage.removeItem("alert_type")
 }
 
 function alert_set(alert_en_in,alert_jp_in,alert_type_in){

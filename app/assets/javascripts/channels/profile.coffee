@@ -1,4 +1,5 @@
 
+ajax_send = ""
 window.translated = false
 App.profile = App.cable.subscriptions.create "ProfileChannel",
   connected: ->
@@ -10,11 +11,14 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
   received: (data) ->
     user_id = String(data["message"]["id"])
     user_type = data["message"]["usertype"]
-    if $(".user_id").attr('id') == user_id && user_type != "delete"
+    if $(".user_id").attr('id') == String(user_id) && user_type != "delete"
+
+      $(".profile_save_button").attr("style","")
       alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
       location.reload()
 
   change: (username,gender,country,profile_en,profile_jp,able_see) ->
+    $(".profile_save_button").attr("style","pointer-events: none;")
     @perform 'change',username:username,gender:gender,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
 
@@ -94,7 +98,7 @@ translate_google2=(data) ->
   words = profile_jp
   if lang == "ja"
     words = profile_en
-  $.ajax(
+  ajax_send = $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
     type: 'post'
@@ -115,3 +119,7 @@ translate_google2=(data) ->
     alert status
     $("#fakeLoader").fadeOut();
     return
+
+$(document).on 'click', '.fakeloader_cancel_button', (event) ->
+  ajax_send.abort();
+  $("#fakeLoader").fadeOut();

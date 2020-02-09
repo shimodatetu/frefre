@@ -136,6 +136,7 @@ Rails.application.routes.draw do
   post 'notices' => "notices#create"
   get '/groups',to:'groups#new'
   post 'groups' => "groups#create"
+  post 'chats' => "chats#create"
   post 'profile/send_img'
   get 'users/index'
   get 'users/term'

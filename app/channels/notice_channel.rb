@@ -46,7 +46,6 @@ class NoticeChannel < ApplicationCable::Channel
         chat.user_id = current_user.id
         chat.notice_id = notice[0].id
         notice = chat.notice
-        ActionCable.server.broadcast 'notice_channel', profile_jump: notice.id,users:[notice.users.first.id.to_s,notice.users.last.id.to_s]
         chat.save
       end
     end

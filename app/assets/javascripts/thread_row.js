@@ -17,6 +17,17 @@ $(function(){
     $(elem).find(".en_content_row .post_content_text").attr("style","-webkit-line-clamp:"+Math.ceil(row));
 
   });
+  $('.notice_cover .thread_cover').each(function(i, elem){
+    var jp_height = $(elem).find(".jp_content_row .post_content_text").height();
+    var en_height = $(elem).find(".en_content_row .post_content_text").height();
+    if(jp_height == 0){jp_height = 999;}
+    if(en_height == 0){en_height = 999;}
+    var row = Math.ceil((Math.min(jp_height,en_height)) / 22);
+    row += row * (50 - Math.min(left_value,right_value)) / 50 + 1
+    $(elem).find(".jp_content_row .post_content_text").attr("style","-webkit-line-clamp:"+Math.ceil(row));
+    $(elem).find(".en_content_row .post_content_text").attr("style","-webkit-line-clamp:"+Math.ceil(row));
+
+  });
   $('.pvpage_all .thread_cover').each(function(i, elem){
     var jp_height = $(elem).find(".jp_position .post_content_text").height();
     var en_height = $(elem).find(".jp_position .post_content_text").height();

@@ -1,3 +1,4 @@
+
 App.follow = App.cable.subscriptions.create "FollowChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
@@ -46,3 +47,8 @@ button_change=(id) ->
     $(".follow_button"+id+" .follow_button_submit .text_box .jp").html("フォロー中")
     $(".follow_button"+id+" .follow_button_submit .text_box .en").html("Following")
     $(".follow_button"+id+" .follow_button_submit").removeClass('follow_button_submit').addClass('unfollow_button_submit');
+
+
+$(document).on 'click', '.fakeloader_cancel_button', (event) ->
+  ajax_send.abort();
+  $("#fakeLoader").fadeOut();

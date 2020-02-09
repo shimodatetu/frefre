@@ -2,8 +2,7 @@ class ChatBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(message)
-    p "asd"
-    #ActionCable.server.broadcast('notice_channel',notice_id: message.message.notice_id,[message.notice.users.first,message.notice.users.last] message: render_message(message))
+    ActionCable.server.broadcast('chat_channel',notice_id: message.notice_id,chat:message,chat_id:message.notice.chats.all.count,message: render_message(message) )
   end
 
   private

@@ -11,7 +11,7 @@
 <% if logged_in? %>
   <div class="make_thread_cover notice_post">
     <%= form_for(@notice,:html => {class: "thread_image_post post_button_form", id:"form_input",enctype:"multipart/form-data",:multipart => true}) do |form|%>
-      <div class="get_user_id"id="<%= current_user.id %>"></div>
+      <div class="get_user_id user_login"id="<%= current_user.id %>"></div>
       <%= hidden_field_tag :group_id,:id=>other_user.id, :value => params[:id] %>
       <div class="get_other_id"id="<%= other_user.id %>"></div>
       <div class="category_head">

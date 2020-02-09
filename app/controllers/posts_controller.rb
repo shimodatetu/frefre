@@ -122,8 +122,8 @@ class PostsController < ApplicationController
         post.save
       elsif data[:type] == "video" && data[:video] != nil
         #trans(params)d
-        post.subtitle_en = params[:post][:subtitle_en]
-        post.subtitle_jp = params[:post][:subtitle_jp]
+        post.subtitle_en = data[:subtitle_en]
+        post.subtitle_jp = data[:subtitle_jp]
         post.video = data[:video]
         post.save
       end

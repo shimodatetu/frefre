@@ -104,9 +104,9 @@
       <% elsif params[:id] == "2" || params[:id] == "3" %>
         <%= render partial:"history",locals: { user: current_user,type:"mine"} %>
       <% elsif params[:id] == "4" %>
-        <%= render partial:"info" %>
+        <%= render partial:"chat" %>
       <% elsif params[:id] == "5" %>
-        <%= render partial:"detail_info" %>
+        <%= render partial:"detail_chat" %>
       <% elsif params[:id] == "6" %>
         <%= render partial:"notice" %>
       <% elsif params[:id] == "7" %>

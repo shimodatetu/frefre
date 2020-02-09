@@ -1,4 +1,5 @@
 
+ajax_send = ""
 window.translated = false
 App.thread = App.cable.subscriptions.create "ThreadChannel",
   connected: ->
@@ -7,15 +8,10 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    if String(data['user_id']) == $(".get_user_id").attr("id")
-      window.translated = false
-      local = '/thread/show/'+data['id']
-      $('#groups').append data['message']
-      location.href=local
-      alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
     # Called when there's incoming data on the websocket for this channel
   make: (lang, title_jp,mes_jp,title_en,mes_en,types) ->
     $(".jimaku_form").attr("style":"display:none");
+    $(".make_thread_cover #post").attr("style":"pointer-events: none;")
     @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,title_en:title_en,message_en:mes_en,types:types)
 
 
@@ -83,7 +79,7 @@ $(document).on 'change', '.make_thread_cover #video_send', (event) ->
   $(".vjs-tech").attr("poster":blobUrl)
   $(".vjs-tech").attr("src":blobUrl)
   $(".video_show").attr("style":"display:block");
-  $(".jimaku_form").attr("style":"display:block")
+  $(".jimaku_form").attr("style":"display:block;margin-top:30px")
 
 
 video_thread_subtitle=(data) ->
@@ -95,7 +91,7 @@ video_thread_subtitle=(data) ->
     imgBlob = new Blob([ e.target.result ], type: file.type)
     fd.append 'video', imgBlob, file.name
     fd.append 'lang', lang
-    $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
+    ajax_send = $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
       processData: false
       contentType: false
       type: 'post'
@@ -108,9 +104,9 @@ video_thread_subtitle=(data) ->
         $("#fakeLoader").fadeOut();
         if lang == "ja"
           $("#subcontent_eng").val(words[0])
-          #$("#subcontent_jap").val(words[1])
+          $("#subcontent_jap").val("")
         else if lang == "en"
-          #$("#subcontent_eng").val(words[1])
+          $("#subcontent_eng").val("")
           $("#subcontent_jap").val(words[0])
         return
       error: (err)->
@@ -155,21 +151,23 @@ type_check=(id)->
   else if window.translated == true && 1 == 2
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if id == "trans_to_en"
-    if title_jp == ""
-      alert_modal("Title in Japanese is empty.","日本語のタイトルの欄に何も書かれていません","fail");
-    else if content_jp == ""
-      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
-    else
-      #translate_google(title_jp,content_jp,"en")
+    if title_jp != "" && content_jp != ""
       $("#fakeLoader").fakeLoader({},translate_google,["en",title_jp,content_jp]);
-  else if id == "trans_to_jp"
-    if title_en == ""
-      alert_modal("Title in English is empty.","英語のタイトルの欄に何も書かれていません","fail");
-    else if content_en == ""
-      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+    else if content_jp == ""
+      $("#fakeLoader").fakeLoader({},translate_google3,["en",title_jp,".en_data_title"]);
+    else if title_jp == ""
+      $("#fakeLoader").fakeLoader({},translate_google3,["en",content_jp,".en_data_content"]);
     else
-      #translate_google(title_en,content_en,"ja")
+      alert_modal("Nothing in Japanese is written.","日本語欄に何も書かれていません","fail");
+  else if id == "trans_to_jp"
+    if title_en != "" && content_en != ""
       $("#fakeLoader").fakeLoader({},translate_google,["ja",title_en,content_en]);
+    else if content_en == ""
+      $("#fakeLoader").fakeLoader({},translate_google3,["ja",title_en,".jp_data_title"]);
+    else if title_en == ""
+      $("#fakeLoader").fakeLoader({},translate_google3,["ja",content_en,".jp_data_content"]);
+    else
+      alert_modal("Nothing in English is written.","英語欄に何も書かれていません","fail");
   else if id == "subtrans_to_en"
     content_jp = $(".sub_jp_data_content").val();
     if content_jp == ""
@@ -199,7 +197,7 @@ translate_google=(data) ->
   lang = data[0]
   title = data[1]
   content = data[2]
-  $.ajax(
+  ajax_send = $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai_twice',
     type: 'post'
@@ -226,10 +224,10 @@ translate_google=(data) ->
     $("#fakeLoader").fadeOut();
     return
 
-translate_googl2e=(data) ->
+translate_google2=(data) ->
   lang = data[0]
   subtitle = data[1]
-  $.ajax(
+  ajax_send = $.ajax(
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
     type: 'post'
@@ -248,3 +246,31 @@ translate_googl2e=(data) ->
   ).fail (xhr, status, error) ->
     $("#fakeLoader").fadeOut();
     return
+
+translate_google3=(data) ->
+  console.log(data)
+  lang = data[0]
+  words = data[1]
+  place = data[2]
+  ajax_send = $.ajax(
+    async: false
+    url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
+    type: 'post'
+    data:
+      'lang': lang,
+      'words':words
+    dataType: 'json').done((res) ->
+    window.translated = true
+    trans_data = res[0]
+
+    $(place).val(trans_data);
+    $("#fakeLoader").fadeOut();
+    return
+  ).fail (xhr, status, error) ->
+    $("#fakeLoader").fadeOut();
+    return
+
+
+$(document).on 'click', '.fakeloader_cancel_button', (event) ->
+  ajax_send.abort();
+  $("#fakeLoader").fadeOut();
