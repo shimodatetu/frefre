@@ -201,6 +201,7 @@ video_subtitle=(data) ->
     ajax_send = $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
       processData: false
       contentType: false
+      cache: false
       type: 'post'
       enctype: 'multipart/form-data'
       data: fd
@@ -300,6 +301,7 @@ translate_google=(data) ->
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
     type: 'post'
+    cache: false
     data:
       'lang': lang
       'words': words

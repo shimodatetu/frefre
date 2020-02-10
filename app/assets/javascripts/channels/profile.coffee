@@ -101,6 +101,7 @@ translate_google2=(data) ->
     async: false
     url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
     type: 'post'
+    cache: false
     data:
       'lang': lang
       'words': words

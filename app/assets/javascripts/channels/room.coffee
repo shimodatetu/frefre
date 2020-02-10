@@ -90,6 +90,7 @@ video_subtitle=(data) ->
     ajax_send = $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
       processData: false
       contentType: false
+      cache: false
       type: 'post'
       enctype: 'multipart/form-data'
       data: fd
@@ -295,6 +296,7 @@ translate_google=(data) ->
     window.touched = true
     ajax_send = $.ajax(
       async: false
+      cache: false
       url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
       type: 'post'
       data:
@@ -323,6 +325,7 @@ translate_google2=(data) ->
   if window.touched == false
     window.touched = true
     ajax_send = $.ajax(
+      cache: false
       async: false
       url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
       type: 'post'
