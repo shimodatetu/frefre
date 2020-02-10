@@ -20,8 +20,7 @@ class RoomChannel < ApplicationCable::Channel
         post.content_eng = data['content_eng']
         post.group_id = group.id
         post.user_id = current_user.id
-        if post.save
-          broadcast_to post.group, comment:"asd"
+        post.save
       end
     end
   end

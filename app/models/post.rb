@@ -23,6 +23,6 @@ class Post < ApplicationRecord
     end
   end
 
-  #after_create_commit { MessageBroadcastJob.perform_later self }
+  after_create_commit { MessageBroadcastJob.perform_later self }
   #mount_uploader :image, ImageUploader
 end
