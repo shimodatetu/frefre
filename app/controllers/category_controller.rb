@@ -69,7 +69,7 @@ class CategoryController < ApplicationController
     end
   end
   def show
-    if params[:id].nil? || page_id.to_i < 1
+    if params[:id].nil? || params[:id].to_i < 1
       @threadtype = Threadtype.find_by(id:1)
     else
       @threadtype = Threadtype.find_by(id:params[:id].to_i)
@@ -84,7 +84,7 @@ class CategoryController < ApplicationController
       page_num = 1
     end
     page_id = params[:id].to_i
-    if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
+    if page_id.nil? || page_id > page_num || page_id < 1
       page_id = 1
     end
     start_num = 1
