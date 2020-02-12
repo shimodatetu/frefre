@@ -232,7 +232,7 @@ struct AVFormatContext;
  *    placed in the same tag.
  * -  Metadata is flat, not hierarchical; there are no subtags. If you
  *    want to store, e.g., the email address of the child of producer Alice
- *    and actor Bob, that could have key=alice_and_bobs_childs_email_address.
+ *    and actor Bob, that could have key=alice_and_bobs_childs_eemail.
  * -  Several modifiers can be applied to the tag name. This is done by
  *    appending a dash character ('-') and the modifier name in the order
  *    they appear in the list below -- e.g. foo-eng-sort, not foo-sort-eng.

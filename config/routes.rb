@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  #devise_for :users
+  #devise_for :users
   get 'users/test'
   get 'users/unsubscribe'
   get 'manager',to:"manager#show"
@@ -68,7 +70,7 @@ Rails.application.routes.draw do
   post 'chat_make',to:"chat#make"
 
   get "/oauth_complete", to:"sessions#oauth_complete"
-  get    '/login',   to: 'sessions#index'
+  get    '/login_page',   to: 'sessions#index'
   post   '/login',   to: 'sessions#login_post'
   post   '/login2',   to: 'sessions#login_post2'
   delete '/logout',  to: 'sessions#destroy'

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  #devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
   attr_accessor :remember_token, :activation_token, :reset_token
@@ -59,7 +62,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true,format: { with: /\A[a-z0-9]+\z/i }, length: {maximum: 32}, unless: :uid?
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_email_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   def User.new_token
     SecureRandom.urlsafe_base64
   end
