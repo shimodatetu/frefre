@@ -70,7 +70,7 @@ class CategoryController < ApplicationController
   end
   def show
     if params[:id].nil? || params[:id].to_i < 1
-      @threadtype = Threadtype.find_by(id:1)
+      @threadtype = Threadtype.find_by(id:5)
     else
       @threadtype = Threadtype.find_by(id:params[:id].to_i)
     end
