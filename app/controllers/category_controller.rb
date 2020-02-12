@@ -69,13 +69,11 @@ class CategoryController < ApplicationController
     end
   end
   def show
-
-    page_id = params[:id].to_i
-    if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
-      page_id = 1
+    if params[:id].nil? || page_id.to_i < 1
+      @threadtype = Threadtype.find_by(id:1)
+    else
+      @threadtype = Threadtype.find_by(id:params[:id].to_i)
     end
-    @threadtype = Threadtype.find_by(id:page_id)
-
     @groups = @threadtype.groups
     thread_page_num = 20.to_f
     page_show_max = 5.to_f
@@ -84,6 +82,10 @@ class CategoryController < ApplicationController
     page_num = (group_num / thread_page_num).ceil
     if page_num == 0
       page_num = 1
+    end
+    page_id = params[:id].to_i
+    if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
+      page_id = 1
     end
     start_num = 1
     end_num = page_num
