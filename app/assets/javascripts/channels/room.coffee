@@ -8,7 +8,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    alert("asd")
     url = location.pathname
     urls = url.split("/")
     now_id = urls[3]
@@ -18,7 +17,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       $(".thread_send #post").attr("style","")
       $(".thread_submit_image").attr("style","display:none")
       $(".thread_submit_video").attr("style","display:none")
-
     now_page = 1
     if urls.length >= 5
       now_page = urls[4]

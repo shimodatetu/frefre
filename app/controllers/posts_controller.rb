@@ -10,7 +10,6 @@ class PostsController < ApplicationController
     @groups = Group.all.where("deleted = false")
   end
   def trans2(params)
-    p "trans"
     @uri = URI.parse("http://localhost:5000/api/file")
     @http = Net::HTTP.new(@uri.host, @uri.port)
     @http.use_ssl = false
