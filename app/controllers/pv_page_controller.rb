@@ -3,7 +3,7 @@ class PvPageController < ApplicationController
     @groups = Group.all.where("deleted = false")
     Group.all do |group|
       if group.posts.count == 0
-        group.delete
+        group.posts.delete
       end
     end
     Post.all.where(deleted:true).each do |post|

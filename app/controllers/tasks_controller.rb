@@ -1,5 +1,48 @@
-class TasksController < ApplicationController
+require 'net/http'
+require 'uri'
+require 'json'
 
+class Net::HTTP
+  alias :create :initialize
+
+  def initialize(*args)
+    create(*args)
+    self.set_debug_output $stderr
+    $stderr.sync = true
+  end
+end
+class TasksController < ApplicationController
+  def trans
+    lang = params[:lang]
+    words = ""
+    if lang == "ja"
+      words = params[:content_en]
+    elsif lang == "en"
+      words = params[:content_jp]
+    end
+    uri = URI.parse("http://localhost:5000/trans_mirai")
+    req = Net::HTTP::Post.new(uri)
+    req["Authorization"] = "Bearer sample_token"
+    p "------------"
+    p words
+    p lang
+    p "おはよう"
+    p "-------------"
+    req.set_form_data({"words"=>words, "lang"=>lang})
+    req_options = {
+     use_ssl: uri.scheme == "http"
+    }
+    response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    	http.request(req)
+    end
+    answer = response.body.slice(2..-3).force_encoding("UTF-8")
+    p "----------------------"
+    p answer
+    p params[:show_class_en]
+    p params[:show_class_jp]
+    p "----------------------"
+    NodejsChannel.broadcast_to(current_user,"trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],lang:lang)
+  end
   def report_user
     id = params[:report_id]
     user = User.find_by(id:id.to_i)

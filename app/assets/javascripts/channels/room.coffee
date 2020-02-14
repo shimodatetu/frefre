@@ -294,7 +294,7 @@ translate_google=(data) ->
     ajax_send = $.ajax(
       async: false
       cache: false
-      url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
+      url: 'http://localhost:5000/trans_mirai',
       type: 'post'
       data:
         'lang': lang
