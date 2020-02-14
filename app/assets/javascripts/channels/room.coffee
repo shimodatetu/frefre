@@ -1,4 +1,5 @@
 
+
 window.translated = false
 window.touched = false
 ajax_send = ""
@@ -11,31 +12,33 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     url = location.pathname
     urls = url.split("/")
     now_id = urls[3]
-    window.translated = false
-    user_id = Number($(".user_login").attr("id"))
-    if user_id == data['user_id']
-      $(".thread_send #post").attr("style","")
-      $(".thread_submit_image").attr("style","display:none")
-      $(".thread_submit_video").attr("style","display:none")
     now_page = 1
     if urls.length >= 5
       now_page = urls[4]
     page_id_max = 20
-    page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-    if url.indexOf("groups") != -1 && user_id == data['user_id']
-      alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
-      window.location.href = "/thread/show/" + data["data"]["group_id"] + "/" + String(Number(page))
-    else if url.indexOf('thread/show') != -1 && Number(now_id) == data['group_id']
-      if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-        if user_id == data['user_id']
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-      else if Number(now_page) == page
-        if user_id == data['user_id']
+    page = Math.ceil((parseFloat(data["post"]['post_id'])) / page_id_max)
+    if data["type"] == "make"
+      if url.indexOf("groups") != -1 && user_id == data["post"]['user_id']
+        alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
+        window.location.href = "/thread/show/" + data["post"]["group_id"] + "/" + String(Number(page))
+      else if url.indexOf('thread/show') != -1 && Number(now_id) == data['group_id']
+        if Number(now_page) + 1 == page && parseInt(data["post"]['post_id']) % page_id_max == 1
+          if user_id == data["post"]['user_id']
+            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+        else if Number(now_page) == page
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
-        add_post(data,user_id)
-      else
-        window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+          if(!($('.thread_cover#'+data["post"]['post_id']).length))
+            if user_id == data["post"]['user_id']
+              $(".profile_button_destroy").click();
+            else
+              $(".delete_button_destroy").click();
+              $(".report_button_destroy").click();
+        else
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+    else if data["type"] == "accept" && url.indexOf('thread/show') != -1 && Number(now_id) == data['group_id'] && Number(now_page) == page
+        if(!($('.thread_cover#'+data["post"]['post_id']).length))
+          add_post(data,user_id)
   speak: (lang,mes_jp,mes_en, group)->
     $(".thread_send #post").attr("style","pointer-events: none;")
     $(".thread_submit_image").attr("style","display:none;pointer-events: none;")
@@ -199,11 +202,6 @@ add_post=(data,user_id)->
     plus_post = $(data["message"].replace('example.org', 'www.frefreforum.com'))
   $(".thread_cover_cover").append plus_post
   plus_post.ready ->
-    if user_id == data['user_id']
-      $(".profile_button_destroy").click();
-    else
-      $(".delete_button_destroy").click();
-      $(".report_button_destroy").click();
     jp_height = plus_post.find(".jp_content_row .post_content_text").height();
     en_height = plus_post.find(".en_content_row .post_content_text").height();
     row = (Math.max(jp_height,en_height) - 10) / 22;

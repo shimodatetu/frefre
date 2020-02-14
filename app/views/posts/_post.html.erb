@@ -56,7 +56,11 @@
             <div class="dropdown">
               <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <div class="create_time">
-                  <%= (time_ago_in_words(post.created_at)).sub(/about/, '') %>
+                  <% time_show = (time_ago_in_words(group.created_at)).sub(/about/, '') %>
+                  <% if time_show == "less than minit" %>
+                    <% time_show = "0 minute" %>
+                  <% end %>
+                  <%= time_show%>
                 </div>
                 <span class="caret"></span>
               </div>
