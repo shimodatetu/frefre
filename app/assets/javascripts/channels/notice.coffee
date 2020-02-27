@@ -73,10 +73,10 @@ prohibit_check=(text_en,text_jp)->
   return can_post
 
 
-$(document).on 'click', '.thread_make .thread_auto_subtitle_en', (event) ->
+$(document).on 'click', '.notice_post_cover .notice_auto_subtitle_en', (event) ->
   $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
 
-$(document).on 'click', '.thread_make .thread_auto_subtitle_ja', (event) ->
+$(document).on 'click', '.notice_post_cover .notice_auto_subtitle_ja', (event) ->
   $("#fakeLoader").fakeLoader({},video_subtitle,["en"]);
 
 
