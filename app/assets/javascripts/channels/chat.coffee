@@ -187,11 +187,13 @@ type_check=(id)->
 trans_submit=(data) ->
   lang = data[0]
   $(".chat_trans_form .lang_input").val(lang)
+  $(".cancel_button_class").val(".chat_trans_form .send_time")
   $(".chat_trans_form .trans_send").click()
 
 trans_submit2=(data) ->
   lang = data[0]
   $(".chat_subtrans_form .lang_input").val(lang)
+  $(".cancel_button_class").val(".chat_subtrans_form .send_time")
   $(".chat_subtrans_form .trans_send").click()
 
 
@@ -216,6 +218,7 @@ $(document).on 'change', '.notice_cover .chat_thread_image_post #chat_file_send'
 video_subtitle=(data) ->
   $(".chat_thread_video_post .lang_input").val(data[0])
   $(".chat_thread_video_post").attr("action","/tasks/video")
+  $(".cancel_button_class").val(".chat_thread_video_post .send_time")
   $(".chat_thread_video_post .chat_thread_submit_video").click()
   $(".chat_thread_video_post").attr("action","/chats")
 
@@ -321,5 +324,8 @@ isHalf=(str)->
   return str_length == str_byte
 
 $(document).on 'click', '.fakeloader_cancel_button', (event) ->
-  ajax_send.abort();
+
   $("#fakeLoader").fadeOut();
+  send_time_class = $(".cancel_button_class").val()
+  send_time = Number($(send_time_class).val()) + 1
+  $(send_time_class).val(String(send_time))

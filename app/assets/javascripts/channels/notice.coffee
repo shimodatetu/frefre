@@ -83,6 +83,7 @@ $(document).on 'click', '.notice_post_cover .notice_auto_subtitle_ja', (event) -
 video_subtitle=(data) ->
   $(".notice_post_cover .post_button_form .lang_input").val(data[0])
   $(".notice_post_cover .post_button_form").attr("action","/tasks/video")
+  $(".cancel_button_class").val(".notice_post_cover .send_time")
   $(".notice_post_cover .post_button_form .thread_submit").click()
   $(".notice_post_cover .post_button_form").attr("action","/notices")
 
@@ -154,8 +155,8 @@ trans_submit=(data) ->
   send_time = $(".notice_post_cover .send_time").val()
   $(".notice_trans_form .send_time").val(send_time)
   $(".notice_trans_form .lang_input").val(lang)
+  $(".cancel_button_class").val(".notice_post_cover .send_time")
   $(".notice_trans_form .trans_send").click()
-
 trans_submit2=(data) ->
   lang = data[0]
   words = data[1]
@@ -167,6 +168,7 @@ trans_submit2=(data) ->
   send_time = $(".notice_post_cover .send_time").val()
   $(".notice_subtrans_form .send_time").val(send_time)
   $(".notice_subtrans_form .lang_input").val(lang)
+  $(".cancel_button_class").val(".notice_post_cover .send_time")
   $(".notice_subtrans_form .trans_send").click()
 
 
@@ -197,6 +199,3 @@ translate_google=(data) ->
     $("#fakeLoader").fadeOut();
     return
 
-$(document).on 'click', '.fakeloader_cancel_button', (event) ->
-  ajax_send.abort();
-  $("#fakeLoader").fadeOut();

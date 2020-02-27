@@ -6,7 +6,7 @@
  *Licensed MIT
 -----------------------------------------------------------------------*/
 (function ($) {
-
+    
     $.fn.fakeLoader = function(options,callback,data) {
         //Defaults
         var settings = $.extend({

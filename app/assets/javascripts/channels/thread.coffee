@@ -84,6 +84,7 @@ $(document).on 'change', '.make_thread_cover #video_send', (event) ->
 video_subtitle=(data) ->
   $(".thread_make .post_button_form .lang_input").val(data[0])
   $(".thread_make .post_button_form").attr("action","/tasks/video")
+  $(".cancel_button_class").val(".thread_make .post_button_form .send_time")
   $(".thread_make .post_button_form .thread_submit").click()
   $(".thread_make .post_button_form").attr("action","/groups")
 
@@ -203,6 +204,8 @@ trans_submit=(data) ->
     $(".thread_trans_title .thread_en_data_title").val(words)
   else
     $(".thread_trans_title .thread_jp_data_title").val(words)
+
+  $(".cancel_button_class").val(".thread_make .send_time")
   $(".thread_trans_title .lang_input").val(lang)
   $(".thread_trans_title .trans_send").click()
 
@@ -214,6 +217,7 @@ trans_submit2=(data) ->
     $(".thread_trans_content .thread_en_data_content").val(words)
   else
     $(".thread_trans_content .thread_jp_data_content").val(words)
+  $(".cancel_button_class").val(".thread_make .send_time")
   $(".thread_trans_content .lang_input").val(lang)
   $(".thread_trans_content .trans_send").click()
 
@@ -225,6 +229,7 @@ trans_submit3=(data) ->
     $(".thread_trans_subtitle .thread_en_data_subtitle").val(words)
   else
     $(".thread_trans_subtitle .thread_jp_data_subtitle").val(words)
+  $(".cancel_button_class").val(".thread_make .send_time")
   $(".thread_trans_subtitle .lang_input").val(lang)
   $(".thread_trans_subtitle .trans_send").click()
 
@@ -319,6 +324,6 @@ translate_google3=(data) ->
     return
 
 
-$(document).on 'click', '.fakeloader_cancel_button', (event) ->
-  ajax_send.abort();
-  $("#fakeLoader").fadeOut();
+#$(document).on 'click', '.fakeloader_cancel_button', (event) ->
+#  ajax_send.abort();
+#  $("#fakeLoader").fadeOut();

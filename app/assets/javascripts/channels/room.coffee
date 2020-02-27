@@ -90,6 +90,7 @@ video_subtitle=(data) ->
   $(".thread_video_post .lang_input").val(data[0])
   $(".thread_video_post").attr("action","/tasks/video")
   $(".thread_video_post .thread_submit_video").click()
+  $(".cancel_button_class").val(".thread_video_post .send_time")
   $(".thread_video_post").attr("action","/posts")
 
 $(document).on 'click', '.auto_subtitle_en', (event) ->
@@ -261,11 +262,13 @@ type_check=(type)->
 trans_submit=(data) ->
   lang = data[0]
   $(".post_trans_form .lang_input").val(lang)
+  $(".cancel_button_class").val(".post_trans_form .send_time")
   $(".post_trans_form .trans_send").click()
 
 trans_submit2=(data) ->
   lang = data[0]
   $(".post_subtrans_form .lang_input").val(lang)
+  $(".cancel_button_class").val(".post_subtrans_form .send_time")
   $(".post_subtrans_form .trans_send").click()
 ###
 translate_google=(data) ->
@@ -336,6 +339,3 @@ isHalf=(str)->
   str_byte = bytes(str)
   return str_length == str_byte
 
-$(document).on 'click', '.fakeloader_cancel_button', (event) ->
-  ajax_send.abort();
-  $("#fakeLoader").fadeOut();

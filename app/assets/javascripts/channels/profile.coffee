@@ -119,7 +119,3 @@ translate_google2=(data) ->
     alert status
     $("#fakeLoader").fadeOut();
     return
-
-$(document).on 'click', '.fakeloader_cancel_button', (event) ->
-  ajax_send.abort();
-  $("#fakeLoader").fadeOut();

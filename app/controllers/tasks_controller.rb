@@ -31,7 +31,7 @@ class TasksController < ApplicationController
   end
 
   def video_subtitle(file_name,params)
-    connection = Faraday.new("http://localhost:5000") do |builder|
+    connection = Faraday.new("https://still-plains-44123.herokuapp.com") do |builder|
       # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
       builder.request :multipart
       builder.request :url_encoded
@@ -44,6 +44,7 @@ class TasksController < ApplicationController
     }
     response = connection.post("/upload_raw", paramater)
     stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
+    answer = response.body.slice(2..-3).force_encoding("UTF-8")
     NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
 
   end
