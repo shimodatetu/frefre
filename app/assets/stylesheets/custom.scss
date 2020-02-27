@@ -434,15 +434,13 @@ body{
       width:70%!important;
       .lang_bar{
         .slider{
-          width:calc(60%)!important;
+          width:calc(80vw - 180px) !important
         }
       }
       .jp_country{
         margin-left: 10px!important;
       }
       .country_flag{
-        height: 28px;
-        width: 40px;
         margin-right:1vw!important;
         margin-left:1vw!important;
         .image{
@@ -452,25 +450,34 @@ body{
       }
     }
   }
-
   .lang_bar_cover{
-    width:105%!important;
+    .lang_bar{
+      margin-left: 56px;
+    }
+    .slider{
+      width:300px!important;
+    }
+  }
+  .make_thread_category{
+    width:95%!important;
+    .hash_form{
+      margin-right: 0px!important;
+      .hash_input{
+        width:calc(50% - 33px)!important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 570px){
+  .lang_bar_cover{
     .en_country{
       margin-left: 10px;
     }
     .lang_bar{
-      padding-left:2px!important;
+      margin-left:5vw!important;
       .slider{
-        width:calc(80vw - 120px)!important;
-      }
-    }
-    .country_flag{
-      width:32px;
-      height:24px;
-      margin-right:1vw!important;
-      .image{
-        width:100%!important;
-        height:100%!important;
+        width:calc(80vw - 162px) !important
       }
     }
     .slider-handle{
@@ -487,18 +494,7 @@ body{
       }
     }
   }
-  .make_thread_category{
-    width:95%!important;
-    .hash_form{
-      margin-right: 0px!important;
-      .hash_input{
-        width:calc(50% - 33px)!important;
-      }
-    }
-  }
-}
 
-@media screen and (max-width: 570px){
   .top_explain{
     .delete_message{
       display:none;
@@ -626,15 +622,6 @@ body{
       }
       .jp_country{
         margin-left: 10px!important;
-      }
-      .country_flag{
-        width:7vw;
-        height:5vw;
-        margin-right:1vw!important;
-        .image{
-          width:100%!important;
-          height:100%!important;
-        }
       }
     }
   }

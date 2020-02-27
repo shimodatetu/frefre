@@ -12,7 +12,6 @@
   position: fixed;
   width: 100%;
   padding-top: 38px;
-  padding-left: 5%;
   margin-top: 5px;
   border-bottom: none;
   .up_slider{
@@ -22,13 +21,12 @@
     //color: #408bc9;
   }
   .lang_bar{
-    padding-left:calc(10% + 80px);
+    margin-left: calc(35vw - 256px);
     padding-top: 6px;
     padding-bottom: 2px;
     .slider{
-
       margin-top: -10px;
-      width:calc(10% + 250px);
+      width:calc(30vw + 50px);
       display: inline-block;
       .tooltip{
         display: none !important;
@@ -71,12 +69,17 @@
       display: inline-block;
       margin-right: 10px;
       .image{
+        display:none;
         height: 20px;
         width: 40px;
       }
     }
+    .en_country{
+      color:#00b1c4;
+    }
     .jp_country{
       margin-left:15px;
+      color:#89e3ff;
     }
   }
 }
