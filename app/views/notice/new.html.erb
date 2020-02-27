@@ -4,6 +4,7 @@
     color:#ffffff;
   }
 </style>
+<input type="hiddem"class="cancel_button_class"val="">
 <% other_user = current_user %>
 <% if User.find_by(id:params[:id].to_i) %>
   <% other_user = User.find_by(id:params[:id].to_i) %>
@@ -192,7 +193,7 @@
           <% end %>
         </div>
       </div>
-      <%= hidden_field_tag :show_class_en,".subbase_jp_form" %>
+      <%= hidden_field_tag :show_class_en,".subbase_en_form" %>
       <%= hidden_field_tag :show_class_jp,".subbase_jp_form" %>
       <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
       <%= hidden_field_tag :show_class ,".notice_post_cover .thread_image_post" %>
