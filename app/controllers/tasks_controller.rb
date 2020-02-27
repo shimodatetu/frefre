@@ -38,10 +38,6 @@ class TasksController < ApplicationController
 
       builder.adapter Faraday.default_adapter
     end
-    source = "en"
-    if params[:lang] == "en"
-      source = "ja"
-    end
     paramater = {
       lang:params[:lang] ,
       picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")

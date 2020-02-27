@@ -6,6 +6,7 @@ App.nodejs = App.cable.subscriptions.create "NodejsChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    console.log(data)
     $("#fakeLoader").fadeOut();
     if data["success"] == "true"
       id = $("." + data["form_class"] + " .send_time").val()
