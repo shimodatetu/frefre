@@ -5,12 +5,14 @@
   }
 </style>
 <% other_user = current_user %>
-<% if User.find(params[:id].to_i) %>
-  <% other_user = User.find(params[:id].to_i) %>
+<% if User.find_by(id:params[:id].to_i) %>
+  <% other_user = User.find_by(id:params[:id].to_i) %>
 <% end %>
 <% if logged_in? %>
-  <div class="make_thread_cover notice_post">
+  <div class="make_thread_cover notice_post_cover">
+    <input type="hidden"class="send_time"value="1">
     <%= form_for(@notice,:html => {class: "thread_image_post post_button_form", id:"form_input",enctype:"multipart/form-data",:multipart => true}) do |form|%>
+      <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
       <div class="get_user_id user_login"id="<%= current_user.id %>"></div>
       <%= hidden_field_tag :group_id,:id=>other_user.id, :value => params[:id] %>
       <div class="get_other_id"id="<%= other_user.id %>"></div>
@@ -61,7 +63,6 @@
             </div>
           </div>
           <div class="content_input">
-
             <%= text_area_tag :content_en,"",id:"content",class:"content_input_form form-control form_lang en_data_content",rows:"5",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
             <div class="space_form"style="margin-top:0px">
               <div class="trans_cover">
@@ -83,7 +84,7 @@
                 </button>
               </div>
             </div>
-            <%= text_area_tag :content_en,"",id:"content",class:"content_input_form form-control form_lang jp_data_content",rows:"5",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
+            <%= text_area_tag :content_en,"",id:"content",class:"content_input_form form-control form_lang jp_data_content",rows:"5",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
           </div>
         </div>
         <div style="margin-top:30px;">
@@ -93,7 +94,7 @@
           </video>
         </div>
         <img src="/"class="image_show"style="display:none;">
-        <div class="jimaku_form"style="display:none">
+        <div class="jimaku_form"style="display:none;">
           <div class="modal-body">
             <div class="thread_post content_input">
               <div>
@@ -113,7 +114,7 @@
               </div>
               <div class="space_form thread_send"style="margin-top:0px;">
                 <div class="trans_cover">
-                  <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="subtrans_to_en"
+                  <button type="button" class="normal_button post_button btn  btn_send mes_post_button"id="subtrans_to_en"
                   name="<% if logged_in? %>logined<% end %>">
                     <div class="glyphicon glyphicon-arrow-left picture_send"></div>
                     <div class="button_text">
@@ -122,7 +123,7 @@
                   </button>
                 </div>
                 <div class="trans_cover">
-                  <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="subtrans_to_jp"
+                  <button type="button" class="normal_button post_button btn  btn_send mes_post_button"id="subtrans_to_jp"
                   name="<% if logged_in? %>logined<% end %>">
                     <div class="glyphicon glyphicon-arrow-right picture_send"></div>
                     <div class="button_text">
@@ -191,6 +192,14 @@
           <% end %>
         </div>
       </div>
+      <%= hidden_field_tag :show_class_en,".subbase_jp_form" %>
+      <%= hidden_field_tag :show_class_jp,".subbase_jp_form" %>
+      <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+      <%= hidden_field_tag :show_class ,".notice_post_cover .thread_image_post" %>
+      <%= hidden_field_tag :show_modal ,"" %>
+      <%= hidden_field_tag :form_class ,"notice_post_cover .thread_image_post" %>
+      <%= hidden_field_tag :form_type ,"notice" %>
+      <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
     <% end %>
     <div class="thread_post_cover">
       <div class="modal fade" id="noticeModal" tabindex="-1">
@@ -299,6 +308,27 @@
       </div>
     </div>
   </div>
+  <%= form_tag('/tasks/trans',method: :post,class: "modal-body notice_trans_form search_form_top",style:"display:block") do %>
+    <%= hidden_field_tag :content_en,"",class:"notice_en_data_content" %>
+    <%= hidden_field_tag :content_jp,"",class:"notice_jp_data_content" %>
+    <%= hidden_field_tag :show_class_en,"en_data_content" %>
+    <%= hidden_field_tag :show_class_jp,"jp_data_content" %>
+    <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+    <%= hidden_field_tag :form_class ,"notice_post_cover" %>
+    <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+    <%= submit_tag "",class:"trans_send",style:"display:none"%>
+  <% end %>
+
+  <%= form_tag('/tasks/trans',method: :post,class: "modal-body notice_subtrans_form search_form_top",style:"display:block") do %>
+    <%= hidden_field_tag :content_en,"",class:"notice_subbase_en_form" %>
+    <%= hidden_field_tag :content_jp,"",class:"notice_subbase_jp_form" %>
+    <%= hidden_field_tag :show_class_en,"subbase_en_form" %>
+    <%= hidden_field_tag :show_class_jp,"subbase_jp_form" %>
+    <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+    <%= hidden_field_tag :form_class ,"notice_post_cover" %>
+    <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+    <%= submit_tag "",class:"trans_send",style:"display:none"%>
+  <% end %>
 <% else %>
   <div class="panel panel-warning not_logined_cover">
     <div class='panel-body not_logined'>

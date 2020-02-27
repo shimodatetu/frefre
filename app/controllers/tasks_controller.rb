@@ -2,47 +2,97 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-class Net::HTTP
-  alias :create :initialize
-
-  def initialize(*args)
-    create(*args)
-    self.set_debug_output $stderr
-    $stderr.sync = true
-  end
-end
 class TasksController < ApplicationController
-  def trans
-    lang = params[:lang]
-    words = ""
-    if lang == "ja"
-      words = params[:content_en]
-    elsif lang == "en"
-      words = params[:content_jp]
+  def video
+    p params[:form_type]
+    p params[params[:form_type]][:video]
+    if current_user == nil || none_nil(params[:form_type]) || params[params[:form_type]][:video] == nil || none_nil(params[:show_class]) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(params[:lang])
+      NodejsChannel.broadcast_to(current_user,"type":"video","success":"false","params":params)
+      return
+    else
+      require "execjs"
+      num = 0
+      file = File.open("files/data.txt", "r")
+        num = file.read.to_i
+      file.close
+      file = File.open("files/data.txt", "w")
+        file.write (num+ 1).to_s
+      file.close
+      file_name = "output"+num.to_s
+      url = params[params[:form_type]][:video].tempfile.path
+      stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
+      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
+      std_data = stderr.split(" ")
+      index = std_data.index("Hz,")
+      hertz = std_data[index - 1].to_i
+      stdout, stderr, status = Open3.capture3('ffmpeg -i files/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le files/'+file_name+'.raw')
+      video_subtitle(file_name,params)
     end
-    uri = URI.parse("http://localhost:5000/trans_mirai")
-    req = Net::HTTP::Post.new(uri)
-    req["Authorization"] = "Bearer sample_token"
-    p "------------"
-    p words
-    p lang
-    p "おはよう"
-    p "-------------"
-    req.set_form_data({"words"=>words, "lang"=>lang})
-    req_options = {
-     use_ssl: uri.scheme == "http"
-    }
-    response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-    	http.request(req)
-    end
-    answer = response.body.slice(2..-3).force_encoding("UTF-8")
-    p "----------------------"
-    p answer
-    p params[:show_class_en]
-    p params[:show_class_jp]
-    p "----------------------"
-    NodejsChannel.broadcast_to(current_user,"trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],lang:lang)
   end
+
+  def video_subtitle(file_name,params)
+    connection = Faraday.new("http://localhost:5000") do |builder|
+      # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
+      builder.request :multipart
+      builder.request :url_encoded
+
+      builder.adapter Faraday.default_adapter
+    end
+    source = "en"
+    if params[:lang] == "en"
+      source = "ja"
+    end
+    paramater = {
+      lang:params[:lang] ,
+      picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")
+    }
+    response = connection.post("/upload_raw", paramater)
+    p response.body
+    p answer = response.body.slice(2..-3).force_encoding("UTF-8")
+    p params
+    NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
+  end
+  def trans
+    begin
+      lang = params[:lang]
+      words = ""
+      if lang == "ja"
+        words = params[:content_en]
+      elsif lang == "en"
+        words = params[:content_jp]
+      end
+      if current_user == nil || none_nil(words) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(lang)
+        NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
+        return
+      else
+        uri = URI.parse("http://localhost:5000/trans_mirai")
+        req = Net::HTTP::Post.new(uri)
+        req["Authorization"] = "Bearer sample_token"
+        req.set_form_data({"words"=>words, "lang"=>lang})
+        req_options = {
+         use_ssl: uri.scheme == "http"
+        }
+        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+        	http.request(req)
+        end
+        answer = response.body.slice(2..-3).force_encoding("UTF-8")
+
+        NodejsChannel.broadcast_to(current_user,"type":"trans","trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":lang,"success":"true")
+        return
+      end
+    rescue => error
+      NodejsChannel.broadcast_to(current_user,"type":"trans","success":error)
+    end
+  end
+
+  def none_nil(data)
+    if data == nil || data == ""
+      return true
+    else
+      return false
+    end
+  end
+
   def report_user
     id = params[:report_id]
     user = User.find_by(id:id.to_i)

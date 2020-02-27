@@ -74,7 +74,7 @@ class UsersController < ApplicationController
     User.find_by(id:current_user.id).update(avater:params[:user][:avater],image:0)
   end
   def show_image
-    @image = User.find(params[:id])
+    @image = User.find_by(id:params[:id])
     send_data @image.photo, :type => 'image/jpeg'
   end
   private

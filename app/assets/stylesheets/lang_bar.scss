@@ -9,11 +9,11 @@
 .lang_bar_cover{
   z-index: 20;
   background: #dff5ea;
-  position:fixed;
-  width:100%;
-  padding-top:38px;
-  padding-left:5%;
-  margin-top:5px;
+  position: fixed;
+  width: 100%;
+  padding-top: 38px;
+  padding-left: 5%;
+  margin-top: 5px;
   border-bottom: none;
   .up_slider{
     float: left;
@@ -23,28 +23,29 @@
   }
   .lang_bar{
     padding-left:calc(10% + 80px);
-    padding-top:8px;
-    padding-bottom:8px;
+    padding-top: 6px;
+    padding-bottom: 2px;
     .slider{
+
+      margin-top: -20px;
       width:calc(10% + 250px);
       display: inline-block;
       .tooltip{
         display: none !important;
       }
       .slider-handle{
-        top: -15px !important;
-        margin-left: -22px;
-        padding-left: 10px;
+        top: -10px !important;
+        margin-left: -7px;
         width: 50px !important;
         height: 50px !important;
         background: none;
         z-index: 50;
-        box-shadow:none;
+        box-shadow: none;
         .slider_icon{
           color: #fff;
-          margin-top: 9px;
-          font-size: 26px;
-          background: #0097a7;
+          margin-top: 19px;
+          font-size: 10px;
+          background: #fff;
           padding: 3px 3px 2px 2px;
           border-radius: 50%;
 
@@ -53,12 +54,15 @@
       .slider-selection{
         //height: 20px !important;
         //top: -5px !important;
-        background:#0097a7;
+        height: 15px;
+        border-radius: 20px 0px 0px 20px;
+        background: rgb(0,177,196);
       }
       .slider-track-high{
-        //top: -5px;
-        //height:20px;
-        background: #408bc9;
+        background: none;
+        height: 15px;
+        border-radius: 0px 20px 20px 0px;
+        background: rgb(137,227,255);
         -webkit-box-shadow:none !important;
       }
     }
@@ -66,8 +70,8 @@
       display: inline-block;
       margin-right: 10px;
       .image{
-        height:28px;
-        width:50px;
+        height: 20px;
+        width: 40px;
       }
     }
     .jp_country{

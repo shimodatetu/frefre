@@ -1,8 +1,13 @@
 class ChatBroadcastJob < ApplicationJob
   queue_as :default
 
-  def perform(message)
-    ActionCable.server.broadcast('chat_channel',notice_id: message.notice_id,chat:message,chat_id:message.notice.chats.all.count,message: render_message(message) )
+  def perform(chat)
+    ActionCable.server.broadcast('chat_channel',chat:chat,chat_id:chat.notice.chats.all.count,message: render_message(chat),type:"accept")
+    if chat.id == chat.notice.chats.first.id
+      ChatChannel.broadcast_to(chat.user,chat:chat,chat_id:chat.notice.chats.all.count,type:"new_maker")
+    else
+      ChatChannel.broadcast_to(chat.user,chat:chat,chat_id:chat.notice.chats.all.count,type:"maker")
+    end
   end
 
   private

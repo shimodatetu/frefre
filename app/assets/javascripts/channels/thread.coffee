@@ -81,6 +81,12 @@ $(document).on 'change', '.make_thread_cover #video_send', (event) ->
   $(".video_show").attr("style":"display:block");
   $(".jimaku_form").attr("style":"display:block;margin-top:30px")
 
+video_subtitle=(data) ->
+  $(".thread_make .post_button_form .lang_input").val(data[0])
+  $(".thread_make .post_button_form").attr("action","/tasks/video")
+  $(".thread_make .post_button_form .thread_submit").click()
+  $(".thread_make .post_button_form").attr("action","/groups")
+
 
 video_thread_subtitle=(data) ->
   lang = data[0]
@@ -117,14 +123,15 @@ video_thread_subtitle=(data) ->
   reader.readAsArrayBuffer(file)
   false
 
-$(document).on 'click', '.thread_auto_subtitle_en', (event) ->
-  $("#fakeLoader").fakeLoader({},video_thread_subtitle,["ja"]);
+$(document).on 'click', '.thread_make .thread_auto_subtitle_en', (event) ->
+  $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
 
-$(document).on 'click', '.thread_auto_subtitle_ja', (event) ->
-  $("#fakeLoader").fakeLoader({},video_thread_subtitle,["en"]);
+$(document).on 'click', '.thread_make .thread_auto_subtitle_ja', (event) ->
+  $("#fakeLoader").fakeLoader({},video_subtitle,["en"]);
 
 
 type_check=(id)->
+  console.log(id)
   types = []
   $('input:checked').each ->
     types.push( $(this).val() )
@@ -151,38 +158,75 @@ type_check=(id)->
         $(".thread_submit").click()
   else if window.translated == true && 1 == 2
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
-  else if id == "trans_to_en"
-    if title_jp != "" && content_jp != ""
-      $("#fakeLoader").fakeLoader({},translate_google,["en",title_jp,content_jp]);
-    else if content_jp == ""
-      $("#fakeLoader").fakeLoader({},translate_google3,["en",title_jp,".en_data_title"]);
-    else if title_jp == ""
-      $("#fakeLoader").fakeLoader({},translate_google3,["en",content_jp,".en_data_content"]);
+  else if id == "trans_to_title_en"
+    if title_jp != ""
+      $("#fakeLoader").fakeLoader({},trans_submit,["en",title_jp]);
     else
-      alert_modal("Nothing in Japanese is written.","日本語欄に何も書かれていません","fail");
-  else if id == "trans_to_jp"
-    if title_en != "" && content_en != ""
-      $("#fakeLoader").fakeLoader({},translate_google,["ja",title_en,content_en]);
-    else if content_en == ""
-      $("#fakeLoader").fakeLoader({},translate_google3,["ja",title_en,".jp_data_title"]);
-    else if title_en == ""
-      $("#fakeLoader").fakeLoader({},translate_google3,["ja",content_en,".jp_data_content"]);
+      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+  else if id == "trans_to_title_jp"
+    if title_en != ""
+      $("#fakeLoader").fakeLoader({},trans_submit,["ja",title_en]);
     else
-      alert_modal("Nothing in English is written.","英語欄に何も書かれていません","fail");
+      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+  else if id == "trans_to_content_en"
+    if content_jp == ""
+      alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+    else
+      #translate_google(title_jp,content_jp,"en")
+      $("#fakeLoader").fakeLoader({},trans_submit2,["en",content_jp]);
+  else if id == "trans_to_content_jp"
+    if content_en == ""
+      alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+    else
+      #translate_google(title_en,content_en,"ja")
+      $("#fakeLoader").fakeLoader({},trans_submit2,["ja",content_en]);
   else if id == "subtrans_to_en"
     content_jp = $(".sub_jp_data_content").val();
     if content_jp == ""
       alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
     else
       #translate_google(title_jp,content_jp,"en")
-      $("#fakeLoader").fakeLoader({},translate_google2,["en",content_jp]);
+      $("#fakeLoader").fakeLoader({},trans_submit3,["en",content_jp]);
   else if id == "subtrans_to_jp"
     content_en = $(".sub_en_data_content").val();
     if content_en == ""
       alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
     else
       #translate_google(title_en,content_en,"ja")
-      $("#fakeLoader").fakeLoader({},translate_google2,["ja",content_en]);
+      $("#fakeLoader").fakeLoader({},trans_submit3,["ja",content_en]);
+
+trans_submit=(data) ->
+  $(".thread_trans_title .send_time").val($(".thread_make .send_time").val())
+  lang = data[0]
+  words = data[1]
+  if lang == "ja"
+    $(".thread_trans_title .thread_en_data_title").val(words)
+  else
+    $(".thread_trans_title .thread_jp_data_title").val(words)
+  $(".thread_trans_title .lang_input").val(lang)
+  $(".thread_trans_title .trans_send").click()
+
+trans_submit2=(data) ->
+  $(".thread_trans_content .send_time").val($(".thread_make .send_time").val())
+  lang = data[0]
+  words = data[1]
+  if lang == "ja"
+    $(".thread_trans_content .thread_en_data_content").val(words)
+  else
+    $(".thread_trans_content .thread_jp_data_content").val(words)
+  $(".thread_trans_content .lang_input").val(lang)
+  $(".thread_trans_content .trans_send").click()
+
+trans_submit3=(data) ->
+  $(".thread_trans_subtitle .send_time").val($(".thread_make .send_time").val())
+  lang = data[0]
+  words = data[1]
+  if lang == "ja"
+    $(".thread_trans_subtitle .thread_en_data_subtitle").val(words)
+  else
+    $(".thread_trans_subtitle .thread_jp_data_subtitle").val(words)
+  $(".thread_trans_subtitle .lang_input").val(lang)
+  $(".thread_trans_subtitle .trans_send").click()
 
 cut_hash=(hash_data)->
   hash_ary_main = []

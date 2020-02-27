@@ -15,7 +15,7 @@ class NoticeChannel < ApplicationCable::Channel
     if logged_in?
       if (notice = current_user.notices.includes(:users).where('users.id' => data['address'])).blank?
         notice = Notice.new()
-        notice.users << User.find(data['address'])#最初相手
+        notice.users << User.find_by(id:data['address'])#最初相手
         notice.users << current_user
         if notice.save
           chat = Chat.new()

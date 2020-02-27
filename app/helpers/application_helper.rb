@@ -17,7 +17,8 @@ module ApplicationHelper
   end
 
   def logout
-   session[:user_id] = nil
+    session.delete(:user_id)
+    @current_user = nil
   end
 
   def text_url_to_link text

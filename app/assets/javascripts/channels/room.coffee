@@ -9,40 +9,46 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
+    console.log(data)
     url = location.pathname
     urls = url.split("/")
-    now_id = urls[3]
+    now_id = 1
+    if urls.length >= 4
+      now_id = urls[3]
     now_page = 1
     if urls.length >= 5
       now_page = urls[4]
     page_id_max = 20
-    page = Math.ceil((parseFloat(data["post"]['post_id'])) / page_id_max)
-    if data["type"] == "make"
-      if url.indexOf("groups") != -1 && user_id == data["post"]['user_id']
-        alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
-        window.location.href = "/thread/show/" + data["post"]["group_id"] + "/" + String(Number(page))
-      else if url.indexOf('thread/show') != -1 && Number(now_id) == data['group_id']
-        if Number(now_page) + 1 == page && parseInt(data["post"]['post_id']) % page_id_max == 1
-          if user_id == data["post"]['user_id']
-            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+    page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+    if data["type"] == "new_maker"
+      alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
+      window.location.href = "/thread/show/" + data["post"]["group_id"] + "/" + String(Number(page))
+    else if data["type"] == "maker"
+      $(".thread_send #post").attr("style","")
+      $(".thread_submit_image").attr("style","display:none;")
+      $(".thread_submit_video").attr("style","display:none;")
+      $(".trans_send").attr("style","display:none")
+      if url.indexOf('thread/show') != -1 && Number(now_id) == data["post"]['group_id']
+        if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
         else if Number(now_page) == page
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
-          if(!($('.thread_cover#'+data["post"]['post_id']).length))
-            if user_id == data["post"]['user_id']
-              $(".profile_button_destroy").click();
-            else
-              $(".delete_button_destroy").click();
-              $(".report_button_destroy").click();
+          if(!($('.thread_cover#'+data["post"]['id']).length))
+            $(".profile_button_destroy").click();
         else
           window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
-    else if data["type"] == "accept" && url.indexOf('thread/show') != -1 && Number(now_id) == data['group_id'] && Number(now_page) == page
-        if(!($('.thread_cover#'+data["post"]['post_id']).length))
-          add_post(data,user_id)
+    else if data["type"] == "accept" && url.indexOf('thread/show') != -1 && Number(now_id) == data["post"]['group_id'] && Number(now_page) == page
+      if(!($('.thread_cover#'+data["post"]['id']).length))
+        add_post(data)
+        $(".delete_button_destroy").click();
+        $(".report_button_destroy").click();
+
   speak: (lang,mes_jp,mes_en, group)->
     $(".thread_send #post").attr("style","pointer-events: none;")
     $(".thread_submit_image").attr("style","display:none;pointer-events: none;")
     $(".thread_submit_video").attr("style","display:none;pointer-events: none;")
+    $(".trans_send").attr("style","display:none;pointer-events: none;")
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
 
   #image: (file,group)->
@@ -81,43 +87,10 @@ alert_show=()->
   alert("asd")
 
 video_subtitle=(data) ->
-  lang = data[0]
-  reader = new FileReader
-  file = $('.thread_page .thread_video_post #video_send')[0].files[0]
-  reader.onload = (e) ->
-    fd = new FormData
-    imgBlob = new Blob([ e.target.result ], type: file.type)
-    fd.append 'video', imgBlob, file.name
-    fd.append 'lang', lang
-    ajax_send = $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
-      processData: false
-      contentType: false
-      cache: false
-      type: 'post'
-      enctype: 'multipart/form-data'
-      data: fd
-      dataType: 'html'
-      success: (data) ->
-        console.log(data)
-        words = data.slice( 2 ).slice( 0,-2 ).split('\",\"')
-        console.log(words)
-        $("#fakeLoader").fadeOut();
-        if lang == "ja"
-          $("#video-subtitle-modal .subbase_en_form").val(words[0])
-          $("#video-subtitle-modal .subbase_jp_form").val("")
-          $("#video-subtitle-modal").modal("show")
-          #$("#sub_content_jp").val(words[1])
-        else if lang == "en"
-          #$("#sub_content_en").val(words[1])
-          $("#video-subtitle-modal .subbase_en_form").val("")
-          $("#video-subtitle-modal .subbase_jp_form").val(words[0])
-          $("#video-subtitle-modal").modal("show")
-        return
-      error: (err)->
-        console.log(err)
-        $("#fakeLoader").fadeOut();
-        return
-  reader.readAsArrayBuffer(file)
+  $(".thread_video_post .lang_input").val(data[0])
+  $(".thread_video_post").attr("action","/tasks/video")
+  $(".thread_video_post .thread_submit_video").click()
+  $(".thread_video_post").attr("action","/posts")
 
 $(document).on 'click', '.auto_subtitle_en', (event) ->
   $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
@@ -144,6 +117,7 @@ $(document).on 'click', '#video-modal .add_subtitle_en', (event) ->
   $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
 
 $(document).on 'click', '#video-modal .add_subtitle_self', (event) ->
+  video_show()
   $("#video-subtitle-modal").modal("show")
 
 $(document).on 'click', '#video-subtitle-modal .btn_video_send', (event) ->
@@ -151,15 +125,14 @@ $(document).on 'click', '#video-subtitle-modal .btn_video_send', (event) ->
   text_jp = $(".subbase_jp_form").val()
   $(".form_subtitle_input_en").val(text_en)
   $(".form_subtitle_input_jp").val(text_jp)
-  if text_en != "" && text_jp != ""
-    if prohibit_check(text_en,text_jp) == true
-      $("#video-subtitle-modal").modal("hide")
-      $("#video-modal").modal("hide")
-      $(".subbase_jp_form").val("")
-      $(".subbase_en_form").val("")
-      $(".thread_submit_video").click()
-    else
-      alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
+  if prohibit_check(text_en,text_jp) == true
+    $("#video-subtitle-modal").modal("hide")
+    $("#video-modal").modal("hide")
+    $(".subbase_jp_form").val("")
+    $(".subbase_en_form").val("")
+    $(".thread_submit_video").click()
+  else
+    alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
 
 
 
@@ -187,7 +160,7 @@ video_show2　=　->
   $("#video-modal .video_show .vjs-tech").attr("src":blobUrl)
   $("#video-modal .video_show").attr("style":"display:block")
 
-$(document).on 'click', '.thread_send .btn_send', (event) ->
+$(document).on 'click', '.post_form_page .thread_send .btn_send', (event) ->
   if($(this).attr("name") == "logined")
     type_check(this.id);
   else
@@ -195,7 +168,7 @@ $(document).on 'click', '.thread_send .btn_send', (event) ->
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
 
-add_post=(data,user_id)->
+add_post=(data)->
   if location.href.match("localhost")
     plus_post = $(data["message"].replace('example.org', 'localhost:3000'))
   else
@@ -258,14 +231,14 @@ type_check=(type)->
         alert_modal("Japanese form is empty.","日本語入力欄に何も書かれていません","fail")
       else
         #translate_google("en",text_jp)
-        $("#fakeLoader").fakeLoader({},translate_google,["en",text_jp]);
+        $("#fakeLoader").fakeLoader({},trans_submit,["en",text_jp]);
     else if type == "trans_to_jp"
       text_en = $(".base_en_form").val();
       text_jp = $(".base_jp_form").val();
       if text_en == ""
         alert_modal("English form is empty.","英語入力欄に何も書かれていません","fail")
       else
-        $("#fakeLoader").fakeLoader({},translate_google,["ja",text_en]);
+        $("#fakeLoader").fakeLoader({},trans_submit,["ja",text_en]);
         #translate_google("ja",text_en)
     else if type == "subtrans_to_en"
       text_en = $(".subbase_en_form").val();
@@ -274,18 +247,27 @@ type_check=(type)->
         alert_modal("Japanese subtitle form is empty.","日本語字幕入力欄に何も書かれていません","fail")
       else
         #translate_google("en",text_jp)
-        $("#fakeLoader").fakeLoader({},translate_google2,["en",text_jp]);
+        $("#fakeLoader").fakeLoader({},trans_submit2,["en",text_jp]);
     else if type == "subtrans_to_jp"
       text_en = $(".subbase_en_form").val();
       text_jp = $(".subbase_jp_form").val();
       if text_en == ""
         alert_modal("English subtitle form is empty.","英語字幕入力欄に何も書かれていません","fail")
       else
-        $("#fakeLoader").fakeLoader({},translate_google2,["ja",text_en]);
+        $("#fakeLoader").fakeLoader({},trans_submit2,["ja",text_en]);
         #translate_google("ja",text_en)
 
 
+trans_submit=(data) ->
+  lang = data[0]
+  $(".post_trans_form .lang_input").val(lang)
+  $(".post_trans_form .trans_send").click()
 
+trans_submit2=(data) ->
+  lang = data[0]
+  $(".post_subtrans_form .lang_input").val(lang)
+  $(".post_subtrans_form .trans_send").click()
+###
 translate_google=(data) ->
   lang = data[0]
   words = data[1]
@@ -345,7 +327,7 @@ translate_google2=(data) ->
       $("#fakeLoader").fadeOut();
       window.touched = false
       return
-
+###
 
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);

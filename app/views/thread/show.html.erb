@@ -9,7 +9,7 @@
 <% if logged_in? %>
   <div class="user_login"style="display:none"id="<%= current_user.id %>"></div>
 <% end %>
-<div class="thread_page">
+<div class="thread_page post_form_page">
   <div class="thread-panel-title"style="display:inline-block;display:none">
     <div class="panel-title-text">
       <span class="float_en">
@@ -29,7 +29,7 @@
   </div>
   <div class="footer thread_footer">
     <div class="thread_post_cover form_cover">
-      <div class="modal-body">
+      <%= form_tag('/tasks/trans',method: :post,class: "modal-body post_trans_form search_form_top",style:"display:block") do %>
         <div class="thread_post">
           <div class="post_form_cover post_form_cover_enjp connect_btn">
             <button class="btn help_show_small"data-toggle="modal" data-target="#help_slide">
@@ -69,9 +69,15 @@
             <%= image_tag "jap.png", class: "image" %>
             <%= text_area_tag :content_jp,"",class:"base_jp_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
           </div>
+          <%= hidden_field_tag :show_class_en,"base_en_form" %>
+          <%= hidden_field_tag :show_class_jp,"base_jp_form" %>
+          <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+          <%= hidden_field_tag :form_class ,"post_trans_form" %>
+          <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+          <%= submit_tag "",class:"trans_send",style:"display:none"%>
         </div>
-			</div>
-      <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+      <% end %>
+			<%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
         Powered by MT
       <% end %>
 
@@ -110,7 +116,7 @@
               <%= form.file_field :pict,id:"file_send",style:"display:none" %>
             <% end %>
           <% end %>
-          <%= form_for @post, :html => {:class => "thread_video_post post_button_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"} do |form| %>
+          <%= form_with(model: @post, local: true, class: "thread_video_post post_button_form", id: "form_input") do |form| %>
             <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
             <label for="video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-facetime-video picture_send"></div>
@@ -121,6 +127,16 @@
                 Video
               </div>
             </label>
+
+            <%= hidden_field_tag :show_class_en,".subbase_en_form" %>
+            <%= hidden_field_tag :show_class_jp,".subbase_jp_form" %>
+            <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+            <%= hidden_field_tag :show_class ,"#video-subtitle-modal" %>
+            <%= hidden_field_tag :show_modal ,"#video-subtitle-modal" %>
+            <%= hidden_field_tag :form_class ,"thread_video_post" %>
+            <%= hidden_field_tag :form_type ,"post" %>
+            <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+
             <%= form.hidden_field :type, :value => "video",class:"post_type"  %>
             <%= form.hidden_field :subtitle_en,class:"form_subtitle_input_en" %>
             <%= form.hidden_field :subtitle_jp,class:"form_subtitle_input_jp" %>
@@ -278,7 +294,7 @@
     </div>
   </div>
 </div>
-<div class="thread_post_cover">
+<div class="thread_post_cover post_form_page">
   <div class="modal fade" id="video-subtitle-modal" tabindex="-1">
   	<div class="modal-dialog"style="width:90vw">
   		<div class="modal-content">
@@ -289,37 +305,46 @@
               <source src='/' class="video_show_image"type='video/mp4'>
             </video>
           </div>
-          <div class="thread_post jimaku_form">
-            <div class="title">
-              字幕 / Subtitle
-            </div>
-            <div class="post_form_cover post_form_cover_enjp connect_btn">
-              <textarea class="subbase_en_form connect_btn content_post form-control"rows="6"></textarea>
-            </div>
-            <div class="space_form thread_send">
-              <div class="trans_cover">
-                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="subtrans_to_en"
-                name="<% if logged_in? %>logined<% end %>">
-                  <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                  <div class="button_text">
-                    翻訳
-                  </div>
-                </button>
+          <%= form_tag('/tasks/trans',method: :post,class: "modal-body post_subtrans_form search_form_top",style:"display:block") do %>
+            <div class="thread_post jimaku_form">
+              <div class="title">
+                字幕 / Subtitle
               </div>
-              <div class="trans_cover">
-                <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="subtrans_to_jp"
-                name="<% if logged_in? %>logined<% end %>">
-                  <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                  <div class="button_text">
-                    Trans
-                  </div>
-                </button>
+              <div class="post_form_cover post_form_cover_enjp connect_btn">
+                <%= text_area_tag :content_en,"",class:"subbase_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
+              </div>
+              <div class="space_form thread_send">
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn btn_send words_post_button"id="subtrans_to_en"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                    <div class="button_text">
+                      翻訳
+                    </div>
+                  </button>
+                </div>
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="subtrans_to_jp"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                    <div class="button_text">
+                      Trans
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="post_form_cover post_form_cover_enjp">
+                <%= text_area_tag :content_jp,"",class:"subbase_jp_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
               </div>
             </div>
-            <div class="post_form_cover post_form_cover_enjp">
-              <textarea class="subbase_jp_form connect_btn content_post form-control"rows="6"></textarea>
-            </div>
-          </div>
+
+            <%= hidden_field_tag :show_class_en,"subbase_en_form" %>
+            <%= hidden_field_tag :show_class_jp,"subbase_jp_form" %>
+            <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+            <%= hidden_field_tag :form_class ,"post_subtrans_form" %>
+            <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+            <%= submit_tag "",class:"trans_send",style:"display:none"%>
+          <% end %>
   			</div>
   			<div class="modal-footer"style="margin-top:10px">
           <button type="button" class="btn btn-default btn_send btn_video_send"id="enjp">

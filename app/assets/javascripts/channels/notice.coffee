@@ -58,7 +58,7 @@ send_check=()->
     $("#noticeModal").modal("hide")
     App.notice.make("enjp",content_jp,content_en,$(".get_other_id").attr("id"));
 
-$(document).on 'click', '.make_thread_cover .mes_post_button', (event) ->
+$(document).on 'click', '.notice_post_cover .mes_post_button', (event) ->
   type_check($(@).attr("id"),$(".get_other_id").attr("id"))
   event.preventDefault()
 
@@ -71,6 +71,20 @@ prohibit_check=(text_en,text_jp)->
       can_post = false
       return
   return can_post
+
+
+$(document).on 'click', '.thread_make .thread_auto_subtitle_en', (event) ->
+  $("#fakeLoader").fakeLoader({},video_subtitle,["ja"]);
+
+$(document).on 'click', '.thread_make .thread_auto_subtitle_ja', (event) ->
+  $("#fakeLoader").fakeLoader({},video_subtitle,["en"]);
+
+
+video_subtitle=(data) ->
+  $(".notice_post_cover .post_button_form .lang_input").val(data[0])
+  $(".notice_post_cover .post_button_form").attr("action","/tasks/video")
+  $(".notice_post_cover .post_button_form .thread_submit").click()
+  $(".notice_post_cover .post_button_form").attr("action","/notices")
 
 type_check=(id,type)->
   if type == undefined
@@ -106,13 +120,54 @@ type_check=(id,type)->
         alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
       else
         #translate_google(content_en,"ja")
-        $("#fakeLoader").fakeLoader({},translate_google,["ja",content_en]);
+        $("#fakeLoader").fakeLoader({},trans_submit,["ja",content_en]);
     else if id == "trans_to_en"
       if content_jp == ""
         alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
       else
         #translate_google(content_jp,"en")
-        $("#fakeLoader").fakeLoader({},translate_google,["en",content_jp]);
+        $("#fakeLoader").fakeLoader({},trans_submit,["en",content_jp]);
+    else if id == "subtrans_to_jp"
+      content_en = $(".subbase_en_form").val();
+      alert(content_en)
+      if content_en == ""
+        alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
+      else
+        #translate_google(content_en,"ja")
+        $("#fakeLoader").fakeLoader({},trans_submit2,["ja",content_en]);
+    else if id == "subtrans_to_en"
+      content_jp = $(".subbase_jp_form").val();
+      alert(content_jp)
+      if content_jp == ""
+        alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
+      else
+        #translate_google(content_jp,"en")
+        $("#fakeLoader").fakeLoader({},trans_submit2,["en",content_jp]);
+
+trans_submit=(data) ->
+  lang = data[0]
+  words = data[1]
+  if lang == "ja"
+    $(".notice_trans_form .notice_en_data_content").val(words)
+  else
+    $(".notice_trans_form .notice_jp_data_content").val(words)
+  send_time = $(".notice_post_cover .send_time").val()
+  $(".notice_trans_form .send_time").val(send_time)
+  $(".notice_trans_form .lang_input").val(lang)
+  $(".notice_trans_form .trans_send").click()
+
+trans_submit2=(data) ->
+  lang = data[0]
+  words = data[1]
+  if lang == "ja"
+    $(".notice_subtrans_form .notice_subbase_en_form").val(words)
+  else
+    $(".notice_subtrans_form .notice_subbase_en_form").val(words)
+
+  send_time = $(".notice_post_cover .send_time").val()
+  $(".notice_subtrans_form .send_time").val(send_time)
+  $(".notice_subtrans_form .lang_input").val(lang)
+  $(".notice_subtrans_form .trans_send").click()
 
 
 translate_google=(data) ->

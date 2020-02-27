@@ -111,6 +111,7 @@ Rails.application.routes.draw do
   post 'tasks/en',to:'tasks#lang_change_en'
   post 'tasks/jp',to:'tasks#lang_change_jp'
   post 'tasks/trans',to:'tasks#trans'
+  post 'tasks/video',to:'tasks#video'
   post 'delete',to:'tasks#delete'
   post '/report/user',to:"tasks#report_user"
   post '/report/post',to:"tasks#report_post_task"

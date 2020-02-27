@@ -17,25 +17,26 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
       now_page = urls[4]
     page_id_max = 20
     page = Math.ceil((parseFloat(data['chat_id'])) / page_id_max)
-    if user_id == data["chat"]['user_id']
+    if data["type"] == "new_maker"
+      alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
+      window.location.href = "/profile/5/" + data["notice_id"] + "/" + String(Number(page))
+    else if data["type"] == "maker"
       $(".notice_cover #post").attr("style","")
       $(".chat_thread_submit_image").attr("style","display:none;")
       $(".chat_thread_submit_video").attr("style","display:none;")
-
-    if url.indexOf("notice/new") != -1 && user_id == data["chat"]['user_id']
-      alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
-      window.location.href = "/profile/5/" + data["notice_id"] + "/" + String(Number(page))
-    else if url.indexOf("/profile/5") != -1 && Number(now_id) == data["chat"]['notice_id']
-      if Number(now_page) + 1 == page && parseInt(data['chat_id']) % page_id_max == 1
-        if user_id == data["chat"]['user_id']
-          window.location.href = "/profile/5/" + String(now_id) + "/" + String(Number(now_page) + 1)
-      else if Number(now_page) == page
-        if user_id == data['user_id']
+      $(".trans_send").attr("style","display:none")
+      if url.indexOf("/profile/5") != -1 && Number(now_id) == data["chat"]['notice_id']
+        if Number(now_page) + 1 == page && parseInt(data['chat_id']) % page_id_max == 1
+          if user_id == data["chat"]['user_id']
+            window.location.href = "/profile/5/" + String(now_id) + "/" + String(Number(now_page) + 1)
+        else if Number(now_page) == page
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
-        add_chat(data,user_id)
-      else
-        window.location.href = "/profile/5/" + String(now_id) + "/" + String(page)
+        else
+          window.location.href = "/profile/5/" + String(now_id) + "/" + String(page)
+    else if data["type"] == "accept" && url.indexOf("/profile/5") != -1 && Number(now_id) == data["chat"]['notice_id'] && Number(now_page) == page
+      if(!($('.thread_cover#'+data["chat"]['id']).length))
+        add_chat(data)
 
   make: (lang,mes_jp,mes_en, group)->
     window.translated = false
@@ -45,7 +46,6 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
     $(".chat_thread_submit_image").attr("style","display:none;pointer-events: none;")
     $(".chat_thread_submit_video").attr("style","display:none;pointer-events: none;")
     alert_modal("You successed to post.","投稿に成功しました","success")
-    console.log(group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:"")
     @perform('make',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:"")
     $(".base_en_form").val("")
     $(".base_jp_form").val("")
@@ -92,7 +92,7 @@ $(document).on 'change', '.chat_image_post .post_file', (event) ->
   if (this.files[0].type != 'text/plain')
     reader.readAsDataURL(this.files[0], 'UTF-8');
 
-$(document).on 'click', '.notice_cover .btn_send', (event) ->
+$(document).on 'click', '.chat_send .btn_send', (event) ->
   if($(this).attr("name") == "logined")
     type_check(this.id);
   else
@@ -136,7 +136,6 @@ prohibit_check=(text_en,text_jp)->
   check_text_jp = text_jp.toLowerCase().replace(/-/g, '').replace(/\./g, '').replace(/_/g, '').replace(/ /g, '')
   gon.prohibit.forEach (prohibit) ->
     if check_text_en.match?(prohibit) || check_text_jp.match?(prohibit)
-      console.log("not")
       can_post = false
       return
   return can_post
@@ -162,14 +161,39 @@ type_check=(id)->
     if text_jp == ""
       alert_modal("The Japanese form is empty.","日本語入力欄に何も書かれていません","fail");
     else
-      #translate_google("en",text_jp)
-      $("#fakeLoader").fakeLoader({},translate_google,["ja",text_jp]);
+      $("#fakeLoader").fakeLoader({},trans_submit,["en",text_jp]);
   else if id == "trans_to_jp"
     if text_en == ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else
+      $("#fakeLoader").fakeLoader({},trans_submit,["ja",text_en]);
+  else if id == "subtrans_to_en"
+    text_en = $(".subbase_en_form").val();
+    text_jp = $(".subbase_jp_form").val();
+    if text_jp == ""
+      alert_modal("Japanese subtitle form is empty.","日本語字幕入力欄に何も書かれていません","fail")
+    else
+      #translate_google("en",text_jp)
+      $("#fakeLoader").fakeLoader({},trans_submit2,["en",text_jp]);
+  else if id == "subtrans_to_jp"
+    text_en = $(".subbase_en_form").val();
+    text_jp = $(".subbase_jp_form").val();
+    if text_en == ""
+      alert_modal("English subtitle form is empty.","英語字幕入力欄に何も書かれていません","fail")
+    else
+      $("#fakeLoader").fakeLoader({},trans_submit2,["ja",text_en]);
       #translate_google("ja",text_en)
-      $("#fakeLoader").fakeLoader({},translate_google,["ja",text_en]);
+
+trans_submit=(data) ->
+  lang = data[0]
+  $(".chat_trans_form .lang_input").val(lang)
+  $(".chat_trans_form .trans_send").click()
+
+trans_submit2=(data) ->
+  lang = data[0]
+  $(".chat_subtrans_form .lang_input").val(lang)
+  $(".chat_subtrans_form .trans_send").click()
+
 
 $(document).on 'change', '.notice_cover #image_send', (event) ->
   $(".post_type").val("image")
@@ -190,43 +214,10 @@ $(document).on 'change', '.notice_cover .chat_thread_image_post #chat_file_send'
 
 
 video_subtitle=(data) ->
-  lang = data[0]
-  reader = new FileReader
-  file = $('.notice_cover .chat_thread_video_post #chat_video_send')[0].files[0]
-  reader.onload = (e) ->
-    fd = new FormData
-    imgBlob = new Blob([ e.target.result ], type: file.type)
-    fd.append 'video', imgBlob, file.name
-    fd.append 'lang', lang
-    ajax_send = $.ajax 'https://still-plains-44123.herokuapp.com/user_photo',
-      processData: false
-      contentType: false
-      cache: false
-      type: 'post'
-      enctype: 'multipart/form-data'
-      data: fd
-      dataType: 'html'
-      success: (data) ->
-        console.log(data)
-        words = data.slice( 2 ).slice( 0,-2 ).split('\",\"')
-        console.log(words)
-        $("#fakeLoader").fadeOut();
-        if lang == "ja"
-          $("#chat_video-subtitle-modal .subbase_en_form").val(words[0])
-          $("#chat_video-subtitle-modal .subbase_jp_form").val("")
-          $("#chat_video-subtitle-modal").modal("show")
-          #$("#sub_content_jp").val(words[1])
-        else if lang == "en"
-          #$("#sub_content_en").val(words[1])
-          $("#chat_video-subtitle-modal .subbase_en_form").val("")
-          $("#chat_video-subtitle-modal .subbase_jp_form").val(words[0])
-          $("#chat_video-subtitle-modal").modal("show")
-        return
-      error: (err)->
-        console.log(err)
-        $("#fakeLoader").fadeOut();
-        return
-  reader.readAsArrayBuffer(file)
+  $(".chat_thread_video_post .lang_input").val(data[0])
+  $(".chat_thread_video_post").attr("action","/tasks/video")
+  $(".chat_thread_video_post .chat_thread_submit_video").click()
+  $(".chat_thread_video_post").attr("action","/chats")
 
 $(document).on 'change', '.notice_cover #chat_video_send', (event) ->
   if($(this).attr("class") == "logined")
@@ -293,6 +284,7 @@ video_show2　=　->
   $("#chat_video-modal .video_show .vjs-tech").attr("poster":blobUrl)
   $("#chat_video-modal .video_show .vjs-tech").attr("src":blobUrl)
   $("#chat_video-modal .video_show").attr("style":"display:block")
+
 
 translate_google=(data) ->
   lang = data[0]

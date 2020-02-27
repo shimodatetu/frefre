@@ -28,6 +28,7 @@
     </div>
     <div class="panel panel-warning make_thread_category thread_make">
       <%= form_for Group.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+        <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
         <div class="panel-body content_cover"style="margin-top:20px;">
           <div class="title_input_name">
             <div class="sub_jp">
@@ -67,7 +68,26 @@
           </div>
           <div class="title_input">
             <%= form.text_field :title_en, id:"title",class:"form-control form_lang en_data_title" %>
-            <div class="sub_space"></div>
+            <div class="space_form">
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_en"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                  <div class="button_text">
+                    翻訳
+                  </div>
+                </button>
+              </div>
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_jp"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                  <div class="button_text">
+                    Trans
+                  </div>
+                </button>
+              </div>
+            </div>
             <%= form.text_field :title_jp, id:"title",class:"form-control form_lang jp_data_title" %>
           </div>
         </div>
@@ -82,9 +102,9 @@
           </div>
           <div class="content_input">
             <%= text_area_tag :content_eng,"", id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
-            <div class="space_form">
+            <div class="space_form"style="margin-top:5px;">
               <div class="trans_cover">
-                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_en"
+                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_content_en"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-left picture_send"></div>
                   <div class="button_text">
@@ -93,7 +113,7 @@
                 </button>
               </div>
               <div class="trans_cover">
-                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_jp"
+                <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_content_jp"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-right picture_send"></div>
                   <div class="button_text">
@@ -220,6 +240,15 @@
             </div>
           </button>
         </div>
+        <%= hidden_field_tag :show_class_en,".sub_en_data_content" %>
+        <%= hidden_field_tag :show_class_jp,".sub_jp_data_content" %>
+        <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+        <%= hidden_field_tag :show_class ,".thread_make .post_button_form" %>
+        <%= hidden_field_tag :show_modal ,"" %>
+        <%= hidden_field_tag :form_class ,"thread_make .post_button_form" %>
+        <%= hidden_field_tag :form_type ,"group" %>
+        <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+
         <%= form.submit "",class:"thread_submit",style:"display:none" %>
       <% end %>
     </div>
@@ -415,6 +444,39 @@
       </div>
     </div>
   </div>
+
+  <%= form_tag('/tasks/trans',method: :post,class: "modal-body thread_trans_title search_form_top",style:"display:block") do %>
+    <%= hidden_field_tag :content_en,"",class:"thread_en_data_title" %>
+    <%= hidden_field_tag :content_jp,"",class:"thread_jp_data_title" %>
+    <%= hidden_field_tag :show_class_en,"en_data_title" %>
+    <%= hidden_field_tag :show_class_jp,"jp_data_title" %>
+    <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+    <%= hidden_field_tag :form_class ,"thread_make" %>
+    <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+    <%= submit_tag "",class:"trans_send",style:"display:none"%>
+  <% end %>
+
+  <%= form_tag('/tasks/trans',method: :post,class: "modal-body thread_trans_content search_form_top",style:"display:block") do %>
+    <%= hidden_field_tag :content_en,"",class:"thread_en_data_content" %>
+    <%= hidden_field_tag :content_jp,"",class:"thread_jp_data_content" %>
+    <%= hidden_field_tag :show_class_en,"en_data_content" %>
+    <%= hidden_field_tag :show_class_jp,"jp_data_content" %>
+    <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+    <%= hidden_field_tag :form_class ,"thread_make" %>
+    <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+    <%= submit_tag "",class:"trans_send",style:"display:none"%>
+  <% end %>
+
+  <%= form_tag('/tasks/trans',method: :post,class: "modal-body thread_trans_subtitle search_form_top",style:"display:block") do %>
+    <%= hidden_field_tag :content_en,"",class:"thread_en_data_subtitle" %>
+    <%= hidden_field_tag :content_jp,"",class:"thread_jp_data_subtitle" %>
+    <%= hidden_field_tag :show_class_en,"sub_en_data_content" %>
+    <%= hidden_field_tag :show_class_jp,"sub_jp_data_content" %>
+    <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+    <%= hidden_field_tag :form_class ,"thread_make" %>
+    <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+    <%= submit_tag "",class:"trans_send",style:"display:none"%>
+  <% end %>
 <% else %>
   <div class="panel panel-warning not_logined_cover">
     <div class='panel-body not_logined'>

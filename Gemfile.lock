@@ -390,6 +390,8 @@ GEM
     rack (2.0.6)
     rack-attack (6.2.2)
       rack (>= 1.0, < 3)
+    rack-proxy (0.6.5)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.2)
@@ -508,6 +510,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webpacker (4.2.2)
+      activesupport (>= 4.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 4.2)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -533,6 +539,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   dropzonejs-rails
+  faraday
   fog
   gon
   google-cloud-translate
@@ -561,6 +568,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webpacker
 
 RUBY VERSION
    ruby 2.4.1p111

@@ -2,7 +2,7 @@
 <% if manager_logged_in? %>
   <% lang = session["lang"] %>
   <% session["now_group"] = params[:id] %>
-  <% user = User.find(params[:id]) %>
+  <% user = User.find_by(id:params[:id]) %>
 
   <div class="search_result"style="margin-top:50px">
     <div class="thread_all thread_all_post">

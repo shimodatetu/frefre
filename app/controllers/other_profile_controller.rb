@@ -1,6 +1,6 @@
 class OtherProfileController < ApplicationController
   def show
-    other_user = User.find(1)
+    other_user = User.find_by(id:1)
     if User.find_by(id:params[:id].to_i)
       other_user = User.find_by(id:params[:id].to_i)
     end

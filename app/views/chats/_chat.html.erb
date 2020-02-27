@@ -4,7 +4,7 @@
 <% if logged_in? %>
   <% current_user_id = current_user.id %>
 <% end %>
-<div class="thread_cover">
+<div class="thread_cover"id="<%= chat.id %>">
   <div class="group_user_cover">
     <div class="group_img_cover">
       <% url = "/profile" %>

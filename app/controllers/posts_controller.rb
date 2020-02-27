@@ -9,6 +9,21 @@ class PostsController < ApplicationController
     @posts = Post.all.where("deleted = false")
     @groups = Group.all.where("deleted = false")
   end
+
+  def trans3(params)
+    conn = Faraday.new(:url => 'http://example.com') do |builder|
+      builder.request :multipart   # マルチパートでデータを送信
+      builder.request :url_encoded
+      builder.adapter :net_http
+    end
+
+    params = {
+      :name    => 'nyanco',
+      :raw => Faraday::UploadUI.new('files/output.raw', 'raw')
+    }
+    conn.put '/api/nyan.json', params
+  end
+
   def trans2(params)
     @uri = URI.parse("http://localhost:5000/api/file")
     @http = Net::HTTP.new(@uri.host, @uri.port)
@@ -104,7 +119,6 @@ class PostsController < ApplicationController
     req.set_form(data, "multipart/form-data")
 
     res = http.request(req)
-    p "----------------------"
     p res.body
   end
 
@@ -120,7 +134,7 @@ class PostsController < ApplicationController
         post.pict = data[:pict]
         post.save
       elsif data[:type] == "video" && data[:video] != nil
-        #trans(params)d
+        #trans3(params)
         post.subtitle_en = data[:subtitle_en]
         post.subtitle_jp = data[:subtitle_jp]
         post.video = data[:video]

@@ -43,7 +43,7 @@ class NoticeController < ApplicationController
   def create
     if (notice = current_user.notices.includes(:users).where('users.id' => params['address'])).blank?
       notice = Notice.new()
-      notice.users << User.find(params['address'])#最初相手
+      notice.users << User.find_by(id:params['address'])#最初相手
       notice.users << current_user
       if notice.save
         chat = Chat.new()

@@ -2,7 +2,7 @@
 <% if manager_logged_in? %>
   <% lang = session["lang"] %>
   <% session["now_group"] = params[:id] %>
-  <% report_user = Reportuser.find(params[:id]) %>
+  <% report_user = ReportUser.find_by(id:params[:id]) %>
   <% user = report_user.user %>
   <% from_user = User.find_by(id:report_user.from_user) %>
 
