@@ -139,7 +139,7 @@ p{
   }
 }
 .main_content_cover{
-  padding-top:60px;
+  padding-top:45px;
   padding-left:5px;
   width: calc(100% - 310px);
   display: inline-block;
@@ -470,6 +470,7 @@ body{
 }
 
 @media screen and (max-width: 570px){
+
   .lang_bar_cover{
     .en_country{
       margin-left: 10px;
@@ -540,10 +541,16 @@ body{
       .post_content_position{
         margin-top: 7px;
       }
+      .see_more{
+        display:none;
+      }
+      .post_content{
+        margin-right:0px!important;
+      }
     }
   }
   .nav-link{
-    font-size: calc(4vw - 3px)!important;
+    padding:5px 10px !important;
     .jp{
       font-size: calc(3vw - 3px)!important;
     }
@@ -551,62 +558,54 @@ body{
   .profile_sub{
     width:25%!important;
     .edit_user{
-      margin-top: calc(-7vw - 15px)!important;
+      margin-top: -40px!important
     }
     .profile_picture{
-      width:100%!important;
+      width: 100px!important;;
       .group_img{
-        width:100%!important;
+        width:100px!important;
       }
     }
     .profile_contents_change{
-      width:100%!important;
+      width:100px!important;
     }
   }
   .profile_other, .profile{
     .profile_main{
-      margin-left:calc(30% - 20px)!important;
-      width:70%!important;
+      margin-left: 100px !important;
+      width: calc(100% - 120px)!important;
     }
     .profile_picture .group_img{
-      height:18vw!important;
+      height:100px!important;
     }
     .profile_title .title{
       .jp{
-        font-size:calc(3vw - 3px)!important;
+        font-size:12px!important;
       }
-      font-size:calc(5vw - 3px)!important;
+      font-size:16px!important;
     }
     .content_cover{
       width:100%!important;
-    }
-    .content_name{
-      .en{
-        font-size:calc(5vw - 3px);
-      }
-      .jp{
-        font-size:calc(3vw - 3px)!important;
-      }
     }
     .tab-content{
       padding-top:calc(14vw + 20px)!important;
     }
     .profile_picture_change{
       .en{
-        font-size: calc(4vw - 3px)!important;
+        font-size: 14px!important;
         margin-top: 1px!important;
       }
       .jp{
-        font-size: calc(3vw - 3px)!important;
+        font-size: 12px!important;
       }
     }
     .profile_contents_button{
       .en{
-        font-size: calc(4vw - 2px)!important;
+        font-size: 14px!important;
         margin-top: 1px!important;
       }
       .jp{
-        font-size: calc(3vw - 3px)!important;
+        font-size: 10px;
       }
     }
     .en_country{
@@ -624,12 +623,6 @@ body{
         margin-left: 10px!important;
       }
     }
-  }
-  .yes_text, .no_text{
-    font-size:4vw!important;
-  }
-  .yes_text{
-    margin-left:20px!important;
   }
   input.cmn-toggle-round + label {
     width:5vw!important;
