@@ -4,6 +4,7 @@ require 'json'
 
 class TasksController < ApplicationController
   def video
+    p "--------------------"
     p params[:form_type]
     p params[params[:form_type]][:video]
     if current_user == nil || none_nil(params[:form_type]) || params[params[:form_type]][:video] == nil || none_nil(params[:show_class]) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(params[:lang])
@@ -42,12 +43,12 @@ class TasksController < ApplicationController
       picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")
     }
     response = connection.post("/upload_raw", paramater)
-    #stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
-    p response.body
+    stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
     answer = response.body.slice(2..-3).force_encoding("UTF-8")
     NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
   end
   def trans
+    p "--------------------"
     lang = params[:lang]
     words = ""
     if lang == "ja"
