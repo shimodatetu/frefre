@@ -29,26 +29,23 @@ class TasksController < ApplicationController
       index = std_data.index("Hz,")
       hertz = std_data[index - 1].to_i
       stdout, stderr, status = Open3.capture3('ffmpeg -i files/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le files/'+file_name+'.raw')
-      video_subtitle(file_name,params)
+      connection = Faraday.new("https://still-plains-44123.herokuapp.com") do |builder|
+        # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
+        builder.request :multipart
+        builder.request :url_encoded
+        builder.adapter Faraday.default_adapter
+      end
+      paramater = {
+        lang:params[:lang] ,
+        picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")
+      }
+      response = connection.post("/upload_raw", paramater)
+      stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
+      answer = response.body.slice(2..-3).force_encoding("UTF-8")
+      NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
     end
   end
 
-  def video_subtitle(file_name,params)
-    connection = Faraday.new("https://still-plains-44123.herokuapp.com") do |builder|
-      # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
-      builder.request :multipart
-      builder.request :url_encoded
-      builder.adapter Faraday.default_adapter
-    end
-    paramater = {
-      lang:params[:lang] ,
-      picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")
-    }
-    response = connection.post("/upload_raw", paramater)
-    stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
-    answer = response.body.slice(2..-3).force_encoding("UTF-8")
-    NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
-  end
   def trans
     p "--------------------"
     lang = params[:lang]
