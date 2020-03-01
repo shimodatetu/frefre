@@ -1,7 +1,7 @@
 require 'net/https'
 require 'uri'
 require 'json'
-
+require 'tempfile'
 class TasksController < ApplicationController
   def video
     if current_user == nil || none_nil(params[:form_type]) || params[params[:form_type]][:video] == nil || none_nil(params[:show_class]) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(params[:lang])
@@ -17,12 +17,15 @@ class TasksController < ApplicationController
         file.write (num+ 1).to_s
       file.close
       file_name = "output"+num.to_s
-      url = params[params[:form_type]][:video].tempfile.path
-      p "--------------------"
-      p params[params[:form_type]][:video].path
-      p "======================="
-      p params[params[:form_type]][:video].tempfile.path
-      p "--------------------"
+      url = params[params[:form_type]][:video].path
+      Tempfile.open { |t|
+        t.binmode
+        t.write "params[params[:form_type]][:video]"
+        url = t.path
+      }
+      p "----------------"
+      p url
+      p "----------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
       stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
       std_data = stderr.split(" ")
