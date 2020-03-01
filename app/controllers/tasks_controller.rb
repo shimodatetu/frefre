@@ -4,11 +4,6 @@ require 'json'
 
 class TasksController < ApplicationController
   def video
-    p "--------------------"
-    p "tasks/video"
-    p "--------------------"
-    p params[:form_type]
-    p params[params[:form_type]][:video]
     if current_user == nil || none_nil(params[:form_type]) || params[params[:form_type]][:video] == nil || none_nil(params[:show_class]) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(params[:lang])
       NodejsChannel.broadcast_to(current_user,"type":"video","success":"false","params":params)
       return
@@ -23,6 +18,9 @@ class TasksController < ApplicationController
       file.close
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].tempfile.path
+      p "--------------------"
+      p params[params[:form_type]][:video].tempfile.path
+      p "--------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
       stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
       std_data = stderr.split(" ")
