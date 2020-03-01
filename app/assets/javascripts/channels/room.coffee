@@ -99,6 +99,8 @@ $(document).on 'click', '.auto_subtitle_en', (event) ->
 $(document).on 'click', '.auto_subtitle_ja', (event) ->
   $("#fakeLoader").fakeLoader({},video_subtitle,["en"]);
 
+$(document).on 'click', '.thread_page .thread_video_post #video_send', (event) ->
+  this.value = ""
 $(document).on 'change', '.thread_page .thread_video_post #video_send', (event) ->
   if($(this).attr("class") == "logined")
     video_show2()

@@ -32,6 +32,8 @@ $(document).on 'change', '.make_thread_cover #notice_image_send', (event) ->
   reader.readAsDataURL @files[0]
   $(".image_show").attr("style":"display:block");
 
+$(document).on 'click', '.make_thread_cover #notice_video_send', (event) ->
+  this.value =""
 $(document).on 'change', '.make_thread_cover #notice_video_send', (event) ->
   $(".post_type").val("video")
   $(".image_show").attr("style":"display:none");

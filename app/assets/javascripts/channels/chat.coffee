@@ -196,7 +196,6 @@ trans_submit2=(data) ->
   $(".cancel_button_class").val(".chat_subtrans_form .send_time")
   $(".chat_subtrans_form .trans_send").click()
 
-
 $(document).on 'change', '.notice_cover #image_send', (event) ->
   $(".post_type").val("image")
   $(".video_show").attr("style":"display:none");
@@ -208,6 +207,8 @@ $(document).on 'change', '.notice_cover #image_send', (event) ->
   reader.readAsDataURL @files[0]
   $(".image_show").attr("style":"display:block");
 
+$(document).on 'click', '.notice_cover .chat_thread_image_post #chat_file_send', (event) ->
+  this.value = ""
 $(document).on 'change', '.notice_cover .chat_thread_image_post #chat_file_send', (event) ->
   if($(this).attr("class") == "logined")
     $(".chat_thread_submit_image").click()
@@ -222,6 +223,8 @@ video_subtitle=(data) ->
   $(".chat_thread_video_post .chat_thread_submit_video").click()
   $(".chat_thread_video_post").attr("action","/chats")
 
+$(document).on 'click', '.notice_cover #chat_video_send', (event) ->
+  this.value = ""
 $(document).on 'change', '.notice_cover #chat_video_send', (event) ->
   if($(this).attr("class") == "logined")
     $(".post_type").val("video")

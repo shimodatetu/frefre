@@ -66,6 +66,8 @@ $(document).on 'change', '.make_thread_cover #image_send', (event) ->
   $(".image_show").attr("style":"display:block");
 
 
+$(document).on 'click', '.make_thread_cover #video_send', (event) ->
+  this.value = ""
 $(document).on 'change', '.make_thread_cover #video_send', (event) ->
   $(".post_type").val("video")
   $(".image_show").attr("style":"display:none");
