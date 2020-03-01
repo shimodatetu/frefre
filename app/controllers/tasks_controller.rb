@@ -35,7 +35,6 @@ class TasksController < ApplicationController
       # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
       builder.request :multipart
       builder.request :url_encoded
-
       builder.adapter Faraday.default_adapter
     end
     paramater = {
@@ -46,7 +45,6 @@ class TasksController < ApplicationController
     stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
     answer = response.body.slice(2..-3).force_encoding("UTF-8")
     NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
-
   end
   def trans
     begin
@@ -61,7 +59,7 @@ class TasksController < ApplicationController
         NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
         return
       else
-        uri = URI.parse("http://localhost:5000/trans_mirai")
+        uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
         req = Net::HTTP::Post.new(uri)
         req["Authorization"] = "Bearer sample_token"
         req.set_form_data({"words"=>words, "lang"=>lang})
