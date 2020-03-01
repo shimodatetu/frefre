@@ -47,7 +47,6 @@ class TasksController < ApplicationController
     NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
   end
   def trans
-    answer = "asd"
     lang = params[:lang]
     words = ""
     if lang == "ja"
@@ -60,18 +59,18 @@ class TasksController < ApplicationController
       return
     else
       uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
-      req = Net::HTTP::Post.new(uri)
-      req["Authorization"] = "Bearer sample_token"
-      req.set_form_data({"words"=>words, "lang"=>lang})
-      req_options = {
-       use_ssl: uri.scheme == "https"
-      }
-      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-      	http.request(req)
-      end
-      answer = response.body
-      answer = response.body.slice(2..-3).force_encoding("UTF-8")
+      http = Net::HTTP.new(uri.host, uri.port)
 
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      req = Net::HTTP::Post.new(uri.path)
+      req.set_form_data({"words"=>words, "lang"=>lang})
+
+      res = http.request(req)
+
+      p answer = res.body
+      p answer = res.body.slice(2..-3).force_encoding("UTF-8")
       NodejsChannel.broadcast_to(current_user,"type":"trans","trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":lang,"success":"true")
       return
     end
