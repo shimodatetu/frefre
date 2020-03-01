@@ -5,6 +5,8 @@ require 'json'
 class TasksController < ApplicationController
   def video
     p "--------------------"
+    p "tasks/video"
+    p "--------------------"
     p params[:form_type]
     p params[params[:form_type]][:video]
     if current_user == nil || none_nil(params[:form_type]) || params[params[:form_type]][:video] == nil || none_nil(params[:show_class]) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(params[:lang])
