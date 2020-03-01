@@ -19,6 +19,8 @@ class TasksController < ApplicationController
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].tempfile.path
       p "--------------------"
+      p params[params[:form_type]][:video].tempfile
+      p "======================="
       p params[params[:form_type]][:video].tempfile.path
       p "--------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
