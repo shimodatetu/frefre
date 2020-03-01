@@ -1,4 +1,4 @@
-require 'net/http'
+require 'net/https'
 require 'uri'
 require 'json'
 
@@ -42,40 +42,38 @@ class TasksController < ApplicationController
       picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")
     }
     response = connection.post("/upload_raw", paramater)
-    stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
+    #stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
     answer = response.body.slice(2..-3).force_encoding("UTF-8")
     NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
   end
   def trans
-    begin
-      lang = params[:lang]
-      words = ""
-      if lang == "ja"
-        words = params[:content_en]
-      elsif lang == "en"
-        words = params[:content_jp]
+    answer = "asd"
+    lang = params[:lang]
+    words = ""
+    if lang == "ja"
+      words = params[:content_en]
+    elsif lang == "en"
+      words = params[:content_jp]
+    end
+    if current_user == nil || none_nil(words) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(lang)
+      NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
+      return
+    else
+      uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
+      req = Net::HTTP::Post.new(uri)
+      req["Authorization"] = "Bearer sample_token"
+      req.set_form_data({"words"=>words, "lang"=>lang})
+      req_options = {
+       use_ssl: uri.scheme == "https"
+      }
+      response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      	http.request(req)
       end
-      if current_user == nil || none_nil(words) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(lang)
-        NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
-        return
-      else
-        uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
-        req = Net::HTTP::Post.new(uri)
-        req["Authorization"] = "Bearer sample_token"
-        req.set_form_data({"words"=>words, "lang"=>lang})
-        req_options = {
-         use_ssl: uri.scheme == "http"
-        }
-        response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-        	http.request(req)
-        end
-        answer = response.body.slice(2..-3).force_encoding("UTF-8")
+      answer = response.body
+      answer = response.body.slice(2..-3).force_encoding("UTF-8")
 
-        NodejsChannel.broadcast_to(current_user,"type":"trans","trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":lang,"success":"true")
-        return
-      end
-    rescue => error
-      NodejsChannel.broadcast_to(current_user,"type":"trans","success":error)
+      NodejsChannel.broadcast_to(current_user,"type":"trans","trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":lang,"success":"true")
+      return
     end
   end
 
