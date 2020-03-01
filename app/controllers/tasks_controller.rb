@@ -19,7 +19,7 @@ class TasksController < ApplicationController
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].tempfile.path
       p "--------------------"
-      p params[params[:form_type]][:video].tempfile
+      p params[params[:form_type]][:video].path
       p "======================="
       p params[params[:form_type]][:video].tempfile.path
       p "--------------------"
