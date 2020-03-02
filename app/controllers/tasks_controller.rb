@@ -23,8 +23,6 @@ class TasksController < ApplicationController
       # 一時ファイル書き込み
       File.open(url, 'wb') do |file|
         file.write(params[params[:form_type]][:video].read)
-        url = url.to_s
-        url = "https://www.frefreforum.com"+url
         stdout, stderr, status = Open3.capture3('ls /tmp')
         p "-----------------------"
         p stdout
