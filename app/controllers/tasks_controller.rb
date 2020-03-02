@@ -23,13 +23,10 @@ class TasksController < ApplicationController
       # 一時ファイル書き込み
       File.open(url, 'wb') do |file|
         file.write(params[params[:form_type]][:video].read)
+        url = url.to_s
+        stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
+        stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
       end
-      url = url.to_s
-      p "-----------------"
-      p url
-      p "-------------------"
-      stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
-      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
       std_data = stderr.split(" ")
       index = std_data.index("Hz,")
       hertz = std_data[index - 1].to_i
