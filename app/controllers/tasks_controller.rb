@@ -29,9 +29,7 @@ class TasksController < ApplicationController
         p "-----------------------"
         p stdout
         p "-----------------------"
-        stdout, stderr, status = Open3.capture3('urlSCRIPT_DIR=$(cd $(dirname $0); pwd)')
-        p stdout
-        p stderr
+        p url
         p "-----------------------"
         stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
         stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
