@@ -25,10 +25,9 @@ class TasksController < ApplicationController
         file.write(params[params[:form_type]][:video].read)
         url = url.to_s
         url = "https://www.frefreforum.com"+url
-        stdout, stderr, status = Open3.capture3('ls')
+        stdout, stderr, status = Open3.capture3('ls -l /tmp')
         p "-----------------------"
         p stdout
-        p stderr
         p "-----------------------"
         stdout, stderr, status = Open3.capture3('urlSCRIPT_DIR=$(cd $(dirname $0); pwd)')
         p stdout
