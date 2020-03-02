@@ -18,14 +18,13 @@ class TasksController < ApplicationController
       file.close
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].path
-      Tempfile.open { |t|
-        t.binmode
-        t.write "params[params[:form_type]][:video]"
-        url = t.path
-      }
-      p "----------------"
-      p url
-      p "----------------"
+      url = Rails.root.join('tmp', 'asd.mp4')
+
+      # 一時ファイル書き込み
+      File.open(url, 'wb') do |file|
+        file.write(params[params[:form_type]][:video].read)
+      end
+      url = url.to_s
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
       stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
       std_data = stderr.split(" ")
