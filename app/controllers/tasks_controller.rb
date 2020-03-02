@@ -18,7 +18,7 @@ class TasksController < ApplicationController
       file.close
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].path
-      url = Rails.root.join('tmp', 'asd.mp4')
+      #url = Rails.root.join('tmp', 'asd.mp4')
 
       # 一時ファイル書き込み
       File.open(url, 'wb') do |file|
