@@ -27,11 +27,11 @@ class TasksController < ApplicationController
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
       p stderr
       p "==============================="
-      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
+      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy /tmp/files/'+ file_name +'.m4a')
       std_data = stderr.split(" ")
       index = std_data.index("Hz,")
       hertz = std_data[index - 1].to_i
-      stdout, stderr, status = Open3.capture3('ffmpeg -i files/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le files/'+file_name+'.raw')
+      stdout, stderr, status = Open3.capture3('ffmpeg -i /tmp/files/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le files/'+file_name+'.raw')
       connection = Faraday.new("https://still-plains-44123.herokuapp.com") do |builder|
         # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
         builder.request :multipart
