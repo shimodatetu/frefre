@@ -18,41 +18,35 @@ class TasksController < ApplicationController
       file.close
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].path
-      #url = Rails.root.join('tmp', 'asd.mp4')
-
-      # 一時ファイル書き込み
-      File.open(url, 'wb') do |file|
-        file.write(params[params[:form_type]][:video].read)
-        stdout, stderr, status = Open3.capture3('ls /tmp')
-        p "-----------------------"
-        p stdout
-        p "-----------------------"
-        p params[params[:form_type]][:video].path
-        p "-----------------------"
-        stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
-        p stderr
-        p "==============================="
-        stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
-        std_data = stderr.split(" ")
-        index = std_data.index("Hz,")
-        hertz = std_data[index - 1].to_i
-        stdout, stderr, status = Open3.capture3('ffmpeg -i files/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le files/'+file_name+'.raw')
-        connection = Faraday.new("https://still-plains-44123.herokuapp.com") do |builder|
-          # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
-          builder.request :multipart
-          builder.request :url_encoded
-          builder.adapter Faraday.default_adapter
-        end
-        paramater = {
-          lang:params[:lang] ,
-          picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")
-        }
-        response = connection.post("/upload_raw", paramater)
-        stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
-        answer = response.body.slice(2..-3).force_encoding("UTF-8")
-        NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
-
+      stdout, stderr, status = Open3.capture3('ls /tmp')
+      p "-----------------------"
+      p stdout
+      p "-----------------------"
+      p params[params[:form_type]][:video].path
+      p "-----------------------"
+      stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
+      p stderr
+      p "==============================="
+      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
+      std_data = stderr.split(" ")
+      index = std_data.index("Hz,")
+      hertz = std_data[index - 1].to_i
+      stdout, stderr, status = Open3.capture3('ffmpeg -i files/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le files/'+file_name+'.raw')
+      connection = Faraday.new("https://still-plains-44123.herokuapp.com") do |builder|
+        # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
+        builder.request :multipart
+        builder.request :url_encoded
+        builder.adapter Faraday.default_adapter
       end
+      paramater = {
+        lang:params[:lang] ,
+        picture: Faraday::UploadIO.new("files/"+file_name+".raw", "image/jpeg")
+      }
+      response = connection.post("/upload_raw", paramater)
+      stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
+      answer = response.body.slice(2..-3).force_encoding("UTF-8")
+      NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
+
     end
   end
 
