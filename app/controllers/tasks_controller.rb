@@ -25,6 +25,9 @@ class TasksController < ApplicationController
         file.write(params[params[:form_type]][:video].read)
       end
       url = url.to_s
+      p "-----------------"
+      p url
+      p "-------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
       stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
       std_data = stderr.split(" ")
