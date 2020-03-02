@@ -24,6 +24,10 @@ class TasksController < ApplicationController
       File.open(url, 'wb') do |file|
         file.write(params[params[:form_type]][:video].read)
         url = url.to_s
+        url = "https://www.frefreforum.com"+url
+        p "-----------------------"
+        p url
+        p "-----------------------"
         stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
         stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy files/'+ file_name +'.m4a')
         std_data = stderr.split(" ")
@@ -44,7 +48,7 @@ class TasksController < ApplicationController
         stdout, stderr, status = Open3.capture3('rm files/'+file_name+'.m4a files/'+file_name+'.raw')
         answer = response.body.slice(2..-3).force_encoding("UTF-8")
         NodejsChannel.broadcast_to(current_user,"type":"video","trans":answer,"show_modal":params[:show_modal],"show_class":params[:show_class],"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":params[:lang],"success":"true")
-      
+
       end
     end
   end
