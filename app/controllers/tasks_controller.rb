@@ -29,7 +29,7 @@ class TasksController < ApplicationController
       stdout, stderr, status = Open3.capture3('ls /tmp')
       p "-----------------------"
       p stdout
-      stdout2, stderr2, status2 = Open3.capture3('cat /tmp/'+file_name+'.m4a')
+      stdout2, stderr2, status2 = Open3.capture3('cat '+url)
       p stdout2
       p "-----------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i /tmp/'+file_name+'.m4a')
