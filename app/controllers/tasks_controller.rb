@@ -24,14 +24,13 @@ class TasksController < ApplicationController
       p "-----------------------"
       p params[params[:form_type]][:video].path
       p "-----------------------"
-
-      stdout, stderr, status = Open3.capture3('ls /files')
-      p stdout
-      p "-----------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
       p stderr
       p "==============================="
       stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy /files/'+ file_name +'.m4a')
+      stdout, stderr, status = Open3.capture3('ls /files')
+      p stdout
+      p "-----------------------"
       std_data = stderr.split(" ")
       index = std_data.index("Hz,")
       hertz = std_data[index - 1].to_i
