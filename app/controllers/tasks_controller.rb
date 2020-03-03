@@ -29,7 +29,7 @@ class TasksController < ApplicationController
       std_data = stderr.split(" ")
       index = std_data.index("Hz,")
       hertz = std_data[index - 1].to_i
-      stdout2, stderr2, status2 = Open3.capture3('ls /tmp')
+      stdout2, stderr2, status2 = Open3.capture3('cat /tmp/'+file_name+'.m4a')
       p stdout2
       p "-----------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i /tmp/'+file_name+'.m4a')
