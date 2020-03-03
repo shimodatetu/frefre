@@ -24,10 +24,10 @@ class TasksController < ApplicationController
       p "-----------------------"
       p params[params[:form_type]][:video].path
       p "-----------------------"
-      stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)e3('ffmpeg -y -i '+ url +' -acodec copy /files/'+ file_name +'.m4a')
+      stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
+      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy /files/'+ file_name +'.m4a')
       p stderr
       p "==============================="
-      stdout, stderr, status = Open3.captur
       stdout2, stderr2, status2 = Open3.capture3('ls /files')
       p stdout2
       p "-----------------------"
