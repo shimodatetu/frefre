@@ -28,8 +28,8 @@ class TasksController < ApplicationController
       p stderr
       p "==============================="
       stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy /files/'+ file_name +'.m4a')
-      stdout, stderr, status = Open3.capture3('ls /files')
-      p stdout
+      stdout2, stderr2, status2 = Open3.capture3('ls /files')
+      p stdout2
       p "-----------------------"
       std_data = stderr.split(" ")
       index = std_data.index("Hz,")
