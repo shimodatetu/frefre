@@ -18,9 +18,6 @@ class TasksController < ApplicationController
       file.close
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].path
-      stdout, stderr, status = Open3.capture3('ls /tmp')
-      p "-----------------------"
-      p stdout
       p "-----------------------"
       p params[params[:form_type]][:video].path
       p "-----------------------"
@@ -29,6 +26,9 @@ class TasksController < ApplicationController
       std_data = stderr.split(" ")
       index = std_data.index("Hz,")
       hertz = std_data[index - 1].to_i
+      stdout, stderr, status = Open3.capture3('ls /tmp')
+      p "-----------------------"
+      p stdout
       stdout2, stderr2, status2 = Open3.capture3('cat /tmp/'+file_name+'.m4a')
       p stdout2
       p "-----------------------"
