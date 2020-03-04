@@ -22,7 +22,7 @@ class TasksController < ApplicationController
       p params[params[:form_type]][:video].path
       p "-----------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
-      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -acodec copy /tmp/'+ file_name +'.m4a')
+      stdout, stderr, status = Open3.capture3('ffmpeg -y -i '+ url +' -vn -acodec copy /tmp/'+ file_name +'.m4a')
       p stderr
       p "==============================="
       std_data = stderr.split(" ")
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
       p "-----------------------"
       p stdout
       stdout, stderr, status = Open3.capture3('ffmpeg -i /tmp/'+file_name+'.m4a')
-      stdout2, stderr2, status2 = Open3.capture3('cat /tmp/'+file_name+'.m4a')
+      stdout2, stderr2, status2 = Open3.capture3('ffmpeg -codecs')
       p "==============================="
       p stdout2
       stdout, stderr, status = Open3.capture3('ffmpeg -i /tmp/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le /tmp/'+file_name+'.raw')
