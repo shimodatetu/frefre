@@ -95,7 +95,7 @@
                   <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
                   name="<% if logged_in? %>logined<% end %>">
                     <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                    <div class="button_text">
+                    <div class="button_text button_text_jp">
                       翻訳
                     </div>
                   </button>
@@ -104,7 +104,7 @@
                   <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
                   name="<% if logged_in? %>logined<% end %>">
                     <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                    <div class="button_text">
+                    <div class="button_text button_text_en">
                       Trans
                     </div>
                   </button>
@@ -129,7 +129,7 @@
             <button type="button" class="normal_button post_button btn btn_send words_post_button"id="post"
             name="<% if logged_in? %>logined<% end %>">
               <div class="glyphicon glyphicon-comment picture_send"></div>
-              <div class="button_text">
+              <div class="button_text button_text_jp">
                 <div class="float_jp">
                   投稿
                 </div>
@@ -140,7 +140,7 @@
               <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: notice_id %>
               <label for="chat_file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
                 <div class="glyphicon glyphicon-picture picture_send"></div>
-                <div class="button_text">
+                <div class="button_text button_text_en">
                   <div class="float_jp">
                     画像
                   </div>

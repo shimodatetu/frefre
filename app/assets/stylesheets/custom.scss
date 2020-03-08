@@ -331,22 +331,39 @@ body{
 }
 @media screen and (max-width: 750px){
   .space_form{
-    margin-left: calc(50% - 53px);
+    margin-left: calc(50% - 68px);
     margin-top: 5px!important;
     margin-bottom: 5px!important;
     .trans_cover{
       display:inline-block;
-      .glyphicon-arrow-left{
-        -moz-transform: rotate(90deg);
-        -webkit-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-      }
-      .glyphicon-arrow-right{
-        -moz-transform: rotate(90deg);
-        -webkit-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
+      .post_button:focus { outline:0; }
+      .post_button{
+        width: 60px!important;
+        height: 30px!important;
+        .glyphicon-arrow-left{
+          -moz-transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          margin-left: 20px!important;
+          padding-top: 5px!important;
+        }
+        .glyphicon-arrow-right{
+          -moz-transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          margin-left: -15px!important;
+          padding-top: 5px!important;
+        }
+        .button_text_en{
+          margin-left: 17px!important;
+          margin-top: -20px!important;
+        }
+        .button_text_jp{
+          margin-left: -10px!important;
+          margin-top: -20px!important;
+        }
       }
     }
   }
@@ -428,8 +445,14 @@ body{
   .content_cover{
     margin-left: 0px!important;
   }
-  .flag_image{
-    margin-left:calc(33% - 20px)!important;
+  .flag_show{
+    display: none;
+    .flag_image{
+      margin-left:calc(33% - 20px)!important;
+    }
+  }
+  .lang_img{
+    display:block!important;
   }
   .ui-selectmenu-button:nth-child(2){
     margin-top: 0px!important;
@@ -586,9 +609,6 @@ body{
   }
   .nav-link{
     padding:5px 10px !important;
-    .jp{
-      font-size: calc(3vw - 3px)!important;
-    }
   }
   .profile_sub{
     width:25%!important;

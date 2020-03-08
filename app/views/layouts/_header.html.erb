@@ -104,24 +104,31 @@
         </div>
       <% end %>-->
       <% if logged_in?  %>
-        <div class="login_button dropdown">
-          <span class="search_all"style="display:none">
-            <%= form_tag('/search/header',method: :post) do %>
-              <%= text_field_tag :search_text ,"", class:"form-control search_form",placeholder:"Search / 検索" %>
-              <button type="submit"class="search" style="border: none;">
-                <span class="glyphicon glyphicon-search"></span>
-              </button>
+        <div class="login_button"style="padding-right: 25px;">
+          <div class="text_fill
+            <% if url.include?('/profile/6') %>
+              <%= "now_page" %>
+            <% end %>">
+            <%= link_to '/profile/6',class:"link_text" do %>
+              <div class="height_control"></div>
+              <span class="icon glyphicon glyphicon-bell"></span>
+              <div class="text">
+                <div class="float_jap">お知らせ</div>
+                <div class="base_en">Notice</div>
+              </div>
             <% end %>
-          </span>
+          </div>
+        </div>
+        <div class="login_button dropdown">
           <div class="text_fill dropdown-toggle
-          <% if url.include?('/profile') %>
-            <%= "now_page" %>
-          <% end %>"data-toggle="dropdown">
+            <% if url.include?('/profile') %>
+              <%= "now_page" %>
+            <% end %>"data-toggle="dropdown">
             <%= link_to '/category/show',class:"link_text",onclick:"window.location.href = '/profile';" do %>
               <div class="height_control"></div>
               <span class="icon glyphicon glyphicon-user"></span>
               <div class="text">
-                <div class="float_jap"style="margin-left:8px">マイページ</div>
+                <div class="float_jap">マイページ</div>
                 <div class="base_en">My Page</div>
               </div>
             <% end %>

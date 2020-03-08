@@ -21,7 +21,7 @@
   }
   .login_button{
     height:100%;
-    padding-right:40px;
+    padding-right:5px;
     padding-top:5px;
     float:right;
     font-size: 16px;
@@ -86,6 +86,7 @@
     }
     .text_fill{
       height:100%;
+      display:inline-block;
       .text{
         padding-left:5px;
         padding-right:5px;
@@ -94,12 +95,13 @@
         margin-left:-3px;
         display: inline-block;
         font-weight:lighter;
+        text-align: center;
         .float_jap{
           font-size:10px;
         }
         .base_en{
+          font-size:16px;
           margin-top:-3px;
-          margin-left:5px;
         }
       }
     }

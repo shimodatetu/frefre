@@ -68,13 +68,14 @@
             </div>
           </div>
           <div class="title_input">
+            <%= image_tag "/eng.png", class: "image lang_img en_img"%>
             <%= form.text_field :title_en, id:"title",class:"form-control form_lang en_data_title" %>
             <div class="space_form">
               <div class="trans_cover">
                 <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_en"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                  <div class="button_text">
+                  <div class="button_text button_text_jp">
                     翻訳
                   </div>
                 </button>
@@ -83,12 +84,13 @@
                 <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_jp"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                  <div class="button_text">
+                  <div class="button_text button_text_en">
                     Trans
                   </div>
                 </button>
               </div>
             </div>
+            <%= image_tag "jap.png", class: "image lang_img" %>
             <%= form.text_field :title_jp, id:"title",class:"form-control form_lang jp_data_title" %>
           </div>
         </div>
@@ -102,13 +104,14 @@
             </div>
           </div>
           <div class="content_input">
+            <%= image_tag "/eng.png", class: "image lang_img en_img"%>
             <%= text_area_tag :content_eng,"", id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
             <div class="space_form"style="margin-top:5px;">
               <div class="trans_cover">
                 <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_content_en"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                  <div class="button_text">
+                  <div class="button_text button_text_jp">
                     翻訳
                   </div>
                 </button>
@@ -117,12 +120,14 @@
                 <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_content_jp"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                  <div class="button_text">
+                  <div class="button_text button_text_en">
                     Trans
                   </div>
                 </button>
               </div>
             </div>
+
+            <%= image_tag "jap.png", class: "image lang_img" %>
             <%= text_area_tag :content_jap,"", id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x5" %>
           </div>
         </div>
@@ -206,13 +211,14 @@
               </div>
             </button>
 
+            <%= image_tag "/eng.png", class: "image lang_img en_img"%>
             <%= text_area_tag :subcontent_eng,"", id:"subcontent_eng",class:"content_input_form form-control form_lang sub_en_data_content",size:"65x5" %>
             <div class="space_form subtitle_spaceform">
               <div class="trans_cover">
                 <button type="button" class="normal_button post_button btn btn_send words_post_button"id="subtrans_to_en"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                  <div class="button_text">
+                  <div class="button_text button_text_jp">
                     翻訳
                   </div>
                 </button>
@@ -221,12 +227,13 @@
                 <button type="button" class="normal_button post_button btn btn_send words_post_button"id="subtrans_to_jp"
                 name="<% if logged_in? %>logined<% end %>">
                   <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                  <div class="button_text">
+                  <div class="button_text button_text_en">
                     Trans
                   </div>
                 </button>
               </div>
             </div>
+            <%= image_tag "jap.png", class: "image lang_img" %>
             <%= text_area_tag :subcontent_jap,"", id:"subcontent_jap",class:"content_input_form form-control form_lang sub_jp_data_content",size:"65x5" %>
           </div>
         </div>
