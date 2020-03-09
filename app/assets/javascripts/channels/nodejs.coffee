@@ -7,6 +7,7 @@ App.nodejs = App.cable.subscriptions.create "NodejsChannel",
 
   received: (data) ->
     console.log(data)
+    alert(data["trans"])
     if data["success"] == "true"
       id = $("." + data["form_class"] + " .send_time").val()
       if id == data["send_time"]
