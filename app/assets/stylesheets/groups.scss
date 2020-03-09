@@ -445,7 +445,6 @@
         display: inline-block;
         margin-right:0px;
         width:28px;
-        margin-left:5px!important;
       }
       .button_text{
         display: inline-block;
@@ -550,7 +549,7 @@
 
 .not_logined_cover{
   vertical-align: center;
-  margin-top: 50px;
+  margin-left:calc(50vw - 300px);
   width:450px;
   .not_logined{
     font-size:16px;
