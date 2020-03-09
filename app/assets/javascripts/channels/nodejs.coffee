@@ -7,10 +7,10 @@ App.nodejs = App.cable.subscriptions.create "NodejsChannel",
 
   received: (data) ->
     console.log(data)
-    $("#fakeLoader").fadeOut();
     if data["success"] == "true"
       id = $("." + data["form_class"] + " .send_time").val()
       if id == data["send_time"]
+        $("#fakeLoader").fadeOut();
         $("." + data["form_class"] + " .send_time").val(String(parseInt(id) + 1))
         if data["type"] == "trans"
           if data["lang"] == "ja"
