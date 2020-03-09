@@ -94,7 +94,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options   = { host: 'glacial-chamber-99021.herokuapp.com' }
   # Do not dump schema after migrations.
-  mail = ENV['MAIN_ADDRESS']
+  mail = ENV['MAIL_ADDRESS']
   pass = ENV['MAIL_PASSWORD']
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
