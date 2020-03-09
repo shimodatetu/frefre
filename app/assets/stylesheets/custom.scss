@@ -328,6 +328,9 @@ body{
   }
 }
 @media screen and (max-width: 750px){
+  .not_logined_cover{
+    margin-left: calc(50vw - 215px)!important;
+  }
   .profile .nav-tabs{
     width: calc(100vw - 150px)!important;
   }
