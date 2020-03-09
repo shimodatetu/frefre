@@ -243,7 +243,6 @@ p{
   }
   .space{
     margin-top: 5px;
-    margin-left: 5px;
   }
   .green_button{
     background: #66bfbf;
@@ -385,6 +384,11 @@ body{
   .category_cover{
     .dropdown{
       display:block!important;
+    }
+    .category_link{
+      font-size: 13px;
+      padding-left: 8px;
+      padding-right: 8px;
     }
     .category_link.main:nth-child(n + 7) {
       display:none;
