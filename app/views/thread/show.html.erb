@@ -30,7 +30,7 @@
   </div>
   <div class="footer thread_footer">
     <div class="thread_post_cover form_cover">
-      <%= form_tag('/tasks/trans',method: :post,class: "modal-body post_trans_form search_form_top",style:"display:block") do %>
+      <%= form_tag('/tasks/trans', remote: true ,method: :post,class: "modal-body post_trans_form search_form_top",style:"display:block") do %>
         <div class="thread_post">
           <div class="post_form_cover post_form_cover_enjp connect_btn">
             <button type="button"class="btn help_show_small"data-toggle="modal" data-target="#help_slide">
