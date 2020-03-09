@@ -4,6 +4,10 @@
 <% else %>
   <% userinfo = current_user.userinfos.first %>
 <% end %>
+<% if logged_in? && userinfo.seen == false %>
+  <% userinfo.seen = true %>
+  <% userinfo.save %>
+<% end %>
 <div class="profile_notice">
   <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
     <div class="lang_bar">

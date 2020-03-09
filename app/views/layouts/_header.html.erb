@@ -117,6 +117,14 @@
                 <div class="base_en">Notice</div>
               </div>
             <% end %>
+            <% userinfos = current_user.userinfos.where("seen":false) %>
+            <% if userinfos.count > 0 %>
+              <div class="notice_num">
+                <div class="notice_num_text">
+                  <%= userinfos.count %>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="login_button dropdown">

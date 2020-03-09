@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_08_102340) do
+ActiveRecord::Schema.define(version: 2020_03_08_134621) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 2020_02_08_102340) do
     t.string "title_jp"
     t.string "message_en"
     t.string "message_jp"
+    t.boolean "seen", default: false
   end
 
   create_table "users", force: :cascade do |t|
