@@ -321,7 +321,7 @@ body{
 @media screen and (max-width: 600px){
   .profile{
     .lang_bar_cover{
-      width:70%!important;
+      width: calc(100vw - 150px)!important;
     }
   }
   .lang_bar_cover{
@@ -329,6 +329,12 @@ body{
   }
 }
 @media screen and (max-width: 750px){
+  .profile .nav-tabs{
+    width: calc(100vw - 150px)!important;
+  }
+  .profile .lang_bar_cover .lang_bar{
+    margin-left:0px!important;
+  }
   .space_form{
     margin-left: calc(50% - 68px);
     margin-top: 5px!important;
@@ -493,7 +499,7 @@ body{
   }
   .profile{
     .lang_bar_cover{
-      width:70%!important;
+      width: calc(100vw - 150px)!important;
       .lang_bar{
         .slider{
           width:calc(80vw - 180px) !important
@@ -617,7 +623,7 @@ body{
   .profile_sub{
     width:25%!important;
     .edit_user{
-      margin-top: -40px!important
+      margin-top: -47px!important
     }
     .profile_picture{
       width: 100px!important;;
@@ -671,7 +677,8 @@ body{
       margin-left: 10px!important;
     }
     .lang_bar_cover{
-      width:70%!important;
+      width: calc(100vw - 150px)!important;
+      margin-top: 36px!important;
       //margin-top:calc(16px + 7vw)!important;
       .lang_bar{
         .slider{

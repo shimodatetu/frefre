@@ -58,7 +58,10 @@ class ManagerController < ApplicationController
           info.message_jp = params[:message_jp]
 
           info.user_id = user.id
-          info.save
+          if info.save
+            NoticeMailer.notice_mail([user.email,info.title_en,info.title_jp,
+              info.message_en,info.message_jp,""]).deliver_now
+          end
         end
       else
         message_en = params[:message_en]
@@ -81,7 +84,7 @@ class ManagerController < ApplicationController
           info.user_id = id.to_i
           if info.save
             NoticeMailer.notice_mail([User.find_by(id:id.to_i).email,info.title_en,info.title_jp,
-              info.message_en,info.message_jp,params[:url_data]]).deliver_now
+              info.message_en,info.message_jp]).deliver_now
           end
         end
       end

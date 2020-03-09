@@ -72,7 +72,10 @@ class NoticeController < ApplicationController
         下記のURLをクリックしてメッセージを確認してください。
         https://www.frefreforum.com/profile/5/' + notice.id.to_s
         info.user_id = notice.users[0].id
-        info.save
+        if info.save
+          NoticeMailer.notice_mail([User.find_by(id:id.to_i).email,info.title_en,info.title_jp,
+            info.message_en,info.message_jp,params[:url_data]]).deliver_now
+        end
       end
     else
       chat = Chat.new()

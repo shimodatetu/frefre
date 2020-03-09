@@ -6,37 +6,33 @@ $(function(){
   if(localStorage.getItem("frefre_slider") != null){
     first_value = localStorage.getItem("frefre_slider")
   }
+  $(".lang_bar_cover .en_country").on("click",function(){
+    $('.min-slider-handle').animate({"left": "0%"}, {duration: 200,queue: false}, 'linear');
+    $('.slider-selection').animate({"width": "0%"}, {duration: 200,queue: false}, 'linear');
+    $('.slider-track-high').animate({"width": "100%"}, {duration: 200,queue: false}, 'linear');
+    var slider_val = parseInt($("#slider").attr("value"))
+    var move_by_time = parseInt(slider_val) / 20
+    move_left(slider_val,move_by_time,20)
+  })
+  $(".lang_bar_cover .jp_country").on("click",function(){
+    $('.min-slider-handle').animate({"left": "100%"}, {duration: 200,queue: false}, 'linear');
+    $('.slider-selection').animate({"width": "100%"}, {duration: 200,queue: false}, 'linear');
+    $('.slider-track-high').animate({"width": "0%"}, {duration: 200,queue: false}, 'linear');
+    var slider_val = parseInt($("#slider").attr("value"))
+    var move_by_time = (100 - parseInt(slider_val)) / 20
+    move_right(slider_val,move_by_time,20)
+  })
   $('.lang_bar_cover #slider').slider({
     value:first_value,
     formatter: function(value) {
       if(true){
-        var left_max = 15
-        var right_max = 85
         if($('.thread_all_post').length){
             left_max = 5
             right_max = 95
         }
         localStorage.setItem("frefre_slider",value);
-        var en_per = value;
-        var jp_per = (100 - value);
         //var cover_width = window.innerWidth * 0.170
-        if(value < left_max){
-        //if(value == 0){
-          $(".en_position").attr("style","display:none;");
-          $(".jp_position").attr("style","width:calc(100%)");
-          $(".post_content_position_space").attr("style","display:none;");
-        }
-        else if(value > right_max){
-        //else if(value == 1000){
-          $(".en_position").attr("style","width:calc(100%)");
-          $(".jp_position").attr("style","display:none");
-          $(".post_content_position_space").attr("style","display:none;");
-        }
-        else{
-          $(".en_position").attr("style","width:calc("+en_per+"% - 12px)");
-          $(".jp_position").attr("style","width:calc("+jp_per+"% - 12px)");
-          $(".post_content_position_space").removeAttr("style");
-        }
+        move_slider(value)
       }
     }
   });
@@ -74,3 +70,54 @@ $(function(){
     moving = false;
   });
 });
+function move_slider(value){
+  var left_max = 15
+  var right_max = 85
+  var en_per = value;
+  var jp_per = (100 - value);
+  if(value < left_max){
+  //if(value == 0){
+    $(".en_position").attr("style","display:none;");
+    $(".jp_position").attr("style","width:calc(100%)");
+    $(".post_content_position_space").attr("style","display:none;");
+  }
+  else if(value > right_max){
+  //else if(value == 1000){
+    $(".en_position").attr("style","width:calc(100%)");
+    $(".jp_position").attr("style","display:none");
+    $(".post_content_position_space").attr("style","display:none;");
+  }
+  else{
+    $(".en_position").attr("style","width:calc("+en_per+"% - 12px)");
+    $(".jp_position").attr("style","width:calc("+jp_per+"% - 12px)");
+    $(".post_content_position_space").removeAttr("style");
+  }
+}
+function move_left(slider_val,move_by_time,times){
+  if(times == 1){
+    move_slider(0)
+    $("#slider").attr("value","0")
+    localStorage.setItem("frefre_slider","0");
+  }
+  else{
+    slider_val -= move_by_time
+    move_slider(slider_val)
+    setTimeout(function(){
+      move_left(slider_val,move_by_time,times - 1)
+    }, 10);
+  }
+}
+function move_right(slider_val,move_by_time,times){
+  if(times == 1){
+    move_slider(100)
+    $("#slider").attr("value","100")
+    localStorage.setItem("frefre_slider","100");
+  }
+  else{
+    slider_val += move_by_time
+    move_slider(slider_val)
+    setTimeout(function(){
+      move_right(slider_val,move_by_time,times - 1)
+    }, 10);
+  }
+}

@@ -29,15 +29,25 @@ class NoticeChannel < ApplicationCable::Channel
 
           info.title_jp = h(notice.users[1].name) + 'からダイレクトメッセージがありました！'
 
+          url = 'https://www.frefreforum.com/profile/5/'+notice.id.to_s
           info.message_en = 'You got a direct message from ' + h(notice.users[1].name) + '.
           Please click on the url below and check the message.
-          https://www.frefreforum.com/profile/5/'+notice.id.to_s
+          '+url
 
           info.message_jp = h(notice.users[1].name) + 'からダイレクトメッセージがありました！
           下記のURLをクリックしてメッセージを確認してください。
-          https://www.frefreforum.com/profile/5/' + notice.id.to_s
+          '+url
           info.user_id = notice.users[0].id
+
           info.save
+
+          if info.save
+            NoticeMailer.notice_mail([notice.users[0].email,info.title_en,info.title_jp,
+              info.message_en,info.message_jp,url]).deliver_now
+
+            NoticeMailer.notice_mail([notice.users[1].email,info.title_en,info.title_jp,
+              info.message_en,info.message_jp,url]).deliver_now
+          end
         end
       else
         chat = Chat.new()
