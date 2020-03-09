@@ -98,7 +98,7 @@
               Post
             </div>
           </button>
-          <%= form_for @post, data: { remote: true }, :html => {:class => "thread_image_post post_button_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"} do |form| %>
+          <%= form_for @post, :html => {:class => "thread_image_post post_button_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"},remote:true do |form| %>
             <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
             <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
