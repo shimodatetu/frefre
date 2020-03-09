@@ -82,7 +82,6 @@ class TasksController < ApplicationController
       answer = res.body
       answer = res.body.slice(2..-3).force_encoding("UTF-8")
       NodejsChannel.broadcast_to(current_user,"type":"trans","trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":lang,"success":"true")
-      return
     end
   end
 
