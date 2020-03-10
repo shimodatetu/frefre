@@ -141,7 +141,6 @@ class PostsController < ApplicationController
         post.save
       end
     end
-    #Post.find_by(id:params[:post][:post_id]).update(pict:params[:post][:pict])
   end
 end
 private

@@ -21,7 +21,16 @@ class RoomChannel < ApplicationCable::Channel
         post.content_eng = data['content_eng']
         post.group_id = group.id
         post.user_id = current_user.id
-        post.save
+        if post.save
+          p "====================================-"
+          p "1"
+          p "====================================-"
+        else
+        
+          p "====================================-"
+          p "2"
+          p "====================================-"
+        end
       end
     end
   end
