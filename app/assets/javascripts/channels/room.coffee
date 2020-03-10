@@ -9,6 +9,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
+    alert("asdasd")
     console.log(data)
     url = location.pathname
     urls = url.split("/")
