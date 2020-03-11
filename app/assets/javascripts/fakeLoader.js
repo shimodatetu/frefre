@@ -6,7 +6,7 @@
  *Licensed MIT
 -----------------------------------------------------------------------*/
 (function ($) {
-    
+
     $.fn.fakeLoader = function(options,callback,data) {
         //Defaults
         var settings = $.extend({
@@ -36,12 +36,6 @@
 
         //Init styles
         var initStyles = {
-            'background':settings.bgColor,
-            'position':settings.pos,
-            'width':settings.width,
-            'height':settings.height,
-            'top':settings.top,
-            'left':settings.left,
             "display":"block"
         };
 
