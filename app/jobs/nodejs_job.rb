@@ -1,4 +1,4 @@
-class MessageBroadcastJob < ApplicationJob
+class NodejsBroadcastJob < ApplicationJob
   queue_as :default
   def perform(data)
     RoomChannel.broadcast_to("asd")
