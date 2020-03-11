@@ -132,7 +132,6 @@ type_check=(id,type)->
         $("#fakeLoader").fakeLoader({},trans_submit,["en",content_jp]);
     else if id == "subtrans_to_jp"
       content_en = $(".subbase_en_form").val();
-      alert(content_en)
       if content_en == ""
         alert_modal("Content in English is empty.","英語の内容入力欄に何も書かれていません","fail");
       else
@@ -140,7 +139,6 @@ type_check=(id,type)->
         $("#fakeLoader").fakeLoader({},trans_submit2,["ja",content_en]);
     else if id == "subtrans_to_en"
       content_jp = $(".subbase_jp_form").val();
-      alert(content_jp)
       if content_jp == ""
         alert_modal("Content in Japanese is empty.","日本語の内容入力欄に何も書かれていません","fail");
       else

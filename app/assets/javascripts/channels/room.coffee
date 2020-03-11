@@ -9,7 +9,6 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    alert("asdasd")
     console.log(data)
     url = location.pathname
     urls = url.split("/")
@@ -84,8 +83,6 @@ $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) -
   else
     alert_modal("You can't post a comment because you haven't logined.","ログインしていないので書き込めません。","fail")
 
-alert_show=()->
-  alert("asd")
 
 video_subtitle=(data) ->
   $(".thread_video_post .lang_input").val(data[0])
