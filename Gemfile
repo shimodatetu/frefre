@@ -16,7 +16,6 @@ gem 'rack-attack'
 gem 'webpacker'
 gem 'faraday'
 gem 'premailer-rails'
-gem 'whenever', require: false
 #gem 'omniauth'
 #gem 'omniauth-twitter'
 #gem 'omniauth-facebook'
