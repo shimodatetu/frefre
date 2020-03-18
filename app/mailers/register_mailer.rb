@@ -1,5 +1,5 @@
 class RegisterMailer < ApplicationMailer
-  default from: "shimoda14@mccc.jp"
+  default from: "info@frefre.net"
 
   def send_confirm_mail(user)
     @user = user
