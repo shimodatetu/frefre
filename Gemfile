@@ -15,7 +15,6 @@ gem 'httparty'
 gem 'rack-attack'
 gem 'webpacker'
 gem 'faraday'
-gem 'premailer-rails'
 #gem 'omniauth'
 #gem 'omniauth-twitter'
 #gem 'omniauth-facebook'
@@ -63,6 +62,9 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+group :production do
+  gem 'pg'
+end
 gem 'omniauth-google-oauth2'
 
 group :development, :test do
