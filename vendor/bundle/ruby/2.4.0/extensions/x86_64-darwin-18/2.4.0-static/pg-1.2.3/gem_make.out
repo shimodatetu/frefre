@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/pg-1.2.3/ext
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200319-90095-j9tec9.rb extconf.rb --with-pg-config=/usr/pgsql-9.3/bin/pg_config
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200319-59968-azyuly.rb extconf.rb --with-pg-config=/usr/pgsql-9.3/bin/pg_config
 Using config values from /usr/pgsql-9.3/bin/pg_config
 sh: /usr/pgsql-9.3/bin/pg_config: No such file or directory
 sh: /usr/pgsql-9.3/bin/pg_config: No such file or directory
