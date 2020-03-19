@@ -4,7 +4,7 @@ module ActiveStorage::Blob::Representable
   extend ActiveSupport::Concern
 
   included do
-    has_one_attached :preview_image
+    #has_one_attached :preview_image
   end
 
   # Returns an ActiveStorage::Variant instance with the set of +transformations+ provided. This is only relevant for image
