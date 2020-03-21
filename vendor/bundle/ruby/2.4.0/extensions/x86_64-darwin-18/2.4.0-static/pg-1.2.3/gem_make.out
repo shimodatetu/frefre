@@ -1,8 +1,7 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/pg-1.2.3/ext
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200320-70357-432oka.rb extconf.rb --with-pg-config=/usr/pgsql-9.3/bin/pg_config
-Using config values from /usr/pgsql-9.3/bin/pg_config
-sh: /usr/pgsql-9.3/bin/pg_config: No such file or directory
-sh: /usr/pgsql-9.3/bin/pg_config: No such file or directory
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200321-86578-hfcccx.rb extconf.rb --use-system-libraries
+checking for pg_config... yes
+Using config values from /usr/local/bin/pg_config
 checking for libpq-fe.h... yes
 checking for libpq/libpq-fs.h... yes
 checking for pg_config_manual.h... yes
@@ -148,8 +147,7 @@ pg_util.c:119:24: warning: implicit conversion loses integer precision: 'long' t
         ~~~~~~ ~~~~~~~~~~~~~~~^~~~~
 1 warning generated.
 linking shared-object pg_ext.bundle
-ld: file not found: dynamic_lookup
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [pg_ext.bundle] Error 1
 
-make failed, exit code 2
+current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/pg-1.2.3/ext
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 pg_ext.bundle ./.gem.20200321-86578-i7poor
