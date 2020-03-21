@@ -12,14 +12,6 @@ module ActiveRecord
         end
       end
 
-      def method_missing(name, *arguments, &block)
-        match = Method.match(self, name)
-
-        if match && match.valid?
-          match.define
-          send(name, *arguments, &block)
-        end
-      end
 
       class Method
         @matchers = []
