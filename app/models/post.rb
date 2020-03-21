@@ -3,8 +3,8 @@ class Post < ApplicationRecord
   belongs_to :group
   has_many :reportposts
 
-  #has_one_attached :pict
-  #has_one_attached :video
+  has_one_attached :pict
+  has_one_attached :video
   validate :pict_presence
 
   def pict_presence
