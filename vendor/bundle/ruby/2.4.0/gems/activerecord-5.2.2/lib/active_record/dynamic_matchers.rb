@@ -18,8 +18,6 @@ module ActiveRecord
         if match && match.valid?
           match.define
           send(name, *arguments, &block)
-        else
-          super
         end
       end
 
