@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.1'
 gem 'devise'
+gem 'whenever', require: false
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'gon'
