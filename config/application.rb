@@ -13,6 +13,8 @@ module Webapp
     config.action_view.automatically_disable_submit_tag = false
     config.load_defaults 5.2
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.eager_load_paths += Dir["#{config.root}/lib/**/"]
     # config.autoload_paths += Dir["#{config.root}/lib/**/"]
     # config.eager_load_paths += Dir["#{config.root}/lib/**/"]
     # Settings in config/environments/* take precedence over those specified here.
