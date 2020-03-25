@@ -4,7 +4,7 @@ require "#{Rails.root}/app/models/group"
 require "#{Rails.root}/app/models/post"
 class HelloBatch
   def self.execute
-    puts "======================="
+    puts "1======================="
     for user in User.all do
       group_have = []
       for group in user.groups do
@@ -12,6 +12,7 @@ class HelloBatch
           group_have.push(group)
         end
       end
+      puts group_have
       if group_have.length > 0
         puts EverydayMailer.everyday_mail(user,group_have)
 
