@@ -15,7 +15,6 @@
 //= require bootstrap-sprockets
 //= require activestorage
 //= require jquery.turbolinks
-// require turbolinks
 //= require autosize
 // require execjs
 //= require env
