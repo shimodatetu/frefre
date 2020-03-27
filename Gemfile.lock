@@ -391,6 +391,8 @@ GEM
     rack (2.0.6)
     rack-attack (6.2.2)
       rack (>= 1.0, < 3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -557,6 +559,7 @@ DEPENDENCIES
   pg
   puma (~> 3.11)
   rack-attack
+  rack-cors
   rails (~> 5.2.2)
   rest-client
   rinku
