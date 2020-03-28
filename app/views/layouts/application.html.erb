@@ -25,15 +25,13 @@
       <div class="main_content_cover manager_content_cover"id="main_content_cover">
     <% else %>
       <%= render partial:'layouts/header' %>
-      <div class="ads_center_top">
-        <ins class="adsbygoogle"
-         style="display:inline-block;width:728px;height:90px"
-         data-ad-client="ca-pub-2088744114390591"
-         data-ad-slot="6647672122"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
+      <ins class="adsbygoogle ads_center_top"
+       style="display:inline-block;width:728px;height:90px"
+       data-ad-client="ca-pub-2088744114390591"
+       data-ad-slot="6647672122"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
       <div class="main_content_cover"id="main_content_cover">
     <% end %>
       <%= yield %>
