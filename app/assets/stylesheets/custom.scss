@@ -1,7 +1,10 @@
 a{
   color:#07689f;
 }
-
+.ads_center_top{
+  margin-top: 80px;
+  position:absolute;
+}
 p{
   margin:0px;
 }
@@ -126,7 +129,7 @@ p{
   display: inline-block;
   width:300px;
   vertical-align: top;
-  margin-top: 100px;
+  margin-top: 180px;
   .mirai_img{
     margin-top:20px;
     margin-left:50px;
@@ -139,7 +142,7 @@ p{
   }
 }
 .main_content_cover{
-  padding-top:50px;
+  padding-top:140px;
   padding-left:5px;
   width: calc(100% - 310px);
   display: inline-block;
