@@ -4,7 +4,7 @@ a{
 .ads_center_top{
   margin-top: 80px;
   position:absolute;
-  margin-left:calc(50vw - 514px);
+  //margin-left:calc(50vw - 519px);
 }
 p{
   margin:0px;
@@ -313,6 +313,10 @@ p{
 body{
   //background:#fff0a017;
 }
+
+@media screen and (max-width: 1050px){
+
+}
 @media screen and (max-width: 1000px){
   .help_show_small{
     margin-top: -22px;
@@ -332,6 +336,15 @@ body{
   }
 }
 @media screen and (max-width: 750px){
+  .sub_content_cover{
+    margin-top: 100px!important;
+    a{
+      display: block;
+    }
+    img{
+      display: block;
+    }
+  }
   .not_logined_cover{
     margin-left: calc(50vw - 215px)!important;
   }
