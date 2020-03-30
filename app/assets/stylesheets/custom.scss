@@ -556,7 +556,6 @@ body{
 }
 
 @media screen and (max-width: 570px){
-
   .lang_bar_cover{
     .en_country{
       margin-left: 10px;
@@ -660,6 +659,14 @@ body{
     }
     .profile_picture .group_img{
       height:100px!important;
+    }
+    .user_cover{
+      .group_name{
+        margin-left:30px!important;
+      }
+      .follow_button1{
+        margin-top:5px;
+      }
     }
     .profile_title .title{
       .jp{
