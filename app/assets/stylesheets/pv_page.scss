@@ -35,11 +35,14 @@
       display: inline-block;
       vertical-align: -webkit-baseline-middle;
       margin-top: 10px;
-      background: #f19c38;
-      color: #fff;
+      background: #fff;
+      color: #f19c38;
       border-radius: 5px;
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
+      border: solid 1px;
+      border-bottom: none;
+      border-color: #f19c38;
     }
     .thread_post_button{
       display:inline-block;

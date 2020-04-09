@@ -232,11 +232,13 @@ p{
   }
 
   .contract{
-
     border: solid 1px #ff9d3b;
-    font-weight:bold;
     color:#ff9d3b;
     background: #fff;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 13px;
   }
   .contract:hover{
     color:#fff;
