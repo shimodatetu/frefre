@@ -4,11 +4,11 @@
   }
   .category_cover{
     border-radius: 10px;
-    border: solid 1px #f19c38;
+    border: solid 2px #f19c38;
     padding: 5px;
     .title{
       color: #f19c38;
-      font-size: 16px;
+      font-size: 15px;
       padding: 5px;
     }
 
@@ -40,9 +40,13 @@
       border-radius: 5px;
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
-      border: solid 1px;
+      border: solid 2px;
       border-bottom: none;
       border-color: #f19c38;
+    }
+    .panel-title-text:hover{
+      background: #f19c38;
+      color: #fff;
     }
     .thread_post_button{
       display:inline-block;
