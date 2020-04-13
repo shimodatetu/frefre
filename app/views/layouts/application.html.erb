@@ -25,23 +25,7 @@
       <div class="main_content_cover manager_content_cover"id="main_content_cover">
     <% else %>
       <%= render partial:'layouts/header' %>
-      <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
-      !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
-      !url.include?('manager') %>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle ads_center_top"
-           style="display:block"
-           data-ad-format="fluid"
-           data-ad-layout-key="-hk-7+2h-1m-4u"
-           data-ad-client="ca-pub-2088744114390591"
-           data-ad-slot="5864899455"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-        <div class="main_content_cover"id="main_content_cover">
-      <% else %>
-        <div class="main_content_cover"id="main_content_cover"style="margin-top:50px">
-      <% end %>
+      <div class="main_content_cover"id="main_content_cover"style="margin-top:50px">
     <% end %>
       <%= yield %>
       <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
@@ -67,6 +51,21 @@
         <%= render partial:"news/news_top" %>
         <!--iframe src="https://www.youtube.com/embed/E6YC7WTHafg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
       </div>
+    <% end %>
+    <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
+    !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
+    !url.include?('manager') %>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads_center_top"
+         style="display:block"
+         data-ad-format="fluid"
+         data-ad-layout-key="-hk-7+2h-1m-4u"
+         data-ad-client="ca-pub-2088744114390591"
+         data-ad-slot="5864899455"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+      <div class="main_content_cover"id="main_content_cover">
     <% end %>
     <%= render partial:'layouts/footer' %>
   </body>

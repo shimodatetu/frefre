@@ -10,13 +10,18 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:password_reset][:email].downcase)
-    if @user
-      @user.create_reset_digest
-      @user.send_password_reset_email
-      flash[:info] = "Email sent with password reset instructions"
-      render "new_check"
-    else
+    @users = User.where(email: params[:password_reset][:email].downcase)
+    user_exist = false
+    @users.all do |user|
+      if user.provider = nil
+        user_exist = true
+        @user.create_reset_digest
+        @user.send_password_reset_email
+        flash[:info] = "Email sent with password reset instructions"
+        render "new_check"
+      end
+    end
+    if user_exist == false
       flash.now[:failed_jp] = "メールアドレスが間違っています。"
       flash.now[:failed_en] = "Email address is wrong."
       render "new"
@@ -28,7 +33,7 @@ class PasswordResetsController < ApplicationController
 
 
   def update
-    if params[:user][:password].empty?                  # (3) への対応
+    if params[:user][:password].empty? || params[:user][:password] !=  params[:user][:password_confirmation]              # (3) への対応
       @user.errors.add(:password, :blank)
       render 'edit'
     elsif @user.update_attributes(user_params)          # (4) への対応
