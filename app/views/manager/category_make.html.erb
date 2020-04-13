@@ -1,4 +1,20 @@
 <%= form_tag(threadtype_new_path, method: :post) do %>
+  <div class="title">
+    禁止ワード一覧
+  </div>
+  <%= link_to(manager_category_alldelete_path(authenticity_token: form_authenticity_token),method: :post) do %>
+    全て消す
+  <% end %>
+  <table class="category"border="1"style="font-size:16px;">
+    <% @category_all.each do |category_data| %>
+      <div class="prohibit_show">
+        <%= link_to(manager_category_delete_path(id: category_data.id,authenticity_token: form_authenticity_token),method: :post) do %>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <% end %>
+        <%= category_data.type_en %> / <%= category_data.type_jp %>
+      </div>
+    <% end %>
+  </table>
   <div class="row"style="margin-top:40px;">
     <div class="col-sm-6">
       <%= label_tag :英カテゴリー %>

@@ -14,6 +14,9 @@ class ManagerController < ApplicationController
   def news_make
     @news = News.new()
   end
+  def category_make
+    @category_all = Threadtype.all
+  end
   def news_maker
     if manager_logged_in?
       data = params[:news]
@@ -123,6 +126,17 @@ class ManagerController < ApplicationController
   def prohibit_alldelete
     Prohibit.delete_all
     redirect_to "/manager/prohibit"
+  end
+
+  def category_delete
+    if category = Threadtype.find_by(id:params[:id].to_i)
+      category.delete
+    end
+    redirect_to "/manager/category"
+  end
+  def category_alldelete
+    Threadtype.delete_all
+    redirect_to "/manager/category"
   end
 
   def search_report_user
