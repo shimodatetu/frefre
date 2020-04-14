@@ -240,7 +240,7 @@ p{
     padding-left: 6px;
     padding-right: 6px;
     font-size: 13px;
-    font-weight:bold;
+    font-weight: 500;
   }
   .contract:hover{
     color:#fff;
@@ -339,7 +339,6 @@ body{
 }
 @media screen and (max-width: 750px){
   .sub_content_cover{
-    margin-top: 100px!important;
     a{
       display: block;
     }
