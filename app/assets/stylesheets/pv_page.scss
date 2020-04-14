@@ -4,10 +4,10 @@
   }
   .category_cover{
     border-radius: 10px;
-    border: solid 2px #66bfbf;
+    border: solid 2px #f19c38;
     padding: 5px;
     .title{
-      color: #66bfbf;
+      color: #f19c38;
       font-size: 15px;
       padding: 5px;
       font-weight: bold;
@@ -36,8 +36,8 @@
       display: inline-block;
       vertical-align: -webkit-baseline-middle;
       margin-top: 10px;
-      background: #fff;
-      color: #66bfbf;
+      background: #66bfbf;
+      color: #fff;
       border-radius: 5px;
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
@@ -47,8 +47,8 @@
       font-weight: bold;
     }
     .panel-title-text:hover{
-      background: #66bfbf;
-      color: #fff;
+      background: #fff;
+      color: #66bfbf;
     }
     .thread_post_button{
       display:inline-block;
