@@ -121,9 +121,7 @@
       font-size:16px;
       background:#f2fff8;
       .title_padding{
-        text-align: center;
         font-size:16px;
-
         overflow : hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -216,6 +214,7 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         .post_content_text{
+          margin-left:10px;
           overflow : hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
