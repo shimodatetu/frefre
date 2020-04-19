@@ -15,12 +15,24 @@ class UsersController < ApplicationController
       flash.now[:failed_jp] = "利用規約に同意してください"
       render :index
     else
+
+      @users = User.where(email: @user.email.downcase)
+      user_exist = false
+      for user in @users do
+        if user.provider == nil
+          user_exist = true
+        end
+      end
       if @user.usertype == "delete"
         flash.now[:failed_en] = "This acount is freezed."
         flash.now[:failed_jp] = "このアカウントは凍結しています"
         render :index
+      elsif user_exist == false
+        flash.now[:failed_en] = "This mail address is already registered."
+        flash.now[:failed_jp] = "このメールアドレスはすでに登録されています。"
+        render :index
       elsif @user.save
-        flash.now[:success] = "メールに届いたURLをクリックして、アカウントを有効かしてください。"
+        flash.now[:success] = "メールに届いたURLをクリックして、アカウントを有効化してください。"
         UserMailer.account_activation(@user).deliver_now
         redirect_to '/account_activations/check'
       else
