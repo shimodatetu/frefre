@@ -74,8 +74,8 @@ class ManagerController < ApplicationController
             message_en = params[:message_en]+"https://localhost:9292/"+params[:url_data]
             message_jp = params[:message_jp]+"<br>https://localhost:9292/"+params[:url_data]
           else
-            message_en = params[:message_en]+"<br>https://frefreforum.com/"+params[:url_data]
-            message_jp = params[:message_jp]+"<br>https://frefreforum.com/"+params[:url_data]
+            message_en = params[:message_en]+"<br>https://www.frefreforum.com/"+params[:url_data]
+            message_jp = params[:message_jp]+"<br>https://www.frefreforum.com/"+params[:url_data]
           end
         end
         user_id.split(",").each do |id|
