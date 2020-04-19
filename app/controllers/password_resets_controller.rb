@@ -12,7 +12,14 @@ class PasswordResetsController < ApplicationController
   def create
     @users = User.where(email: params[:password_reset][:email].downcase)
     user_exist = false
+
+    p "============================"
+    p @users
+    p "============================"
     @users.all do |user|
+      p "--------------------------"
+      p user
+      p "--------------------------"
       if user.provider == nil
         user_exist = true
         @user.create_reset_digest
