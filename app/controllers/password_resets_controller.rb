@@ -14,16 +14,16 @@ class PasswordResetsController < ApplicationController
     user_exist = false
 
     p "============================"
-    p @users
+    p @users[0]
     p "============================"
-    @users.all do |user|
+    for user in @users do
       p "--------------------------"
       p user
       p "--------------------------"
       if user.provider == nil
         user_exist = true
-        @user.create_reset_digest
-        @user.send_password_reset_email
+        user.create_reset_digest
+        user.send_password_reset_email
         flash[:info] = "Email sent with password reset instructions"
         render "new_check"
       end
