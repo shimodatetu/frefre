@@ -1,5 +1,8 @@
 
 $(function(){
+  if(location.href.indexOf('https://glacial-chamber-99021.herokuapp.com') != -1){
+    location.href = "https://www.frefreforum.com/"
+  }
   $(".profile_image_input").on("change",function(){
     $('#image_submit_change').click();
   });
