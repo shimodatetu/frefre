@@ -1,7 +1,13 @@
 class AccountActivationsController < ApplicationController
 
   def edit
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:email],provider:nil)
+    if user.activated?
+      log_in user
+      flash["alert_en"] = "You successed to login."
+      flash["alert_jp"] = "ログインに成功しました。"
+      flash["alert_type"] = "success"
+    end
     if user && user.authenticated?(:activation, params[:id])
       if !user.activated?
         user.update_attribute(:activated,   true)
@@ -14,11 +20,6 @@ class AccountActivationsController < ApplicationController
         flash["alert_jp"] = "会員登録に成功しました。"
         flash["alert_type"] = "success"
         redirect_to "/profile"
-      else
-        log_in user
-        flash["alert_en"] = "You successed to login."
-        flash["alert_jp"] = "ログインに成功しました。"
-        flash["alert_type"] = "success"
       end
     else
       flash[:danger] = "Invalid activation link"
