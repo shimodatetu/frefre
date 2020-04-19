@@ -88,6 +88,9 @@
 <script>
 
   <% if !flash["alert_en"].nil? && !flash["alert_jp"].nil? && flash["alert_type"]%>
+    if(location.href.indexOf('https://glacial-chamber-99021.herokuapp.com') != -1){
+      location.href = "https://www.frefreforum.com/"
+    }
     alert_modal('<%= flash["alert_en"] %>','<%= flash["alert_jp"] %>','<%= flash["alert_type"] %>')
   <% end %>
   alert_get()
