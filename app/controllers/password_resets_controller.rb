@@ -13,7 +13,7 @@ class PasswordResetsController < ApplicationController
     @users = User.where(email: params[:password_reset][:email].downcase)
     user_exist = false
     @users.all do |user|
-      if user.provider = nil
+      if user.provider == nil
         user_exist = true
         @user.create_reset_digest
         @user.send_password_reset_email

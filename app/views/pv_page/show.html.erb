@@ -61,7 +61,7 @@
     <div>
       <% Threadtype.all.each do |type| %>
         <%= link_to "/category/show/"+type.id.to_s,class:"btn normal_button contract space category_link main" do %>
-          <%= type.type_jp %> / <%= type.type_en %>
+          <%= type.type_en %> / <%= type.type_jp %>
         <% end %>
       <% end %>
     </div>
