@@ -122,23 +122,6 @@ class TasksController < ApplicationController
     reportpost = Reportpost.find_by(post_id: id.to_i)
     if post && logged_in? && !(reportpost && reportpost.from_user == current_user.id)
       Reportpost.create(post_id:id.to_i,from_user:current_user.id,content:content,reporttype:type)
-      flash["alert_en"] = "You reported this post"
-      flash["alert_jp"] = "この投稿を通報しました。"
-      flash["alert_type"] = "success"
-      if params[:page_id] == "0"
-        redirect_to "/thread/show/"+params[:thread_id]
-      else
-        redirect_to "/thread/show/"+params[:thread_id]+"/"+params[:page_id]
-      end
-    else
-      flash["alert_en"] = "You reported this post"
-      flash["alert_jp"] = "この投稿を通報しました。"
-      flash["alert_type"] = "success"
-      if params[:page_id] == "0"
-        redirect_to "/thread/show/"+params[:thread_id]
-      else
-        redirect_to "/thread/show/"+params[:thread_id]+"/"+params[:page_id]
-      end
     end
   end
 

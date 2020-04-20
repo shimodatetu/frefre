@@ -6,6 +6,18 @@
         お問い合わせ / Contact Us
       </div>
     </div>
+    <% if !flash["failed_en"].nil? || !flash["failed_en"].nil? %>
+      <div class="alert alert-danger alert-message" role="alert">
+        <div class="error_jp">
+          <%= flash["failed_jp"] %>
+        </div>
+        <div class="error_en">
+          <%= flash["failed_en"] %>
+        </div>
+      </div>
+      <% flash["failed_en"] = nil %>
+      <% flash["failed_jp"] = nil %>
+    <% end %>
     <div class="panel panel-warning make_thread_category">
       <div class="panel-body content_cover">
         <div class="content_input_name"style="margin-top:20px">

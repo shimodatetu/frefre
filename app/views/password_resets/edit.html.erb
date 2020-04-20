@@ -12,7 +12,6 @@
           </div>
         </div>
         <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
-
           <%= hidden_field_tag :email, @user.email %>
           <div class="input-groups">
             <div class="input_title">

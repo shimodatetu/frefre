@@ -26,18 +26,12 @@ $(document).on 'click', '.unfollow_modal_submit', (event) ->
 $(document).on 'click', '.follow_button_submit', (event) ->
   App.follow.following("follow",parseInt(this.id))
 
-$(document).on 'click', '.report_button', (event) ->
-  $("#report_user_modal").modal("show")
-
-$(document).on 'click', '.report_button_submit', (event) ->
-  App.follow.following("follow",parseInt(this.id))
-
 $(document).on 'hidden.bs.modal', '#follow_modal', (event) ->
   $(".follow_button_submit , .unfollow_button_submit").attr("style","none;");
 
 
 button_change=(id) ->
-  if $('.follow_button'+id+' .glyphicon-star').length == 1
+  if $('.follow_button'+id+' .glyphicon-star').length > 0
     $(".follow_button"+id+" .glyphicon-star").removeClass('glyphicon-star').addClass('glyphicon-star-empty');
     $(".follow_button"+id+" .unfollow_button_submit .text_box .jp").html("フォロー")
     $(".follow_button"+id+" .unfollow_button_submit .text_box .en").html("Follow")

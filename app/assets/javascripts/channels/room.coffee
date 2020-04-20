@@ -76,6 +76,9 @@ $(document).on 'click', '.report_post_button', (event) ->
   $(".report_post_input").val(this.id)
   $("#report_post_modal").modal("show")
 
+$(document).on 'click', '.report_button_submit', (event) ->
+  $("#report_post_modal").modal("hide")
+  alert_modal("You reported this post","この投稿を通報しました。","success")
 
 $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
@@ -270,67 +273,6 @@ trans_submit2=(data) ->
   $(".post_subtrans_form .lang_input").val(lang)
   $(".cancel_button_class").val(".post_subtrans_form .send_time")
   $(".post_subtrans_form .trans_send").click()
-###
-translate_google=(data) ->
-  lang = data[0]
-  words = data[1]
-  if window.touched == false
-    window.touched = true
-    ajax_send = $.ajax(
-      async: false
-      cache: false
-      url: 'http://localhost:5000/trans_mirai',
-      type: 'post'
-      data:
-        'lang': lang
-        'words': words
-      dataType: 'json').done((res) ->
-      window.translated = true
-      translation = res[0]
-      if lang == "ja"
-        $(".base_jp_form").val(translation)
-      else
-        translation = translation.replace("&#39;","'")
-        $(".base_en_form").val(translation)
-      $("#fakeLoader").fadeOut();
-      window.touched = false
-      return
-    ).fail (xhr, status, error) ->
-      alert status
-      $("#fakeLoader").fadeOut();
-      window.touched = false
-      return
-
-translate_google2=(data) ->
-  lang = data[0]
-  words = data[1]
-  if window.touched == false
-    window.touched = true
-    ajax_send = $.ajax(
-      cache: false
-      async: false
-      url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
-      type: 'post'
-      data:
-        'lang': lang
-        'words': words
-      dataType: 'json').done((res) ->
-      window.translated = true
-      translation = res[0]
-      if lang == "ja"
-        $(".subbase_jp_form").val(translation)
-      else
-        translation = translation.replace("&#39;","'")
-        $(".subbase_en_form").val(translation)
-      $("#fakeLoader").fadeOut();
-      window.touched = false
-      return
-    ).fail (xhr, status, error) ->
-      alert status
-      $("#fakeLoader").fadeOut();
-      window.touched = false
-      return
-###
 
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);

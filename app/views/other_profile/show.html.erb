@@ -110,85 +110,91 @@
         <div class="col-sm-12">
           <div class="col-sm-12 profile_content">
             <div class="row profile_content_data">
-              <div class="content_data">
-                Gender :
-                <% if other_user.able_see %>
-                  <% if other_user.gender == "Male" %>Male / 男性
-                  <% elsif other_user.gender == "Female" %>Female / 女性
-                  <% elsif other_user.gender == "Neuter" %>Neuter / 中性
-                  <% else %>Unknown / 不明
+              <div class="content_name">
+                <div class="jp">
+                  性別
+                </div>
+                <div class="en">
+                  Gender
+                </div>
+              </div>
+              <div class="profile_content_cover">
+                <select id="gender"class="content_select"disabled>
+                  <option value="">No Selected</option>
+                  <% if current_user.gender == "Male" %>
+                    <option value="Male" selected>Male / 男性</option>
+                  <% else %>
+                    <option value="Male">Male / 男性</option>
                   <% end %>
-                <% else %>
-                  <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country">
-                <% end %>
+                  <% if current_user.gender == "Female" %>
+                    <option value="Female" selected>Female / 女性</option>
+                  <% else %>
+                    <option value="Female">Female / 女性</option>
+                  <% end %>
+                  <% if current_user.gender == "Neuter" %>
+                    <option value="Neuter" selected>Other / その他</option>
+                  <% else %>
+                    <option value="Neuter">Other / その他</option>
+                  <% end %>
+                  <% if current_user.gender == "not_answer" %>
+                    <option value="not_answer" selected>No answer / 答えない</option>
+                  <% else %>
+                    <option value="not_answer">No answer / 答えない</option>
+                  <% end %>
+                </select>
               </div>
             </div>
           </div>
           <div class="col-sm-12 profile_content"style="padding-top:0px;">
             <div class="row profile_content_data">
-              <div class="content_data">
-                Country :
-                <% if other_user.able_see %>
-                  <% if other_user.country == "" || other_user.country == nil %>
-                    Unknown / 不明
-                  <% else %>
-                    <%= other_user.country %>
-                  <% end %>
-                <% else %>
-                  <input placeholder="Private / 非公開"class="form-control content_input"disabled id="country"name="country"">
-                <% end %>
+              <div class="content_name">
+                <div class="jp">
+                  出身国
+                </div>
+                <div class="en">
+                  Country
+                </div>
+              </div>
+              <div class="profile_content_cover">
+                <select value="<%= current_user.country %>"class="content_select"id="country"name="country"disabled>
+                  <option value="">No selected</option>
+                  <%= render partial: "country" %>
+                </select>
+                <script type="text/javascript">
+                  $("#country option[value='<%= current_user.country %>']").prop("selected","selected");
+                </script>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="profile_content">
-        <div class="col-sm-6"style="padding-left:0px">
+      <div class="profile_content intro_content">
+        <div class="intro">
           <div class="row profile_content_data self_introduction">
-            <div class=" content_name"style="margin-top:5px;">
+            <div class="content_name">
               <div class="jp">
-                自己紹介(日本語)
+                自己紹介(英語)
               </div>
               <div class="en">
-                Self Introduction
-                (Japanese)
+                Introduction
+                (English)
               </div>
             </div>
-            <div class="content_data"style="margin-top: 5px;">
-              <% if other_user.able_see %>
-                <% if other_user.profile_en == "" || other_user.profile_en == nil %>
-                  Not inputed / 記入なし
-                <% else %>
-                  <%= other_user.profile_en%>
-                <% end %>
-              <% else %>
-                Introduction is private
-              <% end %>
-            </div>
+            <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"disabled><%=current_user.profile_en%></textarea>
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="intro">
           <div class="row profile_content_data self_introduction">
-            <div class="content_name"style="margin-top:5px">
+            <div class=" content_name">
               <div class="jp">
                 自己紹介(日本語)
               </div>
               <div class="en">
-                Self Introduction
+                Introduction
                 (Japanese)
               </div>
             </div>
-            <div class="content_data"style="margin-top:5px;">
-              <% if other_user.able_see %>
-                <% if other_user.profile_jp == "" || other_user.profile_jp == nil %>
-                  Not inputed / 記入なし
-                <% else %>
-                  <%= other_user.profile_jp%>
-                <% end %>
-              <% else %>
-                Introduction is private
-              <% end %>
-            </div>
+            <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"disabled><%=current_user.profile_jp%></textarea>
           </div>
         </div>
       </div>

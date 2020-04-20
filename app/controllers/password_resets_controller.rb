@@ -19,6 +19,7 @@ class PasswordResetsController < ApplicationController
         user.send_password_reset_email
         flash[:info] = "Email sent with password reset instructions"
         render "new_check"
+        return
       end
     end
     if user_exist == false
