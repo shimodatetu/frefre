@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   end
 
   def login_post
-    user = User.find_by(email: params[:session][:email])
+    user = User.find_by(email: params[:session][:email],provider:nil)
     if user && user.activated? && user.oauth == false && user.admit == true && user.usertype != "delete" && user.authenticate(params[:session][:password])
       log_in user
       flash["alert_en"] = "You successed to login"
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
     end
   end
   def create
-    user = User.find_by(email: params[:session][:email])
+    user = User.find_by(email: params[:session][:email],provider:nil)
     if user && user.authenticate(params[:session][:password]) && user.activated? && user.oauth == false && user.admit == true
       log_in user
       flash["alert_en"] = "You successed to login"

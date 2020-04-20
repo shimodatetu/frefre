@@ -55,7 +55,7 @@ class PasswordResetsController < ApplicationController
     # beforeフィルタ
 
     def get_user
-      @user = User.find_by(email: params[:email])
+      @user = User.find_by(email: params[:email],provider:nil)
     end
 
     # 有効なユーザーかどうか確認する
