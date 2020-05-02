@@ -185,6 +185,9 @@
               </div>
             </div>
             <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea>
+            <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+              Powered by MT
+            <% end %>
           </div>
         </div>
         <div class="space_form prof_trans">
@@ -219,6 +222,9 @@
               </div>
             </div>
             <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"><%=current_user.profile_jp%></textarea>
+            <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+              翻訳提供 未来翻訳
+            <% end %>
           </div>
         </div>
         <div class="save_button_bottom

@@ -149,6 +149,9 @@ class TasksController < ApplicationController
     post = Post.find_by(id:delete_id)
     if post && logged_in? && post.user.id == current_user.id
       post.update(deleted: true)
+      flash["alert_en"] = "You succeeded to delete."
+      flash["alert_jp"] = "削除に成功しました。"
+      flash["alert_type"] = "success"
       redirect_to params[:url]
     end
   end

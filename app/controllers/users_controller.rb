@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         flash.now[:failed_en] = "This acount is freezed."
         flash.now[:failed_jp] = "このアカウントは凍結しています"
         render :index
-      elsif user_exist == false
+      elsif user_exist == true
         flash.now[:failed_en] = "This mail address is already registered."
         flash.now[:failed_jp] = "このメールアドレスはすでに登録されています。"
         render :index

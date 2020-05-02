@@ -111,8 +111,13 @@
       <% show_group_id = -1 %>
       <% there_be = false %>
       <% user.posts.offset(@thread_page_num2*(@page_id2 - 1)).limit(@thread_page_num2).each do |post| %>
+        <% there_be = true %>
         <% if post.group != nil %>
-          <%= render post %>
+          <% group_id = post.group_id %>
+          <% page_id = (post.group.posts.where("id <= ?",post.id).count / 20).to_i + 1%>
+          <%= link_to("/thread/show/#{group_id}/#{page_id}" , class:"thread_link") do %>
+            <%= render post %>
+          <% end %>
         <% end %>
       <% end %>
       <% if there_be == false %>

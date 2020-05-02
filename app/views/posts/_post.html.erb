@@ -23,34 +23,41 @@
         <% if logged_in? && current_user.id != post.user.id %>
           <% url = "/other_profile/#{post.user.id}" %>
         <% end %>
-        <%= link_to url do %>
-          <% if post.user.image == 0 %>
-            <% if post.user.avater.attached? %>
-              <%= image_tag post.user.avater , :class => "group_img"%>
-            <% else %>
-              <% if post.user.photo.nil? %>
-                <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+        <object>
+          <%= link_to url do %>
+            <% if post.user.image == 0 %>
+              <% if post.user.avater.attached? %>
+                <%= image_tag post.user.avater , :class => "group_img"%>
               <% else %>
-                <%= image_tag show_image_user_path(post.user), :class => "group_img" %>
+                <% if post.user.photo.nil? %>
+                  <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                <% else %>
+                  <%= image_tag show_image_user_path(post.user), :class => "group_img" %>
+                <% end %>
               <% end %>
+            <% else %>
+              <%= image_tag("/userimage/user#{post.user.image}.png", :class => "group_img") %>
             <% end %>
-          <% else %>
-            <%= image_tag("/userimage/user#{post.user.image}.png", :class => "group_img") %>
           <% end %>
-        <% end %>
+        </object>
       </div>
     </div>
     <div class="thread_content">
       <div class="post_content_cover">
         <div class="user_name">
           <% if params[:id].nil? || !logged_in? || current_user_id != post.user.id %>
-            <%= link_to "/other_profile/#{post.user.id}" do %>
-              <%= simple_format(text_url_to_link(h(post.user.name))) %>
-            <% end %>
+            <object>
+              <%= link_to "/other_profile/#{post.user.id}" do %>
+                <%= simple_format(text_url_to_link(h(post.user.name))) %>
+              <% end %>
+            </object>
           <% else %>
-            <%= link_to "/profile" do %>
-              <%= simple_format(text_url_to_link(h(post.user.name))) %>
-            <% end %>
+
+            <object>
+              <%= link_to "/profile" do %>
+                <%= simple_format(text_url_to_link(h(post.user.name))) %>
+              <% end %>
+            </object>
           <% end %>
           <% if params[:id].nil? || current_user_id != post.user.id || (post.id != first_id && logged_in? && current_user_id == post.user.id)%>
             <div class="dropdown">
@@ -74,10 +81,13 @@
                     </button>
                   </div>
                   <div class="one_topic profile_button_set">
-                    <%= link_to "/other_profile/#{post.user.id}" do %>
-                      <div class="jp">プロフィールへ飛ぶ</div>
-                      Jump to the profile.
-                    <% end %>
+
+                    <object>
+                      <%= link_to "/other_profile/#{post.user.id}" do %>
+                        <div class="jp">プロフィールへ飛ぶ</div>
+                        Jump to the profile.
+                      <% end %>
+                    </object>
                   </div>
                   <div class="one_topic report_button_set">
                     <button class="report_post_button none_button"id="<%= post.id %>"style="width:100%">
@@ -88,10 +98,12 @@
                 <% else %>
                   <% if current_user_id != post.user_id %>
                     <div class="one_topic">
-                      <%= link_to "/other_profile/#{post.user.id}" do %>
-                        <div class="jp">プロフィールへ飛ぶ</div>
-                        Jump to the profile.
-                      <% end %>
+                      <object>
+                        <%= link_to "/other_profile/#{post.user.id}" do %>
+                          <div class="jp">プロフィールへ飛ぶ</div>
+                          Jump to the profile.
+                        <% end %>
+                      </object>
                     </div>
                     <% if logged_in? %>
                       <div class="one_topic">

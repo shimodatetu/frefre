@@ -19,7 +19,7 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
     page = Math.ceil((parseFloat(data['chat_id'])) / page_id_max)
     if data["type"] == "new_maker"
       alert_set("You successed to send a direct message.","ダイレクトメッセージの送信に成功しました。","success")
-      window.location.href = "/profile/5/" + data["notice_id"] + "/" + String(Number(page))
+      window.location.href = "/profile/5/" + String(data["chat"]["notice_id"]) + "/" + String(Number(page))
     else if data["type"] == "maker"
       $(".notice_cover #post").attr("style","")
       $(".chat_thread_submit_image").attr("style","display:none;")
@@ -32,8 +32,8 @@ App.chat = App.cable.subscriptions.create "ChatChannel",
         else if Number(now_page) == page
           $(".base_en_form").val("");
           $(".base_jp_form").val("");
-        else
-          window.location.href = "/profile/5/" + String(now_id) + "/" + String(page)
+      else
+        window.location.href = "/profile/5/" + String(data["chat"]["notice_id"]) + "/" + String(Number(page))
     else if data["type"] == "accept" && url.indexOf("/profile/5") != -1 && Number(now_id) == data["chat"]['notice_id'] && Number(now_page) == page
       if(!($('.thread_cover#'+data["chat"]['id']).length))
         add_chat(data)

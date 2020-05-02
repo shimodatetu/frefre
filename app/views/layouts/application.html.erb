@@ -31,7 +31,7 @@
       <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
       <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
       !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
-      !url.include?('manager') && !current_page?(root_path) %>
+      !url.include?('manager') && !current_page?(root_path)%>
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-format="fluid"
@@ -45,7 +45,7 @@
     </div>
     <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
     !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
-    !url.include?('manager') && !url.include?("password_resets")%>
+    !url.include?('manager') && !url.include?("password_resets") && !url.include?("account_activations")%>
       <div class="sub_content_cover">
         <%= render partial:"news/news_top" %>
         <ins class="adsbygoogle"

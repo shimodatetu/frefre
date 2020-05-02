@@ -29,7 +29,7 @@
   </div>
   <div class="category_show">
     <%= form_tag('/search/header',method: :post,class: "search_form_top") do %>
-      <%= text_field_tag :search_text ,"", class: "form-control form_input",placeholder:"Search / 検索" %>
+      <%= text_field_tag :search_text ,"", class: "form-control form_input",placeholder:"Title Search / タイトル検索" %>
       <span class="input-group-btn">
         <% link_to "/" %>
         <button type="submit"class="btn btn-warning form_button">
