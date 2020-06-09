@@ -1,7 +1,38 @@
 .pvpage_all{
-  margin-top:20px;
   p{
     display: block;
+  }
+  .category_list{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    .category_link_button{
+      display: block;
+      text-align: left;
+      margin-top: 5px;
+      border: solid 1px #fff;
+      color: #07689f;
+      background-color: #fff;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 2px 15px 5px 15px;
+      text-decoration: none;
+    }
+    .category_link_button:hover{
+      text-decoration: underline;
+    }
+  }
+  .make_group_button{
+    margin-bottom: 10px;
+    border: solid 2px #ff9d3b;
+    color: #ff9d3b;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px 30px 5px 30px;
+  }
+  .make_group_button:hover{
+    color: #fff;
+    background-color: #ff9d3b;
   }
   .category_cover{
     border-radius: 10px;
@@ -27,25 +58,30 @@
     width:100%;
     display: inline-block;
     font-size:14px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
+    margin-top: 10px;
+    background: #66bfbf;
+    color: #fff;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border: solid 2px;
+    border-bottom: none;
+    border-color: #66bfbf;
+    font-weight: 500;
     .float_jp{
       font-size:13px;
     }
     .panel-title-text{
-      font-size: 15px;
-      padding-left: 5px;
-      padding-right: 5px;
-      display: inline-block;
-      vertical-align: -webkit-baseline-middle;
-      margin-top: 10px;
-      background: #66bfbf;
-      color: #fff;
-      border-radius: 5px;
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
-      border: solid 2px;
-      border-bottom: none;
-      border-color: #66bfbf;
-      font-weight: 500;
+      display:inline-block;
+    }
+    button{
+      padding: 2px 10px 2px 10px;
+      float: right;
+      font-size:12px;
     }
     /*.panel-title-text:hover{
       background: #fff;

@@ -45,18 +45,7 @@
   .thread_cover#1{
   	border: solid 3px #bee;
   }
-  .follow_cover:hover{
-    background-color: #fff;
-  }
-  .follow_cover{
-    min-width: 200px;
-    display: inline-block;
-    margin-left: 15px;
-    .thread_content{
-      vertical-align: baseline!important;
-      width: calc(100% - 60px)!important;
-    }
-  }
+
   .thread_cover{
     background-color: #ffffff;
     padding:5px;
@@ -241,5 +230,17 @@
       margin-top:20px;
       margin-left:-5px;
     }
+  }
+}
+.follow_cover:hover{
+  background-color: #fff;
+}
+.follow_cover{
+  min-width: 200px;
+  display: inline-block;
+  margin-left: 15px;
+  .thread_content{
+    vertical-align: baseline!important;
+    width: calc(100% - 60px)!important;
   }
 }

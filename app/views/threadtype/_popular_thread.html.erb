@@ -1,0 +1,34 @@
+
+<% first_group = threadtype.groups.first %>
+<% thread_id = first_group.id %>
+<div class="threadtype_threads">
+  <ul class="nav nav-tabs title_nav" id="myTab" role="tablist">
+    <li class="nav-item active blue-nav width_max">
+      <a class="nav-link profile_history_change2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+        <i class="fas fa-comments"></i>
+        <div class="text_cover">
+          Popular Thread / 人気スレッド
+        </div>
+      </a>
+    </li>
+  </ul>
+  <% there_be = false %>
+  <% @popular_groups.each do |group| %>
+    <% there_be = true %>
+    <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+  <% end %>
+  <%= paginate @popular_groups , outer_window: 3%>
+
+  <%= link_to("/groups/"+threadtype.id.to_s, type:"button", class:"login_join_button btn mes_button makethread_link") do %>
+    <div class="text_box">
+        Make Thread / スレッドを作成する
+    </div>
+  <% end %>
+  <% if @popular_groups.count > 6 && 1 == 2 %>
+    <%= link_to("/groups/"+threadtype.id.to_s, type:"button", class:"login_join_button btn mes_button makethread_link") do %>
+      <div class="text_box">
+          Make Thread / スレッドを作成する
+      </div>
+    <% end %>
+  <% end %>
+</div>

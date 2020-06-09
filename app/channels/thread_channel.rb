@@ -20,16 +20,15 @@ class ThreadChannel < ApplicationCable::Channel
       group.user_id = current_user.id
       group.first_content_jp = data['message_jp']
       group.first_content_en = data['message_en']
+      group.threadtype_id = data["threadtype_id"]
       if group.save
-        data["types"].each do |type|
-          Threadtype.find_by(id:type.to_i).groups << group
-        end
         post = Post.new()
         post.lang = data['lang']
         post.content_jap = data['message_jp']
         post.content_eng = data['message_en']
         post.id_ingroup = group.posts.count
         post.group_id = group.id
+        post.threadtype_id = data["threadtype_id"]
         post.user_id = current_user.id
         post.save
       end

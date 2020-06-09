@@ -10,12 +10,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
+    @user.profile_en = "Nice to meet you!"
+    @user.profile_jp = "よろしくお願いします！"
     if params[:user][:agreement_term] == "0"
       flash.now[:failed_en] = "Please agree the terms of service"
       flash.now[:failed_jp] = "利用規約に同意してください"
       render :index
     else
-
       @users = User.where(email: @user.email.downcase)
       user_exist = false
       for user in @users do
@@ -76,7 +78,9 @@ class UsersController < ApplicationController
       flash.now[:failed_jp] = "無効なメールアドレスです。"
       flash.now[:failed_en] = "Email is invalid."
     end
-    @user = User.new(name:params[:user][:name],email:params[:user][:email],agreement_term:params[:user][:agreement_term])
+    profile_en = "Nice to meet you!"
+    profile_jp = "よろしくお願いします！"
+    @user = User.new(name:params[:user][:name],email:params[:user][:email],agreement_term:params[:user][:agreement_term],profile_en:profile_en,profile_jp:profile_jp)
   end
 
   def update

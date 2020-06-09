@@ -21,7 +21,7 @@
     </div>
     <div class="thread_all thread_all_post"style="padding-top:10px;">
       <div class="thread_cover_cover">
-        <%= render thread.posts.first %>
+        <%= render thread.posts.first,locals: { type:"normal" } %>
       </div>
     </div>
     <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>

@@ -77,6 +77,7 @@
     }
   }
 }
+
 .thread_cover{
   //filter: drop-shadow(2px 5px 5px rgba(0,0,0,0.2));
   background-color: #ffffff;
@@ -264,4 +265,11 @@
       }
     }
   }
+  .post_content_position.width_max{
+    width: 100%!important;
+  }
 }
+.thread_cover.without_border{
+  border:none;
+}
+

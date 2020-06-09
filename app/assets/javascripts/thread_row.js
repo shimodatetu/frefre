@@ -28,7 +28,7 @@ $(function(){
     $(elem).find(".en_content_row .post_content_text").attr("style","-webkit-line-clamp:"+Math.ceil(row));
 
   });
-  $('.pvpage_all .thread_cover').each(function(i, elem){
+  $('.pvpage_all .thread_cover,.threadtype_threads .thread_cover').each(function(i, elem){
     var jp_height = $(elem).find(".jp_position .post_content_text").height();
     var en_height = $(elem).find(".jp_position .post_content_text").height();
     var row = (Math.max(jp_height,en_height) - 10) / 22;
@@ -39,6 +39,7 @@ $(function(){
       $(elem).find(".en_position .post_content").attr("style","-webkit-line-clamp:1");
     }
   });
+
   var options ={"backdrop":"static"}
 
   $(".cannot_delete").on("click", function (event) {

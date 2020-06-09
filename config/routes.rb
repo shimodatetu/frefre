@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   #devise_for :users
   #devise_for :users
+  get 'threadtype/show'
+  get 'threadtype/show/:id' => 'threadtype#show'
+  get 'threadtype/show/:id/:type' => 'threadtype#show'
+  get 'threadtype/new'
+  post 'threadtypes' => "threadtype#create"
+  post "threadtype/search" => "threadtype#search"
+
+  post 'post/create/:id' => 'post#create'
+
   get 'users/test'
   get 'users/unsubscribe'
   get 'manager',to:"manager#show"
@@ -30,7 +39,7 @@ Rails.application.routes.draw do
   get 'manager/news_make'
 
   post 'news_maker', to:'manager#news_maker'
-  post 'threadtype_new',to:'manager#threadtype_new'
+  post 'category_new',to:'manager#category_new'
   get 'manager/user_office',to:'manager#user_office'
   get 'manager/user_office/:id' => 'manager#user_office'
   post 'user_info',to:'manager#user_info'
@@ -143,6 +152,7 @@ Rails.application.routes.draw do
 
   post 'notices' => "notices#create"
   get '/groups',to:'groups#new'
+  get '/groups/:id',to:'groups#new'
   post 'groups' => "groups#create"
   post 'chats' => "chats#create"
   post 'profile/send_img'
@@ -178,7 +188,7 @@ Rails.application.routes.draw do
     end
   end
   root 'pv_page#show'
-
+  get "/:id" => 'pv_page#show'
   get 'home/:id' => 'pv_page#show'
   #root 'users#index'
   resources :password_resets,     only: [:new, :create, :edit, :update, :new_check]

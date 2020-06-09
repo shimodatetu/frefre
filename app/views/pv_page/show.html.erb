@@ -9,25 +9,7 @@
 </div>
 
 <div class="pvpage_all">
-  <div class="top_explain">
-    <div class="en">
-      FreFre is Forum with Japanese
-      <span class="delete_message">
-        (make friends,travel,culture,problems)
-      </span>
-    </div>
-    <div class="jp">
-      FreFreは
-      <span class="delete_message">
-        翻訳機能で
-      </span>
-      簡単に外国人と話せる掲示板です。
-      <span class="delete_message">
-        英語が苦手でもOK！
-      </span>
-    </div>
-  </div>
-  <div class="category_show">
+  <div class="category_show"style="display:none">
     <%= form_tag('/search/header',method: :post,class: "search_form_top") do %>
       <%= text_field_tag :search_text ,"", class: "form-control form_input",placeholder:"Title Search / タイトル検索" %>
       <span class="input-group-btn">
@@ -39,113 +21,149 @@
       </span>
     <% end %>
   </div>
-
-  <div class="category_cover">
-    <div class="title">
-      Category List　/　カテゴリー覧
-      <div class="dropdown"style="display:none">
-        <div class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span class="caret"></span>
-        </div>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <div class="one_topic">
-            <% Threadtype.all.offset(6).each do |type| %>
-              <%= link_to "/category/show/"+type.id.to_s,class:"btn normal_button contract space category_link" do %>
-                <%= type.type_en %> / <%= type.type_jp %>
-              <% end %>
-            <% end %>
-          </div>
-        </ul>
+  <div class="group_list">
+    Group List / グループ一覧
+  </div>
+  <%= link_to("threadtype/new",type:"button",class:"btn btn-default btn mes_button make_group_button") do %>
+    <div class="text_box">
+      <div class="jp">
+        Make Group / グループを作る
       </div>
     </div>
-    <div>
-      <% Threadtype.all.each do |type| %>
-        <%= link_to "/category/show/"+type.id.to_s,class:"btn normal_button contract space category_link main" do %>
-          <%= type.type_en %> / <%= type.type_jp %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="panel-title"style="display:inline-block">
-    <%= link_to "thread_list/popular" do %>
-      <div class="panel-title-text">
-        Popular Threads
-        <span class="float_jp">
-          人気スレッド
-        </span>
-      </div>
-    <% end %>
-  </div>
-  <div class="pvpage_head">
-  </div>
-  <div class="thread_all thread_all_group">
-    <% there_be = false %>
-    <% @groups.order(seen_num: "DESC").limit(3).each do |group| %>
-      <% there_be = true %>
-      <%= render partial:"/groups/group", locals: { group:group } %>
-    <% end %>
-    <% if there_be == false %>
-      <div class="not_found">
-        <div class="en">
-          There is no thread created.
-        </div>
-        <div class="jp">
-          まだスレッドが作成されていません。
-        </div>
-      </div>
-    <% else %>
-      <%= link_to "thread_list/popular" do %>
-        <div class="see_more_thread">
-          See More / もっと見る
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <% if current_page?(root_path) %>
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-format="fluid"
-       data-ad-layout-key="-hc-l+35-8m+a2"
-       data-ad-client="ca-pub-2088744114390591"
-       data-ad-slot="5806296929"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
   <% end %>
-  <div class="panel-title"style="display:inline-block;margin-top:30px">
-    <%= link_to "thread_list/new" do %>
-      <div class="panel-title-text">
-        Latest Threads
-        <span class="float_jp">
-          最新スレッド
-        </span>
+  <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
+  <div class="threadtype_cover">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item blue-nav active">
+        <i class="fas fa-users"></i>
+        <a class="nav-link pvpage_change1" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
+          <div class="jp">
+            人気グループ
+          </div>
+          <div class="en">
+            Popular Group
+          </div>
+        </a>
+      </li>
+      <li class="nav-item blue-nav">
+        <i class="fas fa-users"></i>
+        <a class="nav-link pvpage_change2" id="latest-tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">
+          <div class="jp">
+            最新グループ
+          </div>
+          <div class="en">
+            Latest Group
+          </div>
+        </a>
+      </li>
+      <li class="nav-item blue-nav">
+        <i class="fas fa-tags"></i>
+        <a class="nav-link pvpage_change3" id="category-tab" data-toggle="tab" href="#category" role="tab" aria-controls="category" aria-selected="false">
+          <div class="jp">
+            グループカテゴリ
+          </div>
+          <div class="en">
+            Group Category
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+        <div class="thread_all thread_all_group">
+          <% there_be = false %>
+          <% @popular_threadtypes.each do |threadtype| %>
+            <% there_be = true %>
+            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+          <% end %>
+          <%= paginate @popular_threadtypes, outer_window: 3 %>
+          <% if there_be == false %>
+            <div class="not_found">
+              <div class="en">
+                There is no thread created.
+              </div>
+              <div class="jp">
+                まだスレッドが作成されていません。
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
-    <% end %>
-  </div>
-  <div class="pvpage_head">
-  </div>
-  <div class="thread_all thread_all_group">
-    <% there_be = false %>
-    <% @groups.order("id DESC").limit(3).each do |group| %>
-      <% there_be = true %>
-      <%= render partial:"/groups/group", locals: { group:group } %>
-    <% end %>
-    <% if there_be == false %>
-      <div class="not_found">
-        <div class="en">
-          There is no thread created.
-        </div>
-        <div class="jp">
-          まだスレッドが作成されていません。
+      <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+        <div class="thread_all thread_all_group">
+          <% there_be = false %>
+          <% @latest_threadtypes.each do |threadtype| %>
+            <% there_be = true %>
+            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+          <% end %>
+          <%= paginate @latest_threadtypes , outer_window: 3%>
+          <% if there_be == false %>
+            <div class="not_found">
+              <div class="en">
+                There is no thread created.
+              </div>
+              <div class="jp">
+                まだスレッドが作成されていません。
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
-    <% else %>
-      <%= link_to "thread_list/new" do %>
-        <div class="see_more_thread">
-          See More / もっと見る
+      <div class="tab-pane fade category_list" id="category" role="tabpanel" aria-labelledby="category-tab">
+        <% there_be = false %>
+        <% Category.all.each do |category| %>
+          <% there_be = true %>
+          <%= render partial:"/category/category", locals: { category:category } %>
+        <% end %>
+        <% if there_be == false %>
+          <div class="not_found">
+            <div class="en">
+              There is no thread created.
+            </div>
+            <div class="jp">
+              まだスレッドが作成されていません。
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="join_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              フォローを解除してもよろしいですか？
+            </div>
+            <div class="text_en">
+              Is it ok to unfollow him or her?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer join_modal_footer">
+          <button type="button" class="btn btn-primary unjoin_modal_submit join_modal_button">
+            <div class="jp">
+              実行
+            </div>
+            <div class="en">
+              OK
+            </div>
+          </button>
+          <button type="button" class="btn btn-default join_modal_button" data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
         </div>
-      <% end %>
-    <% end %>
+  		</div>
+  	</div>
   </div>
 </div>

@@ -18,35 +18,15 @@
     </div>
   </div>
   <div class="profile_page row">
+    <%= button_tag data: {toggle: "modal",target: "#profile_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link" do %>
+      <div class="text_box">
+        <div class="jp">
+          プロフィールを変更する
+        </div>
+      </div>
+    <% end %>
     <div class="profile_page_en">
       <div class="col-sm-12">
-        <div class="col-sm-12 profile_content">
-          <div class="row profile_content_data">
-            <div class="content_name">
-              <div class="jp">
-                プロフィールを公開する
-              </div>
-              <div class="en">
-                Disclose Profile
-              </div>
-            </div>
-            <div class=""style="">
-              <div class="no_text">
-                NO
-              </div>
-              <div class="switch">
-                <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox"
-                <% if current_user.able_see == true %>
-                  checked
-                <% end %>>
-                <label for="cmn-toggle-1"></label>
-              </div>
-              <div class="yes_text">
-                YES
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="col-sm-12 profile_content">
           <div class="row profile_content_data">
             <div class="content_name">
@@ -54,11 +34,11 @@
                 ユーザーネーム
               </div>
               <div class="en">
-                Username
+                Username：
               </div>
             </div>
             <div class="profile_content_cover">
-              <input id="username"class="form_control content_input form-control" placeholder="Blank"value="<%= current_user.name %>">
+              <%= current_user.name %>
             </div>
           </div>
           <div class="row profile_content_data">
@@ -67,78 +47,23 @@
                 性別
               </div>
               <div class="en">
-                Gender
+                Gender：
               </div>
             </div>
             <div class="profile_content_cover">
-              <select id="gender"class="content_select">
-                <option value="">No Selected</option>
                 <% if current_user.gender == "Male" %>
-                  <option value="Male" selected>Male / 男性</option>
+                  <%= "Male / 男性" %>
+                <% elsif current_user.gender == "Female" %>
+                  <%= "Female / 女性" %>
+                <% elsif current_user.gender == "Neuter"  %>
+                  <%= "Other / その他" %>
                 <% else %>
-                  <option value="Male">Male / 男性</option>
+                  <%= "No answer / 答えない" %>
                 <% end %>
-                <% if current_user.gender == "Female" %>
-                  <option value="Female" selected>Female / 女性</option>
-                <% else %>
-                  <option value="Female">Female / 女性</option>
-                <% end %>
-                <% if current_user.gender == "Neuter" %>
-                  <option value="Neuter" selected>Other / その他</option>
-                <% else %>
-                  <option value="Neuter">Other / その他</option>
-                <% end %>
-                <% if current_user.gender == "not_answer" %>
-                  <option value="not_answer" selected>No answer / 答えない</option>
-                <% else %>
-                  <option value="not_answer">No answer / 答えない</option>
-                <% end %>
-              </select>
             </div>
           </div>
         </div>
-        <!--<div class="col-sm-12 profile_content">
-          <div class="profile_content_data row">
-            <div class="content_name col-sm-2">
-              <div class="jp">
-                生年月日
-              </div>
-              Date Of Birth
-            </div>
-            <div class="col-sm-10">
-              <select id="year"class="content_select">
-                <option>Year</option>
-                <% 2019.downto(1900) do |num| %>
-                  <% if current_user.birth_year == num %>
-                    <option value="<%= num %>"selected><%= num %></option>
-                  <% else %>
-                    <option value="<%= num %>"><%= num %></option>
-                  <% end %>
-                <% end %>
-              </select>
-              <select id="month"class="content_select">
-                <option>Month</option>
-                <% 1.upto(12) do |num| %>
-                  <% if current_user.birth_month == num %>
-                    <option value="<%= num %>"selected><%= num %></option>
-                  <% else %>
-                    <option value="<%= num %>"><%= num %></option>
-                  <% end %>
-                <% end %>
-              </select>
-              <select id="date"class="content_select">
-                <option>Date</option>
-                <% 1.upto(31) do |num| %>
-                  <% if current_user.birth_day == num %>
-                    <option value="<%= num %>"selected><%= num %></option>
-                  <% else %>
-                    <option value="<%= num %>"><%= num %></option>
-                  <% end %>
-                <% end %>
-              </select>
-            </div>
-          </div>
-        </div>-->
+
         <div class="profile_content">
           <div class="row profile_content_data">
             <div class="content_name">
@@ -146,32 +71,21 @@
                 出身国
               </div>
               <div class="en">
-                Country
+                Country：
               </div>
             </div>
             <div class="profile_content_cover">
-              <select value="<%= current_user.country %>"class="content_select"id="country"name="country">
-                <option value="">No selected</option>
-                <%= render partial: "country" %>
-              </select>
-              <script type="text/javascript">
-                $("#country option[value='<%= current_user.country %>']").prop("selected","selected");
-              </script>
+              <% if current_user.country == nil %>
+                <%= "No answer / 答えない" %>
+              <% else %>
+                <%= current_user.country %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="profile_words">
-      <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide">
-        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-        <div class="en help_text">
-          Usage
-        </div>
-        <div class="jp help_text">
-          使い方
-        </div>
-      </button>
       <div class="profile_content intro_content">
         <div class="intro">
           <div class="row profile_content_data self_introduction">
@@ -184,30 +98,13 @@
                 (English)
               </div>
             </div>
-            <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea>
-            <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-              Powered by MT
-            <% end %>
-          </div>
-        </div>
-        <div class="space_form prof_trans">
-          <div class="trans_cover">
-            <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
-            name="<% if logged_in? %>logined<% end %>">
-              <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-              <div class="button_text button_text_jp">
-                翻訳
-              </div>
-            </button>
-          </div>
-          <div class="trans_cover">
-            <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
-            name="<% if logged_in? %>logined<% end %>">
-              <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-              <div class="button_text button_text_en">
-                Trans
-              </div>
-            </button>
+            <div class="profile_intro_data">
+              <% if current_user.profile_en == nil %>
+                Blank / 空
+              <% else%>
+                <%=current_user.profile_en%>
+              <% end %>
+            </div>
           </div>
         </div>
         <div class="intro">
@@ -221,21 +118,103 @@
                 (Japanese)
               </div>
             </div>
-            <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"><%=current_user.profile_jp%></textarea>
-            <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
-              翻訳提供 未来翻訳
-            <% end %>
+            <div class="profile_intro_data">
+              <% if current_user.profile_jp == nil %>
+                Blank / 空
+              <% else%>
+                <%=current_user.profile_jp%>
+              <% end %>
+            </div>
           </div>
         </div>
-        <div class="save_button_bottom
-        <% if current_user.usertype == "event" %>
-          profile_cannot_save
-        <% else %>
-          profile_save_button
+      </div>
+    </div>
+    <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
+      <li class="nav-item active">
+        <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
+          <i class="fas fa-users"></i>
+          <div class="text_cover">
+            <div class="jp">
+              参加しているグループ
+            </div>
+            <div class="en">
+              Joining Group
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#group" role="tab" aria-controls="group" aria-selected="false">
+          <i class="fas fa-users"></i>
+          <div class="text_cover">
+            <div class="jp">
+              作成したグループ
+            </div>
+            <div class="en">
+              Made Group
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#thread" role="tab" aria-controls="thread" aria-selected="false">
+          <i class="fas fa-comments"></i>
+          <div class="text_cover">
+            <div class="jp">
+              過去のスレッド
+            </div>
+            <div class="en">
+              Past Thread
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">
+          <i class="fas fa-comments"></i>
+          <div class="text_cover">
+            <div class="jp">
+              過去の投稿
+            </div>
+            <div class="en">
+              Past Post
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+        <% there_be = false %>
+        <% current_user.threadtypes.each do |threadtype| %>
+          <% there_be = true %>
+
+          <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
         <% end %>
-          btn btn-default">
-          Save / 保存
-        </div>
+      </div>
+      <div class="tab-pane fade" id="group" role="tabpanel" aria-labelledby="group-tab">
+        <% show_group_id = -1 %>
+        <% there_be = false %>
+        <% Threadtype.all.where(leader_id:current_user.id).each do |threadtype| %>
+          <% there_be = true %>
+          <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="thread" role="tabpanel" aria-labelledby="thread-tab">
+        <% show_group_id = -1 %>
+        <% there_be = false %>
+        <% current_user.groups.each do |group| %>
+          <% there_be = true %>
+          <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="post" role="tabpanel" aria-labelledby="post-tab">
+        <% show_group_id = -1 %>
+        <% there_be = false %>
+        <% current_user.posts.each do |post| %>
+          <% there_be = true %>
+          <%= render partial: 'posts/post' ,locals: { post:post,type:"normal"} %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -129,6 +129,7 @@ class PostsController < ApplicationController
       post = Post.new()
       post.id_ingroup = group.posts.count
       post.group_id = group.id
+      post.threadtype_id = group.threadtype_id
       post.user_id = current_user.id
       if data[:type] == "image" && data[:pict] != nil
         post.pict = data[:pict]

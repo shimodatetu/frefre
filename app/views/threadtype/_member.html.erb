@@ -1,0 +1,70 @@
+
+<% first_group = threadtype.groups.first %>
+<% thread_id = first_group.id %>
+<div class="threadtype_threads">
+  <ul class="nav nav-tabs make_thread_tab" id="myTab" role="tablist">
+    <li class="nav-item active green-nav width_max">
+      <a class="nav-link profile_history_change2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+        <i class="fas fa-comments"></i>
+        <div class="text_cover">
+          Member / メンバー
+        </div>
+      </a>
+    </li>
+  </ul>
+  <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+    <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
+    <div class="lang_bar">
+      <div class="country_flag en_country">
+        Hide English
+      </div>
+      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+          data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+      <div class="country_flag jp_country">
+        日本語非表示
+      </div>
+    </div>
+  </div>
+
+  <% there_be = false %>
+  <% per = 10 %>
+  <% users = threadtype.users.page(params[:page]).per(per) %>
+  <%= render partial:"usershow", locals: { users:@members } %>
+  <%= paginate @members  , outer_window: 3%>
+</div>
+<div class="profile_modal">
+  <div class="modal fade" id="follow_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              フォローを解除してもよろしいですか？
+            </div>
+            <div class="text_en">
+              Is it ok to unfollow him or her?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-primary unfollow_modal_submit follow_modal_button">
+            <div class="jp">
+              実行
+            </div>
+            <div class="en">
+              OK
+            </div>
+          </button>
+          <button type="button" class="btn btn-default follow_modal_button"data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
+        </div>
+  		</div>
+  	</div>
+  </div>
+</div>

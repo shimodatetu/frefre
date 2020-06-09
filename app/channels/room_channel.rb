@@ -20,6 +20,7 @@ class RoomChannel < ApplicationCable::Channel
         post.content_jap = data['content_jap']
         post.content_eng = data['content_eng']
         post.group_id = group.id
+        post.threadtype_id = group.threadtype_id
         post.user_id = current_user.id
         post.save
       end

@@ -17,6 +17,7 @@
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
     <script data-ad-client="ca-pub-2088744114390591" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script src="https://kit.fontawesome.com/88141e0e74.js" crossorigin="anonymous"></script>
   </head>
   <body>
 
@@ -31,7 +32,7 @@
       <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
       <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
       !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
-      !url.include?('manager') && !current_page?(root_path)%>
+      !url.include?('manager') && !current_page?(root_path) && !url.include?("threadtype/show")%>
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-format="fluid"

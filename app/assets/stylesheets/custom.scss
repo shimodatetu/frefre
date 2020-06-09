@@ -1,3 +1,10 @@
+.group_list{
+  color: #07689f;
+  padding: 10px;
+  padding-top: 0px;
+  font-size: 23px;
+  font-weight: bold;
+}
 a{
   color:#07689f;
 }
@@ -261,6 +268,35 @@ p{
   .glyphicon-star-empty{
     vertical-align: middle;
   }
+  .follow_cover{
+    width:100%;
+    margin-left:0px;
+    .user_name{
+      display: inline-block;
+      display: inline-block;
+      vertical-align: -webkit-baseline-middle;
+      margin-left: 10px;
+      margin-top:5px;
+    }
+    .post_content_text{
+      margin-left:5px!important;
+    }
+    .group_user_cover{
+      vertical-align: top;
+    }
+    .follow_button {
+      float:right;
+      .mes_button{
+        padding:2px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .icon{
+        margin-top:4px;
+        margin-right:5px;
+      }
+    }
+  }
   .follow_button_submit{
     color:#ff9d3b;
     border-color:#ff9d3b;
@@ -338,6 +374,9 @@ body{
   }
 }
 @media screen and (max-width: 750px){
+  .profile_main{
+    width: 100%!important;
+  }
   .sub_content_cover{
     a{
       display: block;
@@ -348,9 +387,6 @@ body{
   }
   .not_logined_cover{
     margin-left: calc(50vw - 215px)!important;
-  }
-  .profile .nav-tabs{
-    width: calc(100vw - 150px)!important;
   }
   .profile .lang_bar_cover .lang_bar{
     margin-left:0px!important;
@@ -391,9 +427,6 @@ body{
         }
       }
     }
-  }
-  .make_thread_category{
-
   }
   .intro{
     width: 100%!important;
@@ -497,9 +530,6 @@ body{
     width:90%!important;
     margin-left:5%!important;
   }
-  .post_form_cover_enjp{
-
-  }
   .post_form_cover_jp{
     width:90%!important;
     margin-left:5%!important;
@@ -519,12 +549,6 @@ body{
   }
   .profile{
     .lang_bar_cover{
-      width: calc(100vw - 150px)!important;
-      .lang_bar{
-        .slider{
-          width:calc(80vw - 180px) !important
-        }
-      }
       .jp_country{
         margin-left: 10px!important;
       }
@@ -588,9 +612,6 @@ body{
       display:none;
     }
   }
-  .header_logo{
-    margin-left: calc(50% - 25px)!important;
-  }
   .not_logined_cover {
     margin-left:0px!important;
     width: 100%!important;
@@ -620,8 +641,7 @@ body{
     }
     .thread_content{
       width:100%!important;
-      margin-top: -24px;
-      display: block!important;
+      margin-top: -14px;
       .user_name{
         margin-left: 35px;
       }

@@ -15,7 +15,7 @@ class ManagerController < ApplicationController
     @news = News.new()
   end
   def category_make
-    @category_all = Threadtype.all
+    @category_all = Category.all
   end
   def news_maker
     if manager_logged_in?
@@ -37,14 +37,14 @@ class ManagerController < ApplicationController
       news.save
     end
   end
-  def threadtype_new
+  def category_new
     type_en = []
     type_jp = []
     params[:category_en].split(",").each do |en_cate|
       type_en.push(en_cate)
     end
     params[:category_jp].split(",").each_with_index do |jp_cate, i|
-      Threadtype.create("type_en":type_en[i],"type_jp":jp_cate)
+      Category.create("type_en":type_en[i],"type_jp":jp_cate)
     end
     redirect_to "/manager/category"
   end
@@ -129,13 +129,13 @@ class ManagerController < ApplicationController
   end
 
   def category_delete
-    if category = Threadtype.find_by(id:params[:id].to_i)
+    if category = Category.find_by(id:params[:id].to_i)
       category.delete
     end
     redirect_to "/manager/category"
   end
   def category_alldelete
-    Threadtype.delete_all
+    Category.delete_all
     redirect_to "/manager/category"
   end
 

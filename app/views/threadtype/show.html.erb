@@ -1,0 +1,112 @@
+
+<% leader = User.find_by(id:@threadtype.leader_id) %>
+<div class="profile threadtype_page">
+  <div class="profile_sub"style="display:inline-block">
+    <div class="profile_picture">
+      <% if @threadtype.id == 22 %>
+        <%= image_tag("group_icon/chat.png", :class => "group_img",:style => "border-radius:none") %>
+      <% elsif @threadtype.id == 23 %>
+        <%= image_tag("group_icon/question.png", :class => "group_img",:style => "border-radius:none") %>
+      <% elsif @threadtype.id == 24 %>
+        <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
+      <% elsif @threadtype.pict.attached? %>
+        <%= image_tag @threadtype.pict , :class => "group_img",:style => "border-radius:none"%>
+      <% else %>
+        <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
+      <% end %>
+    </div>
+    <div class="profile_contents_change">
+      <div class="get_user_id"id="<%= current_user.id %>"></div>
+      <ul class="nav flex-column">
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type != "every") %>active<% end %>">
+          <%= link_to "/threadtype/show/" + @threadtype.id.to_s + "/1",class:"nav-link" do %>
+            <div class="jp">
+              ホーム
+            </div>
+            <div class="en">
+              Home
+            </div>
+          <% end %>
+        </li>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
+            <div class="jp">
+              人気スレッド
+            </div>
+            <div class="en">
+              Popular Thread
+            </div>
+          <% end %>
+        </li>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
+            <div class="jp">
+              最新スレッド
+            </div>
+            <div class="en">
+              Latest Thread
+            </div>
+          <% end %>
+        </li>
+        <% if @threadtype.type != "every" %>
+          <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "4" %>active<% end %>">
+            <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
+              <div class="jp">
+                メンバー
+              </div>
+              <div class="en">
+                Member
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "5" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/5',class:"nav-link" do %>
+            <div class="jp">
+              スレッド作成
+            </div>
+            <div class="en">
+              Make Thread
+            </div>
+          <% end %>
+        </li>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "6" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/6',class:"nav-link" do %>
+            <div class="jp">
+              キーワード検索
+            </div>
+            <div class="en">
+              Search
+            </div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="profile_main">
+    <div class="post_content_cover threadtype_title_show">
+      <div class="post_content_position width_max">
+        <div class="thread_title">
+          <div class="title_padding no_inline"style="font-size: 20px!important;">
+            <%= @threadtype.type_en %> / <%= @threadtype.type_jp %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="thread_cover threadtype_cover">
+      <% if params[:type] == nil || params[:type] == "1"%>
+        <%= render partial: "/threadtype/detail_show", locals: { threadtype: @threadtype }%>
+      <% elsif params[:type] == "2"  %>
+        <%= render partial: "/threadtype/popular_thread", locals: { threadtype: @threadtype }%>
+      <% elsif params[:type] == "3"  %>
+        <%= render partial: "/threadtype/latest_thread", locals: { threadtype: @threadtype }%>
+      <% elsif params[:type] == "4"  %>
+        <%= render partial: "/threadtype/member", locals: { threadtype: @threadtype }%>
+      <% elsif params[:type] == "5"  %>
+        <%= render partial: "/threadtype/make_thread", locals: { threadtype: @threadtype }%>
+      <% elsif params[:type] == "6" || params[:type] == "7" || params[:type] == "8" %>
+        <%= render partial: "/threadtype/search", locals: { threadtype: @threadtype }%>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -46,16 +46,6 @@
             <% end %>
           </li>
           <li class="nav-item profile_contents_button">
-            <%= link_to '/profile/2',class:"nav-link" do %>
-              <div class="jp">
-                履歴
-              </div>
-              <div class="en">
-                History
-              </div>
-            <% end %>
-          </li>
-          <li class="nav-item profile_contents_button">
             <%= link_to '/profile/4',class:"nav-link" do %>
               <div class="jp">
                 チャット
@@ -295,6 +285,255 @@
     			</div>
     		</div>
     	</div>
+    </div>
+  </div>
+
+  <div class="profile_change_modal profile">
+    <div class="modal fade" id="profile_change_modal" tabindex="-1">
+      <form>
+        <div class="profile_title">
+          <div class="title"style="display:none">
+            <div class="jp">
+              プロフィール
+            </div>
+            My Profile
+            <div class="save_button
+            <% if current_user.usertype == "event" %>
+              profile_cannot_save
+            <% else %>
+              profile_save_button
+            <% end %>
+              btn btn-default">
+              Save / 保存
+            </div>
+          </div>
+        </div>
+        <div class="profile_page row">
+          <div class="profile_page_en">
+            <div class="col-sm-12">
+              <div class="col-sm-12 profile_content">
+                <div class="row profile_content_data">
+                  <div class="content_name">
+                    <div class="jp">
+                      プロフィールを公開する
+                    </div>
+                    <div class="en">
+                      Disclose Profile
+                    </div>
+                  </div>
+                  <div class=""style="">
+                    <div class="no_text">
+                      NO
+                    </div>
+                    <div class="switch">
+                      <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox"
+                      <% if current_user.able_see == true %>
+                        checked
+                      <% end %>>
+                      <label for="cmn-toggle-1"></label>
+                    </div>
+                    <div class="yes_text">
+                      YES
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 profile_content">
+                <div class="row profile_content_data">
+                  <div class="content_name">
+                    <div class="jp">
+                      ユーザーネーム
+                    </div>
+                    <div class="en">
+                      Username
+                    </div>
+                  </div>
+                  <div class="profile_content_cover">
+                    <input id="username"class="form_control content_input form-control" placeholder="Blank"value="<%= current_user.name %>">
+                  </div>
+                </div>
+                <div class="row profile_content_data">
+                  <div class="content_name">
+                    <div class="jp">
+                      性別
+                    </div>
+                    <div class="en">
+                      Gender
+                    </div>
+                  </div>
+                  <div class="profile_content_cover">
+                    <select id="gender"class="content_select">
+                      <option value="">No Selected</option>
+                      <% if current_user.gender == "Male" %>
+                        <option value="Male" selected>Male / 男性</option>
+                      <% else %>
+                        <option value="Male">Male / 男性</option>
+                      <% end %>
+                      <% if current_user.gender == "Female" %>
+                        <option value="Female" selected>Female / 女性</option>
+                      <% else %>
+                        <option value="Female">Female / 女性</option>
+                      <% end %>
+                      <% if current_user.gender == "Neuter" %>
+                        <option value="Neuter" selected>Other / その他</option>
+                      <% else %>
+                        <option value="Neuter">Other / その他</option>
+                      <% end %>
+                      <% if current_user.gender == "not_answer" %>
+                        <option value="not_answer" selected>No answer / 答えない</option>
+                      <% else %>
+                        <option value="not_answer">No answer / 答えない</option>
+                      <% end %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-sm-12 profile_content">
+                <div class="profile_content_data row">
+                  <div class="content_name col-sm-2">
+                    <div class="jp">
+                      生年月日
+                    </div>
+                    Date Of Birth
+                  </div>
+                  <div class="col-sm-10">
+                    <select id="year"class="content_select">
+                      <option>Year</option>
+                      <% 2019.downto(1900) do |num| %>
+                        <% if current_user.birth_year == num %>
+                          <option value="<%= num %>"selected><%= num %></option>
+                        <% else %>
+                          <option value="<%= num %>"><%= num %></option>
+                        <% end %>
+                      <% end %>
+                    </select>
+                    <select id="month"class="content_select">
+                      <option>Month</option>
+                      <% 1.upto(12) do |num| %>
+                        <% if current_user.birth_month == num %>
+                          <option value="<%= num %>"selected><%= num %></option>
+                        <% else %>
+                          <option value="<%= num %>"><%= num %></option>
+                        <% end %>
+                      <% end %>
+                    </select>
+                    <select id="date"class="content_select">
+                      <option>Date</option>
+                      <% 1.upto(31) do |num| %>
+                        <% if current_user.birth_day == num %>
+                          <option value="<%= num %>"selected><%= num %></option>
+                        <% else %>
+                          <option value="<%= num %>"><%= num %></option>
+                        <% end %>
+                      <% end %>
+                    </select>
+                  </div>
+                </div>
+              </div>-->
+              <div class="profile_content">
+                <div class="row profile_content_data">
+                  <div class="content_name">
+                    <div class="jp">
+                      出身国
+                    </div>
+                    <div class="en">
+                      Country
+                    </div>
+                  </div>
+                  <div class="profile_content_cover">
+                    <select value="<%= current_user.country %>"class="content_select"id="country"name="country">
+                      <option value="">No selected</option>
+                      <%= render partial: "country" %>
+                    </select>
+                    <script type="text/javascript">
+                      $("#country option[value='<%= current_user.country %>']").prop("selected","selected");
+                    </script>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="profile_words">
+            <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide">
+              <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+              <div class="en help_text">
+                Usage
+              </div>
+              <div class="jp help_text">
+                使い方
+              </div>
+            </button>
+            <div class="profile_content intro_content">
+              <div class="intro">
+                <div class="row profile_content_data self_introduction">
+                  <div class="content_name">
+                    <div class="jp">
+                      自己紹介(英語)
+                    </div>
+                    <div class="en">
+                      Introduction
+                      (English)
+                    </div>
+                  </div>
+                  <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea>
+                  <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+                    Powered by MT
+                  <% end %>
+                </div>
+              </div>
+              <div class="space_form prof_trans">
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_en"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                    <div class="button_text button_text_jp">
+                      翻訳
+                    </div>
+                  </button>
+                </div>
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn  btn_send words_post_button"id="trans_to_jp"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                    <div class="button_text button_text_en">
+                      Trans
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="intro">
+                <div class="row profile_content_data self_introduction">
+                  <div class=" content_name">
+                    <div class="jp">
+                      自己紹介(日本語)
+                    </div>
+                    <div class="en">
+                      Introduction
+                      (Japanese)
+                    </div>
+                  </div>
+                  <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"><%=current_user.profile_jp%></textarea>
+                  <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+                    翻訳提供 未来翻訳
+                  <% end %>
+                </div>
+              </div>
+              <div class="save_button_bottom
+              <% if current_user.usertype == "event" %>
+                profile_cannot_save
+              <% else %>
+                profile_save_button
+              <% end %>
+                btn btn-default">
+                Save / 保存
+              </div>
+
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
     </div>
   </div>
 <% else %>

@@ -1,0 +1,312 @@
+.threadtype_title_show .title_padding{
+  font-size: 20px!important;
+  color: #28689f;
+  padding: 10px;
+  font-weight: bold;
+}
+.threadtype_page{
+  margin-top: 38px;
+  .thread_post_cover.form_cover {
+    border:none;
+  }
+  .make_thread_border{
+    border-bottom:solid thin #ccc;
+    margin-bottom: 10px;
+  }
+  .make_thread_category{
+    border:none;
+    margin:0px;
+  }
+  .profile_contents_change .nav .nav-link {
+    padding:5px 8px;
+  }
+  .profile_main{
+    margin-top: -53px;
+    width:calc(100vw - 450px);
+  }
+  .nav-tabs{
+    width: 100%;
+  }
+  .title_nav{
+    width: calc(100% + 16px);
+    margin-left: -8px;
+    margin-top:-3px;
+  }
+  .make_thread_tab{
+    width: calc(100% + 6px);
+    margin-left: -3px;
+    margin-top:-3px;
+  }
+  .lang_bar_cover{
+    position:static;
+    padding-top:0px;
+    margin-top:0px;
+    width: calc(100% + 16px);
+    margin-left: -8px;
+    .lang_bar{
+      padding-left:0px;
+      margin-left:0px;
+      .en_country{
+        margin-left:15px;
+      }
+      .slider-horizontal{
+        margin-top: -10px;
+        width: calc(100% - 240px);
+        display: inline-block;
+      }
+    }
+    .up_slider{
+      display: none;
+    }
+  }
+  .threadtype_leader{
+    border-radius: 5px;
+    padding-right: 10px;
+    display: inline-block;
+     .threadtype_img{
+      width:40px!important;
+      height:40px!important;
+    }
+  }
+  .thread_cover .thread_content{
+    .explain{
+      border: solid thin #ccc;
+      border-radius: 5px;
+      background: #fff;
+      text-align: left;
+      .width_max_text{
+        border-radius: 5px;
+        padding: 2px;
+        width:100%!important;
+        display: block!important;
+        p{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box!important;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+        }
+      }
+    }
+    .explain:hover{
+      background: #eee;
+    }
+  }
+  .makethread_link{
+    width:calc(100% - 50px);
+    margin: 10px;
+    border: solid 2px #ff9d3b;
+    color: #FF9D3B;
+    background: #fff;
+    font-size: 18px;
+    margin-left: 25px;
+  }
+}
+.threadtype_page.profile{
+  .blue-nav{
+    border: solid thin #07689f!important;
+    color:#07689f;
+    .nav-link{
+      color:#07689f;
+    }
+  }
+  .blue-nav.active{
+    background: #07689f!important;
+    color:#fff!important;
+    a{
+      background-color: #07689f!important;
+      color:#fff!important;
+      border:none!important;
+    }
+  }
+
+ .threadtype_content{
+   width:calc(100% - 20px)!important;
+ }
+}
+.threadtype_threads{
+  margin:0px 5px 0px 5px;
+}
+.threadtype_cover{
+  .compulsory{
+    margin-top: 5px;
+    padding: 2px 5px 2px 5px;
+    background: #e7402b;
+    color: #fff;
+    font-size: 12px;
+  }
+  .thread_title{
+    background:none!important;
+    .title_padding{
+      font-size: 16px!important;
+      font-weight: bold!important;
+      color: #28689f!important;
+      display:block!important;
+      .compulsory_text{
+        color: #b3424a;
+        margin-right: 10px;
+        display: inline-block;
+      }
+    }
+  }
+  .threadtype_member{
+    padding:5px;
+  }
+  .threadtype_title{
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+  }
+  .threadtype_content{
+    width:calc(100% - 80px)!important;
+    .title_padding{
+      -webkit-line-clamp:none;
+    }
+  }
+  .threadtype_image{
+    .group_img{
+      width:60px!important;
+      height:60px!important;
+    }
+  }
+  .post_content_cover{
+    margin-top:5px;
+    margin-left:10px;
+  }
+  .threadtype_users{
+    padding: 0px 5px 0px 0px;
+    margin: 0px 10px 0px 10px;
+    border-radius: 5px;
+    .threadtype_user_cover{
+      margin-right:20px;
+      vertical-align: top;
+      .threadtype_title{
+
+        padding: 5px 5px 5px 5px;
+        margin: 5px 5px 5px 0px;
+        border-radius: 5px;
+        border:solid thin #ccc;
+      }
+      .threadtype_type{
+        border-radius: 5px;
+        padding-right: 10px;
+        padding:10px;
+        display: inline-block;
+        .fas{
+          margin-right: 5px;
+          font-size: 18px;
+          vertical-align: text-bottom;
+        }
+        .fa-check-circle{
+          color: #66bfbf;
+        }
+      }
+    }
+    .threadtype_img_cover{
+      display: inline-block;
+      .threadtype_img{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+    }
+    .threadtype_name{
+      display: inline-block;
+    }
+    .user_plus_show{
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+  .post_footer_simple{
+    width: 100%;
+    margin-top: 30px;
+    padding-left: calc(50% - 120px);
+    .post_button_form{
+      display: inline-block;
+    }
+  }
+  .nav-item{
+    .fas{
+      display: inline-block;
+      margin-left: 5px;
+      font-size: 25px;
+      vertical-align: sub;
+    }
+    .fa-comments{
+      vertical-align: text-bottom;
+      font-size: 25px;
+      margin-right: 5px;
+    }
+    .text_cover{
+      display: inline-block;
+      font-size:18px;
+    }
+    .nav-link{
+      padding:5px 10px 5px 5px;
+      border:none;
+      display: inline-block;
+      font-weight:bold;
+      .jp{
+        font-size:10px;
+      }
+      .en{
+        font-size:14px;
+      }
+    }
+  }
+  .nav-item:hover{
+    background-color: #eeeeee;
+  }
+  .nav-item.width_max{
+    width:100%;
+  }
+  .blue-nav{
+    border: solid thin #07689f!important;
+    color:#07689f;
+    .nav-link{
+      color:#07689f;
+    }
+  }
+  .blue-nav.active{
+    background: #07689f!important;
+    color:#fff!important;
+    a{
+      background-color: #07689f!important;
+      color:#fff!important;
+      border:none!important;
+    }
+  }
+
+  .green-nav{
+    background-color: #fff;
+    color: #66bfbf;
+    border: solid thin #66bfbf;
+    .nav-link{
+      background: #fff;
+      color:#66bfbf;
+      border:none!important;
+    }
+  }
+  .green-nav.active{
+    background: #66bfbf;
+    color: #fff!important;
+    .nav-link{
+      background: #66bfbf;
+      color:#fff;
+    }
+  }
+}
+.open_thread{
+  width: calc(100% - 5px)!important;
+  margin-left: -3px!important;
+  .thread_cover{
+    margin-top:5px;
+  }
+}
+
+.threadtype_new{
+  .image_upload_button{
+    margin-top:-40px;
+  }
+}

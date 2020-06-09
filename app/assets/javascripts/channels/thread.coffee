@@ -9,10 +9,10 @@ App.thread = App.cable.subscriptions.create "ThreadChannel",
     # Called when the subscription has been terminated by the server
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-  make: (lang, title_jp,mes_jp,title_en,mes_en,types) ->
+  make: (lang, title_jp,mes_jp,title_en,mes_en) ->
     $(".jimaku_form").attr("style":"display:none");
     $(".make_thread_cover #post").attr("style":"pointer-events: none;")
-    @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,title_en:title_en,message_en:mes_en,types:types)
+    @perform('make',lang:lang,title_jp:title_jp,message_jp:mes_jp,title_en:title_en,message_en:mes_en,threadtype_id:parseInt( $(".threadtype_id_form").val() ) )
 
 
 $(document).on 'click', '#groupModal .btn_send',(event) ->
@@ -156,7 +156,7 @@ type_check=(id)->
     else
       $("#groupModal").modal("hide")
       if $(".post_type").val() == "text"
-        App.thread.make("enjp",title_jp,content_jp,title_en,content_en,types);
+        App.thread.make("enjp",title_jp,content_jp,title_en,content_en);
       else
         $(".thread_submit").click()
   else if window.translated == true && 1 == 2

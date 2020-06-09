@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :group
   has_many :reportposts
+  belongs_to :threadtype
 
   has_one_attached :pict
   has_one_attached :video

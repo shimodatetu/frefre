@@ -1,6 +1,48 @@
 class PvPageController < ApplicationController
   def show
+    Group.all.each do |group|
+      group.update("threadtype_id": 19)
+    end
     @groups = Group.all.where("deleted = false")
+    User.all.each do |user|
+      user.update(profile_en:"Nice to meet you!",profile_jp:"よろしくお願いします！")
+    end
+    Threadtype.all.each do |threadtype|
+      threadtype.users.delete_all
+      User.all.each do |user|
+        threadtype.users << user
+      end
+    end
+    #Group.all.each do |group|
+    #  group.update(threadtype_id: 22)
+    #end
+
+    #Post.all.each do |post|
+    #  post.group_id = 1
+    #  post.update(threadtype_id:post.group.threadtype_id)
+    #end
+    #last_id = Post.all.last.id
+    #Post.find(last_id).update(threadtype_id:23)
+    #Post.find(last_id - 1).update(threadtype_id:24)
+    Post.all.where(deleted:true).each do |post|
+      post.delete
+    end
+    @threadtypes = Threadtype.all.where.not(type:"every")
+    Threadtype.all.each do |threadtype|
+      threadtype.update(categry_id:9)
+    end
+    per = 10
+    page_id = params[:page].to_i
+    if page_id == nil || page_id < 1
+      page_id = 1
+    end
+    if params[:id] == "latest"
+      @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(1).per(per)
+      @latest_threadtypes = @threadtypes.all.order('id desc').page(page_id).per(per)
+    else
+      @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(page_id).per(per)
+      @latest_threadtypes = @threadtypes.all.order('id desc').page(1).per(per)
+    end
   end
   def new
     set_group_data
@@ -8,9 +50,6 @@ class PvPageController < ApplicationController
   def popular
     set_group_data
   end
-  #result = system("ffmpeg -y -i https://localhost:9292/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0f47fcef2b9b64f33632e4ef76816a5a699d3971/%E3%80%90%E6%BC%AB%E7%94%BB%E3%80%91%E7%89%B9%E6%AE%8A%E6%B8%85%E6%8E%83%E5%93%A1%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%A8%E3%81%A8%E3%82%99%E3%82%93%E3%81%AA%E7%94%9F%E6%B4%BB%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B%EF%BC%9F%E3%80%90%E3%83%9E%E3%83%B3%E3%82%AB%E3%82%99%E5%8B%95%E7%94%BB%E3%80%91.mp4 -acodec copy output.m4a")
-
-  #print result
   def set_group_data
     if Group.present?
       @groups = Group.all.where("deleted = false")

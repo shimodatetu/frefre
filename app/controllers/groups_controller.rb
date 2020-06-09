@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
       group.title_jp = data['title_jp']
       group.title_en = data['title_en']
       group.user_id = current_user.id
+      group.threadtype_id = data['threadtype_id'].to_i
       group.first_content_jp = params['content_jap']
       group.first_content_en = params['content_eng']
       if group.save

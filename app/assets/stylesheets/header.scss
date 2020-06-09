@@ -3,6 +3,18 @@
   position:fixed;
   background-color: rgba(255,255,255,1);
   top:0px;
+  .header_search{
+    display: inline-block;
+    position: absolute;
+    margin-left: 140px;
+    width: calc(100% - 400px);
+    margin-top: 5px;
+    max-width:700px;
+    min-width:320px;
+    .form_input{
+      border-radius: 0px 4px 4px 0px!important;
+    }
+  }
   .header_logo {
     height:50px;
     .icon_img{
@@ -130,7 +142,7 @@
   }
   .header_logo{
     position:absolute;
-    margin-left: calc(50% - 50px);
+    margin-left: 20px;
     .title_logo{
       margin-top:10px;
       img{

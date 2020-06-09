@@ -3,6 +3,7 @@
 <% post_id = params[:page].to_i %>
 <% session["now_group"] = thread_id %>
 <% thread = Group.find(thread_id) %>
+<% threadtype = thread.threadtype %>
 
 <div class="thread_page_num"style="display:none"id="<%= @thread_page_num.to_i %>"></div>
 
@@ -11,21 +12,96 @@
   <div class="user_login"style="display:none"id="<%= current_user.id %>"></div>
 <% end %>
 <div class="thread_page post_form_page">
-  <div class="thread-panel-title"style="display:inline-block;display:none">
-    <div class="panel-title-text">
-      <span class="float_en">
-        <%= simple_format(text_url_to_link(h(thread.title_en))) %>
-      </span>
-      <span class="float_jp">
-        <%= simple_format(text_url_to_link(h(thread.title_jp))) %>
-      </span>
-    </div>
-  </div>
-
   <div class="thread_all thread_all_post"style="padding-top:10px;">
     <div class="thread_cover_cover">
-      <%= render thread.posts.first %>
-      <%= render thread.posts.order(id: "ASC").offset(@thread_page_num*(@page_id - 1) + 1).limit(@thread_page_num) %>
+      <%= leader = User.find_by(id:threadtype.leader_id) %>
+      <div class="threadtype_page">
+        <% there_be = true %>
+        <div class="thread_cover threadtype_cover">
+          <div class="group_user_cover threadtype_image">
+            <div class="group_img_cover">
+              <% if threadtype.id == 22 %>
+                <%= image_tag("group_icon/question.png", :class => "group_img") %>
+              <% elsif threadtype.id == 23 %>
+                <%= image_tag("group_icon/flag1.png", :class => "group_img") %>
+              <% elsif threadtype.id == 24 %>
+                <%= image_tag("group_icon/flag1.png", :class => "group_img") %>
+              <% end %>
+            </div>
+          </div>
+          <div class="thread_content threadtype_content">
+            <div class="post_content_cover">
+              <div class="post_content_position width_max">
+                <div class="thread_title">
+                  <div class="title_padding no_inline">
+                    <%= threadtype.type_en %> / <%= threadtype.type_jp %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="post_content_cover">
+              <div class="post_content_position en_position">
+                <div class="post_content jp">
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(threadtype.content_en))) %>
+                  </div>
+                </div>
+              </div>
+              <div class="post_content_position_space">
+                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+              </div>
+              <div class="post_content_position jp_position">
+                <div class="post_content jp">
+                  <div class="post_content_text no_inline">
+                    <%= simple_format(text_url_to_link(h(threadtype.content_jp))) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="threadtype_cover threadtype_users">
+              <div class="threadtype_user_cover">
+                <div class="threadtype_title">
+                  Manager / 管理者
+                </div>
+                <div class="threadtype_leader">
+                  <div class="threadtype_img_cover">
+                    <% if threadtype.leader_id == 0 %>
+                      <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+                    <% else %>
+                      <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+                    <% end %>
+                  </div>
+                  <div class="threadtype_name">
+                    <% if threadtype.leader_id == 0 %>
+                      FreFre Office
+                    <% else %>
+                      <%= leader.name %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="threadtype_user_cover">
+                <div class="threadtype_title">
+                  Group Type / グループタイプ
+                </div>
+                <div class="threadtype_type">
+                  <% if threadtype.type == "not_open" %>
+                    Private / 非公開
+                  <% elsif threadtype.type == "secret" %>
+                    Secret / 秘密
+                  <% else %>
+                    Public / 公開
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= render partial: 'posts/post',locals: {post:thread.posts.first, type:"first" }%>
+          <% thread.posts.order(id: "ASC").offset(@thread_page_num*(@page_id - 1) + 1).limit(@thread_page_num).each do |post| %>
+            <%= render partial: 'posts/post' ,locals: { post:post,type:"normal"} %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer thread_footer">

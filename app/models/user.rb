@@ -12,8 +12,12 @@ class User < ApplicationRecord
   has_many :userinfos
   has_many :news
 
-  has_many :user_notices
+  has_many :user_threadtypes
+  has_many :threadtypes, through: :user_threadtypes
+  accepts_nested_attributes_for :user_threadtypes
+
   has_many :notices, through: :user_notices
+  has_many :user_notices
   accepts_nested_attributes_for :user_notices
 
   has_secure_password validations: false
@@ -24,6 +28,12 @@ class User < ApplicationRecord
   has_many :followings, through: :following_relationships
   has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :follower_relationships
+
+
+  has_many :joining_relationships, foreign_key: "joiner_id", class_name: "Relationship", dependent: :destroy
+  has_many :joinings, through: :user_threadtypes
+  has_many :joining_relationships, foreign_key: "joining_id", class_name: "Relationship", dependent: :destroy
+  has_many :joiners, through: :fuser_threadtypes
 
   has_one_attached :avater
 
@@ -50,6 +60,34 @@ class User < ApplicationRecord
   def unfollow_id!(other_user_id)
     following_relationships.find_by(following_id: other_user_id).destroy!
   end
+
+
+
+
+  def joining?(other_user)
+    following_relationships.find_by(following_id: other_user.id)
+  end
+
+  def join!(other_user)
+    following_relationships.create!(following_id: other_user.id)
+  end
+
+  def unjoin!(other_user)
+    following_relationships.find_by(following_id: other_user.id).destroy
+  end
+
+  def joining_id?(other_user_id)
+    following_relationships.find_by(following_id: other_user_id)
+  end
+
+  def join_id!(other_user_id)
+    following_relationships.create!(following_id: other_user_id)
+  end
+
+  def unjoin_id!(other_user_id)
+    following_relationships.find_by(following_id: other_user_id).destroy!
+  end
+
   def check_image
     if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
         errors.add(:image, "JPG, PNG, GIFのみアップロードできます。")

@@ -18,25 +18,15 @@ class TasksController < ApplicationController
       file.close
       file_name = "output"+num.to_s
       url = params[params[:form_type]][:video].path
-      p "-----------------------"
-      p params[params[:form_type]][:video].path
-      p "-----------------------"
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url)
       stdout, stderr, status = Open3.capture3('ffmpeg -i '+ url +' -vn -acodec copy /tmp/'+ file_name +'.m4a')
-      p stderr
-      p "==============================="
       std_data = stderr.split(" ")
       index = std_data.index("Hz,")
       hertz = std_data[index - 1].to_i
       stdout, stderr, status = Open3.capture3('ls /tmp')
-      p "-----------------------"
-      p stdout
       stdout, stderr, status = Open3.capture3('ffmpeg -i /tmp/'+file_name+'.m4a')
       stdout2, stderr2, status2 = Open3.capture3('cat /tmp/'+file_name+'.m4a')
-      p "==============================="
-      p stdout2
       stdout, stderr, status = Open3.capture3('ffmpeg -i /tmp/'+file_name+'.m4a -ac 1 -f s16be -acodec pcm_s16le /tmp/'+file_name+'.raw')
-      p "==============================="
       connection = Faraday.new("https://still-plains-44123.herokuapp.com") do |builder|
         # `multipart`ミドルウェアを使って、ContentTypeをmultipart/form-dataにする
         builder.request :multipart
@@ -56,7 +46,6 @@ class TasksController < ApplicationController
   end
 
   def trans
-    p "--------------------"
     lang = params[:lang]
     words = ""
     if lang == "ja"
@@ -70,15 +59,11 @@ class TasksController < ApplicationController
     else
       uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
       http = Net::HTTP.new(uri.host, uri.port)
-
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
       req = Net::HTTP::Post.new(uri.path)
       req.set_form_data({"words"=>words, "lang"=>lang})
-
       res = http.request(req)
-
       answer = res.body
       answer = res.body.slice(2..-3).force_encoding("UTF-8")
       answer = answer.gsub(/\\n/,"\n")
@@ -181,7 +166,6 @@ class TasksController < ApplicationController
   def search_inside_before
     search_text = params[:search_text]
     search_en = Bigcategory.find_by(name_en: search_text)
-
     if !search_en.nil?
       flash[:search_big_id] = search_en.id
       redirect_to "/groups"
@@ -208,7 +192,6 @@ class TasksController < ApplicationController
     end
   end
   def logout_inner
-
     current_user = nil
     session[:user_id] = nil
     redirect_to root_path

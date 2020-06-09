@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_134621) do
+ActiveRecord::Schema.define(version: 2020_05_27_093433) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2020_03_08_134621) do
   create_table "bigcategories", force: :cascade do |t|
     t.string "name_en"
     t.string "name_jp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "type_en"
+    t.string "type_jp"
+    t.integer "threadtype_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -66,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_134621) do
     t.boolean "deleted", default: false, null: false
     t.string "first_content_en"
     t.string "first_content_jp"
+    t.integer "categry_id"
   end
 
   create_table "hashtags", force: :cascade do |t|
@@ -124,6 +133,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_134621) do
     t.datetime "updated_at", null: false
     t.string "subtitle_en", default: ""
     t.string "subtitle_jp", default: ""
+    t.integer "threadtype_id"
   end
 
   create_table "prohibits", force: :cascade do |t|
@@ -189,6 +199,11 @@ ActiveRecord::Schema.define(version: 2020_03_08_134621) do
     t.string "type_jp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
+    t.string "content_en"
+    t.string "content_jp"
+    t.integer "leader_id", default: 0
+    t.integer "categry_id"
   end
 
   create_table "user_notices", force: :cascade do |t|
@@ -196,6 +211,15 @@ ActiveRecord::Schema.define(version: 2020_03_08_134621) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_threadtypes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "threadtype_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["threadtype_id"], name: "index_user_threadtypes_on_threadtype_id"
+    t.index ["user_id"], name: "index_user_threadtypes_on_user_id"
   end
 
   create_table "userinfos", force: :cascade do |t|
@@ -243,6 +267,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_134621) do
     t.datetime "oauth_expires_at"
     t.boolean "admit", default: true
     t.string "usertype", default: "normal"
+    t.integer "threadtype_id"
   end
 
 end

@@ -13,7 +13,7 @@
   <div class="thread_all thread_all_group"style="padding-top:10px;">
     <% @groups.order(seen_num: "DESC").offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |group| %>
       <% there_be = true %>
-      <%= render partial:"/groups/group", locals: { group:group } %>
+      <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
     <% end %>
     <% if there_be == false %>
       <div class="not_found">

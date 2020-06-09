@@ -9,40 +9,86 @@ App.room = App.cable.subscriptions.create "RoomChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-    console.log(data)
     url = location.pathname
     urls = url.split("/")
-    now_id = 1
-    if urls.length >= 4
-      now_id = urls[3]
-    now_page = 1
-    if urls.length >= 5
-      now_page = urls[4]
     page_id_max = 20
-    page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
     if data["type"] == "new_maker"
+      page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
       alert_set("You successed to make a thread.","スレッドの作成に成功しました。","success")
       window.location.href = "/thread/show/" + data["post"]["group_id"] + "/" + String(Number(page))
-    else if data["type"] == "maker"
+    else if data["type"] == "poster"
       $(".thread_send #post").attr("style","")
       $(".thread_submit_image").attr("style","display:none;")
       $(".thread_submit_video").attr("style","display:none;")
       $(".trans_send").attr("style","display:none")
-      if url.indexOf('thread/show') != -1 && Number(now_id) == data["post"]['group_id']
-        if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
-        else if Number(now_page) == page
-          $(".base_en_form").val("");
-          $(".base_jp_form").val("");
-          if(!($('.thread_cover#'+data["post"]['id']).length))
-            $(".profile_button_destroy").click();
-        else
-          window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
-    else if data["type"] == "accept" && url.indexOf('thread/show') != -1 && Number(now_id) == data["post"]['group_id'] && Number(now_page) == page
-      if(!($('.thread_cover#'+data["post"]['id']).length))
-        add_post(data)
-        $(".delete_button_destroy").click();
-        $(".report_button_destroy").click();
+      if url.indexOf('thread/show') != -1
+        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+        now_id = 1
+        if urls.length >= 4
+          now_id = urls[3]
+        if Number(now_id) == data["post"]['group_id']
+          now_page = 1
+          now_page_get = GetQueryString()["page"]
+          if now_page_get != undefined
+            now_page = now_page_get
+          if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+          else if Number(now_page) == page
+            $(".base_en_form").val("");
+            $(".base_jp_form").val("");
+            if(!($('.thread_cover#'+data["post"]['id']).length))
+              $(".profile_button_destroy").click();
+          else
+            window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+      else if url.indexOf('threadtype/show') != -1
+        page_id_max = 10
+        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+        now_id = 1
+        if urls.length >= 4
+          now_id = urls[3]
+        if Number(now_id) == data["post"]['threadtype_id'] && (urls[4] == 1 || urls.length <= 4)
+          now_page = 1
+          now_page_get = GetQueryString()["page"]
+          if now_page_get != undefined
+            now_page = now_page_get
+          if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+            window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(Number(now_page) + 1)
+          else if Number(now_page) == page
+            $(".base_en_form").val("");
+            $(".base_jp_form").val("");
+            if(!($('.thread_cover#'+data["post"]['id']).length))
+              $(".profile_button_destroy").click();
+          else
+            window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(page)
+    else if data["type"] == "accept"
+      if url.indexOf('thread/show') != -1
+        alert("thread")
+        now_id = 1
+        if urls.length >= 4
+          now_id = urls[3]
+        now_page = 1
+        now_page_get = GetQueryString()["page"]
+        if now_page_get != undefined
+          now_page = now_page_get
+        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+        if(!($('.thread_cover#'+data["post"]['id']).length)) && Number(now_page) == page && Number(now_id) == data["post"]['group_id']
+          add_post(data)
+          $(".delete_button_destroy").click();
+          $(".report_button_destroy").click();
+      else if url.indexOf('threadtype/show') != -1 && data["threadtype_first_id"] == data["post"]["threadtype_id"]
+        page_id_max = 10
+        now_id = 1
+        if urls.length >= 4
+          now_id = urls[3]
+        now_page = 1
+        now_page_get = GetQueryString()["page"]
+        if now_page_get != undefined
+          now_page = now_page_get
+        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+        if !($('.thread_cover#'+data["post"]['id']).length) && Number(now_page) == page && Number(now_id) == data["post"]['threadtype_id']
+          add_post(data)
+          $(".delete_button_destroy").click();
+          $(".report_button_destroy").click();
 
   speak: (lang,mes_jp,mes_en, group)->
     $(".thread_send #post").attr("style","pointer-events: none;")
@@ -280,4 +326,22 @@ isHalf=(str)->
   str_length = str.length
   str_byte = bytes(str)
   return str_length == str_byte
+
+GetQueryString = ->
+  result = {}
+  if 1 < window.location.search.length
+    # 最初の1文字 (?記号) を除いた文字列を取得する
+    query = window.location.search.substring(1)
+    # クエリの区切り記号 (&) で文字列を配列に分割する
+    parameters = query.split('&')
+    i = 0
+    while i < parameters.length
+      # パラメータ名とパラメータ値に分割する
+      element = parameters[i].split('=')
+      paramName = decodeURIComponent(element[0])
+      paramValue = decodeURIComponent(element[1])
+      # パラメータ名をキーとして連想配列に追加する
+      result[paramName] = paramValue
+      i++
+  result
 

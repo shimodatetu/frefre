@@ -1,0 +1,172 @@
+<% leader = User.find_by(id:threadtype.leader_id) %>
+<%= link_to("/threadtype/show/#{threadtype.id}" , class:"thread_link") do %>
+  <% there_be = true %>
+  <div class="thread_cover threadtype_cover">
+    <div class="group_user_cover threadtype_image">
+      <div class="group_img_cover">
+        <% if threadtype.id == 22 %>
+          <%= image_tag("group_icon/chat.png", :class => "group_img",:style => "border-radius:0px") %>
+        <% elsif threadtype.id == 23 %>
+          <%= image_tag("group_icon/question.png", :class => "group_img",:style => "border-radius:0px") %>
+        <% elsif threadtype.id == 24 %>
+          <%= image_tag("group_icon/gundum.jpg", :class => "group_img",:style => "border-radius:0px") %>
+        <% elsif threadtype.id == 36 %>
+          <%= image_tag("group_icon/eikaiwa.png", :class => "group_img",:style => "border-radius:0px") %>
+        <% elsif threadtype.pict.attached? %>
+          <%= image_tag threadtype.pict , :class => "group_img",:style => "border-radius:0px"%>
+        <% else %>
+          <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px") %>
+        <% end %>
+      </div>
+      <% if threadtype.type == "every" %>
+        <div class="text_box"style="display:none">
+          <div class="en">
+            Compulsory
+          </div>
+          <div class="jp">
+            会員全員参加
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="thread_content threadtype_content">
+      <div class="post_content_cover">
+        <div class="post_content_position width_max">
+          <div class="thread_title">
+            <div class="title_padding no_inline">
+              <div>
+                <% if threadtype.type == "every" %>
+                  <div class="compulsory_text">
+                    <div class="en">
+                      Compulsory
+                    </div>
+                  </div>
+                <% end %>
+                <%= threadtype.type_en %>
+              </div>
+              <div>
+                <% if threadtype.type == "every" %>
+                  <div class="compulsory_text">
+                    <div class="en">
+                      会員全員参加
+                    </div>
+                  </div>
+                <% end %>
+                <%= threadtype.type_jp %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="threadtype_cover threadtype_users">
+        <div class="threadtype_user_cover"style="display:none">
+          <div class="threadtype_title">
+            Manager / 管理者
+          </div>
+          <div class="threadtype_leader">
+            <div class="threadtype_img_cover">
+              <% if threadtype.leader_id == 0 %>
+                <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+              <% else %>
+                <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+              <% end %>
+            </div>
+            <div class="threadtype_name">
+              <% if threadtype.leader_id == 0 %>
+                FreFre Office
+              <% else %>
+                <%= leader.name %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="threadtype_user_cover">
+          <div class="threadtype_title"style="display:none">
+            Member / メンバー
+          </div>
+          <div class="threadtype_member">
+            <div class="threadtype_img_cover">
+
+              <% if threadtype.leader_id == 0 %>
+                <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+              <% else %>
+                <% user = User.find(threadtype.leader_id) %>
+                <% if user.image == 0 %>
+                  <% if user.avater.attached? %>
+                    <%= image_tag user.avater , :class => "threadtype_img"%>
+                  <% else %>
+                    <%= image_tag("/userimage/user1.png", :class => "threadtype_img") %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag("/userimage/user#{user.image}.png", :class => "threadtype_img") %>
+                <% end %>
+              <% end %>
+              <% threadtype_users = threadtype.users.where.not(id:threadtype.leader_id) %>
+              <% user_sum = threadtype_users.count %>
+              <% threadtype_users.limit(3).each do |user|%>
+                <% if user.image == 0 %>
+                  <% if user.avater.attached? %>
+                    <%= image_tag user.avater , :class => "threadtype_img"%>
+                  <% else %>
+                    <%= image_tag("/userimage/user1.png", :class => "threadtype_img") %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag("/userimage/user#{user.image}.png", :class => "threadtype_img") %>
+                <% end %>
+              <% end %>
+              <% if user_sum > 3 %>
+                <div class="user_plus_show">
+                  + <%= user_sum - 3 %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="join_button_type">
+      <% if !logged_in? %>
+        <div class="join_button_cover">
+          <%= button_tag type:"button",class:"login_join_button btn mes_button join_button join_button_submit" do %>
+            <div class="text_box">
+              <div class="jp">
+                Login and Join / ログインして参加する
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% elsif threadtype.type == "every" %>
+        <div class="join_button_cover">
+          <%= button_tag type:"button",class:"login_join_button btn mes_button join_button all_join_button" do %>
+            <div class="text_box">
+              <div class="jp">
+                Joined / 参加済
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <% threadtype_id = threadtype.id %>
+        <div class="join_button_cover join_button<%= threadtype_id %>">
+          <% if current_user.threadtypes.find_by(id:threadtype_id) != nil %>
+            <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
+              <div class="text_box">
+                <div class="jp">
+                  Joined / 参加済
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
+              <div class="text_box">
+                <div class="jp">
+                  Join / 参加
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

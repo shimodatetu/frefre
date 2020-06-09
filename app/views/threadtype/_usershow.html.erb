@@ -1,0 +1,94 @@
+<% there_be = false %>
+<% users.each do |user| %>
+  <% there_be = true %>
+  <div class="thread_cover link_cover follow_cover">
+    <div class="group_user_cover">
+      <div class="group_img_cover">
+
+        <% url = "/profile" %>
+        <% if logged_in? && current_user.id != user.id %>
+          <% url = "/other_profile/#{user.id}" %>
+        <% end %>
+        <%= link_to "/other_profile/#{user.id}" do %>
+          <% if user.image == 0 %>
+            <% if user.photo.nil? %>
+              <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+            <% else %>
+              <%= image_tag show_image_user_path(user), :class => "group_img" %>
+            <% end %>
+          <% else %>
+            <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="thread_content">
+      <div class="user_name">
+        <% if current_user.id != user.id %>
+          <object>
+            <%= link_to "/other_profile/#{user.id}" do %>
+              <%= simple_format(text_url_to_link(h(user.name))) %>
+            <% end %>
+          </object>
+        <% else %>
+          <object>
+            <%= link_to "/profile" do %>
+              <%= simple_format(text_url_to_link(h(user.name))) %>
+            <% end %>
+          </object>
+        <% end %>
+      </div>
+      <div class="follow_button follow_button<%= user.id %>">
+        <% if current_user.followings.find_by(id: user.id) %>
+          <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button unfollow_button_submit",id:user.id do %>
+            <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
+            <div class="text_box">
+              <div class="en_jp">
+                Following / フォロー中
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= button_tag type:"button",class:"btn mes_button normal_button fullwidth_button follow_button_submit",id:user.id do %>
+            <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
+            <div class="text_box">
+              <div class="en_jp">
+                Follow / フォロー
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="post_content_cover">
+        <div class="post_content_position en_position">
+          <div class="post_content en_content_row">
+            <div class="post_content_text">
+              <%= user.profile_en %>
+            </div>
+          </div>
+        </div>
+        <div class="post_content_position_space">
+          <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+        </div>
+        <div class="post_content_position en_position">
+          <div class="post_content en_content_row">
+            <div class="post_content_text">
+              <%= user.profile_jp %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if there_be == false %>
+  <div class="not_found">
+    <div class="en">
+      There is no users.
+    </div>
+    <div class="jp">
+      ユーザーはいません
+    </div>
+  </div>
+<% end %>

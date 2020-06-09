@@ -6,6 +6,7 @@ class ProfileController < ApplicationController
     for prohibit in Prohibit.all do
       gon.prohibit.push(prohibit.prohibit_words)
     end
+
     if params[:id] == "2" || params[:id] == "3"
       thread_page_num = 20.to_f
       page_show_max = 5.to_f

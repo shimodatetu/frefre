@@ -1,0 +1,50 @@
+.join_modal_footer{
+  padding:10px;
+  .join_modal_button{
+    padding: 3px 12px;
+    width: 60px;
+    .jp{
+      font-size:10px;
+    }
+    .en{
+      font-size:14px;
+    }
+  }
+}
+.join_button_type{
+  float: right;
+  margin-top: -45px;
+  margin-right: 20px;
+}
+.join_button_cover{
+  .join_button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .login_join_button{
+    color:#07689f;
+    border-color:#07689f;
+    background:#fff;
+  }
+  .join_button_submit{
+    color:#07689f;
+    border-color:#07689f;
+    background:#fff;
+  }
+  .unjoin_button_submit{
+    color:#fff;
+    border-color:#07689f;
+    background:#07689f;
+  }
+  .all_join_button{
+    color:#fff;
+    border-color:#07689f;
+    background:#07689f;
+  }
+  .join_button_submit:active{
+    color:#fff;
+    border-color:#07689f;
+    background:#07689f;
+  }
+}
