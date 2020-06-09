@@ -4,6 +4,9 @@ class PvPageController < ApplicationController
       if threadtype.groups.count == 0
         Group.create(title_en:"open_chat",title_jp:"オープンチャット",threadtype_id:threadtype.id,user_id:User.first.id)
       end
+      if threadtype.groups.first.posts.count == 0
+        Post.create(content_eng:"The community has been created!",content_jap:"コミュニティが作成されました！",group_id:threadtype.groups.first.id,threadtype_id:threadtype.id,user_id:User.first.id)
+      end
     end
     #Group.all.each do |group|
     #  group.update(threadtype_id: 22)
