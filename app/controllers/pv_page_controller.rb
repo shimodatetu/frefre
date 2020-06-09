@@ -1,20 +1,14 @@
 class PvPageController < ApplicationController
   def show
     Group.all.each do |group|
-      group.update("threadtype_id": 19)
+      group.update("threadtype_id": 18)
     end
     @groups = Group.all.where("deleted = false")
-    User.all.each do |user|
-      user.update(profile_en:"Nice to meet you!",profile_jp:"よろしくお願いします！")
-    end
     Threadtype.all.each do |threadtype|
-      threadtype.users.delete_all
-      User.all.each do |user|
-        threadtype.users << user
+      if threadtype.groups.count == 0
+        group.create(title_en:"open_chat",title_jp:"オープンチャット",threadtype_id:threadtype.id)
       end
-      threadtype.update(type:"public")
     end
-    Threadtype.first.update(type:"every")
     #Group.all.each do |group|
     #  group.update(threadtype_id: 22)
     #end
@@ -26,9 +20,7 @@ class PvPageController < ApplicationController
     #last_id = Post.all.last.id
     #Post.find(last_id).update(threadtype_id:23)
     #Post.find(last_id - 1).update(threadtype_id:24)
-    Post.all.where(deleted:true).each do |post|
-      post.delete
-    end
+
     @threadtypes = Threadtype.all.where.not(type:"every")
     Threadtype.all.each do |threadtype|
       threadtype.update(categry_id:9)
