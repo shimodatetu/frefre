@@ -14,6 +14,7 @@ class PvPageController < ApplicationController
       end
       threadtype.update(type:"public")
     end
+    threadtype.first.update(type:"every")
     #Group.all.each do |group|
     #  group.update(threadtype_id: 22)
     #end
