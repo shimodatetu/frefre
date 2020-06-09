@@ -12,6 +12,7 @@ class PvPageController < ApplicationController
       User.all.each do |user|
         threadtype.users << user
       end
+      threadtyoe.update(type:"public")
     end
     #Group.all.each do |group|
     #  group.update(threadtype_id: 22)
