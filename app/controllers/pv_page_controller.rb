@@ -6,7 +6,7 @@ class PvPageController < ApplicationController
     @groups = Group.all.where("deleted = false")
     Threadtype.all.each do |threadtype|
       if threadtype.groups.count == 0
-        group.create(title_en:"open_chat",title_jp:"オープンチャット",threadtype_id:threadtype.id)
+        Group.create(title_en:"open_chat",title_jp:"オープンチャット",threadtype_id:threadtype.id)
       end
     end
     #Group.all.each do |group|
