@@ -1,12 +1,8 @@
 class PvPageController < ApplicationController
   def show
-    Group.all.each do |group|
-      group.update("threadtype_id": 18)
-    end
-    @groups = Group.all.where("deleted = false")
     Threadtype.all.each do |threadtype|
       if threadtype.groups.count == 0
-        Group.create(title_en:"open_chat",title_jp:"オープンチャット",threadtype_id:threadtype.id)
+        Group.create(title_en:"open_chat",title_jp:"オープンチャット",threadtype_id:threadtype.id,user_id:User.first.id)
       end
     end
     #Group.all.each do |group|
