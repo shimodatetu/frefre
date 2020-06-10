@@ -1,0 +1,10 @@
+<%= form_for Threadtype.new, url: "/threadtype_update_text" do |form| %>
+  <div class="content_input"style="margin-top:100px">
+    <%= text_area_tag :threadtype_id,"", id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x1" %>
+    英語
+    <%= form.text_area :type_en, id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x1" %>
+    日本語
+    <%= form.text_area :type_jp, id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x1" %>
+  </div>
+  <%= submit_tag  "Upload"  %>
+<% end %>

@@ -99,11 +99,12 @@ class ThreadtypeController < ApplicationController
   end
 
   def update_do
-    p "========================="
-    p threadtype_id = params["threadtype_id"].to_i
-    p params[:pict]
-    p Threadtype.find_by(id:threadtype_id).update(image_params)
-    p "========================="
+    threadtype_id = params["threadtype_id"].to_i
+    Threadtype.find_by(id:threadtype_id).update(image_params)
+  end
+  def update_text_do
+    threadtype_id = params["threadtype_id"].to_i
+    Threadtype.find_by(id:threadtype_id).update(type_en:params[:threadtype][:type_en],type_jp:params[:threadtype][:type_jp])
   end
   def search
     session["search_text"] = params[:search_text]
