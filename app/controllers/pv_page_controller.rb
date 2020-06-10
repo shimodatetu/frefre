@@ -16,7 +16,6 @@ class PvPageController < ApplicationController
         end
       end
     end
-    Use
     User.all.each do |user|
       if user.avater.attached?
         Threadtype.first.users << user
