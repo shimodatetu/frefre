@@ -98,8 +98,18 @@ class ThreadtypeController < ApplicationController
     end
   end
 
+  def update_do
+    p "========================="
+    p threadtype_id = params["threadtype_id"].to_i
+    p params[:pict]
+    p Threadtype.find_by(id:threadtype_id).update(image_params)
+    p "========================="
+  end
   def search
     session["search_text"] = params[:search_text]
     redirect_to "/threadtype/show/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:page_id].gsub(/{:value=>/,"")}"
+  end
+  def image_params
+    params.require(:threadtype).permit(:pict)
   end
 end

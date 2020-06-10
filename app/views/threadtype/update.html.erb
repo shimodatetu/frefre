@@ -1,0 +1,7 @@
+<%= form_for Threadtype.new, url: "/threadtype_update" do |form| %>
+  <div class="content_input"style="margin-top:100px">
+    <%= text_area_tag :threadtype_id,"", id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x1" %>
+    <%= form.file_field :pict,id:"image_send",class:"logined"%>
+  </div>
+  <%= submit_tag  "Upload"  %>
+<% end %>

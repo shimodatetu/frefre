@@ -4,15 +4,7 @@
   <div class="thread_cover threadtype_cover">
     <div class="group_user_cover threadtype_image">
       <div class="group_img_cover">
-        <% if threadtype.id == 22 %>
-          <%= image_tag("group_icon/chat.png", :class => "group_img",:style => "border-radius:0px") %>
-        <% elsif threadtype.id == 23 %>
-          <%= image_tag("group_icon/question.png", :class => "group_img",:style => "border-radius:0px") %>
-        <% elsif threadtype.id == 24 %>
-          <%= image_tag("group_icon/gundum.jpg", :class => "group_img",:style => "border-radius:0px") %>
-        <% elsif threadtype.id == 36 %>
-          <%= image_tag("group_icon/eikaiwa.png", :class => "group_img",:style => "border-radius:0px") %>
-        <% elsif threadtype.pict.attached? %>
+        <% if threadtype.pict.attached? %>
           <%= image_tag threadtype.pict , :class => "group_img",:style => "border-radius:0px"%>
         <% else %>
           <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px") %>
