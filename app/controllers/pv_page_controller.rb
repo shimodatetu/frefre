@@ -10,17 +10,20 @@ class PvPageController < ApplicationController
     end
     Threadtype.all.each do |threadtype|
       count = 0
+      threadtype.users.delete_all
       User.all.each do |user|
         if user.avater.attached? && count < 20
           threadtype.users << user
         end
       end
     end
+    Threadtype.first.users.delete_all
     User.all.each do |user|
       if user.avater.attached?
         Threadtype.first.users << user
       end
     end
+
     #Group.all.each do |group|
     #  group.update(threadtype_id: 22)
     #end
