@@ -44,10 +44,19 @@
       </script>
       <% end %>
     </div>
+
     <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
     !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
     !url.include?('manager') && !url.include?("password_resets") && !url.include?("account_activations")%>
       <div class="sub_content_cover">
+
+        <%= link_to("threadtype/new",type:"button",class:"btn btn-default btn mes_button make_group_button") do %>
+          <div class="text_box">
+            <div class="jp">
+              Make Group / グループを作る
+            </div>
+          </div>
+        <% end %>
         <%= render partial:"news/news_top" %>
         <ins class="adsbygoogle"
          style="display:inline-block;width:300px;height:200px"

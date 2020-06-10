@@ -2,6 +2,11 @@
 <% leader = User.find_by(id:@threadtype.leader_id) %>
 <div class="profile threadtype_page">
   <div class="profile_sub"style="display:inline-block">
+    <% if @threadtype.type == "every" %>
+      <div class="official_mark">
+        Official / 公式
+      </div>
+    <% end %>
     <div class="profile_picture">
       <% if @threadtype.id == 22 %>
         <%= image_tag("group_icon/chat.png", :class => "group_img",:style => "border-radius:none") %>

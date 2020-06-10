@@ -37,6 +37,19 @@ class ThreadController < ApplicationController
     @page_num = page_num
     @start_num = start_num
     @end_num = end_num
+
+    per = 20
+    thread_id = params[:id].to_i
+    if thread_id.nil? || thread_id.to_i < 1
+      thread_id = 1
+    end
+    page_id = params[:page].to_i
+    if page_id.nil? || page_id.to_i < 1
+      page_id = 1
+    end
+    @threadtype = thread.threadtype
+    @thread = Group.find_by(id:thread_id)
+    @thread_posts = @thread.posts.page(page_id).per(per)
   end
   def show_post_image
     @photo = Post.find(params[:id])
