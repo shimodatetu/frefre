@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'threadtype/show/:id' => 'threadtype#show'
   get 'threadtype/show/:id/:type' => 'threadtype#show'
   get 'threadtype/new'
-  get 'threadtype/update'
-  get 'threadtype/update_text'
+  get 'manager/update'
+  get 'manager/update_text'
   post 'threadtypes' => "threadtype#create"
   post "threadtype/search" => "threadtype#search"
   post "/threadtype_update" => "threadtype#update_do"
