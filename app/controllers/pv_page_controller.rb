@@ -8,6 +8,9 @@ class PvPageController < ApplicationController
         Post.create(content_eng:"The community has been created!",content_jap:"コミュニティが作成されました！",group_id:threadtype.groups.first.id,threadtype_id:threadtype.id,user_id:User.first.id)
       end
     end
+    User.all.each do |user|
+      Threadtype.first.users << user
+    end
     #Group.all.each do |group|
     #  group.update(threadtype_id: 22)
     #end
