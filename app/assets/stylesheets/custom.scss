@@ -18,8 +18,17 @@
   color: #07689f;
   padding: 10px;
   padding-top: 0px;
+  padding-bottom:5px;
   font-size: 23px;
   font-weight: bold;
+}
+.group_list_explain{
+  color: #28689f;
+  margin-left: 10px;
+  margin-bottom:5px;
+  .explain_text{
+    margin-top:-3px;
+  }
 }
 a{
   color:#07689f;

@@ -24,7 +24,12 @@
   <div class="group_list">
     Community List / コミュニティ一覧
   </div>
-  <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
+  <div class="group_list_explain">
+    <div class="explain_text"style="display:none">You can browse the contents without joining the group!</div>
+    <div class="explain_text">Join the community and chat!</div>
+    <div class="explain_text"style="display:none">グループに参加してなくても、中身を閲覧することができます！</div>
+    <div class="explain_text">コミュニティに参加してチャットしよう！</div>
+  </div>
   <div class="threadtype_cover">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item blue-nav active">
