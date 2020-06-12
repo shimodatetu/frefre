@@ -1,5 +1,9 @@
 
 <% leader = User.find_by(id:@threadtype.leader_id) %>
+<% current_user_id = -1 %>
+<% if current_user != nil %>
+  <% current_user = current_user.id %>
+<% end %>
 <div class="profile threadtype_page">
   <div class="profile_sub"style="display:inline-block">
     <% if @threadtype.type == "every" %>
@@ -21,7 +25,7 @@
       <% end %>
     </div>
     <div class="profile_contents_change">
-      <div class="get_user_id"id="<%= current_user.id %>"></div>
+      <div class="get_user_id"id="<%= current_user_id %>"></div>
       <ul class="nav flex-column">
         <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type != "every") %>active<% end %>">
           <%= link_to "/threadtype/show/" + @threadtype.id.to_s + "/1",class:"nav-link" do %>
