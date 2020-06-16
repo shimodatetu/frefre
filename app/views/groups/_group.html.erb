@@ -1,73 +1,75 @@
-<%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
-  <% there_be = true %>
-  <div class="thread_cover">
-    <% if type == "normal" %>
-      <div class="group_user_cover">
-        <div class="group_img_cover">
-          <object>
-            <% url = "/profile" %>
-            <% if logged_in? && current_user.id != group.user.id %>
-              <% url = "/other_profile/#{group.user.id}" %>
-            <% end %>
-            <%= link_to url do %>
-              <% if group.user.image == 0 %>
-                <% if group.user.avater.attached? %>
-                  <%= image_tag group.user.avater , :class => "group_img"%>
-                <% else %>
-                  <% if group.user.photo.nil? %>
-                    <%= image_tag("/userimage/user1.png", :class => "group_img") %>
-                  <% else %>
-                    <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
-              <% end %>
-            <% end %>
-          </object>
-        </div>
-      </div>
-    <% end %>
-    <div class="thread_content <% if type == "open" %>open_thread<% end %>">
-      <div class="post_content_cover">
-        <% if type == "normal" %>
-          <div class="user_name">
+<% if group != nil %>
+  <%= link_to("/thread/show/#{group.id}" , class:"thread_link") do %>
+    <% there_be = true %>
+    <div class="thread_cover">
+      <% if type == "normal" %>
+        <div class="group_user_cover">
+          <div class="group_img_cover">
             <object>
+              <% url = "/profile" %>
               <% if logged_in? && current_user.id != group.user.id %>
-                <%= link_to "/other_profile/#{group.user.id}" do %>
-                  <%= simple_format(text_url_to_link(h(group.user.name))) %>
-                <% end %>
-              <% else %>
-                <%= link_to "/profile" do %>
-                  <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                <% url = "/other_profile/#{group.user.id}" %>
+              <% end %>
+              <%= link_to url do %>
+                <% if group.user.image == 0 %>
+                  <% if group.user.avater.attached? %>
+                    <%= image_tag group.user.avater , :class => "group_img"%>
+                  <% else %>
+                    <% if group.user.photo.nil? %>
+                      <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                    <% else %>
+                      <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
                 <% end %>
               <% end %>
-              <div class="create_time"style="float:right">
-                <% replys = group.posts.count - 1 %>
-                <% time_show = (time_ago_in_words(group.created_at)).sub(/about/, '') %>
-                <% if time_show == "less than minit" %>
-                  <% time_show = "0 minute" %>
-                <% end %>
-                <span <% if replys == 0 %>style="color:#b3424a"<% end %>><%= replys %> reply</span>　<%= time_show %>
-              </div>
             </object>
           </div>
-        <% end %>
-        <div class="post_content_position width_max">
-          <div class="thread_title">
-            <div class="title_padding no_inline">
-              <% if type == "normal" %>
-                <%= group.title_en %> / <%= group.title_jp%>
-              <% else %>
-                Open Thread / オープンスレッド
-              <% end %>
+        </div>
+      <% end %>
+      <div class="thread_content <% if type == "open" %>open_thread<% end %>">
+        <div class="post_content_cover">
+          <% if type == "normal" %>
+            <div class="user_name">
+              <object>
+                <% if logged_in? && current_user.id != group.user.id %>
+                  <%= link_to "/other_profile/#{group.user.id}" do %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                  <% end %>
+                <% else %>
+                  <%= link_to "/profile" do %>
+                    <%= simple_format(text_url_to_link(h(group.user.name))) %>
+                  <% end %>
+                <% end %>
+                <div class="create_time"style="float:right">
+                  <% replys = group.posts.count - 1 %>
+                  <% time_show = (time_ago_in_words(group.created_at)).sub(/about/, '') %>
+                  <% if time_show == "less than minit" %>
+                    <% time_show = "0 minute" %>
+                  <% end %>
+                  <span <% if replys == 0 %>style="color:#b3424a"<% end %>><%= replys %> reply</span>　<%= time_show %>
+                </div>
+              </object>
+            </div>
+          <% end %>
+          <div class="post_content_position width_max">
+            <div class="thread_title">
+              <div class="title_padding no_inline">
+                <% if type == "normal" %>
+                  <%= group.title_en %> / <%= group.title_jp%>
+                <% else %>
+                  Open Thread / オープンスレッド
+                <% end %>
+              </div>
             </div>
           </div>
+          <% if type == "open" %>
+            <%= render partial: 'posts/post' ,locals: { post:group.posts.last,type:"normal"} %>
+          <% end %>
         </div>
-        <% if type == "open" %>
-          <%= render partial: 'posts/post' ,locals: { post:group.posts.last,type:"normal"} %>
-        <% end %>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

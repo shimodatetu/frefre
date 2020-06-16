@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="profile_page row">
-    <%= button_tag data: {toggle: "modal",target: "#profile_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link" do %>
+    <%= button_tag data: {toggle: "modal",target: "#profile_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"margin-bottom:0px" do %>
       <div class="text_box">
         <div class="jp">
           プロフィールを変更する
@@ -130,20 +130,20 @@
       </div>
     </div>
     <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
-      <li class="nav-item active">
+      <li class="nav-item <% if params[:page] == nil || params[:page] == "1" %>active<% end %>">
         <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
           <i class="fas fa-users"></i>
           <div class="text_cover">
             <div class="jp">
-              参加しているグループ
+              参加したグループ
             </div>
             <div class="en">
-              Joining Group
+              Join Group
             </div>
           </div>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <% if params[:page] == "2" %>active<% end %>">
         <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#group" role="tab" aria-controls="group" aria-selected="false">
           <i class="fas fa-users"></i>
           <div class="text_cover">
@@ -156,7 +156,7 @@
           </div>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <% if params[:page] == "3" %>active<% end %>">
         <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#thread" role="tab" aria-controls="thread" aria-selected="false">
           <i class="fas fa-comments"></i>
           <div class="text_cover">
@@ -169,9 +169,9 @@
           </div>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <% if params[:page] == "4" %>active<% end %>">
         <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">
-          <i class="fas fa-comments"></i>
+          <i class="fas fa-comment-dots"></i>
           <div class="text_cover">
             <div class="jp">
               過去の投稿
@@ -186,34 +186,41 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
         <% there_be = false %>
-        <% current_user.threadtypes.each do |threadtype| %>
-          <% there_be = true %>
-
-          <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+        <% if @join_groups != nil %>
+          <% @join_groups.each do |threadtype| %>
+            <% there_be = true %>
+            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+          <% end %>
         <% end %>
       </div>
       <div class="tab-pane fade" id="group" role="tabpanel" aria-labelledby="group-tab">
         <% show_group_id = -1 %>
         <% there_be = false %>
-        <% Threadtype.all.where(leader_id:current_user.id).each do |threadtype| %>
-          <% there_be = true %>
-          <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+        <% if @make_groups != nil %>
+          <% @make_groups.each do |threadtype| %>
+            <% there_be = true %>
+            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+          <% end %>
         <% end %>
       </div>
       <div class="tab-pane fade" id="thread" role="tabpanel" aria-labelledby="thread-tab">
         <% show_group_id = -1 %>
         <% there_be = false %>
-        <% current_user.groups.each do |group| %>
-          <% there_be = true %>
-          <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+        <% if @make_threads != nil %>
+          <% @make_threads.each do |group| %>
+            <% there_be = true %>
+            <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+          <% end %>
         <% end %>
       </div>
       <div class="tab-pane fade" id="post" role="tabpanel" aria-labelledby="post-tab">
         <% show_group_id = -1 %>
         <% there_be = false %>
-        <% current_user.posts.each do |post| %>
-          <% there_be = true %>
-          <%= render partial: 'posts/post' ,locals: { post:post,type:"normal"} %>
+        <% if @make_posts != nil %>
+          <% @make_posts.each do |post| %>
+            <% there_be = true %>
+            <%= render partial: 'posts/post' ,locals: { post:post,type:"normal"} %>
+          <% end %>
         <% end %>
       </div>
     </div>

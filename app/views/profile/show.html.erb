@@ -46,7 +46,7 @@
             <% end %>
           </li>
           <li class="nav-item profile_contents_button">
-            <%= link_to '/profile/4',class:"nav-link" do %>
+            <%= link_to '/profile/5',class:"nav-link" do %>
               <div class="jp">
                 チャット
               </div>
@@ -56,7 +56,7 @@
             <% end %>
           </li>
           <li class="nav-item profile_contents_button">
-            <%= link_to '/profile/6',class:"nav-link" do %>
+            <%= link_to '/profile/7',class:"nav-link" do %>
               <div class="jp">
                 お知らせ
               </div>
@@ -66,7 +66,7 @@
             <% end %>
           </li>
           <li class="nav-item profile_contents_button">
-            <%= link_to '/profile/8',class:"nav-link" do %>
+            <%= link_to '/profile/9',class:"nav-link" do %>
               <div class="jp">
                 フォロワー
               </div>
@@ -89,21 +89,19 @@
       </div>
     </div>
     <div class="profile_main">
-      <% if params[:id].nil? || params[:id] == "1" %>
+      <% if params[:id].nil? || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4" %>
         <%= render partial:"profile_page" %>
-      <% elsif params[:id] == "2" || params[:id] == "3" %>
-        <%= render partial:"history",locals: { user: current_user,type:"mine"} %>
-      <% elsif params[:id] == "4" %>
-        <%= render partial:"chat" %>
       <% elsif params[:id] == "5" %>
-        <%= render partial:"detail_chat" %>
+        <%= render partial:"chat" %>
       <% elsif params[:id] == "6" %>
-        <%= render partial:"notice" %>
+        <%= render partial:"detail_chat" %>
       <% elsif params[:id] == "7" %>
+        <%= render partial:"notice" %>
+      <% elsif params[:id] == "8" %>
         <%= render partial:"detail_notice" %>
-      <% elsif params[:id] == "8" || params[:id] == "9" || params[:id] == "10" %>
+      <% elsif params[:id] == "9" || params[:id] == "10" || params[:id] == "11" %>
         <%= render partial:"follow" %>
-      <% elsif params[:id] == "11" %>
+      <% elsif params[:id] == "12" %>
         <%= render partial:"retire" %>
       <% end %>
 

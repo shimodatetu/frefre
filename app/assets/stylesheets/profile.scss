@@ -1,5 +1,40 @@
 .profile{
   margin-top: 10px;
+  .blue-nav{
+    border: solid thin #07689f!important;
+    color:#07689f;
+    .nav-link{
+      color:#07689f;
+    }
+  }
+  .blue-nav.active{
+    background: #07689f!important;
+    color:#fff!important;
+    a{
+      background-color: #07689f!important;
+      color:#fff!important;
+      border:none!important;
+    }
+  }
+
+  .green-nav{
+    background-color: #fff;
+    color: #66bfbf;
+    border: solid thin #66bfbf;
+    .nav-link{
+      background: #fff;
+      color:#66bfbf;
+      border:none!important;
+    }
+  }
+  .green-nav.active{
+    background: #66bfbf;
+    color: #fff!important;
+    .nav-link{
+      background: #66bfbf;
+      color:#fff;
+    }
+  }
   .profile_change_link{
     width: 500px;
     margin: 10px;
@@ -102,6 +137,10 @@
     .thread_cover{
       filter:none;
     }
+    .history_postlist .thread_cover{
+      border-radius: 5px;
+      border: solid thin #ddd;
+    }
   }
   .nav-item:hover{
     border-bottom-color: transparent;
@@ -139,7 +178,7 @@
       margin-left: 5px;
       font-size: 25px;
     }
-    .fa-comments{
+    .fas{
       vertical-align: text-bottom;
       font-size: 25px;
       margin-right: 5px;
@@ -203,11 +242,7 @@
     margin-bottom:10px;
     min-height:calc(100vh - 150px);
   }
-  .mes_button{
-    .jp{
-      font-size: 10px;
-    }
-  }
+
   .profile_picture{
     width:120px;
     margin-bottom:5px;
@@ -263,6 +298,7 @@
         color:#07689f
       }
     }
+
     .profile_contents_button{
       background: #fff;
       border-bottom:solid 2px #dddddd;

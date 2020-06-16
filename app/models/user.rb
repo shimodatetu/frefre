@@ -16,8 +16,8 @@ class User < ApplicationRecord
   has_many :threadtypes, through: :user_threadtypes
   accepts_nested_attributes_for :user_threadtypes
 
-  has_many :notices, through: :user_notices
   has_many :user_notices
+  has_many :notices, through: :user_notices
   accepts_nested_attributes_for :user_notices
 
   has_secure_password validations: false

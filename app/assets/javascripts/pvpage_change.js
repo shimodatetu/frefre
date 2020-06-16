@@ -1,6 +1,6 @@
 
 $(function(){
-  
+
   $(".profile_history_change3").click(function(){
     setTimeout(
       (function(){
@@ -19,14 +19,6 @@ $(function(){
             $(elem).attr("href","/profile/3/"+url_split[3]+"/"+url_split[4])
           }
         });
-        var cHeight = $(".top-page").height();
-        var bHeight = window.parent.screen.height;
-        if((cHeight - bHeight) < 0){
-          $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
-        }
-        else {
-          $(".page_footer").attr("style","width:100%;")
-        }
       })
     ,200);
   })
@@ -47,14 +39,6 @@ $(function(){
             $(elem).attr("href","/profile/2/"+url_split[3]+"/"+url_split[4])
           }
         });
-        var cHeight = $(".top-page").height();
-        var bHeight = window.parent.screen.height;
-        if((cHeight - bHeight) < 0){
-          $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
-        }
-        else {
-          $(".page_footer").attr("style","width:100%;")
-        }
       })
     ,200);
   })
@@ -76,14 +60,6 @@ $(function(){
             $(elem).attr("href","/profile/9/"+url_split[3]+"/"+url_split[4])
           }
         });
-        var cHeight = $(".top-page").height();
-        var bHeight = window.parent.screen.height;
-        if((cHeight - bHeight) < 0){
-          $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
-        }
-        else {
-          $(".page_footer").attr("style","width:100%;")
-        }
       })
     ,200);
   })
@@ -104,14 +80,6 @@ $(function(){
             $(elem).attr("href","/profile/8/"+url_split[3]+"/"+url_split[4])
           }
         });
-        var cHeight = $(".top-page").height();
-        var bHeight = window.parent.screen.height;
-        if((cHeight - bHeight) < 0){
-          $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
-        }
-        else {
-          $(".page_footer").attr("style","width:100%;")
-        }
       })
     ,200);
   })
@@ -132,14 +100,6 @@ $(function(){
             $(elem).attr("href","/profile/10/"+url_split[3]+"/"+url_split[4])
           }
         });
-        var cHeight = $(".top-page").height();
-        var bHeight = window.parent.screen.height;
-        if((cHeight - bHeight) < 0){
-          $(".page_footer").attr("style","position:absolute;bottom:0px;width:100%;")
-        }
-        else {
-          $(".page_footer").attr("style","width:100%;")
-        }
       })
     ,200);
   })

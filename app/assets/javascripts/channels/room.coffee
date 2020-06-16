@@ -63,34 +63,35 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     else if data["type"] == "threadtype_maker"
       window.location.href = "/threadtype/show/"+data["threadtype_id"]
     else if data["type"] == "accept"
-      if url.indexOf('thread/show') != -1
-        alert("thread")
-        now_id = 1
-        if urls.length >= 4
-          now_id = urls[3]
-        now_page = 1
-        now_page_get = GetQueryString()["page"]
-        if now_page_get != undefined
-          now_page = now_page_get
-        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-        if(!($('.thread_cover#'+data["post"]['id']).length)) && Number(now_page) == page && Number(now_id) == data["post"]['group_id']
-          add_post(data)
-          $(".delete_button_destroy").click();
-          $(".report_button_destroy").click();
-      else if url.indexOf('threadtype/show') != -1 && data["threadtype_first_id"] == data["post"]["threadtype_id"]
-        page_id_max = 10
-        now_id = 1
-        if urls.length >= 4
-          now_id = urls[3]
-        now_page = 1
-        now_page_get = GetQueryString()["page"]
-        if now_page_get != undefined
-          now_page = now_page_get
-        page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-        if !($('.thread_cover#'+data["post"]['id']).length) && Number(now_page) == page && Number(now_id) == data["post"]['threadtype_id']
-          add_post(data)
-          $(".delete_button_destroy").click();
-          $(".report_button_destroy").click();
+      if $(".thread_cover#"+data["post"]["threadtype_id"]).length == 0
+        if url.indexOf('thread/show') != -1
+          alert("thread")
+          now_id = 1
+          if urls.length >= 4
+            now_id = urls[3]
+          now_page = 1
+          now_page_get = GetQueryString()["page"]
+          if now_page_get != undefined
+            now_page = now_page_get
+          page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+          if(!($('.thread_cover#'+data["post"]['id']).length)) && Number(now_page) == page && Number(now_id) == data["post"]['group_id']
+            add_post(data)
+            $(".delete_button_destroy").click();
+            $(".report_button_destroy").click();
+        else if url.indexOf('threadtype/show') != -1 && data["threadtype_first_id"] == data["post"]["threadtype_id"]
+            page_id_max = 10
+            now_id = 1
+            if urls.length >= 4
+              now_id = urls[3]
+            now_page = 1
+            now_page_get = GetQueryString()["page"]
+            if now_page_get != undefined
+              now_page = now_page_get
+            page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
+            if !($('.thread_cover#'+data["post"]['id']).length) && Number(now_page) == page && Number(now_id) == data["post"]['threadtype_id']
+              add_post(data)
+              $(".delete_button_destroy").click();
+              $(".report_button_destroy").click();
 
   speak: (lang,mes_jp,mes_en, group)->
     $(".thread_send #post").attr("style","pointer-events: none;")
@@ -98,6 +99,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     $(".thread_submit_video").attr("style","display:none;pointer-events: none;")
     $(".trans_send").attr("style","display:none;pointer-events: none;")
     @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
+
 
   #image: (file,group)->
   #  @perform('image',group_id:group,image:file,lang:"none")

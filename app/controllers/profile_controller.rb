@@ -6,228 +6,87 @@ class ProfileController < ApplicationController
     for prohibit in Prohibit.all do
       gon.prohibit.push(prohibit.prohibit_words)
     end
-
-    if params[:id] == "2" || params[:id] == "3"
-      thread_page_num = 20.to_f
-      page_show_max = 5.to_f
-      page_max_half = (page_show_max / 2).ceil
-      group_num = current_user.groups.all.count
-      page_num = (group_num / thread_page_num).ceil
-      if page_num == 0
-        page_num = 1
-      end
-      page_id = params[:page1].to_i
-      if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
+    if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"
+      page_id = params[:page].to_i
+      if page_id.nil? || page_id.to_i < 1
         page_id = 1
       end
-      start_num = 1
-      end_num = page_num
-      if page_num > page_show_max
-        if page_id - page_max_half < 0
-         end_num = page_show_max
-        elsif page_id + page_max_half > page_num
-         start_num = end_num - page_show_max + 1
-        else
-         start_num = page_id - page_max_half + 2
-         end_num = start_num + page_show_max - 1
-        end
+      per = 10
+      current_user_id = current_user.id
+      if params[:id] == nil || params[:id] == "1"
+        @join_groups = current_user.threadtypes.all.page(page_id).per(per)
+        @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
+        @make_threads = current_user.groups.all.page(1).per(per)
+        @make_posts = current_user.posts.all.page(1).per(per)
+      elsif params[:id] == "2"
+        @join_groups = current_user.threadtypes.all.page(1).per(per)
+        @make_groups = Threadtype.all.where(leader_id:current_user_id).page(page_id).per(per)
+        @make_threads = current_user.groups.all.page(1).per(per)
+        @make_posts = current_user.posts.all.page(1).per(per)
+      elsif params[:id] == "3"
+        @join_groups = current_user.threadtypes.all.page(1).per(per)
+        @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
+        @make_threads = current_user.groups.all.page(page_id).per(per)
+        @make_posts = current_user.posts.all.page(1).per(per)
+      elsif params[:id] == "4"
+        @join_groups = current_user.threadtypes.all.page(1).per(per)
+        @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
+        @make_threads = current_user.groups.all.page(1).per(per)
+        @make_posts = current_user.posts.all.page(page_id).per(per)
       end
-      @thread_page_num = thread_page_num
-      @page_id = page_id
-      @page_num = page_num
-      @start_num = start_num
-      @end_num = end_num
-      page_max_half = (page_show_max / 2).ceil
-      group_num = current_user.posts.all.count
-      page_num = (group_num / thread_page_num).ceil
-      if page_num == 0
-        page_num = 1
-      end
-      page_id = params[:page2].to_i
-      if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
-        page_id = 1
-      end
-      start_num = 1
-      end_num = page_num
-      if page_num > page_show_max
-        if page_id - page_max_half < 0
-         end_num = page_show_max
-        elsif page_id + page_max_half > page_num
-         start_num = end_num - page_show_max + 1
-        else
-         start_num = page_id - page_max_half + 2
-         end_num = start_num + page_show_max - 1
-        end
-      end
-      @thread_page_num2 = thread_page_num
-      @page_id2 = page_id
-      @page_num2 = page_num
-      @start_num2 = start_num
-      @end_num2 = end_num
-    elsif params[:id] == "4"
-      thread_page_num = 20.to_f
-      page_show_max = 5.to_f
-      page_max_half = (page_show_max / 2).ceil
-      group_num = current_user.notices.all.count
-      page_num = (group_num / thread_page_num).ceil
-      if page_num == 0
-        page_num = 1
-      end
-      page_id = params[:page1].to_i
-      if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
-        page_id = 1
-      end
-      start_num = 1
-      end_num = page_num
-      if page_num > page_show_max
-        if page_id - page_max_half < 0
-         end_num = page_show_max
-        elsif page_id + page_max_half > page_num
-         start_num = end_num - page_show_max + 1
-        else
-         start_num = page_id - page_max_half + 2
-         end_num = start_num + page_show_max - 1
-        end
-      end
-      @thread_page_num = thread_page_num
-      @page_id = page_id
-      @page_num = page_num
-      @start_num = start_num
-      @end_num = end_num
     elsif params[:id] == "5"
-      @chat = Chat.new
-      notice_page = 1
-      if !params[:page1].nil?
-        notice_page = params[:page1]
-      end
-      @notice = Notice.find(notice_page.to_i)
-      thread_page_num = 20.to_f
-      page_show_max = 5.to_f
-      page_max_half = (page_show_max / 2).ceil
-      group_num = @notice.chats.all.count
-      page_num = (group_num / thread_page_num).ceil
-      if page_num == 0
-        page_num = 1
-      end
-      page_id = params[:page2].to_i
-      if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
+      page_id = params[:page].to_i
+      if page_id.nil? || page_id.to_i < 1
         page_id = 1
       end
-      start_num = 1
-      end_num = page_num
-      if page_num > page_show_max
-        if page_id - page_max_half < 0
-         end_num = page_show_max
-        elsif page_id + page_max_half > page_num
-         start_num = end_num - page_show_max + 1
-        else
-         start_num = page_id - page_max_half + 2
-         end_num = start_num + page_show_max - 1
-        end
-      end
-      @thread_page_num = thread_page_num
-      @page_id = page_id
-      @page_num = page_num
-      @start_num = start_num
-      @end_num = end_num
+      per = 10
+      @notices = current_user.notices.all.page(page_id).per(per)
     elsif params[:id] == "6"
-      notice_page = 1
-      if !params[:page1].nil?
-        notice_page = params[:page1]
+      notice_id = params[:page1].to_i
+      if !(@notice = Notice.find(params[:page1].to_i))
+        @notice = current_user.notices.first
       end
-      @infos = Userinfo.find_by(id:notice_page.to_i)
-      thread_page_num = 20.to_f
-      page_show_max = 5.to_f
-      page_max_half = (page_show_max / 2).ceil
-      group_num = current_user.userinfos.count
-      page_num = (group_num / thread_page_num).ceil
-      if page_num == 0
-        page_num = 1
-      end
-      page_id = params[:page2].to_i
-      if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
+      @from_user = notice.users.last
+      @to_user = notice.users.first
+      per = 10
+      @chats = notice.chats.all.page(page_id).per(per)
+    elsif params[:id] == "7"
+      page_id = params[:page].to_i
+      if page_id.nil? || page_id.to_i < 1
         page_id = 1
       end
-      start_num = 1
-      end_num = page_num
-      if page_num > page_show_max
-        if page_id - page_max_half < 0
-         end_num = page_show_max
-        elsif page_id + page_max_half > page_num
-         start_num = end_num - page_show_max + 1
-        else
-         start_num = page_id - page_max_half + 2
-         end_num = start_num + page_show_max - 1
-        end
-      end
-      @thread_page_num = thread_page_num
-      @page_id = page_id
-      @page_num = page_num
-      @start_num = start_num
-      @end_num = end_num
-    elsif params[:id] == "8" || params[:id] == "9" || params[:id] == "10"
-      thread_page_num = 20.to_f
-      page_show_max = 5.to_f
-      page_max_half = (page_show_max / 2).ceil
-      group_num = current_user.followings.all.count
-      page_num = (group_num / thread_page_num).ceil
-      if page_num == 0
-        page_num = 1
-      end
-      page_id = params[:page1].to_i
-      if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
+      per = 10
+      @user_infos = current_user.news.all.page(page_id).per(per)
+    elsif params[:id] == "9" || params[:id] == "10" || params[:id] == "11"
+      page_id = params[:page].to_i
+      if page_id.nil? || page_id.to_i < 1
         page_id = 1
       end
-      start_num = 1
-      end_num = page_num
-      if page_num > page_show_max
-        if page_id - page_max_half < 0
-         end_num = page_show_max
-        elsif page_id + page_max_half > page_num
-         start_num = end_num - page_show_max + 1
-        else
-         start_num = page_id - page_max_half + 2
-         end_num = start_num + page_show_max - 1
-        end
+      per = 10
+      current_user_id = current_user.id
+
+      @search_text = ""
+      if session["search_text"].nil? == false && session["search_text"] != ""
+        @search_text = session["search_text"]
       end
-      @thread_page_num = thread_page_num
-      @page_id = page_id
-      @page_num = page_num
-      @start_num = start_num
-      @end_num = end_num
-      page_max_half = (page_show_max / 2).ceil
-      group_num = current_user.followers.count
-      page_num = (group_num / thread_page_num).ceil
-      if page_num == 0
-        page_num = 1
+      users = User.all
+      if !@search_text.nil?
+       @search_users = users.where("name LIKE ?", "%"+ @search_text +"%")
       end
-      page_id = params[:page2].to_i
-      if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1
-        page_id = 1
+
+      if params[:id] == "9"
+        @followings = current_user.followings.all.page(page_id).per(per)
+        @followers = current_user.followings.all.page(1).per(per)
+        @search_users = @search_users.all.page(1).per(per)
+      elsif params[:id] == "10"
+        @followings = current_user.followings.all.page(1).per(per)
+        @followers = current_user.followings.all.page(page_id).per(per)
+        @search_users = @search_users.all.page(1).per(per)
+      elsif params[:id] == "11"
+        @followings = current_user.followings.all.page(1).per(per)
+        @followers = current_user.followings.all.page(1).per(per)
+        @search_users = @search_users.all.page(page_id).per(per)
       end
-      start_num = 1
-      end_num = page_num
-      if page_num > page_show_max
-        if page_id - page_max_half < 0
-         end_num = page_show_max
-        elsif page_id + page_max_half > page_num
-         start_num = end_num - page_show_max + 1
-        else
-         start_num = page_id - page_max_half + 2
-         end_num = start_num + page_show_max - 1
-        end
-      end
-      @thread_page_num2 = @thread_page_num
-      @page_id2 = page_id
-      @page_num2 = page_num
-      @start_num2 = start_num
-      @end_num2 = end_num
-    else
-      @thread_page_num = 0
-      @page_id = 0
-      @page_num = 0
-      @start_num = 0
-      @end_num = 0
     end
   end
   def retire

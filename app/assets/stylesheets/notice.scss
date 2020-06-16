@@ -8,7 +8,6 @@
     }
   }
   .notice_cover{
-    margin-top:25px;
     p{
       display: inline-block;
     }
@@ -54,10 +53,9 @@
     border:solid thin #dddddd;
     .group_user_cover{
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: text-bottom;
       height:100%;
-      margin-right: 10px;
-      margin-top:10px;
+      margin:0px;
       .group_img_cover{
         text-align: center;
         .group_img {
@@ -160,8 +158,7 @@
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 1;
-          padding-left:10px;
-          padding-right:70px;
+          //padding-right:70px;
         }
       }
       .lang_type{

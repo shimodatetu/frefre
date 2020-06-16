@@ -5,11 +5,14 @@
       <%= "active" %>
     <% end %>">
       <a class="nav-link profile_history_change2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-        <div class="jp">
-          作成したスレッド
-        </div>
-        <div class="en">
-          Made Thread
+        <i class="fas fa-comments"></i>
+        <div class="text_cover">
+          <div class="jp">
+            作成したスレッド
+          </div>
+          <div class="en">
+            Made Thread
+          </div>
         </div>
       </a>
     </li>
@@ -18,11 +21,14 @@
       <%= "active" %>
     <% end %>">
       <a class="nav-link profile_history_change3" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-        <div class="jp">
-          過去の投稿
-        </div>
-        <div class="en">
-          Previous Posts
+        <i class="fas fa-comment-dots"></i>
+        <div class="text_cover">
+          <div class="jp">
+            過去の投稿
+          </div>
+          <div class="en">
+            Previous Posts
+          </div>
         </div>
       </a>
     </li>
@@ -104,7 +110,7 @@
         </div>
       <% end %>
     </div>
-    <div class="tab-pane fade
+    <div class="tab-pane history_postlist fade
     <% if params[:id] == "3" %>
       <%= "active" %>
     <% end %>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -116,7 +122,7 @@
           <% group_id = post.group_id %>
           <% page_id = (post.group.posts.where("id <= ?",post.id).count / 20).to_i + 1%>
           <%= link_to("/thread/show/#{group_id}/#{page_id}" , class:"thread_link") do %>
-            <%= render post %>
+            <%= render partial: 'posts/post' ,locals: { post:post,type:"normal"} %>
           <% end %>
         <% end %>
       <% end %>

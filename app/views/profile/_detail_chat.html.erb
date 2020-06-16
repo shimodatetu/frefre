@@ -1,11 +1,4 @@
-<% notice_id = params[:page1].to_i %>
-<% if a = Notice.find(params[:page1].to_i) %>
-  <% notice = a %>
-<% else %>
-  <% notice = current_user.notices.first %>
-<% end %>
-<% from_user = notice.users.last %>
-<% to_user = notice.users.first %>
+
 <% if logged_in? %>
   <div class="user_login"style="display:none"id="<%= current_user.id %>"></div>
 <% end %>
@@ -27,60 +20,21 @@
     <div class="panel-title"style="display:inline-block">
       <div class="panel-title-text">
         <div class="float_jp">
-          <%= simple_format(text_url_to_link(h(from_user.name))) %>と
-          <%= simple_format(text_url_to_link(h(to_user.name))) %>のチャット
+          <%= simple_format(text_url_to_link(h(@from_user.name))) %>と
+          <%= simple_format(text_url_to_link(h(@to_user.name))) %>のチャット
         </div>
         <div class="float_en">
-          Chat <%= simple_format(text_url_to_link(h(from_user.name))) %>
-          with <%= simple_format(text_url_to_link(h(to_user.name))) %>
+          Chat <%= simple_format(text_url_to_link(h(@from_user.name))) %>
+          with <%= simple_format(text_url_to_link(h(@to_user.name))) %>
         </div>
       </div>
     </div>
     <% there_be = false %>
     <div class="chat_all">
-      <%= render notice.chats.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num) %>
+      <%= render @chats %>
     </div>
-    <div class="page_button_cover">
-      <% if 1 >= @page_id.round %>
-        <div class="page_button no_push">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </div>
-      <% else %>
-        <%= link_to("/profile/#{params[:id]}/#{notice.id}/#{@page_id - 1}",class:"page_button ok_push") do %>
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        <% end %>
-      <% end %>
-      <% if @start_num.round != 1 %>
-        <div class="page_button dot_show">
-          ...
-        </div>
-      <% end %>
-      <% for num in @start_num.round..@end_num.round do %>
-        <% if num == @page_id %>
-          <div class="page_button now_page">
-            <%= num %>
-          </div>
-        <% else %>
-          <%= link_to("/profile/#{params[:id]}/#{notice.id}/#{num}",class:"page_button page_move") do %>
-            <%= num %>
-          <% end %>
-        <% end %>
-      <% end %>
-      <% if @end_num.round != @page_num.round %>
-        <div class="page_button dot_show">
-          ...
-        </div>
-      <% end %>
-      <% if @page_num.round <= @page_id.round || @page_num.round == 1 %>
-        <div class="page_button no_push">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </div>
-      <% else %>
-        <%= link_to("/profile/#{params[:id]}/#{notice.id}/#{@page_id.round + 1}",class:"page_button ok_push") do %>
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        <% end %>
-      <% end %>
-    </div>
+
+    <%= paginate @chats , outer_window: 3%>
     <div class="footer thread_footer">
       <div class="thread_post_cover">
   			<div class="modal-body">
