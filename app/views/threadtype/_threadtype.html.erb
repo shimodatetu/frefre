@@ -1,5 +1,6 @@
 <% leader = User.find_by(id:threadtype.leader_id) %>
-<%= link_to("/threadtype/show/#{threadtype.id}" , class:"thread_link") do %>
+
+<%= link_to("/threadtype/show/"+threadtype.id.to_s,class:"thread_link") do %>
   <% there_be = true %>
   <div class="thread_cover threadtype_cover">
     <div class="group_user_cover threadtype_image">
@@ -115,52 +116,57 @@
               <% end %>
             </div>
           </div>
+          <div class="join_button_type">
+            <% if !logged_in? %>
+              <div class="join_button_cover">
+                <%= button_tag type:"button",class:"login_join_button btn mes_button join_button join_button_submit" do %>
+                  <div class="text_box">
+                    <div class="jp">
+                      Login and Join / ログインして参加する
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% elsif threadtype.type == "every" %>
+              <div class="join_button_cover">
+                <%= button_tag type:"button",class:"login_join_button btn mes_button join_button all_join_button" do %>
+                  <div class="text_box">
+                    <div class="jp">
+                      Joined / 参加済
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <% threadtype_id = threadtype.id %>
+              <div class="join_button_cover join_button<%= threadtype_id %>">
+                <% if current_user.threadtypes.find_by(id:threadtype_id) != nil %>
+                  <object>
+                    <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
+                      <div class="text_box">
+                        <div class="jp">
+                          Joined / 参加済
+                        </div>
+                      </div>
+                    <% end %>
+                  </object>
+                <% else %>
+                  <object>
+                    <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
+                      <div class="text_box">
+                        <div class="jp">
+                          Join / 参加する
+                        </div>
+                      </div>
+                    <% end %>
+                  </object>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-    <div class="join_button_type">
-      <% if !logged_in? %>
-        <div class="join_button_cover">
-          <%= button_tag type:"button",class:"login_join_button btn mes_button join_button join_button_submit" do %>
-            <div class="text_box">
-              <div class="jp">
-                Login and Join / ログインして参加する
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% elsif threadtype.type == "every" %>
-        <div class="join_button_cover">
-          <%= button_tag type:"button",class:"login_join_button btn mes_button join_button all_join_button" do %>
-            <div class="text_box">
-              <div class="jp">
-                Joined / 参加済
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <% threadtype_id = threadtype.id %>
-        <div class="join_button_cover join_button<%= threadtype_id %>">
-          <% if current_user.threadtypes.find_by(id:threadtype_id) != nil %>
-            <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
-              <div class="text_box">
-                <div class="jp">
-                  Joined / 参加済
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-            <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
-              <div class="text_box">
-                <div class="jp">
-                  Join / 参加する
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+
   </div>
 <% end %>

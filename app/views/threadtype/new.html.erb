@@ -1,0 +1,429 @@
+
+
+
+<style>
+  .ui-widget-content .ui-state-focus{
+    background:#4e91f7;
+    color:#ffffff;
+  }
+</style>
+<input type="hidden"class="cancel_button_class"val="">
+
+
+<div class="make_thread_cover">
+  <div class="threadtype_page"style="margin-top:0px">
+    <div class="category_head">
+      <div class="panel-title"style="display:inline-block">
+        <div class="panel-title-text">
+          Make Thread
+          <span class="float_jp">
+            スレッド作成
+          </span>
+        </div>
+      </div>
+      <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide"style="margin-top:10px">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+        <div class="en help_text">
+          Usage
+        </div>
+        <div class="jp help_text">
+          使い方
+        </div>
+      </button>
+    </div>
+    <% there_be = true %>
+    <div class="thread_cover threadtype_cover">
+      <% if logged_in? %>
+        <div class="get_user_id user_login"id="<%= current_user.id %>"></div>
+        <div class="panel panel-warning make_thread_category thread_make">
+          <%= form_for Threadtype.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+            <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+            <div class="panel-body content_cover"style="margin-top:20px;">
+              <div class="title_input_name">
+                <div class="sub_jp">
+                  タグ (1つだけ選択できます)
+                </div>
+                <div class="main_en">
+                  Tag (You can choose only 1)
+                </div>
+              </div>
+              <% Category.all.each do |category| %>
+                <%= hidden_field_tag 'threadtype[id][]' %>
+                <div class="checkbox_cover">
+                  <%= form.radio_button :type, category.id %> <%= category.type_en %> / <%= category.type_jp %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="flag_show">
+              <div class="flag_image">
+                <%= image_tag "/eng.png", class: "image" %>
+                <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
+              </div>
+              <div class="flag_image flag_jp">
+                <%= image_tag "jap.png", class: "image" %>
+                <!--span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span-->
+              </div>
+            </div>
+
+            <div class="panel-body content_cover">
+              <div class="title_input_name">
+                <div class="sub_jp">
+                  タイトル
+                </div>
+                <div class="main_en">
+                  Title
+                </div>
+              </div>
+              <div class="title_input">
+                <%= image_tag "/eng.png", class: "image lang_img en_img"%>
+                <%= form.text_area :type_en, id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
+                <div class="space_form"style="margin-top:0px;">
+                  <div class="trans_cover">
+                    <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_en"
+                    name="<% if logged_in? %>logined<% end %>">
+                      <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                      <div class="button_text button_text_jp">
+                        翻訳
+                      </div>
+                    </button>
+                  </div>
+                  <div class="trans_cover">
+                    <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_jp"
+                    name="<% if logged_in? %>logined<% end %>">
+                      <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                      <div class="button_text button_text_en">
+                        Trans
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <%= image_tag "jap.png", class: "image lang_img" %>
+                <%= form.text_area :type_jp, id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
+              </div>
+            </div>
+            <div class="panel-body content_cover"style="padding-bottom:0px">
+              <div class="content_input_name">
+                <div class="sub_jp">
+                  グループの説明
+                </div>
+                <div class="main_en">
+                  Group description
+                </div>
+              </div>
+              <div class="content_input">
+                <%= image_tag "/eng.png", class: "image lang_img en_img"%>
+                <%= text_area_tag :content_eng,"", id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
+                <div class="space_form"style="margin-top:5px;">
+                  <div class="trans_cover">
+                    <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_content_en"
+                    name="<% if logged_in? %>logined<% end %>">
+                      <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                      <div class="button_text button_text_jp">
+                        翻訳
+                      </div>
+                    </button>
+                  </div>
+                  <div class="trans_cover">
+                    <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_content_jp"
+                    name="<% if logged_in? %>logined<% end %>">
+                      <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                      <div class="button_text button_text_en">
+                        Trans
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                <%= image_tag "jap.png", class: "image lang_img" %>
+                <%= text_area_tag :content_jap,"", id:"content",class:"content_input_form form-control form_lang jp_data_content",size:"65x5" %>
+              </div>
+            </div>
+            <div style="width: 100%;height: 20px;">
+              <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+                Powered by MT
+              <% end %>
+
+              <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+                翻訳提供 未来翻訳
+              <% end %>
+            </div>
+            <div class="panel-body content_cover">
+              <div class="content_input_name">
+                <div class="sub_jp">
+                  コミュニティ画像
+                </div>
+                <div class="main_en">
+                  Community Image
+                </div>
+              </div>
+              <div class="content_input">
+                <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
+                <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
+                <label for="image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button"style="margin-left: calc(50% - 75px);">
+                  <div class="glyphicon glyphicon-picture picture_send"></div>
+                  <div class="button_text">
+                    <div class="float_jp">
+                      画像
+                    </div>
+                    Image
+                  </div>
+                </label>
+                <% if logged_in? %>
+                  <%= form.file_field :pict,id:"image_send",class:"logined",style:"display:none" %>
+                <% else %>
+                  <%= form.file_field :pict,id:"image_send",style:"display:none" %>
+                <% end %>
+              </div>
+            </div>
+            <div class="panel-body content_cover jimaku_form"style="display:none">
+              <div class="content_input_name">
+                <div class="sub_jp">
+                  字幕
+                </div>
+                <div class="main_en">
+                  Subtitles
+                </div>
+              </div>
+              <div class="content_input">
+                <!--<button type="button"class="btn help_show_small auto_subtitle thread_auto_subtitle_en"style="background:#408bc9">
+                  <div class="en help_text">
+                    Auto subtitle(English)
+                  </div>
+                </button>
+                <button type="button"class="btn help_show_small auto_subtitle thread_auto_subtitle_ja"style="margin-left:130px;background:#408bc9">
+                  <div class="jp help_text">
+                    自動字幕（日本語）
+                  </div>
+                </button>-->
+
+                <%= image_tag "/eng.png", class: "image lang_img en_img"%>
+                <%= text_area_tag :subcontent_eng,"", id:"subcontent_eng",class:"content_input_form form-control form_lang sub_en_data_content",size:"65x5" %>
+                <div class="space_form subtitle_spaceform">
+                  <div class="trans_cover">
+                    <button type="button" class="normal_button post_button btn btn_send words_post_button"id="subtrans_to_en"
+                    name="<% if logged_in? %>logined<% end %>">
+                      <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                      <div class="button_text button_text_jp">
+                        翻訳
+                      </div>
+                    </button>
+                  </div>
+                  <div class="trans_cover">
+                    <button type="button" class="normal_button post_button btn btn_send words_post_button"id="subtrans_to_jp"
+                    name="<% if logged_in? %>logined<% end %>">
+                      <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                      <div class="button_text button_text_en">
+                        Trans
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <%= image_tag "jap.png", class: "image lang_img" %>
+                <%= text_area_tag :subcontent_jap,"", id:"subcontent_jap",class:"content_input_form form-control form_lang sub_jp_data_content",size:"65x5" %>
+              </div>
+            </div>
+            <div class="post_button_place">
+              <button type="button" class="normal_button post_button btn words_post_button"id="post">
+                <div class="glyphicon glyphicon-comment picture_send"></div>
+                <div class="button_text">
+                  <div class="float_jp">
+                     作成
+                  </div>
+                  Make
+                </div>
+              </button>
+            </div>
+            <%= hidden_field_tag :show_class_en,".sub_en_data_content" %>
+            <%= hidden_field_tag :show_class_jp,".sub_jp_data_content" %>
+            <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+            <%= hidden_field_tag :show_class ,".thread_make .post_button_form" %>
+            <%= hidden_field_tag :show_modal ,"" %>
+            <%= hidden_field_tag :form_class ,"thread_make .post_button_form" %>
+            <%= hidden_field_tag :form_type ,"group" %>
+            <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+
+            <%= form.submit "",class:"thread_submit",style:"display:none" %>
+          <% end %>
+        </div>
+        <div class="thread_post_cover">
+          <div class="modal fade" id="groupModal" tabindex="-1">
+          	<div class="modal-dialog"style="width:90vw">
+          		<div class="modal-content">
+          			<div class="modal-body">
+                  <div class="thread_post">
+                    <div class="post_form_cover post_form_cover_enjp connect_btn">
+                      <%= image_tag "/eng.png", class: "image" %>
+                      <textarea name="content"class="en_form_hash connect_btn content_post form-control"></textarea>
+                    </div>
+                    <div class="post_form_cover post_form_cover_enjp">
+                      <%= image_tag "jap.png", class: "image" %>
+                      <textarea name="content"class="jp_form_hash content_post form-control" rows="2"></textarea>
+                    </div>
+                  </div>
+                  <div class="thread_post">
+                    <div class="post_form_cover post_form_cover_enjp connect_btn">
+                      <input name="content"class="en_form_title content_post form-control">
+                    </div>
+                    <div class="post_form_cover post_form_cover_enjp">
+                      <input name="content"class="jp_form_title content_post form-control">
+                    </div>
+                  </div>
+                  <div class="thread_post">
+                    <div class="post_form_cover post_form_cover_enjp connect_btn">
+                      <textarea name="content"class="en_form_content connect_btn content_post form-control" rows="4"></textarea>
+                    </div>
+                    <div class="post_form_cover post_form_cover_enjp">
+                      <textarea name="content"class="jp_form_content content_post form-control" rows="4"></textarea>
+                    </div>
+                  </div>
+                  <div class="explain_text">
+                    <div class="en">
+                      ●Post it as it is →“POST”<br>
+                      ●Rewriting words and mistranslations  (not using translation)<br>
+                        →Rewrite the contents above & “POST”<br>
+                      ●Rewriting English words & translating it into Jp again →“BACK”<br>
+                    </div>
+                    <div class="jp">
+                      ●このまま投稿→「投稿」<br>
+                      ●誤記・誤訳を修正して投稿（翻訳を使わない）→上記を書き直す＆「投稿」<br>
+                      ●日本語の誤記を直して、もう一度英訳→「戻る」<br>
+                    </div>
+                    <div class="enjp">
+                      ●Rewriting words and mistranslations  (not using translation)<br>
+                        →Rewrite the contents above & “POST”
+                    </div>
+                  </div>
+          			</div>
+          			<div class="modal-footer">
+                  <button type="button" class="btn btn-default btn_send"id="enjp">
+                    <div class="float_jp">投稿</div>
+                    <div class="base_en">Post</div>
+                  </button>
+                  <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+                    <div class="float_jp">戻る</div>
+                    <div class="base_en">Back</div>
+                  </button>
+          			</div>
+          		</div>
+          	</div>
+          </div>
+        </div>
+        <div class="thread_post_cover">
+          <div class="modal fade help_modal" id="help_slide" tabindex="-1">
+          	<div class="modal-dialog">
+          		<div class="modal-content">
+          			<div class="modal-body">
+                  <div id="carousel-example-generic" class="carousel slide"data-interval="false">
+                    <button type="button" class="btn btn-secondary close_button" data-dismiss="modal">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <div class="carousel-inner" role="listbox">
+                      <div class="item active">
+                        <img src="/frefre_explain/make_thread_1.png">
+                      </div>
+                      <div class="item">
+                        <img src="/frefre_explain/make_thread_2.png">
+                      </div>
+                      <div class="item">
+                        <img src="/frefre_explain/make_thread_3.png">
+                      </div>
+                      <div class="item">
+                        <img src="/frefre_explain/make_thread_4.png">
+                      </div>
+                      <div class="item">
+                        <img src="/frefre_explain/make_thread_5.png">
+                      </div>
+                      <div class="item">
+                        <img src="/frefre_explain/make_thread_je1.png">
+                      </div>
+                      <div class="item">
+                        <img src="/frefre_explain/make_thread_je2.png">
+                      </div>
+                    </div>
+
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+          			</div>
+          		</div>
+          	</div>
+          </div>
+        </div>
+
+        <%= form_tag('/tasks/trans',method: :post,class: "modal-body thread_trans_title search_form_top",style:"display:block") do %>
+          <%= hidden_field_tag :content_en,"",class:"thread_en_data_title" %>
+          <%= hidden_field_tag :content_jp,"",class:"thread_jp_data_title" %>
+          <%= hidden_field_tag :show_class_en,"en_data_title" %>
+          <%= hidden_field_tag :show_class_jp,"jp_data_title" %>
+          <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+          <%= hidden_field_tag :form_class ,"thread_make" %>
+          <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+          <%= submit_tag "",class:"trans_send",style:"display:none"%>
+        <% end %>
+
+        <%= form_tag('/tasks/trans',method: :post,class: "modal-body thread_trans_content search_form_top",style:"display:block") do %>
+          <%= hidden_field_tag :content_en,"",class:"thread_en_data_content" %>
+          <%= hidden_field_tag :content_jp,"",class:"thread_jp_data_content" %>
+          <%= hidden_field_tag :show_class_en,"en_data_content" %>
+          <%= hidden_field_tag :show_class_jp,"jp_data_content" %>
+          <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+          <%= hidden_field_tag :form_class ,"thread_make" %>
+          <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+          <%= submit_tag "",class:"trans_send",style:"display:none"%>
+        <% end %>
+
+        <%= form_tag('/tasks/trans',method: :post,class: "modal-body thread_trans_subtitle search_form_top",style:"display:block") do %>
+          <%= hidden_field_tag :content_en,"",class:"thread_en_data_subtitle" %>
+          <%= hidden_field_tag :content_jp,"",class:"thread_jp_data_subtitle" %>
+          <%= hidden_field_tag :show_class_en,"sub_en_data_content" %>
+          <%= hidden_field_tag :show_class_jp,"sub_jp_data_content" %>
+          <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+          <%= hidden_field_tag :form_class ,"thread_make" %>
+          <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+          <%= submit_tag "",class:"trans_send",style:"display:none"%>
+        <% end %>
+      <% else %>
+        <div class="panel panel-warning not_logined_cover">
+          <div class='panel-body not_logined'>
+            If you haven't logged in, you can't make a thread. <br>
+            Please login or sign up.<br>
+            <br>
+            スレッドを作成するにはログインが必要です。<br>
+            ログインかサインインをお願いします。
+            <br>
+            <%= link_to "/login_page",class:"login_or_signin btn" do %>
+              <div class="jp">ログイン</div>
+              <div class="en">Log In</div>
+            <% end %>
+            <%= link_to "/users",class:"login_or_signin btn" do %>
+              <div class="jp">会員登録</div>
+              <div class="en">Sign Up</div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $("input[type=checkbox]").click(function(){
+    var $count = $("input[type=checkbox]:checked").length;
+    var $not = $('input[type=checkbox]').not(':checked')
+
+        //チェックが3つ付いたら、チェックされてないチェックボックスにdisabledを加える
+    if($count >= 3) {
+        $not.attr("disabled",true);
+    }else{
+        //3つ以下ならisabledを外す
+        $not.attr("disabled",false);
+    }
+  });
+
+</script>

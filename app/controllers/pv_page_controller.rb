@@ -8,21 +8,21 @@ class PvPageController < ApplicationController
         Post.create(content_eng:"The community has been created!",content_jap:"コミュニティが作成されました！",group_id:threadtype.groups.first.id,threadtype_id:threadtype.id,user_id:User.first.id)
       end
     end
-    Threadtype.all.each do |threadtype|
-      count = 0
-      threadtype.users.delete_all
-      User.all.each do |user|
-        if user.avater.attached? && count < 20
-          threadtype.users << user
-        end
-      end
-    end
-    Threadtype.first.users.delete_all
-    User.all.each do |user|
-      if user.avater.attached?
-        Threadtype.first.users << user
-      end
-    end
+    # Threadtype.all.each do |threadtype|
+    #   count = 0
+    #   threadtype.users.delete_all
+    #   User.all.each do |user|
+    #     if user.avater.attached? && count < 20
+    #       threadtype.users << user
+    #     end
+    #   end
+    # end
+    # Threadtype.first.users.delete_all
+    # User.all.each do |user|
+    #   if user.avater.attached?
+    #     Threadtype.first.users << user
+    #   end
+    # end
 
     #Group.all.each do |group|
     #  group.update(threadtype_id: 22)

@@ -30,10 +30,10 @@ class User < ApplicationRecord
   has_many :followers, through: :follower_relationships
 
 
-  has_many :joining_relationships, foreign_key: "joiner_id", class_name: "Relationship", dependent: :destroy
-  has_many :joinings, through: :user_threadtypes
-  has_many :joining_relationships, foreign_key: "joining_id", class_name: "Relationship", dependent: :destroy
-  has_many :joiners, through: :fuser_threadtypes
+  has_many :joining_relations, foreign_key: "joiner_id", class_name: "Relation", dependent: :destroy
+  has_many :joinings, through: :joining_relations
+  has_many :joiner_relations, foreign_key: "joining_id", class_name: "Relation", dependent: :destroy
+  has_many :joiners, through: :joiner_relations
 
   has_one_attached :avater
 
@@ -65,27 +65,27 @@ class User < ApplicationRecord
 
 
   def joining?(other_user)
-    following_relationships.find_by(following_id: other_user.id)
+    joining_relations.find_by(joining_id: other_user.id)
   end
 
   def join!(other_user)
-    following_relationships.create!(following_id: other_user.id)
+    joining_relations.create!(joining_id: other_user.id)
   end
 
   def unjoin!(other_user)
-    following_relationships.find_by(following_id: other_user.id).destroy
+    joining_relations.find_by(joining_id: other_user.id).destroy
   end
 
   def joining_id?(other_user_id)
-    following_relationships.find_by(following_id: other_user_id)
+    joining_relations.find_by(joining_id: other_user_id)
   end
 
   def join_id!(other_user_id)
-    following_relationships.create!(following_id: other_user_id)
+    joining_relations.create!(joining_id: other_user_id)
   end
 
   def unjoin_id!(other_user_id)
-    following_relationships.find_by(following_id: other_user_id).destroy!
+    joining_relations.find_by(joining_id: other_user_id).destroy!
   end
 
   def check_image

@@ -305,14 +305,15 @@
       margin-top: -40px;
       .trans_cover{
         border-radius: 5px;
-        border: solid thin #ff9d3b;
-        padding:2px;
+        border: solid 2px #ff9d3b;
         .post_button{
           width:40px;
           height:50px;
           padding: 0px 2px 5px 2px;
           display:block;
           white-space: normal;
+          background:#fff;
+          color:#ff9b3b;
           .picture_send{
             font-size: 18px;
             width:100%;

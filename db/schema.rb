@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_093433) do
+ActiveRecord::Schema.define(version: 2020_06_15_093243) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -140,6 +140,16 @@ ActiveRecord::Schema.define(version: 2020_05_27_093433) do
     t.string "prohibit_words"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "relations", force: :cascade do |t|
+    t.integer "joiner_id"
+    t.integer "joining_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["joiner_id", "joining_id"], name: "index_relations_on_joiner_id_and_joining_id", unique: true
+    t.index ["joiner_id"], name: "index_relations_on_joiner_id"
+    t.index ["joining_id"], name: "index_relations_on_joining_id"
   end
 
   create_table "relationships", force: :cascade do |t|

@@ -158,6 +158,7 @@
   }
   .threadtype_member{
     padding:5px;
+    display: inline-block;
   }
   .threadtype_title{
     margin-top: 10px;
@@ -185,7 +186,6 @@
     margin: 0px 10px 0px 10px;
     border-radius: 5px;
     .threadtype_user_cover{
-      margin-right:20px;
       vertical-align: top;
       .threadtype_title{
 

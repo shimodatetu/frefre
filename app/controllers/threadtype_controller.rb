@@ -69,6 +69,9 @@ class ThreadtypeController < ApplicationController
       data = params[:threadtype]
       threadtype = Threadtype.new()
       #group.threadtype_id = data['category'].to_i
+      p "================="
+      p params
+      p "================="
       threadtype.type_jp = data['type_jp']
       threadtype.type_en = data['type_en']
       threadtype.leader_id = current_user.id

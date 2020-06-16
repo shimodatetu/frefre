@@ -60,6 +60,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
               $(".profile_button_destroy").click();
           else
             window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(page)
+    else if data["type"] == "threadtype_maker"
+      window.location.href = "/threadtype/show/"+data["threadtype_id"]
     else if data["type"] == "accept"
       if url.indexOf('thread/show') != -1
         alert("thread")
