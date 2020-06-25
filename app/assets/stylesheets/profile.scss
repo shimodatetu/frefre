@@ -301,7 +301,6 @@
 
     .profile_contents_button{
       background: #fff;
-      border-bottom:solid 2px #dddddd;
       .jp{
         font-size:10px;
       }
@@ -342,20 +341,22 @@
       }
       .space_form{
         display: inline-block;
-        margin-bottom: 15px;
-        vertical-align: bottom;
+        vertical-align: top;
+        margin-top:40px;
         .trans_cover{
           border-radius: 5px;
-          border: solid thin #ff9d3b;
-          padding:2px;
+          border: solid 2px #ff9d3b;
+          //padding:2px;
           .post_button{
             width:40px;
-            height:50px;
-            padding: 0px 2px 5px 2px;
+            height:33px;
+            padding: 0px;
             display:block;
             white-space: normal;
+            background:#fff;
+            color:#ff9d3b;
             .picture_send{
-              font-size: 18px;
+              font-size: 16px;
               width:100%;
               text-align:center;
               margin-bottom:2px;
@@ -364,8 +365,9 @@
             .button_text{
               display:block;
               word-wrap: break-word;
-              margin-top:2px;
-              font-size:13px;
+              margin-top:-4px;
+              font-size:14px;
+              font-weight:bold;
             }
           }
         }

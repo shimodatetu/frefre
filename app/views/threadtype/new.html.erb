@@ -15,9 +15,9 @@
     <div class="category_head">
       <div class="panel-title"style="display:inline-block">
         <div class="panel-title-text">
-          Make Thread
+          Make Community
           <span class="float_jp">
-            スレッド作成
+            コミュニティ作成
           </span>
         </div>
       </div>
@@ -41,10 +41,10 @@
             <div class="panel-body content_cover"style="margin-top:20px;">
               <div class="title_input_name">
                 <div class="sub_jp">
-                  タグ (1つだけ選択できます)
+                  カテゴリー (1つだけ選択できます)
                 </div>
                 <div class="main_en">
-                  Tag (You can choose only 1)
+                  Category (You can choose only 1)
                 </div>
               </div>
               <% Category.all.each do |category| %>
@@ -105,16 +105,16 @@
             <div class="panel-body content_cover"style="padding-bottom:0px">
               <div class="content_input_name">
                 <div class="sub_jp">
-                  グループの説明
+                  コミュニティの説明
                 </div>
                 <div class="main_en">
-                  Group description
+                  Community description
                 </div>
               </div>
               <div class="content_input">
                 <%= image_tag "/eng.png", class: "image lang_img en_img"%>
                 <%= text_area_tag :content_eng,"", id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
-                <div class="space_form"style="margin-top:5px;">
+                <div class="space_form"style="margin-top:20px;">
                   <div class="trans_cover">
                     <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_content_en"
                     name="<% if logged_in? %>logined<% end %>">

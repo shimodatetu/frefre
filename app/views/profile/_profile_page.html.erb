@@ -21,7 +21,7 @@
     <%= button_tag data: {toggle: "modal",target: "#profile_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"margin-bottom:0px" do %>
       <div class="text_box">
         <div class="jp">
-          プロフィールを変更する
+          Edit Profile / プロフィールを変更する
         </div>
       </div>
     <% end %>
@@ -199,7 +199,7 @@
         <% if @make_groups != nil %>
           <% @make_groups.each do |threadtype| %>
             <% there_be = true %>
-            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+            <%= render partial:"/threadtype/threadtype_edit", locals: { threadtype:threadtype } %>
           <% end %>
         <% end %>
       </div>

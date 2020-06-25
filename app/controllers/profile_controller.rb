@@ -86,7 +86,17 @@ class ProfileController < ApplicationController
         @followings = current_user.followings.all.page(1).per(per)
         @followers = current_user.followings.all.page(1).per(per)
         @search_users = @search_users.all.page(page_id).per(per)
+      elsif params[:id] == "11"
+        @followings = current_user.followings.all.page(1).per(per)
+        @followers = current_user.followings.all.page(1).per(per)
+        @search_users = @search_users.all.page(page_id).per(per)
       end
+    elsif params[:id] == "14"
+      page_id = params[:page1].to_i
+      if page_id.nil? || page_id.to_i < 1
+        page_id = 1
+      end
+      @threadtype = Threadtype.find_by(id:page_id.to_i)
     end
   end
   def retire

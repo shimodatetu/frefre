@@ -1,0 +1,413 @@
+
+<% leader = User.find_by(id:@threadtype.leader_id) %>
+<% current_user_id = -1 %>
+<% if logged_in? %>
+  <% current_user_id = current_user.id %>
+<% end %>
+<div class="profile threadtype_page">
+  <div class="profile_sub"style="display:inline-block">
+    <% if @threadtype.type == "every" %>
+      <div class="official_mark">
+        Official / 公式
+      </div>
+    <% end %>
+    <div class="profile_picture">
+      <% if @threadtype.id == 22 %>
+        <%= image_tag("group_icon/chat.png", :class => "group_img",:style => "border-radius:none") %>
+      <% elsif @threadtype.id == 23 %>
+        <%= image_tag("group_icon/question.png", :class => "group_img",:style => "border-radius:none") %>
+      <% elsif @threadtype.id == 24 %>
+        <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
+      <% elsif @threadtype.pict.attached? %>
+        <%= image_tag @threadtype.pict , :class => "group_img",:style => "border-radius:none"%>
+      <% else %>
+        <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
+      <% end %>
+    </div>
+    <div class="profile_contents_change">
+      <div class="get_user_id"id="<%= current_user_id %>"></div>
+      <ul class="nav flex-column">
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every") %>active<% end %>">
+          <%= link_to "/threadtype/show/" + @threadtype.id.to_s + "/1",class:"nav-link" do %>
+            <div class="jp">
+              ホーム
+            </div>
+            <div class="en">
+              Home
+            </div>
+          <% end %>
+        </li>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
+            <div class="jp">
+              人気スレッド
+            </div>
+            <div class="en">
+              Popular Thread
+            </div>
+          <% end %>
+        </li>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
+            <div class="jp">
+              最新スレッド
+            </div>
+            <div class="en">
+              Latest Thread
+            </div>
+          <% end %>
+        </li>
+        <% if @threadtype.type != "every" %>
+          <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "4" %>active<% end %>">
+            <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
+              <div class="jp">
+                メンバー
+              </div>
+              <div class="en">
+                Member
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "5" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/5',class:"nav-link" do %>
+            <div class="jp">
+              スレッド作成
+            </div>
+            <div class="en">
+              Make Thread
+            </div>
+          <% end %>
+        </li>
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "6" %>active<% end %>">
+          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/6',class:"nav-link" do %>
+            <div class="jp">
+              キーワード検索
+            </div>
+            <div class="en">
+              Search
+            </div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="profile_main">
+    <div class="post_content_cover threadtype_title_show">
+      <div class="post_content_position width_max">
+        <div class="thread_title">
+          <div class="title_padding no_inline"style="font-size: 20px!important;">
+            Community Edit Page / コミュニティ管理画面
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="thread_cover threadtype_cover">
+      <div class="post_content_cover threadtype_title_show">
+        <div class="post_content_position width_max">
+          <div class="thread_title">
+            <div class="title_padding no_inline"style="font-size: 20px!important;padding:0px;">
+              <%= @threadtype.type_en %> / <%= @threadtype.type_jp %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% there_be = true %>
+      <% leader = User.find_by(id:@threadtype.leader_id) %>
+      <div class="thread_content threadtype_content">
+        <%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link",data: {toggle: "modal",target: "#profile_change_modal"}) do %>
+          <div class="text_box">
+            <div class="en">
+              Edit / 編集
+            </div>
+          </div>
+        <% end %>
+        <button class="post_content_cover explain"data-toggle="modal" data-target="#explain_modal">
+          <div class="post_content_position en_position width_max_text">
+            <div class="post_content">
+              <div class="post_content_text no_inline">
+                <%= simple_format(text_url_to_link(h(@threadtype.content_en))) %>
+              </div>
+            </div>
+          </div>
+          <div class="post_content_position jp_position width_max_text">
+            <div class="post_content">
+              <div class="post_content_text no_inline">
+                <%= simple_format(text_url_to_link(h(@threadtype.content_jp))) %>
+              </div>
+            </div>
+          </div>
+        </button>
+        <div class="threadtype_cover threadtype_users">
+          <div class="threadtype_user_cover">
+            <div class="threadtype_title">
+              Manager / 管理者
+            </div>
+            <div class="threadtype_leader">
+              <div class="threadtype_img_cover">
+                <% if @threadtype.leader_id == 0 %>
+                  <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+                <% else %>
+                  <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+                <% end %>
+              </div>
+              <div class="threadtype_name">
+                <% if @threadtype.leader_id == 0 %>
+                  FreFre Office
+                <% else %>
+                  <%= leader.name %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="threadtype_user_cover">
+            <div class="threadtype_title">
+              Group Type / グループタイプ
+            </div>
+            <div class="threadtype_type">
+              <% if @threadtype.type == "not_open" %>
+                <i class="fas fa-minus-circle"></i>Private / 非公開
+              <% elsif @threadtype.type == "secret" %>
+                <i class="fas fa-lock"></i>Secret / 秘密
+              <% else %>
+                <i class="fas fa-check-circle"></i>Public / 公開
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="profile_change_modal profile">
+  <div class="modal fade" id="profile_change_modal" tabindex="-1">
+    <form>
+      <div class="profile_title">
+        <div class="title"style="display:none">
+          <div class="jp">
+            コミュニティ
+          </div>
+          Community
+          <div class="save_button
+          <% if current_user.usertype == "event" %>
+            profile_cannot_save
+          <% else %>
+            profile_save_button
+          <% end %>
+            btn btn-default">
+            Save / 保存
+          </div>
+        </div>
+      </div>
+      <div class="profile_page row">
+        <div class="profile_page_en">
+          <div class="col-sm-12">
+            <div class="col-sm-12 profile_content">
+              <div class="row profile_content_data">
+                <div class="content_name">
+                  <div class="jp">
+                    コミュニティの種類
+                  </div>
+                  <div class="en">
+                    Type of Community
+                  </div>
+                </div>
+                <div class="profile_content_cover">
+                  <select id="gender"class="content_select">
+                    <% if @threadtype.type == "puplic" %>
+                      <option value="Public" selected>Public / 公開</option>
+                    <% else %>
+                      <option value="Public">Public / 公開</option>
+                    <% end %>
+                    <% if @threadtype.type == "private" %>
+                      <option value="Private" selected>Private / 非公開</option>
+                    <% else %>
+                      <option value="Private">Private / 非公開</option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body content_cover"style="margin-top:20px;">
+              <div class="title_input_name">
+                <div class="sub_jp">
+                  カテゴリー (1つだけ選択できます)
+                </div>
+                <div class="main_en">
+                  Category (You can choose only 1)
+                </div>
+              </div>
+              <% Category.all.each do |category| %>
+                <%= hidden_field_tag 'threadtype[id][]' %>
+                <div class="checkbox_cover">
+                  <%= radio_button_tag :type, category.id,checked: @threadtype.category_id == category.id %> <%= category.type_en %> / <%= category.type_jp %>
+                </div>
+              <% end %>
+            </div>
+            <div class="profile_content intro_content">
+              <div class="intro">
+                <div class="row profile_content_data self_introduction">
+                  <div class="content_name">
+                    <div class="jp">
+                      タイトル(英語)
+                    </div>
+                    <div class="en">
+                      Title
+                      (English)
+                    </div>
+                  </div>
+                  <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"><%=@threadtype.type_en%></textarea>
+                </div>
+              </div>
+              <div class="space_form prof_trans">
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_en"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                    <div class="button_text button_text_jp">
+                      翻訳
+                    </div>
+                  </button>
+                </div>
+                <div class="trans_cover">
+                  <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_jp"
+                  name="<% if logged_in? %>logined<% end %>">
+                    <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                    <div class="button_text button_text_en">
+                      Trans
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div class="intro">
+                <div class="row profile_content_data self_introduction">
+                  <div class=" content_name">
+                    <div class="jp">
+                      タイトル(日本語)
+                    </div>
+                    <div class="en">
+                      Title
+                      (Japanese)
+                    </div>
+                  </div>
+                  <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"><%=@threadtype.type_jp%></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile_words">
+          <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide"style="display:none">
+            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+            <div class="en help_text">
+              Usage
+            </div>
+            <div class="jp help_text">
+              使い方
+            </div>
+          </button>
+          <div class="profile_content intro_content">
+            <div class="intro">
+              <div class="row profile_content_data self_introduction">
+                <div class="content_name">
+                  <div class="jp">
+                    コミュニティ紹介(英語)
+                  </div>
+                  <div class="en">
+                    Introduction
+                    (English)
+                  </div>
+                </div>
+                <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea>
+                <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+                  Powered by MT
+                <% end %>
+              </div>
+            </div>
+            <div class="space_form prof_trans"style="margin-top: 65px;">
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_en"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                  <div class="button_text button_text_jp">
+                    翻訳
+                  </div>
+                </button>
+              </div>
+              <div class="trans_cover">
+                <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_jp"
+                name="<% if logged_in? %>logined<% end %>">
+                  <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                  <div class="button_text button_text_en">
+                    Trans
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="intro">
+              <div class="row profile_content_data self_introduction">
+                <div class=" content_name">
+                  <div class="jp">
+                    コミュニティ紹介(日本語)
+                  </div>
+                  <div class="en">
+                    Introduction
+                    (Japanese)
+                  </div>
+                </div>
+                <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"><%=current_user.profile_jp%></textarea>
+                <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+                  翻訳提供 未来翻訳
+                <% end %>
+              </div>
+            </div>
+            <div class="save_button_bottom
+            <% if current_user.usertype == "event" %>
+              profile_cannot_save
+            <% else %>
+              profile_save_button
+            <% end %>
+              btn btn-default">
+              Save / 保存
+            </div>
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="profile_modal">
+  <div class="modal fade" id="explain_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="post_content_cover explain"data-toggle="modal" data-target="exlain_modal">
+            <div class="post_content_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(@threadtype.content_en))) %>
+                </div>
+              </div>
+            </div>
+            <div class="post_content_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(@threadtype.content_jp))) %>
+                </div>
+              </div>
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close / 閉じる
+          </button>
+        </div>
+  		</div>
+  	</div>
+  </div>
+</div>
+

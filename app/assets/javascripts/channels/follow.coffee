@@ -31,6 +31,8 @@ $(document).on 'click', '.follow_button_submit', (event) ->
 $(document).on 'hidden.bs.modal', '#follow_modal', (event) ->
   $(".follow_button_submit , .unfollow_button_submit").attr("style","none;");
 
+$(document).on "click", ".all_join_button", (event) ->
+  $("#all_join_modal").modal("show")
 
 button_change=(id) ->
   if $('.follow_button'+id+' .glyphicon-star').length > 0
