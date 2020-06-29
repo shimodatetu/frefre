@@ -1,0 +1,170 @@
+<form>
+  <div class="profile_page row">
+    <div class="profile_page_en">
+      <div class="col-sm-12">
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                プロフィールを公開する
+              </div>
+              <div class="en">
+                Disclose Profile ：
+              </div>
+            </div>
+            <div style="display:inline-block">
+              <% if current_user.able_see == true %>
+                YES
+              <% else %>
+                NO
+              <% end %>
+            </div>
+            <%= button_tag data: {toggle: "modal",target: "#private_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"width:auto;margin:0px 0px 0px 20px;" do %>
+              <div class="text_box">
+                <div class="jp">
+                  Edit / 編集
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                ユーザーネーム
+              </div>
+              <div class="en">
+                Username ：
+              </div>
+            </div>
+            <div class="profile_content_cover">
+              <%= current_user.name %>
+            </div>
+            <%= button_tag data: {toggle: "modal",target: "#username_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"width:auto;margin:0px 0px 0px 20px;" do %>
+              <div class="text_box">
+                <div class="jp">
+                  Edit / 編集
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                ユーザーID
+              </div>
+              <div class="en">
+                User ID ：
+              </div>
+            </div>
+            <div class="profile_content_cover">
+              @<%= current_user.user_search_id %>
+            </div>
+            <%= button_tag data: {toggle: "modal",target: "#userid_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"width:auto;margin:0px 0px 0px 20px;" do %>
+              <div class="text_box">
+                <div class="jp">
+                  Edit / 編集
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="profile_change_modal profile">
+  <div class="modal fade" id="private_change_modal" tabindex="-1"style="margin-top:20px">
+    <form>
+      <div class="profile_page row">
+        <div class="profile_page_en"style="margin: 10px;">
+          <div class="col-sm-12 profile_content">
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  プロフィールを公開する
+                </div>
+                <div class="en">
+                  Disclose Profile
+                </div>
+              </div>
+              <div>
+                <div class="no_text">
+                  NO
+                </div>
+                <div class="switch">
+                  <%= check_box_tag :checkbox,current_user.able_see == true,id:"cmn-toggle-1",class:"cmn-toggle cmn-toggle-round private_data",checked: current_user.able_see == true%>
+                  <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox"
+                  <% if current_user.able_see == true %>
+                    checked
+                  <% end %>>
+                  <label for="cmn-toggle-1"></label>
+                </div>
+                <div class="yes_text">
+                  YES
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= submit_tag "Save / 保存",type:"button", class:"login_join_button btn mes_button profile_change_link edit_private_change",style:"width:auto;margin: 10px 0px 10px calc(50% - 50px);"%>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="profile_change_modal profile">
+  <div class="modal fade" id="username_change_modal" tabindex="-1"style="margin-top:20px">
+    <form>
+      <div class="profile_page row">
+        <div class="profile_page_en"style="margin: 10px;">
+          <div class="col-sm-12 profile_content">
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  ユーザーネーム
+                </div>
+                <div class="en">
+                  Username ：
+                </div>
+              </div>
+              <div class="profile_content_cover"style="width: calc(100% - 200px);">
+                <%= text_field_tag :username,current_user.name,class: "form_control content_input username_data",placeholder:"Blank",value: current_user.name %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= submit_tag "Save / 保存",type:"button", class:"login_join_button btn mes_button profile_change_link edit_username_change",style:"width:auto;margin: 10px 0px 10px calc(50% - 50px);"%>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="profile_change_modal profile">
+  <div class="modal fade" id="userid_change_modal" tabindex="-1"style="margin-top:20px">
+    <form>
+      <div class="profile_page row">
+        <div class="profile_page_en"style="margin: 10px;">
+          <div class="col-sm-12 profile_content">
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  ユーザーID
+                </div>
+                <div class="en">
+                  User ID ：
+                </div>
+              </div>
+              <div class="profile_content_cover"style="width: calc(100% - 200px);">
+                <%= text_field_tag :username,current_user.user_search_id,class: "form_control content_input userid_data",placeholder:"Blank",value: current_user.user_search_id %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= submit_tag "Save / 保存",type:"button", class:"login_join_button btn mes_button profile_change_link edit_userid_change",style:"width:auto;margin: 10px 0px 10px calc(50% - 50px);"%>
+      </div>
+    </form>
+  </div>
+</div>

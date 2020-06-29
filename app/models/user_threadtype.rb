@@ -1,4 +1,4 @@
 class UserThreadtype < ApplicationRecord
-  belongs_to :user
-  belongs_to :threadtype
+  belongs_to :user, optional: true
+  belongs_to :threadtype, optional: true
 end

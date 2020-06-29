@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_053455) do
+ActiveRecord::Schema.define(version: 2020_06_28_094442) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -213,7 +213,6 @@ ActiveRecord::Schema.define(version: 2020_06_25_053455) do
     t.string "content_en"
     t.string "content_jp"
     t.integer "leader_id", default: 0
-    t.integer "categry_id"
     t.integer "category_id"
   end
 
@@ -279,6 +278,7 @@ ActiveRecord::Schema.define(version: 2020_06_25_053455) do
     t.boolean "admit", default: true
     t.string "usertype", default: "normal"
     t.integer "threadtype_id"
+    t.string "user_search_id"
   end
 
 end

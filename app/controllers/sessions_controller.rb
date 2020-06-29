@@ -112,7 +112,14 @@ class SessionsController < ApplicationController
         flash.now[:failed_en] = "Please input your username using half-width alphanumeric."
         render :oauth_complete
       else
-        user.update(name: name,admit:true)
+        user_search_id = ""
+        for i in 1..1000
+          user_search_id = name + rand(1000000).to_s
+          if User.find_by(user_search_id:user_search_id) == nil
+            break
+          end
+        end
+        user.update(name: name,user_search_id:user_search_id,admit:true)
         log_in user
         #User.last.delete
         flash["alert_en"] = "You successed to signup."

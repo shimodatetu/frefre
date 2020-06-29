@@ -46,7 +46,7 @@ class ThreadtypeController < ApplicationController
       thread_id = @threadtype.groups.first.id
       search_users = @threadtype.users.where.not(id:thread_id)
       if !@search_text.nil?
-        search_users = search_users.where("name LIKE ?", "%"+ @search_text +"%")
+        search_users = search_users.where("name LIKE ? OR profile_en LIKE ? OR profile_jp LIKE ?", "%"+ @search_text +"%","%"+ @search_text +"%","%"+ @search_text +"%")
       end
       if params[:type] == "6"
         @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(page_id).per(per)
@@ -68,16 +68,14 @@ class ThreadtypeController < ApplicationController
     if logged_in?
       data = params[:threadtype]
       threadtype = Threadtype.new()
-      #group.threadtype_id = data['category'].to_i
-      p "================="
-      p params
-      p "================="
       threadtype.type_jp = data['type_jp']
       threadtype.type_en = data['type_en']
       threadtype.leader_id = current_user.id
       threadtype.content_jp = params['content_jap']
       threadtype.content_en = params['content_eng']
       threadtype.type = data["type"]
+      threadtype.type = "normal"
+      threadtype.users << current_user
       if threadtype.save
         group = Group.new()
         group.title_jp = "オープンスレッド"
@@ -87,7 +85,6 @@ class ThreadtypeController < ApplicationController
         group.first_content_jp = "オープンスレッドが作成されました。"
         group.first_content_en = "Open Thread was made."
         if group.save
-          threadtype.groups << group
           post = Post.new()
           post.content_jap = "オープンスレッドが作成されました。"
           post.content_eng = "Open Thread was made."

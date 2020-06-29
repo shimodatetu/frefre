@@ -8,6 +8,7 @@ class PvPageController < ApplicationController
         Post.create(content_eng:"The community has been created!",content_jap:"コミュニティが作成されました！",group_id:threadtype.groups.first.id,threadtype_id:threadtype.id,user_id:User.first.id)
       end
     end
+    
     # Threadtype.all.each do |threadtype|
     #   count = 0
     #   threadtype.users.delete_all
@@ -38,7 +39,7 @@ class PvPageController < ApplicationController
 
     @threadtypes = Threadtype.all.where.not(type:"every")
     Threadtype.all.each do |threadtype|
-      threadtype.update(categry_id:9)
+      threadtype.update(category_id:9)
     end
     per = 10
     page_id = params[:page].to_i

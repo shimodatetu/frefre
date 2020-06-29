@@ -72,11 +72,14 @@
       <div class="tab-pane active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
         <div class="thread_all thread_all_group">
           <% there_be = false %>
-          <% @popular_threadtypes.each do |threadtype| %>
-            <% there_be = true %>
-            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+
+          <% if @latest_threadtypes != nil %>
+            <% @popular_threadtypes.each do |threadtype| %>
+              <% there_be = true %>
+              <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+            <% end %>
+            <%= paginate @popular_threadtypes, outer_window: 3 %>
           <% end %>
-          <%= paginate @popular_threadtypes, outer_window: 3 %>
           <% if there_be == false %>
             <div class="not_found">
               <div class="en">
@@ -92,11 +95,13 @@
       <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
         <div class="thread_all thread_all_group">
           <% there_be = false %>
-          <% @latest_threadtypes.each do |threadtype| %>
-            <% there_be = true %>
-            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+          <% if @latest_threadtypes != nil %>
+            <% @latest_threadtypes.each do |threadtype| %>
+              <% there_be = true %>
+              <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+            <% end %>
+            <%= paginate @latest_threadtypes , outer_window: 3%>
           <% end %>
-          <%= paginate @latest_threadtypes , outer_window: 3%>
           <% if there_be == false %>
             <div class="not_found">
               <div class="en">

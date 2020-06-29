@@ -152,6 +152,7 @@ Rails.application.routes.draw do
 
   post "profile/retire",to: "profile#retire"
   patch '/profile', to: 'profile#update'
+  post "/threadtype_profile/search",to: "profile#threadtype_profile_search"
   get '/notice/new/:id' => 'notice#new'
 
   post 'notices' => "notices#create"
@@ -192,7 +193,6 @@ Rails.application.routes.draw do
     end
   end
   root 'pv_page#show'
-  get "/:id" => 'pv_page#show'
   get 'home/:id' => 'pv_page#show'
   #root 'users#index'
   resources :password_resets,     only: [:new, :create, :edit, :update, :new_check]

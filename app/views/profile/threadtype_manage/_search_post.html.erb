@@ -1,0 +1,68 @@
+<div class="post_content_cover threadtype_title_show">
+  <div class="post_content_position width_max">
+    <div class="thread_title">
+      <div class="title_padding no_inline"style="font-size: 20px!important;">
+        Search Post / 投稿検索
+      </div>
+    </div>
+  </div>
+</div>
+<div class="threadtype_cover">
+  <div class="threadtype_threads">
+    <ul class="nav nav-tabs title_nav" id="myTab" role="tablist">
+      <li class="nav-item active green-nav width_max">
+        <a class="nav-link profile_history_change2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+          <i class="fas fa-comment-dots"></i>
+          <div class="text_cover">
+            <%= @thread.title_en %> / <%= @thread.title_jp %>
+          </div>
+          <%= form_tag('/threadtype_profile/delete_group',method: :post,style:"float:right;") do %>
+            <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
+            <%= hidden_field_tag :type_id, "17" %>
+            <%= hidden_field_tag :page_id, params[:page] %>
+            <button class="btn btn-danger delete_group_button">
+              <div class="text_box">
+                Delete / 削除
+              </div>
+            </button>
+          <% end %>
+        </a>
+      </li>
+    </ul>
+    <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+      <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
+      <div class="lang_bar">
+        <div class="country_flag en_country">
+          Hide English
+        </div>
+        <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+            data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+        <div class="country_flag jp_country">
+          日本語非表示
+        </div>
+      </div>
+    </div>
+    <%= form_tag('/threadtype_profile/search',method: :post,class: "search_form_top") do %>
+      <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
+      <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
+      <%= hidden_field_tag :type_id, "18" %>
+      <%= hidden_field_tag :page_id, params[:page] %>
+      <%= hidden_field_tag :thread_id, params[:page2] %>
+      <span class="input-group-btn">
+        <button type="submit"class="btn btn-warning form_button">
+          <span class="glyphicon glyphicon-search"></span>
+          検索
+        </button>
+      </span>
+    <% end %>
+    <div class="thread_all thread_all_post">
+      <div class="thread_cover_cover">
+        <% @search_posts.each do |post| %>
+          <%= render partial:"/profile/threadtype_manage/post" ,locals: { post:post,type:"normal"} %>
+        <% end %>
+
+        <%= paginate @search_posts , outer_window: 3%>
+      </div>
+    </div>
+  </div>
+</div>

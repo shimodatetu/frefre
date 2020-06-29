@@ -1,5 +1,5 @@
 class News < ApplicationRecord
   has_one_attached :pict
   has_one_attached :video
-  belongs_to :user
+  belongs_to :user, optional: true
 end

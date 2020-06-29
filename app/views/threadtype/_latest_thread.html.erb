@@ -13,6 +13,18 @@
       </a>
     </li>
   </ul>
+  <%= form_tag('/threadtype/search',method: :post,class: "search_form_top",style:"margin: 10px -5px;") do %>
+    <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
+    <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
+    <%= hidden_field_tag :type_id, "7" %>
+    <%= hidden_field_tag :page_id, params[:page] %>
+    <span class="input-group-btn">
+      <button type="submit"class="btn btn-warning form_button">
+        <span class="glyphicon glyphicon-search"></span>
+        検索
+      </button>
+    </span>
+  <% end %>
   <% there_be = false %>
   <%  @latest_groups.each do |group| %>
     <% there_be = true %>
@@ -25,11 +37,4 @@
     </div>
   <% end %>
   <%= paginate @latest_groups , outer_window: 3%>
-  <% if @latest_groups.count > 6 && 1 == 2%>
-    <%= link_to("/groups/"+threadtype.id.to_s, type:"button", class:"login_join_button btn mes_button makethread_link") do %>
-      <div class="text_box">
-          Make Thread / スレッドを作成する
-      </div>
-    <% end %>
-  <% end %>
 </div>

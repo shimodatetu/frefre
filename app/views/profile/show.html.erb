@@ -1,7 +1,7 @@
 
 <% if logged_in? %>
 
-  <% if params[:id] == "14" %>
+  <% if params[:id].to_i >= 14 && @threadtype != nil%>
     <%= render partial:"profile/threadtype_manage/top" %>
   <% else %>
     <div class="profile">
@@ -49,16 +49,18 @@
                 </div>
               <% end %>
             </li>
-            <li class="nav-item profile_contents_button <% if params[:id] == "13" || params[:id] == "14"%>active<% end %>">
-              <%= link_to '/profile/13',class:"nav-link" do %>
-                <div class="jp">
-                  コミュニティ管理
-                </div>
-                <div class="en">
-                  Community
-                </div>
-              <% end %>
-            </li>
+            <% if Threadtype.find_by(leader_id:current_user.id) != nil %>
+              <li class="nav-item profile_contents_button <% if params[:id] == "13" || params[:id] == "14"%>active<% end %>">
+                <%= link_to '/profile/13',class:"nav-link" do %>
+                  <div class="jp">
+                    コミュニティ管理
+                  </div>
+                  <div class="en">
+                    Community
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
             <li class="nav-item profile_contents_button <% if params[:id] == "5" || params[:id] == "6"%>active<% end %>">
               <%= link_to '/profile/5',class:"nav-link" do %>
                 <div class="jp">
@@ -89,6 +91,16 @@
                 </div>
               <% end %>
             </li>
+            <li class="nav-item profile_contents_button <% if params[:id] == "12"%>active<% end %>">
+              <%= link_to '/profile/12',class:"nav-link" do %>
+                <div class="jp">
+                  設定
+                </div>
+                <div class="en">
+                  Edit
+                </div>
+              <% end %>
+            </li>
             <li class="nav-item profile_contents_button">
               <div class="unsubscribe_modal nav-link"data-toggle="modal" data-target="#unsubscribe_modal">
                 <div class="jp">
@@ -116,7 +128,7 @@
         <% elsif params[:id] == "9" || params[:id] == "10" || params[:id] == "11" %>
           <%= render partial:"follow" %>
         <% elsif params[:id] == "12" %>
-          <%= render partial:"retire" %>
+          <%= render partial:"editprofile" %>
         <% elsif params[:id] == "13" %>
           <%= render partial:"threadtype_list" %>
         <% end %>
@@ -325,46 +337,6 @@
             <div class="profile_page_en">
               <div class="col-sm-12">
                 <div class="col-sm-12 profile_content">
-                  <div class="row profile_content_data">
-                    <div class="content_name">
-                      <div class="jp">
-                        プロフィールを公開する
-                      </div>
-                      <div class="en">
-                        Disclose Profile
-                      </div>
-                    </div>
-                    <div class=""style="">
-                      <div class="no_text">
-                        NO
-                      </div>
-                      <div class="switch">
-                        <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox"
-                        <% if current_user.able_see == true %>
-                          checked
-                        <% end %>>
-                        <label for="cmn-toggle-1"></label>
-                      </div>
-                      <div class="yes_text">
-                        YES
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 profile_content">
-                  <div class="row profile_content_data">
-                    <div class="content_name">
-                      <div class="jp">
-                        ユーザーネーム
-                      </div>
-                      <div class="en">
-                        Username
-                      </div>
-                    </div>
-                    <div class="profile_content_cover">
-                      <input id="username"class="form_control content_input form-control" placeholder="Blank"value="<%= current_user.name %>">
-                    </div>
-                  </div>
                   <div class="row profile_content_data">
                     <div class="content_name">
                       <div class="jp">

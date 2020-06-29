@@ -1,0 +1,40 @@
+<% first_group = @threadtype.groups.first %>
+<% thread_id = first_group.id %>
+<div class="post_content_cover threadtype_title_show">
+  <div class="post_content_position width_max">
+    <div class="thread_title">
+      <div class="title_padding no_inline"style="font-size: 20px!important;">
+        Community Edit Page / コミュニティ管理画面
+      </div>
+    </div>
+  </div>
+</div>
+<div class="threadtype_cover">
+  <div class="threadtype_threads">
+    <ul class="nav nav-tabs title_nav" id="myTab" role="tablist"style="width: 100%;margin-left:0px;">
+      <li class="nav-item active green-nav width_max">
+        <a class="nav-link profile_history_change2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+          <i class="fas fa-comments"></i>
+          <div class="text_cover">
+            Edit Member / メンバー管理
+          </div>
+        </a>
+      </li>
+    </ul>
+    <%= form_tag('/threadtype_profile/search',method: :post,class: "search_form_top") do %>
+      <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
+      <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
+      <%= hidden_field_tag :type_id, "20" %>
+      <%= hidden_field_tag :thread_id, params[:page2] %>
+      <%= hidden_field_tag :page_id, params[:page] %>
+      <span class="input-group-btn">
+        <button type="submit"class="btn btn-warning form_button">
+          <span class="glyphicon glyphicon-search"></span>
+          検索
+        </button>
+      </span>
+    <% end %>
+    <%= render partial:"profile/threadtype_manage/usershow", locals: { users:@search_members } %>
+    <%= paginate @search_members , outer_window: 3%>
+  </div>
+</div>

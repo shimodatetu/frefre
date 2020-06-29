@@ -10,9 +10,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     @user.profile_en = "Nice to meet you!"
     @user.profile_jp = "よろしくお願いします！"
+    for i in 1..100
+      user_search_id = user.name + rand(1000000).to_s
+      if User.find_by(user_search_id:user_search_id) == nil
+        @user.user_search_id = user_search_id
+        break
+      end
+    end
     if params[:user][:agreement_term] == "0"
       flash.now[:failed_en] = "Please agree the terms of service"
       flash.now[:failed_jp] = "利用規約に同意してください"
@@ -84,9 +90,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    p "---------------------"
-    p current_user
-    p "---------------------"
     User.find_by(id:current_user.id).update(avater:params[:user][:avater],image:0)
   end
   def show_image

@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
-  belongs_to :user
-  belongs_to :group
-  has_many :reportposts
+  belongs_to :user, optional: true
+  belongs_to :group, optional: true
+  has_many :reportposts, dependent: :destroy
   belongs_to :threadtype
 
   has_one_attached :pict

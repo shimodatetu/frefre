@@ -6,6 +6,7 @@ class ProfileController < ApplicationController
     for prohibit in Prohibit.all do
       gon.prohibit.push(prohibit.prohibit_words)
     end
+    @threadtype = nil
     if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"
       page_id = params[:page].to_i
       if page_id.nil? || page_id.to_i < 1
@@ -91,13 +92,69 @@ class ProfileController < ApplicationController
         @followers = current_user.followings.all.page(1).per(per)
         @search_users = @search_users.all.page(page_id).per(per)
       end
-    elsif params[:id] == "14"
-      page_id = params[:page1].to_i
-      if page_id.nil? || page_id.to_i < 1
-        page_id = 1
+    elsif params[:id].to_i >= 14
+      threadtype_id = params[:page1].to_i
+      if threadtype_id.nil? || threadtype_id.to_i < 1
+        threadtype_id = 1
       end
-      @threadtype = Threadtype.find_by(id:page_id.to_i)
+      @threadtype = Threadtype.find_by(id:threadtype_id.to_i)
+      if @threadtype.leader_id == current_user.id
+        if params[:id] == "15"
+          @threads = @threadtype.groups.page(page_id).per(per)
+        elsif params[:id] == "16"
+          thread_id = params[:page2].to_i
+          if thread_id.nil? || thread_id.to_i < 1
+            thread_id = 1
+          end
+          @thread = Group.find_by(id:thread_id.to_i)
+          @posts = @thread.posts.page(page_id).per(per)
+        elsif params[:id] == "17"
+          @search_text = ""
+          if session["search_text"].nil? == false && session["search_text"] != ""
+            @search_text = session["search_text"]
+          end
+          search_groups = @threadtype.groups
+          if !@search_text.nil?
+           search_groups = search_groups.where("title_jp LIKE ? OR title_en LIKE ? OR first_content_jp LIKE ? OR first_content_en LIKE ?", "%"+ @search_text +"%", "%"+ @search_text +"%", "%"+ @search_text +"%", "%"+ @search_text +"%")
+          end
+          @search_groups = search_groups.all.page(page_id).per(per)
+        elsif params[:id] == "18"
+          thread_id = params[:page2].to_i
+          if thread_id.nil? || thread_id.to_i < 1
+            thread_id = 1
+          end
+          @thread = Group.find_by(id:thread_id.to_i)
+
+          @search_text = ""
+          if session["search_text"].nil? == false && session["search_text"] != ""
+            @search_text = session["search_text"]
+          end
+          search_posts = @thread.posts
+          if !@search_text.nil?
+           search_posts = search_posts.where("content_eng LIKE ? OR content_jap LIKE ?", "%"+ @search_text +"%", "%"+ @search_text +"%")
+          end
+          @search_posts = search_posts.all.page(page_id).per(per)
+        elsif params[:id] == "19"
+          @members = @threadtype.users.where.not(id:current_user.id).page(page_id).per(per)
+        elsif params[:id] == "20"
+          @search_text = ""
+          if session["search_text"].nil? == false && session["search_text"] != ""
+            @search_text = session["search_text"]
+          end
+          search_members = @threadtype.users
+          if !@search_text.nil?
+           search_members = search_members.where("name LIKE ? OR profile_en LIKE ? OR profile_jp LIKE ?", "%"+ @search_text +"%","%"+ @search_text +"%","%"+ @search_text +"%")
+          end
+          @search_members = search_members.all.page(page_id).per(per)
+        end
+      else
+        @threadtype = nil
+      end
     end
+  end
+  def threadtype_profile_search
+    session["search_text"] = params[:search_text]
+    redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
   end
   def retire
     current_user.update(usertype:"delete")
@@ -119,6 +176,9 @@ class ProfileController < ApplicationController
         render :show
       end
     end
+  end
+  def edit_detail
+    current_user.update()
   end
   private
   def user_params

@@ -1,5 +1,4 @@
 class ProfileChannel < ApplicationCable::Channel
-
   def logged_in?
     !current_user.nil?
   end
@@ -9,6 +8,17 @@ class ProfileChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+  end
+  def change_detail(data)
+    if logged_in?
+      if data["type"] == "username"
+        current_user.update(name:data["data"])
+      elsif data["type"] == "userid"
+        current_user.update(user_search_id:data["data"])
+      elsif data["type"] == "private"
+        current_user.update(able_see:data["data"])
+      end
+    end
   end
 
   def change(data)

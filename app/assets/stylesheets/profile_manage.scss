@@ -1,0 +1,46 @@
+.profile_manage{
+  .profile_main{
+    width: calc(100vw - 200px);
+    .search_form_top{
+      margin: 10px 5px;
+    }
+    .threadtype_threads{
+      margin:0px;
+      .title_nav , .lang_bar_cover{
+        width:100%;
+        margin-left:0px;
+      }
+    }
+    .delete_post{
+      width: 100%;
+      display: inline-block;
+      border:solid thin #ddd;
+      border-radius:5px;
+      .thread_content{
+        width:calc(100% - 200px);
+      }
+    }
+    .delete_button_cover{
+      float:right;
+      text-align: center;
+      .delete_button{
+        padding: 3px 15px;
+        margin-top: 2px;
+        vertical-align: middle;
+        margin-left:20px;
+        .text_jp{
+          font-size:11px;
+        }
+        .text_en{
+          margin-top:-3px;
+        }
+      }
+    }
+    .delete_group_button{
+      padding: 3px 15px;
+      vertical-align: middle;
+      font-size: 13px;
+      margin-left: 20px;
+    }
+  }
+}

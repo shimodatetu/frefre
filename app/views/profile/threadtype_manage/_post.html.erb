@@ -1,0 +1,178 @@
+<% if post != nil %>
+  <% group = post.group %>
+  <% first_id = group.posts.first.id%>
+  <% id = params[:id] %>
+  <% current_user_id = -1 %>
+
+  <% if current_user != nil %>
+    <% current_user_id = current_user.id %>
+  <% end %>
+
+  <% if post.deleted %>
+    <div class="thread_cover deleted_coment">
+      この投稿は削除されました。<br>
+      <div class="en">
+        This comment is deleted.
+      </div>
+    </div>
+  <% else %>
+    <div class="thread_cover without_border delete_post"id="<%= post.id %>">
+      <div class="group_user_cover">
+        <div class="group_img_cover">
+
+          <% url = "/profile" %>
+          <% if logged_in? && current_user_id != post.user.id %>
+            <% url = "/other_profile/#{post.user.id}" %>
+          <% end %>
+          <% if post.user.id == 0 %>
+            <%= image_tag("frefre_icon2.png", :class => "group_img") %>
+          <% else %>
+            <object>
+              <%= link_to url do %>
+                <% if post.user.image == 0 %>
+                  <% if post.user.avater.attached? %>
+                    <%= image_tag post.user.avater , :class => "group_img"%>
+                  <% else %>
+                    <% if post.user.photo.nil? %>
+                      <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                    <% else %>
+                      <%= image_tag show_image_user_path(post.user), :class => "group_img" %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= image_tag("/userimage/user#{post.user.image}.png", :class => "group_img") %>
+                <% end %>
+              <% end %>
+            </object>
+          <% end %>
+        </div>
+      </div>
+      <div class="thread_content">
+        <div class="post_content_cover">
+          <div class="user_name">
+            <% if post.user.id == 0 %>
+              <object>
+                <%= simple_format(text_url_to_link(h(post.user.name))) %>
+              </object>
+            <% elsif params[:id].nil? || !logged_in? || current_user_id != post.user.id %>
+              <object>
+                <%= link_to "/other_profile/#{post.user.id}" do %>
+                  <%= simple_format(text_url_to_link(h(post.user.name))) %>
+                <% end %>
+              </object>
+            <% else %>
+              <object>
+                <%= link_to "/profile" do %>
+                  <%= simple_format(text_url_to_link(h(post.user.name))) %>
+                <% end %>
+              </object>
+            <% end %>
+          </div>
+          <% if post.content_eng != nil && post.content_jap != nil && post.content_eng != "" && post.content_jap != ""%>
+            <div class="balloon">
+              <div class="post_content_position en_position">
+                <% if type == "first" %>
+                  <div class="thread_title">
+                    <div class="title_padding no_inline">
+                      <%= simple_format(text_url_to_link(h(post.group.title_en))) %>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="title_space"></div>
+                <% end %>
+                <div class="post_content en_content_row">
+                  <div class="post_content_text">
+                    <%= simple_format(Rinku.auto_link(h(post.content_eng))) %>
+                  </div>
+                </div>
+              </div>
+              <div class="post_content_position_space">
+                <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+              </div>
+              <div class="post_content_position jp_position">
+                <% if type == "first" %>
+                  <div class="thread_title">
+                    <div class="title_padding no_inline">
+                      <%= simple_format(text_url_to_link(h(post.group.title_jp))) %>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="title_space"></div>
+                <% end %>
+                <div class="post_content jp_content_row">
+                  <div class="post_content_text">
+                    <%= simple_format(Rinku.auto_link(h(post.content_jap))) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% if post.pict.attached?%>
+            <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
+              <%= image_tag post.pict , :class => "group_img"+post.id.to_s%>
+            </div>
+          <% elsif post.video.attached? %>
+            <div class="post_video_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
+              <video id='my-video' class='video-js' controls preload='auto' width='1108' height='600'
+                poster='<%= url_for(post.video) %>' data-setup='{}'>
+                <source src='<%= url_for(post.video) %>' type='video/mp4'>
+              </video>
+              <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != "" %>
+               <div class="post_content_position post_subtitle_position en_position jimaku_post">
+                 <div class="post_content en_content_row">
+                   <div class="post_content_text">
+                     <%= simple_format(Rinku.auto_link(h(post.subtitle_en))) %>
+                   </div>
+                 </div>
+               </div>
+               <div class="post_content_position_space">
+                 <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+               </div>
+               <div class="post_content_position post_subtitle_position jp_position jimaku_post">
+                 <div class="post_content jp_content_row">
+                   <div class="post_content_text">
+                     <%= simple_format(Rinku.auto_link(h(post.subtitle_jp))) %>
+                   </div>
+                 </div>
+               </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="delete_button_cover">
+        <%= form_tag('/threadtype_profile/delete_post',method: :post) do %>
+          <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
+          <%= hidden_field_tag :type_id, "17" %>
+          <%= hidden_field_tag :page_id, params[:page] %>
+
+          <button class="btn btn-danger delete_button">
+            <div class="text_box">
+              <div class="text_jp">
+                投稿を削除する
+              </div>
+              <div class="text_en">
+                Delete post
+              </div>
+            </div>
+          </button>
+        <% end %>
+        <%= form_tag('/threadtype_profile/delete_post',method: :post) do %>
+          <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
+          <%= hidden_field_tag :type_id, "17" %>
+          <%= hidden_field_tag :page_id, params[:page] %>
+          <button class="btn btn-danger delete_button">
+            <div class="text_box">
+              <div class="text_jp">
+                退出させる
+              </div>
+              <div class="text_en">
+                Exit this user
+              </div>
+            </div>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

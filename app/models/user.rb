@@ -5,19 +5,19 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
   attr_accessor :remember_token, :activation_token, :reset_token
-  has_many :reportusers
-  has_many :posts
-  has_many :groups
-  has_many :chats
-  has_many :userinfos
-  has_many :news
+  has_many :reportusers, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :groups, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  has_many :userinfos, dependent: :destroy
+  has_many :news, dependent: :destroy
 
-  has_many :user_threadtypes
-  has_many :threadtypes, through: :user_threadtypes
+  has_many :user_threadtypes, dependent: :destroy
+  has_many :threadtypes, through: :user_threadtypes, dependent: :destroy
   accepts_nested_attributes_for :user_threadtypes
 
-  has_many :user_notices
-  has_many :notices, through: :user_notices
+  has_many :user_notices, dependent: :destroy
+  has_many :notices, through: :user_notices, dependent: :destroy
   accepts_nested_attributes_for :user_notices
 
   has_secure_password validations: false
@@ -25,15 +25,15 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 6}, on: :update, allow_blank: true, unless: :uid?
 
   has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
-  has_many :followings, through: :following_relationships
+  has_many :followings, through: :following_relationships, dependent: :destroy
   has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
-  has_many :followers, through: :follower_relationships
+  has_many :followers, through: :follower_relationships, dependent: :destroy
 
 
   has_many :joining_relations, foreign_key: "joiner_id", class_name: "Relation", dependent: :destroy
-  has_many :joinings, through: :joining_relations
+  has_many :joinings, through: :joining_relations, dependent: :destroy
   has_many :joiner_relations, foreign_key: "joining_id", class_name: "Relation", dependent: :destroy
-  has_many :joiners, through: :joiner_relations
+  has_many :joiners, through: :joiner_relations, dependent: :destroy
 
   has_one_attached :avater
 

@@ -9,6 +9,7 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    alert("asd")
     user_id = String(data["message"]["id"])
     user_type = data["message"]["usertype"]
     if $(".user_id").attr('id') == String(user_id) && user_type != "delete"
@@ -16,10 +17,28 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
       alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
       location.reload()
 
+
+  change_detail: (type,data) ->
+    alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")
+    location.reload()
+    @perform 'change_detail',type:type,data:data
+
   change: (username,gender,country,profile_en,profile_jp,able_see) ->
     $(".profile_save_button").attr("style","pointer-events: none;")
     @perform 'change',username:username,gender:gender,
     country:country,profile_en:profile_en,profile_jp:profile_jp,able_see:able_see
+
+$(document).on 'click', ".edit_private_change",(event) ->
+  data = $(".private_data").attr("checked")
+  App.profile.change_detail("private",data)
+
+$(document).on 'click', ".edit_username_change",(event) ->
+  data = $(".username_data").val()
+  App.profile.change_detail("username",data)
+
+$(document).on 'click', ".edit_userid_change",(event) ->
+  data = $(".userid_data").val()
+  App.profile.change_detail("userid",data)
 
 $(document).on 'click', '#profile_modal .btn_send', (event) ->
   ###
