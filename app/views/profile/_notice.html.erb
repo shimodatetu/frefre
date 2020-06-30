@@ -12,18 +12,19 @@
     </div>
   </div>
   <div class="notice_cover">
-    <div class="panel-title"style="display:inline-block">
-      <div class="panel-title-text">
-        <div class="float_jp">
-          お知らせ一覧
-        </div>
-        <div class="float_en">
-          Notice List
-        </div>
-      </div>
-    </div>
+    <ul class="nav nav-tabs title_nav" id="myTab" role="tablist">
+      <li class="nav-item active green-nav width_max"style="width:100%">
+        <a class="nav-link profile_history_change2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+          <i class="fas fa-comment-dots"></i>
+          <div class="text_cover"style="font-size:18px;font-weight:bold">
+            News List / お知らせ一覧
+          </div>
+        </a>
+      </li>
+    </ul>
+    
     <% there_be = false %>
-    <% current_user.userinfos.offset(@thread_page_num*(@page_id - 1)).limit(@thread_page_num).each do |userinfo| %>
+    <% @user_infos.each do |userinfo| %>
       <%= link_to("/profile/7/#{userinfo.id}" , class:"thread_link") do %>
         <% there_be = true %>
         <div class="thread_cover link_cover">
@@ -88,47 +89,8 @@
         </div>
       </div>
     <% else %>
-      <div class="page_button_cover">
-        <% if 1 >= @page_id.round %>
-          <div class="page_button no_push">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </div>
-        <% else %>
-          <%= link_to("/profile/#{params[:id]}/#{@page_id - 1}/#{@page_id2}",class:"page_button ok_push") do %>
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          <% end %>
-        <% end %>
-        <% if @start_num.round != 1 %>
-          <div class="page_button dot_show">
-            ...
-          </div>
-        <% end %>
-        <% for num in @start_num.round..@end_num.round do %>
-          <% if num == @page_id %>
-            <div class="page_button now_page">
-              <%= num %>
-            </div>
-          <% else %>
-            <%= link_to("/profile/#{params[:id]}/#{num}/#{@page_id2}",class:"page_button page_move") do %>
-              <%= num %>
-            <% end %>
-          <% end %>
-        <% end %>
-        <% if @end_num.round != @page_num.round %>
-          <div class="page_button dot_show">
-            ...
-          </div>
-        <% end %>
-        <% if @page_num.round <= @page_id.round || @page_num.round == 1 %>
-          <div class="page_button no_push">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </div>
-        <% else %>
-          <%= link_to("/profile/#{params[:id]}/#{@page_id.round + 1}/#{@page_id2}",class:"page_button ok_push") do %>
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          <% end %>
-        <% end %>
-      </div>
+
+      <%= paginate @user_infos  , outer_window: 3%>
     <% end %>
   </div>
 </div>
