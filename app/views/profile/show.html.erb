@@ -39,7 +39,7 @@
         <div class="profile_contents_change">
           <div class="get_user_id"id="<%= current_user.id %>"></div>
           <ul class="nav flex-column">
-            <li class="nav-item profile_contents_button <% if params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"%>active<% end %>">
+            <li class="nav-item profile_contents_button <% if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"%>active<% end %>">
               <%= link_to '/profile/1',class:"nav-link" do %>
                 <div class="jp">
                   プロフィール

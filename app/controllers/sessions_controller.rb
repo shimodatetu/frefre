@@ -119,7 +119,7 @@ class SessionsController < ApplicationController
             break
           end
         end
-        user.update(name: name,user_search_id:user_search_id,admit:true)
+        user.update(name: name,user_search_id:user_search_id,admit:true,profile_en: "Nice to meet you!",profile_jp: "よろしくお願いします！")
         log_in user
         #User.last.delete
         flash["alert_en"] = "You successed to signup."

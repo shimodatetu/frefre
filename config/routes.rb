@@ -104,8 +104,8 @@ Rails.application.routes.draw do
   get 'password_resets/new'
   get 'password_resets/new_check'
   get 'password_resets/edit'
-  get 'search/:page' => 'search#show'
-  get 'search' => 'search#show'
+  get 'search/show'
+  get 'search/show/:id' => "search#show"
 
   get 'category/new'
   get 'category/new2'

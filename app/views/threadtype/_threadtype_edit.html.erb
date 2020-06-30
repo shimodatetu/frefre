@@ -11,16 +11,6 @@
           <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px") %>
         <% end %>
       </div>
-      <% if threadtype.type == "every" %>
-        <div class="text_box"style="display:none">
-          <div class="en">
-            Compulsory Community
-          </div>
-          <div class="jp">
-            会員全員参加コミュニティ
-          </div>
-        </div>
-      <% end %>
     </div>
     <div class="thread_content threadtype_content">
       <div class="post_content_cover">
@@ -31,21 +21,23 @@
                 <% if threadtype.type == "every" %>
                   <div class="compulsory_text">
                     <div class="en">
-                      Compulsory
+                      <%= threadtype.type_en %>
                     </div>
                   </div>
+                <% else %>
+                  <%= threadtype.type_en %>
                 <% end %>
-                <%= threadtype.type_en %>
               </div>
               <div>
                 <% if threadtype.type == "every" %>
                   <div class="compulsory_text">
                     <div class="en">
-                      会員全員参加
+                      <%= threadtype.type_jp %>
                     </div>
                   </div>
+                <% else %>
+                  <%= threadtype.type_jp %>
                 <% end %>
-                <%= threadtype.type_jp %>
               </div>
             </div>
           </div>

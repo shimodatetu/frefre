@@ -14,7 +14,9 @@ class ProfileChannel < ApplicationCable::Channel
       if data["type"] == "username"
         current_user.update(name:data["data"])
       elsif data["type"] == "userid"
-        current_user.update(user_search_id:data["data"])
+        if User.find_by(user_search_id:data["data"]) == nil
+          current_user.update(user_search_id:data["data"])
+        end
       elsif data["type"] == "private"
         current_user.update(able_see:data["data"])
       end
