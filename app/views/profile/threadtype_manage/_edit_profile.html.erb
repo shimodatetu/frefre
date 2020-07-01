@@ -22,35 +22,43 @@
     <% there_be = true %>
     <% leader = User.find_by(id:@threadtype.leader_id) %>
     <div class="thread_content threadtype_content">
-      <%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link",data: {toggle: "modal",target: "#profile_change_modal"}) do %>
-        <div class="text_box">
-          <div class="en">
-            Edit / 編集
-          </div>
-        </div>
-      <% end %>
-      <button class="post_content_cover explain"data-toggle="modal" data-target="#explain_modal">
-        <div class="post_content_position en_position width_max_text">
-          <div class="post_content">
-            <div class="post_content_text no_inline">
-              <%= simple_format(text_url_to_link(h(@threadtype.content_en))) %>
+      <table class="table_all_cover threadtype_cover threadtype_users" border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#eee">
+        <tr class="table_list">
+          <th class="column_title">
+            <div class="title_jp">
+              紹介
             </div>
-          </div>
-        </div>
-        <div class="post_content_position jp_position width_max_text">
-          <div class="post_content">
-            <div class="post_content_text no_inline">
-              <%= simple_format(text_url_to_link(h(@threadtype.content_jp))) %>
+            <div class="title_en">
+              Introduction
             </div>
-          </div>
-        </div>
-      </button>
-      <div class="threadtype_cover threadtype_users">
-        <div class="threadtype_user_cover">
-          <div class="threadtype_title">
-            Manager / 管理者
-          </div>
-          <div class="threadtype_leader">
+          </th>
+          <th class="explain column_content"data-toggle="modal" data-target="#explain_modal">
+            <div class="post_content_position en_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(@threadtype.content_en))) %>
+                </div>
+              </div>
+            </div>
+            <div class="post_content_position jp_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(@threadtype.content_jp))) %>
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr class="table_list">
+          <th class="column_title">
+            <div class="title_jp">
+              管理者
+            </div>
+            <div class="title_en">
+              Manager
+            </div>
+          </th>
+          <th class="column_content">
             <div class="threadtype_img_cover">
               <% if @threadtype.leader_id == 0 %>
                 <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
@@ -59,29 +67,43 @@
               <% end %>
             </div>
             <div class="threadtype_name">
-              <% if @threadtype.leader_id == 0 %>
+              <% if @threadtype.type == "every" %>
                 FreFre Office
               <% else %>
                 <%= leader.name %>
               <% end %>
             </div>
+          </th>
+        </tr>
+        <tr class="table_list">
+          <th class="column_title">
+            <div class="title_jp">
+              コミュニティタイプ
+            </div>
+            <div class="title_en">
+              Community Type
+            </div>
+          </th>
+          <th class="column_content threadtype_user_cover">
+            <div class="threadtype_type">
+              <% if @threadtype.type == "not_open" %>
+                <i class="fas fa-minus-circle"></i>Private / 非公開
+              <% elsif @threadtype.type == "secret" %>
+                <i class="fas fa-lock"></i>Secret / 秘密
+              <% else %>
+                <i class="fas fa-check-circle"></i>Public / 公開
+              <% end %>
+            </div>
+          </th>
+        </tr>
+      </table>
+      <%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link",data: {toggle: "modal",target: "#profile_change_modal"},style:"margin-left:calc(50% - 56px);") do %>
+        <div class="text_box">
+          <div class="en">
+            Edit / 編集
           </div>
         </div>
-        <div class="threadtype_user_cover">
-          <div class="threadtype_title">
-            Thread Type / スレッドタイプ
-          </div>
-          <div class="threadtype_type">
-            <% if @threadtype.type == "not_open" %>
-              <i class="fas fa-minus-circle"></i>Private / 非公開
-            <% elsif @threadtype.type == "secret" %>
-              <i class="fas fa-lock"></i>Secret / 秘密
-            <% else %>
-              <i class="fas fa-check-circle"></i>Public / 公開
-            <% end %>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="profile_change_modal profile">

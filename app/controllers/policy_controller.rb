@@ -18,7 +18,7 @@ class PolicyController < ApplicationController
       flash[:failed_jp] = "ユーザーネームが入力されていません。"
       flash[:failed_en] = "Username is not inputed."
       render "contact"
-    elsif params["contact_data"][2] == ""
+    elsif params["contact_data"][2] == "" || params["contact_data"][2] == "info@frefre.net"
       flash[:failed_jp] = "メールアドレスが入力されていません。"
       flash[:failed_en] = "Mail Address is not inputed."
       render "contact"
