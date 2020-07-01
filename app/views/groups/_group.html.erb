@@ -69,7 +69,11 @@
             <%= render partial: 'posts/post' ,locals: { post:group.posts.last,type:"normal"} %>
           <% end %>
         </div>
+
+        <%= render partial: 'posts/post' ,locals: { post:group.posts.first,type:"in_group"} %>
       </div>
+
     </div>
+
   <% end %>
 <% end %>

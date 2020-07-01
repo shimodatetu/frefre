@@ -31,7 +31,7 @@
   <% end %>
   <%= paginate @popular_groups , outer_window: 3%>
 
-  <%= link_to("/groups/"+threadtype.id.to_s, type:"button", class:"login_join_button btn mes_button makethread_link") do %>
+  <%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link") do %>
     <div class="text_box">
         Make Thread / スレッドを作成する
     </div>
