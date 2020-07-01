@@ -13,7 +13,7 @@
       </a>
     </li>
   </ul>
-  <%= form_tag('/threadtype/search',method: :post,class: "search_form_top",style:"margin: 10px -5px;") do %>
+  <%= form_tag('/threadtype/search',method: :post,class: "search_form_top",style:"margin: 10px 5px;") do %>
     <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
     <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
     <%= hidden_field_tag :type_id, "7" %>
