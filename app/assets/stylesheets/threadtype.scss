@@ -34,11 +34,6 @@
   .nav-tabs{
     width: 100%;
   }
-  .title_nav{
-    width: calc(100% + 16px);
-    margin-left: -8px;
-    margin-top:-3px;
-  }
   .make_thread_tab{
     width: calc(100% + 6px);
     margin-left: -3px;
@@ -48,8 +43,7 @@
     position:static;
     padding-top:0px;
     margin-top:0px;
-    width: calc(100% + 16px);
-    margin-left: -8px;
+    width: calc(100%);
     .lang_bar{
       padding-left:0px;
       margin-left:0px;
@@ -119,7 +113,8 @@
  }
 }
 .threadtype_threads{
-  margin:0px 5px 0px 5px;
+  width:100%;
+  background: #eee;
 }
 .threadtype_cover{
   .compulsory{
