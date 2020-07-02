@@ -23,16 +23,19 @@
     .delete_button_cover{
       float:right;
       text-align: center;
+      margin-bottom: 5px;
+      margin-right: 10px;
       .delete_post_button{
         padding: 3px 15px;
         margin-top: 2px;
         vertical-align: middle;
         margin-left:20px;
         .text_jp{
-          font-size:11px;
+          font-size:10px;
         }
         .text_en{
           margin-top:-3px;
+          font-size: 14px;
         }
       }
     }

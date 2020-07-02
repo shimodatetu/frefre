@@ -1,5 +1,7 @@
 <% there_be = true %>
-<% leader = User.find_by(id:@threadtype.leader_id) %>
+<% if @threadtype.leader_id != 0 %>
+  <% leader = User.find_by(id:@threadtype.leader_id) %>
+<% end %>
 <div class="thread_content threadtype_content">
   <table class="table_all_cover threadtype_cover threadtype_users" border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#eee">
     <tr class="table_list">
@@ -426,7 +428,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <% if logged_in? && current_user.usertype=="event" %>
+          <% if logged_in? && current_user.usertype == "event" %>
             <button class="btn btn-default btn_delete cannot_delete"id="jp">
               <div class="float_jp">削除</div>
               <div class="base_en">Delete</div>
