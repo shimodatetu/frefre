@@ -426,7 +426,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <% if current_user.usertype=="event" %>
+          <% if logged_in? && current_user.usertype=="event" %>
             <button class="btn btn-default btn_delete cannot_delete"id="jp">
               <div class="float_jp">削除</div>
               <div class="base_en">Delete</div>
