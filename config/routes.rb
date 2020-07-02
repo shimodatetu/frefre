@@ -168,6 +168,7 @@ Rails.application.routes.draw do
   get 'users/index'
   get 'users/term'
   get 'other_profile/:id' => 'other_profile#show'
+  get 'other_profile/:id/:type' => 'other_profile#show'
   get 'thread_list/popular'
   get 'thread_list/new'
   get 'thread_list/popular/:id' => 'thread_list#popular'

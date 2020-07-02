@@ -11,22 +11,22 @@ class OtherProfileController < ApplicationController
       end
       per = 10
       other_user_id = other_user.id
-      if params[:id] == nil || params[:id] == "1"
+      if params[:type] == nil || params[:id] == "1"
         @join_groups = other_user.threadtypes.all.page(page_id).per(per)
         @make_groups = Threadtype.all.where(leader_id:other_user_id).page(1).per(per)
         @make_threads = other_user.groups.all.page(1).per(per)
         @make_posts = other_user.posts.all.page(1).per(per)
-      elsif params[:id] == "2"
+      elsif params[:type] == "2"
         @join_groups = other_user.threadtypes.all.page(1).per(per)
         @make_groups = Threadtype.all.where(leader_id:other_user_id).page(page_id).per(per)
         @make_threads = other_user.groups.all.page(1).per(per)
         @make_posts = other_user.posts.all.page(1).per(per)
-      elsif params[:id] == "3"
+      elsif params[:type] == "3"
         @join_groups = other_user.threadtypes.all.page(1).per(per)
         @make_groups = Threadtype.all.where(leader_id:other_user_id).page(1).per(per)
         @make_threads = other_user.groups.all.page(page_id).per(per)
         @make_posts = other_user.posts.all.page(1).per(per)
-      elsif params[:id] == "4"
+      elsif params[:type] == "4"
         @join_groups = other_user.threadtypes.all.page(1).per(per)
         @make_groups = Threadtype.all.where(leader_id:other_user_id).page(1).per(per)
         @make_threads = other_user.groups.all.page(1).per(per)
