@@ -224,7 +224,7 @@
         </div>
       </div>
       <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
-        <li class="nav-item <% if params[:page] == nil || params[:page] == "1" %>active<% end %>">
+        <li class="nav-item <% if params[:type] == nil || params[:type] == "1" %>active<% end %>">
           <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
             <i class="fas fa-users"></i>
             <div class="text_cover">
@@ -237,7 +237,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item <% if params[:page] == "2" %>active<% end %>">
+        <li class="nav-item <% if params[:type] == "2" %>active<% end %>">
           <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#group" role="tab" aria-controls="group" aria-selected="false">
             <i class="fas fa-users"></i>
             <div class="text_cover">
@@ -250,7 +250,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item <% if params[:page] == "3" %>active<% end %>">
+        <li class="nav-item <% if params[:type] == "3" %>active<% end %>">
           <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#thread" role="tab" aria-controls="thread" aria-selected="false">
             <i class="fas fa-comments"></i>
             <div class="text_cover">
@@ -263,7 +263,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item <% if params[:page] == "4" %>active<% end %>">
+        <li class="nav-item <% if params[:type] == "4" %>active<% end %>">
           <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">
             <i class="fas fa-comment-dots"></i>
             <div class="text_cover">
