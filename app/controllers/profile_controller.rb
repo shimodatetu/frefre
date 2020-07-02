@@ -180,6 +180,36 @@ class ProfileController < ApplicationController
   def edit_detail
     current_user.update()
   end
+
+  def delete_group
+    if logged_in?
+      if (thread = Group.find_by(id: params[:thread_id].to_i)) == nil && thread.threadtype.leader_id == current_user.id
+        thread.update(deleted:true)
+        redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
+      end
+    end
+  end
+  def delete_post
+    if logged_in?
+      p "==============-"
+      p params[:post_id].to_i
+      p "==============-"
+      p Post.find_by(id: params[:post_id].to_i).threadtype.leader_id == current_user.id
+      p "==============-"
+      if (post = Post.find_by(id: params[:post_id].to_i)) == nil && post.threadtype.leader_id == current_user.id
+        post.update(deleted:true)
+        redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
+      end
+    end
+  end
+  def invlisible_post
+    if logged_in?
+      if (post = Post.find_by(id: params[:post_id].to_i)) == nil && post.threadtype.leader_id == current_user.id
+        post.update(visible:false)
+        redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
+      end
+    end
+  end
   private
   def user_params
     params.require(:user).permit(:image)
@@ -187,4 +217,7 @@ class ProfileController < ApplicationController
   def image_params
     params.require(:user).permit(:photo)
   end
+
+
+
 end

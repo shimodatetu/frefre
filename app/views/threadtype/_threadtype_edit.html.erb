@@ -18,18 +18,7 @@
           <div class="thread_title">
             <div class="title_padding no_inline">
               <div>
-                <% if threadtype.type == "every" %>
-                  <div class="compulsory_text">
-                    <div class="en">
-                      <%= threadtype.type_en %>
-                    </div>
-                  </div>
-                <% else %>
-                  <%= threadtype.type_en %>
-                <% end %>
-              </div>
-              <div>
-                <% if threadtype.type == "every" %>
+                <% if threadtype.type == "every"&& 1 == 2 %>
                   <div class="compulsory_text">
                     <div class="en">
                       <%= threadtype.type_jp %>
@@ -37,6 +26,17 @@
                   </div>
                 <% else %>
                   <%= threadtype.type_jp %>
+                <% end %>
+              </div>
+              <div>
+                <% if threadtype.type == "every" && 1 == 2%>
+                  <div class="compulsory_text">
+                    <div class="en">
+                      <%= threadtype.type_en %>
+                    </div>
+                  </div>
+                <% else %>
+                  <%= threadtype.type_en %>
                 <% end %>
               </div>
             </div>

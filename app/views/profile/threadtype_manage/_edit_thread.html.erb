@@ -18,9 +18,10 @@
           </div>
           <%= form_tag('/threadtype_profile/delete_group',method: :post,style:"float:right;") do %>
             <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
-            <%= hidden_field_tag :type_id, "17" %>
+            <%= hidden_field_tag :type_id, "16" %>
             <%= hidden_field_tag :page_id, params[:page] %>
-            <button class="btn btn-danger delete_group_button">
+            <%= hidden_field_tag :thread_id, @thread.id %>
+            <button type="submit"class="btn btn-danger group_delete_button">
               <div class="text_box">
                 Delete / 削除
               </div>
@@ -60,7 +61,6 @@
         <% @posts.each do |post| %>
           <%= render partial:"/profile/threadtype_manage/post" ,locals: { post:post,type:"normal"} %>
         <% end %>
-
         <%= paginate @posts , outer_window: 3%>
       </div>
     </div>

@@ -15,7 +15,7 @@
         This comment is deleted.
       </div>
     </div>
-  <% else %>
+  <% elsif post.visible == true%>
     <div class="thread_cover without_border delete_post"id="<%= post.id %>">
       <div class="group_user_cover">
         <div class="group_img_cover">
@@ -145,8 +145,9 @@
           <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
           <%= hidden_field_tag :type_id, "17" %>
           <%= hidden_field_tag :page_id, params[:page] %>
-
-          <button class="btn btn-danger delete_button">
+          <%= hidden_field_tag :thread_id, post.group_id %>
+          <%= hidden_field_tag :post_id, post.id %>
+          <button type="submit"class="btn btn-danger delete_post_button">
             <div class="text_box">
               <div class="text_jp">
                 投稿を削除する
@@ -157,11 +158,13 @@
             </div>
           </button>
         <% end %>
-        <%= form_tag('/threadtype_profile/delete_post',method: :post) do %>
+        <%= form_tag('/threadtype_profile/invlisible_post',method: :post) do %>
           <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
           <%= hidden_field_tag :type_id, "17" %>
           <%= hidden_field_tag :page_id, params[:page] %>
-          <button class="btn btn-danger delete_button">
+          <%= hidden_field_tag :thread_id, post.group_id %>
+          <%= hidden_field_tag :post_id, post.id %>
+          <button type="submit"class="btn btn-danger delete_post_button">
             <div class="text_box">
               <div class="text_jp">
                 退出させる

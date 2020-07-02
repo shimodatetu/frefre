@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_094442) do
+ActiveRecord::Schema.define(version: 2020_07_02_062311) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_094442) do
     t.string "subtitle_en", default: ""
     t.string "subtitle_jp", default: ""
     t.integer "threadtype_id"
+    t.boolean "visible", default: true
   end
 
   create_table "prohibits", force: :cascade do |t|
