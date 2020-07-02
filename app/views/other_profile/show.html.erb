@@ -5,7 +5,24 @@
 <% other_user_id = other_user.id %>
 <div class="other_profile profile">
   <div class="profile_sub"style="display:inline-block">
-  
+    <div class="profile_picture">
+      <% if other_user.image == 0 %>
+        <% if other_user.avater.attached? %>
+          <%= image_tag other_user.avater , :class => "group_img"%>
+        <% else %>
+          <% if other_user.photo.nil? %>
+            <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+          <% else %>
+            <%= image_tag show_image_user_path(other_user), :class => "group_img" %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= image_tag("/userimage/user#{other_user.image}.png", :class => "group_img") %>
+      <% end %>
+      <div class="name_show"style="font-size:16px">
+        <%= simple_format(text_url_to_link(h(other_user.name))) %>
+      </div>
+    </div>
     <% if logged_in? %>
       <div class="follow_button<%= other_user_id %>">
         <% if logged_in? && current_user.followings.find_by(id: other_user_id) %>
