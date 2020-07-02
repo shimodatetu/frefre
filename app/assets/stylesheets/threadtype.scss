@@ -252,6 +252,11 @@
     padding-left: calc(50% - 80px);
     padding-bottom: 10px;
     border-bottom: solid thin #ccc;
+    .normal_button{
+      background: #fff;
+      color: #ff9d3b;
+      border: solid 2px #ff9d3b;
+    }
     .post_button_form{
       display: inline-block;
     }
