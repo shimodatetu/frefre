@@ -19,7 +19,7 @@
       <% else %>
         <%= image_tag("/userimage/user#{other_user.image}.png", :class => "group_img") %>
       <% end %>
-      <div class="name_show"style="font-size:20px">
+      <div class="name_show"style="font-size:16px">
         <%= simple_format(text_url_to_link(h(other_user.name))) %>
       </div>
     </div>
@@ -112,93 +112,118 @@
             <div class="row profile_content_data">
               <div class="content_name">
                 <div class="jp">
-                  性別
+                  ユーザーネーム
                 </div>
                 <div class="en">
-                  Gender
+                  Username：
                 </div>
               </div>
               <div class="profile_content_cover">
-                <select id="gender"class="content_select"disabled>
-                  <option value="">No Selected</option>
-                  <% if current_user.gender == "Male" %>
-                    <option value="Male" selected>Male / 男性</option>
+                <%= other_user.name %>
+              </div>
+            </div>
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  ユーザーID
+                </div>
+                <div class="en">
+                  User ID：
+                </div>
+              </div>
+              <div class="profile_content_cover">
+                <%= other_user.user_search_id %>
+              </div>
+            </div>
+            <div class="row profile_content_data">
+              <div class="content_name">
+                <div class="jp">
+                  性別
+                </div>
+                <div class="en">
+                  Gender：
+                </div>
+              </div>
+              <div class="profile_content_cover">
+                  <% if other_user.gender == "Male" %>
+                    <%= "Male / 男性" %>
+                  <% elsif other_user.gender == "Female" %>
+                    <%= "Female / 女性" %>
+                  <% elsif other_user.gender == "Neuter"  %>
+                    <%= "Other / その他" %>
                   <% else %>
-                    <option value="Male">Male / 男性</option>
+                    <%= "No answer / 答えない" %>
                   <% end %>
-                  <% if current_user.gender == "Female" %>
-                    <option value="Female" selected>Female / 女性</option>
-                  <% else %>
-                    <option value="Female">Female / 女性</option>
-                  <% end %>
-                  <% if current_user.gender == "Neuter" %>
-                    <option value="Neuter" selected>Other / その他</option>
-                  <% else %>
-                    <option value="Neuter">Other / その他</option>
-                  <% end %>
-                  <% if current_user.gender == "not_answer" %>
-                    <option value="not_answer" selected>No answer / 答えない</option>
-                  <% else %>
-                    <option value="not_answer">No answer / 答えない</option>
-                  <% end %>
-                </select>
               </div>
             </div>
           </div>
-          <div class="col-sm-12 profile_content"style="padding-top:0px;">
+
+          <div class="profile_content">
             <div class="row profile_content_data">
               <div class="content_name">
                 <div class="jp">
                   出身国
                 </div>
                 <div class="en">
-                  Country
+                  Country：
                 </div>
               </div>
               <div class="profile_content_cover">
-                <select value="<%= current_user.country %>"class="content_select"id="country"name="country"disabled>
-                  <option value="">No selected</option>
-                  <%= render partial: "country" %>
-                </select>
-                <script type="text/javascript">
-                  $("#country option[value='<%= current_user.country %>']").prop("selected","selected");
-                </script>
+                <% if other_user.country == nil %>
+                  <%= "No answer / 答えない" %>
+                <% else %>
+                  <%= other_user.country %>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="profile_content intro_content">
-        <div class="intro">
-          <div class="row profile_content_data self_introduction">
-            <div class="content_name">
-              <div class="jp">
-                自己紹介(英語)
+      <div class="profile_words">
+        <div class="profile_content intro_content">
+          <div class="intro"style="margin-left: -15px;">
+            <div class="row profile_content_data self_introduction">
+              <div class="content_name">
+                <div class="jp">
+                  自己紹介(英語)
+                </div>
+                <div class="en">
+                  Introduction
+                  (English)
+                </div>
               </div>
-              <div class="en">
-                Introduction
-                (English)
+              <div class="profile_intro_data">
+                <% if other_user.profile_en == nil %>
+                  Blank / 空
+                <% else%>
+                  <%= other_user.profile_en%>
+                <% end %>
               </div>
             </div>
-            <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"disabled><%=current_user.profile_en%></textarea>
           </div>
-        </div>
-        <div class="intro">
-          <div class="row profile_content_data self_introduction">
-            <div class=" content_name">
-              <div class="jp">
-                自己紹介(日本語)
+          <div class="intro">
+            <div class="row profile_content_data self_introduction">
+              <div class=" content_name">
+                <div class="jp">
+                  自己紹介(日本語)
+                </div>
+                <div class="en">
+                  Introduction
+                  (Japanese)
+                </div>
               </div>
-              <div class="en">
-                Introduction
-                (Japanese)
+              <div class="profile_intro_data">
+                <% if other_user.profile_jp == nil %>
+                  Blank / 空
+                <% else%>
+                  <%=other_user.profile_jp%>
+                <% end %>
               </div>
             </div>
-            <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"disabled><%=current_user.profile_jp%></textarea>
           </div>
         </div>
       </div>
-      <%#= render partial:"profile/history" ,locals: { user: other_user,type:"other"}%>
+
     </div>
   </div>
 </div>
