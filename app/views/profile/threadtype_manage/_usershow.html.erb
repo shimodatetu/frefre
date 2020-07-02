@@ -45,10 +45,11 @@
         </div>
         <div class="follow_button follow_button<%= user.id %>">
           <object>
-            <%= form_tag('/threadtype_profile/delete_group',method: :post,style:"float:right;") do %>
+            <%= form_tag('/threadtype_profile/delete_member',method: :post,style:"float:right;") do %>
               <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
-              <%= hidden_field_tag :type_id, "17" %>
+              <%= hidden_field_tag :type_id, "19" %>
               <%= hidden_field_tag :page_id, params[:page] %>
+              <%= hidden_field_tag :user_id, user.id %>
               <button class="btn btn-danger delete_group_button">
                 <div class="text_box">
                   Withdraw / 強制退会させる

@@ -65,17 +65,33 @@
             </div>
           </div>
         </div>
-        <div class="threadtype_user_cover">
-          <div class="threadtype_title"style="display:none">
-            Member / メンバー
-          </div>
-          <div class="threadtype_member">
-            <div class="threadtype_img_cover">
-              <% if 1 == 2 %>
-                <% if threadtype.leader_id == 0 %>
-                  <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-                <% else %>
-                  <% user = User.find(threadtype.leader_id) %>
+        <% if threadtype.type != "every" %>
+          <div class="threadtype_user_cover">
+            <div class="threadtype_title"style="display:none">
+              Member / メンバー
+            </div>
+            <div class="threadtype_member">
+              <div class="threadtype_img_cover">
+                <% if 1 == 2 %>
+                  <% if threadtype.leader_id == 0 %>
+                    <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+                  <% else %>
+                    <% user = User.find(threadtype.leader_id) %>
+                    <% if user.image == 0 %>
+                      <% if user.avater.attached? %>
+                        <%= image_tag user.avater , :class => "threadtype_img"%>
+                      <% else %>
+                        <%= image_tag("/userimage/user1.png", :class => "threadtype_img") %>
+                      <% end %>
+                    <% else %>
+                      <%= image_tag("/userimage/user#{user.image}.png", :class => "threadtype_img") %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+
+                <% threadtype_users = threadtype.users.where.not(id:threadtype.leader_id) %>
+                <% user_sum = threadtype_users.count %>
+                <% threadtype_users.limit(3).each do |user|%>
                   <% if user.image == 0 %>
                     <% if user.avater.attached? %>
                       <%= image_tag user.avater , :class => "threadtype_img"%>
@@ -86,29 +102,15 @@
                     <%= image_tag("/userimage/user#{user.image}.png", :class => "threadtype_img") %>
                   <% end %>
                 <% end %>
-              <% end %>
-
-              <% threadtype_users = threadtype.users.where.not(id:threadtype.leader_id) %>
-              <% user_sum = threadtype_users.count %>
-              <% threadtype_users.limit(3).each do |user|%>
-                <% if user.image == 0 %>
-                  <% if user.avater.attached? %>
-                    <%= image_tag user.avater , :class => "threadtype_img"%>
-                  <% else %>
-                    <%= image_tag("/userimage/user1.png", :class => "threadtype_img") %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag("/userimage/user#{user.image}.png", :class => "threadtype_img") %>
+                <% if user_sum > 3 %>
+                  <div class="user_plus_show">
+                    + <%= user_sum - 3 %>
+                  </div>
                 <% end %>
-              <% end %>
-              <% if user_sum > 3 %>
-                <div class="user_plus_show">
-                  + <%= user_sum - 3 %>
-                </div>
-              <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>

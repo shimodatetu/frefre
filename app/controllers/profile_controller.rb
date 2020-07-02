@@ -135,7 +135,7 @@ class ProfileController < ApplicationController
           end
           @search_posts = search_posts.all.page(page_id).per(per)
         elsif params[:id] == "19"
-          @members = @threadtype.users.where.not(id:current_user.id).page(page_id).per(per)
+          @members = @threadtype.users.page(page_id).per(per)
         elsif params[:id] == "20"
           @search_text = ""
           if session["search_text"].nil? == false && session["search_text"] != ""
@@ -191,12 +191,7 @@ class ProfileController < ApplicationController
   end
   def delete_post
     if logged_in?
-      p "==============-"
-      p params[:post_id].to_i
-      p "==============-"
-      p Post.find_by(id: params[:post_id].to_i).threadtype.leader_id == current_user.id
-      p "==============-"
-      if (post = Post.find_by(id: params[:post_id].to_i)) == nil && post.threadtype.leader_id == current_user.id
+      if (post = Post.find_by(id: params[:post_id].to_i)) != nil && post.threadtype.leader_id == current_user.id
         post.update(deleted:true)
         redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
       end
@@ -204,9 +199,44 @@ class ProfileController < ApplicationController
   end
   def invlisible_post
     if logged_in?
-      if (post = Post.find_by(id: params[:post_id].to_i)) == nil && post.threadtype.leader_id == current_user.id
+      if (post = Post.find_by(id: params[:post_id].to_i)) != nil && post.threadtype.leader_id == current_user.id
         post.update(visible:false)
         redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
+      end
+    end
+  end
+  def delete_member
+    if logged_in? && (threadtype = Threadtype.find_by(id: params[:threadtype_id])) != nil && threadtype.leader_id == current_user.id
+      if !(user_connects = threadtype.user_threadtypes.where(user_id:params[:user_id])).blank?
+        user_connects.delete_all
+        redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
+      end
+    end
+  end
+  def news_make
+
+    if logged_in? && (threadtype = Threadtype.find_by(id:params["threadtype_id"].to_i)) != nil && threadtype.leader_id == current_user.id
+
+      news = News.new()
+      #group.threadtype_id = data['category'].to_i
+      news.title_jp = params['title_jp']
+      news.title_en = params['title_en']
+      news.content_jp = params['content_ja']
+      news.content_en = params['content_en']
+      if params[:type] == "image"
+        news.pict = params[:pict]
+      elsif params[:type] == "video"
+        news.video = params[:video]
+        news.subtitle_en = params['subcontent_jap']
+        news.subtitle_jp = params['subcontent_jap']
+      end
+
+      p "---------------------------"
+      p threadtype
+      p "=========================="
+      threadtype.users.each do |user|
+        news.user_id = user.id
+        news.save
       end
     end
   end
@@ -217,7 +247,5 @@ class ProfileController < ApplicationController
   def image_params
     params.require(:user).permit(:photo)
   end
-
-
 
 end

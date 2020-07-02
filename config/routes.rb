@@ -158,6 +158,9 @@ Rails.application.routes.draw do
   post '/threadtype_profile/delete_group',to: "profile#delete_group"
   post '/threadtype_profile/delete_post',to: "profile#delete_post"
   post '/threadtype_profile/invlisible_post',to: "profile#invlisible_post"
+  post '/threadtype_profile/delete_member',to: "profile#delete_member"
+  post '/threadtype_profile/news_make',to: "profile#news_make"
+
 
   post 'notices' => "notices#create"
   get '/groups',to:'groups#new'

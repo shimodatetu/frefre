@@ -75,9 +75,9 @@ class ThreadtypeController < ApplicationController
       threadtype.content_en = params['content_eng']
       threadtype.type = data["type"]
       threadtype.type = "normal"
-      threadtype.users << current_user
       if threadtype.save
         group = Group.new()
+        threadtype.users << current_user
         group.title_jp = "オープンスレッド"
         group.title_en = "Open Thread"
         group.user_id = current_user.id

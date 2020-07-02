@@ -9,7 +9,7 @@ App.notice = App.cable.subscriptions.create "NoticeChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
   received: (data) ->
-
+    location.reloaded()
       # Called when there's incoming data on the websocket for this channel
 
   make: (lang, mes_jp,mes_en,address) ->

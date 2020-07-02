@@ -41,7 +41,9 @@
     <div class="make_thread_cover">
       <div class="get_user_id"id="<%= current_user.id %>"></div>
       <div class="panel panel-warning make_thread_category">
-        <%= form_tag('/news_maker', method: :post,class:"thread_image_post post_button_form") do %>
+        <%= form_tag('/threadtype_profile/news_make', method: :post,class:"thread_image_post post_button_form") do %>
+
+          <%= hidden_field_tag :threadtype_id ,@threadtype.id,class:"send_time" %>
           <div class="flag_show">
             <div class="flag_image">
               <%= image_tag "/eng.png", class: "image" %>
@@ -85,7 +87,6 @@
                     </button>
                   </div>
                 </div>
-
                 <%= text_area_tag :title_jp,"", id:"content",class:"form-control form_lang jp_data_title",size:"65x3" %>
               </div>
             </div>
@@ -227,7 +228,7 @@
             <%= hidden_field_tag :type, :value => "text",class:"post_type" %>
           </div>
           <div class="post_button_place">
-            <button type="button" class="normal_button post_button btn words_post_button"id="post">
+            <button type="submit" class="normal_button post_button btn words_post_button"id="post">
               <div class="glyphicon glyphicon-comment picture_send"></div>
               <div class="button_text">
                 <div class="float_jp">
