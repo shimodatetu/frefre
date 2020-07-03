@@ -44,7 +44,7 @@
           <% end %>
         </div>
         <div class="threadtype_name">
-          <% if @threadtype.type == "every" %>
+          <% if @threadtype.type == "every" || @threadtype.leader_id == 1 %>
             FreFre Office
           <% else %>
             <%= leader.name %>
