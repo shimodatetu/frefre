@@ -1,5 +1,19 @@
+<% there_be = true %>
+<% if @threadtype.leader_id != 0 %>
+  <% leader = User.find_by(id:@threadtype.leader_id) %>
+<% end %>
+<%= render partial:"threadtype/explain_table" %>
 
-
+<%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link") do %>
+  <div class="text_box">
+    <div class="en">
+      Make Thread in this Community
+    </div>
+    <div class="jp">
+      このコミュニティ内でスレッドを作成する
+    </div>
+  </div>
+<% end %>
 <% first_group = threadtype.groups.first %>
 <% thread_id = first_group.id %>
 <div class="threadtype_threads">
@@ -13,6 +27,20 @@
       </a>
     </li>
   </ul>
+  <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
+    <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
+    <div class="lang_bar">
+      <div class="country_flag en_country">
+        Hide English
+      </div>
+      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
+          data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+      <div class="country_flag jp_country">
+        日本語非表示
+      </div>
+    </div>
+  </div>
+
   <%= form_tag('/threadtype/search',method: :post,class: "search_form_top",style:"margin: 10px 5px;") do %>
     <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
     <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
@@ -31,10 +59,5 @@
     <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
   <% end %>
 
-  <%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link") do %>
-    <div class="text_box">
-        Make Thread / スレッドを作成する
-    </div>
-  <% end %>
   <%= paginate @latest_groups , outer_window: 3%>
 </div>

@@ -214,29 +214,23 @@ class ProfileController < ApplicationController
     end
   end
   def news_make
-
     if logged_in? && (threadtype = Threadtype.find_by(id:params["threadtype_id"].to_i)) != nil && threadtype.leader_id == current_user.id
-
-      news = News.new()
+      user_info = Userinfo.new()
       #group.threadtype_id = data['category'].to_i
-      news.title_jp = params['title_jp']
-      news.title_en = params['title_en']
-      news.content_jp = params['content_ja']
-      news.content_en = params['content_en']
+      user_info.title_jp = params['title_jp']
+      user_info.title_en = params['title_en']
+      user_info.content_jp = params['content_ja']
+      user_info.content_en = params['content_en']
       if params[:type] == "image"
-        news.pict = params[:pict]
+        user_info.pict = params[:pict]
       elsif params[:type] == "video"
-        news.video = params[:video]
-        news.subtitle_en = params['subcontent_jap']
-        news.subtitle_jp = params['subcontent_jap']
+        user_info.video = params[:video]
+        user_info.subtitle_en = params['subcontent_jap']
+        user_info.subtitle_jp = params['subcontent_jap']
       end
-
-      p "---------------------------"
-      p threadtype
-      p "=========================="
       threadtype.users.each do |user|
-        news.user_id = user.id
-        news.save
+        user_info.user_id = user.id
+        user_info.save
       end
     end
   end

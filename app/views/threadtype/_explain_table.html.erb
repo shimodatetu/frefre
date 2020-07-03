@@ -1,0 +1,158 @@
+<div class="thread_content threadtype_content">
+  <table class="table_all_cover threadtype_cover threadtype_users" border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#eee">
+    <tr class="table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          紹介
+        </div>
+        <div class="title_en">
+          Introduction
+        </div>
+      </th>
+      <th class="explain column_content"data-toggle="modal" data-target="#explain_modal">
+        <div class="post_content_position en_position width_max_text">
+          <div class="post_content">
+            <div class="post_content_text no_inline">
+              <%= simple_format(text_url_to_link(h(@threadtype.content_en))) %>
+            </div>
+          </div>
+        </div>
+        <div class="post_content_position jp_position width_max_text">
+          <div class="post_content">
+            <div class="post_content_text no_inline">
+              <%= simple_format(text_url_to_link(h(@threadtype.content_jp))) %>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+    <tr class="table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          管理者
+        </div>
+        <div class="title_en">
+          Manager
+        </div>
+      </th>
+      <th class="column_content">
+        <div class="threadtype_img_cover">
+          <% if @threadtype.leader_id == 0 %>
+            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+          <% else %>
+            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
+          <% end %>
+        </div>
+        <div class="threadtype_name">
+          <% if @threadtype.type == "every" %>
+            FreFre Office
+          <% else %>
+            <%= leader.name %>
+          <% end %>
+        </div>
+      </th>
+    </tr>
+    <tr class="table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          コミュニティタイプ
+        </div>
+        <div class="title_en">
+          Community Type
+        </div>
+      </th>
+      <th class="column_content threadtype_user_cover">
+        <div class="threadtype_type">
+          <% if @threadtype.type == "not_open" %>
+            <i class="fas fa-minus-circle"></i>Private / 非公開
+          <% elsif @threadtype.type == "secret" %>
+            <i class="fas fa-lock"></i>Secret / 秘密
+          <% else %>
+            <i class="fas fa-check-circle"></i>Public / 公開
+          <% end %>
+        </div>
+      </th>
+    </tr>
+    <% if @threadtype.type == "every" %>
+      <tr class="table_list">
+        <th class="column_title"style="height:83px;">
+          <div class="title_jp">
+            メンバー
+          </div>
+          <div class="title_en">
+            Member
+          </div>
+        </th>
+        <th class="column_content threadtype_user_cover threadtype_users_all"style= "height:83px">
+          <%= link_to("/threadtype/show/"+ @threadtype.id.to_s + "/4") do %>
+            <div class="threadtype_img_cover users_all">
+              <% threadtype_users = @threadtype.users.where.not(id:@threadtype.leader_id) %>
+              <% user_sum = threadtype_users.count %>
+              <% threadtype_users.limit(3).each do |user|%>
+                <% url = "/profile" %>
+                <% if logged_in? && current_user.id != user.id %>
+                  <% url = "/other_profile/#{user.id}" %>
+                <% end %>
+                <object>
+                  <%= link_to url,class:"user_cover" do %>
+
+                    <% if user.user_threadtypes.find_by(threadtype_id:@threadtype.id).created_at > Time.current.ago(7.days) %>
+                      <i class="new_user_icon fa fa-user-plus" aria-hidden="true"></i>
+                    <% end %>
+                    <% if user.image == 0 %>
+                      <% if user.avater.attached? %>
+                        <%= image_tag user.avater , :class => "user_img"%>
+                      <% else %>
+                        <%= image_tag("/userimage/user1.png", :class => "user_img") %>
+                      <% end %>
+                    <% else %>
+                      <%= image_tag("/userimage/user#{user.image}.png", :class => "user_img") %>
+                    <% end %>
+                    <div class="user_name">
+                      <%= user.name %>
+                    </div>
+                  <% end %>
+                </object>
+              <% end %>
+              <div class="user_others_dots">
+                ・・・
+              </div>
+            </div>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="explain_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="post_content_cover explain"data-toggle="modal" data-target="exlain_modal">
+            <div class="post_content_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(@threadtype.content_en))) %>
+                </div>
+              </div>
+            </div>
+            <div class="post_content_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(@threadtype.content_jp))) %>
+                </div>
+              </div>
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close / 閉じる
+          </button>
+        </div>
+  		</div>
+  	</div>
+  </div>
+</div>

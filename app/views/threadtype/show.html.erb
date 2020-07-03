@@ -12,13 +12,7 @@
       </div>
     <% end %>
     <div class="profile_picture">
-      <% if @threadtype.id == 22 %>
-        <%= image_tag("group_icon/chat.png", :class => "group_img",:style => "border-radius:none") %>
-      <% elsif @threadtype.id == 23 %>
-        <%= image_tag("group_icon/question.png", :class => "group_img",:style => "border-radius:none") %>
-      <% elsif @threadtype.id == 24 %>
-        <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
-      <% elsif @threadtype.pict.attached? %>
+      <% if @threadtype.pict.attached? %>
         <%= image_tag @threadtype.pict , :class => "group_img",:style => "border-radius:none"%>
       <% else %>
         <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
@@ -27,17 +21,7 @@
     <div class="profile_contents_change">
       <div class="get_user_id"id="<%= current_user_id %>"></div>
       <ul class="nav flex-column">
-        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every") %>active<% end %>">
-          <%= link_to "/threadtype/show/" + @threadtype.id.to_s + "/1",class:"nav-link" do %>
-            <div class="jp">
-              ホーム
-            </div>
-            <div class="en">
-              Home
-            </div>
-          <% end %>
-        </li>
-        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
+        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
           <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
             <div class="jp">
               人気スレッド
@@ -104,7 +88,7 @@
     </div>
     <div class="thread_cover threadtype_cover">
       <% if params[:type] == nil || params[:type] == "1"%>
-        <%= render partial: "/threadtype/detail_show", locals: { threadtype: @threadtype }%>
+        <%= render partial: "/threadtype/popular_thread", locals: { threadtype: @threadtype }%>
       <% elsif params[:type] == "2"  %>
         <%= render partial: "/threadtype/popular_thread", locals: { threadtype: @threadtype }%>
       <% elsif params[:type] == "3"  %>

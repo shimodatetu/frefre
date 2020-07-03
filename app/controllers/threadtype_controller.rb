@@ -24,10 +24,10 @@ class ThreadtypeController < ApplicationController
 
     thread_id = @threadtype.groups.first.id
     groups = @threadtype.groups.where.not(id:thread_id)
-    if params[:type] == nil || params[:type] == "1"
+    if (params[:type] == nil || params[:type] == "1") && 1 == 2
       @open_posts = @threadtype.groups.first.posts.page(page_id).per(per)
       @post = Post.new
-    elsif params[:type] == "2"
+    elsif params[:type] == nil || params[:type] == "1" || params[:type] == "2"
       @popular_groups = groups.order(seen_num: "DESC").page(page_id).per(per)
     elsif params[:type] == "3"
       @latest_groups = groups.order(id:"asc").page(page_id).per(per)
