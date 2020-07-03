@@ -2,6 +2,7 @@
 <% if @threadtype.leader_id != 0 %>
   <% leader = User.find_by(id:@threadtype.leader_id) %>
 <% end %>
+<%= render partial:"threadtype/explain_table" %>
 
 <%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link") do %>
   <div class="text_box">
