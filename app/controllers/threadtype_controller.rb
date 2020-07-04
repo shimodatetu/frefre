@@ -78,16 +78,16 @@ class ThreadtypeController < ApplicationController
       if threadtype.save
         group = Group.new()
         threadtype.users << current_user
-        group.title_jp = "オープンスレッド"
-        group.title_en = "Open Thread"
+        group.title_jp = "お知らせ・一般スレッド"
+        group.title_en = "News・Standard Thread"
         group.user_id = current_user.id
         group.threadtype_id = threadtype.id
-        group.first_content_jp = "オープンスレッドが作成されました。"
-        group.first_content_en = "Open Thread was made."
+        group.first_content_jp = "コミュニティが作成されました!"
+        group.first_content_en = "Community was made!"
         if group.save
           post = Post.new()
-          post.content_jap = "オープンスレッドが作成されました。"
-          post.content_eng = "Open Thread was made."
+          post.content_jap = "コミュニティが作成されました。"
+          post.content_eng = "Community was made."
           post.id_ingroup = group.posts.count
           post.threadtype_id = threadtype.id
           post.group_id = group.id
