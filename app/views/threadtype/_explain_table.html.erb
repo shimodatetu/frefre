@@ -26,32 +26,7 @@
         </div>
       </th>
     </tr>
-    <tr class="table_list">
-      <th class="column_title">
-        <div class="title_jp">
-          管理者
-        </div>
-        <div class="title_en">
-          Manager
-        </div>
-      </th>
-      <th class="column_content">
-        <div class="threadtype_img_cover">
-          <% if @threadtype.leader_id == 0 %>
-            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-          <% else %>
-            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-          <% end %>
-        </div>
-        <div class="threadtype_name">
-          <% if @threadtype.type == "every" || @threadtype.leader_id == 1 %>
-            FreFre Office
-          <% else %>
-            <%= leader.name %>
-          <% end %>
-        </div>
-      </th>
-    </tr>
+    
     <tr class="table_list">
       <th class="column_title">
         <div class="title_jp">
@@ -73,7 +48,55 @@
         </div>
       </th>
     </tr>
+    <% if @threadtype.type == "every" %>
+      <tr class="table_list">
+        <th class="column_title"style="height:83px;">
+          <div class="title_jp">
+            メンバー
+          </div>
+          <div class="title_en">
+            Member
+          </div>
+        </th>
+        <th class="column_content threadtype_user_cover threadtype_users_all"style= "height:83px">
+          <%= link_to("/threadtype/show/"+ @threadtype.id.to_s + "/4") do %>
+            <div class="threadtype_img_cover users_all">
+              <% threadtype_users = @threadtype.users.where.not(id:@threadtype.leader_id) %>
+              <% user_sum = threadtype_users.count %>
+              <% threadtype_users.limit(3).each do |user|%>
+                <% url = "/profile" %>
+                <% if logged_in? && current_user.id != user.id %>
+                  <% url = "/other_profile/#{user.id}" %>
+                <% end %>
+                <object>
+                  <%= link_to url,class:"user_cover" do %>
 
+                    <% if user.user_threadtypes.find_by(threadtype_id:@threadtype.id).created_at > Time.current.ago(7.days) %>
+                      <i class="new_user_icon fa fa-user-plus" aria-hidden="true"></i>
+                    <% end %>
+                    <% if user.image == 0 %>
+                      <% if user.avater.attached? %>
+                        <%= image_tag user.avater , :class => "user_img"%>
+                      <% else %>
+                        <%= image_tag("/userimage/user1.png", :class => "user_img") %>
+                      <% end %>
+                    <% else %>
+                      <%= image_tag("/userimage/user#{user.image}.png", :class => "user_img") %>
+                    <% end %>
+                    <div class="user_name">
+                      <%= user.name %>
+                    </div>
+                  <% end %>
+                </object>
+              <% end %>
+              <div class="user_others_dots">
+                ・・・
+              </div>
+            </div>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
   </table>
 </div>
 
