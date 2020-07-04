@@ -1,0 +1,73 @@
+
+<% leader = User.find_by(id:@threadtype.leader_id) %>
+<% current_user_id = -1 %>
+<% if logged_in? %>
+  <% current_user_id = current_user.id %>
+<% end %>
+<div class="profile_menu_tab">
+  <div class="get_user_id"id="<%= current_user_id %>"></div>
+  <ul class="nav flex-column">
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
+      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
+        <div class="jp">
+          人気スレッド
+        </div>
+        <div class="en">
+          Popular Thread
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
+      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
+        <div class="jp">
+          人気スレッド
+        </div>
+        <div class="en">
+          Popular Thread
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
+      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
+        <div class="jp">
+          最新スレッド
+        </div>
+        <div class="en">
+          Latest Thread
+        </div>
+      <% end %>
+    </li>
+    <% if @threadtype.type != "every" %>
+      <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "4" %>active<% end %>">
+        <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
+          <div class="jp">
+            メンバー
+          </div>
+          <div class="en">
+            Member
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "5" %>active<% end %>">
+      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/5',class:"nav-link" do %>
+        <div class="jp">
+          スレッド作成
+        </div>
+        <div class="en">
+          Make Thread
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "6" %>active<% end %>">
+      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/6',class:"nav-link" do %>
+        <div class="jp">
+          キーワード検索
+        </div>
+        <div class="en">
+          Search
+        </div>
+      <% end %>
+    </li>
+  </ul>
+</div>

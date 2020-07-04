@@ -25,6 +25,7 @@ class ThreadtypeController < ApplicationController
     thread_id = @threadtype.groups.first.id
     groups = @threadtype.groups.where.not(id:thread_id)
 
+    @threadtype_users = @threadtype.users.where.not(id:@threadtype.leader_id)
     @threadtype_menu_show = true
 
     if (params[:type] == nil || params[:type] == "1") && 1 == 2

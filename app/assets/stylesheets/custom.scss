@@ -1,3 +1,4 @@
+
 .table_all_cover{
   color:#4e4e4e;
 }
@@ -166,6 +167,24 @@ p{
   width:300px;
   vertical-align: top;
   margin-top:80px;
+  .profile_menu_tab{
+    .nav{
+      border-radius:5px;
+      border:solid thin #ccc;
+      .nav-item{
+        border-bottom: solid 1px #ccc;
+        .nav-link{
+          padding: 5px 15px;
+          .jp{
+            font-size:11px;
+          }
+          .en{
+            font-size:15px;
+          }
+        }
+      }
+    }
+  }
   .mirai_img{
     margin-top:20px;
     margin-left:50px;
