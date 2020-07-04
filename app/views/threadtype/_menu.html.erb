@@ -8,25 +8,31 @@
   <div class="get_user_id"id="<%= current_user_id %>"></div>
   <ul class="nav flex-column">
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
-      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
+      <div class="nav-link">
         <div class="jp">
-          人気スレッド
+          コミュニティメニュー
         </div>
         <div class="en">
-          Popular Thread
+          Community Menu
         </div>
-      <% end %>
+      </div>
     </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
-        <div class="jp">
-          人気スレッド
+        <div class="text_cover">
+          <div class="jp">
+            人気スレッド
+          </div>
+          <div class="en">
+            Popular Thread
+          </div>
         </div>
-        <div class="en">
-          Popular Thread
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
         </div>
       <% end %>
     </li>
+
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
         <div class="jp">
@@ -34,6 +40,9 @@
         </div>
         <div class="en">
           Latest Thread
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
         </div>
       <% end %>
     </li>
@@ -59,6 +68,9 @@
         </div>
       <% end %>
     </li>
+    <div class="menu_right_button">
+      <i class="fas fa-plus"></i>
+    </div>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "6" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/6',class:"nav-link" do %>
         <div class="jp">
@@ -69,5 +81,8 @@
         </div>
       <% end %>
     </li>
+    <div class="menu_right_button">
+      <i class="fas fa-plus"></i>
+    </div>
   </ul>
 </div>

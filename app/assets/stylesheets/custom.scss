@@ -171,17 +171,33 @@ p{
     .nav{
       border-radius:5px;
       border:solid thin #ccc;
+      margin-top:10px;
       .nav-item{
         border-bottom: solid 1px #ccc;
         .nav-link{
           padding: 5px 15px;
-          .jp{
-            font-size:11px;
-          }
-          .en{
-            font-size:15px;
+          .text_cover{
+            .jp{
+              font-size:11px;
+            }
+            .en{
+              font-size:15px;
+              margin-top: -2px;
+            }
           }
         }
+      }
+      .menu_right_button{
+        float:right;
+        border-radius:50%;
+        background:#07689f;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        font-size: 23px;
+        margin-right: -5px;
+        margin-top: -32px;
+        color:#fff;
       }
     }
   }
