@@ -48,32 +48,7 @@
         </div>
       </th>
     </tr>
-    <tr class="threadtype_user_cover table_list">
-      <th class="column_title">
-        <div class="title_jp">
-          管理者
-        </div>
-        <div class="title_en">
-          Manager
-        </div>
-      </th>
-      <th class="column_content">
-        <div class="threadtype_img_cover">
-          <% if @threadtype.leader_id == 0 || @threadtype.type == "every" %>
-            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-          <% else %>
-            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-          <% end %>
-        </div>
-        <div class="threadtype_name">
-          <% if @threadtype.leader_id == 0 || @threadtype.type == "every" %>
-            FreFre Office
-          <% else %>
-            <%= leader.name %>
-          <% end %>
-        </div>
-      </th>
-    </tr>
+    
     <% if @threadtype.type == "every" %>
       <tr class="table_list">
         <th class="column_title"style="height:83px;">

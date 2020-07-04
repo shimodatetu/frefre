@@ -24,6 +24,9 @@ class ThreadtypeController < ApplicationController
 
     thread_id = @threadtype.groups.first.id
     groups = @threadtype.groups.where.not(id:thread_id)
+
+    @threadtype_menu_show = true
+
     if (params[:type] == nil || params[:type] == "1") && 1 == 2
       @open_posts = @threadtype.groups.first.posts.page(page_id).per(per)
       @post = Post.new
