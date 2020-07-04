@@ -186,6 +186,42 @@ p{
             }
           }
         }
+        .threadtype_img_cover{
+          display: inline-block;
+          .threadtype_img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
+          .user_others_dots{
+            vertical-align: middle;
+            margin-top: 20px;
+            display: inline-block;
+            margin-left: -15px;
+          }
+          .user_cover{
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: top;
+            min-width: 70px;
+            .user_img{
+              width: 40px;
+              height: 40px;
+              margin-left: 10px;
+              border-radius: 50%;
+            }
+            .new_user_icon {
+              float: right;
+              margin-top: -5px;
+              color: #28689f;
+            }
+            .user_name{
+              max-width: 60px;
+              word-wrap: break-word;
+              line-height: 13px;
+            }
+          }
+        }
       }
       .menu_right_button{
         float:right;
