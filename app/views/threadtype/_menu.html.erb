@@ -9,11 +9,13 @@
   <ul class="nav flex-column">
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
       <div class="nav-link">
-        <div class="jp">
-          コミュニティメニュー
-        </div>
-        <div class="en">
-          Community Menu
+        <div class="text_cover">
+          <div class="jp">
+            コミュニティメニュー
+          </div>
+          <div class="en">
+            Community Menu
+          </div>
         </div>
       </div>
     </li>
@@ -35,11 +37,13 @@
 
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
-        <div class="jp">
-          最新スレッド
-        </div>
-        <div class="en">
-          Latest Thread
+        <div class="text_cover">
+          <div class="jp">
+            最新スレッド
+          </div>
+          <div class="en">
+            Latest Thread
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -49,40 +53,49 @@
     <% if @threadtype.type != "every" %>
       <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "4" %>active<% end %>">
         <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
-          <div class="jp">
-            メンバー
+          <div class="text_cover">
+            <div class="jp">
+              メンバー
+            </div>
+            <div class="en">
+              Member
+            </div>
           </div>
-          <div class="en">
-            Member
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
           </div>
         <% end %>
       </li>
     <% end %>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "5" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/5',class:"nav-link" do %>
-        <div class="jp">
-          スレッド作成
+        <div class="text_cover">
+          <div class="jp">
+            スレッド作成
+          </div>
+          <div class="en">
+            Make Thread
+          </div>
         </div>
-        <div class="en">
-          Make Thread
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
         </div>
       <% end %>
     </li>
-    <div class="menu_right_button">
-      <i class="fas fa-plus"></i>
-    </div>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "6" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/6',class:"nav-link" do %>
-        <div class="jp">
-          キーワード検索
+        <div class="text_cover">
+          <div class="jp">
+            キーワード検索
+          </div>
+          <div class="en">
+            Search
+          </div>
         </div>
-        <div class="en">
-          Search
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
         </div>
       <% end %>
     </li>
-    <div class="menu_right_button">
-      <i class="fas fa-plus"></i>
-    </div>
   </ul>
 </div>
