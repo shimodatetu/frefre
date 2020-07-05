@@ -122,7 +122,6 @@
   }
   .nav-tabs{
     z-index: 5;
-    width: calc(100vw - 200px);
     margin-top: 5px;
   }
 
@@ -232,13 +231,10 @@
     margin-left: 6px;
     margin-top:10px;
   }
-  .profile_sub{
-      position:fixed;
-  }
+
   .profile_main{
     display:inline-block;
-    width: calc(100vw - 200px);
-    margin-left:120px;
+    width: calc(100vw - 350px);
     margin-bottom:10px;
     min-height:calc(100vh - 150px);
   }
@@ -327,7 +323,7 @@
   }
   .profile_words, .profile_page{
     font-size:18px;
-    margin-left:15px;
+    margin-left:5px;
     background-color: #f2fff8;
     border-radius:5px;
     .profile_content{

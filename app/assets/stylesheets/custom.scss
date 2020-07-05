@@ -9,6 +9,7 @@
   font-weight: bold;
   font-size: 15px;
   padding: 5px 10px 5px 10px;
+  margin: 5px 5px 10px 0px;
 }
 .make_group_button:hover{
   border: solid 2px #ff9d3b;
@@ -220,6 +221,7 @@ p{
               max-width: 60px;
               word-wrap: break-word;
               line-height: 13px;
+              text-align: center;
             }
           }
         }

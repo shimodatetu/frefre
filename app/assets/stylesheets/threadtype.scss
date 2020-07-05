@@ -11,6 +11,17 @@
   color: #fff;
 }
 .threadtype_page{
+  .explain_join_button{
+    margin-left: calc(50% - 80px);
+    margin-left:5px;
+    .unjoin_button{
+      pointer-events: none;
+    }
+    .join_button{
+      font-size: 20px;
+      padding: 5px 30px;
+    }
+  }
   .thread_post_cover.form_cover {
     border:none;
     margin-bottom:0px;
@@ -150,8 +161,15 @@
     .title_padding{
       -webkit-line-clamp:none;
     }
+    .table_left_image{
+      float: left;
+      margin-right: 10px;
+      img{
+        width: 150px;
+      }
+    }
     .table_all_cover{
-      width:100%;
+      width: calc(100% - 160px);
       .table_list{
         .column_title{
           display:inline-block;

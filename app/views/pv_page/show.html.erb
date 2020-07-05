@@ -30,7 +30,15 @@
     <div class="explain_text"style="display:none">コミュニティに参加してなくても、中身を閲覧することができます！</div>
     <div class="explain_text">コミュニティに参加してチャットしよう！</div>
   </div>
+  <%= link_to("threadtype/new",type:"button",class:"btn btn-default btn mes_button make_group_button") do %>
+    <div class="text_box">
+      <div class="jp">
+        Make Community / コミュニティを作る
+      </div>
+    </div>
+  <% end %>
   <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
+
   <div class="threadtype_cover">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item blue-nav active">

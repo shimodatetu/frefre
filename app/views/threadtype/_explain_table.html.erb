@@ -2,6 +2,13 @@
   <% leader = User.find_by(id:@threadtype.leader_id) %>
 <% end %>
 <div class="thread_content threadtype_content">
+  <div class="table_left_image">
+    <% if @threadtype.pict.attached? %>
+      <%= image_tag @threadtype.pict , :class => "group_img",:style => "border-radius:0px"%>
+    <% else %>
+      <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px") %>
+    <% end %>
+  </div>
   <table class="table_all_cover threadtype_cover threadtype_users" border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#eee">
     <tr class="table_list">
       <th class="column_title">
@@ -127,6 +134,27 @@
       </tr>
     <% end %>
   </table>
+</div>
+
+<% threadtype_id = @threadtype.id %>
+<div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
+  <% if current_user.threadtypes.find_by(id:threadtype_id) != nil %>
+    <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
+      <div class="text_box">
+        <div class="jp">
+          Joined / 参加済
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit click",id:threadtype_id do %>
+      <div class="text_box">
+        <div class="jp">
+          Join / 参加する
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="profile_modal">

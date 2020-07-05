@@ -7,6 +7,7 @@ class ProfileController < ApplicationController
       gon.prohibit.push(prohibit.prohibit_words)
     end
     @threadtype = nil
+    @profile_menu_show = true
     if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"
       page_id = params[:page].to_i
       if page_id.nil? || page_id.to_i < 1

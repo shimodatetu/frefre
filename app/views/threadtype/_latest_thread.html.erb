@@ -4,16 +4,6 @@
 <% end %>
 <%= render partial:"threadtype/explain_table" %>
 
-<%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link") do %>
-  <div class="text_box">
-    <div class="en">
-      Make Thread in this Community
-    </div>
-    <div class="jp">
-      このコミュニティ内でスレッドを作成する
-    </div>
-  </div>
-<% end %>
 <% first_group = threadtype.groups.first %>
 <% thread_id = first_group.id %>
 <div class="threadtype_threads">

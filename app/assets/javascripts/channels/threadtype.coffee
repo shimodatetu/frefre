@@ -13,15 +13,15 @@ App.threadtype = App.cable.subscriptions.create "ThreadtypeChannel",
     $(".join_button_submit , .unjoin_button_submit").attr("style","pointer-events: none;")
     @perform('joining',type:type,id:id)
 
-$(document).on 'click', '.unjoin_button_submit', (event) ->
+$(document).on 'click', '.unjoin_button_submit.click', (event) ->
   $("#join_modal").modal("show")
   $(".unjoin_modal_submit").attr("id",this.id)
 
-$(document).on 'click', '.unjoin_modal_submit', (event) ->
+$(document).on 'click', '.unjoin_modal_submit.click', (event) ->
   App.threadtype.join("unjoin",parseInt(this.id))
   $("#join_modal").modal("hide")
 
-$(document).on 'click', '.join_button_submit', (event) ->
+$(document).on 'click', '.join_button_submit.click', (event) ->
   App.threadtype.join("join",parseInt(this.id))
 
 $(document).on 'hidden.bs.modal', '#join_modal', (event) ->
