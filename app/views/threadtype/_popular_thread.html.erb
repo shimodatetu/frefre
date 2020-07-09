@@ -16,19 +16,19 @@
     <% end %>
   <% else %>
     <% if @threadtype.approval == "approval" %>
-      <% if logged_in? && current_user.approvals.find_by(threadtype_id:threadtype_id) == nil %>
-        <%= button_tag type:"button",class:"btn mes_button join_button approves_button_submit click",id:threadtype_id do %>
-          <div class="text_box">
-            <div class="jp">
-              Approve this Community / コミュニティに参加申請する
-            </div>
-          </div>
-        <% end %>
-      <% else %>
+      <% if logged_in? && current_user.approvals.find_by(threadtype_id:threadtype_id) != nil %>
         <%= button_tag type:"button",class:"btn mes_button join_button approved_button_submit click",id:threadtype_id do %>
           <div class="text_box">
             <div class="jp">
               You Approved Community / コミュニティ参加申請済み
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= button_tag type:"button",class:"btn mes_button join_button approves_button_submit click",id:threadtype_id do %>
+          <div class="text_box">
+            <div class="jp">
+              Approve this Community / コミュニティに参加申請する
             </div>
           </div>
         <% end %>
