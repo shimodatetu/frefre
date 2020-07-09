@@ -1,0 +1,49 @@
+
+<div class="threadtype_threads">
+  <ul class="nav nav-tabs title_nav" id="myTab" role="tablist">
+    <li class="nav-item active green-nav width_max">
+      <a class="nav-link profile_history_change2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+        <i class="fas fa-comments"></i>
+        <div class="text_cover">
+          Leave this Community / このコミュニティを退会する
+        </div>
+      </a>
+    </li>
+  </ul>
+  <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3"data-toggle="modal" data-target="#unsubscribe_modal"style="margin: 10px;margin-left: calc(50% - 100px);">
+    <div class="text_box">
+      <div class="jp">
+        このコミュニティを退会する
+      </div>
+      <div class="en">
+        Leave this Community
+      </div>
+    </div>
+  </button>
+  <div class="profile_modal">
+    <div class="modal fade" id="unsubscribe_modal" tabindex="-1">
+      <div class="modal-dialog"style="width:90vw">
+        <div class="modal-content">
+          <div class="modal-body"style="font-size: 18px;">
+            このコミュニティからを退会してよろしいですか?<br>
+            Are you sure to leave this community?
+          </div>
+          <div class="modal-footer">
+            <%= form_tag({controller: :threadtype, action: :retire}, { method: :post,style:"display:inline-block"})  do  %>
+
+              <%= hidden_field_tag :threadtype_id ,@threadtype.id,class:"send_time" %>
+              <button type="submit" class="btn btn-default btn_send"id="enjp"style="background:#ff2222">
+                <div class="float_jp">退会</div>
+                <div class="base_en">Unsubscribe</div>
+              </button>
+            <% end %>
+            <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+              <div class="float_jp">戻る</div>
+              <div class="base_en">Back</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

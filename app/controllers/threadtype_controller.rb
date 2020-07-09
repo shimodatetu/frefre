@@ -76,8 +76,16 @@ class ThreadtypeController < ApplicationController
       threadtype.leader_id = current_user.id
       threadtype.content_jp = params['content_jap']
       threadtype.content_en = params['content_eng']
-      threadtype.type = data["type"]
-      threadtype.type = "normal"
+      if data["type"] == "private"
+        threadtype.type = "private"
+      else
+        threadtype.type = "public"
+      end
+      if data["approval"] == "approval"
+        threadtype.type = "approval"
+      else
+        threadtype.type = "normal"
+      end
       if threadtype.save
         group = Group.new()
         threadtype.users << current_user
@@ -100,7 +108,18 @@ class ThreadtypeController < ApplicationController
       end
     end
   end
-
+  def retire
+    if logged_in? && (threadtype = Threadtype.find_by(id:params[:threadtype_id])) != nil && (user_threadtype = threadtype.user_threadtypes.find_by(user_id:current_user.id)) != nil
+      user_threadtype.delete
+      redirect_to "/threadtype/show/"+threadtype.id.to_s+"/1"
+    end
+  end
+  def approval_retire
+    if logged_in? && (threadtype = Threadtype.find_by(id:params[:threadtype_id])) != nil && threadtype.approval == "approval" && (approval = Approval.find_by(user_id:current_user.id,threadtype_id:threadtype.id)) != nil
+      approval.delete
+      redirect_to "/threadtype/show/"+threadtype.id.to_s+"/1"
+    end
+  end
   def update_do
     threadtype_id = params["threadtype_id"].to_i
     Threadtype.find_by(id:threadtype_id).update(image_params)

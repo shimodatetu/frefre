@@ -1,0 +1,145 @@
+<div class="thread_content threadtype_content">
+  <div class="table_left_image">
+    <% if user.avater.attached? %>
+      <%= image_tag user.avater , :class => "group_img",:style => "border-radius:0px"%>
+    <% else %>
+      <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px") %>
+    <% end %>
+    <div class="edit_user">
+      <button type="button" class="btn btn-default profile_picture_change " data-toggle="modal" data-target="#image_modal" data-whatever="@mdo">
+        <label>
+          <div class="jp">
+            写真を変更する
+          </div>
+          <div class="en">
+            Change Photo
+          </div>
+        </label>
+      </button>
+    </div>
+  </div>
+  <table class="table_all_cover threadtype_cover threadtype_users" border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#eee">
+    <tr class="table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          ユーザーネーム
+        </div>
+        <div class="title_en">
+          User Name
+        </div>
+      </th>
+      <th class="column_content threadtype_user_cover">
+        <%= user.name %>
+      </th>
+    </tr>
+    <tr class="threadtype_user_cover table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          ユーザーID
+        </div>
+        <div class="title_en">
+          User ID
+        </div>
+      </th>
+      <th class="column_content">
+        <%= user.user_search_id %>
+      </th>
+    </tr>
+    <tr class="threadtype_user_cover table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          性別
+        </div>
+        <div class="title_en">
+          Gender
+        </div>
+      </th>
+      <th class="column_content">
+        <% if current_user.gender == "Male" %>
+          <%= "Male / 男性" %>
+        <% elsif current_user.gender == "Female" %>
+          <%= "Female / 女性" %>
+        <% elsif current_user.gender == "Neuter"  %>
+          <%= "Other / その他" %>
+        <% else %>
+          <%= "No answer / 答えない" %>
+        <% end %>
+      </th>
+    </tr>
+    <tr class="threadtype_user_cover table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          出身国
+        </div>
+        <div class="title_en">
+          Country
+        </div>
+      </th>
+      <th class="column_content">
+        <% if current_user.country == nil %>
+          <%= "No answer / 答えない" %>
+        <% else %>
+          <%= current_user.country %>
+        <% end %>
+      </th>
+    </tr>
+    <tr class="table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          自己紹介
+        </div>
+        <div class="title_en">
+          Introduction
+        </div>
+      </th>
+      <th class="explain column_content"data-toggle="modal" data-target="#explain_modal">
+        <div class="post_content_position en_position width_max_text">
+          <div class="post_content">
+            <div class="post_content_text no_inline">
+              <%= simple_format(text_url_to_link(h(user.profile_en))) %>
+            </div>
+          </div>
+        </div>
+        <div class="post_content_position jp_position width_max_text">
+          <div class="post_content">
+            <div class="post_content_text no_inline">
+              <%= simple_format(text_url_to_link(h(user.profile_jp))) %>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </table>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="explain_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="post_content_cover explain"data-toggle="modal" data-target="exlain_modal">
+            <div class="post_content_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(user.profile_en))) %>
+                </div>
+              </div>
+            </div>
+            <div class="post_content_position width_max_text">
+              <div class="post_content">
+                <div class="post_content_text no_inline">
+                  <%= simple_format(text_url_to_link(h(user.profile_jp))) %>
+                </div>
+              </div>
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close / 閉じる
+          </button>
+        </div>
+  		</div>
+  	</div>
+  </div>
+</div>

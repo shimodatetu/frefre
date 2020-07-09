@@ -30,9 +30,9 @@ $(document).on 'hidden.bs.modal', '#join_modal', (event) ->
 
 button_change=(id) ->
   if $('.join_button'+id+' .unjoin_button_submit').length > 0
-    $(".join_button"+id+" .unjoin_button_submit .text_box .jp").html("Join / 参加する")
+    $(".join_button"+id+" .unjoin_button_submit .text_box .jp").html("Join this Community / このコミュニティに参加する")
     $(".join_button"+id+" .unjoin_button_submit").removeClass('unjoin_button_submit').addClass('join_button_submit');
   else
-    $(".join_button"+id+" .join_button_submit .text_box .jp").html("Joined / 参加済")
+    $(".join_button"+id+" .join_button_submit .text_box .jp").html("Joined Community / 参加済コミュニティ")
     $(".join_button"+id+" .join_button_submit").removeClass('join_button_submit').addClass('unjoin_button_submit');
 

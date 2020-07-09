@@ -1,0 +1,81 @@
+
+<% current_user_id = -1 %>
+<% if logged_in? %>
+  <% current_user_id = current_user.id %>
+<% end %>
+<div class="profile_menu_tab">
+  <div class="get_user_id"id="<%= current_user_id %>"></div>
+  <ul class="nav flex-column">
+    <li class="nav-item profile_contents_button <% if params[:id] == "22"%>active<% end %>">
+      <%= link_to "/profile/14/" + @threadtype.id.to_s ,class:"nav-link" do %>
+        <div class="jp">
+          トップページ
+        </div>
+        <div class="en">
+          Top Page
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <% if Threadtype.find_by(leader_id:current_user.id) != nil %>
+      <li class="nav-item profile_contents_button <% if params[:id] == "13" || params[:id] == "14"%>active<% end %>">
+        <%= link_to "/profile/15/" + @threadtype.id.to_s ,class:"nav-link" do %>
+          <div class="jp">
+            スレッド管理
+          </div>
+          <div class="en">
+            Edit Thread
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    <% if Threadtype.find_by(leader_id:current_user.id) != nil %>
+      <li class="nav-item profile_contents_button <% if params[:id] == "21" || params[:id] == "22"%>active<% end %>">
+        <%= link_to "/profile/19/" + @threadtype.id.to_s,class:"nav-link" do %>
+          <div class="jp">
+            メンバー管理
+          </div>
+          <div class="en">
+            Edit Member
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="nav-item profile_contents_button <% if params[:id] == "5" || params[:id] == "6"%>active<% end %>">
+      <%= link_to "/profile/21/" + @threadtype.id.to_s,class:"nav-link" do %>
+        <div class="jp">
+          お知らせ作成
+        </div>
+        <div class="en">
+          Make News
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button <% if params[:id] == "7" || params[:id] == "8"%>active<% end %>">
+      <% if @threadtype.type != "every" %>
+        <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
+          <div class="jp">
+            コミュニティ削除
+          </div>
+          <div class="en">
+            Delete Community
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      <% end %>
+    </li>
+  </ul>
+</div>

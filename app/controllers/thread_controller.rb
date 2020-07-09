@@ -20,6 +20,7 @@ class ThreadController < ApplicationController
     @threadtype = thread.threadtype
     @thread = Group.find_by(id:thread_id)
     @thread_posts = @thread.posts.page(page_id).per(per)
+    @threadtype_menu_show = true
   end
   def show_post_image
     @photo = Post.find(params[:id])

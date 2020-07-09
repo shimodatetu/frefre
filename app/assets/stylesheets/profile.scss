@@ -326,6 +326,95 @@
     margin-left:5px;
     background-color: #f2fff8;
     border-radius:5px;
+    .table_left_image{
+      float: left;
+      margin-right: 10px;
+      img{
+        width: 140px;
+        border:solid thin #ccc;
+      }
+      .edit_user{
+        margin-top:5px;
+        button{
+          width: 100%;
+          border-color: #07689f;
+          background: #07689f;
+          color: #fff;
+          padding: 3px 10px;
+        }
+        .jp{
+          font-size:14px;
+        }
+        .en{
+          font-size: 17px;
+          margin-top: -3px;
+        }
+      }
+    }
+    .table_all_cover{
+      width: calc(100% - 160px);
+      background: #fff;
+      margin-top:10px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      .table_list{
+        .column_title{
+          display:inline-block;
+          width:150px;
+          border-right:none;
+          padding: 5px;
+          height: 52px;
+          .title_jp{
+            font-size: 12px;
+          }
+          .title_en{
+            font-size: 16px;
+          }
+        }
+        .column_content{
+          display:inline-block;
+          width:calc(100% - 150px);
+          height: 52px;
+          padding: 10px;
+          border-left: solid thin #eee;
+        }
+        .threadtype_users_all{
+          padding:0px;
+          .users_all{
+            width: 100%;
+            padding: 10px;
+            height: 100%;
+          }
+          .users_all:hover{
+            background: #eee;
+          }
+        }
+        .explain{
+          background: #fff;
+          text-align: left;
+          cursor: pointer;
+          padding:0px;
+          padding-left: 5px;
+          font-size: 15px;
+          .width_max_text{
+            border-radius: 5px;
+            padding: 2px;
+            width:100%!important;
+            display: block!important;
+            p{
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box!important;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+            }
+          }
+        }
+        .explain:hover{
+          background: #eee;
+        }
+      }
+    }
     .profile_content{
       border-radius:5px;
       padding-left:15px;

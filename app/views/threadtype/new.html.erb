@@ -38,7 +38,7 @@
         <div class="panel panel-warning make_thread_category thread_make">
           <%= form_for Threadtype.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
             <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
-            <div class="panel-body content_cover"style="margin-top:20px;">
+            <div class="panel-body content_cover"style="margin-top:20px;display:none">
               <div class="title_input_name">
                 <div class="sub_jp">
                   カテゴリー (1つだけ選択できます)
@@ -54,7 +54,34 @@
                 </div>
               <% end %>
             </div>
-
+            <div class="panel-body content_cover"style="margin-top:20px">
+              <div class="title_input_name">
+                <div class="sub_jp">
+                  公開・非公開
+                </div>
+                <div class="main_en">
+                  Private or Public
+                </div>
+              </div>
+              <div class="checkbox_cover">
+                <%= form.radio_button :type, "normal" %> Public / 公開　　
+                <%= form.radio_button :type, "private" %> Private / 非公開
+              </div>
+            </div>
+            <div class="panel-body content_cover">
+              <div class="title_input_name">
+                <div class="sub_jp">
+                  参加方法
+                </div>
+                <div class="main_en">
+                  Way to Join
+                </div>
+              </div>
+              <div class="checkbox_cover">
+                <%= form.radio_button :approval, "free" %> Free to Join / 誰でも参加可能　
+                <%= form.radio_button :approval, "private" %> Approval / 承認制
+              </div>
+            </div>
             <div class="flag_show">
               <div class="flag_image">
                 <%= image_tag "/eng.png", class: "image" %>

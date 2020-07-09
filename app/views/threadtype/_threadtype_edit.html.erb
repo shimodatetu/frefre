@@ -1,6 +1,9 @@
 <% leader = User.find_by(id:threadtype.leader_id) %>
-
-<%= link_to("/profile/14/"+threadtype.id.to_s,class:"thread_link") do %>
+<% url = "/profile/14/"+threadtype.id.to_s %>
+<% if type == "join" %>
+  <% url = "/profile/22/"+threadtype.id.to_s %>
+<% end %>
+<%= link_to(url,class:"thread_link") do %>
   <% there_be = true %>
   <div class="thread_cover threadtype_cover">
     <div class="group_user_cover threadtype_image">

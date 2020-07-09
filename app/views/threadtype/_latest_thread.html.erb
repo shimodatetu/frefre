@@ -3,7 +3,26 @@
   <% leader = User.find_by(id:@threadtype.leader_id) %>
 <% end %>
 <%= render partial:"threadtype/explain_table" %>
-
+<% threadtype_id = @threadtype.id %>
+<div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
+  <% if logged_in? && current_user.threadtypes.find_by(id:threadtype_id) != nil %>
+    <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id,style:"cursor:default" do %>
+      <div class="text_box">
+        <div class="jp">
+          Joined Community / 参加済コミュニティ
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit click",id:threadtype_id do %>
+      <div class="text_box">
+        <div class="jp">
+          Join this Community / このコミュニティに参加する
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 <% first_group = threadtype.groups.first %>
 <% thread_id = first_group.id %>
 <div class="threadtype_threads">

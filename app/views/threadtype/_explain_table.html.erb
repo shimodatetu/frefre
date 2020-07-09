@@ -48,12 +48,31 @@
       </th>
       <th class="column_content threadtype_user_cover">
         <div class="threadtype_type">
-          <% if @threadtype.type == "not_open" %>
-            <i class="fas fa-minus-circle"></i>Private / 非公開
-          <% elsif @threadtype.type == "secret" %>
-            <i class="fas fa-lock"></i>Secret / 秘密
+          <% if @threadtype.type == "every" %>
+            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>Official / 公式
+          <% elsif @threadtype.type == "private" %>
+            <i class="fas fa-lock"></i>Private / 非公開
           <% else %>
             <i class="fas fa-check-circle"></i>Public / 公開
+          <% end %>
+        </div>
+      </th>
+    </tr>
+    <tr class="table_list">
+      <th class="column_title">
+        <div class="title_jp">
+          参加方法
+        </div>
+        <div class="title_en">
+          Way to Join
+        </div>
+      </th>
+      <th class="column_content threadtype_user_cover">
+        <div class="threadtype_type">
+          <% if @threadtype.approval == "approval" %>
+            Private / 承認制
+          <% else %>
+            Free to Join / 誰でも参加可能
           <% end %>
         </div>
       </th>
@@ -136,26 +155,7 @@
   </table>
 </div>
 
-<% threadtype_id = @threadtype.id %>
-<div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
-  <% if current_user.threadtypes.find_by(id:threadtype_id) != nil %>
-    <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
-      <div class="text_box">
-        <div class="jp">
-          Joined / 参加済
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit click",id:threadtype_id do %>
-      <div class="text_box">
-        <div class="jp">
-          Join / 参加する
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+
 
 <div class="profile_modal">
   <div class="modal fade" id="explain_modal" tabindex="-1">

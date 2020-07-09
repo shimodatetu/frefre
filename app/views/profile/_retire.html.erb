@@ -16,7 +16,6 @@
         <div class="group_user_cover">
           <div class="group_img_cover">
             <object>
-
             <% url = "/profile" %>
             <% if logged_in? && current_user.id != user.id %>
               <% url = "/other_profile/#{user.id}" %>
@@ -83,16 +82,38 @@
     <% end %>
   </div>
 
-  <%= form_tag({controller: :profile, action: :retire}, { method: :post})  do  %>
-    <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
-      <div class="text_box">
-        <div class="jp">
-          退会する
-        </div>
-        <div class="en">
-          Unsubscribe
+  <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3"data-toggle="modal" data-target="#unsubscribe_modal">
+    <div class="text_box">
+      <div class="jp">
+        退会する
+      </div>
+      <div class="en">
+        Unsubscribe
+      </div>
+    </div>
+  </button>
+  <div class="profile_modal">
+    <div class="modal fade" id="unsubscribe_modal" tabindex="-1">
+      <div class="modal-dialog"style="width:90vw">
+        <div class="modal-content">
+          <div class="modal-body"style="font-size: 18px;">
+            アカウントを解除してよろしいですか?<br>
+            Do you want to delete your account?
+          </div>
+          <div class="modal-footer">
+            <%= form_tag({controller: :profile, action: :retire}, { method: :post,style:"display:inline-block"})  do  %>
+              <button type="submit" class="btn btn-default btn_send"id="enjp"style="background:#ff2222">
+                <div class="float_jp">退会</div>
+                <div class="base_en">Unsubscribe</div>
+              </button>
+            <% end %>
+            <button type="button" class="btn btn-default btn_back" data-dismiss="modal"style="margin-right:calc(50% - 70px);">
+              <div class="float_jp">戻る</div>
+              <div class="base_en">Back</div>
+            </button>
+          </div>
         </div>
       </div>
-    </button>
-  <% end %>
+    </div>
+  </div>
 </div>

@@ -99,6 +99,10 @@
         <%= render partial: "/threadtype/make_thread", locals: { threadtype: @threadtype }%>
       <% elsif params[:type] == "6" || params[:type] == "7" || params[:type] == "8" %>
         <%= render partial: "/threadtype/search", locals: { threadtype: @threadtype }%>
+      <% elsif params[:type] == "9"  %>
+        <%= render partial: "/threadtype/retire", locals: { threadtype: @threadtype }%>
+      <% elsif params[:type] == "10"  %>
+        <%= render partial: "/threadtype/approval_retire", locals: { threadtype: @threadtype }%>
       <% end %>
     </div>
   </div>

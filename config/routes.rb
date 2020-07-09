@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post "threadtype/search" => "threadtype#search"
   post "/threadtype_update" => "threadtype#update_do"
   post "/threadtype_update_text" => "threadtype#update_text_do"
+  post "/threadtype/retire" => "threadtype#retire"
+  post "/threadtype/approval_retire" => "threadtype#approval_retire"
 
   post 'post/create/:id' => 'post#create'
 

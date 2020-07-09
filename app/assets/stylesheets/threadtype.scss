@@ -18,7 +18,7 @@
       pointer-events: none;
     }
     .join_button{
-      font-size: 20px;
+      font-size: 16px;
       padding: 5px 30px;
     }
   }
@@ -124,8 +124,12 @@
 .threadtype_threads{
   width:100%;
   background:#f5f5f5;
+  margin-top: -5px;
 }
 .threadtype_cover{
+  padding-top: 0px;
+  border-radius: 0px;
+  margin-bottom: 0px;
   .compulsory{
     margin-top: 5px;
     padding: 2px 5px 2px 5px;
@@ -175,15 +179,32 @@
           display:inline-block;
           width:150px;
           border-right:none;
-          padding: 5px;
-          height: 52px;
+          padding: 3px 10px;
+          border-bottom:none;
+          font-size:12px;
+          .title_en{
+            font-size:13px;
+            margin-top:-3px;
+          }
         }
         .column_content{
           display:inline-block;
           width:calc(100% - 150px);
-          height: 52px;
-          padding: 10px;
+          height: 100%;
+          padding: 4px;
           border-left: solid thin #eee;
+          .post_content_position{
+            padding:0px!important;
+          }
+          .jp_position{
+            margin-top:-4px;
+          }
+          .threadtype_img_cover{
+            img{
+              width:30px;
+              height:30px;
+            }
+          }
         }
         .threadtype_users_all{
           padding:0px;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_062311) do
+ActiveRecord::Schema.define(version: 2020_07_09_062148) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2020_07_02_062311) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "approvals", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "threadtype_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bigcategories", force: :cascade do |t|
@@ -215,6 +222,7 @@ ActiveRecord::Schema.define(version: 2020_07_02_062311) do
     t.string "content_jp"
     t.integer "leader_id", default: 0
     t.integer "category_id"
+    t.string "approval"
   end
 
   create_table "user_notices", force: :cascade do |t|

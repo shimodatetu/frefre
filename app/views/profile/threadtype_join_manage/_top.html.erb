@@ -80,22 +80,8 @@
       </div>
     </div>
     <div class="profile_main">
-      <% if params[:id] == "14" %>
+      <% if params[:id] == "22" %>
         <%= render partial:"profile/threadtype_manage/edit_profile" %>
-      <% elsif params[:id] == "15" %>
-        <%= render partial:"profile/threadtype_manage/thread_list" %>
-      <% elsif params[:id] == "16" %>
-        <%= render partial:"profile/threadtype_manage/edit_thread" %>
-      <% elsif params[:id] == "17" %>
-        <%= render partial:"profile/threadtype_manage/search_thread" %>
-      <% elsif params[:id] == "18" %>
-        <%= render partial:"profile/threadtype_manage/search_post" %>
-      <% elsif params[:id] == "19" %>
-        <%= render partial:"profile/threadtype_manage/member_list" %>
-      <% elsif params[:id] == "20" %>
-        <%= render partial:"profile/threadtype_manage/search_member" %>
-      <% elsif params[:id] == "21" %>
-        <%= render partial:"profile/threadtype_manage/news_make" %>
       <% end %>
     </div>
   </div>

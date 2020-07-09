@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :threadtypes, through: :user_threadtypes, dependent: :destroy
   accepts_nested_attributes_for :user_threadtypes
 
+  has_many :approvals, dependent: :destroy
+
   has_many :user_notices, dependent: :destroy
   has_many :notices, through: :user_notices, dependent: :destroy
   accepts_nested_attributes_for :user_notices

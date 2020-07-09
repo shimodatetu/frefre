@@ -93,7 +93,9 @@ class ProfileController < ApplicationController
         @followers = current_user.followings.all.page(1).per(per)
         @search_users = @search_users.all.page(page_id).per(per)
       end
-    elsif params[:id].to_i >= 14
+    elsif params[:id].to_i >= 14 && params[:id].to_i <= 20
+      @profile_menu_show = false
+      @profile_menu_manage_show = true
       threadtype_id = params[:page1].to_i
       if threadtype_id.nil? || threadtype_id.to_i < 1
         threadtype_id = 1
@@ -151,6 +153,14 @@ class ProfileController < ApplicationController
       else
         @threadtype = nil
       end
+    elsif params[:id].to_i >= 22 && params[:id].to_i <= 25
+      @profile_menu_show = false
+      @profile_joinmenu_manage_show = true
+      threadtype_id = params[:page1].to_i
+      if threadtype_id.nil? || threadtype_id.to_i < 1
+        threadtype_id = 1
+      end
+      @threadtype = Threadtype.find_by(id:threadtype_id.to_i)
     end
   end
   def threadtype_profile_search

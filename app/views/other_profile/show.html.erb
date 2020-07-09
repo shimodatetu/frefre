@@ -293,7 +293,7 @@
           <% if @make_groups != nil %>
             <% @make_groups.each do |threadtype| %>
               <% there_be = true %>
-              <%= render partial:"/threadtype/threadtype_edit", locals: { threadtype:threadtype } %>
+              <%= render partial:"/threadtype/threadtype_edit", locals: { threadtype:threadtype,type:"made" } %>
             <% end %>
           <% end %>
         </div>

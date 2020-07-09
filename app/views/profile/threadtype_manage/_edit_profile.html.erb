@@ -8,7 +8,6 @@
   </div>
 </div>
 <div class="threadtype_cover">
-
   <div class="thread_cover threadtype_cover">
     <div class="post_content_cover threadtype_title_show">
       <div class="post_content_position width_max">
@@ -23,6 +22,16 @@
     <% leader = User.find_by(id:@threadtype.leader_id) %>
     <div class="thread_content threadtype_content">
       <%= render partial:"threadtype/explain_table" %>
+      <% threadtype_id = @threadtype.id %>
+      <div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
+        <%= link_to("/threadtype/show/"+threadtype_id.to_s,class:"btn mes_button join_button unjoin_button_submit") do %>
+          <div class="text_box">
+            <div class="jp">
+              To this community / このコミュニティへ
+            </div>
+          </div>
+        <% end %>
+      </div>
       <%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link",data: {toggle: "modal",target: "#profile_change_modal"},style:"margin-left:calc(50% - 56px);") do %>
         <div class="text_box">
           <div class="en">
@@ -82,6 +91,48 @@
                 </div>
               </div>
               <div class="col-sm-12 profile_content">
+                <div class="row profile_content_data">
+                  <div class="content_name">
+                    <div class="jp">
+                      コミュニティの種類
+                    </div>
+                    <div class="en">
+                      Type of Community
+                    </div>
+                  </div>
+                  <div class="profile_content_cover">
+                    <select id="gender"class="content_select">
+                      <% if @threadtype.type == "puplic" %>
+                        <option value="Public" selected>Public / 公開</option>
+                      <% else %>
+                        <option value="Public">Public / 公開</option>
+                      <% end %>
+                      <% if @threadtype.type == "private" %>
+                        <option value="Private" selected>Private / 非公開</option>
+                      <% else %>
+                        <option value="Private">Private / 非公開</option>
+                      <% end %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 profile_content"style="display:none">
+                <div class="row profile_content_data">
+                  <div class="content_name">
+                    <div class="jp">
+                      コミュニティの種類
+                    </div>
+                    <div class="en">
+                      Type of Community
+                    </div>
+                  </div>
+                </div>
+                <div class="profile_content_cover">
+                  <%= radio_button_tag :type, "public",checked: @threadtype.type == "normal" %> Public / 公開
+                  <%= radio_button_tag :type, "private",checked: @threadtype.type == "private" %> Private/ 非公開
+                </div>
+              </div>
+              <div class="col-sm-12 profile_content"style="display:none">
                 <div class="row profile_content_data">
                   <div class="content_name">
                     <div class="sub_jp">

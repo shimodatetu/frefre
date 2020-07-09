@@ -22,7 +22,6 @@
         </div>
       <% end %>
     </li>
-
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
         <div class="text_cover">
@@ -85,6 +84,57 @@
         </div>
       <% end %>
     </li>
+    <% if logged_in? && @threadtype.leader_id == current_user.id %>
+      <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "9" %>active<% end %>">
+        <%= link_to '/profile/14/'+ @threadtype.id.to_s,class:"nav-link" do %>
+          <div class="text_cover">
+            <div class="jp">
+              コミュニティ管理画面へ
+            </div>
+            <div class="en">
+              Community Manage Page
+            </div>
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    <% if logged_in? && @threadtype.users.find_by(id:current_user.id) != nil %>
+      <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "9" %>active<% end %>">
+        <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/9',class:"nav-link" do %>
+          <div class="text_cover">
+            <div class="jp">
+              このコミュニティを退会する
+            </div>
+            <div class="en">
+              Leave this Community
+            </div>
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    <% if logged_in? && current_user.approvals.find_by(threadtype_id:@threadtype.id) != nil %>
+      <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "9" %>active<% end %>">
+        <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/10',class:"nav-link" do %>
+          <div class="text_cover">
+            <div class="jp">
+              参加申請を取り消す
+            </div>
+            <div class="en">
+              Remove approval of Community
+            </div>
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </div>
 <% if @threadtype.type != "every" || 1 == 1 %>
@@ -115,7 +165,6 @@
               <% end %>
               <object>
                 <%= link_to url,class:"user_cover" do %>
-
                   <% if user.user_threadtypes.find_by(threadtype_id:@threadtype.id).created_at > Time.current.ago(7.days) %>
                     <i class="new_user_icon fa fa-user-plus" aria-hidden="true"></i>
                   <% end %>
