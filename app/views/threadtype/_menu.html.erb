@@ -156,7 +156,7 @@
       <li class="nav-item profile_contents_button">
         <%= link_to("/threadtype/show/"+ @threadtype.id.to_s + "/4") do %>
           <div class="threadtype_img_cover users_all">
-            <% threadtype_users = @threadtype.users.where.not(id:@threadtype.leader_id) %>
+            <% threadtype_users = @threadtype.users %>
             <% user_sum = threadtype_users.count %>
             <% threadtype_users.limit(3).each do |user|%>
               <% url = "/profile" %>
@@ -190,7 +190,7 @@
         <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
           <div class="text_cover">
             <div class="en_jp">
-              See More / もっと見る
+              Member List / メンバーリスト
             </div>
           </div>
         <% end %>

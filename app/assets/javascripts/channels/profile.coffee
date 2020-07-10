@@ -10,8 +10,9 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
 
   received: (data) ->
     alert("asd")
-    user_id = String(data["message"]["id"])
-    user_type = data["message"]["usertype"]
+    console.log(data)
+    user_id = String(data["user_id"])
+    user_type = data["usertype"]
     if $(".user_id").attr('id') == String(user_id) && user_type != "delete"
       $(".profile_save_button").attr("style","")
       alert_set("Your profile was successfully saved.","プロフィールの保存に成功しました","success")

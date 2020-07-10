@@ -354,48 +354,7 @@
                     </div>
                   </div>
                 </div>
-                <!--<div class="col-sm-12 profile_content">
-                  <div class="profile_content_data row">
-                    <div class="content_name col-sm-2">
-                      <div class="jp">
-                        生年月日
-                      </div>
-                      Date Of Birth
-                    </div>
-                    <div class="col-sm-10">
-                      <select id="year"class="content_select">
-                        <option>Year</option>
-                        <% 2019.downto(1900) do |num| %>
-                          <% if current_user.birth_year == num %>
-                            <option value="<%= num %>"selected><%= num %></option>
-                          <% else %>
-                            <option value="<%= num %>"><%= num %></option>
-                          <% end %>
-                        <% end %>
-                      </select>
-                      <select id="month"class="content_select">
-                        <option>Month</option>
-                        <% 1.upto(12) do |num| %>
-                          <% if current_user.birth_month == num %>
-                            <option value="<%= num %>"selected><%= num %></option>
-                          <% else %>
-                            <option value="<%= num %>"><%= num %></option>
-                          <% end %>
-                        <% end %>
-                      </select>
-                      <select id="date"class="content_select">
-                        <option>Date</option>
-                        <% 1.upto(31) do |num| %>
-                          <% if current_user.birth_day == num %>
-                            <option value="<%= num %>"selected><%= num %></option>
-                          <% else %>
-                            <option value="<%= num %>"><%= num %></option>
-                          <% end %>
-                        <% end %>
-                      </select>
-                    </div>
-                  </div>
-                </div>-->
+
                 <div class="profile_content">
                   <div class="row profile_content_data">
                     <div class="content_name">
@@ -418,83 +377,82 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="profile_words">
-              <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                <div class="en help_text">
-                  Usage
-                </div>
-                <div class="jp help_text">
-                  使い方
-                </div>
-              </button>
-              <div class="profile_content intro_content">
-                <div class="intro">
-                  <div class="row profile_content_data self_introduction">
-                    <div class="content_name">
-                      <div class="jp">
-                        自己紹介(英語)
+              <div class="profile_words">
+                <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide">
+                  <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                  <div class="en help_text">
+                    Usage
+                  </div>
+                  <div class="jp help_text">
+                    使い方
+                  </div>
+                </button>
+                <div class="profile_content intro_content">
+                  <div class="intro">
+                    <div class="row profile_content_data self_introduction">
+                      <div class="content_name">
+                        <div class="jp">
+                          自己紹介(英語)
+                        </div>
+                        <div class="en">
+                          Introduction
+                          (English)
+                        </div>
                       </div>
-                      <div class="en">
-                        Introduction
-                        (English)
-                      </div>
+                      <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea>
+                      <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+                        Powered by MT
+                      <% end %>
                     </div>
-                    <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea>
-                    <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-                      Powered by MT
-                    <% end %>
                   </div>
-                </div>
-                <div class="space_form prof_trans"style="margin-top: 60px;">
-                  <div class="trans_cover">
-                    <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_en"
-                    name="<% if logged_in? %>logined<% end %>">
-                      <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                      <div class="button_text button_text_jp">
-                        翻訳
-                      </div>
-                    </button>
-                  </div>
-                  <div class="trans_cover">
-                    <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_jp"
-                    name="<% if logged_in? %>logined<% end %>">
-                      <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                      <div class="button_text button_text_en">
-                        Trans
-                      </div>
-                    </button>
-                  </div>
-                </div>
-                <div class="intro">
-                  <div class="row profile_content_data self_introduction">
-                    <div class=" content_name">
-                      <div class="jp">
-                        自己紹介(日本語)
-                      </div>
-                      <div class="en">
-                        Introduction
-                        (Japanese)
-                      </div>
+                  <div class="space_form prof_trans"style="margin-top: 60px;">
+                    <div class="trans_cover">
+                      <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_en"
+                      name="<% if logged_in? %>logined<% end %>">
+                        <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                        <div class="button_text button_text_jp">
+                          翻訳
+                        </div>
+                      </button>
                     </div>
-                    <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"><%=current_user.profile_jp%></textarea>
-                    <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
-                      翻訳提供 未来翻訳
-                    <% end %>
+                    <div class="trans_cover">
+                      <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_jp"
+                      name="<% if logged_in? %>logined<% end %>">
+                        <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                        <div class="button_text button_text_en">
+                          Trans
+                        </div>
+                      </button>
+                    </div>
                   </div>
+                  <div class="intro">
+                    <div class="row profile_content_data self_introduction">
+                      <div class=" content_name">
+                        <div class="jp">
+                          自己紹介(日本語)
+                        </div>
+                        <div class="en">
+                          Introduction
+                          (Japanese)
+                        </div>
+                      </div>
+                      <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"><%=current_user.profile_jp%></textarea>
+                      <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+                        翻訳提供 未来翻訳
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="save_button_bottom
+                  <% if current_user.usertype == "event" %>
+                    profile_cannot_save
+                  <% else %>
+                    profile_save_button
+                  <% end %>
+                    btn btn-default">
+                    Save / 保存
+                  </div>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
                 </div>
-                <div class="save_button_bottom
-                <% if current_user.usertype == "event" %>
-                  profile_cannot_save
-                <% else %>
-                  profile_save_button
-                <% end %>
-                  btn btn-default">
-                  Save / 保存
-                </div>
-
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
               </div>
             </div>
           </div>

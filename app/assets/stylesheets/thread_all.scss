@@ -1,3 +1,42 @@
+.dropdown{
+  display: inline-block;
+  float:right;
+  .create_time{
+    float:left;
+    margin-right:2px;
+    font-weight: bold;
+    color:#07689f
+  }
+  .caret {
+    border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #000000;
+  }
+  .dropdown-menu{
+    margin-left:-60px;
+    font-size:14px;
+    z-index:10;
+    margin-top: -3px;
+    .one_topic{
+      text-align: center;
+      color:#666;
+      padding:5px;
+      a{
+        text-decoration: none;
+        color:#666
+      }
+      .jp{
+        font-size:12px;
+      }
+    }
+    .one_topic:hover{
+      background: #f2fff8;
+      //color: #000;
+      //a{color:#bf8454}
+    }
+    .one_topic:nth-of-type(n+2){
+      border-top: solid thin #bbb;
+    }
+  }
+}
 .thread-panel-title{
   display: inline-block;
   width:100%;
@@ -174,45 +213,7 @@
       .post_content.jp{
         margin-right:80px;
       }
-      .dropdown{
-        display: inline-block;
-        float:right;
-        .create_time{
-          float:left;
-          margin-right:2px;
-          font-weight: bold;
-          color:#07689f
-        }
-        .caret {
-          border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #000000;
-        }
-        .dropdown-menu{
-          margin-left:-60px;
-          font-size:14px;
-          z-index:10;
-          margin-top: -3px;
-          .one_topic{
-            text-align: center;
-            color:#666;
-            padding:5px;
-            a{
-              text-decoration: none;
-              color:#666
-            }
-            .jp{
-              font-size:12px;
-            }
-          }
-          .one_topic:hover{
-            background: #f2fff8;
-            //color: #000;
-            //a{color:#bf8454}
-          }
-          .one_topic:nth-of-type(n+2){
-            border-top: solid thin #bbb;
-          }
-        }
-      }
+
       .post_content{
         overflow : hidden;
         text-overflow: ellipsis;

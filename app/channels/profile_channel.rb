@@ -3,6 +3,7 @@ class ProfileChannel < ApplicationCable::Channel
     !current_user.nil?
   end
   def subscribed
+    stream_for current_user
     stream_from "profile_channel"
   end
 
@@ -26,8 +27,8 @@ class ProfileChannel < ApplicationCable::Channel
   def change(data)
     if logged_in? && current_user.usertype != "event"
       user = current_user;
-      if user.update(name:data["username"],country:data["country"],gender:data["gender"],profile_en:data["profile_en"],
-        profile_jp:data["profile_jp"],able_see:data["able_see"])
+      if user.update(country:data["country"],gender:data["gender"],profile_en:data["profile_en"],profile_jp:data["profile_jp"])
+        ProfileChannel.broadcast_to(current_user, user_id:current_user.id,usertype:current_user.usertype)
       else
         redirect_to "/"
       end

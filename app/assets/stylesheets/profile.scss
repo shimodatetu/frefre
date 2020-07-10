@@ -363,18 +363,19 @@
           width:150px;
           border-right:none;
           padding: 5px;
-          height: 52px;
+          height: 45px;
           .title_jp{
             font-size: 12px;
           }
           .title_en{
-            font-size: 16px;
+            font-size: 15px;
+            margin-top:-3px;
           }
         }
         .column_content{
           display:inline-block;
           width:calc(100% - 150px);
-          height: 52px;
+          height: 45px;
           padding: 10px;
           border-left: solid thin #eee;
         }
@@ -395,10 +396,9 @@
           cursor: pointer;
           padding:0px;
           padding-left: 5px;
-          font-size: 15px;
+          font-size: 14px;
           .width_max_text{
             border-radius: 5px;
-            padding: 2px;
             width:100%!important;
             display: block!important;
             p{

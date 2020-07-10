@@ -43,7 +43,7 @@
   </div>
   <div class="profile_change_modal profile">
     <div class="modal fade" id="profile_change_modal" tabindex="-1">
-      <form>
+      <%= form_for Threadtype.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
         <div class="profile_title">
           <div class="title"style="display:none">
             <div class="jp">
@@ -74,62 +74,28 @@
                       Type of Community
                     </div>
                   </div>
-                  <div class="profile_content_cover">
-                    <select id="gender"class="content_select">
-                      <% if @threadtype.type == "puplic" %>
-                        <option value="Public" selected>Public / 公開</option>
-                      <% else %>
-                        <option value="Public">Public / 公開</option>
-                      <% end %>
-                      <% if @threadtype.type == "private" %>
-                        <option value="Private" selected>Private / 非公開</option>
-                      <% else %>
-                        <option value="Private">Private / 非公開</option>
-                      <% end %>
-                    </select>
-                  </div>
+                </div>
+                <div class="profile_content_cover">
+                  <%= radio_button_tag :type, "public",checked: @threadtype.type != "private" %> Public / 公開
+                  <br>
+                  <%= radio_button_tag :type, "private",checked: @threadtype.type == "private" %> Private/ 非公開
                 </div>
               </div>
               <div class="col-sm-12 profile_content">
                 <div class="row profile_content_data">
                   <div class="content_name">
                     <div class="jp">
-                      コミュニティの種類
+                      参加方法
                     </div>
                     <div class="en">
-                      Type of Community
-                    </div>
-                  </div>
-                  <div class="profile_content_cover">
-                    <select id="gender"class="content_select">
-                      <% if @threadtype.type == "puplic" %>
-                        <option value="Public" selected>Public / 公開</option>
-                      <% else %>
-                        <option value="Public">Public / 公開</option>
-                      <% end %>
-                      <% if @threadtype.type == "private" %>
-                        <option value="Private" selected>Private / 非公開</option>
-                      <% else %>
-                        <option value="Private">Private / 非公開</option>
-                      <% end %>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-12 profile_content"style="display:none">
-                <div class="row profile_content_data">
-                  <div class="content_name">
-                    <div class="jp">
-                      コミュニティの種類
-                    </div>
-                    <div class="en">
-                      Type of Community
+                      Way to Join
                     </div>
                   </div>
                 </div>
                 <div class="profile_content_cover">
-                  <%= radio_button_tag :type, "public",checked: @threadtype.type == "normal" %> Public / 公開
-                  <%= radio_button_tag :type, "private",checked: @threadtype.type == "private" %> Private/ 非公開
+                  <%= radio_button_tag :approval, "public",checked: @threadtype.approval != "approval" %> Free to Join / 参加自由
+                  <br>
+                  <%= radio_button_tag :approval, "private",checked: @threadtype.approval == "approval" %> Aproval / 承認制
                 </div>
               </div>
               <div class="col-sm-12 profile_content"style="display:none">
@@ -164,7 +130,8 @@
                         (English)
                       </div>
                     </div>
-                    <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"><%=@threadtype.type_en%></textarea>
+                    <%= text_area_tag :type_en,@threadtype.type_en,class:"form-control content_input textarea",size:"65x5" %>
+                    <!--textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="3"><%=@threadtype.type_en%></textarea-->
                   </div>
                 </div>
                 <div class="space_form prof_trans">
@@ -198,92 +165,96 @@
                         (Japanese)
                       </div>
                     </div>
-                    <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"><%=@threadtype.type_jp%></textarea>
+                    <%= text_area_tag :type_jp,@threadtype.type_jp,class:"form-control content_input textarea",size:"65x5" %>
+                    <!--textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="3"><%=@threadtype.type_jp%></textarea-->
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="profile_words">
-            <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide"style="display:none">
-              <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-              <div class="en help_text">
-                Usage
-              </div>
-              <div class="jp help_text">
-                使い方
-              </div>
-            </button>
-            <div class="profile_content intro_content">
-              <div class="intro">
-                <div class="row profile_content_data self_introduction">
-                  <div class="content_name">
-                    <div class="jp">
-                      コミュニティ紹介(英語)
-                    </div>
-                    <div class="en">
-                      Introduction
-                      (English)
-                    </div>
+              <div class="profile_words">
+                <button type="button"class="btn help_show"data-toggle="modal" data-target="#help_slide"style="display:none">
+                  <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                  <div class="en help_text">
+                    Usage
                   </div>
-                  <textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea>
-                  <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-                    Powered by MT
-                  <% end %>
-                </div>
-              </div>
-              <div class="space_form prof_trans"style="margin-top: 65px;">
-                <div class="trans_cover">
-                  <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_en"
-                  name="<% if logged_in? %>logined<% end %>">
-                    <div class="glyphicon glyphicon-arrow-left picture_send"></div>
-                    <div class="button_text button_text_jp">
-                      翻訳
-                    </div>
-                  </button>
-                </div>
-                <div class="trans_cover">
-                  <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_jp"
-                  name="<% if logged_in? %>logined<% end %>">
-                    <div class="glyphicon glyphicon-arrow-right picture_send"></div>
-                    <div class="button_text button_text_en">
-                      Trans
-                    </div>
-                  </button>
-                </div>
-              </div>
-              <div class="intro">
-                <div class="row profile_content_data self_introduction">
-                  <div class=" content_name">
-                    <div class="jp">
-                      コミュニティ紹介(日本語)
-                    </div>
-                    <div class="en">
-                      Introduction
-                      (Japanese)
-                    </div>
+                  <div class="jp help_text">
+                    使い方
                   </div>
-                  <textarea id="profile_jp"placeholder="入力されていません"class="form-control content_input textarea"rows="5"><%=current_user.profile_jp%></textarea>
-                  <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
-                    翻訳提供 未来翻訳
-                  <% end %>
-                </div>
-              </div>
-              <div class="save_button_bottom
-              <% if current_user.usertype == "event" %>
-                profile_cannot_save
-              <% else %>
-                profile_save_button
-              <% end %>
-                btn btn-default">
-                Save / 保存
-              </div>
+                </button>
+                <div class="profile_content intro_content">
+                  <div class="intro">
+                    <div class="row profile_content_data self_introduction">
+                      <div class="content_name">
+                        <div class="jp">
+                          コミュニティ紹介(英語)
+                        </div>
+                        <div class="en">
+                          Introduction
+                          (English)
+                        </div>
+                      </div>
 
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
+                      <%= text_area_tag :content_en,@threadtype.content_en,class:"form-control content_input textarea",size:"65x5" %>
+                      <!--textarea id="profile_en"placeholder="Blank"class="form-control content_input textarea"rows="5"><%=current_user.profile_en%></textarea-->
+                      <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+                        Powered by MT
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="space_form prof_trans"style="margin-top: 65px;">
+                    <div class="trans_cover">
+                      <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_en"
+                      name="<% if logged_in? %>logined<% end %>">
+                        <div class="glyphicon glyphicon-arrow-left picture_send"></div>
+                        <div class="button_text button_text_jp">
+                          翻訳
+                        </div>
+                      </button>
+                    </div>
+                    <div class="trans_cover">
+                      <button type="button" class="normal_button post_button btn words_post_button"id="trans_to_jp"
+                      name="<% if logged_in? %>logined<% end %>">
+                        <div class="glyphicon glyphicon-arrow-right picture_send"></div>
+                        <div class="button_text button_text_en">
+                          Trans
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="intro">
+                    <div class="row profile_content_data self_introduction">
+                      <div class=" content_name">
+                        <div class="jp">
+                          コミュニティ紹介(日本語)
+                        </div>
+                        <div class="en">
+                          Introduction
+                          (Japanese)
+                        </div>
+                      </div>
+                      <%= text_area_tag :content_jp,@threadtype.content_jp,class:"form-control content_input textarea",size:"65x5" %>
+                      <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+                        翻訳提供 未来翻訳
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="save_button_bottom
+                  <% if current_user.usertype == "event" %>
+                    profile_cannot_save
+                  <% else %>
+                    profile_save_button
+                  <% end %>
+                    btn btn-default"type="submit">
+                    Save / 保存
+                  </div>
+
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
-      </form>
+      <% end %>
     </div>
   </div>
 </div>
