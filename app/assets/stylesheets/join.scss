@@ -24,6 +24,10 @@
     margin-top: 5px;
     margin-bottom: 5px;
     font-weight: bold;
+    cursor:default;
+  }
+  .join_button.click{
+    cursor:pointer;
   }
   .login_join_button{
     color:#07689f;

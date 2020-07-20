@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post "/threadtype_update_text" => "threadtype#update_text_do"
   post "/threadtype/retire" => "threadtype#retire"
   post "/threadtype/approval_retire" => "threadtype#approval_retire"
+  post "/threadtype/change" => "profile#threadtype_change"
+  post "/threadtype_profile/approval_admit" => "profile#approval_admit"
 
   post 'post/create/:id' => 'post#create'
 
@@ -134,6 +136,8 @@ Rails.application.routes.draw do
   post 'delete',to:'tasks#delete'
   post '/report/user',to:"tasks#report_user"
   post '/report/post',to:"tasks#report_post_task"
+  post '/report/threadtype',to:"tasks#report_threadtype"
+  post '/report/group',to:"tasks#report_group"
 
   post 'search/header',to:'tasks#search'
   post 'search/user',to:'tasks#search_user'

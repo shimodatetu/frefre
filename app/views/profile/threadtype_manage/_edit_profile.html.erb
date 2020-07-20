@@ -1,19 +1,11 @@
-<div class="post_content_cover threadtype_title_show">
-  <div class="post_content_position width_max">
-    <div class="thread_title">
-      <div class="title_padding no_inline"style="font-size: 20px!important;">
-        Community Edit Page / コミュニティ管理画面
-      </div>
-    </div>
-  </div>
-</div>
+
 <div class="threadtype_cover">
   <div class="thread_cover threadtype_cover">
     <div class="post_content_cover threadtype_title_show">
       <div class="post_content_position width_max">
         <div class="thread_title">
-          <div class="title_padding no_inline"style="font-size: 20px!important;padding:0px;">
-            <%= @threadtype.type_en %> / <%= @threadtype.type_jp %>
+          <div class="title_padding no_inline"style="font-size: 20px!important;">
+            Community Edit Page / コミュニティ管理画面
           </div>
         </div>
       </div>
@@ -43,24 +35,8 @@
   </div>
   <div class="profile_change_modal profile">
     <div class="modal fade" id="profile_change_modal" tabindex="-1">
-      <%= form_for Threadtype.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
-        <div class="profile_title">
-          <div class="title"style="display:none">
-            <div class="jp">
-              コミュニティ
-            </div>
-            Community
-            <div class="save_button
-            <% if current_user.usertype == "event" %>
-              profile_cannot_save
-            <% else %>
-              profile_save_button
-            <% end %>
-              btn btn-default">
-              Save / 保存
-            </div>
-          </div>
-        </div>
+      <%= form_tag('/threadtype/change', method: :post, class:"thread_image_post post_button_form") do %>
+        <%= hidden_field_tag :threadtype_id,@threadtype.id %>
         <div class="profile_page row">
           <div class="profile_page_en">
             <div class="col-sm-12">
@@ -118,7 +94,7 @@
                   <% end %>
                 </div>
               </div>
-              <div class="profile_content intro_content">
+              <div class="profile_content intro_content"style="display:none">
                 <div class="intro">
                   <div class="row profile_content_data self_introduction">
                     <div class="content_name">
@@ -237,15 +213,15 @@
                       <% end %>
                     </div>
                   </div>
-                  <div class="save_button_bottom
+                  <button type="submit"class="save_button_bottom
                   <% if current_user.usertype == "event" %>
                     profile_cannot_save
                   <% else %>
                     profile_save_button
                   <% end %>
-                    btn btn-default"type="submit">
+                    btn btn-default">
                     Save / 保存
-                  </div>
+                  </button>
 
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
                 </div>

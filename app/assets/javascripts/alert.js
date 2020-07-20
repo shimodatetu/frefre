@@ -12,10 +12,12 @@ function alert_modal(alert_en,alert_jp,alert_type){
       $(".modal-content").attr("class","modal-content")
     }
     now_alert = true
-    setTimeout(function(){
-      $("#successModal").modal("hide")
-      now_alert = false;
-    },3000);
+    if(alert_type == "success"){
+      setTimeout(function(){
+        $("#successModal").modal("hide")
+        now_alert = false;
+      },3000);
+    }
   }
 }
 

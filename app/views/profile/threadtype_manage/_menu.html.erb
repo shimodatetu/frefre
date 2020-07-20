@@ -62,6 +62,21 @@
         </div>
       <% end %>
     </li>
+    <% if @threadtype.approval == "approval" %>
+      <li class="nav-item profile_contents_button <% if params[:id] == "22"%>active<% end %>">
+        <%= link_to "/profile/22/" + @threadtype.id.to_s,class:"nav-link" do %>
+          <div class="jp">
+            申請一覧
+          </div>
+          <div class="en">
+            Approval List
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
     <li class="nav-item profile_contents_button <% if params[:id] == "7" || params[:id] == "8"%>active<% end %>">
       <% if @threadtype.type != "every" %>
         <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>

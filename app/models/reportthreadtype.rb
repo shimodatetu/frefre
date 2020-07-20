@@ -1,0 +1,2 @@
+class Reportthreadtype < ApplicationRecord
+end

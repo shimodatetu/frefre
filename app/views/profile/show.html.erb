@@ -1,9 +1,9 @@
 
 <% if logged_in? %>
 
-  <% if params[:id].to_i >= 14 && params[:id].to_i <= 20 && @threadtype != nil%>
+  <% if params[:id].to_i >= 14 && params[:id].to_i <= 22 && @threadtype != nil%>
     <%= render partial:"profile/threadtype_manage/top" %>
-  <% elsif params[:id].to_i >= 22 && params[:id].to_i <= 23%>
+  <% elsif params[:id].to_i >= 23 && params[:id].to_i <= 25%>
     <%= render partial:"/profile/threadtype_join_manage/top" %>
   <% else %>
     <div class="profile">
@@ -133,9 +133,7 @@
           <%= render partial:"editprofile" %>
         <% elsif params[:id] == "13" %>
           <%= render partial:"threadtype_list" %>
-        <% elsif params[:id] == "21" %>
-          <%= render partial:"threadtype_join_list" %>
-        <% elsif params[:id] == "24" %>
+        <% elsif params[:id] == "25" %>
           <%= render partial:"retire" %>
         <% end %>
       </div>
@@ -481,3 +479,46 @@
     </div>
   </div>
 <% end %>
+<div class="profile_modal">
+  <div class="modal fade" id="report_threadtype_modal" tabindex="-1">
+    <div class="modal-dialog"style="width:90vw">
+      <div class="modal-content">
+        <%= form_tag('/report/threadtype',method: :post) do %>
+          <div class="modal-body">
+            <div class="title">
+              通報の理由 / Report Reason
+            </div>
+            <%= radio_button_tag :type, 4 ,"checked"%>不適切な投稿 / Sensitive Content<br>
+            <%= radio_button_tag :type, 1 %>乗っ取られたアカウント / Hacked Account<br>
+            <%= radio_button_tag :type, 2 %>偽のアカウント / False Account<br>
+            <%= radio_button_tag :type, 3 %>その他 / Other<br>
+            <div class="title"style="margin-top:10px;margin-bottom:5px;">
+              Specific Content / 具体的な内容
+            </div>
+            <%= text_area_tag :report_content,"", class: "form-control form_input" ,placeholder:"",rows:"5" %>
+          </div>
+          <div class="modal-footer follow_modal_footer">
+            <%= hidden_field_tag :report_id,"-1", class: "form-control form_input report_threadtype_input" %>
+            <%= hidden_field_tag :page_url,request.fullpath %>
+            <button type="submit" class="btn btn-primary report_threadtype_button_submit">
+              <div class="jp">
+                送信
+              </div>
+              <div class="en">
+                Send
+              </div>
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              <div class="jp">
+                戻る
+              </div>
+              <div class="en">
+                Back
+              </div>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

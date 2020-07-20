@@ -82,9 +82,9 @@ class ThreadtypeController < ApplicationController
         threadtype.type = "public"
       end
       if data["approval"] == "approval"
-        threadtype.type = "approval"
+        threadtype.approval = "approval"
       else
-        threadtype.type = "normal"
+        threadtype.approval = "normal"
       end
       if threadtype.save
         group = Group.new()
@@ -111,12 +111,18 @@ class ThreadtypeController < ApplicationController
   def retire
     if logged_in? && (threadtype = Threadtype.find_by(id:params[:threadtype_id])) != nil && (user_threadtype = threadtype.user_threadtypes.find_by(user_id:current_user.id)) != nil
       user_threadtype.delete
+      flash["alert_en"] = "You successed to leave this community."
+      flash["alert_jp"] = "コミュニティの大会に成功しました。"
+      flash["alert_type"] = "success"
       redirect_to "/threadtype/show/"+threadtype.id.to_s+"/1"
     end
   end
   def approval_retire
     if logged_in? && (threadtype = Threadtype.find_by(id:params[:threadtype_id])) != nil && threadtype.approval == "approval" && (approval = Approval.find_by(user_id:current_user.id,threadtype_id:threadtype.id)) != nil
       approval.delete
+      flash["alert_en"] = "You successed to delete approval."
+      flash["alert_jp"] = "参加申請の削除に成功しました。"
+      flash["alert_type"] = "success"
       redirect_to "/threadtype/show/"+threadtype.id.to_s+"/1"
     end
   end

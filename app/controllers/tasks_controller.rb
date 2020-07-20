@@ -99,6 +99,60 @@ class TasksController < ApplicationController
     end
   end
 
+  def report_threadtype
+    if logged_in?
+      id = params[:report_id]
+      threadtype = Threadtype.find_by(id:id.to_i)
+      type = params[:type]
+      content = params[:content]
+      report_threadtype = Reportthreadtype.find_by(threadtype_id: id.to_i)
+      if threadtype && !(report_threadtype && report_threadtype.user_id == current_user.id)
+        Reportthreadtype.create(user_id:current_user.id,threadtype_id:threadtype.id,content:content,reporttype:type)
+        flash["alert_en"] = "You reported this community"
+        flash["alert_jp"] = "このコミュニティを通報しました。"
+        flash["alert_type"] = "success"
+        redirect_to params[:page_url]
+      else
+        flash["alert_en"] = "You failed to report community."
+        flash["alert_jp"] = "コミュニティの通報に失敗しました。。"
+        flash["alert_type"] = "fail"
+        redirect_to params[:page_url]
+      end
+    else
+      flash["alert_en"] = "You can't report because you don't login."
+      flash["alert_jp"] = "ログインしていないので通報できません。"
+      flash["alert_type"] = "fail"
+      redirect_to params[:page_url]
+    end
+  end
+
+  def report_group
+    if logged_in?
+      id = params[:report_id]
+      group = Group.find_by(id:id.to_i)
+      type = params[:type]
+      content = params[:content]
+      report_group = Reportgroup.find_by(threadtype_id: id.to_i)
+      if group && !(report_group && report_group.user_id == current_user.id)
+        Reportgroup.create(user_id:current_user.id,threadtype_id:threadtype.id,content:content,reporttype:type)
+        flash["alert_en"] = "You reported this thread"
+        flash["alert_jp"] = "このスレッドを通報しました。"
+        flash["alert_type"] = "success"
+        redirect_to params[:page_url]
+      else
+        flash["alert_en"] = "You failed to report thread."
+        flash["alert_jp"] = "スレッドの通報に失敗しました。。"
+        flash["alert_type"] = "fail"
+        redirect_to params[:page_url]
+      end
+    else
+      flash["alert_en"] = "You can't report because you don't login."
+      flash["alert_jp"] = "ログインしていないので通報できません。"
+      flash["alert_type"] = "fail"
+      redirect_to params[:page_url]
+    end
+  end
+
   def report_post_task
     id = params[:report_id]
     post = Post.find_by(id:id.to_i)

@@ -130,6 +130,22 @@ $(document).on 'click', '.report_button_submit', (event) ->
   $("#report_post_modal").modal("hide")
   alert_modal("You reported this post","この投稿を通報しました。","success")
 
+$(document).on 'click', '.report_threadtype_button', (event) ->
+  $(".report_threadtype_input").val(this.id)
+  $("#report_threadtype_modal").modal("show")
+
+$(document).on 'click', '.report_threadtype_button_submit', (event) ->
+  $("#report_threadtype_modal").modal("hide")
+
+
+$(document).on 'click', '.report_group_button', (event) ->
+  $(".report_group_input").val(this.id)
+  $("#report_group_modal").modal("show")
+
+$(document).on 'click', '.report_group_button_submit', (event) ->
+  $("#report_group_modal").modal("hide")
+
+
 $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->
   if($(this).attr("class") == "logined")
     $(".thread_submit_image").click()

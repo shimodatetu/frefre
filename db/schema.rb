@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_062148) do
+ActiveRecord::Schema.define(version: 2020_07_16_061944) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -170,6 +170,16 @@ ActiveRecord::Schema.define(version: 2020_07_09_062148) do
     t.index ["following_id"], name: "index_relationships_on_following_id"
   end
 
+  create_table "reportgroups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.string "reporttype"
+    t.string "content"
+    t.boolean "deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reportposts", force: :cascade do |t|
     t.integer "from_user"
     t.integer "post_id"
@@ -178,6 +188,16 @@ ActiveRecord::Schema.define(version: 2020_07_09_062148) do
     t.string "content"
     t.boolean "deleted", default: false, null: false
     t.string "reporttype"
+  end
+
+  create_table "reportthreadtypes", force: :cascade do |t|
+    t.integer "threadtype_id"
+    t.integer "user_id"
+    t.string "reporttype"
+    t.string "content"
+    t.boolean "deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reportusers", force: :cascade do |t|

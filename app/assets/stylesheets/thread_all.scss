@@ -1,3 +1,7 @@
+.group_dropdown{
+  margin-top: -105px;
+  margin-right: 5px;
+}
 .dropdown{
   display: inline-block;
   float:right;
@@ -11,7 +15,7 @@
     border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #000000;
   }
   .dropdown-menu{
-    margin-left:-60px;
+    margin-left: -130px;
     font-size:14px;
     z-index:10;
     margin-top: -3px;

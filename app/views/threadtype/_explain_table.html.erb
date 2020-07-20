@@ -47,15 +47,13 @@
         </div>
       </th>
       <th class="column_content threadtype_user_cover">
-        <div class="threadtype_type">
-          <% if @threadtype.type == "every" %>
-            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>Official / 公式
-          <% elsif @threadtype.type == "private" %>
-            <i class="fas fa-lock"></i>Private / 非公開
-          <% else %>
-            <i class="fas fa-check-circle"></i>Public / 公開
-          <% end %>
-        </div>
+        <% if @threadtype.type == "every" %>
+          <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>Official / 公式
+        <% elsif @threadtype.type == "private" %>
+          <i class="fas fa-lock"></i>Private / 非公開
+        <% else %>
+          <i class="fas fa-check-circle"></i>Public / 公開
+        <% end %>
       </th>
     </tr>
     <tr class="table_list">

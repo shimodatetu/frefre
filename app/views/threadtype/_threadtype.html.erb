@@ -18,26 +18,10 @@
           <div class="thread_title">
             <div class="title_padding no_inline">
               <div>
-                <% if threadtype.type == "every" && 1 == 2%>
-                  <div class="compulsory_text">
-                    <div class="en">
-                      <%= threadtype.type_jp %>
-                    </div>
-                  </div>
-                <% else %>
-                  <%= threadtype.type_jp %>
-                <% end %>
+                <%= threadtype.type_jp %>
               </div>
               <div>
-                <% if threadtype.type == "every" && 1 == 2%>
-                  <div class="compulsory_text">
-                    <div class="en">
-                      <%= threadtype.type_en %>
-                    </div>
-                  </div>
-                <% else %>
-                  <%= threadtype.type_en %>
-                <% end %>
+                <%= threadtype.type_en %>
               </div>
             </div>
           </div>
@@ -113,21 +97,21 @@
         <% end %>
       </div>
     </div>
-    <div class="dropdown">
-      <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        <span class="caret"></span>
-      </div>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <div class="one_topic report_button_set">
-          <button class="report_post_button none_button"id="<%= threadtype.id %>"style="width:100%">
-            <div class="jp">コミュニティを通報する。</div>
-            Report this community.
-          </button>
-        </div>
-      </ul>
-    </div>
   </div>
 <% end %>
+<div class="threadtype_dropdown dropdown"<% if threadtype.type == "every" %>style="margin-top: -70px;"<% end %>>
+  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+  </div>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <div class="one_topic report_button_set">
+      <button class="report_threadtype_button none_button"id="<%= threadtype.id %>"style="width:100%">
+        <div class="jp">コミュニティを通報する。</div>
+        Report this community.
+      </button>
+    </div>
+  </ul>
+</div>
 <div class="join_button_type">
   <% if !logged_in? %>
     <div class="join_button_cover">
@@ -152,7 +136,7 @@
   <% else %>
     <% threadtype_id = threadtype.id %>
     <div class="join_button_cover join_button<%= threadtype_id %>">
-      <% if current_user.threadtypes.find_by(id:threadtype_id) != nil %>
+      <% if logged_in? && (current_user.threadtypes.find_by(id:threadtype_id) != nil || threadtype.leader_id == current_user.id)%>
         <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
           <div class="text_box">
             <div class="jp">
@@ -161,13 +145,34 @@
           </div>
         <% end %>
       <% else %>
-        <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
-          <div class="text_box">
-            <div class="jp">
-              Join / 参加する
+        <% if threadtype.approval == "approval" %>
+          <% if logged_in? && current_user.approvals.find_by(threadtype_id:threadtype_id) != nil %>
+            <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
+              <div class="text_box">
+                <div class="jp">
+                  Approved / 参加申請済み
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
+              <div class="text_box">
+                <div class="jp">
+                  Approve / 参加申請する
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
+            <div class="text_box">
+              <div class="jp">
+                Join / 参加する
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
+
       <% end %>
     </div>
   <% end %>

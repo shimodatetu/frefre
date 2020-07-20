@@ -1,4 +1,7 @@
-
+.not_found{
+  padding: 0px 10px 10px 10px;
+  font-size: 16px;
+}
 .table_all_cover{
   color:#4e4e4e;
 }
@@ -447,12 +450,25 @@ p{
       background: #def5dd;
       border-radius: 5px;
       color:#155724;
+      .close_button{
+        display:none;
+      }
     }
-    .fail{
+    .fail,.error{
       background: #f8d7da;
       border-radius: 5px;
       color:#721c24;
+      .how_that{
+        width: calc(100% - 20px);
+      }
     }
+  }
+  .close_button{
+    float:right;
+    font-size: 20px;
+    margin-right: -5px;
+    margin-top: -10px;
+    cursor: pointer;
   }
 }
 body{
@@ -468,16 +484,6 @@ body{
   }
   .sign_page_cover{
     margin-left:17.5vw!important;
-  }
-}
-@media screen and (max-width: 600px){
-  .profile{
-    .lang_bar_cover{
-      width: calc(100vw - 150px)!important;
-    }
-  }
-  .lang_bar_cover{
-    width:600px!important;
   }
 }
 @media screen and (max-width: 750px){
@@ -743,15 +749,10 @@ body{
         height:30px!important;
       }
     }
+    .thread_title{
+      padding-left:0px!important;
+    }
     .thread_content{
-      width:100%!important;
-      margin-top: -14px;
-      .user_name{
-        margin-left: 35px;
-      }
-      .post_content_position{
-        margin-top: 7px;
-      }
       .see_more{
         display:none;
       }
@@ -780,8 +781,10 @@ body{
   }
   .profile_other, .profile{
     .profile_main{
-      margin-left: 100px !important;
-      width: calc(100% - 120px)!important;
+      margin-left: 0px!important;
+      .table_all_cover{
+        margin-top: 10px;
+      }
     }
     .profile_picture .group_img{
       height:100px!important;
@@ -803,9 +806,6 @@ body{
     .content_cover{
       width:100%!important;
     }
-    .tab-content{
-      padding-top:calc(14vw + 20px)!important;
-    }
     .profile_picture_change{
       .en{
         font-size: 14px!important;
@@ -826,19 +826,6 @@ body{
     }
     .en_country{
       margin-left: 10px!important;
-    }
-    .lang_bar_cover{
-      width: calc(100vw - 150px)!important;
-      margin-top: 36px!important;
-      //margin-top:calc(16px + 7vw)!important;
-      .lang_bar{
-        .slider{
-          width:calc(65%)!important;
-        }
-      }
-      .jp_country{
-        margin-left: 10px!important;
-      }
     }
   }
   input.cmn-toggle-round + label {

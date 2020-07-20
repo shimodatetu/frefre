@@ -80,6 +80,15 @@
       </div>
     </div>
     <div class="profile_main">
+      <div class="post_content_cover threadtype_title_show">
+        <div class="post_content_position width_max">
+          <div class="thread_title">
+            <div class="title_padding no_inline"style="font-size: 20px!important;">
+              <%= @threadtype.type_en %> / <%= @threadtype.type_jp %>
+            </div>
+          </div>
+        </div>
+      </div>
       <% if params[:id] == "14" %>
         <%= render partial:"profile/threadtype_manage/edit_profile" %>
       <% elsif params[:id] == "15" %>
@@ -96,6 +105,10 @@
         <%= render partial:"profile/threadtype_manage/search_member" %>
       <% elsif params[:id] == "21" %>
         <%= render partial:"profile/threadtype_manage/news_make" %>
+      <% elsif params[:id] == "22" && @threadtype.approval == "approval"%>
+        <%= render partial:"profile/threadtype_manage/approval_list" %>
+      <% elsif params[:id] == "23" && @threadtype.approval == "approval"%>
+        <%= render partial:"profile/threadtype_manage/delete_community" %>
       <% end %>
     </div>
   </div>
