@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'manager/search_user_detail'
   get 'manager/search_user_detail/:id' => 'manager#search_user_detail'
   get 'manager/category' => 'manager#category_make'
+
   get 'manager/search_report_user'
   get 'manager/search_report_user/:page' => 'manager#search_user'
   get 'manager/search_report_user_detail'
@@ -44,6 +45,18 @@ Rails.application.routes.draw do
   get 'manager/search_report_post/:page' => 'manager#search_post'
   get 'manager/search_report_post_detail'
   get 'manager/search_report_post_detail/:id' => 'manager#search_report_post_detail'
+
+
+  get 'manager/search_report_threadtype'
+  get 'manager/search_report_threadtype/:page' => 'manager#search_threadtype'
+  get 'manager/search_report_threadtype_detail'
+  get 'manager/search_report_threadtype_detail/:id' => 'manager#search_report_threadtype_detail'
+
+  get 'manager/search_report_group'
+  get 'manager/search_report_group/:page' => 'manager#search_group'
+  get 'manager/search_report_group_detail'
+  get 'manager/search_report_group_detail/:id' => 'manager#search_report_group_detail'
+
   get 'manager/news_make'
 
   post 'news_maker', to:'manager#news_maker'
@@ -76,6 +89,8 @@ Rails.application.routes.draw do
 
   post '/manager/report_user',to:'manager#searcher_report_user'
   post '/manager/report_post',to:'manager#searcher_report_post'
+  post '/manager/report_group',to:'manager#searcher_report_group'
+  post '/manager/report_threadtype',to:'manager#searcher_report_threadtype'
 
   get 'auth/:provider/callback', to: 'sessions#login_auth'
   get '/users/auth/:provider/callback', to: 'sessions#login_auth'

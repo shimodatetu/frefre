@@ -200,4 +200,12 @@ class ManagerController < ApplicationController
     session["search_text"] = params[:search_text]
     redirect_to "/manager/search_report_user"
   end
+  def searcher_report_group
+    session["search_text"] = params[:search_text]
+    redirect_to "/manager/search_report_group"
+  end
+  def searcher_report_threadtype
+    session["search_text"] = params[:search_text]
+    redirect_to "/manager/search_report_threadtype"
+  end
 end
