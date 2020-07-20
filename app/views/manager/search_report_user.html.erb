@@ -43,7 +43,6 @@
             <div class="group_user_cover">
               <div class="group_img_cover">
                 <object>
-
                 <% url = "/profile" %>
                 <% if logged_in? && current_user.id != user.id %>
                   <% url = "/other_profile/#{user.id}" %>

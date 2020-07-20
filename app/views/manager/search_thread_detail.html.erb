@@ -21,10 +21,10 @@
     </div>
     <div class="thread_all thread_all_post"style="padding-top:10px;">
       <div class="thread_cover_cover">
-        <%= render thread.posts.first,locals: { type:"normal" } %>
+        <%= render partial:"/groups/group", locals: { group:thread,type:"normal" } %>
       </div>
     </div>
-    <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post})  do  %>
+    <%= form_tag({controller: :manager, action: :thread_delete}, { method: :post,style:"display:inline-block"})  do  %>
       <%= hidden_field_tag :id,params[:id].to_i %>
       <button type="submit" name="button" type="button" class="btn mes_button normal_button" id="3">
         <div class="text_box">

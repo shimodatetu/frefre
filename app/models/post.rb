@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :reportposts, dependent: :destroy
   belongs_to :threadtype
 
+  
   has_one_attached :pict
   has_one_attached :video
   validate :pict_presence

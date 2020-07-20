@@ -140,11 +140,38 @@ class ManagerController < ApplicationController
   end
 
   def search_report_user
-    @report_users = Reportuser.all
+    page_id = params[:page].to_i
+    if page_id.nil? || page_id.to_i < 1
+      page_id = 1
+    end
+    per = 10
+    @report_users = Reportuser.all.order(usertype:"asc").page(page_id).per(per)
   end
 
   def search_report_post
-    @report_posts = Reportpost.all
+    page_id = params[:page].to_i
+    if page_id.nil? || page_id.to_i < 1
+      page_id = 1
+    end
+    per = 10
+    @report_posts = Reportpost.all.order(deleted:"asc").page(page_id).per(per)
+  end
+
+  def search_report_group
+    page_id = params[:page].to_i
+    if page_id.nil? || page_id.to_i < 1
+      page_id = 1
+    end
+    per = 10
+    @report_groups = Reportgroup.all.order(deleted:"asc").page(page_id).per(per)
+  end
+  def search_report_threadtype
+    page_id = params[:page].to_i
+    if page_id.nil? || page_id.to_i < 1
+      page_id = 1
+    end
+    per = 10
+    @report_threadtypes = Reportthreadtype.all.all.order(deleted:"asc").page(page_id).per(per)
   end
   def search_post
     @posts = Post.all.order(deleted: "ASC")
@@ -155,22 +182,38 @@ class ManagerController < ApplicationController
   def search_user
     @users = User.all.order(usertype: "DESC")
   end
+  def threadtype_delete
+    id = params[:id]
+    if threadtype = Threadtype.find_by(id:id)
+      threadtype.update(deleted:true)
+    end
+    if params[:url] != nil && params[:url] != ""
+      redirect_to "/manager/"+params[:url]
+    else
+      redirect_to "/manager/search_threadtype"
+    end
+  end
   def thread_delete
     id = params[:id]
     if group = Group.find_by(id:id)
       group.update(deleted:true)
-      for post in group.posts do
-        post.update(deleted:true)
-      end
     end
-    redirect_to "/manager/search_thread"
+    if params[:url] != nil && params[:url] != ""
+      redirect_to "/manager/"+params[:url]
+    else
+      redirect_to "/manager/search_thread"
+    end
   end
   def post_delete
     id = params[:id]
     if post = Post.find_by(id:id)
       post.update(deleted:true)
     end
-    redirect_to "/manager/search_post"
+    if params[:url] != nil && params[:url] != ""
+      redirect_to "/manager/"+params[:url]
+    else
+      redirect_to "/manager/search_post"
+    end
   end
   def searcher_post
     session["search_text"] = params[:search_text]

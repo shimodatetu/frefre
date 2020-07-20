@@ -1,3 +1,4 @@
+
 .header {
   z-index: 50;
   position:fixed;
@@ -336,6 +337,7 @@
   }
 }
 
+
 @media screen and (max-width: 500px){
   .width_set{
     width:500px;
@@ -352,5 +354,25 @@
 @media screen and (max-width: 330px){
   .search_all{
     display:none;
+  }
+}
+.manager_header{
+  .glyphicon{
+    display:none!important;
+  }
+  .text_fill{
+    padding-left:0px;
+    padding-right: 5px;
+    border-right: solid thin;
+    .float{
+      display:inline-block;
+      vertical-align: middle;
+      .float_jap{
+        font-size:10px;
+      }
+      .base_en{
+        font-size: 15px;
+      }
+    }
   }
 }

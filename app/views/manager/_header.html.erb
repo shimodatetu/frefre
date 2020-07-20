@@ -1,6 +1,6 @@
 <% if manager_logged_in? %>
   <% url = request.fullpath %>
-  <div class="header">
+  <div class="manager_header header">
     <div class="width_set"style="width:100vw;">
       <div class="nav-fall border border-primary">
         <%= link_to '/manager/search_thread',class:"link_text" do %>
@@ -10,7 +10,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-comment"></span>
-            <div style=""class="float_text">
+            <div style=""class="float">
               <div class="float_jap">
                 スレッド検索
               </div>
@@ -27,7 +27,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-comment"></span>
-            <div style=""class="float_text">
+            <div style=""class="float">
               <div class="float_jap">
                 投稿
               </div>
@@ -44,7 +44,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-user" aria-hidden="true"></span>
-            <div class="float_text">
+            <div class="float">
               <div class="float_jap">
                 ユーザー
               </div>
@@ -61,7 +61,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-user" aria-hidden="true"></span>
-            <div class="float_text">
+            <div class="float">
               <div class="float_jap">
                 通報ユーザー
               </div>
@@ -78,7 +78,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-comment"></span>
-            <div class="float_text">
+            <div class="float">
               <div class="float_jap">
                 通報投稿
               </div>
@@ -88,6 +88,41 @@
             </div>
           </div>
         <% end %>
+        <%= link_to '/manager/search_report_group', data: {"turbolinks"=>false},class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('search_report_group')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-comment"></span>
+            <div class="float">
+              <div class="float_jap">
+                通報スレッド
+              </div>
+              <div class="base_en">
+                Report Thread
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to '/manager/search_report_threadtype', data: {"turbolinks"=>false},class:"link_text" do %>
+          <div class="text_fill
+          <% if url == '/' || url.include?('search_report_threadtype')%>
+            <%= "now_page" %>
+          <% end %>">
+            <div class="height_control"></div>
+            <span class="icon glyphicon glyphicon-comment"></span>
+            <div class="float">
+              <div class="float_jap">
+                通報コミュニティ
+              </div>
+              <div class="base_en">
+                Report Community
+              </div>
+            </div>
+          </div>
+        <% end %>
+
         <%= link_to '/manager/prohibit',class:"link_text" do %>
           <div class="text_fill
           <% if url.include?('prohibit') %>
@@ -95,7 +130,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-search"></span>
-            <div class="float_text">
+            <div class="float">
               <div class="float_jap">
                 禁止ワード設定
               </div>
@@ -112,7 +147,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-th-list" aria-hidden="true"></span>
-            <div class="float_text">
+            <div class="float">
               <div class="float_jap">
                 カテゴリー
               </div>
@@ -129,7 +164,7 @@
           <% end %>">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-bell" aria-hidden="true"></span>
-            <div class="float_text">
+            <div class="float">
               <div class="float_jap">
                 お知らせ作成
               </div>
@@ -143,7 +178,7 @@
           <div class="text_fill">
             <div class="height_control"></div>
             <span class="icon glyphicon glyphicon-share-alt"></span>
-            <div style=""class="float_text">
+            <div style=""class="float">
               <div class="float_jap">
                 戻る
               </div>
@@ -164,14 +199,14 @@
     <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
       <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
       <div class="lang_bar">
-        <button class="country_flag en_country">
-          <%= image_tag "/eng.png", class: "image" %>
-        </button>
-        <input id="slider" class="slider-input"data-slider-id='ex1Slider' type="text" data-slider-min="0"
+        <div class="country_flag en_country">
+          Hide English
+        </div>
+        <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
             data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
-        <button class="country_flag jp_country">
-          <%= image_tag "/jap.png", class: "image" %>
-        </button>
+        <div class="country_flag jp_country">
+          日本語非表示
+        </div>
       </div>
     </div>
     <span class="glyphicon glyphicon-chevron-down down_slider" aria-hidden="true"></span>
@@ -184,3 +219,6 @@
     }
   </style>
 <% end %>
+
+<div style="margin-top:40px">
+</div>

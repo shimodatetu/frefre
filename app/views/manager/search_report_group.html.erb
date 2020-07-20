@@ -7,7 +7,7 @@
   <% lang = session["lang"] %>
   <div class="search_result">
     <div class="category_show">
-      <%= form_tag('/manager/report_post',method: :post,class: "search_form_top") do %>
+      <%= form_tag('/manager/report_group',method: :post,class: "search_form_top") do %>
         <%= text_field_tag :search_text ,search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
         <span class="input-group-btn">
           <button type="submit"class="btn btn-warning form_button">
@@ -19,45 +19,45 @@
     </div>
     <div class="thread_all thread_all_post">
       <% there_be = false %>
-      <% search_posts = @report_posts %>
+      <% search_groups = @report_groups %>
       <% if !search_text.nil? %>
-        <% search_posts = @report_posts.eager_load(:post).where("content_jap LIKE ? OR content_eng LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
+        <% search_groups = @report_groups.eager_load(:group).where("title_jp LIKE ? OR title_en LIKE ?", "%"+ search_text +"%", "%"+ search_text +"%") %>
       <% end %>
       <% show_max = 10.0 %>
-      <% group_num = search_posts.count %>
+      <% group_num = search_groups.count %>
       <% page_num = (group_num / show_max).ceil %>
       <% page_id = params[:page].to_i %>
       <% if page_id.nil? || page_id.to_i > page_num || page_id.to_i < 1 %>
         <% page_id = 1 %>
       <% end %>
-      <% search_posts.offset(show_max*(page_id - 1)).limit(show_max).each do |report_post| %>
-        <% post = report_post.post %>
-        <%= link_to("/manager/search_report_post_detail/"+report_post.id.to_s , class:"thread_link") do %>
+      <% search_groups.offset(show_max*(page_id - 1)).limit(show_max).each do |report_group| %>
+        <% group = report_group.group %>
+        <%= link_to("/manager/search_report_group_detail/"+report_group.id.to_s , class:"thread_link") do %>
           <% there_be = true %>
           <div class="thread_cover"
-            <% if post.deleted == true %>
+            <% if group.deleted == true %>
               style="background:#ff5555;"
             <% end %>>
             <div class="group_user_cover">
               <div class="group_img_cover">
                 <object>
                 <% url = "/profile" %>
-                <% if logged_in? && current_user.id != post.user.id %>
-                  <% url = "/other_profile/#{post.user.id}" %>
+                <% if logged_in? && current_user.id != group.user.id %>
+                  <% url = "/other_profile/#{group.user.id}" %>
                 <% end %>
                 <%= link_to url do %>
-                  <% if post.user.image == 0 %>
-                    <% if post.user.avater.attached? %>
-                      <%= image_tag post.user.avater , :class => "group_img"%>
+                  <% if group.user.image == 0 %>
+                    <% if group.user.avater.attached? %>
+                      <%= image_tag group.user.avater , :class => "group_img"%>
                     <% else %>
-                      <% if post.user.photo.nil? %>
+                      <% if group.user.photo.nil? %>
                         <%= image_tag("/userimage/user1.png", :class => "group_img") %>
                       <% else %>
-                        <%= image_tag show_image_user_path(post.user), :class => "group_img" %>
+                        <%= image_tag show_image_user_path(group.user), :class => "group_img" %>
                       <% end %>
                     <% end %>
                   <% else %>
-                    <%= image_tag("/userimage/user#{post.user.image}.png", :class => "group_img") %>
+                    <%= image_tag("/userimage/user#{group.user.image}.png", :class => "group_img") %>
                   <% end %>
                 <% end %>
                 </object>
@@ -67,24 +67,24 @@
               <div class="post_content_cover">
                 <div class="user_name">
                   <object>
-                  <% if !logged_in? || current_user.id != post.user.id %>
-                    <%= link_to "/other_profile/#{post.user.id}" do %>
-                      <%= simple_format(text_url_to_link(h(post.user.name))) %>
+                  <% if !logged_in? || current_user.id != group.user.id %>
+                    <%= link_to "/other_profile/#{group.user.id}" do %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% else %>
                     <%= link_to "/profile" do %>
-                      <%= simple_format(text_url_to_link(h(post.user.name))) %>
+                      <%= simple_format(text_url_to_link(h(group.user.name))) %>
                     <% end %>
                   <% end %>
                   </object>
                   <div class="create_time"style="float:right">
-                    <%= post.created_at.strftime('%Y/%m/%d') %>
+                    <%= group.created_at.strftime('%Y/%m/%d') %>
                   </div>
                 </div>
                 <div class="post_content_position en_position">
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(post.content_eng))) %>
+                      <%= simple_format(text_url_to_link(h(group.title_en))) %>
                     </div>
                   </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="post_content_position jp_position">
                   <div class="post_content en">
                     <div class="post_content_text no_inline">
-                      <%= simple_format(text_url_to_link(h(post.content_jap))) %>
+                      <%= simple_format(text_url_to_link(h(group.title_jp))) %>
                     </div>
                   </div>
                 </div>
@@ -114,7 +114,7 @@
           </div>
         </div>
       <% else %>
-        <%= paginate @report_posts ,outer_window: 3%>
+        <%= paginate @report_groups ,outer_window: 3%>
       <% end %>
     </div>
   </div>

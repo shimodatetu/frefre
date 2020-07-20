@@ -76,7 +76,7 @@ Rails.application.routes.draw do
   post 'mangaer/post_delete', to:'manager#post_delete'
   post 'searcher/groups',to:'manager#search'
   post '/manager/group',to:'manager#searcher_group'
-  post '/manager/post',to:'manager#searcher_post'
+  post '/manager/report_post',to:'manager#searcher_report_post'
   post '/manager/profile',to:'manager#searcher_profile'
   post '/manager/mail',to:'manager#searcher_mail'
   post '/manager/user',to:'manager#searcher_user'

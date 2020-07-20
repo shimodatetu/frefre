@@ -6,6 +6,10 @@ class User < ApplicationRecord
   before_create :create_activation_digest
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :reportusers, dependent: :destroy
+
+  has_many :reportgroups, dependent: :destroy
+  has_many :reportthreadtypes, dependent: :destroy
+
   has_many :posts, dependent: :destroy
   has_many :groups, dependent: :destroy
   has_many :chats, dependent: :destroy
