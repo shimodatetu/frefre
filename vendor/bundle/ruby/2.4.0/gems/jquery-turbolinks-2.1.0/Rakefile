@@ -44,7 +44,8 @@ namespace :js do
       .select { |f| not f.match(/min\.js$/) }
       .each do |file_name|
         source        = File.read(file_name)
-        compressed    = Uglifier.compile(source, copyright: false)
+        #compressed    = Uglifier.compile(source, copyright: false)
+        compressed    = Uglifier.compile(js, harmony: true)
         min_file_name = file_name.gsub(/\.js$/, '.min.js')
 
         File.open(min_file_name, 'w') do |f|
