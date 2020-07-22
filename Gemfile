@@ -6,18 +6,16 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.4.1'
 gem 'devise'
 gem 'whenever', require: false
+gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'gon'
 gem 'carrierwave'
 gem 'fog'
 gem 'streamio-ffmpeg'
 gem 'httparty'
 gem 'rack-attack'
-gem 'webpacker', '~> 4.0.0'
+gem 'webpacker'
 gem 'faraday'
-gem 'kaminari'
-gem 'kaminari-bootstrap'
-gem 'nokogiri'
-
 #gem 'omniauth'
 #gem 'omniauth-twitter'
 #gem 'omniauth-facebook'
@@ -40,6 +38,7 @@ gem 'bcrypt'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass'
+gem 'carrierwave'
 gem 'sqlite3', group: [:development, :test]
 gem 'gon'
 gem 'dropzonejs-rails'
@@ -69,8 +68,12 @@ group :production do
   gem 'pg'
 end
 group :development, :test do
+  gem 'dotenv-rails'
+end
+group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'sqlite3'
   gem 'dotenv-rails'
   gem 'letter_opener_web'
 end
