@@ -178,36 +178,38 @@
                 </div>
               </div>
             <% end %>
-            <% if post.pict.attached?%>
-              <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
-                <%= image_tag post.pict , :class => "group_img"+post.id.to_s%>
-              </div>
-            <% elsif post.video.attached? %>
-              <div class="post_video_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
-                <video id='my-video' class='video-js' controls preload='auto' width='1108' height='600'
-                  poster='<%= url_for(post.video) %>' data-setup='{}'>
-                  <source src='<%= url_for(post.video) %>' type='video/mp4'>
-                </video>
-                <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != "" %>
-                 <div class="post_content_position post_subtitle_position en_position jimaku_post">
-                   <div class="post_content en_content_row">
-                     <div class="post_content_text">
-                       <%= simple_format(Rinku.auto_link(h(post.subtitle_en))) %>
+            <% if type != "in_group" %>
+              <% if post.pict.attached?%>
+                <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
+                  <%= image_tag post.pict , :class => "group_img"+post.id.to_s%>
+                </div>
+              <% elsif post.video.attached? %>
+                <div class="post_video_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
+                  <video id='my-video' class='video-js' controls preload='auto' width='1108' height='600'
+                    poster='<%= url_for(post.video) %>' data-setup='{}'>
+                    <source src='<%= url_for(post.video) %>' type='video/mp4'>
+                  </video>
+                  <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != "" %>
+                   <div class="post_content_position post_subtitle_position en_position jimaku_post">
+                     <div class="post_content en_content_row">
+                       <div class="post_content_text">
+                         <%= simple_format(Rinku.auto_link(h(post.subtitle_en))) %>
+                       </div>
                      </div>
                    </div>
-                 </div>
-                 <div class="post_content_position_space">
-                   <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-                 </div>
-                 <div class="post_content_position post_subtitle_position jp_position jimaku_post">
-                   <div class="post_content jp_content_row">
-                     <div class="post_content_text">
-                       <%= simple_format(Rinku.auto_link(h(post.subtitle_jp))) %>
+                   <div class="post_content_position_space">
+                     <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+                   </div>
+                   <div class="post_content_position post_subtitle_position jp_position jimaku_post">
+                     <div class="post_content jp_content_row">
+                       <div class="post_content_text">
+                         <%= simple_format(Rinku.auto_link(h(post.subtitle_jp))) %>
+                       </div>
                      </div>
                    </div>
-                 </div>
-                <% end %>
-              </div>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>

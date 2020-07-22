@@ -18,6 +18,8 @@ gem 'webpacker'
 gem 'faraday'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'nokogiri'
+
 #gem 'omniauth'
 #gem 'omniauth-twitter'
 #gem 'omniauth-facebook'
