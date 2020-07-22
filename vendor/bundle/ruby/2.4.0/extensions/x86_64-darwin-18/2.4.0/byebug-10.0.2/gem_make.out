@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/byebug-10.0.2/ext/byebug
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-2182-1lks2xq.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-85139-dr0pny.rb extconf.rb
 creating Makefile
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/byebug-10.0.2/ext/byebug
@@ -16,4 +16,4 @@ linking shared-object byebug/byebug.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/byebug-10.0.2/ext/byebug
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 byebug.bundle ./.gem.20200722-2182-16ae0ca/byebug
+/usr/bin/install -c -m 0755 byebug.bundle ./.gem.20200722-85139-nwch0w/byebug

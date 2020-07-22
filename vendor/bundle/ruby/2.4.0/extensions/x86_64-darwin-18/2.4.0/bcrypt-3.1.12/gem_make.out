@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.12/ext/mri
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-2182-12nq77.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-85139-23d4bb.rb extconf.rb
 creating Makefile
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.12/ext/mri
@@ -48,4 +48,4 @@ linking shared-object bcrypt_ext.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.12/ext/mri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20200722-2182-138me6e
+/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20200722-85139-1d5k35a

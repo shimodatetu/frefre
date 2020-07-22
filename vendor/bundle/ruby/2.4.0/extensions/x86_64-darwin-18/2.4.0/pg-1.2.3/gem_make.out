@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/pg-1.2.3/ext
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-2182-i9xjma.rb extconf.rb --use-system-libraries
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-85139-y1s6b3.rb extconf.rb --use-system-libraries
 checking for pg_config... yes
 Using config values from /usr/local/bin/pg_config
 checking for libpq-fe.h... yes
@@ -150,4 +150,4 @@ linking shared-object pg_ext.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/pg-1.2.3/ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 pg_ext.bundle ./.gem.20200722-2182-kqbu63
+/usr/bin/install -c -m 0755 pg_ext.bundle ./.gem.20200722-85139-oi7108

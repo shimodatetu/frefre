@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/msgpack-1.2.6/ext/msgpack
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-2182-d4hffm.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-85139-rymkcy.rb extconf.rb
 checking for ruby/st.h... yes
 checking for st.h... yes
 checking for rb_str_replace() in ruby.h... yes
@@ -36,4 +36,4 @@ linking shared-object msgpack/msgpack.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/msgpack-1.2.6/ext/msgpack
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 msgpack.bundle ./.gem.20200722-2182-1iy1wk2/msgpack
+/usr/bin/install -c -m 0755 msgpack.bundle ./.gem.20200722-85139-1kiesqo/msgpack

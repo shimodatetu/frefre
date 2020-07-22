@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/bindex-0.5.0/ext/bindex
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-2182-ladxqg.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-85139-1gpdhp7.rb extconf.rb
 creating Makefile
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/bindex-0.5.0/ext/bindex
@@ -12,4 +12,4 @@ linking shared-object bindex/cruby.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/bindex-0.5.0/ext/bindex
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20200722-2182-1t0ztka/bindex
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20200722-85139-sjbyg8/bindex

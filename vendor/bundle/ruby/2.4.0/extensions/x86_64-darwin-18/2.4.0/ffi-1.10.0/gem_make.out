@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/ffi-1.10.0/ext/ffi_c
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-2182-e5xun1.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-85139-103exzg.rb extconf.rb
 checking for ffi_call() in -lffi... yes
 checking for ffi_closure_alloc()... no
 checking for ffi_raw_call()... no
@@ -134,4 +134,4 @@ compiling Variadic.c
 compiling ffi.c
 linking shared-object ffi_c.bundle
 ld: warning: could not create compact unwind for _ffi_call_unix64: does not use RBP or RSP based frame
-/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20200722-2182-1tyfv39
+/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20200722-85139-1g2hosb
