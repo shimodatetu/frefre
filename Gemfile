@@ -40,7 +40,6 @@ gem 'bcrypt'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass'
-gem 'carrierwave'
 gem 'sqlite3', group: [:development, :test]
 gem 'gon'
 gem 'dropzonejs-rails'
