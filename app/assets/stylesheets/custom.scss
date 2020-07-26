@@ -168,6 +168,7 @@ p{
 
 .sub_content_cover{
   display: inline-block;
+  position: absolute;
   width:300px;
   vertical-align: top;
   margin-top:80px;
@@ -259,8 +260,9 @@ p{
   }
 }
 .main_content_cover{
-  padding-left:5px;
-  width: calc(100% - 310px);
+  margin-left:calc(50% - 440px);
+  margin-right:20px;
+  width: 600px;
   display: inline-block;
   min-height: calc(100vh - 70px);
   .mirai_logo{
@@ -475,9 +477,6 @@ body{
   //background:#fff0a017;
 }
 
-@media screen and (max-width: 1050px){
-
-}
 @media screen and (max-width: 1200px){
   .help_show_small{
     margin-top: -22px;
@@ -486,6 +485,20 @@ body{
     margin-left:17.5vw!important;
   }
 }
+
+
+@media screen and (max-width: 900px){
+  .main_content_cover{
+    margin-left:10px!important;
+  }
+}
+@media screen and (max-width: 600px){
+  .sub_content_cover{
+    position: static;
+  }
+}
+
+
 @media screen and (max-width: 750px){
   .profile_main{
     width: 100%!important;
