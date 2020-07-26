@@ -7,7 +7,7 @@ class PvPageController < ApplicationController
       if threadtype.groups.first.posts.count == 0
         Post.create(content_eng:"The community has been created!",content_jap:"コミュニティが作成されました！",group_id:threadtype.groups.first.id,threadtype_id:threadtype.id,user_id:User.first.id)
       end
-      threadtype.groups.first.update(title_jp: "お知らせ・一般スレッド",title_en: "News・Standard Thread",first_content_jp:"コミュニティが作成されました!",first_content_en:"Community was made!")
+      threadtype.groups.first.update(title_jp: "お知らせ・一般トピック",title_en: "News・Standard Topic",first_content_jp:"コミュニティが作成されました!",first_content_en:"Community was made!")
       threadtype.groups.first.posts.first.update(content_jap: "コミュニティが作成されました。",content_eng: "Community was made.")
     end
 

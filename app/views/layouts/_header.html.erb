@@ -157,18 +157,18 @@
 <div class="add_header">
   <div class="thread_button_all"style="display:none">
     <%= link_to "/groups", class: " btn btn-danger thread_button help" do %>
-      <div class="thread_button_jp">緊急スレッド</div>
-      Help Thread
+      <div class="thread_button_jp">緊急トピック</div>
+      Help Topic
     <% end %>
     <% if @test_id.nil? %>
       <%= link_to "/groups", data: {"turbolinks"=>false},class: "btn btn-info thread_button make" do %>
-        <div class="thread_button_jp">スレッド作成</div>
-        Make Threads
+        <div class="thread_button_jp">トピック作成</div>
+        Make Topics
       <% end %>
     <% else %>
       <%= link_to "/groups/?category_id=#{@test_id}",data: {"turbolinks"=>false}, class: "btn btn-info thread_button make" do %>
-        <div class="thread_button_jp">スレッド作成</div>
-        Make Threads
+        <div class="thread_button_jp">トピック作成</div>
+        Make Topics
       <% end %>
     <% end %>
   </div>

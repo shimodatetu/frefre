@@ -89,8 +89,8 @@ class ThreadtypeController < ApplicationController
       if threadtype.save
         group = Group.new()
         threadtype.users << current_user
-        group.title_jp = "お知らせ・一般スレッド"
-        group.title_en = "News・Standard Thread"
+        group.title_jp = "お知らせ・一般トピック"
+        group.title_en = "News・Standard Topic"
         group.user_id = current_user.id
         group.threadtype_id = threadtype.id
         group.first_content_jp = "コミュニティが作成されました!"

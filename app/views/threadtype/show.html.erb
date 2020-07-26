@@ -24,20 +24,20 @@
         <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
           <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
             <div class="jp">
-              人気スレッド
+              人気トピック
             </div>
             <div class="en">
-              Popular Thread
+              Popular Topic
             </div>
           <% end %>
         </li>
         <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
           <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
             <div class="jp">
-              最新スレッド
+              最新トピック
             </div>
             <div class="en">
-              Latest Thread
+              Latest Topic
             </div>
           <% end %>
         </li>
@@ -56,10 +56,10 @@
         <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "5" %>active<% end %>">
           <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/5',class:"nav-link" do %>
             <div class="jp">
-              スレッド作成
+              トピック作成
             </div>
             <div class="en">
-              Make Thread
+              Make Topic
             </div>
           <% end %>
         </li>

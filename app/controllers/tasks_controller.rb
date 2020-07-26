@@ -135,13 +135,13 @@ class TasksController < ApplicationController
       report_group = Reportgroup.find_by(threadtype_id: id.to_i)
       if group && !(report_group && report_group.user_id == current_user.id)
         Reportgroup.create(user_id:current_user.id,threadtype_id:threadtype.id,content:content,reporttype:type)
-        flash["alert_en"] = "You reported this thread"
-        flash["alert_jp"] = "このスレッドを通報しました。"
+        flash["alert_en"] = "You reported this topic"
+        flash["alert_jp"] = "このトピックを通報しました。"
         flash["alert_type"] = "success"
         redirect_to params[:page_url]
       else
-        flash["alert_en"] = "You failed to report thread."
-        flash["alert_jp"] = "スレッドの通報に失敗しました。。"
+        flash["alert_en"] = "You failed to report topic."
+        flash["alert_jp"] = "トピックの通報に失敗しました。。"
         flash["alert_type"] = "fail"
         redirect_to params[:page_url]
       end
