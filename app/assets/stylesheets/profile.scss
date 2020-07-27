@@ -234,7 +234,9 @@
 
   .profile_main{
     display:inline-block;
-    width: calc(100vw - 350px);
+    margin-left: calc(50% - 440px);
+    margin-right: 20px;
+    width: 600px;
     margin-bottom:10px;
     min-height:calc(100vh - 150px);
   }
