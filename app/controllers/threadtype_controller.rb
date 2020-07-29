@@ -115,7 +115,7 @@ class ThreadtypeController < ApplicationController
     if logged_in? && (threadtype = Threadtype.find_by(id:params[:threadtype_id])) != nil && (user_threadtype = threadtype.user_threadtypes.find_by(user_id:current_user.id)) != nil
       user_threadtype.delete
       flash["alert_en"] = "You successed to leave this community."
-      flash["alert_jp"] = "コミュニティの大会に成功しました。"
+      flash["alert_jp"] = "コミュニティの退会に成功しました。"
       flash["alert_type"] = "success"
       redirect_to "/threadtype/show/"+threadtype.id.to_s+"/1"
     end
