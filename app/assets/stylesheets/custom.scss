@@ -707,7 +707,7 @@ body{
   .table_left_image{
     display:block;
     float:inherit!important;
-    margin-left: 10px;
+    margin-left: 10px!important;
     margin-top:10px;
   }
   .table_all_cover{
@@ -756,7 +756,7 @@ body{
     padding-right:5px;
   }
   .threadtype_page .join_button{
-    width:100%;
+    width:calc(100% - 13px);
     white-space: inherit;
   }
   .login_page{

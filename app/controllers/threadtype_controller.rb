@@ -86,6 +86,10 @@ class ThreadtypeController < ApplicationController
       else
         threadtype.approval = "normal"
       end
+      if data[:pict] != nil
+        post.pict = data[:pict]
+        post.save
+      end
       if threadtype.save
         group = Group.new()
         threadtype.users << current_user
