@@ -27,10 +27,10 @@ class ThreadtypeController < ApplicationController
 
     @threadtype_menu_show = true
 
-    if (params[:type] == nil || params[:type] == "1") && 1 == 2
+    if (params[:type] == nil || params[:type] == "1")
       @open_posts = @threadtype.groups.first.posts.page(page_id).per(per)
       @post = Post.new
-    elsif params[:type] == nil || params[:type] == "1" || params[:type] == "2"
+    elsif params[:type] == "2"
       @popular_groups = groups.order(seen_num: "DESC").page(page_id).per(per)
     elsif params[:type] == "3"
       @latest_groups = groups.order(id:"asc").page(page_id).per(per)

@@ -566,7 +566,6 @@ body{
     }
   }
   .sub_content_cover{
-
     a{
       display: block;
     }
@@ -580,10 +579,9 @@ body{
   .sub_content_cover{
     width: 100%;
     text-align: center;
-    margin-top: 10px;
     padding: 30px;
-    padding-right: 50px;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    padding-top:0px;
     position: static;
     .mirai_img{
       margin-top:20px;
