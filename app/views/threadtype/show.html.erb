@@ -88,7 +88,7 @@
     </div>
     <div class="thread_cover threadtype_cover">
       <% if params[:type] == nil || params[:type] == "1"%>
-        <%= render partial: "/threadtype/popular_thread", locals: { threadtype: @threadtype }%>
+        <%= render partial: "/threadtype/detail_show", locals: { threadtype: @threadtype }%>
       <% elsif params[:type] == "2"  %>
         <%= render partial: "/threadtype/popular_thread", locals: { threadtype: @threadtype }%>
       <% elsif params[:type] == "3"  %>

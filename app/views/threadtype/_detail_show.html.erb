@@ -2,95 +2,29 @@
 <% if @threadtype.leader_id != 0 %>
   <% leader = User.find_by(id:@threadtype.leader_id) %>
 <% end %>
-<div class="thread_content threadtype_content">
-  <table class="table_all_cover threadtype_cover threadtype_users" border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#eee">
-    <tr class="table_list">
-      <th class="column_title">
-        <div class="title_jp">
-          紹介
+
+<%= render partial:"threadtype/explain_table" %>
+<% threadtype_id = @threadtype.id %>
+<div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
+  <% if logged_in? && current_user.threadtypes.find_by(id:threadtype_id) != nil %>
+    <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id,style:"cursor:default" do %>
+      <div class="text_box">
+        <div class="jp">
+          Joined Community / 参加済コミュニティ
         </div>
-        <div class="title_en">
-          Introduction
+      </div>
+    <% end %>
+  <% else %>
+    <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit click",id:threadtype_id do %>
+      <div class="text_box">
+        <div class="jp">
+          Join this Community / このコミュニティに参加する
         </div>
-      </th>
-      <th class="explain column_content"data-toggle="modal" data-target="#explain_modal">
-        <div class="post_content_position en_position width_max_text">
-          <div class="post_content">
-            <div class="post_content_text no_inline">
-              <%= simple_format(text_url_to_link(h(@threadtype.content_en))) %>
-            </div>
-          </div>
-        </div>
-        <div class="post_content_position jp_position width_max_text">
-          <div class="post_content">
-            <div class="post_content_text no_inline">
-              <%= simple_format(text_url_to_link(h(@threadtype.content_jp))) %>
-            </div>
-          </div>
-        </div>
-      </th>
-    </tr>
-    <tr class="table_list">
-      <th class="column_title">
-        <div class="title_jp">
-          管理者
-        </div>
-        <div class="title_en">
-          Manager
-        </div>
-      </th>
-      <th class="column_content">
-        <div class="threadtype_img_cover">
-          <% if @threadtype.leader_id == 0 %>
-            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-          <% else %>
-            <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-          <% end %>
-        </div>
-        <div class="threadtype_name">
-          <% if @threadtype.type == "every" %>
-            FreFre Office
-          <% else %>
-            <%= leader.name %>
-          <% end %>
-        </div>
-      </th>
-    </tr>
-    <tr class="table_list">
-      <th class="column_title">
-        <div class="title_jp">
-          コミュニティタイプ
-        </div>
-        <div class="title_en">
-          Community Type
-        </div>
-      </th>
-      <th class="column_content threadtype_user_cover">
-        <div class="threadtype_type">
-          <% if @threadtype.type == "not_open" %>
-            <i class="fas fa-minus-circle"></i>Private / 非公開
-          <% elsif @threadtype.type == "secret" %>
-            <i class="fas fa-lock"></i>Secret / 秘密
-          <% else %>
-            <i class="fas fa-check-circle"></i>Public / 公開
-          <% end %>
-        </div>
-      </th>
-    </tr>
-  </table>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
-
-<%= link_to('/threadtype/show/'+ @threadtype.id.to_s + '/5', type:"button", class:"login_join_button btn mes_button makethread_link") do %>
-  <div class="text_box">
-    <div class="en">
-      Make Topic in this Community
-    </div>
-    <div class="jp">
-      このコミュニティ内でトピックを作成する
-    </div>
-  </div>
-<% end %>
 <% first_group = threadtype.groups.first %>
 <% thread_id = first_group.id %>
 <div class="threadtype_threads">
