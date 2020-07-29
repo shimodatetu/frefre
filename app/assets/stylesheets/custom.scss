@@ -704,6 +704,15 @@ body{
 }
 
 @media screen and (max-width: 570px){
+  .table_left_image{
+    display:block;
+    float:inherit!important;
+    margin-left: 10px;
+  }
+  .table_all_cover{
+    width:100%!important;
+  }
+
   .lang_bar_cover{
     .en_country{
       margin-left: 10px;
@@ -711,9 +720,10 @@ body{
     .lang_bar{
       margin-left:5vw!important;
       .slider{
-        width:calc(80vw - 162px) !important
+        width:calc(100% - 220px)!important;
       }
     }
+
     .slider-handle{
       top: -5px !important;
       width: 10px !important;
@@ -740,9 +750,13 @@ body{
     margin-right:30px;
   }
   .main_content_cover{
-    width:100%!important;
+    width: calc(100% - 30px)!important;
     padding-left:5px;
     padding-right:5px;
+  }
+  .threadtype_page .join_button{
+    width:100%;
+    white-space: inherit;
   }
   .login_page{
     width:99vw!important;
