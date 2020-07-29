@@ -329,10 +329,12 @@
     border-radius:5px;
     .table_left_image{
       float: left;
-      margin-right: 10px;
+      margin-right: 5px;
+      margin-left: 10px;
       img{
         width: 140px;
         border:solid thin #ccc;
+        border-radius:5px;
       }
       .edit_user{
         margin-top:5px;
