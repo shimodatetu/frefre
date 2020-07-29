@@ -492,25 +492,14 @@ body{
     margin-left:10px!important;
   }
 }
-@media screen and (max-width: 600px){
-  .sub_content_cover{
-    position: static;
-  }
-}
+
 
 
 @media screen and (max-width: 750px){
   .profile_main{
     width: 100%!important;
   }
-  .sub_content_cover{
-    a{
-      display: block;
-    }
-    img{
-      display: block;
-    }
-  }
+
   .profile .lang_bar_cover .lang_bar{
     margin-left:0px!important;
   }
@@ -577,12 +566,25 @@ body{
     }
   }
   .sub_content_cover{
+
+    a{
+      display: block;
+    }
+    img{
+      display: block;
+    }
+  }
+  .main_content_cover{
+    width: calc(100% - 40px)!important;
+  }
+  .sub_content_cover{
     width: 100%;
     text-align: center;
     margin-top: 10px;
     padding: 30px;
     padding-right: 50px;
     margin-bottom: 20px;
+    position: static;
     .mirai_img{
       margin-top:20px;
       margin-left: calc(50% - 150px);
@@ -601,9 +603,6 @@ body{
   }
   .search_form{
     display: none!important;
-  }
-  .main_content_cover{
-    width:560px!important;
   }
   .profile_history{
     margin-left: 5px!important;

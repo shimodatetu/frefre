@@ -40,7 +40,6 @@
   .profile_main{
     margin-top: -13px;
     margin-left:10px;
-    width: calc(100vw - 340px);
   }
   .nav-tabs{
     width: 100%;
@@ -355,7 +354,8 @@
       display: inline-block;
       margin-left: 5px;
       font-size: 25px;
-      vertical-align: sub;
+      margin-top: 2px;
+      vertical-align: top;
     }
     .fa-comments{
       vertical-align: text-bottom;
@@ -365,6 +365,7 @@
     .text_cover{
       display: inline-block;
       font-size:18px;
+      width: calc(100% - 40px);
     }
     .nav-link{
       padding:5px 10px 5px 5px;
