@@ -7,7 +7,22 @@
 <div class="profile_menu_tab">
   <div class="get_user_id"id="<%= current_user_id %>"></div>
   <ul class="nav flex-column">
-    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" )|| params[:type] == "2" %>active<% end %>">
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" ) %>active<% end %>">
+      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
+        <div class="text_cover">
+          <div class="jp">
+            人気トピック
+          </div>
+          <div class="en">
+            Popular Topic
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
         <div class="text_cover">
           <div class="jp">

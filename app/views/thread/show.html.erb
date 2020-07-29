@@ -240,16 +240,19 @@
                 <% end %>
               </div>
             </div>
-            <button type="button" class="normal_button post_button btn btn_send words_post_button post_footer_one"id="post"
-            name="<% if logged_in? %>logined<% end %>">
-              <div class="glyphicon glyphicon-comment picture_send"></div>
-              <div class="button_text">
-                <div class="float_jp">
-                  投稿
+
+            <div class="thread_send">
+              <button type="button" class="normal_button post_button btn btn_send words_post_button post_footer_one"id="post"
+              name="<% if logged_in? %>logined<% end %>">
+                <div class="glyphicon glyphicon-comment picture_send"></div>
+                <div class="button_text">
+                  <div class="float_jp">
+                    投稿
+                  </div>
+                  Post
                 </div>
-                Post
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
 
           <%= paginate @thread_posts ,outer_window: 3%>
@@ -399,6 +402,7 @@
                   <%= submit_tag "",class:"trans_send",style:"display:none"%>
                 <% end %>
         			</div>
+
         			<div class="modal-footer"style="margin-top:10px">
                 <button type="button" class="btn btn-default btn_send btn_video_send"id="enjp">
                   <div class="float_jp">投稿</div>
