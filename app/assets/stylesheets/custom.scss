@@ -260,9 +260,9 @@ p{
   }
 }
 .main_content_cover{
-  margin-left:calc(50% - 440px);
+  margin-left:calc(50% - 520px);
   margin-right:20px;
-  width: 600px;
+  width: 720px;
   display: inline-block;
   min-height: calc(100vh - 70px);
   .mirai_logo{
@@ -702,6 +702,10 @@ body{
 }
 
 @media screen and (max-width: 570px){
+  .login_page_cover{
+    padding-left: 0px !important;
+    margin-right: 0px!important;
+  }
   .table_left_image{
     display:block;
     float:inherit!important;

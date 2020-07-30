@@ -18,9 +18,11 @@
           <div class="thread_title">
             <div class="title_padding no_inline">
               <div>
+                <% if threadtype.type == "every" %><%= "「公式」" %><% end %>
                 <%= threadtype.type_jp %>
               </div>
               <div>
+                <% if threadtype.type == "every" %><%= "「Official」" %><% end %>
                 <%= threadtype.type_en %>
               </div>
             </div>

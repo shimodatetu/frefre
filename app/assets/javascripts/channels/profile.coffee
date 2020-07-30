@@ -9,7 +9,6 @@ App.profile = App.cable.subscriptions.create "ProfileChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    alert("asd")
     console.log(data)
     user_id = String(data["user_id"])
     user_type = data["usertype"]

@@ -37,7 +37,6 @@
       </div>
     </div>
   <% end %>
-  <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
 
   <div class="threadtype_cover">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -80,7 +79,7 @@
       <div class="tab-pane active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
         <div class="thread_all thread_all_group">
           <% there_be = false %>
-
+          <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
           <% if @latest_threadtypes != nil %>
             <% @popular_threadtypes.each do |threadtype| %>
               <% there_be = true %>
@@ -103,6 +102,7 @@
       <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
         <div class="thread_all thread_all_group">
           <% there_be = false %>
+          <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
           <% if @latest_threadtypes != nil %>
             <% @latest_threadtypes.each do |threadtype| %>
               <% there_be = true %>
