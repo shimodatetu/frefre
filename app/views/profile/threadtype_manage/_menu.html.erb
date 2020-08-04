@@ -8,11 +8,14 @@
   <ul class="nav flex-column">
     <li class="nav-item profile_contents_button <% if params[:id] == "14"%>active<% end %>">
       <%= link_to "/profile/14/" + @threadtype.id.to_s ,class:"nav-link" do %>
-        <div class="jp">
-          トップページ
-        </div>
-        <div class="en">
-          Top Page
+        <i class="fas fa-comment-users"></i>
+        <div class="text_cover">
+          <div class="jp">
+            トップページ
+          </div>
+          <div class="en">
+            Top Page
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -22,11 +25,14 @@
     <% if Threadtype.find_by(leader_id:current_user.id) != nil %>
       <li class="nav-item profile_contents_button <% if params[:id] == "15"%>active<% end %>">
         <%= link_to "/profile/15/" + @threadtype.id.to_s ,class:"nav-link" do %>
-          <div class="jp">
-            トピック管理
-          </div>
-          <div class="en">
-            Edit Topic
+          <i class="fas fa-comment-dots"></i>
+          <div class="text_cover">
+            <div class="jp">
+              トピック管理
+            </div>
+            <div class="en">
+              Edit Topic
+            </div>
           </div>
           <div class="menu_right_button">
             <i class="fas fa-plus"></i>

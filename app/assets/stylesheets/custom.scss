@@ -5,6 +5,25 @@
 .table_all_cover{
   color:#4e4e4e;
 }
+.url_menu{
+  margin-left:0px!important;
+}
+.profile_menu_tab{
+  .fas{
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  .icon_img{
+    width: 30px;
+    margin-left: -5px;
+    height: 30px;
+    vertical-align: bottom;
+  }
+  .text_cover{
+    display: inline-block;
+  }
+}
 .make_group_button{
   border: solid 2px #ff9d3b;
   color: #fff;
@@ -242,9 +261,11 @@ p{
         height: 30px;
         text-align: center;
         font-size: 23px;
-        margin-right: -5px;
-        margin-top: -32px;
         color:#fff;
+        .fas{
+          font-size:23px;
+          margin-right:0px;
+        }
       }
     }
   }
@@ -487,7 +508,7 @@ body{
 }
 
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 1060px){
   .main_content_cover{
     margin-left:10px!important;
   }

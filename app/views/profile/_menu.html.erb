@@ -8,11 +8,14 @@
   <ul class="nav flex-column">
     <li class="nav-item profile_contents_button <% if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"%>active<% end %>">
       <%= link_to '/profile/1',class:"nav-link" do %>
-        <div class="jp">
-          プロフィール
-        </div>
-        <div class="en">
-          Profile
+        <i class="fas fa-address-card"></i>
+        <div class="text_cover">
+          <div class="jp">
+            プロフィール
+          </div>
+          <div class="en">
+            Profile
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -22,26 +25,14 @@
     <% if Threadtype.find_by(leader_id:current_user.id) != nil %>
       <li class="nav-item profile_contents_button <% if params[:id] == "13" || params[:id] == "14"%>active<% end %>">
         <%= link_to '/profile/13',class:"nav-link" do %>
-          <div class="jp">
-            作成したコミュニティ
-          </div>
-          <div class="en">
-            Made Community
-          </div>
-          <div class="menu_right_button">
-            <i class="fas fa-plus"></i>
-          </div>
-        <% end %>
-      </li>
-    <% end %>
-    <% if Threadtype.find_by(leader_id:current_user.id) != nil && 1 == 2%>
-      <li class="nav-item profile_contents_button <% if params[:id] == "22" || params[:id] == "23"%>active<% end %>">
-        <%= link_to '/profile/21',class:"nav-link" do %>
-          <div class="jp">
-            参加したコミュニティ
-          </div>
-          <div class="en">
-            Joined Community
+          <i class="fas fa-address-card"></i>
+          <div class="text_cover">
+            <div class="jp">
+              作成したコミュニティ
+            </div>
+            <div class="en">
+              Made Community
+            </div>
           </div>
           <div class="menu_right_button">
             <i class="fas fa-plus"></i>
@@ -51,11 +42,14 @@
     <% end %>
     <li class="nav-item profile_contents_button <% if params[:id] == "5" || params[:id] == "6"%>active<% end %>">
       <%= link_to '/profile/5',class:"nav-link" do %>
-        <div class="jp">
-          チャット
-        </div>
-        <div class="en">
-          Chat
+        <i class="fas fa-comments"></i>
+        <div class="text_cover">
+          <div class="jp">
+            チャット
+          </div>
+          <div class="en">
+            Chat
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -64,11 +58,14 @@
     </li>
     <li class="nav-item profile_contents_button <% if params[:id] == "7" || params[:id] == "8"%>active<% end %>">
       <%= link_to '/profile/7',class:"nav-link" do %>
-        <div class="jp">
-          お知らせ
-        </div>
-        <div class="en">
-          Notice
+        <i class="fas fa-exclamation-triangle"></i>
+        <div class="text_cover">
+          <div class="jp">
+            お知らせ
+          </div>
+          <div class="en">
+            Notice
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -77,11 +74,14 @@
     </li>
     <li class="nav-item profile_contents_button <% if params[:id] == "9" || params[:id] == "10" || params[:id] == "11"%>active<% end %>">
       <%= link_to '/profile/9',class:"nav-link" do %>
-        <div class="jp">
-          フォロワー
-        </div>
-        <div class="en">
-          Follower
+        <%= image_tag "/icon/follow.png",class:"icon_img" %>
+        <div class="text_cover">
+          <div class="jp">
+            フォロワー
+          </div>
+          <div class="en">
+            Follower
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -90,11 +90,14 @@
     </li>
     <li class="nav-item profile_contents_button <% if params[:id] == "12"%>active<% end %>">
       <%= link_to '/profile/12',class:"nav-link" do %>
-        <div class="jp">
-          設定
-        </div>
-        <div class="en">
-          Edit
+        <i class="fas fa-edit"></i>
+        <div class="text_cover">
+          <div class="jp">
+            設定
+          </div>
+          <div class="en">
+            Edit
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -103,11 +106,14 @@
     </li>
     <li class="nav-item profile_contents_button <% if params[:id] == "24"%>active<% end %>">
       <%= link_to '/profile/24',class:"nav-link" do %>
-        <div class="jp">
-          このアカウントを退会させる
-        </div>
-        <div class="en">
-          Leave this account
+        <i class="fas fa-user-slash"></i>
+        <div class="text_cover">
+          <div class="jp">
+            このアカウントを退会させる
+          </div>
+          <div class="en">
+            Leave this account
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>

@@ -9,6 +9,7 @@
   <ul class="nav flex-column">
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" ) %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/1',class:"nav-link" do %>
+        <i class="fas fa-users"></i>
         <div class="text_cover">
           <div class="jp">
             トップページ
@@ -24,6 +25,7 @@
     </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
+        <%= image_tag "/icon/popular.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">
             人気トピック
@@ -39,6 +41,8 @@
     </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
+
+        <%= image_tag "/icon/latest.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">
             最新トピック
@@ -52,25 +56,9 @@
         </div>
       <% end %>
     </li>
-    <% if @threadtype.type != "every" %>
-      <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "4" %>active<% end %>">
-        <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
-          <div class="text_cover">
-            <div class="jp">
-              メンバー
-            </div>
-            <div class="en">
-              Member
-            </div>
-          </div>
-          <div class="menu_right_button">
-            <i class="fas fa-plus"></i>
-          </div>
-        <% end %>
-      </li>
-    <% end %>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "5" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/5',class:"nav-link" do %>
+        <i class="fas fa-marker"></i>
         <div class="text_cover">
           <div class="jp">
             トピック作成
@@ -86,6 +74,7 @@
     </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "6" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/6',class:"nav-link" do %>
+        <i class="fas fa-search"></i>
         <div class="text_cover">
           <div class="jp">
             キーワード検索
@@ -102,6 +91,7 @@
     <% if logged_in? && @threadtype.leader_id == current_user.id %>
       <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "9" %>active<% end %>">
         <%= link_to '/profile/14/'+ @threadtype.id.to_s,class:"nav-link" do %>
+          <i class="fas fa-list-alt"></i>
           <div class="text_cover">
             <div class="jp">
               コミュニティ管理画面へ
@@ -119,6 +109,7 @@
     <% if logged_in? && @threadtype.users.find_by(id:current_user.id) != nil %>
       <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "9" %>active<% end %>">
         <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/9',class:"nav-link" do %>
+          <i class="fas fa-door-open"></i>
           <div class="text_cover">
             <div class="jp">
               このコミュニティを退会する
@@ -136,6 +127,7 @@
     <% if logged_in? && current_user.approvals.find_by(threadtype_id:@threadtype.id) != nil %>
       <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "9" %>active<% end %>">
         <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/10',class:"nav-link" do %>
+          <i class="fas fa-window-close"></i>
           <div class="text_cover">
             <div class="jp">
               参加申請を取り消す
