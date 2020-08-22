@@ -1,10 +1,10 @@
 <% threadtype_id = @threadtype.id %>
-<% if logged_in? %>
+<% if !logged_in? %>
   <div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
     <%= link_to("/login_page",class:"login_join_button btn mes_button join_button") do %>
       <div class="text_box">
         <div class="jp">
-          Login / ログインする
+          Login and Join/ ログインして参加する
         </div>
       </div>
     <% end %>

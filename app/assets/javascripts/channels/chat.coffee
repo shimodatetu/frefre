@@ -291,34 +291,6 @@ video_show2　=　->
   $("#chat_video-modal .video_show .vjs-tech").attr("src":blobUrl)
   $("#chat_video-modal .video_show").attr("style":"display:block")
 
-
-translate_google=(data) ->
-  lang = data[0]
-  words = data[1]
-  ajax_send = $.ajax(
-    async: false
-    url: 'https://still-plains-44123.herokuapp.com/trans_mirai',
-    type: 'post'
-    cache: false
-    data:
-      'lang': lang
-      'words': words
-    dataType: 'json').done((res) ->
-    window.translated = true
-    translation = res[0]
-    if lang == "ja"
-      $(".base_jp_form").val(translation);
-    else
-      translation = translation.replace("&#39;","'")
-      $(".base_en_form").val(translation);
-    $("#fakeLoader").fadeOut();
-    return
-  ).fail (xhr, status, error) ->
-    alert status
-    $("#fakeLoader").fadeOut();
-    return
-
-
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);
 isHalf=(str)->

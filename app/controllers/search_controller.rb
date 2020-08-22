@@ -14,11 +14,7 @@ class SearchController < ApplicationController
      @threadtypes = Threadtype.where("type_jp LIKE ? OR type_en LIKE ?", "%"+ @search_text +"%", "%"+ @search_text +"%")
     end
 
-    if logged_in?
-      search_users = User.where.not(id:current_user.id)
-    else
-      search_users = User.all
-    end
+    search_users = User.all
     if !@search_text.nil?
       search_users = search_users.where("name LIKE ? OR user_search_id LIKE ?", "%"+ @search_text +"%","%"+ @search_text +"%")
     end

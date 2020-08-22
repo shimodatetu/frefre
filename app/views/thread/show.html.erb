@@ -1,5 +1,4 @@
 
-
 <% there_be = true %>
 <% leader = User.find_by(id:@threadtype.leader_id) %>
 
@@ -12,93 +11,6 @@
   <% current_user_id = current_user.id %>
 <% end %>
 <div class="profile threadtype_page">
-  <div class="profile_sub"style="display:none;margin-top:20px;">
-    <% if @threadtype.type == "every" %>
-      <div class="official_mark">
-        Official / 公式
-      </div>
-    <% end %>
-    <div class="profile_picture">
-      <% if @threadtype.id == 22 %>
-        <%= image_tag("group_icon/chat.png", :class => "group_img",:style => "border-radius:none") %>
-      <% elsif @threadtype.id == 23 %>
-        <%= image_tag("group_icon/question.png", :class => "group_img",:style => "border-radius:none") %>
-      <% elsif @threadtype.id == 24 %>
-        <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
-      <% elsif @threadtype.pict.attached? %>
-        <%= image_tag @threadtype.pict , :class => "group_img",:style => "border-radius:none"%>
-      <% else %>
-        <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:none") %>
-      <% end %>
-    </div>
-    <div class="profile_contents_change">
-      <div class="get_user_id"id="<%= current_user_id %>"></div>
-      <ul class="nav flex-column">
-        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every") %>active<% end %>">
-          <%= link_to "/threadtype/show/" + @threadtype.id.to_s + "/1",class:"nav-link" do %>
-            <div class="jp">
-              ホーム
-            </div>
-            <div class="en">
-              Home
-            </div>
-          <% end %>
-        </li>
-        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
-          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
-            <div class="jp">
-              人気トピック
-            </div>
-            <div class="en">
-              Popular Topic
-            </div>
-          <% end %>
-        </li>
-        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
-          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
-            <div class="jp">
-              最新トピック
-            </div>
-            <div class="en">
-              Latest Thread
-            </div>
-          <% end %>
-        </li>
-        <% if @threadtype.type != "every" %>
-          <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "4" %>active<% end %>">
-            <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
-              <div class="jp">
-                メンバー
-              </div>
-              <div class="en">
-                Member
-              </div>
-            <% end %>
-          </li>
-        <% end %>
-        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "5" %>active<% end %>">
-          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/5',class:"nav-link" do %>
-            <div class="jp">
-              トピック作成
-            </div>
-            <div class="en">
-              Make Topic
-            </div>
-          <% end %>
-        </li>
-        <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "6" %>active<% end %>">
-          <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/6',class:"nav-link" do %>
-            <div class="jp">
-              キーワード検索
-            </div>
-            <div class="en">
-              Search
-            </div>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
   <div class="profile_main"style="margin-top:5px;">
     <div class="post_content_cover threadtype_title_show">
       <div class="post_content_position width_max">
@@ -262,9 +174,9 @@
       <% if logged_in? %>
       <div class="thread_post_cover">
         <div class="modal fade" id="sampleModal-enjp" tabindex="-1">
-        	<div class="modal-dialog"style="width:90vw">
-        		<div class="modal-content">
-        			<div class="modal-body">
+        <div class="modal-dialog"style="width:90vw">
+        <div class="modal-content">
+        <div class="modal-body">
                 <div class="thread_post">
                   <div class="post_form_cover post_form_cover_enjp connect_btn">
                     <%= image_tag "/eng.png", class: "image" %>
@@ -294,8 +206,8 @@
                       →Rewrite the contents above & “POST”
                   </div>
                 </div>
-        			</div>
-        			<div class="modal-footer">
+        </div>
+        <div class="modal-footer">
                 <button type="button" class="btn btn-default btn_send"id="enjp">
                   <div class="float_jp">投稿</div>
                   <div class="base_en">Post</div>
@@ -304,9 +216,9 @@
                   <div class="float_jp">戻る</div>
                   <div class="base_en">Back</div>
                 </button>
-        			</div>
-        		</div>
-        	</div>
+        </div>
+        </div>
+        </div>
         </div>
       </div>
       <div class="thread_post_cover check_delete">
@@ -352,9 +264,9 @@
       </div>
       <div class="thread_post_cover post_form_page">
         <div class="modal fade" id="video-subtitle-modal" tabindex="-1">
-        	<div class="modal-dialog"style="width:90vw">
-        		<div class="modal-content">
-        			<div class="modal-body">
+        <div class="modal-dialog"style="width:90vw">
+        <div class="modal-content">
+        <div class="modal-body">
                 <div style="margin-top:30px;">
                   <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
                     poster='/' data-setup='{}'style="display:none">
@@ -401,9 +313,9 @@
                   <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
                   <%= submit_tag "",class:"trans_send",style:"display:none"%>
                 <% end %>
-        			</div>
+        </div>
 
-        			<div class="modal-footer"style="margin-top:10px">
+        <div class="modal-footer"style="margin-top:10px">
                 <button type="button" class="btn btn-default btn_send btn_video_send"id="enjp">
                   <div class="float_jp">投稿</div>
                   <div class="base_en">Post</div>
@@ -412,9 +324,9 @@
                   <div class="float_jp">戻る</div>
                   <div class="base_en">Back</div>
                 </button>
-        			</div>
-        		</div>
-        	</div>
+        </div>
+        </div>
+        </div>
         </div>
       </div>
       <div class="thread_post_cover check_delete">
@@ -518,9 +430,9 @@
 
       <div class="profile_modal">
         <div class="modal fade" id="explain_modal" tabindex="-1">
-        	<div class="modal-dialog"style="width:90vw">
-        		<div class="modal-content">
-        			<div class="modal-body">
+        <div class="modal-dialog"style="width:90vw">
+        <div class="modal-content">
+        <div class="modal-body">
                 <div class="post_content_cover explain"data-toggle="modal" data-target="exlain_modal">
                   <div class="post_content_position width_max_text">
                     <div class="post_content">
@@ -537,23 +449,23 @@
                     </div>
                   </div>
                 </div>
-        			</div>
+        </div>
               <div class="modal-footer follow_modal_footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                   Close / 閉じる
                 </button>
               </div>
-        		</div>
-        	</div>
+        </div>
+        </div>
         </div>
       </div>
 
       <div class="profile_modal">
         <div class="modal fade" id="report_post_modal" tabindex="-1">
-        	<div class="modal-dialog"style="width:90vw">
-        		<div class="modal-content">
+        <div class="modal-dialog"style="width:90vw">
+        <div class="modal-content">
               <%= form_tag('/report/post',remote: true ,method: :post,class: "search_form_top") do %>
-          			<div class="modal-body">
+          <div class="modal-body">
                   <div class="title">
                     通報の理由 / Report Reason
                   </div>
@@ -565,7 +477,7 @@
                     Specific Content / 具体的な内容
                   </div>
                   <%= text_area_tag :report_content,"", class: "form-control form_input" ,placeholder:"",rows:"5" %>
-          			</div>
+          　</div>
                 <div class="modal-footer follow_modal_footer">
                   <%= hidden_field_tag :report_id,"-1", class: "form-control form_input report_post_input" %>
                   <%= hidden_field_tag :thread_id,thread_id %>
@@ -588,8 +500,8 @@
                   </button>
                 </div>
               <% end %>
-        		</div>
-        	</div>
+        </div>
+        </div>
         </div>
       </div>
     </div>

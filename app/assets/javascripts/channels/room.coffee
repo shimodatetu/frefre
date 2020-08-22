@@ -36,6 +36,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           else if Number(now_page) == page
             $(".base_en_form").val("");
             $(".base_jp_form").val("");
+            alert_modal("Success to Post!","投稿に成功しました！" ,"success")
             if(!($('.thread_cover#'+data["post"]['id']).length))
               $(".profile_button_destroy").click();
           else
@@ -46,16 +47,18 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         now_id = 1
         if urls.length >= 4
           now_id = urls[3]
-        if Number(now_id) == data["post"]['threadtype_id'] && (urls[4] == 1 || urls.length <= 4)
+        if Number(now_id) == data["post"]['threadtype_id']
           now_page = 1
           now_page_get = GetQueryString()["page"]
           if now_page_get != undefined
             now_page = now_page_get
           if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+            alert_modal("Jump to Next page!","次のページへ飛びました！" ,"success")
             window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(Number(now_page) + 1)
           else if Number(now_page) == page
             $(".base_en_form").val("");
             $(".base_jp_form").val("");
+            alert_modal("Success to Post!","投稿に成功しました！" ,"success")
             if(!($('.thread_cover#'+data["post"]['id']).length))
               $(".profile_button_destroy").click();
           else
@@ -364,4 +367,3 @@ GetQueryString = ->
       result[paramName] = paramValue
       i++
   result
-

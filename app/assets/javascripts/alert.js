@@ -1,4 +1,5 @@
 now_alert = false
+alert_time = 1000
 function alert_modal(alert_en,alert_jp,alert_type){
   if(now_alert == false){
     $("#successModal .en").html(alert_en)
@@ -16,7 +17,7 @@ function alert_modal(alert_en,alert_jp,alert_type){
       setTimeout(function(){
         $("#successModal").modal("hide")
         now_alert = false;
-      },3000);
+      },alert_time);
     }
   }
 }
@@ -34,14 +35,14 @@ function alert_modal_js(alert_en,alert_jp,alert_type){
   }
   setTimeout(function(){
     document.querySelector("#successModal").modal("hide")
-  },3000);
+  },alert_time);
 }
 
 function alert_get(){
   alert_en = localStorage.getItem("alert_en")
   alert_jp = localStorage.getItem("alert_jp")
   alert_type = localStorage.getItem("alert_type")
-  if(alert_en != null && alert_jp != null){
+  if(alert_en != null && alert_jp != null && alert_type != null){
     alert_modal(alert_en,alert_jp,alert_type)
     alert_en = localStorage.removeItem("alert_en")
     alert_jp = localStorage.removeItem("alert_jp")

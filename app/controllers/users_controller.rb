@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user.profile_en = "Nice to meet you!"
     @user.profile_jp = "よろしくお願いします！"
     for i in 1..100
-      user_search_id = user.name + rand(1000000).to_s
+      user_search_id = @user.name + rand(1000000).to_s
       if User.find_by(user_search_id:user_search_id) == nil
         @user.user_search_id = user_search_id
         break

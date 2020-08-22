@@ -615,6 +615,18 @@ body{
       height:45vw
     }
   }
+  .sign_page_cover{
+    margin-right:0px!important;
+    margin-left:5%!important;
+    width:100%!important;
+  }
+  .login_page_cover{
+    margin-right:0px!important;
+    margin-left:5%!important;
+    .login_page{
+      width:100%!important;
+    }
+  }
   .login_page{
     .password_reset{
       margin-right: 15px!important;
@@ -726,6 +738,7 @@ body{
   .login_page_cover{
     padding-left: 0px !important;
     margin-right: 0px!important;
+    margin-left: 0px!important;
   }
   .table_left_image{
     display:block;
@@ -781,9 +794,6 @@ body{
   .threadtype_page .join_button{
     width:calc(100% - 13px);
     white-space: inherit;
-  }
-  .login_page{
-    width:99vw!important;
   }
   .words_post_button {
     .button_text{

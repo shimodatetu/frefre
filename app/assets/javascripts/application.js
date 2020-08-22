@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require turbolinks
 //= require jquery
 //= require rails-ujs
 //= require bootstrap-sprockets
@@ -18,4 +19,5 @@
 //= require autosize
 // require execjs
 //= require env
+//= require jquery.jscroll.min.js
 //= require_tree .
