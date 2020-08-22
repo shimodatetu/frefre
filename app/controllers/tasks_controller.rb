@@ -63,10 +63,6 @@ class TasksController < ApplicationController
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       req = Net::HTTP::Post.new(uri.path)
       req.set_form_data({"words"=>words, "lang"=>lang})
-
-      p "============================="
-      p answer
-      p "============================="
       res = http.request(req)
       answer = res.body
       answer = res.body.slice(2..-3).force_encoding("UTF-8")
