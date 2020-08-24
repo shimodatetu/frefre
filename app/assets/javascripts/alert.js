@@ -1,5 +1,5 @@
 now_alert = false
-alert_time = 1000
+alert_time = 1500
 function alert_modal(alert_en,alert_jp,alert_type){
   if(now_alert == false){
     $("#successModal .en").html(alert_en)

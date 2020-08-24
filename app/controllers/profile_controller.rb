@@ -221,6 +221,9 @@ class ProfileController < ApplicationController
     if logged_in? && (threadtype = Threadtype.find_by(id: params[:threadtype_id])) != nil && threadtype.leader_id == current_user.id
       if !(user_connects = threadtype.user_threadtypes.where(user_id:params[:user_id])).blank?
         user_connects.delete_all
+        flash["alert_en"] = "Successed to widthdraw member."
+        flash["alert_jp"] = "ユーザーの退会に成功しました。"
+        flash["alert_type"] = "success"
         redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
       end
     end

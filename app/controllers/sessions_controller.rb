@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
       flash[:failed_jp] = "このアカウントは凍結しています"
       render :index
     else
-      flash.now[:failed_en] = "Mail address or password is wrong."
-      flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"
+      flash[:failed_en] = "Mail address or password is wrong."
+      flash[:failed_jp] = "メールアドレスかパスワードが間違っています。"
       @email = params[:session][:email]
       render :index
     end
@@ -39,8 +39,8 @@ class SessionsController < ApplicationController
       flash["alert_type"] = "success"
       redirect_to "/thread/show/11", success: 'ログインに成功しました'
     else
-      flash.now[:failed_en] = "Mail address or password is wrong."
-      flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"
+      flash[:failed_en] = "Mail address or password is wrong."
+      flash[:failed_jp] = "メールアドレスかパスワードが間違っています。"
       render :event_login
     end
   end
@@ -53,8 +53,8 @@ class SessionsController < ApplicationController
       flash["alert_type"] = "success"
       redirect_to root_path, success: 'ログインに成功しました'
     else
-      flash.now[:failed_en] = "Mail address or password is wrong."
-      flash.now[:failed_jp] = "メールアドレスかパスワードが間違っています。"
+      flash[:failed_en] = "Mail address or password is wrong."
+      flash[:failed_jp] = "メールアドレスかパスワードが間違っています。"
       render :index
     end
   end
@@ -64,16 +64,16 @@ class SessionsController < ApplicationController
     if user_uid != nil && user = User.find_by(uid: user_uid)
       if user.usertype == "delete"
         signup_yet = true
-        flash.now[:failed_en] = "This acount is freezed."
-        flash.now[:failed_jp] = "このアカウントは凍結しています"
+        flash[:failed_en] = "This acount is freezed."
+        flash[:failed_jp] = "このアカウントは凍結しています"
         render :index
       elsif user.admit == true
         session[:user_id] = user.id
         signup_yet = true
-        flash.now["alert_en"] = "You successed to login"
-        flash.now["alert_jp"] = "ログインに成功しました。"
-        flash.now["alert_type"] = "success"
-        redirect_to root_path
+        flash["alert_en"] = "You successed to login"
+        flash["alert_jp"] = "ログインに成功しました。"
+        flash["alert_type"] = "success"
+        redirect_to "/profile"
       end
     end
     if signup_yet == false
@@ -94,22 +94,22 @@ class SessionsController < ApplicationController
     user = User.find_by(id: session[:oauth_id])
     @user = User.new(name:params[:user][:name],agreement_term:params[:user][:agreement_term])
     if params[:user][:agreement_term] == "0"
-      flash.now[:failed_en] = "Please agree the terms of service"
-      flash.now[:failed_jp] = "利用規約に同意してください"
+      flash[:failed_en] = "Please agree the terms of service"
+      flash[:failed_jp] = "利用規約に同意してください"
       render :oauth_complete
     else
       name = params[:user][:name]
       if name == ""
-        flash.now[:failed_en] = "Name can't be blank"
-        flash.now[:failed_jp] = "名前が空になっています。"
+        flash[:failed_en] = "Name can't be blank"
+        flash[:failed_jp] = "名前が空になっています。"
         render :oauth_complete
       elsif name.length > 32
-        flash.now[:failed_en] = "Username is too long (maximum is 32 characters)"
-        flash.now[:failed_jp] = "ユーザーネームが長すぎます。(最高32文字です)"
+        flash[:failed_en] = "Username is too long (maximum is 32 characters)"
+        flash[:failed_jp] = "ユーザーネームが長すぎます。(最高32文字です)"
         render :oauth_complete
       elsif !(name =~ /\A[a-z0-9]+\z/i)
-        flash.now[:failed_jp] = "名前は半角英数字でお願いします。"
-        flash.now[:failed_en] = "Please input your username using half-width alphanumeric."
+        flash[:failed_jp] = "名前は半角英数字でお願いします。"
+        flash[:failed_en] = "Please input your username using half-width alphanumeric."
         render :oauth_complete
       else
         user_search_id = ""

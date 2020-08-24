@@ -25,7 +25,7 @@
     <% if Threadtype.find_by(leader_id:current_user.id) != nil %>
       <li class="nav-item profile_contents_button <% if params[:id] == "13" || params[:id] == "14"%>active<% end %>">
         <%= link_to '/profile/13',class:"nav-link" do %>
-          <i class="fas fa-address-card"></i>
+          <i class="fas fa-users"></i>
           <div class="text_cover">
             <div class="jp">
               作成したコミュニティ

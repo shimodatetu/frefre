@@ -23,8 +23,8 @@ class PasswordResetsController < ApplicationController
       end
     end
     if user_exist == false
-      flash.now[:failed_jp] = "メールアドレスが間違っています。"
-      flash.now[:failed_en] = "Email address is wrong."
+      flash[:failed_jp] = "メールアドレスが間違っています。"
+      flash[:failed_en] = "Email address is wrong."
       render "new"
     end
   end

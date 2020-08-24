@@ -16,7 +16,7 @@
       <%= render partial:"threadtype/explain_table" %>
       <% threadtype_id = @threadtype.id %>
       <div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
-        <%= link_to("/threadtype/show/"+threadtype_id.to_s,class:"btn mes_button join_button unjoin_button_submit") do %>
+        <%= link_to("/threadtype/show/"+threadtype_id.to_s,class:"btn mes_button join_button join_button_submit",style:"cursor:pointer") do %>
           <div class="text_box">
             <div class="jp">
               To this community / このコミュニティへ

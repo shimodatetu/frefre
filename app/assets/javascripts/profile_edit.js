@@ -3,7 +3,7 @@ $(function(){
   $(".profile_image_input").on("change",function(){
     $('#image_submit_change').click();
   });
-  $(".profile_history_change3").click(function(){
+  /*$(".profile_history_change3").click(function(){
     setTimeout(
       (function(){
         url_split = location.href.split("/profile");
@@ -151,5 +151,5 @@ $(function(){
         });
       })
     ,200);
-  })
+  })*/
 })

@@ -20,8 +20,8 @@ class UsersController < ApplicationController
       end
     end
     if params[:user][:agreement_term] == "0"
-      flash.now[:failed_en] = "Please agree the terms of service"
-      flash.now[:failed_jp] = "利用規約に同意してください"
+      flash[:failed_en] = "Please agree the terms of service"
+      flash[:failed_jp] = "利用規約に同意してください"
       render :index
     else
       @users = User.where(email: @user.email.downcase)
@@ -32,22 +32,22 @@ class UsersController < ApplicationController
         end
       end
       if @user.usertype == "delete"
-        flash.now[:failed_en] = "This acount is freezed."
-        flash.now[:failed_jp] = "このアカウントは凍結しています"
+        flash[:failed_en] = "This acount is freezed."
+        flash[:failed_jp] = "このアカウントは凍結しています"
         render :index
       elsif user_exist == true
-        flash.now[:failed_en] = "This mail address is already registered."
-        flash.now[:failed_jp] = "このメールアドレスはすでに登録されています。"
+        flash[:failed_en] = "This mail address is already registered."
+        flash[:failed_jp] = "このメールアドレスはすでに登録されています。"
         render :index
       elsif @user.save
-        flash.now[:success] = "メールに届いたURLをクリックして、アカウントを有効化してください。"
+        flash[:success] = "メールに届いたURLをクリックして、アカウントを有効化してください。"
         UserMailer.account_activation(@user).deliver_now
         redirect_to '/account_activations/check'
       else
-        flash.now[:failed_jp] = "登録に失敗しました"
+        flash[:failed_jp] = "登録に失敗しました"
         if @user.errors.any?
           @user.errors.full_messages.each do |message|
-            flash.now[:failed_en] = message
+            flash[:failed_en] = message
             error_jp(message)
           end
         end
@@ -58,31 +58,31 @@ class UsersController < ApplicationController
 
   def error_jp(mes_en)
     if mes_en == "Password can't be blank"
-      flash.now[:failed_jp] = "パスワードが空になっています。"
+      flash[:failed_jp] = "パスワードが空になっています。"
     elsif mes_en == "Email can't be blank"
-      flash.now[:failed_jp] = "メールアドレスが空になっています。"
+      flash[:failed_jp] = "メールアドレスが空になっています。"
     elsif mes_en == "Email has already been taken"
-      flash.now[:failed_jp] = "すでに登録済みのメールアドレスです。"
+      flash[:failed_jp] = "すでに登録済みのメールアドレスです。"
     elsif mes_en == "Name can't be blank"
-      flash.now[:failed_jp] = "名前が空になっています。"
+      flash[:failed_jp] = "名前が空になっています。"
     elsif mes_en == "Password confirmation doesn't match Password"
-      flash.now[:failed_jp] = "パスワード確認がパスワードと一致しません。"
+      flash[:failed_jp] = "パスワード確認がパスワードと一致しません。"
     elsif mes_en == "Password is too short (minimum is 6 characters)"
-      flash.now[:failed_jp] = "パスワードが短すぎます。(最低６文字です)"
+      flash[:failed_jp] = "パスワードが短すぎます。(最低６文字です)"
     elsif mes_en == "Password is too long (maximum is 32 characters)"
-      flash.now[:failed_jp] = "パスワードが長すぎます。(最高32文字です)"
+      flash[:failed_jp] = "パスワードが長すぎます。(最高32文字です)"
     elsif mes_en == "Name is invalid"
-      flash.now[:failed_jp] = "ユーザーネームは半角英数字でお願いします。"
-      flash.now[:failed_en] = "Please input your username using half-width alphanumeric."
+      flash[:failed_jp] = "ユーザーネームは半角英数字でお願いします。"
+      flash[:failed_en] = "Please input your username using half-width alphanumeric."
     elsif mes_en == "Name is too long (maximum is 32 characters)"
-      flash.now[:failed_jp] = "ユーザーネームが長すぎます。(最高32文字です)"
-      flash.now[:failed_en] = "Username is too long (maximum is 32 characters)"
+      flash[:failed_jp] = "ユーザーネームが長すぎます。(最高32文字です)"
+      flash[:failed_en] = "Username is too long (maximum is 32 characters)"
     elsif mes_en == "Password is invalid"
-      flash.now[:failed_jp] = "パスワードは半角英数字でお願いします。"
-      flash.now[:failed_en] = "Please input your password using half-width alphanumeric."
+      flash[:failed_jp] = "パスワードは半角英数字でお願いします。"
+      flash[:failed_en] = "Please input your password using half-width alphanumeric."
     elsif mes_en == "Email is invalid"
-      flash.now[:failed_jp] = "無効なメールアドレスです。"
-      flash.now[:failed_en] = "Email is invalid."
+      flash[:failed_jp] = "無効なメールアドレスです。"
+      flash[:failed_en] = "Email is invalid."
     end
     profile_en = "Nice to meet you!"
     profile_jp = "よろしくお願いします！"

@@ -99,7 +99,7 @@
 
 * Allow engine detection in generators
 * HTTP Cache is no longer triggered for collections
-* `:js` now sets the `flash.now` by default, instead of `flash`
+* `:js` now sets the `flash` by default, instead of `flash`
 * Renamed `responders_install` generator to `responders:install`
 * Added `CollectionResponder` which allows you to always redirect to the collection path
   (index action) after POST/PUT/DELETE

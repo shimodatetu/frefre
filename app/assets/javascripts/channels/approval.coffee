@@ -7,7 +7,7 @@ App.approval = App.cable.subscriptions.create "ApprovalChannel",
 
   received: (data) ->
     $(".join_button_submit , .approved_button_submit").attr("style","none;")
-    alert_modal("You successed to approve this community.","コミュニティの申請にに成功しました。","success")
+    alert_set("You successed to approve this community.","コミュニティの申請にに成功しました。","success")
     location.reload()
 
   add: (type,id)->

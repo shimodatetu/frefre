@@ -14,7 +14,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     page_id_max = 20
     if data["type"] == "new_maker"
       page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-      alert_modal("You successed to make a topic.","トピックの作成に成功しました。","success")
+      alert_set("You successed to make a topic.","トピックの作成に成功しました。","success")
       window.location.href = "/thread/show/" + data["post"]["group_id"] + "/" + String(Number(page))
     else if data["type"] == "poster"
       $(".thread_send #post").attr("style","")
@@ -32,6 +32,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           if now_page_get != undefined
             now_page = now_page_get
           if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
+            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
             window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
           else if Number(now_page) == page
             $(".base_en_form").val("");
@@ -40,6 +41,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
             if(!($('.thread_cover#'+data["post"]['id']).length))
               $(".profile_button_destroy").click();
           else
+            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
             window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
       else if url.indexOf('threadtype/show') != -1
         page_id_max = 10
@@ -53,7 +55,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           if now_page_get != undefined
             now_page = now_page_get
           if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-            alert_modal("Jump to Next page!","次のページへ飛びました！" ,"success")
+            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
             window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(Number(now_page) + 1)
           else if Number(now_page) == page
             $(".base_en_form").val("");
@@ -62,6 +64,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
             if(!($('.thread_cover#'+data["post"]['id']).length))
               $(".profile_button_destroy").click();
           else
+            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
             window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(page)
     else if data["type"] == "threadtype_maker"
       window.location.href = "/threadtype/show/"+data["threadtype_id"]

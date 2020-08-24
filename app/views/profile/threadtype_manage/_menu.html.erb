@@ -8,7 +8,7 @@
   <ul class="nav flex-column">
     <li class="nav-item profile_contents_button <% if params[:id] == "14"%>active<% end %>">
       <%= link_to "/profile/14/" + @threadtype.id.to_s ,class:"nav-link" do %>
-        <i class="fas fa-comment-users"></i>
+        <i class="fas fa-users"></i>
         <div class="text_cover">
           <div class="jp">
             トップページ
@@ -43,11 +43,14 @@
     <% if Threadtype.find_by(leader_id:current_user.id) != nil %>
       <li class="nav-item profile_contents_button <% if params[:id] == "19"%>active<% end %>">
         <%= link_to "/profile/19/" + @threadtype.id.to_s,class:"nav-link" do %>
-          <div class="jp">
-            メンバー管理
-          </div>
-          <div class="en">
-            Edit Member
+          <i class="fas fa-user"></i>
+          <div class="text_cover">
+            <div class="jp">
+              メンバー管理
+            </div>
+            <div class="en">
+              Edit Member
+            </div>
           </div>
           <div class="menu_right_button">
             <i class="fas fa-plus"></i>
@@ -57,11 +60,14 @@
     <% end %>
     <li class="nav-item profile_contents_button <% if params[:id] == "21"%>active<% end %>">
       <%= link_to "/profile/21/" + @threadtype.id.to_s,class:"nav-link" do %>
-        <div class="jp">
-          お知らせ作成
-        </div>
-        <div class="en">
-          Make News
+        <i class="fas fa-newspaper"></i>
+        <div class="text_cover">
+          <div class="jp">
+            お知らせ作成
+          </div>
+          <div class="en">
+            Make News
+          </div>
         </div>
         <div class="menu_right_button">
           <i class="fas fa-plus"></i>
@@ -71,11 +77,14 @@
     <% if @threadtype.approval == "approval" %>
       <li class="nav-item profile_contents_button <% if params[:id] == "22"%>active<% end %>">
         <%= link_to "/profile/22/" + @threadtype.id.to_s,class:"nav-link" do %>
-          <div class="jp">
-            申請一覧
-          </div>
-          <div class="en">
-            Approval List
+          <i class="fas fa-envelope-open-text"></i>
+          <div class="text_cover">
+            <div class="jp">
+              申請一覧
+            </div>
+            <div class="en">
+              Approval List
+            </div>
           </div>
           <div class="menu_right_button">
             <i class="fas fa-plus"></i>
@@ -86,11 +95,14 @@
     <li class="nav-item profile_contents_button <% if params[:id] == "7" || params[:id] == "8"%>active<% end %>">
       <% if @threadtype.type != "every" %>
         <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/4',class:"nav-link" do %>
-          <div class="jp">
-            コミュニティ削除
-          </div>
-          <div class="en">
-            Delete Community
+          <i class="fas fa-window-close"></i>
+          <div class="text_cover">
+            <div class="jp">
+              コミュニティ削除
+            </div>
+            <div class="en">
+              Delete Community
+            </div>
           </div>
           <div class="menu_right_button">
             <i class="fas fa-plus"></i>
