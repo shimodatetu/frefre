@@ -14,7 +14,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     page_id_max = 20
     if data["type"] == "new_maker"
       page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
-      alert_set("You successed to make a topic.","トピックの作成に成功しました。","success")
+      alert_modal("You successed to make a topic.","トピックの作成に成功しました。","success")
       window.location.href = "/thread/show/" + data["post"]["group_id"] + "/" + String(Number(page))
     else if data["type"] == "poster"
       $(".thread_send #post").attr("style","")

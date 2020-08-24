@@ -57,6 +57,7 @@
     .url_menu{
       margin-top: -10px;
       min-width:120px;
+      margin-left: 0px;
       float:right;
       text-align: center;
       .url_tab_li{
@@ -333,6 +334,11 @@
     }
     .url_menu{
       margin-left: -60px;
+    }
+    .login_button{
+      .url_menu{
+        margin-left: -60px;
+      }
     }
   }
 }

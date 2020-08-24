@@ -27,7 +27,7 @@
     </div>
     <div class="thread_all thread_all_group"style="padding-top:10px;">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item blue-nav <% if params[:type] == "6" %>active<% end %>">
+        <li class="nav-item blue-nav <% if params["navlink"] == nil || params["navlink"] == "popular"%> active <% end %>">
           <i class="fas fa-users"></i>
           <a class="nav-link searche_change1" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false"style="width: auto;">
             <div class="jp">
@@ -38,7 +38,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item blue-nav <% if params[:type] == "7" %> active<% end %>">
+        <li class="nav-item blue-nav <% if params["navlink"] == "latest"%> active <% end %>">
           <i class="fas fa-users"></i>
           <a class="nav-link search_change2" id="latest-tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false"style="width: auto;">
             <div class="jp">
@@ -49,7 +49,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item blue-nav <% if params[:type] == "8" %> active<% end %>">
+        <li class="nav-item blue-nav <% if params["navlink"] == "member"%> active <% end %>">
           <i class="fas fa-user"></i>
           <a class="nav-link search_change3" id="category-tab" data-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="false"style="width: auto;">
             <div class="jp">
@@ -62,19 +62,19 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane <% if params[:type] == "6" %> active<% else %>fade<% end %>" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+        <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "popular"%>active<% else %>fade<% end %>" id="popular" role="tabpanel" aria-labelledby="popular-tab">
           <% @popular_search_groups.each do |group| %>
             <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
           <% end %>
           <%= paginate @popular_search_groups ,outer_window: 3%>
         </div>
-        <div class="tab-pane <% if params[:type] == "7" %> active<% else %>fade<% end %>" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+        <div class="tab-pane <% if params["navlink"] == "latest"%>active<% else %>fade<% end %>" id="latest" role="tabpanel" aria-labelledby="latest-tab">
           <% @latest_search_groups.each do |group| %>
             <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
           <% end %>
           <%= paginate @popular_search_groups ,outer_window: 3%>
         </div>
-        <div class="tab-pane <% if params[:type] == "8" %> active<% else %>fade<% end %> category_list" id="member" role="tabpanel" aria-labelledby="member-tab">
+        <div class="tab-pane <% if params["navlink"] == "member"%>active<% else %>fade<% end %> category_list" id="member" role="tabpanel" aria-labelledby="member-tab">
           <%= render partial:"usershow", locals: { users:@search_members} %>
           <%= paginate @search_members ,outer_window: 3%>
         </div>

@@ -16,26 +16,28 @@ class ProfileController < ApplicationController
         end
         per = 10
         current_user_id = current_user.id
-        if params[:id] == nil || params[:id] == "1"
-          @join_groups = current_user.threadtypes.all.page(page_id).per(per)
-          @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
-          @make_threads = current_user.groups.all.page(1).per(per)
-          @make_posts = current_user.posts.all.page(1).per(per)
-        elsif params[:id] == "2"
-          @join_groups = current_user.threadtypes.all.page(1).per(per)
-          @make_groups = Threadtype.all.where(leader_id:current_user_id).page(page_id).per(per)
-          @make_threads = current_user.groups.all.page(1).per(per)
-          @make_posts = current_user.posts.all.page(1).per(per)
-        elsif params[:id] == "3"
-          @join_groups = current_user.threadtypes.all.page(1).per(per)
-          @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
-          @make_threads = current_user.groups.all.page(page_id).per(per)
-          @make_posts = current_user.posts.all.page(1).per(per)
-        elsif params[:id] == "4"
-          @join_groups = current_user.threadtypes.all.page(1).per(per)
-          @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
-          @make_threads = current_user.groups.all.page(1).per(per)
-          @make_posts = current_user.posts.all.page(page_id).per(per)
+        if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"
+          if params["navlink"] == nil || params["navlink"] == "popular"
+            @join_groups = current_user.threadtypes.all.page(page_id).per(per)
+            @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
+            @make_threads = current_user.groups.all.page(1).per(per)
+            @make_posts = current_user.posts.all.page(1).per(per)
+          elsif params["navlink"] == "group"
+            @join_groups = current_user.threadtypes.all.page(1).per(per)
+            @make_groups = Threadtype.all.where(leader_id:current_user_id).page(page_id).per(per)
+            @make_threads = current_user.groups.all.page(1).per(per)
+            @make_posts = current_user.posts.all.page(1).per(per)
+          elsif params["navlink"] == "thread"
+            @join_groups = current_user.threadtypes.all.page(1).per(per)
+            @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
+            @make_threads = current_user.groups.all.page(page_id).per(per)
+            @make_posts = current_user.posts.all.page(1).per(per)
+          elsif params["navlink"] == "post"
+            @join_groups = current_user.threadtypes.all.page(1).per(per)
+            @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
+            @make_threads = current_user.groups.all.page(1).per(per)
+            @make_posts = current_user.posts.all.page(page_id).per(per)
+          end
         end
       elsif params[:id] == "5"
         page_id = params[:page].to_i
@@ -77,19 +79,15 @@ class ProfileController < ApplicationController
          @search_users = users.where("name LIKE ?", "%"+ @search_text +"%")
         end
 
-        if params[:id] == "9"
+        if params["navlink"] == nil || params["navlink"] == "following"
           @followings = current_user.followings.all.page(page_id).per(per)
           @followers = current_user.followings.all.page(1).per(per)
           @search_users = @search_users.all.page(1).per(per)
-        elsif params[:id] == "10"
+        elsif params["navlink"] == "follower"
           @followings = current_user.followings.all.page(1).per(per)
           @followers = current_user.followings.all.page(page_id).per(per)
           @search_users = @search_users.all.page(1).per(per)
-        elsif params[:id] == "11"
-          @followings = current_user.followings.all.page(1).per(per)
-          @followers = current_user.followings.all.page(1).per(per)
-          @search_users = @search_users.all.page(page_id).per(per)
-        elsif params[:id] == "11"
+        elsif params["navlink"] == "usersearch"
           @followings = current_user.followings.all.page(1).per(per)
           @followers = current_user.followings.all.page(1).per(per)
           @search_users = @search_users.all.page(page_id).per(per)

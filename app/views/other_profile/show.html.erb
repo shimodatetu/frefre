@@ -224,7 +224,7 @@
         </div>
       </div>
       <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
-        <li class="nav-item <% if params[:type] == nil || params[:type] == "1" %>active<% end %>">
+        <li class="nav-item <% if params["navlink"] == nil || params["navlink"] == "popular"%> active <% end %>">
           <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
             <i class="fas fa-users"></i>
             <div class="text_cover">
@@ -237,7 +237,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item <% if params[:type] == "2" %>active<% end %>">
+        <li class="nav-item <% if params["navlink"] == "group"%> active <% end %>">
           <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#group" role="tab" aria-controls="group" aria-selected="false">
             <i class="fas fa-users"></i>
             <div class="text_cover">
@@ -250,7 +250,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item <% if params[:type] == "3" %>active<% end %>">
+        <li class="nav-item <% if params["navlink"] == "thread"%> active <% end %>">
           <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#thread" role="tab" aria-controls="thread" aria-selected="false">
             <i class="fas fa-comments"></i>
             <div class="text_cover">
@@ -263,7 +263,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item <% if params[:type] == "4" %>active<% end %>">
+        <li class="nav-item <% if params["navlink"] == "post"%> active <% end %>">
           <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">
             <i class="fas fa-comment-dots"></i>
             <div class="text_cover">
@@ -278,7 +278,7 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+        <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "popular"%>active<% else %>fade<% end %>" id="popular" role="tabpanel" aria-labelledby="popular-tab">
           <% there_be = false %>
           <% if @join_groups != nil %>
             <% @join_groups.each do |threadtype| %>
@@ -287,7 +287,7 @@
             <% end %>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="group" role="tabpanel" aria-labelledby="group-tab">
+        <div class="tab-pane <% if params["navlink"] == "group"%>active<% else %>fade<% end %>" id="group" role="tabpanel" aria-labelledby="group-tab">
           <% show_group_id = -1 %>
           <% there_be = false %>
           <% if @make_groups != nil %>
@@ -297,7 +297,7 @@
             <% end %>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="thread" role="tabpanel" aria-labelledby="thread-tab">
+        <div class="tab-pane <% if params["navlink"] == "thread"%>active<% else %>fade<% end %>" id="thread" role="tabpanel" aria-labelledby="thread-tab">
           <% show_group_id = -1 %>
           <% there_be = false %>
           <% if @make_threads != nil %>
@@ -307,7 +307,7 @@
             <% end %>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="post" role="tabpanel" aria-labelledby="post-tab">
+        <div class="tab-pane <% if params["navlink"] == "post"%>active<% else %>fade<% end %>" id="post" role="tabpanel" aria-labelledby="post-tab">
           <% show_group_id = -1 %>
           <% there_be = false %>
           <% if @make_posts != nil %>

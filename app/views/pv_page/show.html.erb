@@ -40,7 +40,7 @@
 
   <div class="threadtype_cover">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item blue-nav active">
+      <li class="nav-item blue-nav <% if params["navlink"] == nil || params["navlink"] == "popular"%> active <% end %>">
         <i class="fas fa-users"></i>
         <a class="nav-link pvpage_change1" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
           <div class="jp">
@@ -51,7 +51,7 @@
           </div>
         </a>
       </li>
-      <li class="nav-item blue-nav">
+      <li class="nav-item blue-nav <% if params["navlink"] == "latest"%> active <% end %>">
         <i class="fas fa-users"></i>
         <a class="nav-link pvpage_change2" id="latest-tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">
           <div class="jp">
@@ -62,7 +62,7 @@
           </div>
         </a>
       </li>
-      <li class="nav-item blue-nav">
+      <li class="nav-item blue-nav <% if params["navlink"] == "category"%> active <% end %>">
         <i class="fas fa-tags"></i>
         <a class="nav-link pvpage_change3" id="category-tab" data-toggle="tab" href="#category" role="tab" aria-controls="category" aria-selected="false">
           <div class="jp">
@@ -76,7 +76,7 @@
     </ul>
 
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane active" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+      <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "popular"%>active<% else %>fade<% end %>" id="popular" role="tabpanel" aria-labelledby="popular-tab">
         <div class="thread_all thread_all_group">
           <% there_be = false %>
           <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
@@ -99,7 +99,7 @@
           <% end %>
         </div>
       </div>
-      <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+      <div class="tab-pane <% if params["navlink"] == "latest"%>active<% else %>fade<% end %>" id="latest" role="tabpanel" aria-labelledby="latest-tab">
         <div class="thread_all thread_all_group">
           <% there_be = false %>
           <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
@@ -122,7 +122,7 @@
           <% end %>
         </div>
       </div>
-      <div class="tab-pane fade category_list" id="category" role="tabpanel" aria-labelledby="category-tab">
+      <div class="tab-pane <% if params["navlink"] == "category"%>active<% else %>fade<% end %> category_list" id="category" role="tabpanel" aria-labelledby="category-tab">
         <% there_be = false %>
         <% Category.all.each do |category| %>
           <% there_be = true %>

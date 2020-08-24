@@ -51,18 +51,20 @@ class ThreadtypeController < ApplicationController
       if !@search_text.nil?
         search_users = search_users.where("name LIKE ? OR profile_en LIKE ? OR profile_jp LIKE ?", "%"+ @search_text +"%","%"+ @search_text +"%","%"+ @search_text +"%")
       end
-      if params[:type] == "6"
-        @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(page_id).per(per)
-        @latest_search_groups = search_groups.order(id: "ASC").all.page(1).per(per)
-        @search_members = search_users.all.page(1).per(per)
-      elsif params[:type] == "7"
-        @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(1).per(per)
-        @latest_search_groups = search_groups.order(id: "ASC").all.page(page_id).per(per)
-        @search_members = search_users.all.page(1).per(per)
-      elsif params[:type] == "8"
-        @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(1).per(per)
-        @latest_search_groups = search_groups.order(id: "ASC").all.page(1).per(per)
-        @search_members = search_users.all.page(page_id).per(per)
+      if params[:type] == "6" || params[:type] == "7" || params[:type] == "8"
+        if params["navlink"] == nil || params["navlink"] == "popular"
+          @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(page_id).per(per)
+          @latest_search_groups = search_groups.order(id: "ASC").all.page(1).per(per)
+          @search_members = search_users.all.page(1).per(per)
+        elsif params["navlink"] == "latest"
+          @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(1).per(per)
+          @latest_search_groups = search_groups.order(id: "ASC").all.page(page_id).per(per)
+          @search_members = search_users.all.page(1).per(per)
+        elsif params["navlink"] == "member"
+          @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(1).per(per)
+          @latest_search_groups = search_groups.order(id: "ASC").all.page(1).per(per)
+          @search_members = search_users.all.page(page_id).per(per)
+        end
       end
     end
   end

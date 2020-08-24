@@ -25,7 +25,7 @@
     </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
-        <%= image_tag "/icon/popular.png",class:"icon_img" %>
+        <%= image_tag "/icon2/popular.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">
             人気トピック
@@ -42,7 +42,7 @@
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
 
-        <%= image_tag "/icon/latest.png",class:"icon_img" %>
+        <%= image_tag "/icon2/latest.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">
             最新トピック
@@ -133,7 +133,7 @@
               参加申請を取り消す
             </div>
             <div class="en">
-              Remove approval of Community
+              Remove Approval
             </div>
           </div>
           <div class="menu_right_button">

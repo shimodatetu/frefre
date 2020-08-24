@@ -18,15 +18,15 @@ class SearchController < ApplicationController
     if !@search_text.nil?
       search_users = search_users.where("name LIKE ? OR user_search_id LIKE ?", "%"+ @search_text +"%","%"+ @search_text +"%")
     end
-    if params[:id] == "1" || params[:id] == nil
+    if params["navlink"] == nil || params["navlink"] == "popular"
       @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(page_id).per(per)
       @latest_threadtypes = @threadtypes.all.order('id desc').page(1).per(per)
       @search_users = search_users.all.page(1).per(per)
-    elsif params[:id] == "2"
+    elsif params["navlink"] == "latest"
       @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(1).per(per)
       @latest_threadtypes = @threadtypes.all.order('id desc').page(page_id).per(per)
       @search_users = search_users.all.page(1).per(per)
-    elsif params[:id] == "3"
+    elsif params["navlink"] == "user"
       @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(1).per(per)
       @latest_threadtypes = @threadtypes.all.order('id desc').page(1).per(per)
       @search_users = search_users.all.page(page_id).per(per)

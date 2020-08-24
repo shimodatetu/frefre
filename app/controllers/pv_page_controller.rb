@@ -11,34 +11,6 @@ class PvPageController < ApplicationController
       threadtype.groups.first.posts.first.update(content_jap: "コミュニティが作成されました。",content_eng: "Community was made.")
     end
 
-    # Threadtype.all.each do |threadtype|
-    #   count = 0
-    #   threadtype.users.delete_all
-    #   User.all.each do |user|
-    #     if user.avater.attached? && count < 20
-    #       threadtype.users << user
-    #     end
-    #   end
-    # end
-    # Threadtype.first.users.delete_all
-    # User.all.each do |user|
-    #   if user.avater.attached?
-    #     Threadtype.first.users << user
-    #   end
-    # end
-
-    #Group.all.each do |group|
-    #  group.update(threadtype_id: 22)
-    #end
-
-    #Post.all.each do |post|
-    #  post.group_id = 1
-    #  post.update(threadtype_id:post.group.threadtype_id)
-    #end
-    #last_id = Post.all.last.id
-    #Post.find(last_id).update(threadtype_id:23)
-    #Post.find(last_id - 1).update(threadtype_id:24)
-
     @threadtypes = Threadtype.all.where.not(type:"every")
     Threadtype.all.each do |threadtype|
       threadtype.update(category_id:9)
@@ -48,12 +20,12 @@ class PvPageController < ApplicationController
     if page_id == nil || page_id < 1
       page_id = 1
     end
-    if params[:id] == "latest"
-      @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(1).per(per)
-      @latest_threadtypes = @threadtypes.all.order('id desc').page(page_id).per(per)
-    else
+    if params["navlink"] == nil || params["navlink"] == "popular"
       @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(page_id).per(per)
       @latest_threadtypes = @threadtypes.all.order('id desc').page(1).per(per)
+    else
+      @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(1).per(per)
+      @latest_threadtypes = @threadtypes.all.order('id desc').page(page_id).per(per)
     end
   end
   def new
