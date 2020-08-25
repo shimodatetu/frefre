@@ -180,7 +180,7 @@ class TasksController < ApplicationController
 
   def search_user
     session["search_text"] = params[:search_text]
-    redirect_to "/profile/10"
+    redirect_to "/profile/9"
   end
 
   def delete

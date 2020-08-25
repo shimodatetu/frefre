@@ -1,6 +1,6 @@
 
 $(function(){
-
+  /*
   $(".profile_history_change3").click(function(){
     setTimeout(
       (function(){
@@ -103,4 +103,5 @@ $(function(){
       })
     ,200);
   })
+  */
 })
