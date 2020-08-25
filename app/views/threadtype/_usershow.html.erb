@@ -29,7 +29,7 @@
       </div>
       <div class="thread_content">
         <div class="user_name">
-          <% if current_user.id != user.id %>
+          <% if logged_in? && current_user.id != user.id %>
             <object>
               <%= link_to "/other_profile/#{user.id}" do %>
                 <%= simple_format(text_url_to_link(h(user.name))) %>
