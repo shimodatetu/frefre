@@ -286,11 +286,14 @@ type_check=(type)->
     if $(".thread_page .thread_image_post #file_send").length || (".thread_page .thread_image_post #video_send").length
       App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
     else if text_en != "" && text_jp != ""
-      if prohibit_check(text_en,text_jp) == true
-        $(".post_type").val("post_type")
-        App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
+      if $(".unjoin_button_submit").length
+        if prohibit_check(text_en,text_jp) == true
+          $(".post_type").val("post_type")
+          App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
+        else
+          alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
       else
-        alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
+        alert_modal("You don't join this community","コミュニティに参加していません。","fail");
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""
