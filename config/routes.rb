@@ -86,7 +86,7 @@ Rails.application.routes.draw do
 
   get 'auth/:provider/callback', to: 'sessions#login_auth'
   get '/users/auth/:provider/callback', to: 'sessions#login_auth'
-  get 'auth/failure', to: redirect('/groups')
+  get 'auth/failure', to: redirect('/login_page')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'sessions/index'
   get 'sessions/new'
