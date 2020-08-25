@@ -68,6 +68,9 @@
         <% if @profile_menu_manage_show == true %>
           <%= render partial:"/profile/threadtype_manage/menu" %>
         <% end %>
+        <% if @other_profile_menu_show == true %>
+          <%= render partial:"/other_profile/menu" %>
+        <% end %>
 
         <%= render partial:"news/news_top" %>
 

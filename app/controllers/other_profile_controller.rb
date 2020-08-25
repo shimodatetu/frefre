@@ -1,5 +1,8 @@
 class OtherProfileController < ApplicationController
   def show
+    if logged_in?
+      @other_profile_menu_show = true
+    end
     other_user = User.find_by(id:1)
     if User.find_by(id:params[:id].to_i)
       other_user = User.find_by(id:params[:id].to_i)

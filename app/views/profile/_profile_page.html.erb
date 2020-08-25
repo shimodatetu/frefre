@@ -26,7 +26,7 @@
       </div>
     <% end %>
 
-    <%= render partial:"/profile/explain_table",locals: { user:current_user}  %>
+    <%= render partial:"/profile/explain_table",locals: { user:current_user,change_button:true}  %>
     <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
       <li class="nav-item <% if params["navlink"] == nil || params["navlink"] == "popular"%> active <% end %>">
         <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">

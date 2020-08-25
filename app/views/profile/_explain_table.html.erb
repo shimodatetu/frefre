@@ -1,11 +1,19 @@
 <div class="thread_content threadtype_content">
   <div class="table_left_image">
-    <% if user.avater.attached? %>
-      <%= image_tag user.avater , :class => "group_img",:style => "border-radius:0px"%>
+    <% if user.image == 0 %>
+      <% if user.avater.attached? %>
+        <%= image_tag user.avater , :class => "group_img"%>
+      <% else %>
+        <% if other_user.photo.nil? %>
+          <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+        <% else %>
+          <%= image_tag show_image_user_path(user), :class => "group_img" %>
+        <% end %>
+      <% end %>
     <% else %>
-      <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px") %>
+      <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
     <% end %>
-    <div class="edit_user">
+    <div class="edit_user"<% if change_button == false %>style="display:none"<% end %>>
       <button type="button" class="btn btn-default profile_picture_change " data-toggle="modal" data-target="#image_modal" data-whatever="@mdo">
         <label>
           <div class="jp">
