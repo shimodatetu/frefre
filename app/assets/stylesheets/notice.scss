@@ -112,6 +112,7 @@
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 1;
+          word-break: break-all;
           p{
             word-break: break-all;
           }
@@ -147,6 +148,7 @@
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-box-orient: vertical;
+          word-break: break-all;
           p{
             display: block;
             word-break: break-all;
@@ -158,6 +160,7 @@
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 1;
+          word-break: break-all;
           //padding-right:70px;
         }
       }

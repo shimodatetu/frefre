@@ -245,6 +245,7 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
+            word-break: break-all;
             p{
               word-break: break-all;
             }
@@ -285,6 +286,7 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
+            word-break: break-all;
             height:25px;
             .post_content_text{
               margin:auto;
@@ -294,6 +296,7 @@
               display: -webkit-box;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 1;
+              word-break: break-all;
               p{
                 display: block;
                 word-break: break-all;

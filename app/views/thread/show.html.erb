@@ -45,7 +45,7 @@
             <%= form_for @post,url:"/posts" , :html => {:class => "thread_image_post post_button_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"},remote:true do |form| %>
               <div class="thread_post">
                 <div class="post_form_cover post_form_cover_enjp connect_btn">
-                  <button type="button"class="btn help_show_small"data-toggle="modal" data-target="#help_slide">
+                  <button type="button"class="btn help_show_small"data-toggle="modal" data-target="#help_slide"style="display:none">
                     <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                     <div class="en help_text">
                       Usage

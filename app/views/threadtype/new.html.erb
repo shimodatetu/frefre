@@ -203,6 +203,18 @@
                 <% end %>
               </div>
             </div>
+            <div>
+              <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
+                poster='/' data-setup='{}'style="display:none">
+                <source src='/' class="video_show_image"type='video/mp4'>
+              </video>
+              <img src="/"class="image_show"style="display:none;">
+              <% if logged_in? %>
+                <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+              <% else %>
+                <%= form.file_field :video,id:"video_send",style:"display:none" %>
+              <% end %>
+            </div>
             <div class="panel-body content_cover jimaku_form"style="display:none">
               <div class="content_input_name">
                 <div class="sub_jp">
