@@ -123,24 +123,72 @@ class PostsController < ApplicationController
   end
 
   def create
+
     data = params[:post]
-    group = Group.find(params["group_num"])
-    if group
-      post = Post.new()
-      post.id_ingroup = group.posts.count
-      post.group_id = group.id
-      post.threadtype_id = group.threadtype_id
-      post.user_id = current_user.id
-      if data[:type] == "image" && data[:pict] != nil
-        post.pict = data[:pict]
-        post.save
-      elsif data[:type] == "video" && data[:video] != nil
-        #trans3(params)
-        post.subtitle_en = data[:subtitle_en]
-        post.subtitle_jp = data[:subtitle_jp]
-        post.video = data[:video]
+    p "=================="
+    p params[:show_class_en]
+    p "=================="
+    if data[:type] == "trans_to_en" || data[:type] == "trans_to_jp"
+      words = ""
+      if data[:type] == "trans_to_jp"
+        words = data[:content_eng]
+        lang = "ja"
+      elsif data[:type] == "trans_to_en"
+        words = data[:content_jap]
+        lang = "en"
+      end
+      if current_user == nil || none_nil(words) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(lang)
+        p "======================="
+        p "error"
+        p "========================"
+        NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
+        return
+      else
+        p "======================="
+        p "ok"
+        p "========================"
+        uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        req = Net::HTTP::Post.new(uri.path)
+        req.set_form_data({"words"=>words, "lang"=>lang})
+        res = http.request(req)
+        answer = res.body
+        answer = res.body.slice(2..-3).force_encoding("UTF-8")
+        answer = answer.gsub(/\\n/,"\n")
+        NodejsChannel.broadcast_to(current_user,"type":"trans","trans":answer,"show_class_en":params[:show_class_en],"show_class_jp":params[:show_class_jp],"form_class":params[:form_class],"send_time":params[:send_time],"lang":lang,"success":"true")
+      end
+    else
+      group = Group.find(params["group_num"])
+      if group
+        post = Post.new()
+        post.id_ingroup = group.posts.count
+        post.group_id = group.id
+        post.threadtype_id = group.threadtype_id
+        post.user_id = current_user.id
+
+        post.content_jap = data['content_jap']
+        post.content_eng = data['content_eng']
+        post.threadtype_id = group.threadtype_id
+        post.user_id = current_user.id
+        if data[:type] == "image" && data[:pict] != nil
+          post.pict = data[:pict]
+        elsif data[:type] == "video" && data[:video] != nil
+          #trans3(params)
+          post.subtitle_en = data[:subtitle_en]
+          post.subtitle_jp = data[:subtitle_jp]
+          post.video = data[:video]
+        end
         post.save
       end
+    end
+  end
+  def none_nil(data)
+    if data == nil || data == ""
+      return true
+    else
+      return false
     end
   end
 end

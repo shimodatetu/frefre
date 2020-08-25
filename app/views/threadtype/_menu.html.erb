@@ -124,7 +124,7 @@
         <% end %>
       </li>
     <% end %>
-    <% if logged_in? && current_user.approvals.find_by(threadtype_id:@threadtype.id) != nil %>
+    <% if logged_in? && @threadtype.type != "every" && current_user.approvals.find_by(threadtype_id:@threadtype.id) != nil %>
       <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "9" %>active<% end %>">
         <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/10',class:"nav-link" do %>
           <i class="fas fa-window-close"></i>

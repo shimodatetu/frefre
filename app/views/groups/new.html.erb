@@ -50,80 +50,12 @@
           <% end %>
         </div>
       </div>
-      <div class="thread_content threadtype_content">
-        <div class="post_content_cover">
-          <div class="post_content_position width_max">
-            <div class="thread_title">
-              <div class="title_padding no_inline">
-                <%= threadtype.type_en %> / <%= threadtype.type_jp %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="post_content_cover">
-          <div class="post_content_position en_position">
-
-            <div class="post_content jp">
-              <div class="post_content_text no_inline">
-                <%= simple_format(text_url_to_link(h(threadtype.content_en))) %>
-              </div>
-            </div>
-          </div>
-          <div class="post_content_position_space">
-            <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
-          </div>
-          <div class="post_content_position jp_position">
-            <div class="post_content jp">
-              <div class="post_content_text no_inline">
-                <%= simple_format(text_url_to_link(h(threadtype.content_jp))) %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="threadtype_cover threadtype_users">
-          <div class="threadtype_user_cover">
-            <div class="threadtype_title">
-              Manager / 管理者
-            </div>
-            <div class="threadtype_leader">
-              <div class="threadtype_img_cover">
-                <% if threadtype.leader_id == 0 %>
-                  <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-                <% else %>
-                  <%= image_tag("frefre_icon2.png", :class => "threadtype_img") %>
-                <% end %>
-              </div>
-              <div class="threadtype_name">
-                <% if threadtype.leader_id == 0 %>
-                  FreFre Office
-                <% else %>
-                  <%= leader.name %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="threadtype_user_cover">
-            <div class="threadtype_title">
-              topic Type / トピックタイプ
-            </div>
-            <div class="threadtype_type">
-              <% if threadtype.type == "not_open" %>
-                Private / 非公開
-              <% elsif threadtype.type == "secret" %>
-                Secret / 秘密
-              <% else %>
-                Public / 公開
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
       <% if logged_in? %>
         <div class="get_user_id user_login"id="<%= current_user.id %>"></div>
         <div class="panel panel-warning make_thread_category thread_make">
-          <%= form_for Group.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+          <%= form_for Post.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
             <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
-
+            <%= hidden_field_tag :threadtype_id ,threadtype.id,class:"send_time" %>
             <div class="flag_show">
               <div class="flag_image">
                 <%= image_tag "/eng.png", class: "image" %>
@@ -146,7 +78,7 @@
               </div>
               <div class="title_input">
                 <%= image_tag "/eng.png", class: "image lang_img en_img"%>
-                <%= form.text_field :title_en, id:"title",class:"form-control form_lang en_data_title" %>
+                <%= text_field_tag :title_en,"", id:"title",class:"form-control form_lang en_data_title" %>
                 <div class="space_form">
                   <div class="trans_cover">
                     <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_en"
@@ -168,7 +100,7 @@
                   </div>
                 </div>
                 <%= image_tag "jap.png", class: "image lang_img" %>
-                <%= form.text_field :title_jp, id:"title",class:"form-control form_lang jp_data_title" %>
+                <%= text_field_tag :title_jp,"", id:"title",class:"form-control form_lang jp_data_title" %>
               </div>
             </div>
             <div class="panel-body content_cover"style="padding-bottom:0px">
@@ -227,8 +159,8 @@
                 </div>
               </div>
               <div class="content_input">
-                <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
-                <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
+                <%= hidden_field_tag :group_id,:id=>"group_id", :value => params[:id] %>
+                <%= hidden_field_tag :post_id,:id=>"post_id", :value => -1 %>
                 <label for="image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button"style="margin-left: calc(50% - 160px);">
                   <div class="glyphicon glyphicon-picture picture_send"></div>
                   <div class="button_text">
@@ -265,7 +197,7 @@
               <% else %>
                 <%= form.file_field :video,id:"video_send",style:"display:none" %>
               <% end %>
-              <%= form.hidden_field :type, :value => "text",class:"post_type" %>
+              <%= hidden_field_tag :type, :value => "text",class:"post_type" %>
             </div>
             <div class="panel-body content_cover jimaku_form"style="display:none">
               <div class="content_input_name">

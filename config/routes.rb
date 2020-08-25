@@ -23,37 +23,30 @@ Rails.application.routes.draw do
   get 'manager',to:"manager#show"
   get 'manager/show'
   get 'manager/search_post'
-  get 'manager/search_post/:page' => 'manager#search_post'
   get 'manager/search_post_detail'
   get 'manager/search_post_detail/:id' => 'manager#search_post_detail'
   get 'manager/search_thread'
-  get 'manager/search_thread/:page' => 'manager#search_thread'
   get 'manager/search_thread_detail'
   get 'manager/search_thread_detail/:id' => 'manager#search_thread_detail'
   get 'manager/search_user'
-  get 'manager/search_user/:page' => 'manager#search_user'
   get 'manager/search_user_detail'
   get 'manager/search_user_detail/:id' => 'manager#search_user_detail'
   get 'manager/category' => 'manager#category_make'
 
   get 'manager/search_report_user'
-  get 'manager/search_report_user/:page' => 'manager#search_user'
   get 'manager/search_report_user_detail'
   get 'manager/search_report_user_detail/:id' => 'manager#search_report_user_detail'
 
   get 'manager/search_report_post'
-  get 'manager/search_report_post/:page' => 'manager#search_post'
   get 'manager/search_report_post_detail'
   get 'manager/search_report_post_detail/:id' => 'manager#search_report_post_detail'
 
 
   get 'manager/search_report_threadtype'
-  get 'manager/search_report_threadtype/:page' => 'manager#search_threadtype'
   get 'manager/search_report_threadtype_detail'
   get 'manager/search_report_threadtype_detail/:id' => 'manager#search_report_threadtype_detail'
 
   get 'manager/search_report_group'
-  get 'manager/search_report_group/:page' => 'manager#search_group'
   get 'manager/search_report_group_detail'
   get 'manager/search_report_group_detail/:id' => 'manager#search_report_group_detail'
 
@@ -66,7 +59,6 @@ Rails.application.routes.draw do
   post 'user_info',to:'manager#user_info'
 
   get 'news/show/:id' => 'news#show'
-  get 'news/show/:id/:page' => 'news#show'
   get 'news/show_all'
   get '/manager/prohibit'
 
@@ -129,9 +121,7 @@ Rails.application.routes.draw do
   get 'category/new'
   get 'category/new2'
   get 'category/new3'
-  get 'category/smallcategory/:id/:page' => 'category#smallcategory'
   get 'category/smallcategory/:id' => 'category#smallcategory'
-  get 'category/typecategory/:id/:page' => 'category#typecategory'
   get 'category/typecategory/:id' => 'category#typecategory'
   match '/small_new' => 'category#small_new', via: [ :post ]
   match '/big_new' => 'category#big_new', via: [ :post ]
@@ -140,7 +130,6 @@ Rails.application.routes.draw do
   match '/type_new' => 'category#type_new', via: [ :post ]
   get 'category/show'
   get 'category/show/:id' => 'category#show'
-  get 'category/show/:id/:page' => 'category#show'
   get 'category/show2'
 
   post '/follow_other',to:'tasks#follow_other'
@@ -160,7 +149,6 @@ Rails.application.routes.draw do
   post 'logout/inner',to:'tasks#logout_inner'
   get 'signup',to:'users#index'
   get 'thread/show/:id' => 'thread#show'
-  get 'thread/show/:id/:page' => 'thread#show'
   get 'thread_all/show/:id' => 'thread_all#show'
   get 'posts/index'
   post "posts/trans"

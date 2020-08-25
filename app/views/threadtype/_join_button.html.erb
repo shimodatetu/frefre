@@ -11,7 +11,15 @@
   </div>
 <% else %>
   <div class="explain_join_button join_button_cover join_button<%= threadtype_id%>">
-    <% if (current_user.threadtypes.find_by(id:threadtype_id) != nil || @threadtype.leader_id == current_user.id)%>
+    <% if @threadtype.type == "every" %>
+      <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id,style:"cursor:default" do %>
+        <div class="text_box">
+          <div class="jp">
+            Joined Community / 参加済コミュニティ
+          </div>
+        </div>
+      <% end %>
+    <% elsif (current_user.threadtypes.find_by(id:threadtype_id) != nil || @threadtype.leader_id == current_user.id)%>
       <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id,style:"cursor:default" do %>
         <div class="text_box">
           <div class="jp">

@@ -15,7 +15,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     if data["type"] == "new_maker"
       page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
       alert_set("You successed to make a topic.","トピックの作成に成功しました。","success")
-      window.location.href = "/thread/show/" + data["post"]["group_id"] + "/" + String(Number(page))
+      window.location.href = "/thread/show/" + data["post"]["group_id"] + "?page=" + String(Number(page))
     else if data["type"] == "poster"
       $(".thread_send #post").attr("style","")
       $(".thread_submit_image").attr("style","display:none;")
@@ -32,8 +32,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           if now_page_get != undefined
             now_page = now_page_get
           if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
-            window.location.href = "/thread/show/" + String(now_id) + "/" + String(Number(now_page) + 1)
+            alert_set("Success to Post!","投稿に成功しました！" ,"success")
+            window.location.href = "/thread/show/" + String(now_id) + "?page=" + String(Number(now_page) + 1)
           else if Number(now_page) == page
             $(".base_en_form").val("");
             $(".base_jp_form").val("");
@@ -41,8 +41,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
             if(!($('.thread_cover#'+data["post"]['id']).length))
               $(".profile_button_destroy").click();
           else
-            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
-            window.location.href = "/thread/show/" + String(now_id) + "/" + String(page)
+            alert_set("Success to Post!","投稿に成功しました！" ,"success")
+            window.location.href = "/thread/show/" + String(now_id) + "?page=" + String(page)
       else if url.indexOf('threadtype/show') != -1
         page_id_max = 10
         page = Math.ceil((parseFloat(data['post_id'])) / page_id_max)
@@ -55,7 +55,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
           if now_page_get != undefined
             now_page = now_page_get
           if Number(now_page) + 1 == page && parseInt(data['post_id']) % page_id_max == 1
-            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
+            alert_set("Success to Post!","投稿に成功しました！" ,"success")
             window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(Number(now_page) + 1)
           else if Number(now_page) == page
             $(".base_en_form").val("");
@@ -64,14 +64,13 @@ App.room = App.cable.subscriptions.create "RoomChannel",
             if(!($('.thread_cover#'+data["post"]['id']).length))
               $(".profile_button_destroy").click();
           else
-            alert_set("Jump to Next page!","次のページへ飛びました！" ,"success")
+            alert_set("Success to Post!","投稿に成功しました！" ,"success")
             window.location.href = "/threadtype/show/" + String(now_id) + "/1/?page=" + String(page)
     else if data["type"] == "threadtype_maker"
       window.location.href = "/threadtype/show/"+data["threadtype_id"]
     else if data["type"] == "accept"
       if $(".thread_cover#"+data["post"]["threadtype_id"]).length == 0
         if url.indexOf('thread/show') != -1
-          alert("thread")
           now_id = 1
           if urls.length >= 4
             now_id = urls[3]
@@ -104,8 +103,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     $(".thread_submit_image").attr("style","display:none;pointer-events: none;")
     $(".thread_submit_video").attr("style","display:none;pointer-events: none;")
     $(".trans_send").attr("style","display:none;pointer-events: none;")
-    @perform('speak',group_id:group,content_jap:mes_jp,content_eng:mes_en,lang:lang)
-
+    $(".thread_submit").click()
 
   #image: (file,group)->
   #  @perform('image',group_id:group,image:file,lang:"none")
@@ -123,7 +121,6 @@ reader.addEventListener 'load', ->
 reader2.addEventListener 'load', ->
   text = "<img src='" + String(reader2.result) + "'>"
   $(".thread_all").append(text)
-
 
 $(document).on 'click', '.post_image_submit', (event) ->
   $('.post_image_submit').prop('disabled', false)
@@ -286,8 +283,11 @@ type_check=(type)->
   if type == "post"
     text_en = $(".base_en_form").val();
     text_jp = $(".base_jp_form").val();
-    if text_en != "" && text_jp != ""
+    if $(".thread_page .thread_image_post #file_send").length || (".thread_page .thread_image_post #video_send").length
+      App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
+    else if text_en != "" && text_jp != ""
       if prohibit_check(text_en,text_jp) == true
+        $(".post_type").val("post_type")
         App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
       else
         alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
@@ -301,36 +301,40 @@ type_check=(type)->
     if window.translated == true && 1 == 2
       alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
     else if type == "trans_to_en"
+      $(".post_type").val(this.id)
       text_en = $(".base_en_form").val();
       text_jp = $(".base_jp_form").val();
       if text_jp == ""
         alert_modal("Japanese form is empty.","日本語入力欄に何も書かれていません","fail")
       else
         #translate_google("en",text_jp)
-        $("#fakeLoader").fakeLoader({},trans_submit,["en",text_jp]);
+        $("#fakeLoader").fakeLoader({},trans_submit,["en",text_en,text_jp]);
     else if type == "trans_to_jp"
+      $(".post_type").val(this.id)
       text_en = $(".base_en_form").val();
       text_jp = $(".base_jp_form").val();
       if text_en == ""
         alert_modal("English form is empty.","英語入力欄に何も書かれていません","fail")
       else
-        $("#fakeLoader").fakeLoader({},trans_submit,["ja",text_en]);
+        $("#fakeLoader").fakeLoader({},trans_submit,["ja",text_en,text_jp]);
         #translate_google("ja",text_en)
     else if type == "subtrans_to_en"
+      $(".post_type").val(this.id)
       text_en = $(".subbase_en_form").val();
       text_jp = $(".subbase_jp_form").val();
       if text_jp == ""
         alert_modal("Japanese subtitle form is empty.","日本語字幕入力欄に何も書かれていません","fail")
       else
         #translate_google("en",text_jp)
-        $("#fakeLoader").fakeLoader({},trans_submit2,["en",text_jp]);
+        $("#fakeLoader").fakeLoader({},trans_submit2,["en",text_en,text_jp]);
     else if type == "subtrans_to_jp"
+      $(".post_type").val(this.id)
       text_en = $(".subbase_en_form").val();
       text_jp = $(".subbase_jp_form").val();
       if text_en == ""
         alert_modal("English subtitle form is empty.","英語字幕入力欄に何も書かれていません","fail")
       else
-        $("#fakeLoader").fakeLoader({},trans_submit2,["ja",text_en]);
+        $("#fakeLoader").fakeLoader({},trans_submit2,["ja",text_en,text_jp]);
         #translate_google("ja",text_en)
 
 
@@ -338,13 +342,52 @@ trans_submit=(data) ->
   lang = data[0]
   $(".post_trans_form .lang_input").val(lang)
   $(".cancel_button_class").val(".post_trans_form .send_time")
-  $(".post_trans_form .trans_send").click()
+  $(".post_type").val("image")
+  App.room.speak("none",data[1],data[2],parseInt($(".group_num").val()))
 
 trans_submit2=(data) ->
   lang = data[0]
   $(".post_subtrans_form .lang_input").val(lang)
   $(".cancel_button_class").val(".post_subtrans_form .send_time")
-  $(".post_subtrans_form .trans_send").click()
+  $(".post_type").val("video")
+  App.room.speak("none",data[1],data[2],parseInt($(".group_num").val()))
+
+$(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->
+  $(".post_type").val("image")
+  $(".video_show").attr("style":"display:none");
+  reader = new FileReader
+  reader.onload = (e) ->
+    $(".image_show").attr("src": e.target.result);
+    $(".image_show").attr("style":"display:block");
+    return
+  reader.readAsDataURL @files[0]
+  $(".image_show").attr("style":"display:block");
+
+
+$(document).on 'click', '.thread_page .thread_image_post #video_send', (event) ->
+  this.value = ""
+$(document).on 'change', '.thread_page .thread_image_post #video_send', (event) ->
+  $(".post_type").val("video")
+  $(".image_show").attr("style":"display:none");
+  fileList = @files
+  i = 0
+  l = fileList.length
+  while l > i
+    blobUrl = window.URL.createObjectURL(fileList[i])
+    i++
+  $(".vjs-tech").attr("style":"")
+  $(".vjs-tech").attr("poster":blobUrl)
+  $(".vjs-tech").attr("src":blobUrl)
+  $(".video_show").attr("style":"display:block");
+  $(".jimaku_form").attr("style":"display:block;margin-top:30px")
+
+video_subtitle=(data) ->
+  $(".thread_page .thread_image_post .post_button_form .lang_input").val(data[0])
+  $(".thread_page .thread_image_post .post_button_form").attr("action","/tasks/video")
+  $(".cancel_button_class").val(".thread_page .thread_image_post .post_button_form .send_time")
+  $(".thread_page .thread_image_post .post_button_form .thread_submit").click()
+  $(".thread_page .thread_image_post .post_button_form").attr("action","/groups")
+
 
 bytes=(str) ->
   return(encodeURIComponent(str).replace(/%../g,"x").length);

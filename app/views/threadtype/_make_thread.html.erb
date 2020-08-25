@@ -19,7 +19,7 @@
   <div class="make_thread_cover threadtype_new">
     <div class="get_user_id user_login"id="<%= current_user.id %>"></div>
     <div class="panel panel-warning make_thread_category thread_make">
-      <%= form_for Group.new, :html => {:class => "thread_image_post post_button_form"} do |form| %>
+      <%= form_for Post.new,url: '/groups', :html => {:class => "thread_image_post post_button_form"} do |form| %>
         <div class="make_thread_border">
           <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
 
@@ -45,7 +45,7 @@
             </div>
             <div class="title_input">
               <%= image_tag "/eng.png", class: "image lang_img en_img"%>
-              <%= form.text_area :title_en, id:"content",class:"form-control form_lang en_data_title",size:"65x5" %>
+              <%= text_area_tag :title_en,"", id:"content",class:"form-control form_lang en_data_title",size:"65x5" %>
               <div class="space_form"style="margin-top:0px;">
                 <div class="trans_cover">
                   <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_en"
@@ -67,7 +67,7 @@
                 </div>
               </div>
               <%= image_tag "jap.png", class: "image lang_img" %>
-              <%= form.text_area :title_jp, id:"content",class:"form-control form_lang jp_data_title",size:"65x5" %>
+              <%= text_area_tag :title_jp,"", id:"content",class:"form-control form_lang jp_data_title",size:"65x5" %>
             </div>
           </div>
           <div class="panel-body content_cover"style="padding-bottom:0px">
@@ -116,6 +116,7 @@
               翻訳提供 未来翻訳
             <% end %>
           </div>
+
           <div class="panel-body content_cover">
             <div class="content_input_name"style="display:none">
               <div class="sub_jp">
@@ -126,8 +127,7 @@
               </div>
             </div>
             <div class="content_input">
-              <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
-              <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
+              <%= hidden_field_tag :type, "text",class:"post_type" %>
               <label for="image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button"style="margin-left: calc(50% - 160px);">
                 <div class="glyphicon glyphicon-picture picture_send"></div>
                 <div class="button_text">
@@ -164,7 +164,6 @@
             <% else %>
               <%= form.file_field :video,id:"video_send",style:"display:none" %>
             <% end %>
-            <%= form.hidden_field :type, :value => "text",class:"post_type" %>
           </div>
           <div class="panel-body content_cover jimaku_form"style="display:none">
             <div class="content_input_name">

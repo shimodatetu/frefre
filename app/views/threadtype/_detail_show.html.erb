@@ -41,7 +41,7 @@
   </div>
   <div class="footer thread_footer">
     <div class="thread_page post_form_page thread_post_cover form_cover">
-      <%= form_tag('/tasks/trans', remote: true ,method: :post,class: "modal-body post_trans_form search_form_top",style:"display:block") do %>
+      <%= form_for @post,url:"/posts" , :html => {:class => "thread_image_post post_button_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"},remote:true do |form| %>
         <div class="thread_post">
           <div class="post_form_cover post_form_cover_enjp connect_btn">
             <button type="button"class="btn help_show_small"data-toggle="modal" data-target="#help_slide">
@@ -55,7 +55,7 @@
             </button>
             <%= image_tag "/eng.png", class: "image" %>
 
-            <%= text_area_tag :content_en,"",class:"base_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
+            <%= form.text_area :content_eng,class:"base_en_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is English form.\r\nこちらは英語投稿欄です" %>
           </div>
           <div class="space_form thread_send">
             <div class="trans_cover">
@@ -79,28 +79,18 @@
           </div>
           <div class="post_form_cover post_form_cover_enjp">
             <%= image_tag "jap.png", class: "image" %>
-            <%= text_area_tag :content_jp,"",class:"base_jp_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
+            <%= form.text_area :content_jap,class:"base_jp_form connect_btn content_post form-control",rows:"6",placeholder:"\r\nThis side is Japanese form.\r\nこちらは日本語投稿欄です" %>
           </div>
-          <%= hidden_field_tag :show_class_en,"base_en_form" %>
-          <%= hidden_field_tag :show_class_jp,"base_jp_form" %>
-          <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
-          <%= hidden_field_tag :form_class ,"post_trans_form" %>
-          <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
-          <%= submit_tag "",class:"trans_send",style:"display:none"%>
         </div>
-      <% end %>
-      <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
-        Powered by MT
-      <% end %>
+        <%= link_to "https://miraitranslate.com/",class:"mirai_logo left_logo" do %>
+          Powered by MT
+        <% end %>
 
-      <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
-        翻訳提供 未来翻訳
-      <% end %>
-      <div class="post_footer_simple">
-        <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
-        <div class="post_button_cover thread_send">
-          <%= form_for @post,:url => {controller: "post", action: "create"}, :html => {:class => "thread_image_post post_button_form", :id => "form_input",:method => "post",enctype:"multipart/form-data"},remote:true do |form| %>
-            <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
+        <%= link_to "https://miraitranslate.com/",class:"mirai_logo right_logo" do %>
+          翻訳提供 未来翻訳
+        <% end %>
+        <div class="post_footer_simple">
+          <div class="post_button_cover thread_send">
             <label for="file_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-picture picture_send"></div>
               <div class="button_text">
@@ -110,16 +100,7 @@
                 Image
               </div>
             </label>
-            <%= form.hidden_field :type, :value => "image",class:"post_type"  %>
-            <% if logged_in? %>
-              <%= form.file_field :pict,id:"file_send",class:"logined",style:"display:none" %>
-              <%= form.submit "",class:"thread_submit_image",style:"display:none" %>
-            <% else %>
-              <%= form.file_field :pict,id:"file_send",style:"display:none" %>
-            <% end %>
-          <% end %>
-          <%= form_with(model: @post,:url => {controller: "post", action: "create"}, local: true, class: "thread_video_post post_button_form", id: "form_input") do |form| %>
-            <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
+            <%= form.file_field :pict,id:"file_send",class:"logined",style:"display:none" %>
             <label for="video_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
               <div class="glyphicon glyphicon-facetime-video picture_send"></div>
               <div class="button_text">
@@ -129,40 +110,45 @@
                 Video
               </div>
             </label>
-
-            <%= hidden_field_tag :show_class_en,".subbase_en_form" %>
-            <%= hidden_field_tag :show_class_jp,".subbase_jp_form" %>
-            <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
-            <%= hidden_field_tag :show_class ,"#video-subtitle-modal" %>
-            <%= hidden_field_tag :show_modal ,"#video-subtitle-modal" %>
-            <%= hidden_field_tag :form_class ,"thread_video_post" %>
-            <%= hidden_field_tag :form_type ,"post" %>
-            <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
-
-            <%= form.hidden_field :type, :value => "video",class:"post_type"  %>
             <%= form.hidden_field :subtitle_en,class:"form_subtitle_input_en" %>
             <%= form.hidden_field :subtitle_jp,class:"form_subtitle_input_jp" %>
-            <% if logged_in? %>
-              <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
-              <%= form.submit "",class:"thread_submit_video",style:"display:none" %>
-            <% else %>
-              <%= form.file_field :video,id:"video_send",style:"display:none" %>
-            <% end %>
+            <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+          </div>
+        </div>
+        <div>
+          <video id='my-video' class='video-js video_show' controls preload='auto' width='1108' height='600'
+            poster='/' data-setup='{}'style="display:none">
+            <source src='/' class="video_show_image"type='video/mp4'>
+          </video>
+          <img src="/"class="image_show"style="display:none;">
+          <% if logged_in? %>
+            <%= form.file_field :video,id:"video_send",class:"logined",style:"display:none" %>
+          <% else %>
+            <%= form.file_field :video,id:"video_send",style:"display:none" %>
           <% end %>
         </div>
-      </div>
-      <div class="thread_send">
-        <button type="button" class="normal_button post_button btn btn_send words_post_button post_footer_one"id="post"
-        name="<% if logged_in? %>logined<% end %>">
-          <div class="glyphicon glyphicon-comment picture_send"></div>
-          <div class="button_text">
-            <div class="float_jp">
-              投稿
+        <div class="thread_send">
+          <button type="button" class="normal_button post_button btn btn_send words_post_button post_footer_one"id="post"
+          name="<% if logged_in? %>logined<% end %>">
+            <div class="glyphicon glyphicon-comment picture_send"></div>
+            <div class="button_text">
+              <div class="float_jp">
+                投稿
+              </div>
+              Post
             </div>
-            Post
-          </div>
-        </button>
-      </div>
+          </button>
+
+          <%= hidden_field_tag :show_class_en,"base_en_form" %>
+          <%= hidden_field_tag :show_class_jp,"base_jp_form" %>
+          <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+          <%= hidden_field_tag :form_class ,"thread_page .post_button_form" %>
+
+          <%= form.hidden_field :type, :value => "post",class:"post_type" %>
+          <%= text_field_tag :group_num,"" ,class: "group_num",style:"display:none",value: thread_id %>
+          <%= form.submit "",class:"thread_submit",style:"display:none" %>
+        </div>
+      <% end %>
     </div>
 
     <%= paginate @open_posts ,outer_window: 3%>
