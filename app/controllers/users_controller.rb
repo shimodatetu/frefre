@@ -91,6 +91,7 @@ class UsersController < ApplicationController
 
   def update
     User.find_by(id:current_user.id).update(avater:params[:user][:avater],image:0)
+    ProfileChannel.broadcast_to(current_user, user_id:current_user.id,usertype:current_user.usertype)
   end
   def show_image
     @image = User.find_by(id:params[:id])

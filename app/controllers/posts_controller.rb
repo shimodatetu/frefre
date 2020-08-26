@@ -138,16 +138,10 @@ class PostsController < ApplicationController
         lang = "en"
       end
       if current_user == nil || none_nil(words) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(lang)
-        p "======================="
-        p "error"
-        p "========================"
         NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
         return
       else
-        p "======================="
-        p "ok"
-        p "========================"
-        uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
+        uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai/GeRMbTjahiswSTm9dn2rEEmzWdiNeW")
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE

@@ -57,7 +57,7 @@ class TasksController < ApplicationController
       NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
       return
     else
-      uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai")
+      uri = URI.parse("https://still-plains-44123.herokuapp.com/trans_mirai/GeRMbTjahiswSTm9dn2rEEmzWdiNeW")
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -114,7 +114,7 @@ class TasksController < ApplicationController
         redirect_to params[:page_url]
       else
         flash["alert_en"] = "You failed to report community."
-        flash["alert_jp"] = "コミュニティの通報に失敗しました。。"
+        flash["alert_jp"] = "コミュニティの通報に失敗しました。"
         flash["alert_type"] = "fail"
         redirect_to params[:page_url]
       end
@@ -141,7 +141,7 @@ class TasksController < ApplicationController
         redirect_to params[:page_url]
       else
         flash["alert_en"] = "You failed to report topic."
-        flash["alert_jp"] = "トピックの通報に失敗しました。。"
+        flash["alert_jp"] = "トピックの通報に失敗しました。"
         flash["alert_type"] = "fail"
         redirect_to params[:page_url]
       end

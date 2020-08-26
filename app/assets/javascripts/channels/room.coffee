@@ -304,7 +304,7 @@ type_check=(type)->
     if window.translated == true && 1 == 2
       alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
     else if type == "trans_to_en"
-      $(".post_type").val(this.id)
+      $(".post_type").val(type)
       text_en = $(".base_en_form").val();
       text_jp = $(".base_jp_form").val();
       if text_jp == ""
@@ -313,7 +313,7 @@ type_check=(type)->
         #translate_google("en",text_jp)
         $("#fakeLoader").fakeLoader({},trans_submit,["en",text_en,text_jp]);
     else if type == "trans_to_jp"
-      $(".post_type").val(this.id)
+      $(".post_type").val(type)
       text_en = $(".base_en_form").val();
       text_jp = $(".base_jp_form").val();
       if text_en == ""
@@ -322,7 +322,7 @@ type_check=(type)->
         $("#fakeLoader").fakeLoader({},trans_submit,["ja",text_en,text_jp]);
         #translate_google("ja",text_en)
     else if type == "subtrans_to_en"
-      $(".post_type").val(this.id)
+      $(".post_type").val(type)
       text_en = $(".subbase_en_form").val();
       text_jp = $(".subbase_jp_form").val();
       if text_jp == ""
@@ -331,7 +331,7 @@ type_check=(type)->
         #translate_google("en",text_jp)
         $("#fakeLoader").fakeLoader({},trans_submit2,["en",text_en,text_jp]);
     else if type == "subtrans_to_jp"
-      $(".post_type").val(this.id)
+      $(".post_type").val(type)
       text_en = $(".subbase_en_form").val();
       text_jp = $(".subbase_jp_form").val();
       if text_en == ""
@@ -345,14 +345,12 @@ trans_submit=(data) ->
   lang = data[0]
   $(".post_trans_form .lang_input").val(lang)
   $(".cancel_button_class").val(".post_trans_form .send_time")
-  $(".post_type").val("image")
   App.room.speak("none",data[1],data[2],parseInt($(".group_num").val()))
 
 trans_submit2=(data) ->
   lang = data[0]
   $(".post_subtrans_form .lang_input").val(lang)
   $(".cancel_button_class").val(".post_subtrans_form .send_time")
-  $(".post_type").val("video")
   App.room.speak("none",data[1],data[2],parseInt($(".group_num").val()))
 
 $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->

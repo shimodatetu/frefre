@@ -16,10 +16,14 @@
           <% end %>
           <%= link_to "/other_profile/#{user.id}" do %>
             <% if user.image == 0 %>
-              <% if user.photo.nil? %>
-                <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+              <% if user.avater.attached? %>
+                <%= image_tag user.avater , :class => "group_img"%>
               <% else %>
-                <%= image_tag show_image_user_path(user), :class => "group_img" %>
+                <% if other_user.photo.nil? %>
+                  <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                <% else %>
+                  <%= image_tag show_image_user_path(user), :class => "group_img" %>
+                <% end %>
               <% end %>
             <% else %>
               <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
