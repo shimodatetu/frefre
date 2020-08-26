@@ -141,7 +141,7 @@ class ThreadtypeController < ApplicationController
   end
   def search
     session["search_text"] = params[:search_text]
-    redirect_to "/threadtype/show/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:page_id].gsub(/{:value=>/,"")}"
+    redirect_to "/threadtype/show/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:type_id].gsub(/{:value=>/,"")}/?page=#{params[:page_id].gsub(/{:value=>/,"")}&navlink=#{params[:navlink].gsub(/{:value=>/,"")}"
   end
   def image_params
     params.require(:threadtype).permit(:pict)

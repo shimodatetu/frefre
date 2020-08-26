@@ -16,6 +16,7 @@
           <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
           <%= hidden_field_tag :type_id, params[:type] %>
           <%= hidden_field_tag :page_id, params[:page] %>
+          <%= hidden_field_tag :navlink, params[:navlink] %>
           <span class="input-group-btn">
             <button type="submit"class="btn btn-warning form_button">
               <span class="glyphicon glyphicon-search"></span>

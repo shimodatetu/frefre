@@ -59,6 +59,7 @@
         <div class="tab-pane <% if params["navlink"] == "usersearch"%>active<% else %>fade<% end %>" id="usersearch" role="tabpanel" aria-labelledby="follower-tab">
           <%= form_tag('/search/user',method: :post,class: "search_form_top") do %>
             <%= text_field_tag :search_text ,search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
+            <%= hidden_field_tag :navlink, params[:navlink] %>
             <span class="input-group-btn">
               <button type="submit"class="btn btn-warning form_button">
                 <span class="glyphicon glyphicon-search"></span>

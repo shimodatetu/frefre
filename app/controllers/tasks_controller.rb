@@ -175,12 +175,12 @@ class TasksController < ApplicationController
 
   def search
     session["search_text"] = params[:search_text]
-    redirect_to "/search/show"
+    redirect_to "/search/show?navlink=#{params[:navlink].gsub(/{:value=>/,"")}"
   end
 
   def search_user
     session["search_text"] = params[:search_text]
-    redirect_to "/profile/9"
+    redirect_to "/profile/9?navlink=#{params[:navlink].gsub(/{:value=>/,"")}"
   end
 
   def delete
