@@ -21,7 +21,7 @@ class PvPageController < ApplicationController
         for i in 1..100
           user_search_id = @user.name + rand(1000000).to_s
           if User.find_by(user_search_id:user_search_id) == nil
-            @user.user_search_id = user_search_id
+            user.update(user_search_id: user_search_id)
             break
           end
         end
