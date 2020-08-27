@@ -99,10 +99,9 @@ App.room = App.cable.subscriptions.create "RoomChannel",
               $(".report_button_destroy").click();
 
   speak: (lang,mes_jp,mes_en, group)->
-    $(".thread_send #post").attr("style","pointer-events: none;")
-    $(".thread_submit_image").attr("style","display:none;pointer-events: none;")
-    $(".thread_submit_video").attr("style","display:none;pointer-events: none;")
-    $(".trans_send").attr("style","display:none;pointer-events: none;")
+    if(lang == "none"){
+      $(".thread_send #post").attr("style","pointer-events: none;")
+    }
     $(".thread_submit").click()
 
   #image: (file,group)->
@@ -345,13 +344,13 @@ trans_submit=(data) ->
   lang = data[0]
   $(".post_trans_form .lang_input").val(lang)
   $(".cancel_button_class").val(".post_trans_form .send_time")
-  App.room.speak("none",data[1],data[2],parseInt($(".group_num").val()))
+  App.room.speak(lang,data[1],data[2],parseInt($(".group_num").val()))
 
 trans_submit2=(data) ->
   lang = data[0]
   $(".post_subtrans_form .lang_input").val(lang)
   $(".cancel_button_class").val(".post_subtrans_form .send_time")
-  App.room.speak("none",data[1],data[2],parseInt($(".group_num").val()))
+  App.room.speak(lang,data[1],data[2],parseInt($(".group_num").val()))
 
 $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->
   $(".post_type").val("image")
