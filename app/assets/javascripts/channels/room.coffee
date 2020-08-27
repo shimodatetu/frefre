@@ -281,11 +281,10 @@ type_check=(type)->
   if type == "post"
     text_en = $(".base_en_form").val();
     text_jp = $(".base_jp_form").val();
-    if $(".thread_page .thread_image_post #file_send").val() != "" || (".thread_page .thread_image_post #video_send").val() != ""
+    if $(".thread_page .thread_image_post #file_send").val() != "" || $(".thread_page .thread_image_post #video_send").val() != ""
       alert("video")
       App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
     else if text_en != "" && text_jp != ""
-      alert("asd")
       if $(".unjoin_button_submit").length
         if prohibit_check(text_en,text_jp) == true
           $(".post_type").val("post_type")
