@@ -176,6 +176,8 @@
       margin-left: 5px;
       img{
         width: 150px;
+        height: 150px;
+        object-fit: cover;
         border:solid thin #ccc;
         border-radius:5px;
       }

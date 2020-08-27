@@ -16,17 +16,17 @@ class PvPageController < ApplicationController
     # Threadtype.all.each do |threadtype|
     #   threadtype.update(category_id:9)
     # end
-    User.all.each do |user|
-      if user.user_search_id == "" || user.user_search_id == nil
-        for i in 1..100
-          user_search_id = user.name + rand(1000000).to_s
-          if User.find_by(user_search_id:user_search_id) == nil
-            user.update(user_search_id: user_search_id)
-            break
-          end
-        end
-      end
-    end
+    # User.all.each do |user|
+    #   if user.user_search_id == "" || user.user_search_id == nil
+    #     for i in 1..100
+    #       user_search_id = user.name + rand(1000000).to_s
+    #       if User.find_by(user_search_id:user_search_id) == nil
+    #         user.update(user_search_id: user_search_id)
+    #         break
+    #       end
+    #     end
+    #   end
+    # end
     @threadtypes = Threadtype.all.where.not(type:"every")
     per = 10
     page_id = params[:page].to_i
