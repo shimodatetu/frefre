@@ -5,7 +5,7 @@
 
 <div class="profile_notice">
   <ul class="nav nav-tabs" id="myTab" role="tablist"style="margin-top:-15px;">
-    <li class="nav-item <% if params["navlink"] == nil || params["navlink"] == "following"%> active <% end %>">
+    <li class="nav-item <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "following"%> active <% end %>">
       <a class="nav-link profile_history_change8" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="true">
         <i class="fas fa-user"></i>
         <div class="text_cover">
@@ -48,7 +48,7 @@
   <div class="tab-content no_lang_bar" id="myTabContent"style="padding-top: 0px!important;">
     <div class="notice_cover">
       <div class="follow_all">
-        <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "following"%>active<% else %>fade<% end %> show" id="following" role="tabpanel" aria-labelledby="following-tab">
+        <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "following"%>active<% else %>fade<% end %> show" id="following" role="tabpanel" aria-labelledby="following-tab">
           <%= render partial:"usershow", locals: {users:@followings } %>
           <%= paginate @followings , outer_window: 3%>
         </div>

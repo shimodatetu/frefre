@@ -33,7 +33,7 @@ class PvPageController < ApplicationController
     if page_id == nil || page_id < 1
       page_id = 1
     end
-    if params["navlink"] == nil || params["navlink"] == "popular"
+    if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"
       @popular_threadtypes = @threadtypes.where(id:Post.group(:threadtype_id).order('count(threadtype_id) desc').pluck(:threadtype_id)).page(page_id).per(per)
       @latest_threadtypes = @threadtypes.all.order('id desc').page(1).per(per)
     else

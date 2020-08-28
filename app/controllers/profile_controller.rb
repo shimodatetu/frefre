@@ -17,7 +17,7 @@ class ProfileController < ApplicationController
         per = 10
         current_user_id = current_user.id
         if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"
-          if params["navlink"] == nil || params["navlink"] == "popular"
+          if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"
             @join_groups = current_user.threadtypes.all.page(page_id).per(per)
             @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
             @make_threads = current_user.groups.all.page(1).per(per)
@@ -79,7 +79,7 @@ class ProfileController < ApplicationController
          @search_users = users.where("name LIKE ?", "%"+ @search_text +"%")
         end
 
-        if params["navlink"] == nil || params["navlink"] == "following"
+        if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "following"
           @followings = current_user.followings.all.page(page_id).per(per)
           @followers = current_user.followings.all.page(1).per(per)
           @search_users = @search_users.all.page(1).per(per)
@@ -166,6 +166,18 @@ class ProfileController < ApplicationController
   end
   def threadtype_profile_search
     session["search_text"] = params[:search_text]
+    if params[:type_id] == nil
+      params[:type_id] = ""
+    end
+    if params[:threadtype_id] == nil
+      params[:threadtype_id] = ""
+    end
+    if params[:thread_id] == nil
+      params[:thread_id] = ""
+    end
+    if params[:page_id] == nil
+      params[:page_id] = ""
+    end
     redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
   end
   def retire
@@ -197,6 +209,18 @@ class ProfileController < ApplicationController
     if logged_in?
       if (thread = Group.find_by(id: params[:thread_id].to_i)) == nil && thread.threadtype.leader_id == current_user.id
         thread.update(deleted:true)
+        if params[:type_id] == nil
+          params[:type_id] = ""
+        end
+        if params[:threadtype_id] == nil
+          params[:threadtype_id] = ""
+        end
+        if params[:thread_id] == nil
+          params[:thread_id] = ""
+        end
+        if params[:page_id] == nil
+          params[:page_id] = ""
+        end
         redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
       end
     end
@@ -205,6 +229,18 @@ class ProfileController < ApplicationController
     if logged_in?
       if (post = Post.find_by(id: params[:post_id].to_i)) != nil && post.threadtype.leader_id == current_user.id
         post.update(deleted:true)
+        if params[:type_id] == nil
+          params[:type_id] = ""
+        end
+        if params[:threadtype_id] == nil
+          params[:threadtype_id] = ""
+        end
+        if params[:thread_id] == nil
+          params[:thread_id] = ""
+        end
+        if params[:page_id] == nil
+          params[:page_id] = ""
+        end
         redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
       end
     end
@@ -213,6 +249,18 @@ class ProfileController < ApplicationController
     if logged_in?
       if (post = Post.find_by(id: params[:post_id].to_i)) != nil && post.threadtype.leader_id == current_user.id
         post.update(visible:false)
+        if params[:type_id] == nil
+          params[:type_id] = ""
+        end
+        if params[:threadtype_id] == nil
+          params[:threadtype_id] = ""
+        end
+        if params[:thread_id] == nil
+          params[:thread_id] = ""
+        end
+        if params[:page_id] == nil
+          params[:page_id] = ""
+        end
         redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:thread_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
       end
     end
@@ -224,6 +272,15 @@ class ProfileController < ApplicationController
         flash["alert_en"] = "Successed to widthdraw member."
         flash["alert_jp"] = "ユーザーの退会に成功しました。"
         flash["alert_type"] = "success"
+        if params[:type_id] == nil
+          params[:type_id] = ""
+        end
+        if params[:threadtype_id] == nil
+          params[:threadtype_id] = ""
+        end
+        if params[:page_id] == nil
+          params[:page_id] = ""
+        end
         redirect_to "/profile/#{params[:type_id].gsub(/{:value=>/,"")}/#{params[:threadtype_id].gsub(/{:value=>/,"")}?page=#{params[:page_id].gsub(/{:value=>/,"")}"
       end
     end

@@ -52,7 +52,7 @@ class ThreadtypeController < ApplicationController
         search_users = search_users.where("name LIKE ? OR profile_en LIKE ? OR profile_jp LIKE ?", "%"+ @search_text +"%","%"+ @search_text +"%","%"+ @search_text +"%")
       end
       if params[:type] == "6" || params[:type] == "7" || params[:type] == "8"
-        if params["navlink"] == nil || params["navlink"] == "popular"
+        if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"
           @popular_search_groups = search_groups.order(seen_num: "DESC").all.page(page_id).per(per)
           @latest_search_groups = search_groups.order(id: "ASC").all.page(1).per(per)
           @search_members = search_users.all.page(1).per(per)
@@ -141,6 +141,18 @@ class ThreadtypeController < ApplicationController
   end
   def search
     session["search_text"] = params[:search_text]
+    if params[:type_id] == nil
+      params[:type_id] = ""
+    end
+    if params[:threadtype_id] == nil
+      params[:threadtype_id] = ""
+    end
+    if params[:navlink] == nil
+      params[:navlink] = ""
+    end
+    if params[:page_id] == nil
+      params[:page_id] = ""
+    end
     redirect_to "/threadtype/show/#{params[:threadtype_id].gsub(/{:value=>/,"")}/#{params[:type_id].gsub(/{:value=>/,"")}/?page=#{params[:page_id].gsub(/{:value=>/,"")}&navlink=#{params[:navlink].gsub(/{:value=>/,"")}"
   end
   def image_params

@@ -139,8 +139,6 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
   def self.from_omniauth(auth)
-    p "=========================="
-    p "=========================="
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
