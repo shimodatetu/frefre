@@ -41,7 +41,6 @@
     </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "3" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/3',class:"nav-link" do %>
-
         <%= image_tag "/icon2/latest.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">
@@ -144,7 +143,7 @@
     <% end %>
   </ul>
 </div>
-<% if @threadtype.type != "every" || 1 == 1 %>
+<% if @threadtype.type != "every"%>
   <div class="profile_menu_tab">
     <div class="get_user_id"id="<%= current_user_id %>"></div>
     <ul class="nav flex-column">
@@ -177,12 +176,16 @@
                   <% end %>
                   <% if user.image == 0 %>
                     <% if user.avater.attached? %>
-                      <%= image_tag user.avater , :class => "user_img"%>
+                      <%= image_tag user.avater , :class => "group_img"%>
                     <% else %>
-                      <%= image_tag("/userimage/user1.png", :class => "user_img") %>
+                      <% if user.photo.nil? %>
+                        <%= image_tag("/userimage/user1.png", :class => "group_img") %>
+                      <% else %>
+                        <%= image_tag show_image_user_path(user), :class => "group_img" %>
+                      <% end %>
                     <% end %>
                   <% else %>
-                    <%= image_tag("/userimage/user#{user.image}.png", :class => "user_img") %>
+                    <%= image_tag("/userimage/user#{user.image}.png", :class => "group_img") %>
                   <% end %>
                   <div class="user_name">
                     <%= user.name %>
