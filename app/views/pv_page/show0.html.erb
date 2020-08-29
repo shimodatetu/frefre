@@ -9,6 +9,18 @@
 </div>
 
 <div class="pvpage_all">
+  <div class="category_show"style="display:none">
+    <%= form_tag('/search/header',method: :post,class: "search_form_top") do %>
+      <%= text_field_tag :search_text ,"", class: "form-control form_input",placeholder:"Title Search / タイトル検索" %>
+      <span class="input-group-btn">
+        <% link_to "/" %>
+        <button type="submit"class="btn btn-warning form_button">
+          <span class="glyphicon glyphicon-search"></span>
+          検索
+        </button>
+      </span>
+    <% end %>
+  </div>
   <div class="group_list">
     Community List / コミュニティ一覧
   </div>
@@ -18,12 +30,116 @@
     <div class="explain_text"style="display:none">コミュニティに参加してなくても、中身を閲覧することができます！</div>
     <div class="explain_text">コミュニティに参加してチャットしよう！</div>
   </div>
+  <%= link_to("threadtype/new",type:"button",class:"btn btn-default btn mes_button make_group_button") do %>
+    <div class="text_box">
+      <div class="jp">
+        Make Community / コミュニティを作る
+      </div>
+    </div>
+  <% end %>
+
   <div class="threadtype_cover">
-    <% if current_page?(root_path) || params[:id] == nil || params[:id] == "1" %>
-      <%= render partial:"popular" %>
-    <% elsif params[:id] == "2" %>
-      <%= render partial:"latest" %>
-    <% end %>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item blue-nav <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"%> active <% end %>">
+        <i class="fas fa-users"></i>
+        <a class="nav-link pvpage_change1" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
+          <div class="jp">
+            人気コミュニティ
+          </div>
+          <div class="en">
+            Popular Community
+          </div>
+        </a>
+      </li>
+      <li class="nav-item blue-nav <% if params["navlink"] == "latest"%> active <% end %>">
+        <i class="fas fa-users"></i>
+        <a class="nav-link pvpage_change2" id="latest-tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">
+          <div class="jp">
+            最新コミュニティ
+          </div>
+          <div class="en">
+            Latest Community
+          </div>
+        </a>
+      </li>
+      <li class="nav-item blue-nav <% if params["navlink"] == "category"%> active <% end %>">
+        <i class="fas fa-tags"></i>
+        <a class="nav-link pvpage_change3" id="category-tab" data-toggle="tab" href="#category" role="tab" aria-controls="category" aria-selected="false">
+          <div class="jp">
+            コミュニティカテゴリ
+          </div>
+          <div class="en">
+            Community Category
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"%>active<% else %>fade<% end %>" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+        <div class="thread_all thread_all_group">
+          <% there_be = false %>
+          <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
+          <% if @latest_threadtypes != nil %>
+            <% @popular_threadtypes.each do |threadtype| %>
+              <% there_be = true %>
+              <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+            <% end %>
+            <%= paginate @popular_threadtypes, outer_window: 3 %>
+          <% end %>
+          <% if there_be == false %>
+            <div class="not_found">
+              <div class="en">
+                There is no community created.
+              </div>
+              <div class="jp">
+                まだコミュニティが作成されていません。
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="tab-pane <% if params["navlink"] == "latest"%>active<% else %>fade<% end %>" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+        <div class="thread_all thread_all_group">
+          <% there_be = false %>
+          <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
+          <% if @latest_threadtypes != nil %>
+            <% @latest_threadtypes.each do |threadtype| %>
+              <% there_be = true %>
+              <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+            <% end %>
+            <%= paginate @latest_threadtypes , outer_window: 3%>
+          <% end %>
+          <% if there_be == false %>
+            <div class="not_found">
+              <div class="en">
+                There is no community created.
+              </div>
+              <div class="jp">
+                まだコミュニティが作成されていません。
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="tab-pane <% if params["navlink"] == "category"%>active<% else %>fade<% end %> category_list" id="category" role="tabpanel" aria-labelledby="category-tab">
+        <% there_be = false %>
+        <% Category.all.each do |category| %>
+          <% there_be = true %>
+          <%= render partial:"/category/category", locals: { category:category } %>
+        <% end %>
+        <% if there_be == false %>
+          <div class="not_found">
+            <div class="en">
+              There is no community created.
+            </div>
+            <div class="jp">
+              まだコミュニティが作成されていません。
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 

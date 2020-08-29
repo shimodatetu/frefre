@@ -71,9 +71,11 @@
         <% if @other_profile_menu_show == true %>
           <%= render partial:"/other_profile/menu" %>
         <% end %>
+        <% if @home_page_menu == true %>
+          <%= render partial:"/pv_page/menu" %>
+        <% end %>
 
         <%= render partial:"news/news_top" %>
-
 
         <ins class="adsbygoogle"
          style="display:inline-block;width:300px;height:200px"

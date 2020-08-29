@@ -240,10 +240,10 @@ $(document).on 'click', '.post_form_page .thread_send .btn_send', (event) ->
 
 
 add_post=(data)->
-  if location.href.match("localhost")
-    plus_post = $(data["message"].replace('example.org', 'localhost:3000'))
+  if location.href.match("localhost") != null
+    plus_post = data["message"].replace(/example.org/g, 'localhost:3000')
   else
-    plus_post = $(data["message"].replace('example.org', 'www.frefreforum.com'))
+    plus_post = data["message"].replace(/example.org/g, 'www.frefreforum.com')
   $(".thread_cover_cover").append plus_post
   plus_post.ready ->
     jp_height = plus_post.find(".jp_content_row .post_content_text").height();
@@ -281,18 +281,18 @@ type_check=(type)->
   if type == "post"
     text_en = $(".base_en_form").val();
     text_jp = $(".base_jp_form").val();
-    if $(".thread_page .thread_image_post #file_send").val() != "" || $(".thread_page .thread_image_post #video_send").val() != ""
-      alert("video")
+    if $(".thread_page .thread_image_post #file_send").val() != ""
+      $(".post_type").val("image")
+      App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
+    else if $(".thread_page .thread_image_post #video_send").val() != ""
+      $(".post_type").val("video")
       App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
     else if text_en != "" && text_jp != ""
-      if $(".unjoin_button_submit").length
-        if prohibit_check(text_en,text_jp) == true
-          $(".post_type").val("post_type")
-          App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
-        else
-          alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
+      if prohibit_check(text_en,text_jp) == true
+        $(".post_type").val("post_type")
+        App.room.speak("none",text_jp,text_en,parseInt($(".group_num").val()))
       else
-        alert_modal("You don't join this community","コミュニティに参加していません。","fail");
+        alert_modal("You cannot post because it contains prohibited words.","禁止ワードが含まれているので投稿できません。","fail");
     else if text_jp != ""
       alert_modal("The English is empty.","英語入力欄に何も書かれていません","fail");
     else if text_en != ""
@@ -355,6 +355,7 @@ trans_submit2=(data) ->
 $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) ->
   $(".post_type").val("image")
   $(".video_show").attr("style":"display:none");
+  $('.thread_page .thread_image_post #video_send').val("")
   reader = new FileReader
   reader.onload = (e) ->
     $(".image_show").attr("src": e.target.result);
@@ -363,12 +364,15 @@ $(document).on 'change', '.thread_page .thread_image_post #file_send', (event) -
   reader.readAsDataURL @files[0]
   $(".image_show").attr("style":"display:block");
 
+$(document).on 'click', '.post_form_page .thread_send .not_join_community',(event) ->
+  alert_modal("You don't join this community","コミュニティに参加していません。","fail");
 
 $(document).on 'click', '.thread_page .thread_image_post #video_send', (event) ->
   this.value = ""
 $(document).on 'change', '.thread_page .thread_image_post #video_send', (event) ->
   $(".post_type").val("video")
   $(".image_show").attr("style":"display:none");
+  $('.thread_page .thread_image_post #file_send').val("")
   fileList = @files
   i = 0
   l = fileList.length

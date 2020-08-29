@@ -1,0 +1,74 @@
+
+<% current_user_id = -1 %>
+<% if logged_in? %>
+  <% current_user_id = current_user.id %>
+<% end %>
+<div class="profile_menu_tab">
+  <div class="get_user_id"id="<%= current_user_id %>"></div>
+  <ul class="nav flex-column">
+    <li class="nav-item profile_contents_button blue-nav <% if current_page?(root_path) %>active<% end %>">
+      <%= link_to '/',class:"nav-link" do %>
+        <i class="fas fa-users"></i>
+        <div class="text_cover">
+          <div class="jp">
+            トップページ
+          </div>
+          <div class="en">
+            Top Page
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:id] == "2" %>active<% end %>">
+      <%= link_to '/home/2',class:"nav-link" do %>
+        <%= image_tag "/icon2/popular.png",class:"icon_img" %>
+        <div class="text_cover">
+          <div class="jp">
+            人気トピック
+          </div>
+          <div class="en">
+            Popular Topic
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:id] == "3" %>active<% end %>">
+      <%= link_to '/home/3',class:"nav-link" do %>
+        <%= image_tag "/icon2/latest.png",class:"icon_img" %>
+        <div class="text_cover">
+          <div class="jp">
+            最新トピック
+          </div>
+          <div class="en">
+            Latest Topic
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:id] == "4" %>active<% end %>">
+      <%= link_to '/threadtype/new',class:"nav-link" do %>
+        <i class="fas fa-marker"></i>
+        <div class="text_cover">
+          <div class="jp">
+            コミュニティを作る
+          </div>
+          <div class="en">
+            Make Community
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+  </ul>
+</div>

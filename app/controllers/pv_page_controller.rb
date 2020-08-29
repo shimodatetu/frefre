@@ -27,6 +27,7 @@ class PvPageController < ApplicationController
     #     end
     #   end
     # end
+    @home_page_menu = true
     @threadtypes = Threadtype.all.where.not(type:"every")
     per = 10
     page_id = params[:page].to_i

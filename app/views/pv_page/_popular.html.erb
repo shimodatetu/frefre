@@ -1,0 +1,21 @@
+<div class="thread_all thread_all_group">
+  <% there_be = false %>
+  <%= render partial:"/threadtype/threadtype", locals: { threadtype:Threadtype.where(type:"every").first } %>
+  <% if @latest_threadtypes != nil %>
+    <% @popular_threadtypes.each do |threadtype| %>
+      <% there_be = true %>
+      <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+    <% end %>
+    <%= paginate @popular_threadtypes, outer_window: 3 %>
+  <% end %>
+  <% if there_be == false %>
+    <div class="not_found">
+      <div class="en">
+        There is no community created.
+      </div>
+      <div class="jp">
+        まだコミュニティが作成されていません。
+      </div>
+    </div>
+  <% end %>
+</div>

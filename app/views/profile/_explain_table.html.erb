@@ -4,7 +4,7 @@
       <% if user.avater.attached? %>
         <%= image_tag user.avater , :class => "group_img"%>
       <% else %>
-        <% if other_user.photo.nil? %>
+        <% if user.photo.nil? %>
           <%= image_tag("/userimage/user1.png", :class => "group_img") %>
         <% else %>
           <%= image_tag show_image_user_path(user), :class => "group_img" %>
