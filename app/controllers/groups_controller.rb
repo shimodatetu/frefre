@@ -22,9 +22,6 @@ class GroupsController < ApplicationController
         post = Post.new()
         post.content_jap = params['content_jap']
         post.content_eng = params['content_eng']
-        p "================="
-        p post.content_jap = params[:type]
-        p "================="
         if params[:type] == "image"
           post.pict = data[:pict]
         elsif params[:type] == "video"
