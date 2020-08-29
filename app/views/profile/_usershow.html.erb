@@ -9,7 +9,6 @@
     <div class="thread_cover link_cover follow_cover">
       <div class="group_user_cover">
         <div class="group_img_cover">
-
           <% url = "/profile" %>
           <% if logged_in? && current_user.id != user.id %>
             <% url = "/other_profile/#{user.id}" %>
@@ -93,6 +92,9 @@
       </div>
     </div>
   <% end %>
+<% end %>
+<% if users.count > 3 %>
+  ・・・
 <% end %>
 <% if there_be == false %>
   <div class="not_found">
