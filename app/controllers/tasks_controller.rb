@@ -53,6 +53,11 @@ class TasksController < ApplicationController
     elsif lang == "en"
       words = params[:content_jp]
     end
+
+    p "==================="
+    p params
+    p "==================="
+
     if current_user == nil || none_nil(words) || none_nil(params[:show_class_en]) || none_nil(params[:show_class_jp]) || none_nil(params[:form_class]) || none_nil(params[:send_time]) || none_nil(lang)
       NodejsChannel.broadcast_to(current_user,"type":"trans","success":"false")
       return

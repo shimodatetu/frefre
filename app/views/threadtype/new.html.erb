@@ -64,7 +64,7 @@
                 </div>
               </div>
               <div class="checkbox_cover">
-                <%= form.radio_button :type, "normal" %> Public / 公開　　
+                <%= form.radio_button :type, "normal",checked:true %> Public / 公開　　
                 <%= form.radio_button :type, "private" %> Private / 非公開
               </div>
             </div>
@@ -78,7 +78,7 @@
                 </div>
               </div>
               <div class="checkbox_cover">
-                <%= form.radio_button :approval, "free" %> Free to Join / 誰でも参加可能　
+                <%= form.radio_button :approval, "free",checked:true %> Free to Join / 誰でも参加可能　
                 <%= form.radio_button :approval, "private" %> Approval / 承認制
               </div>
             </div>
@@ -104,7 +104,7 @@
               </div>
               <div class="title_input">
                 <%= image_tag "/eng.png", class: "image lang_img en_img"%>
-                <%= form.text_area :type_en, id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
+                <%= form.text_area :type_en, id:"content",class:"content_input_form form-control form_lang en_data_title",size:"65x5" %>
                 <div class="space_form"style="margin-top:0px;">
                   <div class="trans_cover">
                     <button type="button" class="normal_button post_button btn btn_send words_post_button"id="trans_to_title_en"
@@ -126,7 +126,7 @@
                   </div>
                 </div>
                 <%= image_tag "jap.png", class: "image lang_img" %>
-                <%= form.text_area :type_jp, id:"content",class:"content_input_form form-control form_lang en_data_content",size:"65x5" %>
+                <%= form.text_area :type_jp, id:"content",class:"content_input_form form-control form_lang jp_data_title",size:"65x5" %>
               </div>
             </div>
             <div class="panel-body content_cover"style="padding-bottom:0px">
@@ -187,7 +187,7 @@
               <div class="content_input">
                 <%= form.hidden_field :group_id,:id=>"group_id", :value => params[:id] %>
                 <%= form.hidden_field :post_id,:id=>"post_id", :value => -1 %>
-                <label for="image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button"style="margin-left: calc(50% - 75px);">
+                <label for="image_send"class="normal_button post_button image_send_button btn btn-prmary image_post_button">
                   <div class="glyphicon glyphicon-picture picture_send"></div>
                   <div class="button_text">
                     <div class="float_jp">
