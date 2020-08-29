@@ -128,7 +128,7 @@
           <% end %>
         </div>
         <div class="thread_send">
-          <% if logged_in? && (@threadtype.type == "every" || current_user.threadtypes.find_by(id:threadtype_id) != nil || @threadtype.leader_id == current_user.id) %>
+          <% if logged_in? && (@threadtype.type == "every" || current_user.threadtypes.find_by(id:@threadtype.id) != nil || @threadtype.leader_id == current_user.id) %>
             <button type="button" class="normal_button post_button btn btn_send words_post_button post_footer_one"id="post"
             name="<% if logged_in? %>logined<% end %>">
               <div class="glyphicon glyphicon-comment picture_send"></div>
