@@ -6,6 +6,18 @@
 <div class="profile_menu_tab">
   <div class="get_user_id"id="<%= current_user_id %>"></div>
   <ul class="nav flex-column">
+    <li class="nav-item profile_contents_button blue-nav">
+      <div class="menu_title">
+        <div class="text_cover">
+          <div class="jp">
+            コミュニティ管理メニュー
+          </div>
+          <div class="en">
+            Community Manage Menu
+          </div>
+        </div>
+      </div>
+    </li>
     <li class="nav-item profile_contents_button <% if params[:id] == "14"%>active<% end %>">
       <%= link_to "/profile/14/" + @threadtype.id.to_s ,class:"nav-link" do %>
         <i class="fas fa-users"></i>

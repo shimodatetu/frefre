@@ -10,20 +10,20 @@
       <div class="menu_title">
         <div class="text_cover">
           <div class="jp">
-            トップページのメニュー
+            検索メニュー
           </div>
           <div class="en">
-            Top Page Menu
+            Search Menu
           </div>
         </div>
       </div>
     </li>
-    <li class="nav-item profile_contents_button blue-nav <% if params[:id] == nil || params[:id] == "1" %>active<% end %>">
-      <%= link_to '/',class:"nav-link" do %>
+    <li class="nav-item profile_contents_button blue-nav <% if current_page?(root_path) || params[:id] == "1" %>active<% end %>">
+      <%= link_to '/search/show',class:"nav-link" do %>
         <%= image_tag "/icon2/popular.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">
-            人気トピック
+            人気コミュニティ
           </div>
           <div class="en">
             Popular Topic
@@ -35,7 +35,7 @@
       <% end %>
     </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:id] == "2" %>active<% end %>">
-      <%= link_to '/home/2',class:"nav-link" do %>
+      <%= link_to '/search/show/2',class:"nav-link" do %>
         <%= image_tag "/icon2/latest.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">
@@ -50,15 +50,15 @@
         </div>
       <% end %>
     </li>
-    <li class="nav-item profile_contents_button blue-nav <% if params[:id] == "4" %>active<% end %>">
-      <%= link_to '/threadtype/new',class:"nav-link" do %>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:id] == "3" %>active<% end %>">
+      <%= link_to '/search/show/3',class:"nav-link" do %>
         <i class="fas fa-marker"></i>
         <div class="text_cover">
           <div class="jp">
-            コミュニティを作る
+            メンバー検索
           </div>
           <div class="en">
-            Make Community
+            Search Member
           </div>
         </div>
         <div class="menu_right_button">

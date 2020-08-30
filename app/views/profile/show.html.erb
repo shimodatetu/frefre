@@ -295,6 +295,7 @@
     <div class="profile_change_modal profile">
       <div class="modal fade" id="profile_change_modal" tabindex="-1">
         <form>
+          <%= hidden_field_tag :send_time ,"1",class:"profile_send_time" %>
           <div class="profile_title">
             <div class="title"style="display:none">
               <div class="jp">
@@ -440,13 +441,13 @@
                       <% end %>
                     </div>
                   </div>
-                  <div class="save_button_bottom
+                  <div class='save_button_bottom
                   <% if current_user.usertype == "event" %>
                     profile_cannot_save
                   <% else %>
                     profile_save_button
                   <% end %>
-                    btn btn-default">
+                    btn btn-default'>
                     Save / 保存
                   </div>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close / 閉じる</button>
@@ -455,7 +456,16 @@
             </div>
           </div>
         </form>
-
+        <%= form_tag('/tasks/trans',method: :post,class: "modal-body profile_trans_intro search_form_top",style:"display:block") do %>
+          <%= hidden_field_tag :content_en,"",class:"profile_intro_en" %>
+          <%= hidden_field_tag :content_jp,"",class:"profile_intro_jp" %>
+          <%= hidden_field_tag :show_class_en,"profile_content_data #profile_en" %>
+          <%= hidden_field_tag :show_class_jp,"profile_content_data #profile_jp" %>
+          <%= hidden_field_tag :send_time ,"1",class:"send_time" %>
+          <%= hidden_field_tag :form_class ,"profile_change_modal" %>
+          <%= hidden_field_tag :lang ,"none", class: "lang_input" %>
+          <%= submit_tag "",class:"trans_send",style:"display:none"%>
+        <% end %>
       </div>
     </div>
   <% end %>

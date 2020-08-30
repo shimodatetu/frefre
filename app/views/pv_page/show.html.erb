@@ -19,6 +19,29 @@
     <div class="explain_text">コミュニティに参加してチャットしよう！</div>
   </div>
   <div class="threadtype_cover">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <% if current_page?(root_path) || params[:id] == nil || params[:id] == "1" %>
+        <li class="nav-item blue-nav active width_max"style="padding: 5px;">
+          <i class="fas fa-users"></i>
+          <a class="nav-link pvpage_change1" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false"style="width: calc(100% - 50px);">
+            <div class="text_cover">
+              Popular Community / 人気コミュニティ
+            </div>
+          </a>
+        </li>
+      <% elsif params[:id] == "2" %>
+        <li class="nav-item blue-nav active width_max"style="padding: 5px;">
+          <i class="fas fa-users"></i>
+          <a class="nav-link pvpage_change2" id="latest-tab" data-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false"style="width: calc(100% - 50px);">
+            <div class="text_cover">
+              Latest Community / 最新コミュニティ
+            </div>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="threadtype_cover">
     <% if current_page?(root_path) || params[:id] == nil || params[:id] == "1" %>
       <%= render partial:"popular" %>
     <% elsif params[:id] == "2" %>

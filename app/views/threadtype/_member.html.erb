@@ -28,7 +28,7 @@
   <%= form_tag('/threadtype/search',method: :post,class: "search_form_top",style:"margin: 10px 5px;") do %>
     <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
     <%= hidden_field_tag :threadtype_id ,@threadtype.id %>
-    <%= hidden_field_tag :type_id, "8" %>
+    <%= hidden_field_tag :type_id, "4" %>
     <%= hidden_field_tag :page_id, params[:page] %>
     <span class="input-group-btn">
       <button type="submit"class="btn btn-warning form_button">

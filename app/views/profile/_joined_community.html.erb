@@ -1,0 +1,6 @@
+<% if @join_groups != nil %>
+  <% @join_groups.each do |threadtype| %>
+    <% there_be = true %>
+    <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+  <% end %>
+<% end %>

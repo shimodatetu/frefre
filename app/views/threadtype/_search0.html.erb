@@ -27,10 +27,24 @@
       <% end %>
     </div>
     <div class="thread_all thread_all_group"style="padding-top:10px;">
-      <% @popular_search_groups.each do |group| %>
-        <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
-      <% end %>
-      <%= paginate @popular_search_groups ,outer_window: 3%>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"%>active<% else %>fade<% end %>" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+          <% @popular_search_groups.each do |group| %>
+            <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+          <% end %>
+          <%= paginate @popular_search_groups ,outer_window: 3%>
+        </div>
+        <div class="tab-pane <% if params["navlink"] == "latest"%>active<% else %>fade<% end %>" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+          <% @latest_search_groups.each do |group| %>
+            <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+          <% end %>
+          <%= paginate @popular_search_groups ,outer_window: 3%>
+        </div>
+        <div class="tab-pane <% if params["navlink"] == "member"%>active<% else %>fade<% end %> category_list" id="member" role="tabpanel" aria-labelledby="member-tab">
+          <%= render partial:"usershow", locals: { users:@search_members} %>
+          <%= paginate @search_members ,outer_window: 3%>
+        </div>
+      </div>
     </div>
   </div>
 </div>

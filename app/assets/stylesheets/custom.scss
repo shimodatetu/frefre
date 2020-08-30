@@ -222,6 +222,9 @@ p{
       border:solid thin #ccc;
       margin-top:10px;
       font-weight: bold;
+      .nav-item.active{
+        background-color: #ccc;
+      }
       .nav-item{
         border-bottom: solid 1px #ccc;
         .nav-link:hover{
@@ -238,7 +241,18 @@ p{
             font-size:15px;
             margin-top: -2px;
           }
-
+        }
+        .menu_title{
+          padding: 5px 15px;
+          background: #07689f !important;
+          color: #fff !important;
+          .jp{
+            font-size:11px;
+          }
+          .en{
+            font-size:15px;
+            margin-top: -2px;
+          }
         }
         .threadtype_img_cover{
           display: inline-block;

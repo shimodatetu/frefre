@@ -1,0 +1,4 @@
+<% if @search_users != nil %>
+  <%= render partial:"/threadtype/usershow", locals: { users:@search_users } %>
+  <%= paginate @search_users  , outer_window: 3%>
+<% end %>

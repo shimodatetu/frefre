@@ -32,7 +32,7 @@
       <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
       <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
       !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
-      !url.include?('manager') && !current_page?(root_path) && !url.include?("threadtype/show")%>
+      !url.include?('manager') && !current_page?(root_path) && !url.include?("home") && !url.include?("threadtype/show")%>
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-format="fluid"
@@ -61,18 +61,16 @@
 
         <% if @threadtype_menu_show == true %>
           <%= render partial:"/threadtype/menu" %>
-        <% end %>
-        <% if @profile_menu_show == true %>
+        <% elsif @profile_menu_show == true %>
           <%= render partial:"/profile/menu" %>
-        <% end %>
-        <% if @profile_menu_manage_show == true %>
+        <% elsif @profile_menu_manage_show == true %>
           <%= render partial:"/profile/threadtype_manage/menu" %>
-        <% end %>
-        <% if @other_profile_menu_show == true %>
+        <% elsif @other_profile_menu_show == true %>
           <%= render partial:"/other_profile/menu" %>
-        <% end %>
-        <% if @home_page_menu == true %>
+        <% elsif @home_page_menu == true %>
           <%= render partial:"/pv_page/menu" %>
+        <% elsif @search_menu_show == true %>
+          <%= render partial:"/search/menu" %>
         <% end %>
 
         <%= render partial:"news/news_top" %>

@@ -59,20 +59,34 @@ $(document).on 'click', '#profile_modal .btn_send', (event) ->
 $(document).on 'click', '.prof_trans .words_post_button', (event) ->
   profile_en = $(".profile_page #profile_en").val();
   profile_jp = $(".profile_page #profile_jp").val();
+
   if window.translated == true && 1 == 2
     alert_modal("You can translate at once.","一度しか翻訳できません。","fail")
   else if this.id == "trans_to_en"
     if profile_jp == ""
       alert_modal("Japanese introduction is empty.","日本語プロフィール欄に何も書かれていません","fail")
     else
-      $("#fakeLoader").fakeLoader({},translate_google2,["en",profile_en,profile_jp]);
+      $("#fakeLoader").fakeLoader({},trans_submit,["en",profile_jp]);
       #translate_google(profile_en,profile_jp,"en")
   else if this.id == "trans_to_jp"
     if profile_en == ""
       alert_modal("English introduction is empty.","英語プロフィール欄に何も書かれていません","fail")
     else
-      $("#fakeLoader").fakeLoader({},translate_google2,["ja",profile_en,profile_jp]);
+      $("#fakeLoader").fakeLoader({},trans_submit,["ja",profile_en]);
       #translate_google(profile_en,profile_jp,"ja")
+
+trans_submit=(data) ->
+  $(".profile_trans_intro .send_time").val($(".profile_send_time").val())
+  lang = data[0]
+  words = data[1]
+  if lang == "ja"
+    $(".profile_trans_intro .profile_intro_en").val(words)
+  else
+    $(".profile_trans_intro .profile_intro_jp").val(words)
+
+  $(".cancel_button_class").val(".profile_send_time")
+  $(".profile_trans_intro .lang_input").val(lang)
+  $(".profile_trans_intro .trans_send").click()
 
 $(document).on 'click', '.profile_cannot_save', (event) ->
   alert_modal("The event acount cannot be changed.","イベント用アカウントは変更できません","fail")

@@ -1,0 +1,6 @@
+<% if @make_threads != nil %>
+  <% @make_threads.each do |group| %>
+    <% there_be = true %>
+    <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+  <% end %>
+<% end %>

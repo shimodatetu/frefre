@@ -1,0 +1,113 @@
+<% search_text = "" %>
+<% if session["search_text"].nil? == false && session["search_text"] != "" %>
+  <% search_text = session["search_text"] %>
+<% end %>
+
+<div class="profile_notice">
+  <ul class="nav nav-tabs" id="myTab" role="tablist"style="margin-top:-15px;">
+    <li class="nav-item <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "following"%> active <% end %>">
+      <a class="nav-link profile_history_change8" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="true">
+        <i class="fas fa-user"></i>
+        <div class="text_cover">
+          <div class="jp">
+            フォロー
+          </div>
+          <div class="en">
+            Following
+          </div>
+        </div>
+      </a>
+    </li>
+    <li class="nav-item <% if params["navlink"] == "follower"%> active <% end %>">
+      <a class="nav-link profile_history_change9" id="follower-tab" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">
+        <i class="fas fa-user"></i>
+        <div class="text_cover">
+          <div class="jp">
+            フォロワー
+          </div>
+          <div class="en">
+            Follower
+          </div>
+        </div>
+      </a>
+    </li>
+    <li class="nav-item <% if params["navlink"] == "usersearch"%> active <% end %>">
+      <a class="nav-link profile_history_change10" id="follower-tab" data-toggle="tab" href="#usersearch" role="tab" aria-controls="follower" aria-selected="false">
+        <i class="fas fa-search"></i>
+        <div class="text_cover">
+          <div class="jp">
+            ユーザー検索
+          </div>
+          <div class="en">
+            User Search
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content no_lang_bar" id="myTabContent"style="padding-top: 0px!important;">
+    <div class="notice_cover">
+      <div class="follow_all">
+        <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "following"%>active<% else %>fade<% end %> show" id="following" role="tabpanel" aria-labelledby="following-tab">
+          <%= render partial:"usershow", locals: {users:@followings } %>
+          <%= paginate @followings , outer_window: 3%>
+        </div>
+        <div class="tab-pane <% if params["navlink"] == "follower"%>active<% else %>fade<% end %>" id="follower" role="tabpanel" aria-labelledby="follower-tab">
+          <%= render partial:"usershow", locals: {users:@followers } %>
+          <%= paginate @followers , outer_window: 3%>
+        </div>
+        <div class="tab-pane <% if params["navlink"] == "usersearch"%>active<% else %>fade<% end %>" id="usersearch" role="tabpanel" aria-labelledby="follower-tab">
+          <%= form_tag('/search/user',method: :post,class: "search_form_top") do %>
+            <%= text_field_tag :search_text ,search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
+            <%= hidden_field_tag :navlink, params[:navlink] %>
+            <span class="input-group-btn">
+              <button type="submit"class="btn btn-warning form_button">
+                <span class="glyphicon glyphicon-search"></span>
+                検索
+              </button>
+            </span>
+          <% end %>
+          <%= render partial:"usershow", locals: {users:@search_users } %>
+          <%= paginate @search_users , outer_window: 3%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="profile_modal">
+  <div class="modal fade" id="follow_modal" tabindex="-1">
+  	<div class="modal-dialog"style="width:90vw">
+  		<div class="modal-content">
+  			<div class="modal-body">
+          <div class="text_box">
+            <div class="text_jp">
+              フォローを解除してもよろしいですか？
+            </div>
+            <div class="text_en">
+              Is it ok to unfollow him or her?
+            </div>
+          </div>
+  			</div>
+        <div class="modal-footer follow_modal_footer">
+          <button type="button" class="btn btn-primary unfollow_modal_submit follow_modal_button">
+            <div class="jp">
+              実行
+            </div>
+            <div class="en">
+              OK
+            </div>
+          </button>
+          <button type="button" class="btn btn-default follow_modal_button"data-dismiss="modal">
+            <div class="jp">
+              戻る
+            </div>
+            <div class="en">
+              Back
+            </div>
+          </button>
+        </div>
+  		</div>
+  	</div>
+  </div>
+</div>

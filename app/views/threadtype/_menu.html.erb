@@ -7,6 +7,18 @@
 <div class="profile_menu_tab">
   <div class="get_user_id"id="<%= current_user_id %>"></div>
   <ul class="nav flex-column">
+    <li class="nav-item profile_contents_button blue-nav">
+      <div class="menu_title">
+        <div class="text_cover">
+          <div class="jp">
+            このコミュニティのメニュー
+          </div>
+          <div class="en">
+            This Community Menu
+          </div>
+        </div>
+      </div>
+    </li>
     <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" ) %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/1',class:"nav-link" do %>
         <i class="fas fa-users"></i>
@@ -76,10 +88,10 @@
         <i class="fas fa-search"></i>
         <div class="text_cover">
           <div class="jp">
-            キーワード検索
+            トピック検索
           </div>
           <div class="en">
-            Search
+            Topic Search
           </div>
         </div>
         <div class="menu_right_button">

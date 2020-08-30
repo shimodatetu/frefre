@@ -169,6 +169,14 @@
       color:#07689f!important;
     }
   }
+  .nav-item.width_max {
+    width: 100%;
+    .text_cover {
+      display: inline-block;
+      font-size: 18px;
+      width: calc(100% - 50px);
+    }
+  }
   .nav-item{
     border: solid thin #66bfbf;
     color:#07689f;

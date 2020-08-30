@@ -17,22 +17,22 @@ class ProfileController < ApplicationController
         per = 10
         current_user_id = current_user.id
         if params[:id] == nil || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4"
-          if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"
+          if params["navlink"] == "popular" || (params["navlink"] == nil || params["navlink"] == "") && (params[:id] == nil || params[:id] == "1" || params[:id] == "2")
             @join_groups = current_user.threadtypes.all.page(page_id).per(per)
             @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
             @make_threads = current_user.groups.all.page(1).per(per)
             @make_posts = current_user.posts.all.page(1).per(per)
-          elsif params["navlink"] == "group"
+          elsif params["navlink"] == "group" || (params["navlink"] == nil || params["navlink"] == "") && params[:id] == "2"
             @join_groups = current_user.threadtypes.all.page(1).per(per)
             @make_groups = Threadtype.all.where(leader_id:current_user_id).page(page_id).per(per)
             @make_threads = current_user.groups.all.page(1).per(per)
             @make_posts = current_user.posts.all.page(1).per(per)
-          elsif params["navlink"] == "thread"
+          elsif params["navlink"] == "thread" || (params["navlink"] == nil || params["navlink"] == "") && params[:id] == "3"
             @join_groups = current_user.threadtypes.all.page(1).per(per)
             @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
             @make_threads = current_user.groups.all.page(page_id).per(per)
             @make_posts = current_user.posts.all.page(1).per(per)
-          elsif params["navlink"] == "post"
+          elsif params["navlink"] == "post" || (params["navlink"] == nil || params["navlink"] == "") && params[:id] == "4"
             @join_groups = current_user.threadtypes.all.page(1).per(per)
             @make_groups = Threadtype.all.where(leader_id:current_user_id).page(1).per(per)
             @make_threads = current_user.groups.all.page(1).per(per)
