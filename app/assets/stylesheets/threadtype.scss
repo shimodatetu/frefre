@@ -124,7 +124,8 @@
 .threadtype_threads{
   width:100%;
   background:#fff;
-  margin-top: -5px;
+  margin-top:5px;
+  border:solid thin #eee;
 }
 .threadtype_dropdown{
   margin-top: -100px;
@@ -134,7 +135,6 @@
   padding-top: 0px;
   border-radius: 0px;
   margin-bottom: 0px;
-  border: solid thin #fff;
   .compulsory{
     margin-top: 5px;
     padding: 2px 5px 2px 5px;
