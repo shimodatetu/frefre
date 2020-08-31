@@ -20,7 +20,7 @@
     <div class="profile_page row">
       <%= render partial:"/profile/explain_table",locals: { user:other_user,change_button:false}  %>
       <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
-        <% if params["navlink"] == "popular" || (params["navlink"] == nil || params["navlink"] == "") && (params[:type] == nil || params[:type] == "1")%>
+        <% if params["navlink"] == "popular" || (params["navlink"] == nil || params["navlink"] == "") && (params[:id] == nil || params[:id] == "1")%>
           <li class="nav-item active width_max">
             <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
               <i class="fas fa-users"></i>
@@ -29,7 +29,7 @@
               </div>
             </a>
           </li>
-        <% elsif params["navlink"] == "group" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "2" %>
+        <% elsif params["navlink"] == "group" || (params["navlink"] == nil || params["navlink"] == "") && params[:id] == "2" %>
           <li class="nav-item active width_max">
             <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#group" role="tab" aria-controls="group" aria-selected="false">
               <i class="fas fa-users"></i>
@@ -38,7 +38,7 @@
               </div>
             </a>
           </li>
-        <% elsif params["navlink"] == "thread" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "3" %>
+        <% elsif params["navlink"] == "thread" || (params["navlink"] == nil || params["navlink"] == "") && params[:id] == "3" %>
           <li class="nav-item active width_max">
             <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#thread" role="tab" aria-controls="thread" aria-selected="false">
               <i class="fas fa-comments"></i>
@@ -47,7 +47,7 @@
               </div>
             </a>
           </li>
-        <% elsif params["navlink"] == "post" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "4" %>
+        <% elsif params["navlink"] == "post" || (params["navlink"] == nil || params["navlink"] == "") && params[:id] == "4" %>
           <li class="nav-item active width_max">
             <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">
               <i class="fas fa-comment-dots"></i>
@@ -58,42 +58,47 @@
           </li>
         <% end %>
       </ul>
-      <% if params["navlink"] == "popular" || (params["navlink"] == nil || params["navlink"] == "") && (params[:type] == nil || params[:type] == "1")%>
-        <% there_be = false %>
-        <% if @join_groups != nil %>
-          <% @join_groups.each do |threadtype| %>
-            <% there_be = true %>
-            <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane <% if params["navlink"] == nil || params["navlink"] == "" || params["navlink"] == "popular"%>active<% else %>fade<% end %>" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+          <% there_be = false %>
+          <% if @join_groups != nil %>
+            <% @join_groups.each do |threadtype| %>
+              <% there_be = true %>
+              <%= render partial:"/threadtype/threadtype", locals: { threadtype:threadtype } %>
+            <% end %>
           <% end %>
-        <% end %>
-      <% elsif params["navlink"] == "group" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "2" %>
-        <% show_group_id = -1 %>
-        <% there_be = false %>
-        <% if @make_groups != nil %>
-          <% @make_groups.each do |threadtype| %>
-            <% there_be = true %>
-            <%= render partial:"/threadtype/threadtype_edit", locals: { threadtype:threadtype,type:"made" } %>
+        </div>
+        <div class="tab-pane <% if params["navlink"] == "group"%>active<% else %>fade<% end %>" id="group" role="tabpanel" aria-labelledby="group-tab">
+          <% show_group_id = -1 %>
+          <% there_be = false %>
+          <% if @make_groups != nil %>
+            <% @make_groups.each do |threadtype| %>
+              <% there_be = true %>
+              <%= render partial:"/threadtype/threadtype_edit", locals: { threadtype:threadtype,type:"made" } %>
+            <% end %>
           <% end %>
-        <% end %>
-      <% elsif params["navlink"] == "thread" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "3" %>
-        <% show_group_id = -1 %>
-        <% there_be = false %>
-        <% if @make_threads != nil %>
-          <% @make_threads.each do |group| %>
-            <% there_be = true %>
-            <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+        </div>
+        <div class="tab-pane <% if params["navlink"] == "thread"%>active<% else %>fade<% end %>" id="thread" role="tabpanel" aria-labelledby="thread-tab">
+          <% show_group_id = -1 %>
+          <% there_be = false %>
+          <% if @make_threads != nil %>
+            <% @make_threads.each do |group| %>
+              <% there_be = true %>
+              <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+            <% end %>
           <% end %>
-        <% end %>
-      <% elsif params["navlink"] == "post" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "4" %>
-        <% show_group_id = -1 %>
-        <% there_be = false %>
-        <% if @make_threads != nil %>
-          <% @make_threads.each do |group| %>
-            <% there_be = true %>
-            <%= render partial:"/groups/group", locals: { group:group,type:"normal" } %>
+        </div>
+        <div class="tab-pane <% if params["navlink"] == "post"%>active<% else %>fade<% end %>" id="post" role="tabpanel" aria-labelledby="post-tab">
+          <% show_group_id = -1 %>
+          <% there_be = false %>
+          <% if @make_posts != nil %>
+            <% @make_posts.each do |post| %>
+              <% there_be = true %>
+              <%= render partial: 'posts/post' ,locals: { post:post,type:"normal"} %>
+            <% end %>
           <% end %>
-        <% end %>
-      <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

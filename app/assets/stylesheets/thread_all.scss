@@ -1,5 +1,5 @@
 .group_dropdown{
-  margin-top: -90px;
+  margin-top: -120px;
   margin-right: 5px;
 }
 .dropdown{
@@ -123,12 +123,16 @@
 }
 
 .thread_cover{
-  //filter: drop-shadow(2px 5px 5px rgba(0,0,0,0.2));
   background-color: #ffffff;
   padding-top: 5px;
   border-radius: 5px;
   margin-bottom:3px;
   border:solid thin #dddddd;
+  .group_title_show{
+    padding: 5px 10px;
+    font-size:16px;
+    background:#ddd;
+  }
   .group_user_cover{
     display: inline-block;
     vertical-align: middle;

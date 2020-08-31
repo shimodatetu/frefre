@@ -11,63 +11,141 @@
 <div class="profile_menu_tab">
   <div class="get_user_id"id="<%= current_user_id %>"></div>
   <ul class="nav flex-column">
-    <li class="nav-item profile_contents_button">
-      <div class="follow_button<%= other_user_id %>">
-        <% if logged_in? && current_user.followings.find_by(id: other_user_id) %>
-          <%= button_tag type:"button",class:"nav-link btn mes_button normal_button fullwidth_button unfollow_button_submit",id:other_user_id do %>
-            <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
-            <div class="text_box text_cover">
-              <div class="jp">
-                フォロー中
-              </div>
-              <div class="en">
-                Following
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <%= button_tag type:"button",class:"nav-link btn mes_button normal_button fullwidth_button follow_button_submit",id:other_user_id do %>
-            <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
-            <div class="text_cover text_box">
-              <div class="jp">
-                フォローする
-              </div>
-              <div class="en">
-                Follow
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+    <li class="nav-item profile_contents_button blue-nav">
+      <div class="menu_title">
+        <div class="text_cover">
+          <div class="jp">
+            他ユーザープロフィールメニュー
+          </div>
+          <div class="en">
+            Other Profile Menu
+          </div>
+        </div>
       </div>
     </li>
-    <li class="nav-item profile_contents_button">
-      <% if logged_in? && a = current_user.notices.eager_load(:users).find_by(id: other_user_id) %>
-        <%= link_to "/profile/5/#{a.id}",class:"nav-link" do %>
-          <button class="btn mes_button normal_button green_button fullwidth_button">
-            <div class="jp">
-              チャットへ飛ぶ
-            </div>
-            <div class="en">
-              Jump to Chat
-            </div>
-          </button>
-        <% end %>
-      <% else %>
-        <%= link_to "/notice/new/#{params[:id]}",class:"nav-link" do %>
-          <button class="btn mes_button normal_button green_button fullwidth_button">
-            <span class="glyphicon glyphicon-envelope icon" aria-hidden="true"></span>
-            <div class="text_box text_cover">
-              <div class="jp">
-                メッセージ
-              </div>
-              <div class="en">
-                Message
-              </div>
-            </div>
-          </button>
-        <% end %>
+    <li class="nav-item profile_contents_button <% if params["navlink"] == "popular" || (params["navlink"] == nil || params["navlink"] == "") && (params[:type] == nil || params[:type] == "1") %>active<% end %>">
+      <%= link_to '/other_profile/'+params[:id],class:"nav-link" do %>
+        <i class="fas fa-users"></i>
+        <div class="text_cover">
+          <div class="jp">
+            参加したコミュニティ
+          </div>
+          <div class="en">
+            Joined Community
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
       <% end %>
     </li>
+    <li class="nav-item profile_contents_button <% if params["navlink"] == "group" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "2" %> active <% end %>">
+      <%= link_to '/other_profile/'+params[:id]+'/2',class:"nav-link" do %>
+        <i class="fas fa-users"></i>
+        <div class="text_cover">
+          <div class="jp">
+            作成したコミュニティ
+          </div>
+          <div class="en">
+            Made Community
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button <% if params["navlink"] == "thread" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "3" %>active<% end %>">
+      <%= link_to '/other_profile/'+params[:id]+'/3',class:"nav-link" do %>
+        <i class="fas fa-comments"></i>
+        <div class="text_cover">
+          <div class="jp">
+            過去のトピック
+          </div>
+          <div class="en">
+            Past Topic
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <li class="nav-item profile_contents_button <% if params["navlink"] == "post" || (params["navlink"] == nil || params["navlink"] == "") && params[:type] == "4" %> active <% end %>">
+      <%= link_to '/other_profile/'+params[:id]+'/4',class:"nav-link" do %>
+        <i class="fas fa-comment-dots"></i>
+        <div class="text_cover">
+          <div class="jp">
+            過去の投稿
+          </div>
+          <div class="en">
+            Past Post
+          </div>
+        </div>
+        <div class="menu_right_button">
+          <i class="fas fa-plus"></i>
+        </div>
+      <% end %>
+    </li>
+    <% if logged_in? %>
+      <li class="nav-item profile_contents_button">
+        <div class="follow_button<%= other_user_id %>">
+          <% if logged_in? && current_user.followings.find_by(id: other_user_id) %>
+            <%= button_tag type:"button",class:"nav-link btn mes_button normal_button fullwidth_button unfollow_button_submit",id:other_user_id do %>
+              <span class="glyphicon glyphicon-star icon" aria-hidden="true"></span>
+              <div class="text_box text_cover">
+                <div class="jp">
+                  フォロー中
+                </div>
+                <div class="en">
+                  Following
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <%= button_tag type:"button",class:"nav-link btn mes_button normal_button fullwidth_button follow_button_submit",id:other_user_id do %>
+              <span class="glyphicon glyphicon-star-empty icon" aria-hidden="true"></span>
+              <div class="text_cover text_box">
+                <div class="jp">
+                  フォローする
+                </div>
+                <div class="en">
+                  Follow
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+      <li class="nav-item profile_contents_button">
+        <% if logged_in? && a = current_user.notices.eager_load(:users).find_by(id: other_user_id) %>
+          <%= link_to "/profile/5/#{a.id}",class:"nav-link" do %>
+            <button class="btn mes_button normal_button green_button fullwidth_button">
+              <div class="jp">
+                チャットへ飛ぶ
+              </div>
+              <div class="en">
+                Jump to Chat
+              </div>
+            </button>
+          <% end %>
+        <% else %>
+          <%= link_to "/notice/new/#{params[:type]}",class:"nav-link" do %>
+            <button class="btn mes_button normal_button green_button fullwidth_button">
+              <span class="glyphicon glyphicon-envelope icon" aria-hidden="true"></span>
+              <div class="text_box text_cover">
+                <div class="jp">
+                  メッセージ
+                </div>
+                <div class="en">
+                  Message
+                </div>
+              </div>
+            </button>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
     <li class="nav-item profile_contents_button">
       <%= button_tag type:"button",class:"nav-link btn mes_button normal_button fullwidth_button report_button",id:other_user_id do %>
         <span class="glyphicon glyphicon-exclamation-sign icon" aria-hidden="true"></span>

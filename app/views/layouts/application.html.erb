@@ -71,6 +71,8 @@
           <%= render partial:"/pv_page/menu" %>
         <% elsif @search_menu_show == true %>
           <%= render partial:"/search/menu" %>
+        <% elsif @other_profile_menu_show == true %>
+          <%= render partial:"/other_profile/menu" %>
         <% end %>
 
         <%= render partial:"news/news_top" %>

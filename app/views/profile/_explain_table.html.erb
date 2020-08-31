@@ -63,11 +63,11 @@
         </div>
       </th>
       <th class="column_content">
-        <% if current_user.gender == "Male" %>
+        <% if user.gender == "Male" %>
           <%= "Male / 男性" %>
-        <% elsif current_user.gender == "Female" %>
+        <% elsif user.gender == "Female" %>
           <%= "Female / 女性" %>
-        <% elsif current_user.gender == "Neuter"  %>
+        <% elsif user.gender == "Neuter"  %>
           <%= "Other / その他" %>
         <% else %>
           <%= "No answer / 答えない" %>
@@ -84,10 +84,10 @@
         </div>
       </th>
       <th class="column_content">
-        <% if current_user.country == nil || current_user.country == ""%>
+        <% if user.country == nil || user.country == ""%>
           <%= "No answer / 答えない" %>
         <% else %>
-          <%= current_user.country %>
+          <%= user.country %>
         <% end %>
       </th>
     </tr>
