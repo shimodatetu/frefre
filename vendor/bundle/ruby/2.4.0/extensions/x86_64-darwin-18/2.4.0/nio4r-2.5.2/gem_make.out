@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/nio4r-2.5.2/ext/nio4r
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200722-85139-1bn8eji.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200907-5727-m4iwob.rb extconf.rb
 checking for unistd.h... yes
 checking for linux/aio_abi.h... no
 checking for sys/select.h... yes
@@ -298,4 +298,4 @@ linking shared-object nio4r_ext.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/nio4r-2.5.2/ext/nio4r
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20200722-85139-bw1w9u
+/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20200907-5727-br3at7

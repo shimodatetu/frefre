@@ -4,7 +4,7 @@
 <%= include_gon %>
 <html class="top-page">
   <head>
-    <link rel="index" href="https://www.frefreforum.com/" />
+    <link rel="index" href="https://www.frefreforum.com/">
     <%= favicon_link_tag 'frefre_icon.png',style:"border-radius:50%"%>
     <title>FreFre / Forum with Japanese : 外国人との掲示板</title>
     <%= csrf_meta_tags %>
@@ -20,7 +20,6 @@
     <script src="https://kit.fontawesome.com/88141e0e74.js" crossorigin="anonymous"></script>
   </head>
   <body>
-
     <% if url.include?('manager') %>
       <%= render partial:'manager/header' %>
       <div class="main_content_cover manager_content_cover"id="main_content_cover">
@@ -33,15 +32,12 @@
       <% if !url.include?('profile') && !url.include?('users') && !url.include?('login') && !url.include?('policy') &&
       !url.include?('term') && !url.include?('contact') && !url.include?('oauth_complete') && !url.include?('create_oauth') &&
       !url.include?('manager') && !current_page?(root_path) && !url.include?("home") && !url.include?("threadtype/show")%>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-format="fluid"
-           data-ad-layout-key="-hc-l+35-8m+a2"
-           data-ad-client="ca-pub-2088744114390591"
-           data-ad-slot="5806296929"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+        <ins class="adsbygoogle"style="display:block"data-ad-format="fluid"data-ad-layout-key="-hc-l+35-8m+a2"data-ad-client="ca-pub-2088744114390591"data-ad-slot="5806296929">
+
+        </ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       <% end %>
     </div>
 

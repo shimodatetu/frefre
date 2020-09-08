@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
  add_flash_types :success, :info, :warning, :danger ,:search_big_id,:search_small_id, :alert_en, :alert_jp, :alert_type
 
- helper_method :current_user2
+ helper_method :current_user
  #before_action :configure_permitted_parameters, if: :devise_controller?
  # def configure_permitted_parameters
  #    # サインアップ時にnameのストロングパラメータを追加

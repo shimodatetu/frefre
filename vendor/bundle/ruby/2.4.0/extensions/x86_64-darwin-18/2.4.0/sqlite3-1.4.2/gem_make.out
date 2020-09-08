@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/sqlite3-1.4.2/ext/sqlite3
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200822-79032-fjkv0b.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200907-5727-1vep08i.rb extconf.rb
 checking for sqlite3.h... yes
 checking for pthread_create() in -lpthread... yes
 checking for -ldl... yes
@@ -60,4 +60,4 @@ linking shared-object sqlite3/sqlite3_native.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/sqlite3-1.4.2/ext/sqlite3
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 sqlite3_native.bundle ./.gem.20200822-79032-5ix2p1/sqlite3
+/usr/bin/install -c -m 0755 sqlite3_native.bundle ./.gem.20200907-5727-oq9byc/sqlite3

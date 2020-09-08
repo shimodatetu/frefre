@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/ovirt-engine-sdk-4.3.1/ext/ovirtsdk4c
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200822-79032-1nys2t7.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200907-5727-5kgfs8.rb extconf.rb
 checking for xml2-config... yes
 checking for curl-config... yes
 creating Makefile
@@ -55,4 +55,4 @@ linking shared-object ovirtsdk4c.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/ovirt-engine-sdk-4.3.1/ext/ovirtsdk4c
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 ovirtsdk4c.bundle ./.gem.20200822-79032-kicgkg
+/usr/bin/install -c -m 0755 ovirtsdk4c.bundle ./.gem.20200907-5727-1wyvw9m

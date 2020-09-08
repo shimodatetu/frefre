@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/aliyun-sdk-0.8.0/ext/crcx
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200822-79032-z3drjg.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200907-5727-1lgctnk.rb extconf.rb
 creating Makefile
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/aliyun-sdk-0.8.0/ext/crcx
@@ -13,4 +13,4 @@ linking shared-object aliyun/crcx.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/aliyun-sdk-0.8.0/ext/crcx
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 crcx.bundle ./.gem.20200822-79032-8wnmr3/aliyun
+/usr/bin/install -c -m 0755 crcx.bundle ./.gem.20200907-5727-uhyves/aliyun

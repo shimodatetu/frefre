@@ -125,11 +125,18 @@
 .thread_cover{
   background-color: #ffffff;
   border-radius: 5px;
+  margin-bottom:3px;
   border:solid thin #dddddd;
   .group_title_show{
     padding: 5px 10px;
     font-size:16px;
-    background:#ddd;
+    background:#eee;
+  }
+  .group_title_show:hover{
+    .text_cover{
+      text-decoration-color: #07689f;
+      text-decoration: underline;
+    }
   }
   .group_user_cover{
     display: inline-block;

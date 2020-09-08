@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/ffi-1.13.1/ext/ffi_c
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200822-79032-c3yiah.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200907-5727-1na9v7.rb extconf.rb
 checking for ffi_prep_closure_loc() in -lffi... no
 checking for ffi_prep_closure_loc() in -llibffi... no
 checking for ffi_prep_closure_loc() in -llibffi-8... no
@@ -122,4 +122,4 @@ compiling Types.c
 compiling Variadic.c
 compiling ffi.c
 linking shared-object ffi_c.bundle
-/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20200822-79032-1a69wk9
+/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20200907-5727-e5r6a9

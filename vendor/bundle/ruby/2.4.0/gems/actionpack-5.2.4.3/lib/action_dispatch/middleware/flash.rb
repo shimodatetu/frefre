@@ -97,12 +97,12 @@ module ActionDispatch
         @flash[k.to_s]
       end
 
-      # Convenience accessor for <tt>flash[:alert]=</tt>.
+      # Convenience accessor for <tt>flash.now[:alert]=</tt>.
       def alert=(message)
         self[:alert] = message
       end
 
-      # Convenience accessor for <tt>flash[:notice]=</tt>.
+      # Convenience accessor for <tt>flash.now[:notice]=</tt>.
       def notice=(message)
         self[:notice] = message
       end
@@ -210,7 +210,7 @@ module ActionDispatch
 
       # Sets a flash that will not be available to the next action, only to the current.
       #
-      #     flash[:message] = "Hello current action"
+      #     flash.now[:message] = "Hello current action"
       #
       # This method enables you to use the flash as a central messaging system in your app.
       # When you need to pass an object to the next action, you use the standard flash assign (<tt>[]=</tt>).
@@ -221,11 +221,11 @@ module ActionDispatch
       #
       # Also, brings two convenience accessors:
       #
-      #   flash.alert = "Beware now!"
-      #   # Equivalent to flash[:alert] = "Beware now!"
+      #   flash.now.alert = "Beware now!"
+      #   # Equivalent to flash.now[:alert] = "Beware now!"
       #
-      #   flash.notice = "Good luck now!"
-      #   # Equivalent to flash[:notice] = "Good luck now!"
+      #   flash.now.notice = "Good luck now!"
+      #   # Equivalent to flash.now[:notice] = "Good luck now!"
       def now
         @now ||= FlashNow.new(self)
       end

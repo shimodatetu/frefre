@@ -84,12 +84,14 @@ Rails.application.routes.draw do
   post '/manager/report_group',to:'manager#searcher_report_group'
   post '/manager/report_threadtype',to:'manager#searcher_report_threadtype'
 
+  get '/auth/:provider/callback', to: 'sessions#login_auth'
   get 'auth/:provider/callback', to: 'sessions#login_auth'
   get '/users/auth/:provider/callback', to: 'sessions#login_auth'
   get 'auth/failure', to: redirect('/login_page')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'sessions/index'
   get 'sessions/new'
+  get 'sessions/new_test'
   get '/sessions/event_login'
   get 'sessions/oauth_complete'
   post 'session/create_oauth'

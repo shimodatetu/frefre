@@ -144,7 +144,6 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.name = auth.info.name
       user.email = auth.info.email
-      user.photo = auth.info.image
       user.oauth = true
       user.password = ""
       user.oauth_token = auth.credentials.token
@@ -152,13 +151,6 @@ class User < ApplicationRecord
       user.admit = false
       return user
     end
-  end
-
-  private
-
-  def create_activation_digest
-    self.activation_token  = User.new_token
-    self.activation_digest = User.digest(activation_token)
   end
 
 end

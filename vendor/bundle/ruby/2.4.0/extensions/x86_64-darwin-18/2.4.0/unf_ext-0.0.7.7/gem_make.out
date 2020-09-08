@@ -1,5 +1,5 @@
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/unf_ext-0.0.7.7/ext/unf_ext
-/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200822-79032-pd2ws1.rb extconf.rb
+/Users/user/.rbenv/versions/2.4.1/bin/ruby -r ./siteconf20200907-5727-idpnb4.rb extconf.rb
 checking for -lstdc++... yes
 creating Makefile
 
@@ -35,4 +35,4 @@ linking shared-object unf_ext.bundle
 
 current directory: /Users/user/workspace/rails_projects/frefre/vendor/bundle/ruby/2.4.0/gems/unf_ext-0.0.7.7/ext/unf_ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 unf_ext.bundle ./.gem.20200822-79032-mjadqt
+/usr/bin/install -c -m 0755 unf_ext.bundle ./.gem.20200907-5727-16ee9ak

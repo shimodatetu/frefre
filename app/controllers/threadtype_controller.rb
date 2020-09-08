@@ -1,5 +1,6 @@
 class ThreadtypeController < ApplicationController
   def new
+    @home_page_menu = true
     @thread_types = Threadtype.all
     gon.prohibit = []
     for prohibit in Prohibit.all do
@@ -7,6 +8,7 @@ class ThreadtypeController < ApplicationController
     end
   end
   def show
+
     gon.prohibit = []
     for prohibit in Prohibit.all do
       gon.prohibit.push(prohibit.prohibit_words)

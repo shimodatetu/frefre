@@ -16,7 +16,7 @@ gem 'webpacker', '~> 4.0.0'
 gem 'faraday'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
-gem 'nokogiri'
+gem 'nokogiri',"1.10.10"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'

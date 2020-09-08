@@ -1,8 +1,9 @@
 <% if group != nil %>
   <%= link_to("/thread/show/#{group.id}" , class:"thread_link",style:"margin-bottom:10px;") do %>
     <% there_be = true %>
-    <div class="thread_cover"style="padding-top:0px;border-radius:0px;background:#f5f5f5;margin-bottom:5px;">
+    <div class="thread_cover"style="padding-top:0px;border-radius:0px;background:#f5f5f5;margin-bottom:10px;">
       <div class="group_title_show">
+        <i class="fas fa-comment-dots" aria-hidden="true" style="font-size:18px;margin-right:4px;"></i>
         <div class="text_cover"style="display:inline-block">
           <%= group.title_en %> / <%= group.title_jp %>
         </div>
