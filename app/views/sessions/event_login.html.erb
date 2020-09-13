@@ -23,7 +23,7 @@
           <% flash["failed_en"] = nil %>
           <% flash["failed_jp"] = nil %>
         <% end %>
-        <% if User.find_by(id:17) %>
+        <% if User.find_by(id:17) != nil %>
           <div class="event_login_form">
             <%= form_for :session, url: login2_path do |f| %>
               <%= f.hidden_field :id,value:17%>
@@ -41,7 +41,7 @@
           </div>
         <% end %>
 
-        <% if User.find_by(id:18) %>
+        <% if User.find_by(id:18) != nil %>
           <div class="event_login_form">
             <%= form_for :session, url: login2_path do |f| %>
               <%= f.hidden_field :id,value:18%>
@@ -59,7 +59,7 @@
           </div>
         <% end %>
 
-        <% if User.find_by(id:19) %>
+        <% if User.find_by(id:19) != nil %>
           <div class="event_login_form">
             <%= form_for :session, url: login2_path do |f| %>
               <%= f.hidden_field :id,value:19%>
