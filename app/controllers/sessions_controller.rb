@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
       flash["alert_en"] = "You successed to login"
       flash["alert_jp"] = "ログインに成功しました。"
       flash["alert_type"] = "success"
-      redirect_to "/thread/show/11", success: 'ログインに成功しました'
+      redirect_to "/", success: 'ログインに成功しました'
     else
       flash[:failed_en] = "Mail address or password is wrong."
       flash[:failed_jp] = "メールアドレスかパスワードが間違っています。"
