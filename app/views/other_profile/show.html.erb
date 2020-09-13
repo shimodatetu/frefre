@@ -5,18 +5,8 @@
 <% other_user_id = other_user.id %>
 <div class="other_profile profile">
   <div class="profile_main">
-    <div class="lang_bar_cover" data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
-      <div class="lang_bar">
-        <div class="country_flag en_country">
-          <%= image_tag "/eng.png", class: "image" %>
-        </div>
-        <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-            data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
-        <div class="country_flag jp_country">
-          <%= image_tag "jap.png", class: "image" %>
-        </div>
-      </div>
-    </div>
+
+    <%= render partial: "/layouts/lang_bar" %>
     <div class="profile_page row">
       <%= render partial:"/profile/explain_table",locals: { user:other_user,change_button:false}  %>
       <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">

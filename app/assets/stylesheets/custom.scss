@@ -774,6 +774,9 @@ body{
 }
 
 @media screen and (max-width: 570px){
+  .join_button_type.disappear_thin{
+    display:none;
+  }
   .login_page_cover{
     padding-left: 0px !important;
     margin-right: 0px!important;

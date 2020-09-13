@@ -12,19 +12,8 @@
       </a>
     </li>
   </ul>
-  <div class="lang_bar_cover" id="lang_bar_cover"data-toggle="tooltip" data-placement="bottom" data-original-title="説明">
-    <span class="glyphicon glyphicon-chevron-up up_slider" aria-hidden="true"></span>
-    <div class="lang_bar">
-      <div class="country_flag en_country">
-        Hide English
-      </div>
-      <input id="slider" data-slider-id='ex1Slider' type="text" data-slider-min="0"
-          data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
-      <div class="country_flag jp_country">
-        日本語非表示
-      </div>
-    </div>
-  </div>
+
+  <%= render partial: "/layouts/lang_bar" %>
   <%= form_tag('/threadtype/search',method: :post,class: "search_form_top",style:"margin: 10px 5px;") do %>
     <%= text_field_tag :search_text ,@search_text, class: "form-control form_input",placeholder:"Search / 検索" %>
     <%= hidden_field_tag :threadtype_id ,@threadtype.id %>

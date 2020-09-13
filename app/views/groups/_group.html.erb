@@ -7,36 +7,41 @@
         <div class="text_cover"style="display:inline-block">
           <%= group.title_en %> / <%= group.title_jp %>
         </div>
-        <div class="dropdown">
-          <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <span class="caret"></span>
+
+        <% if 1 == 2 %>
+          <div class="dropdown">
+            <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span class="caret"></span>
+            </div>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <% if params[:id].nil? %>
+                <div class="one_topic report_button_set">
+                  <button class="report_post_button none_button"id="<%= post.id %>"style="width:100%">
+                    <div class="jp">この投稿を通報する。</div>
+                    Report this post.
+                  </button>
+                </div>
+              <% end %>
+            </ul>
           </div>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <% if params[:id].nil? %>
-              <div class="one_topic report_button_set">
-                <button class="report_post_button none_button"id="<%= post.id %>"style="width:100%">
-                  <div class="jp">この投稿を通報する。</div>
-                  Report this post.
-                </button>
-              </div>
-            <% end %>
-          </ul>
-        </div>
+        <% end %>
       </div>
-      <%= render partial: 'posts/post' ,locals: { post:group.posts.first,type:"normal"} %>
+      <%= render partial: 'posts/post' ,locals: { post:group.posts.first,type:"group_post"} %>
     </div>
   <% end %>
 <% end %>
-<div class="group_dropdown dropdown"style="display:none">
-  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <span class="caret"></span>
-  </div>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <div class="one_topic report_button_set">
-      <button class="report_group_button none_button"id="<%= group.id %>"style="width:100%">
-        <div class="jp">トピックを通報する。</div>
-        Report this topic.
-      </button>
+<% if 1 == 2 %>
+  <div class="group_dropdown dropdown"style="display:none">
+    <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <span class="caret"></span>
     </div>
-  </ul>
-</div>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <div class="one_topic report_button_set">
+        <button class="report_group_button none_button"id="<%= group.id %>"style="width:100%">
+          <div class="jp">トピックを通報する。</div>
+          Report this topic.
+        </button>
+      </div>
+    </ul>
+  </div>
+<% end %>

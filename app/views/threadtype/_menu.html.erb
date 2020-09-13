@@ -19,24 +19,26 @@
         </div>
       </div>
     </li>
-    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" ) %>active<% end %>">
+    <% if 1 != 1 %>
+      <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" ) %>active<% end %>">
+        <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/1',class:"nav-link" do %>
+          <i class="fas fa-users"></i>
+          <div class="text_cover">
+            <div class="jp">
+              トップページ
+            </div>
+            <div class="en">
+              Top Page
+            </div>
+          </div>
+          <div class="menu_right_button">
+            <i class="fas fa-plus"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == nil || params[:type] == "1" || (params[:type] == "4" && @threadtype.type == "every" ) || params[:type] == "2" %>active<% end %>">
       <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/1',class:"nav-link" do %>
-        <i class="fas fa-users"></i>
-        <div class="text_cover">
-          <div class="jp">
-            トップページ
-          </div>
-          <div class="en">
-            Top Page
-          </div>
-        </div>
-        <div class="menu_right_button">
-          <i class="fas fa-plus"></i>
-        </div>
-      <% end %>
-    </li>
-    <li class="nav-item profile_contents_button blue-nav <% if params[:type] == "2" %>active<% end %>">
-      <%= link_to '/threadtype/show/'+ @threadtype.id.to_s + '/2',class:"nav-link" do %>
         <%= image_tag "/icon2/popular.png",class:"icon_img" %>
         <div class="text_cover">
           <div class="jp">

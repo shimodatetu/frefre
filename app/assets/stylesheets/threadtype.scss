@@ -166,7 +166,7 @@
     display: inline-block;
   }
   .threadtype_content{
-    width:calc(100% - 80px)!important;
+    width:calc(100% - 90px)!important;
     .title_padding{
       -webkit-line-clamp:none;
     }
@@ -257,8 +257,8 @@
   }
   .threadtype_image{
     .group_img{
-      width:60px!important;
-      height:60px!important;
+      width:80px!important;
+      height:80px!important;
     }
   }
   .post_content_cover{
@@ -267,7 +267,7 @@
   }
   .threadtype_users{
     padding: 0px 5px 0px 0px;
-    margin: 0px 10px 0px 10px;
+    margin: 0px 10px 0px 0px;
     border-radius: 5px;
     .threadtype_user_cover{
       vertical-align: top;
@@ -297,9 +297,10 @@
     .threadtype_img_cover{
       display: inline-block;
       .threadtype_img{
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
+        object-fit: cover;
       }
       .user_others_dots{
         vertical-align: middle;

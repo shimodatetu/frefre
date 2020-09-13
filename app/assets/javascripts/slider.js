@@ -6,6 +6,62 @@ $(function(){
   if(localStorage.getItem("frefre_slider") != null){
     first_value = localStorage.getItem("frefre_slider")
   }
+
+  if( (frefre_button = localStorage.getItem("frefre_button") ) == null && window.innerWidth <= 750 ){
+    en_button()
+  }
+  else if((frefre_button = localStorage.getItem("frefre_button") ) == null || frefre_button == "jp_button"){
+    jp_button()
+  }
+  else if(frefre_button == "enjp_button"){
+    enjp_button()
+  }
+  else if(frefre_button == "en_button"){
+    en_button()
+  }
+
+  $(".lang_change .jp_button").on("click",function(){
+    localStorage.setItem("frefre_button","jp_button");
+    jp_button()
+  })
+  $(".lang_change .enjp_button").on("click",function(){
+    localStorage.setItem("frefre_button","enjp_button");
+    enjp_button()
+  })
+  $(".lang_change .en_button").on("click",function(){
+    localStorage.setItem("frefre_button","en_button");
+    en_button()
+  })
+
+  function jp_button(){
+    $(".en_position").attr("style","display:none;");
+    $(".jp_position").attr("style","width:calc(100%)");
+    $(".post_content_position_space").attr("style","display:none;");
+    $(".en_button").attr("id","");
+    $(".enjp_button").attr("id","");
+    $(".jp_button").attr("id","active");
+    $(".float_button .jp_button").attr("style","display:none");
+    $(".float_button .en_button").attr("style","display:block");
+  }
+  function enjp_button(){
+    $(".en_position").attr("style","width:calc(50% - 12px)");
+    $(".jp_position").attr("style","width:calc(50% - 12px)");
+    $(".post_content_position_space").attr("style","");
+    $(".en_button").attr("id","");
+    $(".enjp_button").attr("id","active");
+    $(".jp_button").attr("id","");
+  }
+  function en_button(){
+    $(".jp_position").attr("style","display:none;");
+    $(".en_position").attr("style","width:calc(100%)");
+    $(".post_content_position_space").attr("style","display:none;");
+    $(".en_button").attr("id","active");
+    $(".enjp_button").attr("id","");
+    $(".jp_button").attr("id","");
+    $(".float_button .en_button").attr("style","display:none");
+    $(".float_button .jp_button").attr("style","display:block");
+  }
+
   $(".lang_bar_cover .en_country").on("click",function(){
     $('.min-slider-handle').animate({"left": "0%"}, {duration: 200,queue: false}, 'linear');
     $('.slider-selection').animate({"width": "0%"}, {duration: 200,queue: false}, 'linear');

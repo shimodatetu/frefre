@@ -88,26 +88,28 @@
     </div>
   </div>
 <% end %>
-<div class="threadtype_dropdown dropdown"<% if threadtype.type == "every" %>style="margin-top: -70px;"<% end %>>
-  <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <span class="caret"></span>
-  </div>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <div class="one_topic report_button_set">
-      <button class="report_threadtype_button none_button"id="<%= threadtype.id %>"style="width:100%">
-        <div class="jp">コミュニティを通報する。</div>
-        Report this community.
-      </button>
+<% if 1 == 2 %>
+  <div class="threadtype_dropdown dropdown"<% if threadtype.type == "every" %>style="margin-top: -70px;"<% end %>>
+    <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <span class="caret"></span>
     </div>
-  </ul>
-</div>
-<div class="join_button_type">
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <div class="one_topic report_button_set">
+        <button class="report_threadtype_button none_button"id="<%= threadtype.id %>"style="width:100%">
+          <div class="jp">コミュニティを通報する。</div>
+          Report this community.
+        </button>
+      </div>
+    </ul>
+  </div>
+<% end %>
+<div class="join_button_type disappear_thin">
   <% if !logged_in? %>
     <div class="join_button_cover">
-      <%= link_to("/login_page",class:"login_join_button btn mes_button join_button login_button") do %>
+      <%= link_to("/threadtype/show/"+threadtype.id.to_s,class:"login_join_button btn mes_button join_button login_button") do %>
         <div class="text_box">
           <div class="jp">
-            Login / ログインする
+            Show / 閲覧する
           </div>
         </div>
       <% end %>

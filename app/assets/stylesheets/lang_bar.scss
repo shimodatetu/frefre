@@ -6,6 +6,67 @@
   margin-top:45px;
   z-index:10;
 }
+.float_button{
+  position: fixed;
+  z-index: 20;
+  bottom: 30px;
+  right: 30px;
+  .en_button{
+    display:none;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+  }
+  .en_button_in{
+    width: 60px;
+    height: 60px;
+    font-size: 15px;
+    border-radius: 50%;
+    border: none;
+    background: #27689f;
+    color: #fff;
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    font-weight:bold;
+    outline:0;
+    padding-top: 19px;
+  }
+  .en_button_in:hover{
+    background: #4788bf;
+  }
+  .jp_button{
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+  }
+  .jp_button_in:hover{
+    background: #70d2e5;
+  }
+  .jp_button_in{
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 50%;
+    border: none;
+    background: #50b2c5;
+    color: #fff;
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    font-weight:bold;
+    outline:0;
+    padding-top: 14px;
+  }
+}
 .lang_bar_cover{
   top:0px;
   z-index: 20;
@@ -16,6 +77,22 @@
   padding-top: 38px;
   margin-top: 5px;
   border-bottom: none;
+  .country_button{
+    border: none;
+    background: #fff;
+    color: #00b1c4!important;
+    border: solid 2px #00b1c4;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left:calc(25% - 90px)
+  }
+  .country_button#active{
+    background: #00b1c4;
+    color: #fff!important;
+    border: solid 2px #00b1c4!important;
+    outline:0;
+  }
   .up_slider{
     float: left;
     margin-left: calc(-5% + 7px);
