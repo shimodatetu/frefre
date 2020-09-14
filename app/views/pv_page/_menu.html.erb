@@ -5,20 +5,23 @@
 <% end %>
 <div class="help_button">
   <ul class="nav flex-column">
-    <li class="nav-item profile_contents_button blue-nav">
-      <div class="menu_title">
-        <div class="text_cover">
-          <div class="jp">
-            使い方説明
-          </div>
-          <div class="en">
-            How To Use
-          </div>
-        </div>
-      </div>
-    </li>
+
     <%= link_to "/help" do %>
+      <li class="nav-item profile_contents_button blue-nav">
+        <div class="menu_title">
+          <div class="text_cover">
+            <div class="jp">
+              使い方説明
+            </div>
+            <div class="en">
+              How To Use
+            </div>
+          </div>
+          <i class="glyphicon glyphicon-chevron-right help_jump"></i>
+        </div>
+      </li>
       <%= image_tag "/help_button.png" %>
+
     <% end %>
   </ul>
 </div>

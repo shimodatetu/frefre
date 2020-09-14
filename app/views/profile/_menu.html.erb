@@ -18,7 +18,7 @@
         </div>
       </div>
     </li>
-    <li class="nav-item profile_contents_button <% if params[:id] == nil || params[:id] == "1"%>active<% end %>">
+    <li class="nav-item profile_contents_button <% if params[:id] == nil || params[:id] == "1" || params[:id] == "2" %>active<% end %>">
       <%= link_to '/profile/1',class:"nav-link" do %>
         <i class="fas fa-address-card"></i>
         <div class="text_cover">
@@ -34,8 +34,8 @@
         </div>
       <% end %>
     </li>
-    <li class="nav-item profile_contents_button <% if params[:id] == "2" %>active<% end %>">
-      <%= link_to '/profile/2',class:"nav-link" do %>
+    <li class="nav-item profile_contents_button <% if params[:id] == "3" %>active<% end %>">
+      <%= link_to '/profile/3',class:"nav-link" do %>
         <i class="fas fa-comments"></i>
         <div class="text_cover">
           <div class="jp">
@@ -50,8 +50,8 @@
         </div>
       <% end %>
     </li>
-    <li class="nav-item profile_contents_button <% if params[:id] == "3"%>active<% end %>">
-      <%= link_to '/profile/3',class:"nav-link" do %>
+    <li class="nav-item profile_contents_button <% if params[:id] == "4"%>active<% end %>">
+      <%= link_to '/profile/4',class:"nav-link" do %>
         <i class="fas fa-comment-dots"></i>
         <div class="text_cover">
           <div class="jp">

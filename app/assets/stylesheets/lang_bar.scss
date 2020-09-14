@@ -70,12 +70,17 @@
 .lang_bar_cover{
   top:0px;
   z-index: 20;
-  //background: #f2fff8;
   background: #f2fff8;
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
   border-bottom: none;
+  .narrow_screen{
+    display:none;
+  }
+  .wide_screen{
+    display: block;
+  }
   .country_button{
     border: none;
     background: #fff;

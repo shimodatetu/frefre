@@ -312,8 +312,10 @@ p{
     img{
       width:300px;
     }
-    .menu_title{
-      background: #66bfbf!important;
+    .help_jump{
+      float: right;
+      margin-top: -32px;
+      font-size: 30px;
     }
   }
 
@@ -565,6 +567,7 @@ body{
   body{
     min-width: 100%!important;
   }
+
   .profile_main{
     width: 100%!important;
   }
@@ -748,7 +751,12 @@ body{
       }
     }
   }
+  .profile_main .profile_change_link{
+    width: calc(100% - 20px)!important;
+    margin: 10px!important;
+  }
   .profile{
+
     .lang_bar_cover{
       .jp_country{
         margin-left: 10px!important;
@@ -783,6 +791,20 @@ body{
 }
 
 @media screen and (max-width: 570px){
+  .header_search .search_form_top #search_text{
+    width: calc(100vw - 300px);
+  }
+  .lang_bar_cover{
+    .narrow_screen{
+      display:block!important;
+    }
+    .wide_screen{
+      display: none!important;
+    }
+    .country_button{
+      margin-left: calc(25% - 60px)!important;
+    }
+  }
   .join_button_type.disappear_thin{
     display:none;
   }
@@ -852,7 +874,7 @@ body{
     }
   }
   .thread_cover{
-    padding:5px!important;
+    padding:2px!important;
     .group_user_cover{
       margin:0px!important;
       img{
