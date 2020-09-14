@@ -72,10 +72,9 @@
   z-index: 20;
   //background: #f2fff8;
   background: #f2fff8;
-  position: fixed;
   width: 100%;
-  padding-top: 38px;
-  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-bottom: none;
   .country_button{
     border: none;
@@ -100,9 +99,9 @@
     //color: #408bc9;
   }
   .lang_bar{
-    margin-left: calc(35vw - 256px);
     padding-top: 6px;
     padding-bottom: 2px;
+    font-size:14px;
     .slider{
       margin-top: -10px;
       width:calc(30vw + 50px);
