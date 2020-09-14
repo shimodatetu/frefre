@@ -1,71 +1,69 @@
 
-<form>
-  <div class="profile_title">
-    <div class="title"style="display:none">
-      <div class="jp">
-        プロフィール
-      </div>
-      My Profile
-      <div class="save_button
-      <% if current_user.usertype == "event" %>
-        profile_cannot_save
-      <% else %>
-        profile_save_button
-      <% end %>
-        btn btn-default">
-        Save / 保存
-      </div>
+<div class="profile_title">
+  <div class="title"style="display:none">
+    <div class="jp">
+      プロフィール
+    </div>
+    My Profile
+    <div class="save_button
+    <% if current_user.usertype == "event" %>
+      profile_cannot_save
+    <% else %>
+      profile_save_button
+    <% end %>
+      btn btn-default">
+      Save / 保存
     </div>
   </div>
-  <div class="profile_page row">
-    <%= button_tag data: {toggle: "modal",target: "#profile_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"margin-bottom:0px" do %>
-      <div class="text_box">
-        <div class="jp">
-          Edit Profile / プロフィールを変更する
-        </div>
+</div>
+<div class="profile_page row">
+  <%= button_tag data: {toggle: "modal",target: "#profile_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"margin-bottom:0px" do %>
+    <div class="text_box">
+      <div class="jp">
+        Edit Profile / プロフィールを変更する
       </div>
-    <% end %>
-    <%= render partial:"/profile/explain_table",locals: { user:current_user,change_button:true}  %>
-    <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
-      <% if params[:id] == nil || params[:id] == "1" || params[:id] == "2"%>
-        <li class="nav-item active width_max">
-          <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
-            <i class="fas fa-users"></i>
-            <div class="text_cover">
-              Join Community / 参加したコミュニティ
-            </div>
-          </a>
-        </li>
-      <% elsif params[:id] == "3" %>
-        <li class="nav-item active width_max">
-          <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#thread" role="tab" aria-controls="thread" aria-selected="false">
-            <i class="fas fa-comments"></i>
-            <div class="text_cover">
-              Past Topic / 過去のトピック
-            </div>
-          </a>
-        </li>
-      <% elsif params[:id] == "4" %>
-        <li class="nav-item active width_max">
-          <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">
-            <i class="fas fa-comment-dots"></i>
-            <div class="text_cover">
-              Past Post / 過去の投稿
-            </div>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-    <%= render partial: "/layouts/lang_bar" %>
+    </div>
+  <% end %>
+  <%= render partial:"/profile/explain_table",locals: { user:current_user,change_button:true}  %>
+  <ul class="nav nav-tabs nav-top" id="myTab" role="tablist">
     <% if params[:id] == nil || params[:id] == "1" || params[:id] == "2"%>
-      <%= render partial:"/profile/joined_community"%>
+      <li class="nav-item active width_max">
+        <a class="nav-link profile_history_change3" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="false">
+          <i class="fas fa-users"></i>
+          <div class="text_cover">
+            Join Community / 参加したコミュニティ
+          </div>
+        </a>
+      </li>
     <% elsif params[:id] == "3" %>
-      <%= render partial:"/profile/past_topic"%>
+      <li class="nav-item active width_max">
+        <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#thread" role="tab" aria-controls="thread" aria-selected="false">
+          <i class="fas fa-comments"></i>
+          <div class="text_cover">
+            Past Topic / 過去のトピック
+          </div>
+        </a>
+      </li>
     <% elsif params[:id] == "4" %>
-      <%= render partial:"/profile/past_posts"%>
+      <li class="nav-item active width_max">
+        <a class="nav-link profile_history_change4" id="latest-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">
+          <i class="fas fa-comment-dots"></i>
+          <div class="text_cover">
+            Past Post / 過去の投稿
+          </div>
+        </a>
+      </li>
     <% end %>
-  </div>
-</form>
+  </ul>
+  <%= render partial: "/layouts/lang_bar" %>
+  <% if params[:id] == nil || params[:id] == "1" || params[:id] == "2"%>
+    <%= render partial:"/profile/joined_community"%>
+  <% elsif params[:id] == "3" %>
+    <%= render partial:"/profile/past_topic"%>
+  <% elsif params[:id] == "4" %>
+    <%= render partial:"/profile/past_posts"%>
+  <% end %>
+</div>
 
 <div class="thread_post_cover">
   <div class="modal fade help_modal" id="help_slide" tabindex="-1" style="z-index:9999">

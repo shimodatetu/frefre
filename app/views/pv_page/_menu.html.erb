@@ -3,6 +3,25 @@
 <% if logged_in? %>
   <% current_user_id = current_user.id %>
 <% end %>
+<div class="help_button">
+  <ul class="nav flex-column">
+    <li class="nav-item profile_contents_button blue-nav">
+      <div class="menu_title">
+        <div class="text_cover">
+          <div class="jp">
+            使い方説明
+          </div>
+          <div class="en">
+            How To Use
+          </div>
+        </div>
+      </div>
+    </li>
+    <%= link_to "/help" do %>
+      <%= image_tag "/help_button.png" %>
+    <% end %>
+  </ul>
+</div>
 <div class="profile_menu_tab">
   <div class="get_user_id"id="<%= current_user_id %>"></div>
   <ul class="nav flex-column">

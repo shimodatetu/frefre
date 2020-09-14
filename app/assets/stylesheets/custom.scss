@@ -216,7 +216,7 @@ p{
   vertical-align: top;
   margin-top:80px;
   margin-bottom: 20px;
-  .profile_menu_tab{
+  .profile_menu_tab,.help_button{
     .nav{
       border-radius:5px;
       border:solid thin #ccc;
@@ -244,7 +244,7 @@ p{
         }
         .menu_title{
           padding: 5px 15px;
-          background: #07689f !important;
+          background: #07689f;
           color: #fff !important;
           .jp{
             font-size:11px;
@@ -308,6 +308,15 @@ p{
       }
     }
   }
+  .help_button{
+    img{
+      width:300px;
+    }
+    .menu_title{
+      background: #66bfbf!important;
+    }
+  }
+
   .mirai_img{
     margin-top:20px;
     margin-left:50px;

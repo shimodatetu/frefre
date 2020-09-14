@@ -1,6 +1,5 @@
 
 <% if logged_in? %>
-
   <% if params[:id].to_i >= 14 && params[:id].to_i <= 22 && @threadtype != nil%>
     <%= render partial:"profile/threadtype_manage/top" %>
   <% elsif params[:id].to_i >= 23 && params[:id].to_i <= 25%>
