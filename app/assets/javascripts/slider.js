@@ -10,11 +10,11 @@ $(function(){
   if( (frefre_button = localStorage.getItem("frefre_button") ) == null && window.innerWidth <= 750 ){
     en_button()
   }
-  else if((frefre_button = localStorage.getItem("frefre_button") ) == null || frefre_button == "jp_button"){
-    jp_button()
-  }
-  else if(frefre_button == "enjp_button"){
+  else if((frefre_button = localStorage.getItem("frefre_button") ) == null || frefre_button == "enjp_button"){
     enjp_button()
+  }
+  else if(frefre_button == "jp_button"){
+    jp_button()
   }
   else if(frefre_button == "en_button"){
     en_button()
