@@ -83,6 +83,50 @@
             <% end %>
           </div>
         </div>
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                メールアドレス
+              </div>
+              <div class="en">
+                Main Address：
+              </div>
+            </div>
+            <div class="profile_content_cover">
+              <%= current_user.email %>
+            </div>
+            <%= button_tag data: {toggle: "modal",target: "#email_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"width:auto;margin:0px 0px 0px 20px;" do %>
+              <div class="text_box">
+                <div class="jp">
+                  Edit / 編集
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-sm-12 profile_content">
+          <div class="row profile_content_data">
+            <div class="content_name">
+              <div class="jp">
+                パスワード
+              </div>
+              <div class="en">
+                Password：
+              </div>
+            </div>
+            <div class="profile_content_cover">
+              ***************
+            </div>
+            <%= button_tag data: {toggle: "modal",target: "#password_change_modal"},type:"button", class:"login_join_button btn mes_button profile_change_link",style:"width:auto;margin:0px 0px 0px 20px;" do %>
+              <div class="text_box">
+                <div class="jp">
+                  Edit / 編集
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

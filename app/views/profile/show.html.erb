@@ -116,7 +116,7 @@
         </div>
       </div>
       <div class="profile_main">
-        <% if params[:id].nil? || params[:id] == "1" || params[:id] == "2" || params[:id] == "3" || params[:id] == "4" %>
+        <% if params[:id].nil? || params[:id].to_i >= 1 && params[:id].to_i <= 13 || params[:id] == "25" %>
           <%= render partial:"profile_page" %>
         <% elsif params[:id] == "5" %>
           <%= render partial:"chat" %>

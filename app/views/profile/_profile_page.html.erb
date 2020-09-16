@@ -55,13 +55,31 @@
       </li>
     <% end %>
   </ul>
-  <%= render partial: "/layouts/lang_bar" %>
+  <% if params[:id] == "3" || params[:id] == "4" %>
+    <%= render partial: "/layouts/lang_bar" %>
+  <% end %>
   <% if params[:id] == nil || params[:id] == "1" || params[:id] == "2"%>
     <%= render partial:"/profile/joined_community"%>
   <% elsif params[:id] == "3" %>
     <%= render partial:"/profile/past_topic"%>
   <% elsif params[:id] == "4" %>
     <%= render partial:"/profile/past_posts"%>
+  <% elsif params[:id] == "5" %>
+    <%= render partial:"chat" %>
+  <% elsif params[:id] == "6" %>
+    <%= render partial:"detail_chat" %>
+  <% elsif params[:id] == "7" %>
+    <%= render partial:"notice" %>
+  <% elsif params[:id] == "8" %>
+    <%= render partial:"detail_notice" %>
+  <% elsif params[:id] == "9" || params[:id] == "10" || params[:id] == "11" %>
+    <%= render partial:"follow" %>
+  <% elsif params[:id] == "12" %>
+    <%= render partial:"editprofile" %>
+  <% elsif params[:id] == "13" %>
+    <%= render partial:"threadtype_list" %>
+  <% elsif params[:id] == "25" %>
+    <%= render partial:"retire" %>
   <% end %>
 </div>
 
