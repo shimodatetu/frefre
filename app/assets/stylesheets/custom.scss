@@ -567,8 +567,8 @@ body{
     margin-left: calc(50% - 70px);
   }
   .event_login_button{
-    margin-left: calc(50% - 140px);
-    display: block;
+    margin-left: calc(50% - 140px)!important;
+    display: block!important;
     margin-top:20px;
   }
   body{
