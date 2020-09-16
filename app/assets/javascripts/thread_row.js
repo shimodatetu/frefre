@@ -6,7 +6,7 @@ $(function(){
     left_value = localStorage.getItem("frefre_slider")
   }
   var right_value = 100 - left_value
-  $('.thread_page .thread_cover').each(function(i, elem){
+  /*$('.thread_page .thread_cover').each(function(i, elem){
     var jp_height = $(elem).find(".jp_content_row .post_content_text").height();
     var en_height = $(elem).find(".en_content_row .post_content_text").height();
     if(jp_height == 0){jp_height = 999;}
@@ -26,8 +26,9 @@ $(function(){
     row += row * (50 - Math.min(left_value,right_value)) / 50 + 1
     $(elem).find(".jp_content_row .post_content_text").attr("style","-webkit-line-clamp:"+Math.ceil(row));
     $(elem).find(".en_content_row .post_content_text").attr("style","-webkit-line-clamp:"+Math.ceil(row));
-
   });
+  */
+
   $('.pvpage_all .thread_cover,.threadtype_threads .thread_cover').each(function(i, elem){
     var jp_height = $(elem).find(".jp_position .post_content_text").height();
     var en_height = $(elem).find(".jp_position .post_content_text").height();
