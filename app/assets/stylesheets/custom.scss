@@ -564,7 +564,7 @@ body{
 
 @media screen and (max-width: 750px){
   .event_img{
-    margin-left: calc(50% - 70px);
+    margin-left: calc(50% - 70px)!important;
   }
   .event_login_button{
     margin-left: calc(50% - 140px)!important;
