@@ -1,0 +1,47 @@
+<% if group != nil %>
+  <%= link_to("/thread/show/#{group.id}" , class:"thread_link",style:"margin-bottom:10px;") do %>
+    <% there_be = true %>
+    <div class="thread_cover"style="padding-top:0px;border-radius:0px;margin-bottom:10px;">
+      <div class="group_title_show"style="background:#f5f5f5;">
+        <i class="fas fa-comment-dots" aria-hidden="true" style="font-size:18px;margin-right:4px;"></i>
+        <div class="text_cover"style="display:inline-block">
+          <%= group.title_en %> / <%= group.title_jp %>
+        </div>
+
+        <% if 1 == 2 %>
+          <div class="dropdown">
+            <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span class="caret"></span>
+            </div>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <% if params[:id].nil? %>
+                <div class="one_topic report_button_set">
+                  <button class="report_post_button none_button"id="<%= post.id %>"style="width:100%">
+                    <div class="jp">この投稿を通報する。</div>
+                    Report this post.
+                  </button>
+                </div>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+      <%= render partial: 'posts/post' ,locals: { post:group.posts.first,type:"group_post"} %>
+    </div>
+  <% end %>
+<% end %>
+<% if 1 == 2 %>
+  <div class="group_dropdown dropdown"style="display:none">
+    <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <span class="caret"></span>
+    </div>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <div class="one_topic report_button_set">
+        <button class="report_group_button none_button"id="<%= group.id %>"style="width:100%">
+          <div class="jp">トピックを通報する。</div>
+          Report this topic.
+        </button>
+      </div>
+    </ul>
+  </div>
+<% end %>

@@ -653,7 +653,8 @@ body{
     }
   }
   .main_content_cover{
-    width: calc(100% - 40px)!important;
+    width: calc(100vw - 30px) !important;
+    margin-right: 0px!important;
   }
   .sub_content_cover{
     width: 100%;
@@ -662,6 +663,9 @@ body{
     margin-top: 0px;
     padding-top:0px;
     position: static;
+    .help_button img{
+      width: 100%;
+    }
     .mirai_img{
       margin-top:20px;
       margin-left: calc(50% - 150px);

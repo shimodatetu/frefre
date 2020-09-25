@@ -7,7 +7,7 @@ App.threadtype = App.cable.subscriptions.create "ThreadtypeChannel",
 
   received: (data) ->
     $(".join_button_submit , .unjoin_button_submit").attr("style","none;")
-    alert_set("You successed to join this community.","コミュニティの参加にに成功しました。","success")
+    alert_modal("You successed to join this community.","コミュニティの参加に成功しました。","success")
     button_change(String(data["joiner_id"]))
     location.reloaded()
 

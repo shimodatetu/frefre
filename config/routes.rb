@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   #devise_for :users
   #devise_for :users
+  get 'help' => 'help#show'
+
   get 'threadtype/show'
   get 'threadtype/show/:id' => 'threadtype#show'
   get 'threadtype/show/:id/:type' => 'threadtype#show'

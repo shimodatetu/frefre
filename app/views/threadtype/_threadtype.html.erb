@@ -83,6 +83,16 @@
               </div>
             </div>
           </div>
+        <% else %>
+          <div class="join_button_cover"style="margin-left: 15px;">
+            <%= button_tag type:"button",class:"login_join_button btn mes_button join_button all_join_button" do %>
+              <div class="text_box">
+                <div class="jp">
+                  会員全員参加 / Compulsory
+                </div>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

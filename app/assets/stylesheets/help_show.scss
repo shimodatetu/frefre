@@ -1,0 +1,27 @@
+.help_design{
+  .text_cover{
+    display: inline-block;
+    font-weight:bold;
+  }
+  .normal_button {
+    margin: 5px 0px;
+    .glyphicon-arrow-down{
+      display: inline-block;
+      vertical-align: revert;
+      font-size: 25px;
+    }
+  }
+  .nav-item:not(:first-of-type){
+    margin-top:50px;
+  }
+  .auto{
+    .d-block{
+      width:100%;
+      margin:5px 0px;
+    }
+    .glyphicon-arrow-down{
+      font-size: 30px;
+      margin-left: calc(50% - 10px);
+    }
+  }
+}

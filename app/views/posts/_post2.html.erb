@@ -1,0 +1,99 @@
+<% if post != nil %>
+  <% if (group = post.group) != nil %>
+    <% first_id = group.posts.first.id%>
+    <% id = params[:id] %>
+    <% current_user_id = -1 %>
+
+    <% if current_user != nil %>
+      <% current_user_id = current_user.id %>
+    <% end %>
+
+    <% if post.deleted %>
+      <div class="thread_cover deleted_coment"style="padding:5px;">
+        この投稿は削除されました。<br>
+        <div class="en">
+          This comment is deleted.
+        </div>
+      </div>
+    <% elsif post.visible == true %>
+      <div class="thread_cover without_border"id="<%= post.id %>"<% if type == "normal" || type == "group_post"%> <% end %>>
+        <div class="thread_content"style="<% if type == "in_group" %>width:100%;<% end %>width: calc(100% - 10px);">
+          <div class="post_content_cover">
+            <% if post.content_eng != nil && post.content_jap != nil && post.content_eng != "" && post.content_jap != ""%>
+              <div class="balloon2"style="border-radius:5px;border:solid thin #ccc;padding:5px;">
+                <div class="post_content_position en_position">
+                  <% if type == "first" %>
+                    <div class="thread_title">
+                      <div class="title_padding no_inline">
+                        <%= simple_format(text_url_to_link(h(post.group.title_en))) %>
+                      </div>
+                    </div>
+                  <% else %>
+                    <div class="title_space"></div>
+                  <% end %>
+                  <div class="post_content en_content_row">
+                    <div class="post_content_text"<% if type == "group_post" %> id="group_post" <% end %>>
+                      <%= simple_format(Rinku.auto_link(h(post.content_eng))) %>
+                    </div>
+                  </div>
+                </div>
+                <div class="post_content_position_space">
+                  <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+                </div>
+                <div class="post_content_position jp_position">
+                  <% if type == "first" %>
+                    <div class="thread_title">
+                      <div class="title_padding no_inline">
+                        <%= simple_format(text_url_to_link(h(post.group.title_jp))) %>
+                      </div>
+                    </div>
+                  <% else %>
+                    <div class="title_space"></div>
+                  <% end %>
+                  <div class="post_content jp_content_row">
+                    <div class="post_content_text"<% if type == "group_post" %> id="group_post" <% end %>>
+                      <%= simple_format(Rinku.auto_link(h(post.content_jap))) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% if type != "in_group" %>
+              <% if post.pict.attached?%>
+                <div class="post_image_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
+                  <%= image_tag post.pict , :class => "group_img"+post.id.to_s%>
+                </div>
+              <% elsif post.video.attached? %>
+                <div class="post_video_cover zoom_modal_open"data-toggle="modal" data-target="#zoom_modal">
+                  <video id='my-video' class='video-js' controls preload='auto' width='1108' height='600'
+                    poster='<%= url_for(post.video) %>' data-setup='{}'>
+                    <source src='<%= url_for(post.video) %>' type='video/mp4'>
+                  </video>
+                  <% if post.subtitle_en != nil && post.subtitle_jp != nil && post.subtitle_en != "" && post.subtitle_jp != "" %>
+                   <div class="post_content_position post_subtitle_position en_position jimaku_post">
+                     <div class="post_content en_content_row">
+                       <div class="post_content_text">
+                         <%= simple_format(Rinku.auto_link(h(post.subtitle_en))) %>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="post_content_position_space">
+                     <span class="slider_icon glyphicon glyphicon-resize-horizontal"></span>
+                   </div>
+                   <div class="post_content_position post_subtitle_position jp_position jimaku_post">
+                     <div class="post_content jp_content_row">
+                       <div class="post_content_text">
+                         <%= simple_format(Rinku.auto_link(h(post.subtitle_jp))) %>
+                       </div>
+                     </div>
+                   </div>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

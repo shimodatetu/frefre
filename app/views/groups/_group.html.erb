@@ -1,10 +1,53 @@
+<style>
+  .group_img2{
+    width:30px;
+    height:30px;
+    object-fit: cover;
+    border-radius: 50%;
+    border-bottom: none !important;
+  }
+</style>
 <% if group != nil %>
   <%= link_to("/thread/show/#{group.id}" , class:"thread_link",style:"margin-bottom:10px;") do %>
     <% there_be = true %>
     <div class="thread_cover"style="padding-top:0px;border-radius:0px;margin-bottom:10px;">
       <div class="group_title_show"style="background:#f5f5f5;">
-        <i class="fas fa-comment-dots" aria-hidden="true" style="font-size:18px;margin-right:4px;"></i>
-        <div class="text_cover"style="display:inline-block">
+        <% if (post = group.posts.first) != nil%>
+          <div class="group_user_cover"style="font-weight:bold">
+            <div class="group_img_cover">
+              <% url = "/profile" %>
+              <% if logged_in? && current_user_id != post.user.id %>
+                <% url = "/other_profile/#{post.user.id}" %>
+              <% end %>
+              <% if post.user.id == 0 %>
+                <%= image_tag("frefre_icon2.png", :class => "group_img2") %>
+              <% else %>
+                <object>
+                  <%= link_to url do %>
+                    <% if post.user.image == 0 %>
+                      <% if post.user.avater.attached? %>
+                        <%= image_tag post.user.avater , :class => "group_img2"%>
+                      <% else %>
+                        <% if post.user.photo.nil? %>
+                          <%= image_tag("/userimage/user1.png", :class => "group_img2") %>
+                        <% else %>
+                          <%= image_tag show_image_user_path(post.user), :class => "group_img2" %>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <%= image_tag("/userimage/user#{post.user.image}.png", :class => "group_img2") %>
+                    <% end %>
+                  <% end %>
+                </object>
+              <% end %>
+            </div>
+          </div>
+          <div class="username"style="font-weight:bold;display:inline-block">
+            <%= post.user.name %>
+          </div>
+        <% end %>
+        <i class="fas fa-comment-dots" aria-hidden="true" style="font-size:18px;margin-left:14px;vertical-align: middle;margin-top:0px"></i>
+        <div class="text_cover"style="display:inline-block;width: calc(100% - 120px);">
           <%= group.title_en %> / <%= group.title_jp %>
         </div>
 
@@ -26,7 +69,7 @@
           </div>
         <% end %>
       </div>
-      <%= render partial: 'posts/post' ,locals: { post:group.posts.first,type:"group_post"} %>
+      <%= render partial: 'posts/post2' ,locals: { post:group.posts.first,type:"group_post"} %>
     </div>
   <% end %>
 <% end %>
