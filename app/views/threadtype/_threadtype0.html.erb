@@ -1,35 +1,27 @@
-<style>
-  .title_two_line{
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-</style>
 <% leader = User.find_by(id:threadtype.leader_id) %>
 
-<%= link_to("/threadtype/show/"+threadtype.id.to_s,class:"thread_link",style:"display: inline-block;margin: 10px;") do %>
+<%= link_to("/threadtype/show/"+threadtype.id.to_s,class:"thread_link") do %>
   <% there_be = true %>
-  <div class="thread_cover threadtype_cover"style="border-radius: 5px;">
-    <div class="group_user_cover threadtype_image"style="display: block;">
+  <div class="thread_cover threadtype_cover">
+    <div class="group_user_cover threadtype_image">
       <div class="group_img_cover">
         <% if threadtype.pict.attached? %>
-          <%= image_tag threadtype.pict , :class => "group_img",:style => "border-radius:0px;width: 210px!important;height: 120px!important;"%>
+          <%= image_tag threadtype.pict , :class => "group_img",:style => "border-radius:0px"%>
         <% else %>
-          <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px;width: 210px!important;height: 120px!important;") %>
+          <%= image_tag("group_icon/flag1.png", :class => "group_img",:style => "border-radius:0px") %>
         <% end %>
       </div>
     </div>
-    <div class="thread_content threadtype_content"style="width: calc(100% - 10px) !important;">
+    <div class="thread_content threadtype_content">
       <div class="post_content_cover">
         <div class="post_content_position width_max">
           <div class="thread_title">
-            <div class="title_padding no_inline"style="width: 200px;">
-              <div style="title_two_line">
+            <div class="title_padding no_inline">
+              <div>
                 <% if threadtype.type == "every" %><%= "「公式」" %><% end %>
                 <%= threadtype.type_jp %>
               </div>
-              <div style="title_two_line">
+              <div>
                 <% if threadtype.type == "every" %><%= "「Official」" %><% end %>
                 <%= threadtype.type_en %>
               </div>
@@ -96,7 +88,7 @@
             <%= button_tag type:"button",class:"login_join_button btn mes_button join_button all_join_button" do %>
               <div class="text_box">
                 <div class="jp">
-                  会員参加 / Compulsory
+                  会員全員参加 / Compulsory
                 </div>
               </div>
             <% end %>
@@ -121,3 +113,68 @@
     </ul>
   </div>
 <% end %>
+<div class="join_button_type disappear_thin">
+  <% if !logged_in? %>
+    <div class="join_button_cover">
+      <%= link_to("/threadtype/show/"+threadtype.id.to_s,class:"login_join_button btn mes_button join_button login_button") do %>
+        <div class="text_box">
+          <div class="jp">
+            Show / 閲覧する
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% elsif threadtype.type == "every" %>
+    <div class="join_button_cover">
+      <%= button_tag type:"button",class:"login_join_button btn mes_button join_button all_join_button" do %>
+        <div class="text_box">
+          <div class="jp">
+            Joined / 参加済
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <% threadtype_id = threadtype.id %>
+    <div class="join_button_cover join_button<%= threadtype_id %>">
+      <% if logged_in? && (current_user.threadtypes.find_by(id:threadtype_id) != nil || threadtype.leader_id == current_user.id)%>
+        <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
+          <div class="text_box">
+            <div class="jp">
+              Joined / 参加済
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <% if threadtype.approval == "approval" %>
+          <% if logged_in? && current_user.approvals.find_by(threadtype_id:threadtype_id) != nil %>
+            <%= button_tag type:"button",class:"btn mes_button join_button unjoin_button_submit",id:threadtype_id do %>
+              <div class="text_box">
+                <div class="jp">
+                  Approved / 参加申請済み
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
+              <div class="text_box">
+                <div class="jp">
+                  Approve / 参加申請する
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= button_tag type:"button",class:"btn mes_button join_button join_button_submit",id:threadtype_id do %>
+            <div class="text_box">
+              <div class="jp">
+                Join / 参加する
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+
+      <% end %>
+    </div>
+  <% end %>
+</div>
