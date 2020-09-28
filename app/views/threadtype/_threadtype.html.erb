@@ -11,10 +11,28 @@
     height: 120px;
     object-fit: cover;
   }
+  .threadtype_link{
+    display: inline-block;margin: 12px;
+  }
+  @media screen and (max-width: 750px){
+    .threadtype_link{
+      display: inline-block;
+      margin: 3px;
+    }
+  }
+  @media screen and (max-width: 570px){
+    .threadtype_link{
+      width: calc(50vw - 33px);
+    }
+    .threadtype_icon_img{
+      width: calc(50vw - 40px);
+      height: calc(28vw - 23px);
+    }
+  }
 </style>
 <% leader = User.find_by(id:threadtype.leader_id) %>
 
-<%= link_to("/threadtype/show/"+threadtype.id.to_s,class:"thread_link",style:"display: inline-block;margin: 10px;") do %>
+<%= link_to("/threadtype/show/"+threadtype.id.to_s,class:"thread_link threadtype_link") do %>
   <% there_be = true %>
   <div class="thread_cover threadtype_cover"style="border-radius: 5px;">
     <div class="icon_cover threadtype_image"style="display: block;">
@@ -26,8 +44,8 @@
         <% end %>
       </div>
     </div>
-    <div class="thread_content threadtype_content"style="width: calc(100% - 10px) !important;height: 137px;">
-      <div class="post_content_cover">
+    <div class="thread_content threadtype_content"style="width: calc(100% - 10px) !important;">
+      <div class="post_content_cover"style="height:88px">
         <div class="post_content_position width_max">
           <div class="thread_title">
             <div class="title_padding no_inline"style="width: 200px;">
@@ -102,7 +120,7 @@
             <%= button_tag type:"button",class:"login_join_button btn mes_button join_button all_join_button" do %>
               <div class="text_box">
                 <div class="jp">
-                  会員参加 / Compulsory
+                  会員参加 / All User
                 </div>
               </div>
             <% end %>

@@ -372,7 +372,6 @@
     .text_cover{
       display: inline-block;
       font-size:18px;
-      width: calc(100% - 50px);
     }
     .nav-link{
       padding:5px 10px 5px 5px;
@@ -398,6 +397,8 @@
     color:#07689f;
     .nav-link{
       color:#07689f;
+      vertical-align: top;
+      margin-top: -3px;
     }
   }
   .blue-nav.active{
@@ -417,6 +418,8 @@
     .nav-link{
       background: #fff;
       color:#66bfbf;
+      vertical-align: top;
+      margin-top: -3px;
       border:none!important;
     }
   }
